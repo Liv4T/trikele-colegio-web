@@ -1,0 +1,122 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+
+.navbar-laravel {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+
+/*CUSTOM ELEMENTS*/
+.classroom-label{
+    color:#278080;
+    padding:10px;
+    margin-top:15px;
+    font-size: 1.2em;
+}
+.classroom-planning-section{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+.classroom-planning-section>span{
+    margin-left: 20px;
+}
+.padding-10{
+    padding: 10px;
+}
+
+.btn-primary{
+    background-color:$color-1;
+    font-weight: 600;
+    color: $color-2;
+    border-color: $color-1;
+}
+.btn-primary:hover{
+    background-color: $color-1-6;
+    border-color: $color-2;
+    text-decoration: none;
+    color: white;
+}
+.btn-primary:focus{
+    background-color:$color-1;
+    border-color: $color-1;
+    text-decoration: none;
+    color: white;
+    box-shadow: none;
+}
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle{
+    text-decoration: none;
+    color: $color-2;
+}
+
+
+.btn-warning{
+    background-color:$color-1;
+    font-weight: 600;
+    border-color: $color-1;
+     color: $color-2;
+}
+.btn-warning:hover{
+    background-color: $color-1-6;
+    border-color: $color-1-6;
+    text-decoration: none;
+    color:$color-2;
+}
+.btn-warning:not(:disabled):not(.disabled):active, .btn-warning:not(:disabled):not(.disabled).active, .show > .btn-warning.dropdown-toggle{
+    text-decoration: none;
+    color: $color-2;
+}
+
+
+
+
+.btn-link_bold{
+    font-weight: bold;
+}
+.btn-link{
+    font-weight: 600;
+    color:$color-3;
+}
+.btn-link:hover{
+    border:0px;
+    text-decoration: underline;
+    color:$color-3;
+}
+.btn-link:focus{
+    text-decoration: none;
+    box-shadow: none;
+}
+
+.btn-danger{
+    background-color:$color-4;
+    font-weight: 600;
+    color: $color-2;
+    border-color: $color-4;
+}
+.btn-danger:hover{
+    background-color: $color-4-6;
+    border-color: $color-2;
+    text-decoration: none;
+    color: white;
+}
+.btn-danger:focus{
+    background-color:$color-4;
+    border-color: $color-4;
+    text-decoration: none;
+    color: white;
+    box-shadow: none;
+}
+.btn-danger:not(:disabled):not(.disabled):active, .btn-danger:not(:disabled):not(.disabled).active, .show > .btn-danger.dropdown-toggle{
+    text-decoration: none;
+    color: $color-2;
+}

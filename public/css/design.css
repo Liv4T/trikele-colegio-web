@@ -1,0 +1,49 @@
+.chat-room{
+	font-family: verdana;
+}
+.chat-room .panel-heading{
+	text-align: center;
+}
+.chat-room .panel-footer{
+	padding: 0;
+
+}
+.chat-room .input-message{
+	margin: 0;
+	border-radius: 0;
+}
+.chat-room button{
+	border-radius: 0;
+}
+.panel-body{
+	height: 70vh;
+	overflow: scroll;
+}
+.message {
+	border-bottom: 5px solid #eee;
+	margin-bottom: 10px;
+	
+	border-radius: 25px;
+	box-shadow: 2px 3px 4px #aaa;
+}
+.chat-room .panel-body > .message-usr-odd
+{
+	background: #3bd6f161;
+	padding: 1%;
+}
+.chat-room .panel-body > .message-usr-even
+{
+	background:#62d8625e;
+	padding: 1%;
+}
+.message-sender h3{
+	color: #ddd;
+	padding: 0;
+	margin: 0;
+}
+.message-sender{
+	padding-bottom: 5px;
+}
+.message-text{
+	
+}
