@@ -1,16 +1,40 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
+@font-face {
+    font-family: "Poppins";
+    src: url('fonts/PoppinsRegular.ttf') format("truetype");
+}
+@font-face {
+    font-family: "PoppinsBold";
+    src: url('fonts/PoppinsSemiBold.ttf') format("truetype");
+}
+
 
 // Variables
 @import 'variables';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-
-
+@font-face {
+    font-family: "Poppins";
+    src: url('fonts/PoppinsRegular.ttf') format("truetype");
+}
+@font-face {
+    font-family: "PoppinsBold";
+    src: url('fonts/PoppinsSemiBold.ttf') format("truetype");
+}
 .navbar-laravel {
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+body{
+    font-family: "Poppins";
+}
+.letra-poppins-bold{
+ font-family: "PoppinsBold";
+}
+.letra-poppins {
+    font-family: "Poppins";
 }
 
 

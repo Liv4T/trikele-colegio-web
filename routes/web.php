@@ -20,9 +20,13 @@ use Illuminate\Support\Facades\Excel;
 
 // Route::group(['middleware' => 'auth', function () {
 //add all your routes here
+Route::get('/ciclos', function () {
+    return view('homeCiclos');
+});
 Route::middleware('auth')->get('/user', function () {
     return view('user');
 });
+Route::post('sendEmailHome', 'TestingController@sendEmailHome')->name('sendEmailHome');
 Route::middleware('auth')->get('/board', function () {
     return view('welcome');
 });
@@ -610,15 +614,15 @@ Route::middleware('auth')->get('/docente/estudiantes', function () {
     return view('teacherStudents');
 });
 
-Route::middleware('auth')->get('/docente/area/{id_area}/curso/{id_classroom}/estudiante/{id_student}', function (int $id_area, int $id_classroom,int $id_student) {
+Route::middleware('auth')->get('/docente/area/{id_area}/curso/{id_classroom}/estudiante/{id_student}', function (int $id_area, int $id_classroom, int $id_student) {
     return view('teacherStudent')->with('id_area', $id_area)->with('id_classroom', $id_classroom)->with('id_student', $id_student);
 });
 
-Route::middleware('auth')->get('/docente/area/{id_area}/curso/{id_classroom}/estudiante/{id_student}/modulo/{id_module}', function (int $id_area, int $id_classroom,int $id_student,int $id_module) {
+Route::middleware('auth')->get('/docente/area/{id_area}/curso/{id_classroom}/estudiante/{id_student}/modulo/{id_module}', function (int $id_area, int $id_classroom, int $id_student, int $id_module) {
     return view('teacherStudent')->with('id_area', $id_area)->with('id_classroom', $id_classroom)->with('id_student', $id_student)->with('id_module', $id_module);
 });
 
-Route::middleware('auth')->get('/docente/area/{id_area}/curso/{id_classroom}/estudiante/{id_student}/modulo/{id_module}/clase/{id_class}', function (int $id_area, int $id_classroom,int $id_student,int $id_module,int $id_class) {
+Route::middleware('auth')->get('/docente/area/{id_area}/curso/{id_classroom}/estudiante/{id_student}/modulo/{id_module}/clase/{id_class}', function (int $id_area, int $id_classroom, int $id_student, int $id_module, int $id_class) {
     return view('teacherStudent')->with('id_area', $id_area)->with('id_classroom', $id_classroom)->with('id_student', $id_student)->with('id_module', $id_module)->with('id_class', $id_class);
 });
 
@@ -690,5 +694,3 @@ Route::get('/api/lectives/planification/{id_lective_planification}/weekly/{id_we
 Route::get('/api/lectives/planification/{id_lective_planification}/activities', 'LectivesController@getActivitiesByPlan');
 Route::put('/api/lectives/planification/{id_lective_planification}/weekly/{id_weekly_plan}/course/{id_class}/activity/{id_activity}/module/ENCUESTA_UNICA_RTA/question/{id_question}', 'QuestionController@responseQuestiononLective');
 Route::put('/api/planification/copy', 'CoursesController@copyInformation');
-
-

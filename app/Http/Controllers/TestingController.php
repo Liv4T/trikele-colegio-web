@@ -24,19 +24,16 @@ use Omnipay;
 class TestingController extends Controller
 {
 
-public function sendemail(Request $request, string $id)
-    {
-        // $data = $request->json()->all();
-            $name = 'Mildred';
-            $surname = 'prueba';
-        $data = [
-            'namwe' => $name,
-            'surname' => $surname,
-        ];
-    Mail::send('emails.register', $data, function($msj){
-        $msj->to('desarrollador.sr@dybcatering.com')->subject('Theres only one more step to go');
-     });
-    return "ok";
 
+    public function sendEmailHome(Request $request)
+    {
+        $email_to = "colegiotrikele@gmail.com";
+
+        Mail::send('emails.contactus', ["subject" => $request->subject, "nombre" => $request->name, "telefono" => $request->phone, "correo" => $request->email], function ($message) use ($email_to) {
+            $message->to($email_to, 'Trikele Contáctanos');
+            $message->subject('Nuevo usuario Contáctanos');
+        });
+
+        return 'ok';
     }
 }

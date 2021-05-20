@@ -1,17 +1,43 @@
 <!DOCTYPE html>
   <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
   <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <!-- CSRF Token -->
-      <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="shortcat icon" href="images/icon.png" />
+    @if(Request::path() === '/' || Request::path() === 'plan_estudio' || strpos(Request::path(), 'materias') !== false || strpos(Request::path(), 'modulos_home') !== false  || strpos(Request::path(), 'compra/plan') !== false)
+        <script>
+            !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '3494583660595760'); fbq('track', 'PageView');
+        </script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-182178478-1">
+        </script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-      <title>{{ config('app.name', 'Live4teach') }}</title>
+        gtag('config', 'UA-182178478-1');
+        </script>
+        <!-- Hotjar Tracking Code for www.trikele.com -->
+        <script>
+            (function(h,o,t,j,a,r){
+                h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+                h._hjSettings={hjid:2243659,hjsv:6};
+                a=o.getElementsByTagName('head')[0];
+                r=o.createElement('script');r.async=1;
+                r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+                a.appendChild(r);
+            })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+        </script>
+     @endif
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>{{ config('app.name', 'Live4teach') }}</title>
 
-      <!-- Scripts -->
-      <script src="{{ asset('js/app.js') }}" defer></script>
-      <script src="https://kit.fontawesome.com/a72f7eba65.js" crossorigin="anonymous"></script>
-    <!--<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" />-->
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://kit.fontawesome.com/a72f7eba65.js" crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://unpkg.com/@coreui/coreui@2.1.16/dist/css/coreui.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
     <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" />
@@ -40,137 +66,164 @@
     />
 
       <!-- Fonts -->
-      <link rel="dns-prefetch" href="//fonts.gstatic.com">
-      <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+      <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
       <!-- Styles -->
       <link href="{{ asset('css/app.css') }}" rel="stylesheet">
       <link href="{{ asset('css/design.css') }}" rel="stylesheet">
       <script>
-      window.Forum = <?php echo json_encode([
-            'auth' => Auth::check(),
-            'user_id' => Auth::check() ? Auth::user()->id : -1,
-            'role' => Config::get('type_user')
-        ]); ?>
+        window.Forum = <?php echo json_encode([
+                'auth' => Auth::check(),
+                'user_id' => Auth::check() ? Auth::user()->id : -1,
+                'role' => Config::get('type_user')
+            ]); ?>
       </script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
     <!-- Begin emoji-picker Stylesheets -->
     <link href="//onesignal.github.io/emoji-picker/lib/css/emoji.css" rel="stylesheet">
+
   </head>
-  <body>
+  <body >
 
     <div id="app">
+ <nav class="navbar bg-trikele" >
+    <div class="nleft">
+          <a href="https://www.facebook.com/TrikelePlataformaEducativa/" target="_blank"  class="icons">
+            <i class="fab fa-facebook fa-2x"></i>
+          </a>
+          <a href="https://www.instagram.com/trikele_/"  target="_blank"  class="icons">
+            <i class="fab fa-instagram fa-2x"></i>
+          </a>
+        </div>
+          <div style="align-self: flex-end;">
+             <a href="/login"  class="btn btn-lg btn-primary" style="font-family: 'PoppinsBold'; font-size:20px;">Entra a tu colegio</a>
+          </div>
 
-        <nav class="navbar fixed-top navbar-expand-md navbar-light navbar-laravel">
+        </nav>
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+            <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <div>
-                        {{ config('Life4teach') }}
-                        <img thumbnail fluid src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/LOGO_LIV4T_SKOOL.png?alt=media&token=e0a74c90-0f0d-4932-863a-827b5f87ed0c"  alt="4"></img>
-                    </div>
-
+                    <img class="img-logo" thumbnail fluid src="{{ asset('uploads/home/Logo_trikele.png') }}" width="225px"></img>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-
-
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="/ciclos">Programas</a>
+                            <a class="nav-link" href="/#que_es">Qué es</a>
+                            <a class="nav-link" href="/#contacto">Contactanos</a>
+                        </li>
                     </ul>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav mr-sm-6 justify-content-start">
-                        <!-- Authentication Links -->
-                            @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('loginNew') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('registerNew'))
-                            <!-- li class="nav-item"-->
-                                <!--a class="nav-link" href="{{ route('registerNew') }}">{{ __('Register') }}</a-->
-                            <!--/li-->
-                            @endif
-                            @else
-                            <li class="nav-item dropdown">
-                               <notification-component></notification-component>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                        @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('loginNew') }}">{{ __('Iniciar Sesión') }}</a>
+                        </li>
+                        @if (Route::has('registerNew'))
+
+                        @endif
+                        @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="/inicio">Ir a clase</a>
-                                    <a class="dropdown-item" href="/changePassword">Cambiar Contraseña</a>
-                                    <a class="dropdown-item" href="/manual">Ayuda</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                            @endguest
+                                <a class="dropdown-item" href="/changePassword">Cambiar Contraseña</a>
+                                 <a class="dropdown-item" href="/manual">Ayuda</a>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                        @endguest
                     </ul>
                 </div>
+            </div>
         </nav>
-
-        <main class="py-3" id="content">
+        <a href="https://wa.me/573041560991?text=Me%20gustaría%20saber%20más%20del%20%colegio" class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
+        <main class="py-3">
             @yield('content')
-
+            @yield('scripts')
         </main>
     </div>
-            @yield('scripts')
+    <style>
+    .navbar{
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        z-index: 1020;
+    }
+
+    .navbar a {
+    float: left;
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+
+    }
+    .navbar-light .navbar-nav .nav-link{
+    color: black;
+    font-family: 'PoppinsBold';
+        padding: 10px;
+    }
+
+    .bg-trikele {
+        background-color:  #ff7900; !important;
+        height: 60px;
+        padding: 0px;
+    }
+    .nleft{
+        align-self: flex-start;
+    }
+
+.bg-trikele {
+    background-color:  #ff7900; !important;
+    height: 60px;
+    padding: 0px;
+}
+.nleft{
+    align-self: flex-start;
+}
+.whatsapp {
+  position:fixed;
+  width:60px;
+  height:60px;
+  bottom:40px;
+  right:40px;
+  background-color:#25d366;
+  color:#FFF;
+  border-radius:50px;
+  text-align:center;
+  font-size:30px;
+  z-index:100;
+}
+.whatsapp a{
+    color: white;
+}
+
+.whatsapp-icon {
+  margin-top:13px;
+}
+    </style>
+    @if(isset($usersChart))
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+            {!! $usersChart->script() !!}
+    @endif
+
   </body>
 </html>
-<style>
-.navbar{
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 1020;
-}
-
-.navbar a {
-  float: left;
-  display: block;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-
-}
-.navbar-brand{
-    max-height: 120px;
-}
-.navbar-brand img{
-    width:200px;
-}
-.navbar-brand>div{
-    background-color:white;
-    max-width: 100%;
-    border-radius:5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-}
-.py-3{
-    margin-top:5px;
-}
-@media only screen and (max-width: 400px) {
-    .navbar-brand img{
-        width:150px;
-    }
-}
-</style>
-<script>
-    document.getElementById('content').onscroll = function() {
-        console.log("scrolling");
-    };
-</script>
-   @if(isset($usersChart))
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
-{!! $usersChart->script() !!}
-@endif

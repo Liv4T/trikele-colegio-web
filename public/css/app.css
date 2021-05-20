@@ -1,5 +1,15 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
 
+@font-face {
+  font-family: "Poppins";
+  src: url(/fonts/PoppinsRegular.ttf?8b6af8e5e8324edfd77af8b3b35d7f9c) format("truetype");
+}
+
+@font-face {
+  font-family: "PoppinsBold";
+  src: url(/fonts/PoppinsSemiBold.ttf?4cdacb8f89d588d69e8570edcbe49507) format("truetype");
+}
+
 /*!
  * Bootstrap v4.4.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
@@ -10882,9 +10892,31 @@ a.text-dark:focus {
   }
 }
 
+@font-face {
+  font-family: "Poppins";
+  src: url(/fonts/PoppinsRegular.ttf?8b6af8e5e8324edfd77af8b3b35d7f9c) format("truetype");
+}
+
+@font-face {
+  font-family: "PoppinsBold";
+  src: url(/fonts/PoppinsSemiBold.ttf?4cdacb8f89d588d69e8570edcbe49507) format("truetype");
+}
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+body {
+  font-family: "Poppins";
+}
+
+.letra-poppins-bold {
+  font-family: "PoppinsBold";
+}
+
+.letra-poppins {
+  font-family: "Poppins";
 }
 
 /*CUSTOM ELEMENTS*/

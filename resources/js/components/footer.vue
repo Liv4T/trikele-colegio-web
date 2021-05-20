@@ -23,10 +23,7 @@
         <footer class="text-center footer-style">
             <div class="row footer-row">
                 <div class="col footer-col">
-                    <p>
-                        Direccion:
-                        <br />AC 100#8A-55 Bogotá, Colombia.
-                    </p>
+
                 </div>
                 <div class="col footer-col">
                     <i class="fab fa-facebook fa-2x"></i>
@@ -45,12 +42,11 @@
     bottom: 0;
     width: 100%;
     position: absolute;
-    height: 400px;
-    padding-top: 50px;
-    background: url(../assets/img/Footer_web.jpg);
+    height: 130px;
+    background-color: #ff7900 ;
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    margin: -400px auto;
+    margin: -130px auto;
 }
 footer {
     color: rgb(243, 243, 243);
