@@ -98,7 +98,7 @@
           </a>
         </div>
           <div style="align-self: flex-end;">
-             <a href="/login"  class="btn btn-lg btn-primary" style="font-family: 'PoppinsBold'; font-size:20px;">Entra a tu colegio</a>
+             <a href="/loginNew"  class="btn btn-lg btn-primary" style="font-family: 'PoppinsBold'; font-size:20px;">Entra a tu colegio</a>
           </div>
 
         </nav>
@@ -153,7 +153,7 @@
                 </div>
             </div>
         </nav>
-        <a href="https://wa.me/573041560991?text=Me%20gustaría%20saber%20más%20del%20%colegio" class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
+        <a href="https://wa.me/573041560991?text=Me%20gustaría%20saber%20más%20del%20colegio" class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
         <main class="py-3">
             @yield('content')
             @yield('scripts')

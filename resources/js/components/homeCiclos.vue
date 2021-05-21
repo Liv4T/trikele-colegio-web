@@ -3,7 +3,7 @@
     <div class="seccion">
       <div class="form-group">
         <a href="/login">
-          <img src="uploads/home/5.png" width="100%" />
+          <img src="uploads/home/ciclosslide.jpg" width="100%" />
         </a>
       </div>
     </div>
@@ -14,32 +14,32 @@
         La educación por ciclos, es una organización curricular formada por unidades de contenidos seleccionados e integrados para que el estudiante culmine una sucesión de grados o niveles de la educación formal, en menor tiempo. Son conocidos como Ciclos Lectivos Especiales Integrados (CLEI)
       </p>
       <div class="form-group row mx-auto letra-poppins-bold indicador-ciclo">
-        <img class="img-ciclo" src="uploads/home/icono1.png" />
+        <img class="img-ciclo" src="uploads/home/regla.png" />
         <p class="text-center">Es operado por un colegio regido por las mismas normas del ministerio.</p>
       </div>
       <div class="form-group row mx-auto letra-poppins-bold indicador-ciclo">
-        <img class="img-ciclo" src="uploads/home/icono1.png" />
+        <img class="img-ciclo" src="uploads/home/bombillo.png" />
         <p class="text-center">Debe contar con licencia de funcionamiento y reconocimiento de carácter oficial.</p>
       </div>
       <div class="form-group row mx-auto letra-poppins-bold indicador-ciclo">
-        <img class="img-ciclo" src="uploads/home/icono1.png" />
+        <img class="img-ciclo" src="uploads/home/atomo.png" />
         <p class="text-center">Debe contar con gobierno escolar (rector, consejo directivo, consejo académico).</p>
       </div>
       <div class="form-group row mx-auto letra-poppins-bold indicador-ciclo">
-        <img class="img-ciclo" src="uploads/home/icono1.png" />
+        <img class="img-ciclo" src="uploads/home/lapiz.png" />
         <p class="text-center">Los certificados (diploma, actas) los entrega la institución.</p>
       </div>
       <div class="form-group row mx-auto letra-poppins-bold indicador-ciclo">
-        <img class="img-ciclo" src="uploads/home/icono1.png" />
+        <img class="img-ciclo" src="uploads/home/libro.png" />
         <p class="text-center">También debe tener su propio Proyecto Educativo Institucional (PEI).</p>
       </div>
       <div class="form-group row mx-auto letra-poppins-bold indicador-ciclo">
-        <img class="img-ciclo" src="uploads/home/icono1.png" />
+        <img class="img-ciclo" src="uploads/home/regla.png" />
         <p class="text-center">La duración de cada ciclo escolar corresponde a 40 semanas, sin incluir receso.</p>
       </div>
       <div class="form-group row mx-auto letra-poppins-bold indicador-ciclo-telefono">
         <div class="col-md-2 text-center">
-          <img class="img-ciclo" src="uploads/home/icono1.png" />
+          <img class="img-ciclo" src="uploads/home/regla.png" />
         </div>
         <div class="col-md-8">
           <p class="text-center">Es operado por un colegio regido por las mismas normas del ministerio.</p>
@@ -48,7 +48,7 @@
 
       <div class="form-group row mx-auto letra-poppins-bold indicador-ciclo-telefono">
         <div class="col-md-2 text-center">
-          <img class="img-ciclo" src="uploads/home/icono1.png" />
+          <img class="img-ciclo" src="uploads/home/bombillo.png" />
         </div>
         <div class="col-md-8">
           <p class="text-center">Debe contar con licencia de funcionamiento y reconocimiento de carácter oficial.</p>
@@ -56,7 +56,7 @@
       </div>
       <div class="form-group row mx-auto letra-poppins-bold indicador-ciclo-telefono">
         <div class="col-md-2 text-center">
-          <img class="img-ciclo" src="uploads/home/icono1.png" />
+          <img class="img-ciclo" src="uploads/home/atomo.png" />
         </div>
         <div class="col-md-8">
           <p class="text-center">Debe contar con gobierno escolar (rector, consejo directivo, consejo académico).</p>
@@ -64,7 +64,7 @@
       </div>
       <div class="form-group row mx-auto letra-poppins-bold indicador-ciclo-telefono">
         <div class="col-md-2 text-center">
-          <img class="img-ciclo" src="uploads/home/icono1.png" />
+          <img class="img-ciclo" src="uploads/home/lapiz.png" />
         </div>
         <div class="col-md-8">
           <p class="text-center">Los certificados (diploma, actas) los entrega la institución.</p>
@@ -72,7 +72,7 @@
       </div>
       <div class="form-group row mx-auto letra-poppins-bold indicador-ciclo-telefono">
         <div class="col-md-2 text-center">
-          <img class="img-ciclo" src="uploads/home/icono1.png" />
+          <img class="img-ciclo" src="uploads/home/libro.png" />
         </div>
         <div class="col-md-8">
           <p class="text-center">También debe tener su propio Proyecto Educativo Institucional (PEI).</p>
@@ -80,7 +80,7 @@
       </div>
       <div class="form-group row mx-auto letra-poppins-bold indicador-ciclo-telefono">
         <div class="col-md-2 text-center">
-          <img class="img-ciclo" src="uploads/home/icono1.png" />
+          <img class="img-ciclo" src="uploads/home/regla.png" />
         </div>
         <div class="col-md-8">
           <p class="text-center" style="padding-bottom: 25px">La duración de cada ciclo escolar corresponde a 40 semanas, sin incluir receso.</p>
@@ -98,7 +98,7 @@
     <div class="row" style="background-image: url('/uploads/home/ciclos.jpg'); background-repeat: no-repeat; background-position: bottom; background-size: cover">
       <div class="col-md-6"></div>
       <div class="col-md-6">
-        <img src="uploads/home/trikele-naranja.png" width="100%" />
+        <img src="uploads/home/pqtrikele.png" />
         <div style="background-color: #f0f0f0; width: 90%">
           <p class="section-ciclos mx-auto">
             Seguimos las normas y lineamientos del <span class="realistic-marker-highlight"><strong>Ministerio de Educación Nacional.</strong></span>
@@ -115,10 +115,10 @@
         </div>
       </div>
     </div>
-    <div class="row" style="background-image: url('/uploads/home/cuadernociclos.png'); background-repeat: no-repeat; background-position: bottom; background-size: cover">
-      <div class="form-group mx-auto" style="padding: 20px; justify-content: center">
+    <div class="row ciclo-fondo">
+      <div class="form-group mx-auto imagen-cambio">
         <div class="row">
-          <div class="col-md-8 ciclos-p">
+          <div class="col-md-6 ciclos-p">
             <p><strong>TRIKELE</strong> colegio sin fronteras, es una iniciativa de educación de alta calidad, <strong>mediado a través de herramientas de la tecnología y la información (TIC).</strong></p>
             <p><strong>TRIKELE</strong> es un símbolo de la tradición Celta que significa la unión entre cuerpo, mente y espíritu. <strong>Representa el aprendizaje, el crecimiento y la evolución permanente.</strong></p>
             <p><strong>TRIKELE</strong> es un proyecto educativo sin fronteras que busca formar ciudadanos del mundo con altas capacidades en todas las áreas de su vida.</p>
@@ -130,7 +130,7 @@
     <br />
     <br />
     <div class="form-group" style="background-image: url('/uploads/home/cambiociclos.png'); background-repeat: no-repeat; background-position: bottom; background-size: cover">
-      <h3 class="title-yellow mx-auto">SOMOS LA PLATAFORMA QUE SE AJUSTA A LAS NECESIDADES DEL ESTUDIANTE POR QUE...</h3>
+      <img src="uploads/home/titulocambio.png" width="90%" />
       <p class="text-yellow padding-20">En Trikele sabemos que eres diferente y que te espera un mundo en transformación permanente. Por eso, desarrollamos contigo las habilidades que necesitas para el siglo XXI:</p>
       <div class="form-group row padding-20">
         <div class="col-md-6">
@@ -619,6 +619,10 @@ a {
   border-bottom-color: #dacfcf36;
   border-bottom-style: groove;
 }
+.imagen-cambio {
+  padding-top: 200px;
+  padding-bottom: 200px;
+}
 .section4 {
   width: 100%;
   height: auto;
@@ -732,6 +736,12 @@ iframe:not(.md-image) {
   background-repeat: round;
   padding: 25px;
 }
+.ciclo-fondo {
+  background-image: url("/uploads/home/colegio.jpg");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
+}
 
 .texto-encima {
   position: absolute;
@@ -754,6 +764,11 @@ iframe:not(.md-image) {
     transform: translate(-50%, -20%);
     width: 40%;
     display: contents;
+  }
+  .ciclos-p {
+    font-family: "Poppins";
+    font-size: 14px;
+    width: 90%;
   }
   .sliderv {
     padding-top: 100px;
@@ -822,6 +837,16 @@ iframe:not(.md-image) {
     font-size: 12px;
     padding: 20px 50px 20px;
     line-height: 30px;
+  }
+  .ciclo-fondo {
+    background-image: url("/uploads/home/cuaderno.png");
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+  }
+  .imagen-cambio {
+    padding-top: 30px;
+    padding-bottom: 20px;
   }
   .footer-style {
     bottom: 0;
