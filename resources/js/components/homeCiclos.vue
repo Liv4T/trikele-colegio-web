@@ -97,8 +97,10 @@
     </div>
     <div class="row" style="background-image: url('/uploads/home/ciclos.jpg'); background-repeat: no-repeat; background-position: bottom; background-size: cover">
       <div class="col-md-6"></div>
-      <div class="col-md-6">
-        <img src="uploads/home/pqtrikele.png" />
+      <div class="col-md-6 padding-20">
+        <img src="uploads/home/pqtrikele.png" style="padding: 20px" />
+        <br />
+        <br />
         <div style="background-color: #f0f0f0; width: 90%">
           <p class="section-ciclos mx-auto">
             Seguimos las normas y lineamientos del <span class="realistic-marker-highlight"><strong>Ministerio de Educación Nacional.</strong></span>
@@ -113,6 +115,10 @@
             Contamos con nuestro propio <span class="realistic-marker-highlight"><strong>Proyecto Educativo Institucional (PEI).</strong></span>
           </p>
         </div>
+        <br />
+        <br />
+        <br />
+        <br />
       </div>
     </div>
     <div class="row ciclo-fondo">

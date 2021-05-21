@@ -209,6 +209,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 (function () {
   "use strict";
 
@@ -871,8 +877,15 @@ var staticRenderFns = [
       [
         _c("div", { staticClass: "col-md-6" }),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("img", { attrs: { src: "uploads/home/pqtrikele.png" } }),
+        _c("div", { staticClass: "col-md-6 padding-20" }, [
+          _c("img", {
+            staticStyle: { padding: "20px" },
+            attrs: { src: "uploads/home/pqtrikele.png" }
+          }),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("br"),
           _vm._v(" "),
           _c(
             "div",
@@ -909,7 +922,15 @@ var staticRenderFns = [
                 ])
               ])
             ]
-          )
+          ),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("br")
         ])
       ]
     )
