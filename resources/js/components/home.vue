@@ -1,13 +1,20 @@
 <template>
   <div>
-    <div class="seccion">
+    <div class="seccion desktop1">
       <div class="form-group">
         <a href="/ciclos">
           <img src="uploads/home/5.png" width="100%" />
         </a>
       </div>
     </div>
-    <div class="form-group">
+    <div class="mobile1">
+      <div class="form-group">
+        <a href="/ciclos">
+          <img src="uploads/home/mobile-1.png" width="100%" />
+        </a>
+      </div>
+    </div>
+    <div class="form-group desktop2">
       <h4 class="text-center">ÚNETE A NUESTRA COMUNIDAD TRIKELE</h4>
       <h3 class="text-center">Emprende tu propio camino de aprendizaje</h3>
       <div class="text-center">
@@ -15,7 +22,7 @@
       </div>
     </div>
     <br />
-    <div class="row" id="que_es" style="background-image: url('/uploads/home/banner-azul.jpg'); background-repeat: no-repeat; background-position: bottom; background-size: cover">
+    <div class="row desktop4" id="que_es" style="background-image: url('/uploads/home/banner-azul.jpg'); background-repeat: no-repeat; background-position: bottom; background-size: cover">
       <div class="col-md-6">
         <img src="uploads/home/trikele-naranja.png" width="100%" />
         <p class="section3P mx-auto">Seguimos las normas y lineamientos del Ministerio de Educación Nacional.</p>
@@ -24,7 +31,14 @@
         <p class="section3P mx-auto">Contamos con nuestro propio Proyecto Educativo Institucional (PEI)</p>
       </div>
     </div>
-    <div class="section-naranja">
+    <div class="mobile2">
+      <div class="form-group">
+        <a href="/ciclos">
+          <img src="uploads/home/mobile-trikele.png" width="100%" />
+        </a>
+      </div>
+    </div>
+    <div class="section-naranja desktop-mision">
       <div class="row mx-auto" style="padding: 20px; justify-content: center">
         <div class="col-md-4 text-center">
           <img width="100%" src="/uploads/home/vision.png" alt="" />
@@ -43,7 +57,7 @@
     <br />
     <br />
     <br />
-    <div class="section-yellow">
+    <div class="section-yellow desktop5">
       <h3 class="title-yellow mx-auto">SOMOS LA PLATAFORMA QUE SE AJUSTA A LAS NECESIDADES DEL ESTUDIANTE POR QUE...</h3>
       <div class="form-group row">
         <div class="col-md-6 text-center">
@@ -63,13 +77,25 @@
         <a class="btn btn-lg btn-Azul mx-auto letra-poppins-bold" href="/login">MATRICÚLATE</a>
       </div>
     </div>
-    <div class="form-group">
+    <div class="mobile3">
+      <div class="form-group">
+        <a href="/ciclos">
+          <img src="uploads/home/mobile-amarillo.png" width="100%" />
+        </a>
+      </div>
+    </div>
+    <div class="form-group desktop6">
       <a href="/ciclos">
         <img src="uploads/home/ciclos.png" />
       </a>
     </div>
+    <div class="form-group mobile4">
+      <a href="/ciclos">
+        <img src="uploads/home/mobile-ciclos.png" />
+      </a>
+    </div>
 
-    <div class="form-group" id="contacto">
+    <div class="form-group desktop-texto" id="contacto">
       <h4 class="text-center">
         Por qué con trikele, porque es educación de <br />
         calidad, flexible y disponible 24/7
@@ -667,6 +693,24 @@ iframe:not(.md-image) {
   height: 272px;
   width: 360px;
 }
+.mobile1 {
+  display: none;
+}
+.mobile2 {
+  display: none;
+}
+.mobile3 {
+  display: none;
+}
+.mobile4 {
+  display: none;
+}
+.mobile5 {
+  display: none;
+}
+.mobile6 {
+  display: none;
+}
 .fondo-gris {
   background-color: #f0f0f0;
 }
@@ -728,6 +772,53 @@ iframe:not(.md-image) {
     background-color: #009fe3;
 
     background-size: contain;
+  }
+  .mobile1 {
+    display: block;
+  }
+  .mobile2 {
+    display: block;
+  }
+  .mobile3 {
+    display: block;
+  }
+  .mobile4 {
+    display: block;
+  }
+  .mobile5 {
+    display: block;
+  }
+  .mobile6 {
+    display: block;
+  }
+  .desktop1 {
+    display: none;
+  }
+  .desktop2 h4,
+  h3 {
+    font-size: 18px !important;
+  }
+  .desktop-mision p {
+    font-size: 18px !important;
+    padding: 0px !important;
+  }
+  .desktop-texto h1 {
+    font-size: 20px !important;
+  }
+  .desktop-texto h4 {
+    font-size: 16px !important;
+  }
+  .desktop3 {
+    display: none;
+  }
+  .desktop4 {
+    display: none;
+  }
+  .desktop5 {
+    display: none;
+  }
+  .desktop6 {
+    display: none;
   }
   .title-yellow {
     font-family: boldfont;

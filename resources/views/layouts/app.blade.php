@@ -88,19 +88,20 @@
   <body >
 
     <div id="app">
- <nav class="navbar bg-trikele" >
-    <div class="nleft">
-          <a href="https://www.facebook.com/TrikelePlataformaEducativa/" target="_blank"  class="icons">
-            <i class="fab fa-facebook fa-2x"></i>
-          </a>
-          <a href="https://www.instagram.com/trikele_/"  target="_blank"  class="icons">
-            <i class="fab fa-instagram fa-2x"></i>
-          </a>
-        </div>
-          <div style="align-self: flex-end;">
-             <a href="/loginNew"  class="btn btn-lg btn-primary" style="font-family: 'PoppinsBold'; font-size:20px;">Entra a tu colegio</a>
-          </div>
-
+        <nav class="navbar navbar-light">
+            <div class="container-fluid">
+                <div  class="navbar-brand" >
+                       <a class="navbar-brand" href="https://www.facebook.com/TrikelePlataformaEducativa/" target="_blank"  class="icons">
+                            <i class="fab fa-facebook fa-2x"></i>
+                        </a>
+                        <a class="navbar-brand" href="https://www.instagram.com/trikele_/"  target="_blank"  class="icons">
+                            <i class="fab fa-instagram fa-2x"></i>
+                        </a>
+                </div>
+                <form class="d-flex">
+                <a href="/loginNew"><img src="{{ asset('uploads/home/btncolegio.png') }}" alt=""></a>
+                </form>
+            </div>
         </nav>
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">

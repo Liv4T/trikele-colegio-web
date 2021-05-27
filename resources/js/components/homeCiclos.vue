@@ -9,7 +9,8 @@
     </div>
     <br />
     <div class="form-group seccion-educiclos">
-      <h1 class="letra-poppins-bold titulo-ciclos">¿Qué es educación por ciclos?</h1>
+      <img src="uploads/home/educiclos.png" width="50%" />
+      <!-- <h1 class="letra-poppins-bold titulo-ciclos">¿Qué es educación por ciclos?</h1> -->
       <p class="letra-poppins-bold p-ciclos">
         La educación por ciclos, es una organización curricular formada por unidades de contenidos seleccionados e integrados para que el estudiante culmine una sucesión de grados o niveles de la educación formal, en menor tiempo. Son conocidos como Ciclos Lectivos Especiales Integrados (CLEI)
       </p>
