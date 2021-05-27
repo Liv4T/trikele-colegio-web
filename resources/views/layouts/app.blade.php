@@ -99,7 +99,7 @@
                         </a>
                 </div>
                 <form class="d-flex">
-                <a href="/loginNew"><img src="{{ asset('uploads/home/btncolegio.png') }}" alt=""></a>
+                    <a href="/loginNew"><img class="btn-colegio" src="{{ asset('uploads/home/btncolegio.png') }}" alt=""></a>
                 </form>
             </div>
         </nav>
@@ -219,6 +219,11 @@
 
 .whatsapp-icon {
   margin-top:13px;
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
+.btn-colegio{
+width: 69%;
+}
 }
     </style>
     @if(isset($usersChart))
