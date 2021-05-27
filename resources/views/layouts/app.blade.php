@@ -106,7 +106,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img class="img-logo" thumbnail fluid src="{{ asset('uploads/home/Logo_trikele.png') }}" width="225px"></img>
+                    <img class="img-logo" thumbnail fluid src="{{ asset('uploads/home/Logo_trikele.png') }}" style="max-width:225px "></img>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
