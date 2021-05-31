@@ -593,7 +593,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "seccion desk-1" }, [
       _c("div", { staticClass: "form-group" }, [
-        _c("a", { attrs: { href: "/login" } }, [
+        _c("a", { attrs: { href: "/#contacto" } }, [
           _c("img", {
             attrs: { src: "uploads/home/ciclosslide.jpg", width: "100%" }
           })
@@ -607,7 +607,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "seccion mob-1" }, [
       _c("div", { staticClass: "form-group" }, [
-        _c("a", { attrs: { href: "/login" } }, [
+        _c("a", { attrs: { href: "/#contacto" } }, [
           _c("img", { attrs: { src: "uploads/home/mob-1.png", width: "100%" } })
         ])
       ])
@@ -910,7 +910,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "mob-2" }, [
       _c("div", { staticClass: "form-group" }, [
-        _c("a", { attrs: { href: "/login" } }, [
+        _c("a", { attrs: { href: "" } }, [
           _c("img", { attrs: { src: "uploads/home/mob-2.png", width: "100%" } })
         ])
       ])
@@ -921,7 +921,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group desk-3" }, [
-      _c("a", { attrs: { href: "/login" } }, [
+      _c("a", { attrs: { href: "" } }, [
         _c("img", {
           attrs: { src: "uploads/home/equivalencia.png", width: "100%" }
         })
@@ -1010,7 +1010,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "mob-3" }, [
       _c("div", { staticClass: "form-group" }, [
-        _c("a", { attrs: { href: "/login" } }, [
+        _c("a", { attrs: { href: "" } }, [
           _c("img", {
             attrs: { src: "uploads/home/mobile-porque.png", width: "100%" }
           })
@@ -1067,7 +1067,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "mob-4" }, [
       _c("div", { staticClass: "form-group" }, [
-        _c("a", { attrs: { href: "/login" } }, [
+        _c("a", { attrs: { href: "" } }, [
           _c("img", {
             attrs: { src: "uploads/home/mobile-tucolegio.png", width: "100%" }
           })
@@ -1167,7 +1167,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "mob-5" }, [
       _c("div", { staticClass: "form-group" }, [
-        _c("a", { attrs: { href: "/login" } }, [
+        _c("a", { attrs: { href: "" } }, [
           _c("img", {
             attrs: { src: "uploads/home/mobile-cme.png", width: "100%" }
           })
@@ -1207,18 +1207,28 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("footer", { staticClass: "text-center footer-style" }, [
       _c("div", { staticClass: "row footer-row" }, [
-        _c("div", { staticClass: "col footer-col" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "col footer-col" }, [
-          _c("i", { staticClass: "fab fa-facebook fa-2x" }),
+        _c("div", { staticClass: "col footer-col text-center" }, [
+          _c(
+            "a",
+            {
+              attrs: {
+                href: "https://www.facebook.com/TrikelePlataformaEducativa/",
+                target: "_blank"
+              }
+            },
+            [_c("i", { staticClass: "fab fa-facebook fa-2x" })]
+          ),
           _vm._v(" "),
-          _c("i", { staticClass: "fab fa-google-plus fa-2x" }),
-          _vm._v(" "),
-          _c("i", { staticClass: "fab fa-twitter fa-2x" }),
-          _vm._v(" "),
-          _c("i", { staticClass: "fab fa-linkedin fa-2x" }),
-          _vm._v(" "),
-          _c("i", { staticClass: "fab fa-dribbble fa-2x" })
+          _c(
+            "a",
+            {
+              attrs: {
+                href: "https://www.instagram.com/trikele_/",
+                target: "_blank"
+              }
+            },
+            [_c("i", { staticClass: "fab fa-instagram fa-2x" })]
+          )
         ])
       ])
     ])

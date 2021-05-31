@@ -18,7 +18,7 @@
       <h4 class="text-center">ÚNETE A NUESTRA COMUNIDAD TRIKELE</h4>
       <h3 class="text-center">Emprende tu propio camino de aprendizaje</h3>
       <div class="text-center">
-        <a class="btn btn-lg btn-trikele" href="/login">ÚNETE</a>
+        <a class="btn btn-lg btn-trikele" href="/#contacto">ÚNETE</a>
       </div>
     </div>
     <br />
@@ -74,12 +74,12 @@
             <p class="text-yellow">Proyecto educativo que despierta pasión por el aprendizaje</p>
           </div>
         </div>
-        <a class="btn btn-lg btn-Azul mx-auto letra-poppins-bold" href="/login">MATRICÚLATE</a>
+        <a class="btn btn-lg btn-Azul mx-auto letra-poppins-bold" href="/#contacto">MATRICÚLATE</a>
       </div>
     </div>
     <div class="mobile3">
       <div class="form-group">
-        <a href="/ciclos">
+        <a href="/#contacto">
           <img src="uploads/home/mobile-amarillo.png" width="100%" />
         </a>
       </div>
@@ -110,6 +110,7 @@
           <h2 class="">
             <u style="text-decoration-color: #ff7900; font-family: 'Caviar Dreams'; font-weight: 600"> INSCRÍBETE</u>
           </h2>
+          <p>Ingresa tus datos y uno de nuestros asesores se comunicara contigo.</p>
           <br />
           <a href="https://www.facebook.com/TrikelePlataformaEducativa/" target="_blank" class="icons">
             <i class="fab fa-facebook fa-2x"></i>
@@ -187,13 +188,13 @@
       </div>
       <footer class="text-center footer-style">
         <div class="row footer-row">
-          <div class="col footer-col"></div>
-          <div class="col footer-col">
-            <i class="fab fa-facebook fa-2x"></i>
-            <i class="fab fa-google-plus fa-2x"></i>
-            <i class="fab fa-twitter fa-2x"></i>
-            <i class="fab fa-linkedin fa-2x"></i>
-            <i class="fab fa-dribbble fa-2x"></i>
+          <div class="col footer-col text-center">
+            <a href="https://www.facebook.com/TrikelePlataformaEducativa/" target="_blank" class="">
+              <i class="fab fa-facebook fa-2x"></i>
+            </a>
+            <a href="https://www.instagram.com/trikele_/" target="_blank" class="">
+              <i class="fab fa-instagram fa-2x"></i>
+            </a>
           </div>
         </div>
       </footer>

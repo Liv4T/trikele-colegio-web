@@ -2,14 +2,14 @@
   <div>
     <div class="seccion desk-1">
       <div class="form-group">
-        <a href="/login">
+        <a href="/#contacto">
           <img src="uploads/home/ciclosslide.jpg" width="100%" />
         </a>
       </div>
     </div>
     <div class="seccion mob-1">
       <div class="form-group">
-        <a href="/login">
+        <a href="/#contacto">
           <img src="uploads/home/mob-1.png" width="100%" />
         </a>
       </div>
@@ -100,13 +100,13 @@
     </div>
     <div class="mob-2">
       <div class="form-group">
-        <a href="/login">
+        <a href="">
           <img src="uploads/home/mob-2.png" width="100%" />
         </a>
       </div>
     </div>
     <div class="form-group desk-3">
-      <a href="/login">
+      <a href="">
         <img src="uploads/home/equivalencia.png" width="100%" />
       </a>
     </div>
@@ -139,7 +139,7 @@
     </div>
     <div class="mob-3">
       <div class="form-group">
-        <a href="/login">
+        <a href="">
           <img src="uploads/home/mobile-porque.png" width="100%" />
         </a>
       </div>
@@ -160,7 +160,7 @@
     <br />
     <div class="mob-4">
       <div class="form-group">
-        <a href="/login">
+        <a href="">
           <img src="uploads/home/mobile-tucolegio.png" width="100%" />
         </a>
       </div>
@@ -190,7 +190,7 @@
     </div>
     <div class="mob-5">
       <div class="form-group">
-        <a href="/login">
+        <a href="">
           <img src="uploads/home/mobile-cme.png" width="100%" />
         </a>
       </div>
@@ -213,13 +213,13 @@
       </div>
       <footer class="text-center footer-style">
         <div class="row footer-row">
-          <div class="col footer-col"></div>
-          <div class="col footer-col">
-            <i class="fab fa-facebook fa-2x"></i>
-            <i class="fab fa-google-plus fa-2x"></i>
-            <i class="fab fa-twitter fa-2x"></i>
-            <i class="fab fa-linkedin fa-2x"></i>
-            <i class="fab fa-dribbble fa-2x"></i>
+          <div class="col footer-col text-center">
+            <a href="https://www.facebook.com/TrikelePlataformaEducativa/" target="_blank" class="">
+              <i class="fab fa-facebook fa-2x"></i>
+            </a>
+            <a href="https://www.instagram.com/trikele_/" target="_blank" class="">
+              <i class="fab fa-instagram fa-2x"></i>
+            </a>
           </div>
         </div>
       </footer>
