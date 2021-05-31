@@ -216,6 +216,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 (function () {
   "use strict";
 
@@ -360,7 +396,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "@charset \"UTF-8\";\n.realistic-marker-highlight[data-v-0ceefa86] {\n  position: relative;\n  margin: 0 0rem;\n  padding: 0.1em 0.1em;\n  border-radius: 0.8em 0.3em;\n  background: transparent;\n  background-image: linear-gradient(to right, #f08b2e, #ffb876 4%, #f4cca7);\n  -webkit-box-decoration-break: clone;\n  box-decoration-break: clone;\n}\n.md-card-actions.text-center[data-v-0ceefa86] {\n  display: flex;\n  justify-content: center !important;\n}\n.contact-form[data-v-0ceefa86] {\n  margin-top: 30px;\n}\n.md-has-textarea + .md-layout[data-v-0ceefa86] {\n  margin-top: 15px;\n}\n.containerheader[data-v-0ceefa86] {\n  padding-top: 0px;\n  padding-bottom: 20px;\n}\nfooter[data-v-0ceefa86] {\n  color: #f3f3f3;\n}\nfooter h4[data-v-0ceefa86] {\n  font-weight: 800;\n}\nfooter .footer-above[data-v-0ceefa86] {\n  padding-top: 50px;\n  background-color: #2c3e50;\n}\n.mobileSection[data-v-0ceefa86] {\n  display: none;\n}\n.mobileSection2[data-v-0ceefa86] {\n  display: none;\n}\nfooter .footer-col[data-v-0ceefa86] {\n  margin-top: 70px;\n}\n.card2[data-v-0ceefa86] {\n  padding-top: 20px;\n  padding-left: 40px;\n  padding-bottom: 10px;\n  text-align: justify;\n}\n.card3[data-v-0ceefa86] {\n  padding-top: 10px;\n}\n.backgroundf[data-v-0ceefa86] {\n  background-image: url(https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/fondo3.png?alt=media&token=72eec913-3fff-4752-a719-6f74c81e3435);\n  background-repeat: no-repeat;\n  background-position: bottom;\n  background-size: cover;\n}\n.card[data-v-0ceefa86] {\n  font-family: \"Poppins\";\n  text-align: justify;\n  color: #000000;\n}\n.bg-light.container[data-v-0ceefa86] {\n  width: 70%;\n}\n.bg-light1[data-v-0ceefa86] {\n  background: transparent;\n}\n.bg-light2[data-v-0ceefa86] {\n  background: #c7c7c7;\n  margin: 0%;\n}\n.padding-20[data-v-0ceefa86] {\n  padding: 20px;\n}\nh4[data-v-0ceefa86] {\n  color: #000000;\n  font-family: \"Poppins\";\n  font-weight: bold;\n  font-size: 30px;\n}\nh3[data-v-0ceefa86] {\n  font-family: \"Poppins\";\n  font-weight: 600;\n}\nh5[data-v-0ceefa86] {\n  font-family: \"Poppins\";\n}\na[data-v-0ceefa86] {\n  color: white;\n  font-family: \"Poppins\";\n}\n.textinT[data-v-0ceefa86] {\n  position: absolute;\n  top: 59%;\n  left: 35%;\n  transform: translate(-50%, -50%);\n  color: black;\n  font-family: \"Poppins\";\n  font-weight: bold;\n  width: 300px;\n  padding-top: 20px;\n}\n.seccion-educiclos[data-v-0ceefa86] {\n  background-image: url(\"/uploads/home/cuadernociclos.png\");\n  background-repeat: no-repeat;\n  background-position: bottom;\n  background-size: cover;\n}\n.indicador-ciclo[data-v-0ceefa86] {\n  font-size: 18px;\n  align-items: center;\n  padding-left: 50px;\n}\n.indicador-ciclo-telefono[data-v-0ceefa86] {\n  display: none;\n}\n.titulo-ciclos[data-v-0ceefa86] {\n  color: #ff7900;\n  font-size: 60px;\n  padding: 20px 50px 20px;\n}\n.p-ciclos[data-v-0ceefa86] {\n  font-size: 20px;\n  padding: 20px 50px 20px;\n  line-height: 30px;\n}\n.card-img-top[data-v-0ceefa86] {\n  width: \"197px\";\n  height: \"160px\";\n}\n.ec-stars-wrapper1[data-v-0ceefa86] {\n  /* Espacio entre los inline-block (los hijos, los `a`)\n    http://ksesocss.blogspot.com/2012/03/display-inline-block-y-sus-empeno-en.html */\n  font-size: 0;\n  /* Podríamos quitarlo,\n  pero de esta manera (siempre que no le demos padding),\n  sólo aplicará la regla .ec-stars-wrapper:hover a cuando\n  también se esté haciendo hover a alguna estrella */\n  display: inline-block;\n}\n.ec-stars-wrapper1 a[data-v-0ceefa86] {\n  text-decoration: none;\n  display: inline-block;\n  /* Volver a dar tamaño al texto */\n  font-size: 30px;\n  font-size: 1.5rem;\n  color: #ffd620;\n}\n.card-header[data-v-0ceefa86] {\n  background-color: #e9ecefb5;\n}\n.etiqueta[data-v-0ceefa86] {\n  color: black;\n}\n.selectc[data-v-0ceefa86] {\n  background-color: #e9ecef00;\n  border-color: rgba(0, 0, 0, 0);\n  border-bottom-color: #5c5b5b;\n  font-size: 1em;\n  border-bottom-width: medium;\n}\n.icons[data-v-0ceefa86] {\n  color: gray;\n}\n.icons[data-v-0ceefa86]:not(.md-button):hover {\n  text-decoration: underline;\n  color: #ff4700;\n}\n.fa-chevron-right[data-v-0ceefa86] {\n  display: block;\n  padding-bottom: 10px;\n}\n.fa-chevron-right[data-v-0ceefa86]::before {\n  padding-right: 10px;\n}\n.sticky[data-v-0ceefa86] {\n  padding: 0px;\n  margin: 0px;\n  position: fixed;\n  right: 0px;\n  top: 230px;\n  width: 210px;\n  z-index: 1100;\n}\n.contactanos[data-v-0ceefa86] {\n  color: #ff4700;\n}\n.separator[data-v-0ceefa86] {\n  border-left-style: solid;\n}\n.modal.right .modal-dialog[data-v-0ceefa86] {\n  position: fixed;\n  margin: auto;\n  width: 620px;\n  height: 100%;\n  transform: translate3d(0%, 0, 0);\n}\n.modal.right .modal-content[data-v-0ceefa86] {\n  height: 100%;\n  overflow-y: auto;\n}\n.modal.right .modal-body[data-v-0ceefa86] {\n  padding: 15px 15px 80px;\n}\n\n/*Right*/\n.modal.right.fade .modal-dialog[data-v-0ceefa86] {\n  right: 0px;\n  transition: opacity 0.3s linear, right 0.3s ease-out;\n}\n.modal.right.fade.in .modal-dialog[data-v-0ceefa86] {\n  right: 0;\n}\n.matricula[data-v-0ceefa86] {\n  padding-top: 60px;\n  padding-bottom: 110px;\n}\n.section1[data-v-0ceefa86] {\n  width: 100%;\n  height: auto;\n}\n.section1I[data-v-0ceefa86] {\n  height: 500px;\n  float: right;\n}\n.section2[data-v-0ceefa86] {\n  width: 100%;\n  height: auto;\n  background-image: url(\"/uploads/home/Logo-opacidad-fondo.png\");\n  background-repeat: no-repeat;\n  background-position: center;\n  border-bottom-color: #dacfcf36;\n  border-bottom-style: groove;\n  padding-top: 25px;\n}\n.section2I[data-v-0ceefa86] {\n  width: 100%;\n  max-width: 310px;\n  background: #e8e7e7;\n}\n.section3[data-v-0ceefa86] {\n  width: 100%;\n  height: auto;\n  border-bottom-color: #dacfcf36;\n  border-bottom-style: groove;\n  padding-top: 25px;\n}\n.img-ciclo[data-v-0ceefa86] {\n  width: 60px;\n  height: 60px;\n  background: white;\n  border-radius: 100%;\n  align-self: flex-start;\n}\n.section3P[data-v-0ceefa86] {\n  border-radius: 10px;\n  width: 68%;\n  align-self: flex-end;\n  font-size: large;\n  padding: 10px;\n  font-family: \"Poppins\";\n  color: white;\n  background-color: #ff7900;\n}\n.section-ciclos[data-v-0ceefa86] {\n  align-self: flex-end;\n  font-size: large;\n  padding: 5px;\n  font-family: \"Poppins\";\n  color: black;\n}\n.sect3H[data-v-0ceefa86] {\n  border-bottom-color: #dacfcf36;\n  border-bottom-style: groove;\n}\n.imagen-cambio[data-v-0ceefa86] {\n  padding-top: 200px;\n  padding-bottom: 200px;\n}\n.section4[data-v-0ceefa86] {\n  width: 100%;\n  height: auto;\n  background-image: url(\"/uploads/home/fondo1.png\");\n  background-position-y: bottom;\n  background-repeat: no-repeat;\n  background-size: cover;\n}\n.section4P[data-v-0ceefa86] {\n  border-color: black;\n  background-color: black;\n  color: white;\n  text-align: right;\n}\n.section5[data-v-0ceefa86] {\n  height: auto;\n  background-image: url(\"/uploads/home/Imagen_fondo.jpg\");\n  background-repeat: no-repeat;\n  background-size: cover;\n  border-bottom-color: #dacfcf36;\n  border-bottom-style: groove;\n  padding-top: 25px;\n}\n.section-yellow[data-v-0ceefa86] {\n  background-image: url(\"/uploads/home/fondo-amarillo.png\");\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-color: #ffc500;\n}\n.title-yellow[data-v-0ceefa86] {\n  font-family: boldfont;\n  color: white;\n  background-color: #233d68;\n  padding: 20px;\n  width: 60%;\n  text-align: center;\n}\n.text-yellow[data-v-0ceefa86] {\n  font-weight: bold;\n  font-size: 20px;\n  line-height: 30px;\n  width: 70%;\n}\n.section6[data-v-0ceefa86] {\n  width: 100%;\n  height: 350px;\n  padding-top: 25px;\n}\n.ciclos-p[data-v-0ceefa86] {\n  font-family: \"Poppins\";\n  font-size: 18px;\n  padding: 0 0 20px 50px;\n}\niframe[data-v-0ceefa86]:not(.md-image) {\n  height: 400px;\n}\n.section6I[data-v-0ceefa86] {\n  padding-top: 50px;\n  width: 300px;\n}\n.btn-trikele[data-v-0ceefa86] {\n  background-color: #ff7900;\n  font-family: \"Poppins\";\n}\n.btn-Azul[data-v-0ceefa86] {\n  background: #233d68;\n}\n.section6C[data-v-0ceefa86] {\n  background-color: rgba(128, 128, 128, 0);\n}\n.textoB[data-v-0ceefa86] {\n  color: white;\n}\n.container-fluid[data-v-0ceefa86] {\n  background: #e8e7e7;\n  border-radius: 10px;\n  max-width: 1050px;\n  min-width: auto;\n}\n.seccion[data-v-0ceefa86] {\n  background-color: #f79d52;\n  background-size: contain;\n}\n.container-fluid2[data-v-0ceefa86] {\n  background: rgba(232, 231, 231, 0);\n  border-radius: 10px;\n  max-width: 1050px;\n  min-width: auto;\n}\n.sectionI[data-v-0ceefa86] {\n  height: 272px;\n  width: 360px;\n}\n.fondo-gris[data-v-0ceefa86] {\n  background-color: #f0f0f0;\n}\n.contenedor[data-v-0ceefa86] {\n  position: relative;\n  display: inline-block;\n  text-align: center;\n}\n.btn-morado[data-v-0ceefa86] {\n  background-color: #820180;\n}\n.section-naranja[data-v-0ceefa86] {\n  background-image: url(\"/uploads/home/cuaderno.png\");\n  background-size: cover;\n  background-repeat: round;\n  padding: 25px;\n}\n.ciclo-fondo[data-v-0ceefa86] {\n  background-image: url(\"/uploads/home/colegio.jpg\");\n  background-repeat: no-repeat;\n  background-position: bottom;\n  background-size: cover;\n}\n.texto-encima[data-v-0ceefa86] {\n  position: absolute;\n  top: 10px;\n  left: 10px;\n}\n.centrado[data-v-0ceefa86] {\n  position: absolute;\n  top: 40%;\n  left: 20%;\n  transform: translate(-50%, -50%);\n  width: 20%;\n  background-color: white;\n}\n@media only screen and (min-device-width: 320px) and (max-device-width: 568px) {\n.centrado[data-v-0ceefa86] {\n    position: absolute;\n    top: 40%;\n    left: 20%;\n    transform: translate(-50%, -20%);\n    width: 40%;\n    display: contents;\n}\n.ciclos-p[data-v-0ceefa86] {\n    font-family: \"Poppins\";\n    font-size: 14px;\n    width: 90%;\n}\n.sliderv[data-v-0ceefa86] {\n    padding-top: 100px;\n    font-family: Caviar Dreams;\n    display: contents;\n}\n.vueperslides[data-v-0ceefa86] {\n    display: none;\n}\n.mobileSection[data-v-0ceefa86] {\n    display: inline;\n}\n.mobileSection2[data-v-0ceefa86] {\n    display: inline;\n}\n.deskSection2[data-v-0ceefa86] {\n    display: none;\n}\n.seccion[data-v-0ceefa86] {\n    background-color: #009fe3;\n    background-size: contain;\n}\n.title-yellow[data-v-0ceefa86] {\n    font-family: boldfont;\n    color: white;\n    background-color: #233d68;\n    padding: 20px;\n    width: 80%;\n    text-align: center;\n}\n.text-yellow[data-v-0ceefa86] {\n    font-family: \"PoppinsBold\";\n    font-size: 18px;\n    width: 85%;\n    padding-left: 20%;\n}\n.img-ciclo[data-v-0ceefa86] {\n    width: 60px;\n    height: 60px;\n    background: white;\n    border-radius: 100%;\n    align-self: center;\n}\n.seccion-educiclos[data-v-0ceefa86] {\n    background-image: url(\"/uploads/home/cuadernociclos.png\");\n    background-repeat: no-repeat;\n    background-position: bottom;\n    background-size: cover;\n}\n.indicador-ciclo-telefono[data-v-0ceefa86] {\n    font-size: 14px;\n    align-items: center;\n    padding-left: 10px;\n    display: block;\n}\n.indicador-ciclo[data-v-0ceefa86] {\n    display: none;\n}\n.titulo-ciclos[data-v-0ceefa86] {\n    color: #ff7900;\n    font-size: 20px;\n    padding: 20px 50px 20px;\n}\n.p-ciclos[data-v-0ceefa86] {\n    font-size: 12px;\n    padding: 20px 50px 20px;\n    line-height: 30px;\n}\n.ciclo-fondo[data-v-0ceefa86] {\n    background-image: url(\"/uploads/home/cuaderno.png\");\n    background-repeat: no-repeat;\n    background-position: bottom;\n    background-size: cover;\n}\n.imagen-cambio[data-v-0ceefa86] {\n    padding-top: 30px;\n    padding-bottom: 20px;\n}\n.footer-style[data-v-0ceefa86] {\n    bottom: 0;\n    width: 100%;\n    position: absolute;\n    height: 130px;\n    background-color: #ff7900;\n    background-size: 100% 100%;\n    margin: -130px auto;\n}\n}", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\n.realistic-marker-highlight[data-v-0ceefa86] {\n  position: relative;\n  margin: 0 0rem;\n  padding: 0.1em 0.1em;\n  border-radius: 0.8em 0.3em;\n  background: transparent;\n  background-image: linear-gradient(to right, #f08b2e, #ffb876 4%, #f4cca7);\n  -webkit-box-decoration-break: clone;\n  box-decoration-break: clone;\n}\n.md-card-actions.text-center[data-v-0ceefa86] {\n  display: flex;\n  justify-content: center !important;\n}\n.contact-form[data-v-0ceefa86] {\n  margin-top: 30px;\n}\n.md-has-textarea + .md-layout[data-v-0ceefa86] {\n  margin-top: 15px;\n}\n.containerheader[data-v-0ceefa86] {\n  padding-top: 0px;\n  padding-bottom: 20px;\n}\nfooter[data-v-0ceefa86] {\n  color: #f3f3f3;\n}\nfooter h4[data-v-0ceefa86] {\n  font-weight: 800;\n}\nfooter .footer-above[data-v-0ceefa86] {\n  padding-top: 50px;\n  background-color: #2c3e50;\n}\n.mobileSection[data-v-0ceefa86] {\n  display: none;\n}\n.mobileSection2[data-v-0ceefa86] {\n  display: none;\n}\nfooter .footer-col[data-v-0ceefa86] {\n  margin-top: 70px;\n}\n.card2[data-v-0ceefa86] {\n  padding-top: 20px;\n  padding-left: 40px;\n  padding-bottom: 10px;\n  text-align: justify;\n}\n.card3[data-v-0ceefa86] {\n  padding-top: 10px;\n}\n.backgroundf[data-v-0ceefa86] {\n  background-image: url(https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/fondo3.png?alt=media&token=72eec913-3fff-4752-a719-6f74c81e3435);\n  background-repeat: no-repeat;\n  background-position: bottom;\n  background-size: cover;\n}\n.card[data-v-0ceefa86] {\n  font-family: \"Poppins\";\n  text-align: justify;\n  color: #000000;\n}\n.bg-light.container[data-v-0ceefa86] {\n  width: 70%;\n}\n.bg-light1[data-v-0ceefa86] {\n  background: transparent;\n}\n.bg-light2[data-v-0ceefa86] {\n  background: #c7c7c7;\n  margin: 0%;\n}\n.padding-20[data-v-0ceefa86] {\n  padding: 20px;\n}\nh4[data-v-0ceefa86] {\n  color: #000000;\n  font-family: \"Poppins\";\n  font-weight: bold;\n  font-size: 30px;\n}\nh3[data-v-0ceefa86] {\n  font-family: \"Poppins\";\n  font-weight: 600;\n}\nh5[data-v-0ceefa86] {\n  font-family: \"Poppins\";\n}\na[data-v-0ceefa86] {\n  color: white;\n  font-family: \"Poppins\";\n}\n.textinT[data-v-0ceefa86] {\n  position: absolute;\n  top: 59%;\n  left: 35%;\n  transform: translate(-50%, -50%);\n  color: black;\n  font-family: \"Poppins\";\n  font-weight: bold;\n  width: 300px;\n  padding-top: 20px;\n}\n.seccion-educiclos[data-v-0ceefa86] {\n  background-image: url(\"/uploads/home/cuadernociclos.png\");\n  background-repeat: no-repeat;\n  background-position: bottom;\n  background-size: cover;\n}\n.indicador-ciclo[data-v-0ceefa86] {\n  font-size: 18px;\n  align-items: center;\n  padding-left: 50px;\n}\n.indicador-ciclo-telefono[data-v-0ceefa86] {\n  display: none;\n}\n.titulo-ciclos[data-v-0ceefa86] {\n  color: #ff7900;\n  font-size: 60px;\n  padding: 20px 50px 20px;\n}\n.p-ciclos[data-v-0ceefa86] {\n  font-size: 20px;\n  padding: 20px 50px 20px;\n  line-height: 30px;\n}\n.card-img-top[data-v-0ceefa86] {\n  width: \"197px\";\n  height: \"160px\";\n}\n.ec-stars-wrapper1[data-v-0ceefa86] {\n  /* Espacio entre los inline-block (los hijos, los `a`)\n    http://ksesocss.blogspot.com/2012/03/display-inline-block-y-sus-empeno-en.html */\n  font-size: 0;\n  /* Podríamos quitarlo,\n  pero de esta manera (siempre que no le demos padding),\n  sólo aplicará la regla .ec-stars-wrapper:hover a cuando\n  también se esté haciendo hover a alguna estrella */\n  display: inline-block;\n}\n.ec-stars-wrapper1 a[data-v-0ceefa86] {\n  text-decoration: none;\n  display: inline-block;\n  /* Volver a dar tamaño al texto */\n  font-size: 30px;\n  font-size: 1.5rem;\n  color: #ffd620;\n}\n.card-header[data-v-0ceefa86] {\n  background-color: #e9ecefb5;\n}\n.etiqueta[data-v-0ceefa86] {\n  color: black;\n}\n.selectc[data-v-0ceefa86] {\n  background-color: #e9ecef00;\n  border-color: rgba(0, 0, 0, 0);\n  border-bottom-color: #5c5b5b;\n  font-size: 1em;\n  border-bottom-width: medium;\n}\n.icons[data-v-0ceefa86] {\n  color: gray;\n}\n.icons[data-v-0ceefa86]:not(.md-button):hover {\n  text-decoration: underline;\n  color: #ff4700;\n}\n.fa-chevron-right[data-v-0ceefa86] {\n  display: block;\n  padding-bottom: 10px;\n}\n.fa-chevron-right[data-v-0ceefa86]::before {\n  padding-right: 10px;\n}\n.sticky[data-v-0ceefa86] {\n  padding: 0px;\n  margin: 0px;\n  position: fixed;\n  right: 0px;\n  top: 230px;\n  width: 210px;\n  z-index: 1100;\n}\n.contactanos[data-v-0ceefa86] {\n  color: #ff4700;\n}\n.separator[data-v-0ceefa86] {\n  border-left-style: solid;\n}\n.modal.right .modal-dialog[data-v-0ceefa86] {\n  position: fixed;\n  margin: auto;\n  width: 620px;\n  height: 100%;\n  transform: translate3d(0%, 0, 0);\n}\n.modal.right .modal-content[data-v-0ceefa86] {\n  height: 100%;\n  overflow-y: auto;\n}\n.modal.right .modal-body[data-v-0ceefa86] {\n  padding: 15px 15px 80px;\n}\n\n/*Right*/\n.modal.right.fade .modal-dialog[data-v-0ceefa86] {\n  right: 0px;\n  transition: opacity 0.3s linear, right 0.3s ease-out;\n}\n.modal.right.fade.in .modal-dialog[data-v-0ceefa86] {\n  right: 0;\n}\n.matricula[data-v-0ceefa86] {\n  padding-top: 60px;\n  padding-bottom: 110px;\n}\n.section1[data-v-0ceefa86] {\n  width: 100%;\n  height: auto;\n}\n.section1I[data-v-0ceefa86] {\n  height: 500px;\n  float: right;\n}\n.section2[data-v-0ceefa86] {\n  width: 100%;\n  height: auto;\n  background-image: url(\"/uploads/home/Logo-opacidad-fondo.png\");\n  background-repeat: no-repeat;\n  background-position: center;\n  border-bottom-color: #dacfcf36;\n  border-bottom-style: groove;\n  padding-top: 25px;\n}\n.section2I[data-v-0ceefa86] {\n  width: 100%;\n  max-width: 310px;\n  background: #e8e7e7;\n}\n.section3[data-v-0ceefa86] {\n  width: 100%;\n  height: auto;\n  border-bottom-color: #dacfcf36;\n  border-bottom-style: groove;\n  padding-top: 25px;\n}\n.img-ciclo[data-v-0ceefa86] {\n  width: 60px;\n  height: 60px;\n  background: white;\n  border-radius: 100%;\n  align-self: flex-start;\n}\n.section3P[data-v-0ceefa86] {\n  border-radius: 10px;\n  width: 68%;\n  align-self: flex-end;\n  font-size: large;\n  padding: 10px;\n  font-family: \"Poppins\";\n  color: white;\n  background-color: #ff7900;\n}\n.section-ciclos[data-v-0ceefa86] {\n  align-self: flex-end;\n  font-size: large;\n  padding: 5px;\n  font-family: \"Poppins\";\n  color: black;\n}\n.sect3H[data-v-0ceefa86] {\n  border-bottom-color: #dacfcf36;\n  border-bottom-style: groove;\n}\n.imagen-cambio[data-v-0ceefa86] {\n  padding-top: 200px;\n  padding-bottom: 200px;\n}\n.section4[data-v-0ceefa86] {\n  width: 100%;\n  height: auto;\n  background-image: url(\"/uploads/home/fondo1.png\");\n  background-position-y: bottom;\n  background-repeat: no-repeat;\n  background-size: cover;\n}\n.section4P[data-v-0ceefa86] {\n  border-color: black;\n  background-color: black;\n  color: white;\n  text-align: right;\n}\n.section5[data-v-0ceefa86] {\n  height: auto;\n  background-image: url(\"/uploads/home/Imagen_fondo.jpg\");\n  background-repeat: no-repeat;\n  background-size: cover;\n  border-bottom-color: #dacfcf36;\n  border-bottom-style: groove;\n  padding-top: 25px;\n}\n.section-yellow[data-v-0ceefa86] {\n  background-image: url(\"/uploads/home/fondo-amarillo.png\");\n  background-repeat: no-repeat;\n  background-size: cover;\n  background-color: #ffc500;\n}\n.title-yellow[data-v-0ceefa86] {\n  font-family: boldfont;\n  color: white;\n  background-color: #233d68;\n  padding: 20px;\n  width: 60%;\n  text-align: center;\n}\n.text-yellow[data-v-0ceefa86] {\n  font-weight: bold;\n  font-size: 20px;\n  line-height: 30px;\n  width: 70%;\n}\n.section6[data-v-0ceefa86] {\n  width: 100%;\n  height: 350px;\n  padding-top: 25px;\n}\n.ciclos-p[data-v-0ceefa86] {\n  font-family: \"Poppins\";\n  font-size: 18px;\n  padding: 0 0 20px 50px;\n}\niframe[data-v-0ceefa86]:not(.md-image) {\n  height: 400px;\n}\n.section6I[data-v-0ceefa86] {\n  padding-top: 50px;\n  width: 300px;\n}\n.btn-trikele[data-v-0ceefa86] {\n  background-color: #ff7900;\n  font-family: \"Poppins\";\n}\n.btn-Azul[data-v-0ceefa86] {\n  background: #233d68;\n}\n.section6C[data-v-0ceefa86] {\n  background-color: rgba(128, 128, 128, 0);\n}\n.textoB[data-v-0ceefa86] {\n  color: white;\n}\n.container-fluid[data-v-0ceefa86] {\n  background: #e8e7e7;\n  border-radius: 10px;\n  max-width: 1050px;\n  min-width: auto;\n}\n.seccion[data-v-0ceefa86] {\n  background-color: #f79d52;\n  background-size: contain;\n}\n.container-fluid2[data-v-0ceefa86] {\n  background: rgba(232, 231, 231, 0);\n  border-radius: 10px;\n  max-width: 1050px;\n  min-width: auto;\n}\n.sectionI[data-v-0ceefa86] {\n  height: 272px;\n  width: 360px;\n}\n.fondo-gris[data-v-0ceefa86] {\n  background-color: #f0f0f0;\n}\n.contenedor[data-v-0ceefa86] {\n  position: relative;\n  display: inline-block;\n  text-align: center;\n}\n.mob-1[data-v-0ceefa86] {\n  display: none;\n}\n.mob-2[data-v-0ceefa86] {\n  display: none;\n}\n.mob-3[data-v-0ceefa86] {\n  display: none;\n}\n.mob-4[data-v-0ceefa86] {\n  display: none;\n}\n.mob-5[data-v-0ceefa86] {\n  display: none;\n}\n.btn-morado[data-v-0ceefa86] {\n  background-color: #820180;\n}\n.section-naranja[data-v-0ceefa86] {\n  background-image: url(\"/uploads/home/cuaderno.png\");\n  background-size: cover;\n  background-repeat: round;\n  padding: 25px;\n}\n.ciclo-fondo[data-v-0ceefa86] {\n  background-image: url(\"/uploads/home/colegio.jpg\");\n  background-repeat: no-repeat;\n  background-position: bottom;\n  background-size: cover;\n}\n.texto-encima[data-v-0ceefa86] {\n  position: absolute;\n  top: 10px;\n  left: 10px;\n}\n.centrado[data-v-0ceefa86] {\n  position: absolute;\n  top: 40%;\n  left: 20%;\n  transform: translate(-50%, -50%);\n  width: 20%;\n  background-color: white;\n}\n@media only screen and (min-device-width: 320px) and (max-device-width: 568px) {\n.centrado[data-v-0ceefa86] {\n    position: absolute;\n    top: 40%;\n    left: 20%;\n    transform: translate(-50%, -20%);\n    width: 40%;\n    display: contents;\n}\n.ciclos-p[data-v-0ceefa86] {\n    font-family: \"Poppins\";\n    font-size: 14px;\n    width: 90%;\n}\n.sliderv[data-v-0ceefa86] {\n    padding-top: 100px;\n    font-family: Caviar Dreams;\n    display: contents;\n}\n.desk-1[data-v-0ceefa86] {\n    display: none;\n}\n.desk-2[data-v-0ceefa86] {\n    display: none;\n}\n.desk-3[data-v-0ceefa86] {\n    display: none;\n}\n.desk-4[data-v-0ceefa86] {\n    display: none;\n}\n.desk-5[data-v-0ceefa86] {\n    display: none;\n}\n.desk-6[data-v-0ceefa86] {\n    display: none;\n}\n.desk-7 h3[data-v-0ceefa86] {\n    font-size: 18px !important;\n}\n.mob-1[data-v-0ceefa86] {\n    display: block;\n}\n.mob-2[data-v-0ceefa86] {\n    display: block;\n}\n.mob-3[data-v-0ceefa86] {\n    display: block;\n}\n.mob-4[data-v-0ceefa86] {\n    display: block;\n}\n.mob-5[data-v-0ceefa86] {\n    display: block;\n}\n.vueperslides[data-v-0ceefa86] {\n    display: none;\n}\n.mobileSection[data-v-0ceefa86] {\n    display: inline;\n}\n.mobileSection2[data-v-0ceefa86] {\n    display: inline;\n}\n.deskSection2[data-v-0ceefa86] {\n    display: none;\n}\n.seccion[data-v-0ceefa86] {\n    background-color: #009fe3;\n    background-size: contain;\n}\n.title-yellow[data-v-0ceefa86] {\n    font-family: boldfont;\n    color: white;\n    background-color: #233d68;\n    padding: 20px;\n    width: 80%;\n    text-align: center;\n}\n.text-yellow[data-v-0ceefa86] {\n    font-family: \"PoppinsBold\";\n    font-size: 18px;\n    width: 85%;\n    padding-left: 20%;\n}\n.img-ciclo[data-v-0ceefa86] {\n    width: 60px;\n    height: 60px;\n    background: white;\n    border-radius: 100%;\n    align-self: center;\n}\n.seccion-educiclos[data-v-0ceefa86] {\n    background-image: url(\"/uploads/home/cuadernociclos.png\");\n    background-repeat: no-repeat;\n    background-position: bottom;\n    background-size: cover;\n}\n.indicador-ciclo-telefono[data-v-0ceefa86] {\n    font-size: 14px;\n    align-items: center;\n    padding-left: 10px;\n    display: block;\n}\n.indicador-ciclo[data-v-0ceefa86] {\n    display: none;\n}\n.titulo-ciclos[data-v-0ceefa86] {\n    color: #ff7900;\n    font-size: 20px;\n    padding: 20px 50px 20px;\n}\n.p-ciclos[data-v-0ceefa86] {\n    font-size: 12px;\n    padding: 20px 50px 20px;\n    line-height: 30px;\n}\n.ciclo-fondo[data-v-0ceefa86] {\n    background-image: url(\"/uploads/home/cuaderno.png\");\n    background-repeat: no-repeat;\n    background-position: bottom;\n    background-size: cover;\n}\n.imagen-cambio[data-v-0ceefa86] {\n    padding-top: 30px;\n    padding-bottom: 20px;\n}\n.footer-style[data-v-0ceefa86] {\n    bottom: 0;\n    width: 100%;\n    position: absolute;\n    height: 130px;\n    background-color: #ff7900;\n    background-size: 100% 100%;\n    margin: -130px auto;\n}\n}", ""]);
 
 // exports
 
@@ -415,9 +451,9 @@ var render = function() {
   return _c("div", [
     _vm._m(0),
     _vm._v(" "),
-    _c("br"),
-    _vm._v(" "),
     _vm._m(1),
+    _vm._v(" "),
+    _c("br"),
     _vm._v(" "),
     _vm._m(2),
     _vm._v(" "),
@@ -425,15 +461,25 @@ var render = function() {
     _vm._v(" "),
     _vm._m(4),
     _vm._v(" "),
-    _c("br"),
-    _vm._v(" "),
-    _c("br"),
-    _vm._v(" "),
-    _c("br"),
-    _vm._v(" "),
     _vm._m(5),
     _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
+    _vm._m(6),
+    _vm._v(" "),
+    _vm._m(7),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _vm._m(8),
+    _vm._v(" "),
+    _vm._m(9),
+    _vm._v(" "),
+    _vm._m(10),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group desk-7" }, [
       _c("h3", { staticClass: "text-center" }, [
         _vm._v("Recibe todas las novedades de nuestra comunidad TRIKELE")
       ]),
@@ -529,14 +575,14 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _vm._m(6)
+                _vm._m(11)
               ])
             ])
           ]
         )
       ]),
       _vm._v(" "),
-      _vm._m(7)
+      _vm._m(12)
     ])
   ])
 }
@@ -545,7 +591,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "seccion" }, [
+    return _c("div", { staticClass: "seccion desk-1" }, [
       _c("div", { staticClass: "form-group" }, [
         _c("a", { attrs: { href: "/login" } }, [
           _c("img", {
@@ -559,7 +605,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group seccion-educiclos" }, [
+    return _c("div", { staticClass: "seccion mob-1" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("a", { attrs: { href: "/login" } }, [
+          _c("img", { attrs: { src: "uploads/home/mob-1.png", width: "100%" } })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group seccion-educiclos desk-2" }, [
       _c("img", { attrs: { src: "uploads/home/educiclos.png", width: "50%" } }),
       _vm._v(" "),
       _c("p", { staticClass: "letra-poppins-bold p-ciclos" }, [
@@ -850,7 +908,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
+    return _c("div", { staticClass: "mob-2" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("a", { attrs: { href: "/login" } }, [
+          _c("img", { attrs: { src: "uploads/home/mob-2.png", width: "100%" } })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group desk-3" }, [
       _c("a", { attrs: { href: "/login" } }, [
         _c("img", {
           attrs: { src: "uploads/home/equivalencia.png", width: "100%" }
@@ -865,7 +935,7 @@ var staticRenderFns = [
     return _c(
       "div",
       {
-        staticClass: "row",
+        staticClass: "row desk-4",
         staticStyle: {
           "background-image": "url('/uploads/home/ciclos.jpg')",
           "background-repeat": "no-repeat",
@@ -938,7 +1008,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row ciclo-fondo" }, [
+    return _c("div", { staticClass: "mob-3" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("a", { attrs: { href: "/login" } }, [
+          _c("img", {
+            attrs: { src: "uploads/home/mobile-porque.png", width: "100%" }
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row ciclo-fondo desk-5" }, [
       _c("div", { staticClass: "form-group mx-auto imagen-cambio" }, [
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-6 ciclos-p" }, [
@@ -981,10 +1065,24 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mob-4" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("a", { attrs: { href: "/login" } }, [
+          _c("img", {
+            attrs: { src: "uploads/home/mobile-tucolegio.png", width: "100%" }
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c(
       "div",
       {
-        staticClass: "form-group",
+        staticClass: "form-group desk-6",
         staticStyle: {
           "background-image": "url('/uploads/home/cambiociclos.png')",
           "background-repeat": "no-repeat",
@@ -1062,6 +1160,20 @@ var staticRenderFns = [
         ])
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mob-5" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("a", { attrs: { href: "/login" } }, [
+          _c("img", {
+            attrs: { src: "uploads/home/mobile-cme.png", width: "100%" }
+          })
+        ])
+      ])
+    ])
   },
   function() {
     var _vm = this

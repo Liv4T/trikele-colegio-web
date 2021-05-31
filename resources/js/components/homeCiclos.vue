@@ -1,14 +1,21 @@
 <template>
   <div>
-    <div class="seccion">
+    <div class="seccion desk-1">
       <div class="form-group">
         <a href="/login">
           <img src="uploads/home/ciclosslide.jpg" width="100%" />
         </a>
       </div>
     </div>
+    <div class="seccion mob-1">
+      <div class="form-group">
+        <a href="/login">
+          <img src="uploads/home/mob-1.png" width="100%" />
+        </a>
+      </div>
+    </div>
     <br />
-    <div class="form-group seccion-educiclos">
+    <div class="form-group seccion-educiclos desk-2">
       <img src="uploads/home/educiclos.png" width="50%" />
       <!-- <h1 class="letra-poppins-bold titulo-ciclos">¿Qué es educación por ciclos?</h1> -->
       <p class="letra-poppins-bold p-ciclos">
@@ -91,12 +98,20 @@
       <br />
       <br />
     </div>
-    <div class="form-group">
+    <div class="mob-2">
+      <div class="form-group">
+        <a href="/login">
+          <img src="uploads/home/mob-2.png" width="100%" />
+        </a>
+      </div>
+    </div>
+    <div class="form-group desk-3">
       <a href="/login">
         <img src="uploads/home/equivalencia.png" width="100%" />
       </a>
     </div>
-    <div class="row" style="background-image: url('/uploads/home/ciclos.jpg'); background-repeat: no-repeat; background-position: bottom; background-size: cover">
+
+    <div class="row desk-4" style="background-image: url('/uploads/home/ciclos.jpg'); background-repeat: no-repeat; background-position: bottom; background-size: cover">
       <div class="col-md-6"></div>
       <div class="col-md-6 padding-20">
         <img src="uploads/home/pqtrikele.png" style="padding: 20px" />
@@ -122,7 +137,14 @@
         <br />
       </div>
     </div>
-    <div class="row ciclo-fondo">
+    <div class="mob-3">
+      <div class="form-group">
+        <a href="/login">
+          <img src="uploads/home/mobile-porque.png" width="100%" />
+        </a>
+      </div>
+    </div>
+    <div class="row ciclo-fondo desk-5">
       <div class="form-group mx-auto imagen-cambio">
         <div class="row">
           <div class="col-md-6 ciclos-p">
@@ -136,7 +158,14 @@
     <br />
     <br />
     <br />
-    <div class="form-group" style="background-image: url('/uploads/home/cambiociclos.png'); background-repeat: no-repeat; background-position: bottom; background-size: cover">
+    <div class="mob-4">
+      <div class="form-group">
+        <a href="/login">
+          <img src="uploads/home/mobile-tucolegio.png" width="100%" />
+        </a>
+      </div>
+    </div>
+    <div class="form-group desk-6" style="background-image: url('/uploads/home/cambiociclos.png'); background-repeat: no-repeat; background-position: bottom; background-size: cover">
       <img src="uploads/home/titulocambio.png" width="90%" />
       <p class="text-yellow padding-20">En Trikele sabemos que eres diferente y que te espera un mundo en transformación permanente. Por eso, desarrollamos contigo las habilidades que necesitas para el siglo XXI:</p>
       <div class="form-group row padding-20">
@@ -159,7 +188,14 @@
         </div>
       </div>
     </div>
-    <div class="form-group">
+    <div class="mob-5">
+      <div class="form-group">
+        <a href="/login">
+          <img src="uploads/home/mobile-cme.png" width="100%" />
+        </a>
+      </div>
+    </div>
+    <div class="form-group desk-7">
       <h3 class="text-center">Recibe todas las novedades de nuestra comunidad TRIKELE</h3>
       <div class="col-md-6 mx-auto">
         <form class="needs-validation" v-on:submit.prevent="sendEmail2" novalidate>
@@ -734,6 +770,22 @@ iframe:not(.md-image) {
   display: inline-block;
   text-align: center;
 }
+.mob-1 {
+  display: none;
+}
+.mob-2 {
+  display: none;
+}
+.mob-3 {
+  display: none;
+}
+.mob-4 {
+  display: none;
+}
+.mob-5 {
+  display: none;
+}
+
 .btn-morado {
   background-color: #820180;
 }
@@ -781,6 +833,42 @@ iframe:not(.md-image) {
     padding-top: 100px;
     font-family: Caviar Dreams;
     display: contents;
+  }
+  .desk-1 {
+    display: none;
+  }
+  .desk-2 {
+    display: none;
+  }
+  .desk-3 {
+    display: none;
+  }
+  .desk-4 {
+    display: none;
+  }
+  .desk-5 {
+    display: none;
+  }
+  .desk-6 {
+    display: none;
+  }
+  .desk-7 h3 {
+    font-size: 18px !important;
+  }
+  .mob-1 {
+    display: block;
+  }
+  .mob-2 {
+    display: block;
+  }
+  .mob-3 {
+    display: block;
+  }
+  .mob-4 {
+    display: block;
+  }
+  .mob-5 {
+    display: block;
   }
   .vueperslides {
     display: none;
