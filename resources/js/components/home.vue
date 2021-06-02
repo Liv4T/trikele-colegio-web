@@ -186,6 +186,24 @@
           </div>
         </form>
       </div>
+      <div class="modal fade" id="modalini" data-backdrop="static" data-keyboard="false">
+        <div class="modal-lg modal-dialog">
+          <div class="modal-content">
+            <div class="card">
+              <h3 class="card-header fondo text-center">Gracias!</h3>
+
+              <div class="card-body text-center">
+                <h2 class="mobile-popup">Gracias por registrarte, uno de nuestros asesores se comunicara contigo lo antes posible.</h2>
+                <h3 class="mobile-popup2">Bienvenido a la familia TRIKELE</h3>
+                <img src="uploads/home/chica2.png" />
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-warning" @click.prevent="modaliniciar()">Aceptar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <footer class="text-center footer-style">
         <div class="row footer-row">
           <div class="col footer-col text-center">
@@ -317,7 +335,7 @@ export default {
           })
           .then((response) => {
             toastr.success("Gracias por comunicarse con nosotros.");
-            this.getMenu();
+            $("#modalini").modal("show");
           })
           .catch((error) => {
             this.errors = error.response.data;
@@ -339,6 +357,9 @@ export default {
             this.errors = error.response.data;
           });
       }
+    },
+    modaliniciar() {
+      window.location = "/gracias";
     },
   },
 };
@@ -843,6 +864,12 @@ iframe:not(.md-image) {
     background-color: #ff7900;
     background-size: 100% 100%;
     margin: -130px auto;
+  }
+  .mobile-popup {
+    font-size: 18px;
+  }
+  .mobile-popup2 {
+    font-size: 14px;
   }
 }
 </style>

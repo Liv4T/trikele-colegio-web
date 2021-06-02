@@ -64,6 +64,9 @@ Route::middleware('auth')->get('/free', function () {
 Route::middleware('auth')->get('/freeUnit', function () {
     return view('freeU');
 });
+Route::get('/gracias', function () {
+    return view('home');
+});
 Route::middleware('auth')->get('/course/{id_area}/{id_classroom}', function (String $id_area, String $id_classroom) {
     return view('course')->with('id_area', $id_area)->with('id_classroom', $id_classroom);
 });
