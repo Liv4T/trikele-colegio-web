@@ -58,7 +58,7 @@
     <br />
     <br />
     <div class="section-yellow desktop5">
-      <h3 class="title-yellow mx-auto">SOMOS LA PLATAFORMA QUE SE AJUSTA A LAS NECESIDADES DEL ESTUDIANTE POR QUE...</h3>
+      <h3 class="title-yellow mx-auto">SOMOS LA PLATAFORMA QUE SE AJUSTA A LAS NECESIDADES DEL ESTUDIANTE PORQUE DESARROLLAMOS...</h3>
       <div class="form-group row">
         <div class="col-md-6 text-center">
           <img src="uploads/home/chica-amarillo.png" alt="" width="80%" />
@@ -74,7 +74,7 @@
             <p class="text-yellow">Proyecto educativo que despierta pasión por el aprendizaje</p>
           </div>
         </div>
-        <a class="btn btn-lg btn-Azul mx-auto letra-poppins-bold" href="/#contacto">MATRICÚLATE</a>
+        <a class="btn btn-lg btn-Azul mx-auto letra-poppins-bold" href="/#contacto">INSCRÍBETE</a>
       </div>
     </div>
     <div class="mobile3">
