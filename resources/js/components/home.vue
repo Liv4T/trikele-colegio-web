@@ -216,6 +216,26 @@
           </div>
         </div>
       </footer>
+      <div class="modal fade" id="modalhome" data-backdrop="static" data-keyboard="false">
+        <div class="modal-lg modal-dialog">
+          <div class="modal-content" style="background-color: #ffc100">
+            <div class="card" style="background-color: #ffc100">
+              <br />
+              <h3 class="text-center">Bienvenido a TRIKELE</h3>
+              <div class="card-body text-center row">
+                <div class="col-md-6">
+                  <img src="uploads/home/chica2.png" />
+                  <a class="btn btn-lg btn-Azul mx-auto letra-poppins-bold" href="https://www.trikele.com/">Refuerzo Escolar</a>
+                </div>
+                <div class="col-md-6">
+                  <img src="uploads/home/popup3.png" />
+                  <a class="btn btn-lg btn-Azul mx-auto letra-poppins-bold" href="" @click.prevent="modalhomecol()">Continuar con Colegio</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -307,6 +327,7 @@ export default {
   computed: {},
   mounted() {
     this.plan = window.location.origin + "/compra/plan";
+    $("#modalhome").modal("show");
   },
   methods: {
     getMenu() {
@@ -360,6 +381,9 @@ export default {
     },
     modaliniciar() {
       window.location = "/gracias";
+    },
+    modalhomecol() {
+      $("#modalhome").modal("hide");
     },
   },
 };

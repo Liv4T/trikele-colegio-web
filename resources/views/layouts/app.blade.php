@@ -2,16 +2,6 @@
   <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
   <head>
     <link rel="shortcat icon" href="images/icon.png" />
-    @if(Request::path() === '/' || Request::path() === 'ciclos' || strpos(Request::path(), 'loginNew') !== false )
-     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9YVJXR81KE"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-9YVJXR81KE');
-    </script>
     <!-- Facebook Pixel Code -->
     <script>
     !function(f,b,e,v,n,t,s)
@@ -29,9 +19,15 @@
     src="https://www.facebook.com/tr?id=1141409596328634&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Facebook Pixel Code -->
+     <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9YVJXR81KE"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-
-     @endif
+    gtag('config', 'G-9YVJXR81KE');
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
