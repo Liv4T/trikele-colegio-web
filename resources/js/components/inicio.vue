@@ -1,14 +1,6 @@
 <template>
   <div class="back-calendar">
-    <div class="container"></div>
-
-    <!-- <a
-      target="_blank"
-      href="https://calendar.google.com/event?action=TEMPLATE&amp;tmeid=M3YyaWQwbXN1a2F0cDFiYzc5amQ2Y2JhZjkgbWlsZHJlZGZpZ3Vlcm9hcUBt&amp;tmsrc=mildredfigueroaq%40gmail.com"
-    >
-      <img border="0" src="https://www.google.com/calendar/images/ext/gc_button1_es.gif" />
-    </a>-->
-    <div class="modal fade" id="modalini" data-backdrop="static" data-keyboard="false">
+    <!-- <div class="modal fade" id="modalini" data-backdrop="static" data-keyboard="false">
       <div class="modal-lg modal-dialog">
         <div class="modal-content">
           <div class="card">
@@ -48,6 +40,65 @@
               <button type="button" class="btn btn-warning" @click.prevent="modaliniciar()">Aceptar</button>
             </div>
           </div>
+        </div>
+      </div>
+    </div> -->
+    <div class="row">
+      <div class="col-md-11 mx-auto">
+        <div class="custom-card text-center">
+          <h3 class="card-header fondo">¡BIENVENIDO!</h3>
+          <form class="needs-validation" novalidate>
+            <form-wizard title subtitle color="orange" layout="vertical" next-button-text="Siguiente" back-button-text="Atrás" finish-button-text="Finalizar" @on-complete="createNames">
+              <tab-content title="Documentos requeridos" icon="fas fa-id-card">
+                <h3>Para iniciar con el proceso de matricula debes cargar los siguientes documentos:</h3>
+
+                <div class="card-body pd-20">
+                  <div class="form-group align-center letra-p row mx-auto">
+                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Formulario de admisión
+
+                    <a class="btn btn-warning mg-20" href="#">Cargar</a>
+                  </div>
+
+                  <div class="form-group align-center letra-p row mx-auto">
+                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Cedula de ciudadanía papá y mamá <a class="btn btn-warning mg-20" href="#">Cargar</a>
+                  </div>
+                  <div class="form-group align-center letra-p row mx-auto">
+                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Documento de Identidad del estudiante <a class="btn btn-warning mg-20" href="#">Cargar</a>
+                  </div>
+                  <div class="form-group align-center letra-p row mx-auto">
+                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Certificados último año cursado <a class="btn btn-warning mg-20" href="#">Cargar</a>
+                  </div>
+                  <div class="form-group align-center letra-p row mx-auto">
+                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Certificado afiliación a EPS <a class="btn btn-warning mg-20" href="#">Cargar</a>
+                  </div>
+                  <div class="form-group align-center letra-p row mx-auto">
+                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Certificado Médico <a class="btn btn-warning mg-20" href="#">Cargar</a>
+                  </div>
+                  <div class="form-group align-center letra-p row mx-auto">
+                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Certificado laboral de los padres de familia <a class="btn btn-warning mg-20" href="#">Cargar</a>
+                  </div>
+                  <div class="form-group align-center letra-p row mx-auto">
+                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Certificado laboral <a class="btn btn-warning mg-20" href="#">Cargar</a>
+                  </div>
+                  <div class="form-group align-center letra-p row mx-auto">
+                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Paz y Salvo colegio anterior <a class="btn btn-warning mg-20" href="#">Cargar</a>
+                  </div>
+                </div>
+              </tab-content>
+              <tab-content title="Video" icon="fas fa-id-card">
+                <div class="card-body">
+                  <div class="form-group align-center letra-p row mx-auto">
+                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Video de presentacion del estudiante <a class="btn btn-warning mg-20" href="#">Cargar</a>
+                  </div>
+                </div>
+              </tab-content>
+              <tab-content title="Matricula" icon="fas fa-id-card">
+                <div class="card-body">
+                  <h3>Matricula</h3>
+                </div>
+              </tab-content>
+            </form-wizard>
+          </form>
         </div>
       </div>
     </div>
@@ -105,4 +156,16 @@ export default {
 /* .back-calendar {
   padding-left: 290px;
 } */
+.pd-20 {
+  padding-left: 7em;
+}
+.align-center {
+  align-items: center;
+}
+.letra-p {
+  font-size: 20px;
+}
+.mg-20 {
+  margin: 10px;
+}
 </style>

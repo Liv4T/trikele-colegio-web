@@ -139,7 +139,7 @@ Vue.component("aperfil-adm", ()=>import("./components/AsignarPerfil.vue"));
 Vue.component("adocente-adm", ()=>import("./components/asignarDocente.vue"));
 Vue.component("aestudiante-adm", ()=>import("./components/asignarEstudiante.vue"));
 Vue.component("importar-adm", ()=>import("./components/importAdm.vue"));
-Vue.component("asistencia-adm", ()=>import("./components/asistencia.vue"));
+Vue.component("asistencia-adm", () => import("./components/asistencia.vue"));
 
 
 Vue.component("duplicar-component",  () => import ("./components/duplicarGeneral.vue"));

@@ -262,7 +262,7 @@ Route::middleware('auth')->get('/salon_adm', function () {
 Route::middleware('auth')->get('/asistencia', function () {
     return view('asistencia');
 });
-Route::middleware('auth')->get('/matricula', function () {
+Route::get('/matricula', function () {
     return view('matricula');
 });
 

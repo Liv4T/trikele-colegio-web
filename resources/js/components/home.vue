@@ -186,7 +186,7 @@
           </div>
         </form>
       </div>
-      <div class="modal fade" id="modalini" data-backdrop="static" data-keyboard="false">
+      <!-- <div class="modal fade" id="modalini" data-backdrop="static" data-keyboard="false">
         <div class="modal-lg modal-dialog">
           <div class="modal-content">
             <div class="card">
@@ -203,7 +203,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <footer class="text-center footer-style">
         <div class="row footer-row">
           <div class="col footer-col text-center">
@@ -235,6 +235,103 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="container matricula">
+        <div class="modal right fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="card">
+                <h3 class="card-header fondo text-center">
+                  Inscribete
+                  <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                  </button>
+                </h3>
+                <h5 class="text-center" style="color: #278080">INICIA TU PROCESO DE ADMISIÓN AQUÍ</h5>
+                <div class="card-body">
+                  <form class="needs-validation" v-on:submit.prevent novalidate>
+                    <div class="text-center">
+                      <h5>Tus datos</h5>
+                    </div>
+                    <div class="form-group row mx-auto">
+                      <div class="col text-center mx-auto">
+                        <label for="name"> Nombre </label>
+                        <div>
+                          <input type="text" name="objetive1" class="form-control" v-model="name" required />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row mx-auto">
+                      <div class="col text-center mx-auto">
+                        <label for="name"> Correo </label>
+                        <div>
+                          <input type="text" name="objetive1" class="form-control" v-model="name" required />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row mx-auto">
+                      <div class="col text-center mx-auto">
+                        <label for="name"> Teléfono </label>
+                        <div>
+                          <input type="text" name="objetive1" class="form-control" v-model="name" required />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="text-center">
+                      <h5>Datos de tu hijo</h5>
+                    </div>
+                    <div v-for="(input, t) in inputs" :key="t">
+                      <div class="form-group row mx-auto">
+                        <div class="col text-center mx-auto">
+                          <label for="name"> Nombre </label>
+                          <div>
+                            <input type="text" name="objetive1" class="form-control" v-model="name" required />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group row mx-auto">
+                        <div class="col text-center mx-auto">
+                          <label for="name"> Edad </label>
+                          <div>
+                            <input type="number" name="objetive1" class="form-control" v-model="name" required />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group row mx-auto">
+                        <div class="col text-center mx-auto">
+                          <label for="name"> Grado </label>
+                          <div>
+                            <select class="form-control" ref="seleccionado" required>
+                              <option value="2">Segundo</option>
+                              <option value="3">602</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div align="right">
+                        <a href="#" class="btn btn-info" @click.prevent="add(t)" v-show="t == inputs.length - 1">Agregar</a>
+                        <a class="btn btn-danger" href="#" @click.prevent="remove(t)" v-show="t || (!t && inputs.length > 1)">Eliminar</a>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck" required />
+                        <label class="form-check-label" for="gridCheck">Autorizo el uso y tratamiento de mis datos personales y sus términos y condiciones. Política de Tratamiento de Datos</label>
+                      </div>
+                    </div>
+                    <div class="text-center">
+                      <a class="btn btn-lg btn-warning" href="/matricula">EMPEZAR</a>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!-- modal-content -->
+          </div>
+          <!-- modal-dialog -->
+        </div>
+        <!-- modal -->
       </div>
     </div>
   </div>
@@ -327,7 +424,6 @@ export default {
   computed: {},
   mounted() {
     this.plan = window.location.origin + "/compra/plan";
-    $("#modalhome").modal("show");
   },
   methods: {
     getMenu() {
@@ -384,6 +480,9 @@ export default {
     },
     modalhomecol() {
       $("#modalhome").modal("hide");
+    },
+    modalmatricula() {
+      $("#myModal2").modal("show");
     },
   },
 };

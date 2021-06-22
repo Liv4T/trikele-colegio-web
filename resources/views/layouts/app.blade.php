@@ -1,6 +1,8 @@
 <!DOCTYPE html>
   <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
   <head>
+    <meta name="description" content="Bachillerato por ciclos,Bachillerato,Colegio,Colegio por ciclos,2 grados en 1 año"/>
+    <meta name="keywords" content="Bachillerato por ciclos,Bachillerato,Colegio,Colegio por ciclos,2 grados en 1 año"/>
     <link rel="shortcat icon" href="images/icon.png" />
     <!-- Facebook Pixel Code -->
     <script>

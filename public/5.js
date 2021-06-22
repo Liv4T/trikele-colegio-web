@@ -65,6 +65,57 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -127,7 +178,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* .back-calendar {\r\n  padding-left: 290px;\r\n} */\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .back-calendar {\n  padding-left: 290px;\n} */\n.pd-20 {\n  padding-left: 7em;\n}\n.align-center {\n  align-items: center;\n}\n.letra-p {\n  font-size: 20px;\n}\n.mg-20 {\n  margin: 10px;\n}\n", ""]);
 
 // exports
 
@@ -180,168 +231,354 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "back-calendar" }, [
-    _c("div", { staticClass: "container" }),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "modalini",
-          "data-backdrop": "static",
-          "data-keyboard": "false"
-        }
-      },
-      [
-        _c("div", { staticClass: "modal-lg modal-dialog" }, [
-          _c("div", { staticClass: "modal-content" }, [
-            _c("div", { staticClass: "card" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c("input", {
-                  directives: [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-11 mx-auto" }, [
+        _c("div", { staticClass: "custom-card text-center" }, [
+          _c("h3", { staticClass: "card-header fondo" }, [
+            _vm._v("¡BIENVENIDO!")
+          ]),
+          _vm._v(" "),
+          _c(
+            "form",
+            { staticClass: "needs-validation", attrs: { novalidate: "" } },
+            [
+              _c(
+                "form-wizard",
+                {
+                  attrs: {
+                    title: "",
+                    subtitle: "",
+                    color: "orange",
+                    layout: "vertical",
+                    "next-button-text": "Siguiente",
+                    "back-button-text": "Atrás",
+                    "finish-button-text": "Finalizar"
+                  },
+                  on: { "on-complete": _vm.createNames }
+                },
+                [
+                  _c(
+                    "tab-content",
                     {
-                      name: "model",
-                      rawName: "v-model.number",
-                      value: _vm.page,
-                      expression: "page",
-                      modifiers: { number: true }
-                    }
-                  ],
-                  staticStyle: { width: "5em" },
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.page },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                      attrs: {
+                        title: "Documentos requeridos",
+                        icon: "fas fa-id-card"
                       }
-                      _vm.page = _vm._n($event.target.value)
                     },
-                    blur: function($event) {
-                      return _vm.$forceUpdate()
-                    }
-                  }
-                }),
-                _vm._v(
-                  "\n            /" + _vm._s(_vm.numPages) + "\n            "
-                ),
-                _c(
-                  "button",
-                  {
-                    on: {
-                      click: function($event) {
-                        _vm.rotate += 90
-                      }
-                    }
-                  },
-                  [_vm._v("⟳")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    on: {
-                      click: function($event) {
-                        _vm.rotate -= 90
-                      }
-                    }
-                  },
-                  [_vm._v("⟲")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticStyle: { width: "100%" } },
-                  [
-                    _vm.loadedRatio > 0 && _vm.loadedRatio < 1
-                      ? _c(
+                    [
+                      _c("h3", [
+                        _vm._v(
+                          "Para iniciar con el proceso de matricula debes cargar los siguientes documentos:"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body pd-20" }, [
+                        _c(
                           "div",
                           {
-                            staticStyle: {
-                              "background-color": "green",
-                              color: "white",
-                              "text-align": "center"
-                            },
-                            style: { width: _vm.loadedRatio * 100 + "%" }
+                            staticClass:
+                              "form-group align-center letra-p row mx-auto"
                           },
                           [
+                            _c("img", {
+                              attrs: {
+                                width: "35px",
+                                src:
+                                  "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0",
+                                alt: ""
+                              }
+                            }),
                             _vm._v(
-                              _vm._s(Math.floor(_vm.loadedRatio * 100)) + "%"
+                              "Formulario de admisión\n\n                  "
+                            ),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-warning mg-20",
+                                attrs: { href: "#" }
+                              },
+                              [_vm._v("Cargar")]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "form-group align-center letra-p row mx-auto"
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                width: "35px",
+                                src:
+                                  "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0",
+                                alt: ""
+                              }
+                            }),
+                            _vm._v("Cedula de ciudadanía papá y mamá "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-warning mg-20",
+                                attrs: { href: "#" }
+                              },
+                              [_vm._v("Cargar")]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "form-group align-center letra-p row mx-auto"
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                width: "35px",
+                                src:
+                                  "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0",
+                                alt: ""
+                              }
+                            }),
+                            _vm._v("Documento de Identidad del estudiante "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-warning mg-20",
+                                attrs: { href: "#" }
+                              },
+                              [_vm._v("Cargar")]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "form-group align-center letra-p row mx-auto"
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                width: "35px",
+                                src:
+                                  "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0",
+                                alt: ""
+                              }
+                            }),
+                            _vm._v("Certificados último año cursado "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-warning mg-20",
+                                attrs: { href: "#" }
+                              },
+                              [_vm._v("Cargar")]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "form-group align-center letra-p row mx-auto"
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                width: "35px",
+                                src:
+                                  "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0",
+                                alt: ""
+                              }
+                            }),
+                            _vm._v("Certificado afiliación a EPS "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-warning mg-20",
+                                attrs: { href: "#" }
+                              },
+                              [_vm._v("Cargar")]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "form-group align-center letra-p row mx-auto"
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                width: "35px",
+                                src:
+                                  "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0",
+                                alt: ""
+                              }
+                            }),
+                            _vm._v("Certificado Médico "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-warning mg-20",
+                                attrs: { href: "#" }
+                              },
+                              [_vm._v("Cargar")]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "form-group align-center letra-p row mx-auto"
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                width: "35px",
+                                src:
+                                  "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0",
+                                alt: ""
+                              }
+                            }),
+                            _vm._v(
+                              "Certificado laboral de los padres de familia "
+                            ),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-warning mg-20",
+                                attrs: { href: "#" }
+                              },
+                              [_vm._v("Cargar")]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "form-group align-center letra-p row mx-auto"
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                width: "35px",
+                                src:
+                                  "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0",
+                                alt: ""
+                              }
+                            }),
+                            _vm._v("Certificado laboral "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-warning mg-20",
+                                attrs: { href: "#" }
+                              },
+                              [_vm._v("Cargar")]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "form-group align-center letra-p row mx-auto"
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                width: "35px",
+                                src:
+                                  "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0",
+                                alt: ""
+                              }
+                            }),
+                            _vm._v("Paz y Salvo colegio anterior "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-warning mg-20",
+                                attrs: { href: "#" }
+                              },
+                              [_vm._v("Cargar")]
                             )
                           ]
                         )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.show
-                      ? _c("pdf", {
-                          ref: "pdf",
-                          staticStyle: { border: "1px solid red" },
-                          attrs: {
-                            src: _vm.src,
-                            page: _vm.page,
-                            rotate: _vm.rotate
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "tab-content",
+                    { attrs: { title: "Video", icon: "fas fa-id-card" } },
+                    [
+                      _c("div", { staticClass: "card-body" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "form-group align-center letra-p row mx-auto"
                           },
-                          on: {
-                            progress: function($event) {
-                              _vm.loadedRatio = $event
-                            },
-                            "num-pages": function($event) {
-                              _vm.numPages = $event
-                            },
-                            "link-clicked": function($event) {
-                              _vm.page = $event
-                            }
-                          }
-                        })
-                      : _vm._e()
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-warning",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.modaliniciar()
-                      }
-                    }
-                  },
-                  [_vm._v("Aceptar")]
-                )
-              ])
-            ])
-          ])
+                          [
+                            _c("img", {
+                              attrs: {
+                                width: "35px",
+                                src:
+                                  "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0",
+                                alt: ""
+                              }
+                            }),
+                            _vm._v("Video de presentacion del estudiante "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-warning mg-20",
+                                attrs: { href: "#" }
+                              },
+                              [_vm._v("Cargar")]
+                            )
+                          ]
+                        )
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "tab-content",
+                    { attrs: { title: "Matricula", icon: "fas fa-id-card" } },
+                    [
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("h3", [_vm._v("Matricula")])
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
         ])
-      ]
-    )
+      ])
+    ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h3", { staticClass: "card-header fondo text-center" }, [
-      _vm._v("\n            Términos y condiciones\n            "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_c("span", [_vm._v("×")])]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
