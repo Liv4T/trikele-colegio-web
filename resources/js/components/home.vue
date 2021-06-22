@@ -18,7 +18,7 @@
       <h4 class="text-center">ÚNETE A NUESTRA COMUNIDAD TRIKELE</h4>
       <h3 class="text-center">Emprende tu propio camino de aprendizaje</h3>
       <div class="text-center">
-        <a class="btn btn-lg btn-trikele" href="/#contacto">ÚNETE</a>
+        <a class="btn btn-lg btn-trikele" href="">ÚNETE</a>
       </div>
     </div>
     <br />
