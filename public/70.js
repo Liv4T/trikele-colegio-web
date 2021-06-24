@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[70],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/planAdm.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/planAdm.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/courseComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/courseComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -15,180 +15,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_form_wizard_dist_vue_form_wizard_min_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_form_wizard_dist_vue_form_wizard_min_css__WEBPACK_IMPORTED_MODULE_1__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -366,45 +192,102 @@ $(function () {
 
 Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["id_area", "id_classroom"],
   data: function data() {
     var _ref;
 
     return _ref = {
+      serialLocalStorage: '9f284918-f0f6-4369-a368-eaf6321b6807',
       inputs: [{
         name: "",
-        contenido: "",
-        observation: ""
+        contenido: ""
       }],
+      inputs1: [{
+        logro: "",
+        porcentaje: "0"
+      }],
+      inputs1_saved: [],
+      inputs_saved: [],
       newTrimestre: [],
-      observation: "",
       newLogro1: "",
       newLogro2: "",
       newLogro3: "",
       newLogro4: ""
-    }, _defineProperty(_ref, "newTrimestre", []), _defineProperty(_ref, "trimestre", false), _defineProperty(_ref, "logro_1", ""), _defineProperty(_ref, "logro_2", ""), _defineProperty(_ref, "logro_3", ""), _defineProperty(_ref, "logro_4", ""), _defineProperty(_ref, "fillC", []), _defineProperty(_ref, "anual", []), _defineProperty(_ref, "newAnual", []), _defineProperty(_ref, "errors", []), _ref;
+    }, _defineProperty(_ref, "newTrimestre", []), _defineProperty(_ref, "newLogro", []), _defineProperty(_ref, "trimestre", false), _defineProperty(_ref, "logro_1", ""), _defineProperty(_ref, "logro_2", ""), _defineProperty(_ref, "logro_3", ""), _defineProperty(_ref, "logro_4", ""), _defineProperty(_ref, "fillC", []), _defineProperty(_ref, "anual", []), _defineProperty(_ref, "newAnual", []), _defineProperty(_ref, "errors", []), _defineProperty(_ref, "isSynchronized", true), _defineProperty(_ref, "isLoading", false), _ref;
   },
   mounted: function mounted() {
     var _this = this;
 
-    var urlsel = "Courses";
+    //load from localstorage
+    this.serialLocalStorage = this.serialLocalStorage + "-" + this.id_area + "-" + this.id_classroom;
+    var urlsel = window.location.origin + "/coursePlanification/" + this.id_area + "/" + this.id_classroom;
     axios.get(urlsel).then(function (response) {
-      _this.fillC = response.data;
+      _this.fillC = response.data; //set current data
 
-      if (_this.fillC.courses.length > 0) {
-        _this.trimestre = true;
+      if (response.data.achievements.length > 0 && response.data.quaterly.length > 0) {
+        _this.inputs1 = [];
+        response.data.achievements.forEach(function (e) {
+          _this.inputs1.push({
+            id_plannification: e.id_planification,
+            id_achievement: e.id,
+            logro: e.achievement,
+            porcentaje: e.percentage
+          });
+        });
+        _this.inputs1_saved = JSON.parse(JSON.stringify(_this.inputs1));
+        _this.inputs = [];
+        response.data.quaterly.forEach(function (e) {
+          _this.inputs.push({
+            id_quaterly: e.id,
+            name: e.unit_name,
+            contenido: e.content
+          });
+        });
+        _this.inputs_saved = JSON.parse(JSON.stringify(_this.inputs));
+      } else {
+        if (localStorage.getItem(_this.serialLocalStorage)) {
+          var savedInputModel = JSON.parse(decodeURIComponent(escape(window.atob(localStorage.getItem(_this.serialLocalStorage)))));
 
-        for (var i = 0; i < _this.fillC.courses.length; i++) {
-          _this.logro_1 = _this.fillC.courses[i].achievement_1;
-          _this.logro_2 = _this.fillC.courses[i].achievement_2;
-          _this.logro_3 = _this.fillC.courses[i].achievement_3;
-          _this.logro_4 = _this.fillC.courses[i].achievement_4;
+          if (JSON.stringify(savedInputModel.inputs) != JSON.stringify(_this.inputs)) {
+            _this.inputs = savedInputModel.inputs;
+            _this.isSynchronized = false;
+          }
+
+          if (JSON.stringify(savedInputModel.inputs1) != JSON.stringify(_this.inputs1)) {
+            _this.inputs1 = savedInputModel.inputs1;
+            _this.isSynchronized = false;
+          }
         }
+      }
+
+      if (_this.fillC.quaterly.length > 0) {
+        _this.trimestre = true;
+      } else {
+        _this.trimestre = false;
       }
     });
   },
   methods: {
+    annualContentUpdateEvent: function annualContentUpdateEvent(e, i, type) {
+      var property = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+
+      if (type == 'inputs') {
+        this.inputs[i][property] = this.inputs[i][property].replace(/[^a-zA-Z0-9-.ñáéíóú_*+-/=&%$#!()?¡¿ ]/g, "|");
+      } else if (type == 'inputs1') {
+        this.inputs1[i][property] = this.inputs1[i][property].replace(/[^a-zA-Z0-9-.ñáéíóú_*+-/=&%$#!()?¡¿ ]/g, "|");
+      } //console.log(l.normalize('NFD').replace(/([^n\u0300-\u036f]|n(?!\u0303(?![\u0300-\u036f])))[\u0300-\u036f]+/gi,"$1"));
+      //serialize data on localstorage
+
+
+      localStorage.setItem(this.serialLocalStorage, window.btoa(unescape(encodeURIComponent(JSON.stringify({
+        inputs1: this.inputs1,
+        inputs: this.inputs
+      })))));
+      this.isSynchronized = false;
+    },
     getMenu: function getMenu() {
-      window.location = "/planificacion";
+      window.location = "/actividad_g";
+      this.isLoading = false;
     },
     add: function add(index) {
       this.inputs.push({
@@ -415,10 +298,26 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
     remove: function remove(index) {
       this.inputs.splice(index, 1);
     },
+    add1: function add1(index) {
+      this.inputs1.push({
+        logro: "",
+        porcentaje: "0"
+      });
+    },
+    remove1: function remove1(index) {
+      this.inputs1.splice(index, 1);
+    },
+    isLoadingEvent: function isLoadingEvent() {
+      return this.isLoading;
+    },
     createCourses: function createCourses() {
       var _this2 = this;
 
-      var url = "Courses";
+      this.isLoading = true;
+      var url = window.location.origin + "/Courses";
+      if (this.inputs.length < 1 || this.inputs1.length < 1) return;
+      this.newTrimestre = [];
+      this.newLogro = [];
 
       if (this.inputs.length >= 1) {
         for (var i = 0; i < this.inputs.length; i++) {
@@ -426,14 +325,18 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
         }
       }
 
+      if (this.inputs1.length >= 1) {
+        for (var _i = 0; _i < this.inputs1.length; _i++) {
+          this.newLogro.push(this.inputs1[_i]);
+        }
+      }
+
       axios.post(url, {
         //Cursos generales
-        materia: "1",
-        logro1: this.newLogro1,
-        logro2: this.newLogro2,
-        logro3: this.newLogro3,
-        logro4: this.newLogro4,
-        trimestre: this.newTrimestre
+        id_area: this.id_area,
+        id_classroom: this.id_classroom,
+        logros: this.newLogro,
+        trimestres: this.newTrimestre
       }).then(function (response) {
         _this2.errors = [];
         toastr.success("Nuevo plan general creado exitosamente");
@@ -441,20 +344,28 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
         _this2.getMenu();
       })["catch"](function (error) {
         _this2.errors = error.response.data;
+        _this2.isLoading = false;
       });
     },
     updateCourses: function updateCourses() {
-      window.location = "/planificacion";
+      window.location = "/actividad_g";
+    },
+    editNames: function editNames(clas) {
+      //   var urlr = "showClass/" + clas;
+      //   axios.get(urlr).then(response => {
+      //     this.fillS = response.data;
+      //   });
+      $("#createZ").modal("show");
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/planAdm.vue?vue&type=template&id=d1e31c74&":
-/*!**********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/planAdm.vue?vue&type=template&id=d1e31c74& ***!
-  \**********************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/courseComponent.vue?vue&type=template&id=ee39a2b2&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/courseComponent.vue?vue&type=template&id=ee39a2b2& ***!
+  \******************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -471,26 +382,34 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "back" }, [
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-10 mx-auto" }, [
+        _c("div", { staticClass: "col-md-11 mx-auto" }, [
           _c("div", { staticClass: "custom-card text-center" }, [
             _c("h3", { staticClass: "card-header fondo" }, [
               _vm._v("Planificación general")
             ]),
             _vm._v(" "),
+            _c("span", { staticClass: "classroom-label" }, [
+              _vm._v(_vm._s(_vm.fillC.classroom_name))
+            ]),
+            _vm._v(" "),
             _c(
-              "form",
+              "span",
               {
                 directives: [
                   {
                     name: "show",
                     rawName: "v-show",
-                    value: _vm.trimestre == false,
-                    expression: "trimestre==false"
+                    value: !_vm.isSynchronized,
+                    expression: "!isSynchronized"
                   }
-                ],
-                staticClass: "needs-validation",
-                attrs: { novalidate: "" }
+                ]
               },
+              [_vm._v("(Hay cambios que no han sido guardados)")]
+            ),
+            _vm._v(" "),
+            _c(
+              "form",
+              { staticClass: "needs-validation", attrs: { novalidate: "" } },
               [
                 _c(
                   "form-wizard",
@@ -506,135 +425,152 @@ var render = function() {
                     on: { "on-complete": _vm.createCourses }
                   },
                   [
-                    _c("tab-content", { attrs: { title: "Anual" } }, [
-                      _c("div", { staticClass: "form-group mx-auto" }, [
-                        _c("div", { attrs: { align: "center" } }, [
-                          _c("strong", [_vm._v("Logro 1")])
-                        ]),
-                        _vm._v(" "),
-                        _c("textarea", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.newLogro1,
-                              expression: "newLogro1"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { name: "welcome", required: "" },
-                          domProps: { value: _vm.newLogro1 },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
+                    _vm.isLoading
+                      ? _c("span", {
+                          staticClass: "spinner-border spinner-border",
+                          attrs: { role: "status", "aria-hidden": "true" }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "tab-content",
+                      { attrs: { title: "Anual" } },
+                      _vm._l(_vm.inputs1, function(input1, t) {
+                        return _c(
+                          "div",
+                          { key: t, staticClass: "form-group mx-auto" },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "classroom-planning-section" },
+                              [
+                                _c("strong", [_vm._v("Logro:")]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: input1.porcentaje,
+                                      expression: "input1.porcentaje"
+                                    }
+                                  ],
+                                  staticClass: "form-control form-control-sm",
+                                  staticStyle: { width: "50px" },
+                                  attrs: { type: "number" },
+                                  domProps: { value: input1.porcentaje },
+                                  on: {
+                                    change: function($event) {
+                                      return _vm.annualContentUpdateEvent(
+                                        $event,
+                                        t,
+                                        "inputs1"
+                                      )
+                                    },
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        input1,
+                                        "porcentaje",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v("%\r\n                    "),
+                                _c("span", [
+                                  _c(
+                                    "a",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "show",
+                                          rawName: "v-show",
+                                          value:
+                                            t > 0 &&
+                                            _vm.inputs1_saved.length <= t,
+                                          expression:
+                                            "(t>0 && inputs1_saved.length<=t)"
+                                        }
+                                      ],
+                                      staticClass: "badge badge-danger",
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          return _vm.remove1(t)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("-")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "a",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "show",
+                                          rawName: "v-show",
+                                          value: t == _vm.inputs1.length - 1,
+                                          expression: "t == inputs1.length -1"
+                                        }
+                                      ],
+                                      staticClass: "badge badge-primary",
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          return _vm.add1(t)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("+")]
+                                  )
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: input1.logro,
+                                  expression: "input1.logro"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { name: "welcome", required: "" },
+                              domProps: { value: input1.logro },
+                              on: {
+                                change: function($event) {
+                                  return _vm.annualContentUpdateEvent(
+                                    $event,
+                                    t,
+                                    "inputs1",
+                                    "logro"
+                                  )
+                                },
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(input1, "logro", $event.target.value)
+                                }
                               }
-                              _vm.newLogro1 = $event.target.value
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v("Please fill out this field")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group mx-auto" }, [
-                        _c("div", { attrs: { align: "center" } }, [
-                          _c("strong", [_vm._v("Logro 2")])
-                        ]),
-                        _vm._v(" "),
-                        _c("textarea", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.newLogro2,
-                              expression: "newLogro2"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { name: "intentioned", required: "" },
-                          domProps: { value: _vm.newLogro2 },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.newLogro2 = $event.target.value
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v("Please fill out this field")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group mx-auto" }, [
-                        _c("div", { attrs: { align: "center" } }, [
-                          _c("strong", [_vm._v("Logro 3")])
-                        ]),
-                        _vm._v(" "),
-                        _c("textarea", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.newLogro3,
-                              expression: "newLogro3"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { name: "intentioned", required: "" },
-                          domProps: { value: _vm.newLogro3 },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.newLogro3 = $event.target.value
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v("Please fill out this field")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group mx-auto" }, [
-                        _c("div", { attrs: { align: "center" } }, [
-                          _c("strong", [_vm._v("Logro 4")])
-                        ]),
-                        _vm._v(" "),
-                        _c("textarea", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.newLogro4,
-                              expression: "newLogro4"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { name: "competences", required: "" },
-                          domProps: { value: _vm.newLogro4 },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.newLogro4 = $event.target.value
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v("Please fill out this field")
-                        ])
-                      ])
-                    ]),
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "invalid-feedback" }, [
+                              _vm._v("Please fill out this field")
+                            ])
+                          ]
+                        )
+                      }),
+                      0
+                    ),
                     _vm._v(" "),
                     _c(
                       "tab-content",
@@ -646,7 +582,7 @@ var render = function() {
                           [
                             _c("div", { staticClass: "col-md-6" }, [
                               _c("label", { attrs: { for: "name" } }, [
-                                _vm._v("Unidad")
+                                _vm._v("Indicador")
                               ]),
                               _vm._v(" "),
                               _c("span", [
@@ -658,9 +594,9 @@ var render = function() {
                                         name: "show",
                                         rawName: "v-show",
                                         value:
-                                          t || (!t && _vm.inputs.length > 1),
+                                          t > 0 && _vm.inputs_saved.length <= t,
                                         expression:
-                                          "\r\n                                                        t ||\r\n                                                            (!t &&\r\n                                                                inputs.length >\r\n                                                                    1)\r\n                                                    "
+                                          "(t>0 && inputs_saved.length<=t)"
                                       }
                                     ],
                                     staticClass: "badge badge-danger",
@@ -683,8 +619,7 @@ var render = function() {
                                         name: "show",
                                         rawName: "v-show",
                                         value: t == _vm.inputs.length - 1,
-                                        expression:
-                                          "\r\n                                                        t == inputs.length - 1\r\n                                                    "
+                                        expression: "t == inputs.length - 1"
                                       }
                                     ],
                                     staticClass: "badge badge-primary",
@@ -719,6 +654,14 @@ var render = function() {
                                   },
                                   domProps: { value: input.name },
                                   on: {
+                                    change: function($event) {
+                                      return _vm.annualContentUpdateEvent(
+                                        $event,
+                                        t,
+                                        "inputs",
+                                        "name"
+                                      )
+                                    },
                                     input: function($event) {
                                       if ($event.target.composing) {
                                         return
@@ -757,6 +700,14 @@ var render = function() {
                                 },
                                 domProps: { value: input.contenido },
                                 on: {
+                                  change: function($event) {
+                                    return _vm.annualContentUpdateEvent(
+                                      $event,
+                                      t,
+                                      "inputs",
+                                      "contenido"
+                                    )
+                                  },
                                   input: function($event) {
                                     if ($event.target.composing) {
                                       return
@@ -764,516 +715,6 @@ var render = function() {
                                     _vm.$set(
                                       input,
                                       "contenido",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "invalid-feedback" }, [
-                                _vm._v("Please fill out this field")
-                              ])
-                            ])
-                          ]
-                        )
-                      }),
-                      0
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "form",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.trimestre == true,
-                    expression: "trimestre==true"
-                  }
-                ]
-              },
-              [
-                _c(
-                  "form-wizard",
-                  {
-                    attrs: {
-                      title: "",
-                      subtitle: "",
-                      color: "#ffc107",
-                      "next-button-text": "Siguiente",
-                      "back-button-text": "Atrás",
-                      "finish-button-text": "Guardar"
-                    },
-                    on: { "on-complete": _vm.updateCourses }
-                  },
-                  [
-                    _c("tab-content", { attrs: { title: "Anual" } }, [
-                      _c("div", [
-                        _c("div", { staticClass: "form-group mx-auto" }, [
-                          _c("div", { attrs: { align: "center" } }, [
-                            _c("strong", [
-                              _vm._v(
-                                "\r\n                        Logro 1   20%   \r\n                        "
-                              ),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-outline-success btn-sm",
-                                  attrs: {
-                                    onclick:
-                                      "confirm('Seguro de confirmar el cumplimiento del logro')",
-                                    type: "submit"
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fas fa-check-circle"
-                                  })
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-outline-danger btn-sm",
-                                  attrs: {
-                                    onclick: "confirm('Esta seguro?')",
-                                    type: "submit"
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fas fa-times-circle"
-                                  })
-                                ]
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("textarea", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.logro_1,
-                                expression: "logro_1"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { name: "welcome" },
-                            domProps: { value: _vm.logro_1 },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.logro_1 = $event.target.value
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "invalid-feedback" }, [
-                            _vm._v("Please fill out this field")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group mx-auto" }, [
-                          _c("div", { attrs: { align: "center" } }, [
-                            _c("strong", [
-                              _vm._v(
-                                "\r\n                        Logro 2    40%   \r\n                        "
-                              ),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-outline-success btn-sm",
-                                  attrs: {
-                                    onclick:
-                                      "confirm('Seguro de confirmar el cumplimiento del logro')",
-                                    type: "submit"
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fas fa-check-circle"
-                                  })
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-outline-danger btn-sm",
-                                  attrs: {
-                                    onclick: "confirm('Esta seguro?')",
-                                    type: "submit"
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fas fa-times-circle"
-                                  })
-                                ]
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("textarea", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.logro_2,
-                                expression: "logro_2"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { name: "welcome" },
-                            domProps: { value: _vm.logro_2 },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.logro_2 = $event.target.value
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "invalid-feedback" }, [
-                            _vm._v("Please fill out this field")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group mx-auto" }, [
-                          _c("div", { attrs: { align: "center" } }, [
-                            _c("strong", [
-                              _vm._v(
-                                "\r\n                        Logro 3    20%   \r\n                        "
-                              ),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-outline-success btn-sm",
-                                  attrs: {
-                                    onclick:
-                                      "confirm('Seguro de confirmar el cumplimiento del logro')",
-                                    type: "submit"
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fas fa-check-circle"
-                                  })
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-outline-danger btn-sm",
-                                  attrs: {
-                                    onclick: "confirm('Esta seguro?')",
-                                    type: "submit"
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fas fa-times-circle"
-                                  })
-                                ]
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("textarea", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.logro_3,
-                                expression: "logro_3"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { name: "welcome" },
-                            domProps: { value: _vm.logro_3 },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.logro_3 = $event.target.value
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "invalid-feedback" }, [
-                            _vm._v("Please fill out this field")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group mx-auto" }, [
-                          _c("div", { attrs: { align: "center" } }, [
-                            _c("strong", [
-                              _vm._v(
-                                "\r\n                        Logro 4    20%   \r\n                        "
-                              ),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-outline-success btn-sm",
-                                  attrs: {
-                                    onclick:
-                                      "confirm('Seguro de confirmar el cumplimiento del logro')",
-                                    type: "submit"
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fas fa-check-circle"
-                                  })
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-outline-danger btn-sm",
-                                  attrs: {
-                                    onclick: "confirm('Esta seguro?')",
-                                    type: "submit"
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fas fa-times-circle"
-                                  })
-                                ]
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("textarea", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.logro_4,
-                                expression: "logro_4"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { name: "welcome" },
-                            domProps: { value: _vm.logro_4 },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.logro_4 = $event.target.value
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "invalid-feedback" }, [
-                            _vm._v("Please fill out this field")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group mx-auto" }, [
-                          _c("div", { attrs: { align: "center" } }, [
-                            _c("strong", [_vm._v("Observación")])
-                          ]),
-                          _vm._v(" "),
-                          _c("textarea", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.observation,
-                                expression: "observation"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              name: "welcome",
-                              placeholder: "Comentarios"
-                            },
-                            domProps: { value: _vm.observation },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.observation = $event.target.value
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "invalid-feedback" }, [
-                            _vm._v("Please fill out this field")
-                          ])
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "tab-content",
-                      { attrs: { title: "Trimestral" } },
-                      _vm._l(_vm.fillC.quaterly, function(input, t) {
-                        return _c(
-                          "div",
-                          { key: t, staticClass: "form-group row mx-auto" },
-                          [
-                            _c("div", { staticClass: "col-md-6" }, [
-                              _c("label", { attrs: { for: "name" } }, [
-                                _vm._v(
-                                  "\r\n                      Unidad    \r\n                      "
-                                ),
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "btn btn-outline-success btn-sm",
-                                    attrs: {
-                                      onclick:
-                                        "confirm('Seguro de confirmar el cumplimiento del logro')",
-                                      type: "submit"
-                                    }
-                                  },
-                                  [
-                                    _c("i", {
-                                      staticClass: "fas fa-check-circle"
-                                    })
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "btn btn-outline-danger btn-sm",
-                                    attrs: {
-                                      onclick: "confirm('Esta seguro?')",
-                                      type: "submit"
-                                    }
-                                  },
-                                  [
-                                    _c("i", {
-                                      staticClass: "fas fa-times-circle"
-                                    })
-                                  ]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("div", [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: input.unit_name,
-                                      expression: "input.unit_name"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  attrs: {
-                                    type: "text",
-                                    name: "objetive1",
-                                    placeholder: "Nombre de la unidad"
-                                  },
-                                  domProps: { value: input.unit_name },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        input,
-                                        "unit_name",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                })
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-md-6" }, [
-                              _c("label", { attrs: { for: "name" } }, [
-                                _vm._v("Contenido")
-                              ]),
-                              _vm._v(" "),
-                              _c("textarea", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: input.content,
-                                    expression: "input.content"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: {
-                                  name: "competences",
-                                  placeholder:
-                                    "Es la explicacion o sintesis de la unidad."
-                                },
-                                domProps: { value: input.content },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      input,
-                                      "content",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "invalid-feedback" }, [
-                                _vm._v("Please fill out this field")
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-md-6" }, [
-                              _c("label", { attrs: { for: "name" } }, [
-                                _vm._v("Observación")
-                              ]),
-                              _vm._v(" "),
-                              _c("textarea", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: input.observation,
-                                    expression: "input.observation"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: {
-                                  name: "competences",
-                                  placeholder: "Comentarios"
-                                },
-                                domProps: { value: input.observation },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      input,
-                                      "observation",
                                       $event.target.value
                                     )
                                   }
@@ -1346,17 +787,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/planAdm.vue":
-/*!*********************************************!*\
-  !*** ./resources/js/components/planAdm.vue ***!
-  \*********************************************/
+/***/ "./resources/js/components/courseComponent.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/courseComponent.vue ***!
+  \*****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _planAdm_vue_vue_type_template_id_d1e31c74___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./planAdm.vue?vue&type=template&id=d1e31c74& */ "./resources/js/components/planAdm.vue?vue&type=template&id=d1e31c74&");
-/* harmony import */ var _planAdm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./planAdm.vue?vue&type=script&lang=js& */ "./resources/js/components/planAdm.vue?vue&type=script&lang=js&");
+/* harmony import */ var _courseComponent_vue_vue_type_template_id_ee39a2b2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./courseComponent.vue?vue&type=template&id=ee39a2b2& */ "./resources/js/components/courseComponent.vue?vue&type=template&id=ee39a2b2&");
+/* harmony import */ var _courseComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./courseComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/courseComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -1366,9 +807,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _planAdm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _planAdm_vue_vue_type_template_id_d1e31c74___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _planAdm_vue_vue_type_template_id_d1e31c74___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _courseComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _courseComponent_vue_vue_type_template_id_ee39a2b2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _courseComponent_vue_vue_type_template_id_ee39a2b2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -1378,38 +819,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/planAdm.vue"
+component.options.__file = "resources/js/components/courseComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/planAdm.vue?vue&type=script&lang=js&":
-/*!**********************************************************************!*\
-  !*** ./resources/js/components/planAdm.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************/
+/***/ "./resources/js/components/courseComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/courseComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_planAdm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./planAdm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/planAdm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_planAdm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_courseComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./courseComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/courseComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_courseComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/planAdm.vue?vue&type=template&id=d1e31c74&":
-/*!****************************************************************************!*\
-  !*** ./resources/js/components/planAdm.vue?vue&type=template&id=d1e31c74& ***!
-  \****************************************************************************/
+/***/ "./resources/js/components/courseComponent.vue?vue&type=template&id=ee39a2b2&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/courseComponent.vue?vue&type=template&id=ee39a2b2& ***!
+  \************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_planAdm_vue_vue_type_template_id_d1e31c74___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./planAdm.vue?vue&type=template&id=d1e31c74& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/planAdm.vue?vue&type=template&id=d1e31c74&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_planAdm_vue_vue_type_template_id_d1e31c74___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_courseComponent_vue_vue_type_template_id_ee39a2b2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./courseComponent.vue?vue&type=template&id=ee39a2b2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/courseComponent.vue?vue&type=template&id=ee39a2b2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_courseComponent_vue_vue_type_template_id_ee39a2b2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_planAdm_vue_vue_type_template_id_d1e31c74___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_courseComponent_vue_vue_type_template_id_ee39a2b2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

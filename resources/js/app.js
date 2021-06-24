@@ -202,4 +202,17 @@ Vue.component("teacher-student-class-content", () => import ("./components/teach
 Vue.component("notification-component", () => import ("./components/notificationComponent.vue"));
 Vue.use(CKEditor);
 
+Vue.component("purchase-plan", () => import ("./components/purchasePlanComponent.vue"));
+Vue.component("purchase-plan-login", () => import ("./components/purchasePlanLoginComponent.vue"));
+Vue.component("purchase-module-login", () => import ("./components/purchaseModuleLoginComponent.vue"));
+Vue.component("purchase-area-login", () => import ("./components/purchaseAreaLoginComponent.vue"));
+Vue.component("purchase-plan-resume", () => import ("./components/purchasePlanResumeComponent.vue"));
+Vue.component("purchase-module-resume", () => import ("./components/purchaseModuleResumeComponent.vue"));
+Vue.component("purchase-area-resume", () => import ("./components/purchaseAreaResumeComponent.vue"));
+Vue.component("purchase-plan-pay-mercadopago-result", () => import ("./components/purchasePlanPayResultMercadopagoComponent.vue"));
+Vue.component("purchase-plan-pay-payu-result", () => import ("./components/purchasePlanPayResultPayuComponent.vue"));
+Vue.component("purchase-plan-pay-error", () => import ("./components/purchasePlanPayErrorComponent.vue"));
+Vue.component("purchase-tutorial-resume", () => import ("./components/purchaseTutorialResumeComponent.vue"));
+Vue.component("purchase-tutorial-login", () => import ("./components/purchaseTutorialLoginComponent.vue"));
+
 const app = new Vue({el: "#app", data: {}, store});

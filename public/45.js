@@ -1,14 +1,258 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[45],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/teacherStudentModuleSelectComponent.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/teacherStudentModuleSelectComponent.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -49,46 +293,195 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['id_area', 'id_classroom', 'id_student'],
+  props: ["group_name", "voucher", "area_id", "schedulearea_id", "time_index", "plan_type"],
+  mounted: function mounted() {
+    var _this = this;
+
+    if (this.voucher) {
+      this.voucher_code = "".concat(this.voucher);
+      this.validateVoucher();
+    }
+
+    this.fillWidthCalculate();
+
+    window.onresize = function () {
+      _this.fillWidthCalculate();
+    };
+
+    if (this.plan_type == "TUTORIA_GRUPAL") {
+      this.type = "grupal"; // this.minStudents=3;
+    }
+
+    this.getPlanInformation().then(function () {
+      _this.getScheduleSelected();
+    });
+  },
   data: function data() {
     return {
-      modules: [],
-      current_module: {}
+      minStudents: 1,
+      type: "individual",
+      fullWidth: true,
+      current_plan: {
+        quantity: 1,
+        plan_price: {},
+        english_price: {}
+      },
+      plan_prices: [],
+      english_price: {
+        total_price: 0,
+        total_tax: 0
+      },
+      selected_english: true,
+      events: {
+        pay_loading: false,
+        voucher_loading: false,
+        voucher_error: ""
+      },
+      voucher_code: "",
+      voucher_data: null
     };
   },
-  mounted: function mounted() {
-    this.modules = [];
-    this.getStudentCalifications();
-  },
   methods: {
-    getStudentCalifications: function getStudentCalifications() {
-      var _this = this;
+    fillWidthCalculate: function fillWidthCalculate() {
+      this.fullWidth = window.innerWidth > 1024;
+    },
+    evalue: function evalue(stament) {
+      if (!stament) return "";
+      var ret_stament = "";
+      eval("ret_stament=" + "`" + stament + "`");
+      return ret_stament;
+    },
+    TotalValue: function TotalValue() {
+      return this.current_plan.plan_price.total_price * this.current_plan.quantity;
+    },
+    VoucherDiscountApplied: function VoucherDiscountApplied() {
+      if (!this.voucher_data) return "";
+
+      if (this.voucher_data.discount_percent && this.voucher_data.discount_percent > 0) {
+        return "".concat(this.voucher_data.discount_percent, " % ");
+      } else {
+        return "$ ".concat(this.formatPrice(this.voucher_data.discount_value));
+      }
+    },
+    VoucherDiscountValue: function VoucherDiscountValue() {
+      if (!this.voucher_data) return 0;
+      var total_sale = this.TotalValue();
+
+      if (this.voucher_data.discount_percent && this.voucher_data.discount_percent > 0) {
+        return total_sale * this.voucher_data.discount_percent / 100;
+      } else {
+        return this.voucher_data.discount_value;
+      }
+    },
+    getPlanInformation: function getPlanInformation() {
+      var _this2 = this;
 
       return new Promise(function (resolve, reject) {
-        axios.get("/api/teacher/area/".concat(_this.id_area, "/classroom/").concat(_this.id_classroom, "/student/").concat(_this.id_student, "/module")).then(function (response) {
-          _this.modules = response.data;
-          resolve();
+        axios.get("/api/customer-plan/type/".concat(_this2.plan_type)).then(function (response) {
+          _this2.plan_prices = response.data;
+
+          if (response.data.length == 0) {
+            toastr.error("Plan no es válido");
+            setTimeout(function () {
+              location.href = "/compra/plan";
+              resolve();
+            }, 3000);
+          } else {
+            _this2.current_plan.plan_price = response.data[0];
+            resolve();
+          }
         }, function (e) {
           return reject(e);
         });
       });
     },
-    moduleSelectEvent: function moduleSelectEvent(module) {
-      this.current_module = module;
-      location.href = "/docente/area/".concat(this.id_area, "/curso/").concat(this.id_classroom, "/estudiante/").concat(this.id_student, "/modulo/").concat(this.current_module.id);
+    getScheduleSelected: function getScheduleSelected() {
+      var _this3 = this;
+
+      return new Promise(function (resolve, reject) {
+        axios.get("/api/tutor/schedule/".concat(_this3.type, "/").concat(_this3.schedulearea_id, "/").concat(_this3.time_index)).then(function (response) {
+          _this3.current_plan = {
+            plan_name: "Tutor\xEDa ".concat(response.data[0].area_name),
+            icon: response.data[0].area_icon,
+            quantity: 1,
+            date_from: response.data[0].date_from,
+            date_to: response.data[0].date_to,
+            plan_price: {
+              total_price: response.data[0].rate * _this3.minStudents
+            },
+            english_price: {}
+          };
+        });
+      });
     },
-    GoReturnPage: function GoReturnPage() {
-      window.history.back();
+    validateVoucher: function validateVoucher() {
+      var _this4 = this;
+
+      this.events.voucher_loading = true;
+      this.events.voucher_error = "";
+      this.voucher_data = null;
+      axios.post("/api/customer-voucher/validate", {
+        voucher: this.voucher_code
+      }).then(function (response) {
+        _this4.events.voucher_loading = false;
+        _this4.voucher_data = response.data;
+        console.log(_this4.voucher_data);
+        toastr.success("Cupón aplicado");
+      }, function (error) {
+        _this4.events.voucher_loading = false;
+
+        if (error.response.data) {
+          _this4.events.voucher_error = error.response.data;
+          toastr.error(error.response.data);
+        } else {
+          console.log(error);
+        }
+      });
+    },
+    PlanPriceChangeEvent: function PlanPriceChangeEvent() {//
+    },
+    formatPrice: function formatPrice(value) {
+      var val = (value / 1).toFixed(0).replace(".", ",");
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    },
+    QuantityValidateEvent: function QuantityValidateEvent() {
+      if (this.current_plan.quantity < 1) this.current_plan.quantity = 1;
+      if (this.current_plan.quantity > 20) this.current_plan.quantity = 20;
+    },
+    PayEvent: function PayEvent() {
+      var _this5 = this;
+
+      this.events.pay_loading = true;
+      var model = {
+        plan_id: this.plan_prices[0].id,
+        quantity: this.current_plan.quantity,
+        date_from: this.current_plan.date_from,
+        date_to: this.current_plan.date_to,
+        english_id: 0,
+        tutorschedulearea_id: this.schedulearea_id,
+        time_index: this.time_index,
+        voucher: this.voucher_data ? this.voucher_data.code : null
+      };
+      location.href = "/compra/plan/".concat(this.plan_type, "/tutoria/ingresar/p/").concat(encodeURI(window.btoa(JSON.stringify(model)))); //location.href=`/compra/pagar/mercadopago/${encodeURI(window.btoa(JSON.stringify(model)))}`;
+
+      setTimeout(function () {
+        _this5.events.pay_loading = false;
+      }, 4000);
+    },
+    quantityEditEnabled: function quantityEditEnabled() {
+      if (this.plan_type == "CREDITO") return false;
+      if (this.plan_type.includes("GRAT")) return false;
+      return true;
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/teacherStudentModuleSelectComponent.vue?vue&type=style&index=0&id=c525923e&scoped=true&lang=css&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/teacherStudentModuleSelectComponent.vue?vue&type=style&index=0&id=c525923e&scoped=true&lang=css& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -97,22 +490,22 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.module_container[data-v-c525923e]{\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: space-between;\r\n    padding: 10px;\r\n    border:2px solid #ffc039;\r\n    border-radius:4px;\r\n    margin-top:10px;\r\n    transition: background 0.8s;\r\n    font-weight: 600;\r\n    font-family: \"Century Gothic\";\r\n    color:#000;\n}\n.module_container[data-v-c525923e]:hover{\r\n      box-shadow: 0 0 11px rgba(33,33,33,.2);\r\n      cursor: default;\r\n      background: #ffc039 radial-gradient(circle, transparent 1%, white 1%) center/15000%;\r\n      color:#000;\n}\n.module_container[data-v-c525923e]:active {\r\n  background-color: #ffc039;\r\n  background-size: 100%;\r\n  text-decoration: none;\r\n  transition: background 0s;\r\n   color:white;\n}\n.module_container-active[data-v-c525923e]{\r\n     background-color: #ffc039;\r\n     color:#000;\n}\n.module_notify[data-v-c525923e]{\r\n    font-weight: 700;\r\n    color:#278080;\r\n    background: #edffff;\n}\n.class_container_info[data-v-c525923e]{\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\r\n    align-items: center;\n}\n.class_container_score[data-v-c525923e]{\r\n     display: flex;\r\n     flex-direction: row;\r\n     justify-content: space-between;\r\n     align-items: center;\n}\n.class_container_score>div[data-v-c525923e]{\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    justify-content: center;\r\n    margin-left:20px;\n}\n.class_container_header[data-v-c525923e]{\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\n}\n.class_container_info-container[data-v-c525923e]{\r\n    display: flex;\r\n    flex-direction: column;\n}\r\n", ""]);
+exports.push([module.i, "\nh4 {\r\n  font-size: 1.2em;\n}\n.div-plan-icon {\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.div-plan-title {\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: flex-start;\r\n  align-items: flex-end;\n}\n.div-plan-item {\r\n  display: flex;\r\n  flex-direction: column;\n}\n.div-plan-item > div {\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-between;\n}\n.div-plan-item-total {\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-between;\n}\n.span-plan-name {\r\n  font-weight: bold;\r\n  font-size: 1.3em;\r\n  color: #51647c;\n}\n.span-plan-subtotal {\r\n  font-weight: bold;\r\n  font-size: 1.5em;\n}\n.span-plan-total {\r\n  font-weight: bold;\r\n  font-size: 1.8em;\n}\n.span-price {\r\n  font-weight: bold;\r\n  font-size: 1.5em;\n}\n.margin-top-100 {\r\n  margin-top: 100px;\n}\n.border-bottom-1 {\r\n  border-bottom: 1px solid #818181;\n}\n.div-plan-icon > img {\r\n  width: 100px;\n}\n.span-total {\r\n  font-weight: bold;\r\n  font-size: 2em;\n}\n.color-danger {\r\n  color: tomato;\n}\ncard {\r\n  display: flex;\r\n  justify-content: center;\n}\np {\r\n  font-family: \"Century Gothic\";\r\n  font-size: 1.2em;\n}\nspan {\r\n  font-family: \"Century Gothic\";\r\n  font-size: 1.2em;\n}\nul > li {\r\n  font-family: \"Century Gothic\";\r\n  text-align: left;\n}\na {\r\n  color: #0050e3;\n}\n.title-page-section {\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: center;\r\n  align-items: center;\r\n  margin-bottom: 50px;\n}\n.title-page {\r\n  background: #233d68;\r\n  color: white;\r\n  font-size: 2em;\r\n  padding: 20px;\r\n  border-radius: 5px;\r\n  box-shadow: -1px 4px 9px 0px rgba(148, 148, 148, 1);\n}\n.resume-container {\r\n  background: rgba(255, 121, 0, 0.38);\r\n  padding: 20px;\r\n  border-radius: 8px;\n}\n.resume-container .table {\r\n  margin-bottom: 20px;\n}\n.section-cupon {\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.resume-table {\r\n  background: #fff;\r\n  padding: 5px;\r\n  border-radius: 8px;\r\n  box-shadow: -1px 4px 9px 0px #7a7a7a;\r\n  width: 100%;\r\n  margin-bottom: 20px;\n}\n.resume-table .table thead th {\r\n  border-bottom: 2px solid #233d68;\n}\n.resume-table .table thead td {\r\n  display: flex;\r\n  flex-direction: row;\r\n  align-items: center;\n}\n.thead-resume th {\r\n  color: #ff7900;\n}\n.table-resume th {\r\n  color: #ff7900;\n}\n@media (max-width: 768px) {\n[class*=\"col-\"] {\r\n    margin-bottom: 15px;\n}\n.title-page {\r\n    font-size: 1.5em;\r\n    line-height: 40px;\n}\n}\r\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/teacherStudentModuleSelectComponent.vue?vue&type=style&index=0&id=c525923e&scoped=true&lang=css&":
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/teacherStudentModuleSelectComponent.vue?vue&type=style&index=0&id=c525923e&scoped=true&lang=css& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./teacherStudentModuleSelectComponent.vue?vue&type=style&index=0&id=c525923e&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/teacherStudentModuleSelectComponent.vue?vue&type=style&index=0&id=c525923e&scoped=true&lang=css&");
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./purchaseTutorialResumeComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=style&index=0&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -134,10 +527,10 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/teacherStudentModuleSelectComponent.vue?vue&type=template&id=c525923e&scoped=true&":
-/*!**************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/teacherStudentModuleSelectComponent.vue?vue&type=template&id=c525923e&scoped=true& ***!
-  \**************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=template&id=8f9b9054&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=template&id=8f9b9054& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -149,130 +542,1040 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
-    _c(
-      "div",
-      { staticClass: "col-12 col-md-12" },
-      [
-        _c("div", { staticClass: "class_container_header" }, [
-          _c("span", [_vm._v("Seleccione ciclo:")]),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-link",
-              on: {
-                click: function($event) {
-                  return _vm.GoReturnPage()
-                }
-              }
-            },
-            [_vm._v("Regresar")]
-          )
-        ]),
-        _vm._v(" "),
-        _vm._l(_vm.modules, function(_module, k_module) {
-          return _c(
-            "div",
-            {
-              key: k_module,
-              staticClass: "module_container",
-              class: {
-                "module_container-active": _vm.current_module.id == _module.id
-              },
-              on: {
-                click: function($event) {
-                  return _vm.moduleSelectEvent(_module)
-                }
-              }
-            },
-            [
-              _c("div", { staticClass: "class_container_info" }, [
-                _c("div", { staticClass: "class_container_info-container" }, [
-                  _c("span", [_vm._v(_vm._s(_module.driving_question))]),
-                  _vm._v(" "),
-                  _module.pending_calification > 0
-                    ? _c("small", { staticClass: "module_notify" }, [
-                        _c(
-                          "svg",
-                          {
-                            staticClass: "bi bi-exclamation-triangle",
-                            attrs: {
-                              xmlns: "http://www.w3.org/2000/svg",
-                              width: "16",
-                              height: "16",
-                              fill: "currentColor",
-                              viewBox: "0 0 16 16"
-                            }
-                          },
-                          [
-                            _c("path", {
-                              attrs: {
-                                d:
-                                  "M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"
-                              }
-                            }),
+  return _c("div", { staticClass: "fondo-lista" }, [
+    _c("div", { staticClass: "container" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _vm.fullWidth
+        ? _c("div", { staticClass: "row justify-content-center" }, [
+            _c("div", { staticClass: "col-md-10" }, [
+              _c("section", { staticClass: "resume-container" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _c("div", { staticClass: "resume-table" }, [
+                      _c("table", { staticClass: "table" }, [
+                        _vm._m(1),
+                        _vm._v(" "),
+                        _c("tbody", [
+                          _c("tr", [
+                            _c("td", [
+                              _c(
+                                "div",
+                                { staticClass: "row align-items-center" },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "col-4 col-md-2 div-plan-icon"
+                                    },
+                                    [
+                                      _vm.current_plan.icon
+                                        ? _c("img", {
+                                            attrs: {
+                                              src: _vm.current_plan.icon,
+                                              alt: "incono"
+                                            }
+                                          })
+                                        : _vm._e()
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "col-8 col-md-6 div-plan-title"
+                                    },
+                                    [
+                                      _c("h4", [
+                                        _vm._v(
+                                          "\n                              " +
+                                            _vm._s(_vm.current_plan.plan_name) +
+                                            " - " +
+                                            _vm._s(_vm.group_name) +
+                                            " "
+                                        ),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticStyle: {
+                                              "text-transform": "uppercase"
+                                            }
+                                          },
+                                          [_vm._v(_vm._s(_vm.type))]
+                                        )
+                                      ])
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "col-6 col-md-4 text-center"
+                                    },
+                                    [
+                                      _vm.current_plan.plan_price
+                                        .presentation_url
+                                        ? _c(
+                                            "a",
+                                            {
+                                              attrs: {
+                                                target: "_blank",
+                                                href: _vm.evalue(
+                                                  _vm.current_plan.plan_price
+                                                    .presentation_url
+                                                )
+                                              }
+                                            },
+                                            [_vm._v("Ver detalle")]
+                                          )
+                                        : _vm._e()
+                                    ]
+                                  )
+                                ]
+                              )
+                            ]),
                             _vm._v(" "),
-                            _c("path", {
-                              attrs: {
-                                d:
-                                  "M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"
-                              }
-                            })
-                          ]
-                        ),
-                        _vm._v(
-                          "\n                          Actividades pendientes de calificación\n                      "
-                        )
+                            _c("td", [
+                              _c(
+                                "div",
+                                { staticClass: "row align-items-center" },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "col-12 col-md-12 text-right"
+                                    },
+                                    [
+                                      _c("span", [
+                                        _vm._v(
+                                          "$" +
+                                            _vm._s(
+                                              _vm.formatPrice(_vm.TotalValue())
+                                            )
+                                        )
+                                      ])
+                                    ]
+                                  )
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _vm._m(2),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "div",
+                                { staticClass: "row align-items-center" },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "col-12 col-md-12 text-right"
+                                    },
+                                    [
+                                      _c("span", [
+                                        _vm._v(
+                                          "$" +
+                                            _vm._s(
+                                              _vm.formatPrice(_vm.TotalValue())
+                                            )
+                                        )
+                                      ])
+                                    ]
+                                  )
+                                ]
+                              )
+                            ])
+                          ])
+                        ])
                       ])
-                    : _vm._e()
+                    ])
+                  ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "class_container_score" }, [
-                  _c("div", [
-                    _module.score > -1
-                      ? _c("span", [_vm._v(_vm._s(_module.progress) + "%")])
-                      : _c("span", [_vm._v("-")]),
+                _c("section", { staticClass: "section-cupon" }, [
+                  _c("div", { staticClass: "row align-items-center" }, [
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.voucher_code,
+                            expression: "voucher_code"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          disabled: _vm.events.voucher_loading,
+                          placeholder: "Código de cupón"
+                        },
+                        domProps: { value: _vm.voucher_code },
+                        on: {
+                          change: function($event) {
+                            _vm.events.voucher_error = ""
+                          },
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.voucher_code = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.events.voucher_error
+                        ? _c(
+                            "small",
+                            {
+                              staticClass: "form-text text-error letra-boldfont"
+                            },
+                            [_vm._v(_vm._s(_vm.events.voucher_error))]
+                          )
+                        : _vm._e()
+                    ]),
                     _vm._v(" "),
-                    _c("small", [_vm._v("Progreso")])
+                    _c("div", { staticClass: "col-md-4" }, [
+                      !_vm.events.voucher_loading
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-Azul letra-boldfont",
+                              attrs: { disabled: !_vm.voucher_code },
+                              on: { click: _vm.validateVoucher }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.voucher_data
+                                    ? "Cambiar"
+                                    : "Agregar código"
+                                )
+                              )
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.events.voucher_loading
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary letra-boldfont",
+                              attrs: { type: "button", disabled: "" }
+                            },
+                            [_vm._v("Validando...")]
+                          )
+                        : _vm._e()
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.fullWidth
+        ? _c(
+            "div",
+            { staticClass: "row justify-content-center margin-top-50" },
+            [
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("section", { staticClass: "resume-container" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _c("div", { staticClass: "resume-table" }, [
+                        _c("table", { staticClass: "table" }, [
+                          _vm._m(3),
+                          _vm._v(" "),
+                          _c("tbody", [
+                            _c("tr", [
+                              _c("td", [
+                                _c(
+                                  "div",
+                                  { staticClass: "row align-items-center" },
+                                  [
+                                    _vm._m(4),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "col-6 col-md-6 text-right div-plan-title"
+                                      },
+                                      [
+                                        _c("span", [
+                                          _vm._v(
+                                            "$" +
+                                              _vm._s(
+                                                _vm.formatPrice(
+                                                  _vm.TotalValue()
+                                                )
+                                              )
+                                          )
+                                        ])
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _vm.voucher_data
+                              ? _c("tr", [
+                                  _c("td", [
+                                    _c(
+                                      "div",
+                                      { staticClass: "row align-items-center" },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "col-6 col-md-6 div-plan-icon"
+                                          },
+                                          [
+                                            _c("span", [
+                                              _vm._v(
+                                                "CUPÓN " +
+                                                  _vm._s(_vm.voucher_data.code)
+                                              )
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("small", [
+                                              _vm._v(
+                                                "Descuento: " +
+                                                  _vm._s(
+                                                    _vm.VoucherDiscountApplied()
+                                                  ) +
+                                                  " dcto."
+                                              )
+                                            ])
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "col-6 col-md-6 div-plan-title text-right"
+                                          },
+                                          [
+                                            _c("span", [
+                                              _vm._v(
+                                                "- $" +
+                                                  _vm._s(
+                                                    _vm.formatPrice(
+                                                      _vm.VoucherDiscountValue()
+                                                    )
+                                                  )
+                                              )
+                                            ])
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c("tr", [
+                              _c("td", [
+                                _c(
+                                  "div",
+                                  { staticClass: "row align-items-center" },
+                                  [
+                                    _vm._m(5),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "col-6 col-md-6 div-plan-title text-right"
+                                      },
+                                      [
+                                        _c(
+                                          "span",
+                                          { staticClass: "span-total" },
+                                          [
+                                            _vm._v(
+                                              "$" +
+                                                _vm._s(
+                                                  _vm.formatPrice(
+                                                    _vm.TotalValue() -
+                                                      _vm.VoucherDiscountValue()
+                                                  )
+                                                )
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ])
+                            ])
+                          ])
+                        ])
+                      ])
+                    ])
                   ]),
                   _vm._v(" "),
-                  _c("div", [
-                    _module.score > -1
-                      ? _c("span", [_vm._v(_vm._s(_module.score) + "/5")])
-                      : _c("span", [_vm._v("-")]),
-                    _vm._v(" "),
-                    _c("small", [_vm._v("Calificación")])
+                  _c("div", { staticClass: "content-button" }, [
+                    _c("div", { staticClass: "row align-items-center" }, [
+                      _c("div", { staticClass: "col-md-12 content-button" }, [
+                        !_vm.events.pay_loading &&
+                        _vm.TotalValue() - _vm.VoucherDiscountValue() > 0
+                          ? _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-Azul letra-boldfont",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.PayEvent()
+                                  }
+                                }
+                              },
+                              [_vm._v("FINALIZAR COMPRA")]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.events.pay_loading
+                          ? _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary letra-boldfont",
+                                attrs: { type: "button", disabled: "" }
+                              },
+                              [_vm._v("Procesando...")]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        !_vm.events.pay_loading &&
+                        _vm.TotalValue() - _vm.VoucherDiscountValue() == 0
+                          ? _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-Azul letra-boldfont",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.PayEvent()
+                                  }
+                                }
+                              },
+                              [_vm._v("EMPEZAR")]
+                            )
+                          : _vm._e()
+                      ])
+                    ])
                   ])
                 ])
               ])
             ]
           )
-        })
-      ],
-      2
-    )
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.fullWidth
+        ? _c("div", { staticClass: "row justify-content-center" }, [
+            _c("div", { staticClass: "col-md-10" }, [
+              _c("section", { staticClass: "resume-container" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _c("div", { staticClass: "resume-table" }, [
+                      _c("table", { staticClass: "table table-resume" }, [
+                        _vm._m(6),
+                        _vm._v(" "),
+                        _c("tbody", [
+                          _c("tr", [
+                            _c("td", { attrs: { colspan: "2" } }, [
+                              _c(
+                                "div",
+                                { staticClass: "row align-items-center" },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "col-3 col-md-2 div-plan-icon"
+                                    },
+                                    [
+                                      _vm.current_plan.icon
+                                        ? _c("img", {
+                                            attrs: {
+                                              src: _vm.current_plan.icon,
+                                              alt: "incono"
+                                            }
+                                          })
+                                        : _vm._e()
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "col-9 col-md-6" }, [
+                                    _c("h4", [
+                                      _vm._v(
+                                        "\n                              " +
+                                          _vm._s(_vm.current_plan.plan_name) +
+                                          " - " +
+                                          _vm._s(_vm.group_name) +
+                                          " "
+                                      ),
+                                      _c(
+                                        "span",
+                                        {
+                                          staticStyle: {
+                                            "text-transform": "uppercase"
+                                          }
+                                        },
+                                        [_vm._v(_vm._s(_vm.type))]
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "col-12 col-md-4 text-center"
+                                    },
+                                    [
+                                      _vm.current_plan.plan_price
+                                        .presentation_url
+                                        ? _c(
+                                            "a",
+                                            {
+                                              attrs: {
+                                                target: "_blank",
+                                                href: _vm.evalue(
+                                                  _vm.current_plan.plan_price
+                                                    .presentation_url
+                                                )
+                                              }
+                                            },
+                                            [_vm._v("Ver detalle")]
+                                          )
+                                        : _vm._e()
+                                    ]
+                                  )
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("tr", [
+                            _c("th", { staticClass: "letra-boldfont" }, [
+                              _vm._v("PRECIO")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "div",
+                                { staticClass: "row align-items-center" },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "col-12 col-md-12 text-right"
+                                    },
+                                    [
+                                      _c("span", [
+                                        _vm._v(
+                                          "$" +
+                                            _vm._s(
+                                              _vm.formatPrice(_vm.TotalValue())
+                                            )
+                                        )
+                                      ])
+                                    ]
+                                  )
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(7),
+                          _vm._v(" "),
+                          _c("tr", [
+                            _c("th", { staticClass: "letra-boldfont" }, [
+                              _vm._v("SUBTOTAL")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "div",
+                                { staticClass: "row align-items-center" },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "col-12 col-md-12 text-right"
+                                    },
+                                    [
+                                      _c("span", [
+                                        _vm._v(
+                                          "$" +
+                                            _vm._s(
+                                              _vm.formatPrice(_vm.TotalValue())
+                                            )
+                                        )
+                                      ])
+                                    ]
+                                  )
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("tr", [
+                            _c("td", { attrs: { colspan: "2" } }, [
+                              _c("section", { staticClass: "section-cupon" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "row align-items-center" },
+                                  [
+                                    _c("div", { staticClass: "col-md-6" }, [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.voucher_code,
+                                            expression: "voucher_code"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        attrs: {
+                                          type: "text",
+                                          disabled: _vm.events.voucher_loading,
+                                          placeholder: "Código de cupón"
+                                        },
+                                        domProps: { value: _vm.voucher_code },
+                                        on: {
+                                          change: function($event) {
+                                            _vm.events.voucher_error = ""
+                                          },
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.voucher_code =
+                                              $event.target.value
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _vm.events.voucher_error
+                                        ? _c(
+                                            "small",
+                                            {
+                                              staticClass:
+                                                "form-text text-error letra-boldfont"
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(_vm.events.voucher_error)
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "col-md-4" }, [
+                                      !_vm.events.voucher_loading
+                                        ? _c(
+                                            "button",
+                                            {
+                                              staticClass:
+                                                "btn btn-Azul letra-boldfont",
+                                              attrs: {
+                                                disabled: !_vm.voucher_code
+                                              },
+                                              on: { click: _vm.validateVoucher }
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm.voucher_data
+                                                    ? "Cambiar"
+                                                    : "Agregar código"
+                                                )
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _vm.events.voucher_loading
+                                        ? _c(
+                                            "button",
+                                            {
+                                              staticClass:
+                                                "btn btn-primary letra-boldfont",
+                                              attrs: {
+                                                type: "button",
+                                                disabled: ""
+                                              }
+                                            },
+                                            [_vm._v("Validando...")]
+                                          )
+                                        : _vm._e()
+                                    ])
+                                  ]
+                                )
+                              ])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(8),
+                          _vm._v(" "),
+                          _c("tr", [
+                            _c("th", { staticClass: "letra-boldfont" }, [
+                              _vm._v("SUBTOTAL")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "div",
+                                { staticClass: "row align-items-center" },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "col-12 col-md-12 text-right div-plan-title"
+                                    },
+                                    [
+                                      _c("span", [
+                                        _vm._v(
+                                          "$" +
+                                            _vm._s(
+                                              _vm.formatPrice(_vm.TotalValue())
+                                            )
+                                        )
+                                      ])
+                                    ]
+                                  )
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _vm.voucher_data
+                            ? _c("tr", [
+                                _c("th", { staticClass: "letra-boldfont" }, [
+                                  _c("span", [
+                                    _vm._v(
+                                      "CUPÓN " + _vm._s(_vm.voucher_data.code)
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("small", [
+                                    _vm._v(
+                                      "Descuento: " +
+                                        _vm._s(_vm.VoucherDiscountApplied()) +
+                                        " dcto."
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c(
+                                    "div",
+                                    { staticClass: "row align-items-center" },
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "col-12 col-md-12 div-plan-title text-right"
+                                        },
+                                        [
+                                          _c("span", [
+                                            _vm._v(
+                                              "- $" +
+                                                _vm._s(
+                                                  _vm.formatPrice(
+                                                    _vm.VoucherDiscountValue()
+                                                  )
+                                                )
+                                            )
+                                          ])
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("tr", [
+                            _c("th", { staticClass: "letra-boldfont" }, [
+                              _vm._v("TOTAL")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "div",
+                                { staticClass: "row align-items-center" },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "col-12 col-md-12 div-plan-title text-right"
+                                    },
+                                    [
+                                      _c(
+                                        "span",
+                                        { staticClass: "span-total" },
+                                        [
+                                          _vm._v(
+                                            "$" +
+                                              _vm._s(
+                                                _vm.formatPrice(
+                                                  _vm.TotalValue() -
+                                                    _vm.VoucherDiscountValue()
+                                                )
+                                              )
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("tr", [
+                            _c("td", { attrs: { colspan: "2" } }, [
+                              _c("div", { staticClass: "content-button" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "row align-items-center" },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "col-md-12 content-button"
+                                      },
+                                      [
+                                        !_vm.events.pay_loading &&
+                                        _vm.TotalValue() -
+                                          _vm.VoucherDiscountValue() >
+                                          0
+                                          ? _c(
+                                              "button",
+                                              {
+                                                staticClass:
+                                                  "btn btn-Azul letra-boldfont",
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.PayEvent()
+                                                  }
+                                                }
+                                              },
+                                              [_vm._v("FINALIZAR COMPRA")]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        _vm.events.pay_loading
+                                          ? _c(
+                                              "button",
+                                              {
+                                                staticClass:
+                                                  "btn btn-primary letra-boldfont",
+                                                attrs: {
+                                                  type: "button",
+                                                  disabled: ""
+                                                }
+                                              },
+                                              [_vm._v("Procesando...")]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        !_vm.events.pay_loading &&
+                                        _vm.TotalValue() -
+                                          _vm.VoucherDiscountValue() ==
+                                          0
+                                          ? _c(
+                                              "button",
+                                              {
+                                                staticClass:
+                                                  "btn btn-Azul letra-boldfont",
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.PayEvent()
+                                                  }
+                                                }
+                                              },
+                                              [_vm._v("EMPEZAR")]
+                                            )
+                                          : _vm._e()
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ])
+                            ])
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        : _vm._e()
+    ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("section", { staticClass: "title-page-section" }, [
+          _c("span", { staticClass: "title-page letra-boldfont" }, [
+            _vm._v("RESUMEN DE COMPRA")
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-resume" }, [
+      _c("tr", [
+        _c(
+          "th",
+          {
+            staticClass: "letra-boldfont",
+            staticStyle: { "min-width": "300px" }
+          },
+          [_vm._v("PRODUCTO")]
+        ),
+        _vm._v(" "),
+        _c("th", { staticClass: "letra-boldfont" }, [_vm._v("PRECIO")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "letra-boldfont" }, [_vm._v("CANTIDAD")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "letra-boldfont" }, [_vm._v("SUBTOTAL")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("div", { staticClass: "row align-items-center" }, [
+        _c("div", { staticClass: "col-12 col-md-12 text-right" }, [
+          _c("span", [_vm._v("1")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-resume" }, [
+      _c("tr", [
+        _c(
+          "th",
+          {
+            staticClass: "letra-boldfont",
+            staticStyle: { "min-width": "300px" }
+          },
+          [_vm._v("TOTAL DEL CARRITO")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-md-6 div-plan-icon" }, [
+      _c("span", [_vm._v("SUBTOTAL")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6 col-md-6 div-plan-icon" }, [
+      _c("span", [_vm._v("TOTAL")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "letra-boldfont", attrs: { colspan: "2" } }, [
+          _vm._v("PRODUCTO")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", { staticClass: "letra-boldfont" }, [_vm._v("CANTIDAD")]),
+      _vm._v(" "),
+      _c("td", [
+        _c("div", { staticClass: "row align-items-center" }, [
+          _c("div", { staticClass: "col-12 col-md-12 text-right" }, [
+            _c("span", [_vm._v("1")])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c(
+        "td",
+        {
+          staticClass: "letra-boldfont",
+          staticStyle: { "min-width": "300px", "font-weight": "bold" },
+          attrs: { colspan: "2" }
+        },
+        [_vm._v("TOTAL DEL CARRITO")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
 
 /***/ }),
 
-/***/ "./resources/js/components/teacherStudentModuleSelectComponent.vue":
-/*!*************************************************************************!*\
-  !*** ./resources/js/components/teacherStudentModuleSelectComponent.vue ***!
-  \*************************************************************************/
+/***/ "./resources/js/components/purchaseTutorialResumeComponent.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/purchaseTutorialResumeComponent.vue ***!
+  \*********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _teacherStudentModuleSelectComponent_vue_vue_type_template_id_c525923e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./teacherStudentModuleSelectComponent.vue?vue&type=template&id=c525923e&scoped=true& */ "./resources/js/components/teacherStudentModuleSelectComponent.vue?vue&type=template&id=c525923e&scoped=true&");
-/* harmony import */ var _teacherStudentModuleSelectComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./teacherStudentModuleSelectComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/teacherStudentModuleSelectComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _teacherStudentModuleSelectComponent_vue_vue_type_style_index_0_id_c525923e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./teacherStudentModuleSelectComponent.vue?vue&type=style&index=0&id=c525923e&scoped=true&lang=css& */ "./resources/js/components/teacherStudentModuleSelectComponent.vue?vue&type=style&index=0&id=c525923e&scoped=true&lang=css&");
+/* harmony import */ var _purchaseTutorialResumeComponent_vue_vue_type_template_id_8f9b9054___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./purchaseTutorialResumeComponent.vue?vue&type=template&id=8f9b9054& */ "./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=template&id=8f9b9054&");
+/* harmony import */ var _purchaseTutorialResumeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./purchaseTutorialResumeComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _purchaseTutorialResumeComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./purchaseTutorialResumeComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -283,66 +1586,66 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _teacherStudentModuleSelectComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _teacherStudentModuleSelectComponent_vue_vue_type_template_id_c525923e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _teacherStudentModuleSelectComponent_vue_vue_type_template_id_c525923e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _purchaseTutorialResumeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _purchaseTutorialResumeComponent_vue_vue_type_template_id_8f9b9054___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _purchaseTutorialResumeComponent_vue_vue_type_template_id_8f9b9054___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "c525923e",
+  null,
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/teacherStudentModuleSelectComponent.vue"
+component.options.__file = "resources/js/components/purchaseTutorialResumeComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/teacherStudentModuleSelectComponent.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************!*\
-  !*** ./resources/js/components/teacherStudentModuleSelectComponent.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************/
+/***/ "./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_teacherStudentModuleSelectComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./teacherStudentModuleSelectComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/teacherStudentModuleSelectComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_teacherStudentModuleSelectComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_purchaseTutorialResumeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./purchaseTutorialResumeComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_purchaseTutorialResumeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/teacherStudentModuleSelectComponent.vue?vue&type=style&index=0&id=c525923e&scoped=true&lang=css&":
-/*!**********************************************************************************************************************************!*\
-  !*** ./resources/js/components/teacherStudentModuleSelectComponent.vue?vue&type=style&index=0&id=c525923e&scoped=true&lang=css& ***!
-  \**********************************************************************************************************************************/
+/***/ "./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_teacherStudentModuleSelectComponent_vue_vue_type_style_index_0_id_c525923e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./teacherStudentModuleSelectComponent.vue?vue&type=style&index=0&id=c525923e&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/teacherStudentModuleSelectComponent.vue?vue&type=style&index=0&id=c525923e&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_teacherStudentModuleSelectComponent_vue_vue_type_style_index_0_id_c525923e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_teacherStudentModuleSelectComponent_vue_vue_type_style_index_0_id_c525923e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_teacherStudentModuleSelectComponent_vue_vue_type_style_index_0_id_c525923e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_teacherStudentModuleSelectComponent_vue_vue_type_style_index_0_id_c525923e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_teacherStudentModuleSelectComponent_vue_vue_type_style_index_0_id_c525923e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_purchaseTutorialResumeComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./purchaseTutorialResumeComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_purchaseTutorialResumeComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_purchaseTutorialResumeComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_purchaseTutorialResumeComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_purchaseTutorialResumeComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_purchaseTutorialResumeComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/js/components/teacherStudentModuleSelectComponent.vue?vue&type=template&id=c525923e&scoped=true&":
-/*!********************************************************************************************************************!*\
-  !*** ./resources/js/components/teacherStudentModuleSelectComponent.vue?vue&type=template&id=c525923e&scoped=true& ***!
-  \********************************************************************************************************************/
+/***/ "./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=template&id=8f9b9054&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=template&id=8f9b9054& ***!
+  \****************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_teacherStudentModuleSelectComponent_vue_vue_type_template_id_c525923e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./teacherStudentModuleSelectComponent.vue?vue&type=template&id=c525923e&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/teacherStudentModuleSelectComponent.vue?vue&type=template&id=c525923e&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_teacherStudentModuleSelectComponent_vue_vue_type_template_id_c525923e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_purchaseTutorialResumeComponent_vue_vue_type_template_id_8f9b9054___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./purchaseTutorialResumeComponent.vue?vue&type=template&id=8f9b9054& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=template&id=8f9b9054&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_purchaseTutorialResumeComponent_vue_vue_type_template_id_8f9b9054___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_teacherStudentModuleSelectComponent_vue_vue_type_template_id_c525923e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_purchaseTutorialResumeComponent_vue_vue_type_template_id_8f9b9054___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

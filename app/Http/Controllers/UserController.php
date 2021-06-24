@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\User;
@@ -204,6 +205,40 @@ class UserController extends Controller
             return 'ok';
         } else {
             return 'false';
+        }
+    }
+       /**
+     * login
+     */
+    public function loginClientWeb(Request $request)
+    {
+        $user_name = $request->input('user_name');
+        $password = $request->input('password');
+        if (Auth::attempt(['user_name' => $user_name, 'password' => $password], false)) {
+            $user = Auth::user();
+            /*
+            if(!$user->isClient())
+            {
+               User::where('id',$user->id)->update([
+                   'type_user'=>4
+               ]);
+            }*/
+
+            $client = Customer::where('user_id', $user->id)->where('deleted', 0)->first();
+
+            if (!isset($client)) {
+                Customer::create([
+                    'user_id' => $user->id,
+                    'type' => 1,
+                    'state' => 1,
+                    'deleted' => 0,
+                    'updated_user' => $user->id
+                ]);
+            }
+
+            return redirect('/cliente/cuenta');
+        } else {
+            return redirect('/compra/plan');
         }
     }
     public function logOut()

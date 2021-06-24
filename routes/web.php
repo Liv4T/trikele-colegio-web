@@ -528,9 +528,22 @@ Route::post('/resetPassword', 'UserController@resetPassword')->name('resetPasswo
 Route::post('users_save', 'UserController@store')->name('users_save');
 Route::get('Courses_save', 'CoursesController@storeNew')->name('Courses_save');
 Route::get('/logout2', 'UserController@logOut')->name('logout2');
+Route::post('/login/client/web', 'UserController@loginClientWeb')->name('login_client_web');
 
 
-
+//CONTROLLERS CLIENT
+Route::middleware('auth')->get('/cliente/cuenta', function () {
+    return view('clientAccount');
+});
+Route::middleware('auth')->get('/cliente/estudiantes', function () {
+    return view('clientStudents');
+});
+Route::middleware('auth')->get('/cliente/planes', function () {
+    return view('clientPlans');
+});
+Route::middleware('auth')->get('/cliente/creditos', function () {
+    return view('clientCredits');
+});
 
 //LECTIVAS
 //Módulo de electivas usuario Administrador
@@ -651,7 +664,75 @@ Route::middleware('auth')->get('/admin/clases', function () {
 });
 
 
+//CONTROLLERS PURCHASE
+Route::middleware('auth')->get('/compra/pagar/resultado/payu', 'PurchasedController@payResultPayu');
+Route::middleware('auth')->get('/compra/pagar/resultado/mercadopago', 'PurchasedController@payResultMercadopago');
+Route::middleware('auth')->get('/compra/pagar/payu/{data_string}', 'PurchasedController@payPayu');
+Route::middleware('auth')->get('/compra/pagar/mercadopago/{data_string}', 'PurchasedController@payMercadopago');
 
+
+Route::get('/compra/plan', function () {
+    return view('purchasePlan')->with('voucher', '');
+});
+Route::get('/compra/plan/v/{voucher}', function (string $voucher) {
+    return view('purchasePlan')->with('voucher', $voucher);
+});
+Route::get('/compra/plan/{plan_type}/modulo/{module_id}/ingresar/p/{payment_code}', function (string $plan_type, int $module_id, String $payment_code) {
+    return view('purchaseModuleLogin')->with('plan_type', $plan_type)->with('module_id', $module_id)->with('voucher', '')->with('payment_code', $payment_code);
+});
+Route::get('/compra/plan/{plan_type}/modulo/{module_id}/ingresar/v/{voucher}/p/{payment_code}', function (string $plan_type, string $voucher, int $module_id, String $payment_code) {
+    return view('purchaseModuleLogin')->with('plan_type', $plan_type)->with('module_id', $module_id)->with('voucher', $voucher)->with('payment_code', $payment_code);
+});
+Route::get('/compra/plan/{plan_type}/area/{area_id}/ingresar/p/{payment_code}', function (string $plan_type, int $area_id, String $payment_code) {
+    return view('purchaseAreaLogin')->with('plan_type', $plan_type)->with('area_id', $area_id)->with('voucher', '')->with('payment_code', $payment_code);
+});
+Route::get('/compra/plan/{plan_type}/area/{area_id}/ingresar/v/{voucher}/p/{payment_code}', function (string $plan_type, string $voucher, int $area_id, String $payment_code) {
+    return view('purchaseAreaLogin')->with('plan_type', $plan_type)->with('area_id', $area_id)->with('voucher', $voucher)->with('payment_code', $payment_code);
+});
+Route::get('/compra/plan/{plan_type}/ingresar/p/{payment_code}', function (string $plan_type, String $payment_code) {
+    return view('purchasePlanLogin')->with('plan_type', $plan_type)->with('voucher', '')->with('payment_code', $payment_code);
+});
+Route::get('/compra/plan/{plan_type}/ingresar/v/{voucher}', function (string $plan_type, string $voucher, String $payment_code) {
+    return view('purchasePlanLogin')->with('plan_type', $plan_type)->with('voucher', $voucher)->with('payment_code', $payment_code);
+});
+Route::get('/compra/plan/{plan_type}/modulo/{module_id}/resumen', function (string $plan_type, int $module_id) {
+    return view('purchaseModuleResume')->with('plan_type', $plan_type)->with('module_id', $module_id)->with('voucher', '');
+});
+Route::get('/compra/plan/{plan_type}/modulo/{module_id}/resumen/v/{voucher}', function (string $plan_type, int $module_id, string $voucher) {
+    return view('purchaseModuleResume')->with('plan_type', $plan_type)->with('module_id', $module_id)->with('voucher', $voucher);
+});
+Route::get('/compra/plan/{plan_type}/area/{area_id}/resumen', function (string $plan_type, int $area_id) {
+    return view('purchaseAreaResume')->with('plan_type', $plan_type)->with('area_id', $area_id)->with('voucher', '');
+});
+Route::get('/compra/plan/{plan_type}/area/{area_id}/resumen/v/{voucher}', function (string $plan_type, int $area_id, string $voucher) {
+    return view('purchaseAreaResume')->with('plan_type', $plan_type)->with('area_id', $area_id)->with('voucher', $voucher);
+});
+Route::get('/compra/plan/{plan_type}/resumen', function (string $plan_type) {
+    return view('purchasePlanResume')->with('plan_type', $plan_type)->with('voucher', '');
+});
+Route::get('/compra/plan/{plan_type}/resumen/v/{voucher}', function (string $plan_type, string $voucher) {
+    return view('purchasePlanResume')->with('plan_type', $plan_type)->with('voucher', $voucher);
+});
+
+Route::get('/compra/plan/{plan_type}/tutoria/ingresar/p/{payment_code}', function (string $plan_type,  String $payment_code) {
+    return view('purchaseTutorialLogin')->with('plan_type', $plan_type)->with('voucher', '')->with('payment_code', $payment_code);
+});
+Route::get('/compra/plan/{plan_type}/tutoria/ingresar/v/{voucher}/p/{payment_code}', function (string $plan_type, string $voucher,  String $payment_code) {
+    return view('purchaseTutorialLogin')->with('plan_type', $plan_type)->with('voucher', $voucher)->with('payment_code', $payment_code);
+});
+
+Route::get('/compra/plan/{plan_type}/tutoria/{group_name}/{area_id}/{schedulearea_id}/{time_index}/resumen', function (String $plan_type, String $group_name, int $area_id, int $schedulearea_id, int $time_index) {
+    return view('purchaseTutorialResume')->with('voucher', '')->with('plan_type', $plan_type)->with('area_id', $area_id)->with('group_name', $group_name)->with('schedulearea_id', $schedulearea_id)->with('time_index', $time_index);
+});
+Route::get('/compra/plan/{plan_type}/tutoria/{group_name}/{area_id}/{schedulearea_id}/{time_index}/resumen', function (String $plan_type, String $group_name, int $area_id, int $schedulearea_id, int $time_index) {
+    return view('purchaseTutorialResume')->with('voucher', '')->with('plan_type', $plan_type)->with('area_id', $area_id)->with('group_name', $group_name)->with('schedulearea_id', $schedulearea_id)->with('time_index', $time_index);
+});
+Route::get('/compra/plan/{plan_type}/tutoria/{group_name}/{area_id}/{schedulearea_id}/{time_index}/resumen/v/{voucher}', function (String $plan_type, String $group_name, int $area_id, int $schedulearea_id, int $time_index, String $voucher) {
+    return view('purchaseTutorialResume')->with('voucher', $voucher)->with('plan_type', $plan_type)->with('area_id', $area_id)->with('group_name', $group_name)->with('schedulearea_id', $schedulearea_id)->with('time_index', $time_index);
+});
+Route::get('/compra/plan/{plan_type}/tutoria/{group_name}/{area_id}/{schedulearea_id}/{time_index}/resumen/v/{voucher}', function (String $plan_type, String $group_name, int $area_id, int $schedulearea_id, int $time_index, String $voucher) {
+    return view('purchaseTutorialResume')->with('voucher', $voucher)->with('plan_type', $plan_type)->with('area_id', $area_id)->with('group_name', $group_name)->with('schedulearea_id', $schedulearea_id)->with('time_index', $time_index);
+});
 
 
 
@@ -697,3 +778,24 @@ Route::get('/api/lectives/planification/{id_lective_planification}/weekly/{id_we
 Route::get('/api/lectives/planification/{id_lective_planification}/activities', 'LectivesController@getActivitiesByPlan');
 Route::put('/api/lectives/planification/{id_lective_planification}/weekly/{id_weekly_plan}/course/{id_class}/activity/{id_activity}/module/ENCUESTA_UNICA_RTA/question/{id_question}', 'QuestionController@responseQuestiononLective');
 Route::put('/api/planification/copy', 'CoursesController@copyInformation');
+
+
+Route::get('/api/customer', 'CustomerController@all');
+Route::get('/api/customer-plan', 'CustomerPlanController@all');
+Route::get('/api/customer-plan/type/{type}', 'CustomerPlanController@allByType');
+Route::get('/api/customer-plan/type/{type}/grade/{grade}', 'CustomerPlanController@getByTypeAndGrade');
+Route::get('/api/customer-plan/state/ACTIVE', 'CustomerPlanController@allActive');
+Route::get('/api/customer/{id}', 'CustomerController@get');
+Route::put('/api/customer/{id}', 'CustomerController@update');
+Route::post('/api/customer', 'CustomerController@addCustomer');
+Route::delete('/api/customer/{id}', 'CustomerController@delete');
+Route::post('/api/payment/confirmation/payu', 'PurchasedController@payConfirmationPayu');
+Route::post('/api/payment/confirmation/mercadopago', 'PurchasedController@payConfirmationMercadopago');
+
+Route::get('/api/document-type', 'DocumentTypeController@all');
+Route::get('/api/document-type/state/ACTIVE', 'DocumentTypeController@allActive');
+Route::get('/api/document-type/{id}', 'DocumentTypeController@get');
+Route::put('/api/document-type/{id}', 'DocumentTypeController@update');
+Route::post('/api/document-type', 'DocumentTypeController@insert');
+Route::delete('/api/document-type/{id}', 'DocumentTypeController@delete');
+

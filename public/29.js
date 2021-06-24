@@ -375,7 +375,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.alertaPass {\n  color: red;\n}\n.pd-20 {\n  padding-left: 7em;\n}\n.align-center {\n  align-items: center;\n}\n.letra-p {\n  font-size: 20px;\n}\n", ""]);
+exports.push([module.i, "\n.alertaPass {\r\n  color: red;\n}\n.pd-20 {\r\n  padding-left: 7em;\n}\n.align-center {\r\n  align-items: center;\n}\n.letra-p {\r\n  font-size: 20px;\n}\r\n", ""]);
 
 // exports
 
