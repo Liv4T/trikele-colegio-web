@@ -96,32 +96,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['model'],
+  props: ["model"],
   data: function data() {
     return {
       events: {
         download_invoice_loading: false
       },
-      redirection: '/inicio',
-      actionName: 'Ir al inicio'
+      redirection: "/inicio",
+      actionName: "Ir al inicio"
     };
   },
   mounted: function mounted() {
     //console.log(this.model);
-    if (this.model.invoice && this.model.invoice.items.length > 0 && this.model.invoice.items[0].customer_plan_name.includes("TUTOR")) {
-      if (this.model.status == 'approved') {
-        this.redirection = '/tutoria';
-        this.actionName = 'Ir a mis tutorías';
+    if (this.model.invoice && this.model.invoice.items.length > 0 && this.model.invoice.items[0].customer_plan_name.includes("FORMULARIO-ADMISION")) {
+      if (this.model.status == "approved") {
+        this.redirection = "/Bienvenido";
+        this.actionName = "Ingresar al formulario";
       } else {
-        this.redirection = '/tutorias';
-        this.actionName = 'Regresar';
+        this.redirection = "/tutorias";
+        this.actionName = "Regresar";
       }
     }
+    /*
+          if (this.model.invoice && this.model.invoice.items.length > 0 && this.model.invoice.items[0].customer_plan_name.includes("MATRICULA")) {
+            if (this.model.status == "approved") {
+              this.redirection = "/Bienvenido";
+              this.actionName = "Ingresar";
+            } else {
+              this.redirection = "/tutorias";
+              this.actionName = "Regresar";
+            }
+          }
+    
+          if (this.model.invoice && this.model.invoice.items.length > 0 && this.model.invoice.items[0].customer_plan_name.includes("PENSION")) {
+            if (this.model.status == "approved") {
+              this.redirection = "/Bienvenido";
+              this.actionName = "Ingresar";
+            } else {
+              this.redirection = "/tutorias";
+              this.actionName = "Regresar";
+            }
+          }*/
+
   },
   methods: {
     formatPrice: function formatPrice(value) {
-      var val = (value / 1).toFixed(0).replace('.', ',');
+      var val = (value / 1).toFixed(0).replace(".", ",");
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
   }
@@ -141,7 +165,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.div-notification[data-v-0d52efbe]{display:flex;flex-direction: row; justify-content: center;padding: 10px;align-items: center;border-radius:5px;font-weight: 700;font-size: 1.2em;}\n.div-notification.noti-warning[data-v-0d52efbe]{background-color: #ffe251;}\n.div-notification.noti-success[data-v-0d52efbe]{background-color: #51ff87;}\n.div-notification.noti-danger[data-v-0d52efbe]{background-color: #ff5159;color:white;}\nsvg[data-v-0d52efbe]{margin-right: 10px;}\n.item-description[data-v-0d52efbe]{display: flex;flex-direction: column;}\n.item-description label[data-v-0d52efbe]{font-weight: bold;}\r\n", ""]);
+exports.push([module.i, "\n.div-notification[data-v-0d52efbe] {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  padding: 10px;\n  align-items: center;\n  border-radius: 5px;\n  font-weight: 700;\n  font-size: 1.2em;\n}\n.div-notification.noti-warning[data-v-0d52efbe] {\n  background-color: #ffe251;\n}\n.div-notification.noti-success[data-v-0d52efbe] {\n  background-color: #51ff87;\n}\n.div-notification.noti-danger[data-v-0d52efbe] {\n  background-color: #ff5159;\n  color: white;\n}\nsvg[data-v-0d52efbe] {\n  margin-right: 10px;\n}\n.item-description[data-v-0d52efbe] {\n  display: flex;\n  flex-direction: column;\n}\n.item-description label[data-v-0d52efbe] {\n  font-weight: bold;\n}\n", ""]);
 
 // exports
 
@@ -302,9 +326,9 @@ var render = function() {
                 _c("div", { staticClass: "col item-description" }, [
                   _c("label", [_vm._v("REFERENCIA:")]),
                   _vm._v(
-                    "\r\n                            " +
+                    "\n                " +
                       _vm._s(_vm.model.external_reference) +
-                      "\r\n                        "
+                      "\n              "
                   )
                 ])
               ])
@@ -317,9 +341,9 @@ var render = function() {
                 _c("div", { staticClass: "col item-description" }, [
                   _c("label", [_vm._v("FECHA COMPRA:")]),
                   _vm._v(
-                    "\r\n                            ERROR AL PROCESAR EL PAGO: " +
+                    "\n                " +
                       _vm._s(_vm.model.sale_date) +
-                      "\r\n                        "
+                      "\n              "
                   )
                 ])
               ])
