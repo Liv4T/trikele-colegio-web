@@ -5,66 +5,31 @@
         <div class="custom-card text-center">
           <h3 class="card-header fondo">Registro</h3>
           <form class="needs-validation" novalidate>
-            <form-wizard
-              title
-              subtitle
-              color="#ffc107"
-              next-button-text="Siguiente"
-              back-button-text="Atrás"
-              finish-button-text="Guardar y enviar"
-              @on-complete="createNames"
-            >
+            <form-wizard title subtitle color="#ffc107" next-button-text="Siguiente" back-button-text="Atrás" finish-button-text="Guardar y enviar" @on-complete="createNames">
               <tab-content title="Datos personales" icon="fas fa-user">
                 <div class="card-body">
                   <div class="form-group row">
                     <div class="col">
                       <label for="name">Nombre</label>
-                      <input
-                        type="text"
-                        name="name"
-                        v-model="newName"
-                        class="form-control"
-                        required
-                      />
+                      <input type="text" name="name" v-model="newName" class="form-control" required />
                       <div class="invalid-feedback">Please fill out this field</div>
                     </div>
                     <div class="col">
                       <label for="last_name">Apellido</label>
-                      <input
-                        type="text"
-                        name="last_name"
-                        class="form-control"
-                        v-model="newLastName"
-                        required
-                      />
+                      <input type="text" name="last_name" class="form-control" v-model="newLastName" required />
                       <div class="invalid-feedback">Please fill out this field</div>
                     </div>
                   </div>
                   <div class="form-group row">
                     <div class="col">
                       <label for="name">Email</label>
-                      <input
-                        type="text"
-                        name="email"
-                        class="form-control"
-                        v-model="newEmail"
-                        required
-                      />
+                      <input type="text" name="email" class="form-control" v-model="newEmail" required />
                       <div class="invalid-feedback">Please fill out this field</div>
                     </div>
                     <div class="col">
                       <label for="name">Nombre de Usuario</label>
-                      <input
-                        type="text"
-                        name="user_name"
-                        class="form-control"
-                        maxlength="20"
-                        v-model="newUserName"
-                        required
-                      />
-                      <div
-                        class="invalid-feedback"
-                      >Please fill out this field, the user name may not be greater than 20 characters.</div>
+                      <input type="text" name="user_name" class="form-control" maxlength="20" v-model="newUserName" required />
+                      <div class="invalid-feedback">Please fill out this field, the user name may not be greater than 20 characters.</div>
                     </div>
                   </div>
                 </div>
@@ -81,51 +46,25 @@
                   </div>
                   <div class="col">
                     <label for="name">Teléfono</label>
-                    <input
-                      type="text"
-                      name="phone"
-                      class="form-control"
-                      v-model="newPhone"
-                      required
-                    />
+                    <input type="text" name="phone" class="form-control" v-model="newPhone" required />
                     <div class="invalid-feedback">Please fill out this field</div>
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col">
                     <label for="name">Número de Identificación</label>
-                    <input
-                      type="text"
-                      name="id_number"
-                      class="form-control"
-                      maxlength="15"
-                      v-model="newId_number"
-                      required
-                    />
+                    <input type="text" name="id_number" class="form-control" maxlength="15" v-model="newId_number" required />
                     <div class="invalid-feedback">Please fill out this field</div>
                   </div>
                   <div class="col">
                     <label for="name">Foto</label>
-                    <input
-                      type="file"
-                      name="picture"
-                      class="form-control"
-                      accept="image/*"
-                      @change="onFlieChange"
-                      required
-                    />
+                    <input type="file" name="picture" class="form-control" accept="image/*" @change="onFlieChange" required />
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col">
                     <label for="name">Contraseña</label>
-                    <input
-                      id="password1"
-                      type="password"
-                      class="form-control"
-                      v-model="newPassword"
-                      required
-                    />
+                    <input id="password1" type="password" class="form-control" v-model="newPassword" required />
                   </div>
                   <div class="col">
                     <label for="name">Confirmar contraseña</label>
@@ -135,23 +74,13 @@
                 </div>
                 <div class="form-group row mx-auto">
                   <label for="name">Dirección</label>
-                  <input
-                    type="text"
-                    name="address"
-                    id="validationDefault03"
-                    class="form-control"
-                    v-model="newAddress"
-                    required
-                  />
+                  <input type="text" name="address" id="validationDefault03" class="form-control" v-model="newAddress" required />
                   <div class="invalid-feedback">Please fill out this field</div>
                 </div>
                 <div class="form-group row">
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="gridCheck" required />
-                    <label
-                      class="form-check-label"
-                      for="gridCheck"
-                    >Para todos los efectos legales, certifico que todas las respuestas e información anotadas por mí, en el presente formulario son veraces (C. S. T.) Art. 62 Núm. 1° Régimen Laboral Colombiano § 1057 (Legis).</label>
+                    <label class="form-check-label" for="gridCheck">Para todos los efectos legales, certifico que todas las respuestas e información anotadas por mí, en el presente formulario son veraces (C. S. T.) Art. 62 Núm. 1° Régimen Laboral Colombiano § 1057 (Legis).</label>
                   </div>
                 </div>
                 <!-- <div class="modal-footer">
@@ -307,7 +236,7 @@ export default {
           data.append("file", files[0]);
           data.append("user_name", this.newUserName);
           this.newPicture = data;
-
+          console.log("data es: ", data);
           axios.post("/img_user", data).then((response) => {
             this.emitMessage(response);
           });

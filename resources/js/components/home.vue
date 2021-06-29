@@ -18,7 +18,7 @@
       <h4 class="text-center">ÚNETE A NUESTRA COMUNIDAD TRIKELE</h4>
       <h3 class="text-center">Emprende tu propio camino de aprendizaje</h3>
       <div class="text-center">
-        <a class="btn btn-lg btn-trikele" href="">ÚNETE</a>
+        <a class="btn btn-lg btn-trikele" href @click.prevent="modalmatricula()">ÚNETE</a>
       </div>
     </div>
     <br />
@@ -257,7 +257,7 @@
                       <div class="col text-center mx-auto">
                         <label for="name"> Nombre </label>
                         <div>
-                          <input type="text" name="objetive1" class="form-control" v-model="name" required />
+                          <input type="text" name="name" class="form-control" v-model="nameParent" required />
                         </div>
                       </div>
                     </div>
@@ -265,7 +265,7 @@
                       <div class="col text-center mx-auto">
                         <label for="name"> Correo </label>
                         <div>
-                          <input type="text" name="objetive1" class="form-control" v-model="name" required />
+                          <input type="email" name="email" class="form-control" v-model="emailParent" required />
                         </div>
                       </div>
                     </div>
@@ -273,7 +273,7 @@
                       <div class="col text-center mx-auto">
                         <label for="name"> Teléfono </label>
                         <div>
-                          <input type="text" name="objetive1" class="form-control" v-model="name" required />
+                          <input type="text" name="phone" class="form-control" v-model="phoneParent" required />
                         </div>
                       </div>
                     </div>
@@ -285,7 +285,7 @@
                         <div class="col text-center mx-auto">
                           <label for="name"> Nombre </label>
                           <div>
-                            <input type="text" name="objetive1" class="form-control" v-model="name" required />
+                            <input type="text" name="son" class="form-control" v-model="nameSon" required />
                           </div>
                         </div>
                       </div>
@@ -293,7 +293,7 @@
                         <div class="col text-center mx-auto">
                           <label for="name"> Edad </label>
                           <div>
-                            <input type="number" name="objetive1" class="form-control" v-model="name" required />
+                            <input type="number" name="age" class="form-control" v-model="age" required />
                           </div>
                         </div>
                       </div>
@@ -301,16 +301,9 @@
                         <div class="col text-center mx-auto">
                           <label for="name"> Grado </label>
                           <div>
-                            <select class="form-control" ref="seleccionado" required>
-                              <option value="2">Segundo</option>
-                              <option value="3">602</option>
-                            </select>
+                            <input type="number" name="grade" class="form-control" v-model="grade" required />
                           </div>
                         </div>
-                      </div>
-                      <div align="right">
-                        <a href="#" class="btn btn-info" @click.prevent="add(t)" v-show="t == inputs.length - 1">Agregar</a>
-                        <a class="btn btn-danger" href="#" @click.prevent="remove(t)" v-show="t || (!t && inputs.length > 1)">Eliminar</a>
                       </div>
                     </div>
 
@@ -402,6 +395,12 @@ export default {
       tfomulario: false,
       tcorreo: false,
       plan: "",
+      nameParent: "",
+      phoneParent: "",
+      emailParent: "",
+      nameSon: "",
+      age: "",
+      grade: "",
       slides: [
         {
           content: "",
@@ -428,6 +427,9 @@ export default {
   methods: {
     getMenu() {
       window.location = "/";
+    },
+    getAdmisiones() {
+      window.location = "/matricula";
     },
     inputEvent(e) {
       console.log(e);
@@ -483,6 +485,26 @@ export default {
     },
     modalmatricula() {
       $("#myModal2").modal("show");
+    },
+    saveLead() {
+      if (this.nameParent != "" && this.nameSon != "" && this.email != "" && this.phone != "") {
+        var url = window.location.origin + "/saveLead";
+        axios
+          .post(url, {
+            nameParent: this.nameParent,
+            phoneParent: this.phoneParent,
+            emailParent: this.emailParent,
+            nameSon: this.nameSon,
+            age: this.age,
+            grade: this.grade,
+          })
+          .then((response) => {
+            this.getAdmisiones();
+          })
+          .catch((error) => {
+            this.errors = error.response.data;
+          });
+      }
     },
   },
 };

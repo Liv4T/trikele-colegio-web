@@ -26,7 +26,6 @@
                       <a class="btn btn-warning float-left" href="#">Comprar</a>
                     </div>
                   </div>
-
                   <div class="form-group align-center letra-p row mx-auto"><img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Cedula de ciudadanía papá y mamá</div>
                   <div class="form-group align-center letra-p row mx-auto"><img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Documento de Identidad del estudiante</div>
                   <div class="form-group align-center letra-p row mx-auto"><img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Certificados último año cursado</div>

@@ -116,6 +116,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -130,6 +139,17 @@ __webpack_require__.r(__webpack_exports__);
       page: 1,
       numPages: 0,
       rotate: 0,
+      allowedExtensions: ["pdf", "jpg", "jpeg", "png", "doc", "mp4"],
+      idcard_parent: "",
+      idcard_son: "",
+      form: {},
+      last_certificate: "",
+      eps: "",
+      medical_certificate: "",
+      labor_parent: "",
+      labor_son: "",
+      paz_salvo: "",
+      video: "",
       terminos: []
     };
   },
@@ -160,6 +180,55 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         _this2.errors = error.response.data;
       });
+    },
+    onFlieChange1: function onFlieChange1(e, value) {
+      var file = e.target.files[0];
+
+      if (value == "form") {
+        this.form = file;
+      } else if (value == "idcard_son") {
+        this.idcard_son = file;
+      } else if (value == "idcard_parent") {
+        this.idcard_parent = file;
+      } else if (value == "last_certificate") {
+        this.last_certificate = file;
+      } else if (value == "eps") {
+        this.eps = file;
+      } else if (value == "medical_certificate") {
+        this.medical_certificate = file;
+      } else if (value == "labor_parent") {
+        this.labor_parent = file;
+      } else if (value == "labor_son") {
+        this.labor_son = file;
+      } else if (value == "paz_salvo") {
+        this.paz_salvo = file;
+      }
+    },
+    saveDocs: function saveDocs() {
+      var _this3 = this;
+
+      var url = window.location.origin + "/saveLead";
+      var formData = new FormData(); // idcard_parent
+
+      formData.append("idcard_son", this.idcard_son);
+      formData.append("form", this.form);
+      formData.append("last_certificate", this.last_certificate);
+      formData.append("eps", this.eps);
+      formData.append("medical_certificate", this.medical_certificate);
+      formData.append("labor_parent", this.labor_parent);
+      formData.append("labor_son", this.labor_son);
+      formData.append("paz_salvo", this.paz_salvo);
+      axios.post(url, formData).then(function (response) {
+        console.log(response.data);
+
+        _this3.getAdmisiones();
+      })["catch"](function (error) {
+        console.log(response.data);
+        _this3.errors = response.data;
+      });
+    },
+    chooseFile: function chooseFile() {
+      $("#file").click();
     }
   }
 });
@@ -178,7 +247,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .back-calendar {\n  padding-left: 290px;\n} */\n.pd-20 {\n  padding-left: 7em;\n}\n.align-center {\n  align-items: center;\n}\n.letra-p {\n  font-size: 20px;\n}\n.mg-20 {\n  margin: 10px;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .back-calendar {\n  padding-left: 290px;\n} */\n.pd-20 {\n  padding-left: 7em;\n}\n.align-center {\n  align-items: center;\n}\n.letra-p {\n  font-size: 20px;\n}\n.mg-20 {\n  margin: 10px;\n}\n", ""]);
 
 // exports
 
@@ -253,8 +322,7 @@ var render = function() {
                     "next-button-text": "Siguiente",
                     "back-button-text": "Atrás",
                     "finish-button-text": "Finalizar"
-                  },
-                  on: { "on-complete": _vm.createNames }
+                  }
                 },
                 [
                   _c(
@@ -289,151 +357,21 @@ var render = function() {
                               }
                             }),
                             _vm._v(
-                              "Formulario de admisión\n\n                  "
+                              "Formulario de admisión\n                  "
                             ),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-warning mg-20",
-                                attrs: { href: "#" }
-                              },
-                              [_vm._v("Cargar")]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "form-group align-center letra-p row mx-auto"
-                          },
-                          [
-                            _c("img", {
+                            _c("input", {
+                              staticClass: "form-control",
                               attrs: {
-                                width: "35px",
-                                src:
-                                  "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0",
-                                alt: ""
-                              }
-                            }),
-                            _vm._v("Cedula de ciudadanía papá y mamá "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-warning mg-20",
-                                attrs: { href: "#" }
+                                type: "file",
+                                name: "picture",
+                                required: ""
                               },
-                              [_vm._v("Cargar")]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "form-group align-center letra-p row mx-auto"
-                          },
-                          [
-                            _c("img", {
-                              attrs: {
-                                width: "35px",
-                                src:
-                                  "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0",
-                                alt: ""
+                              on: {
+                                change: function($event) {
+                                  return _vm.onFlieChange1($event, "form")
+                                }
                               }
-                            }),
-                            _vm._v("Documento de Identidad del estudiante "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-warning mg-20",
-                                attrs: { href: "#" }
-                              },
-                              [_vm._v("Cargar")]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "form-group align-center letra-p row mx-auto"
-                          },
-                          [
-                            _c("img", {
-                              attrs: {
-                                width: "35px",
-                                src:
-                                  "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0",
-                                alt: ""
-                              }
-                            }),
-                            _vm._v("Certificados último año cursado "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-warning mg-20",
-                                attrs: { href: "#" }
-                              },
-                              [_vm._v("Cargar")]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "form-group align-center letra-p row mx-auto"
-                          },
-                          [
-                            _c("img", {
-                              attrs: {
-                                width: "35px",
-                                src:
-                                  "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0",
-                                alt: ""
-                              }
-                            }),
-                            _vm._v("Certificado afiliación a EPS "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-warning mg-20",
-                                attrs: { href: "#" }
-                              },
-                              [_vm._v("Cargar")]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "form-group align-center letra-p row mx-auto"
-                          },
-                          [
-                            _c("img", {
-                              attrs: {
-                                width: "35px",
-                                src:
-                                  "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0",
-                                alt: ""
-                              }
-                            }),
-                            _vm._v("Certificado Médico "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-warning mg-20",
-                                attrs: { href: "#" }
-                              },
-                              [_vm._v("Cargar")]
-                            )
+                            })
                           ]
                         ),
                         _vm._v(" "),
@@ -453,16 +391,24 @@ var render = function() {
                               }
                             }),
                             _vm._v(
-                              "Certificado laboral de los padres de familia "
+                              "Cedula de ciudadanía papá y mamá\n                  "
                             ),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-warning mg-20",
-                                attrs: { href: "#" }
+                            _c("input", {
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "file",
+                                name: "picture",
+                                required: ""
                               },
-                              [_vm._v("Cargar")]
-                            )
+                              on: {
+                                change: function($event) {
+                                  return _vm.onFlieChange1(
+                                    $event,
+                                    "idcard_parent"
+                                  )
+                                }
+                              }
+                            })
                           ]
                         ),
                         _vm._v(" "),
@@ -481,15 +427,22 @@ var render = function() {
                                 alt: ""
                               }
                             }),
-                            _vm._v("Certificado laboral "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-warning mg-20",
-                                attrs: { href: "#" }
+                            _vm._v(
+                              "Documento de Identidad del estudiante\n                  "
+                            ),
+                            _c("input", {
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "file",
+                                name: "picture",
+                                required: ""
                               },
-                              [_vm._v("Cargar")]
-                            )
+                              on: {
+                                change: function($event) {
+                                  return _vm.onFlieChange1($event, "idcard_son")
+                                }
+                              }
+                            })
                           ]
                         ),
                         _vm._v(" "),
@@ -508,16 +461,212 @@ var render = function() {
                                 alt: ""
                               }
                             }),
-                            _vm._v("Paz y Salvo colegio anterior "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-warning mg-20",
-                                attrs: { href: "#" }
+                            _vm._v(
+                              "Certificados último año cursado\n                  "
+                            ),
+                            _c("input", {
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "file",
+                                name: "picture",
+                                required: ""
                               },
-                              [_vm._v("Cargar")]
-                            )
+                              on: {
+                                change: function($event) {
+                                  return _vm.onFlieChange1(
+                                    $event,
+                                    "last_certificate"
+                                  )
+                                }
+                              }
+                            })
                           ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "form-group align-center letra-p row mx-auto"
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                width: "35px",
+                                src:
+                                  "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0",
+                                alt: ""
+                              }
+                            }),
+                            _vm._v(
+                              "Certificado afiliación a EPS\n                  "
+                            ),
+                            _c("input", {
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "file",
+                                name: "picture",
+                                required: ""
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.onFlieChange1($event, "eps")
+                                }
+                              }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "form-group align-center letra-p row mx-auto"
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                width: "35px",
+                                src:
+                                  "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0",
+                                alt: ""
+                              }
+                            }),
+                            _vm._v("Certificado Médico\n                  "),
+                            _c("input", {
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "file",
+                                name: "picture",
+                                required: ""
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.onFlieChange1(
+                                    $event,
+                                    "medical_certificate"
+                                  )
+                                }
+                              }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "form-group align-center letra-p row mx-auto"
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                width: "35px",
+                                src:
+                                  "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0",
+                                alt: ""
+                              }
+                            }),
+                            _vm._v(
+                              "Certificado laboral de los padres de familia\n                  "
+                            ),
+                            _c("input", {
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "file",
+                                name: "picture",
+                                required: ""
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.onFlieChange1(
+                                    $event,
+                                    "labor_parent"
+                                  )
+                                }
+                              }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "form-group align-center letra-p row mx-auto"
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                width: "35px",
+                                src:
+                                  "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0",
+                                alt: ""
+                              }
+                            }),
+                            _vm._v("Certificado laboral\n                  "),
+                            _c("input", {
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "file",
+                                name: "picture",
+                                required: ""
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.onFlieChange1($event, "labor_son")
+                                }
+                              }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "form-group align-center letra-p row mx-auto"
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                width: "35px",
+                                src:
+                                  "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0",
+                                alt: ""
+                              }
+                            }),
+                            _vm._v(
+                              "Paz y Salvo colegio anterior\n                  "
+                            ),
+                            _c("input", {
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "file",
+                                name: "picture",
+                                required: ""
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.onFlieChange1($event, "paz_salvo")
+                                }
+                              }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-trikele-lg",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.saveDocs()
+                              }
+                            }
+                          },
+                          [_vm._v("Guardar")]
                         )
                       ])
                     ]
@@ -543,15 +692,22 @@ var render = function() {
                                 alt: ""
                               }
                             }),
-                            _vm._v("Video de presentacion del estudiante "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-warning mg-20",
-                                attrs: { href: "#" }
+                            _vm._v(
+                              "Video de presentacion del estudiante\n                  "
+                            ),
+                            _c("input", {
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "file",
+                                name: "picture",
+                                required: ""
                               },
-                              [_vm._v("Cargar")]
-                            )
+                              on: {
+                                change: function($event) {
+                                  return _vm.onFlieChange1($event, "video")
+                                }
+                              }
+                            })
                           ]
                         )
                       ])

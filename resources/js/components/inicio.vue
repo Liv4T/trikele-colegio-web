@@ -48,47 +48,56 @@
         <div class="custom-card text-center">
           <h3 class="card-header fondo">¡BIENVENIDO!</h3>
           <form class="needs-validation" novalidate>
-            <form-wizard title subtitle color="orange" layout="vertical" next-button-text="Siguiente" back-button-text="Atrás" finish-button-text="Finalizar" @on-complete="createNames">
+            <form-wizard title subtitle color="orange" layout="vertical" next-button-text="Siguiente" back-button-text="Atrás" finish-button-text="Finalizar">
               <tab-content title="Documentos requeridos" icon="fas fa-id-card">
                 <h3>Para iniciar con el proceso de matricula debes cargar los siguientes documentos:</h3>
 
                 <div class="card-body pd-20">
                   <div class="form-group align-center letra-p row mx-auto">
                     <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Formulario de admisión
-
-                    <a class="btn btn-warning mg-20" href="#">Cargar</a>
+                    <input type="file" name="picture" class="form-control" @change="onFlieChange1($event, 'form')" required />
                   </div>
 
                   <div class="form-group align-center letra-p row mx-auto">
-                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Cedula de ciudadanía papá y mamá <a class="btn btn-warning mg-20" href="#">Cargar</a>
+                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Cedula de ciudadanía papá y mamá
+                    <input type="file" name="picture" class="form-control" @change="onFlieChange1($event, 'idcard_parent')" required />
                   </div>
                   <div class="form-group align-center letra-p row mx-auto">
-                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Documento de Identidad del estudiante <a class="btn btn-warning mg-20" href="#">Cargar</a>
+                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Documento de Identidad del estudiante
+                    <input type="file" name="picture" class="form-control" @change="onFlieChange1($event, 'idcard_son')" required />
                   </div>
                   <div class="form-group align-center letra-p row mx-auto">
-                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Certificados último año cursado <a class="btn btn-warning mg-20" href="#">Cargar</a>
+                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Certificados último año cursado
+                    <input type="file" name="picture" class="form-control" @change="onFlieChange1($event, 'last_certificate')" required />
                   </div>
                   <div class="form-group align-center letra-p row mx-auto">
-                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Certificado afiliación a EPS <a class="btn btn-warning mg-20" href="#">Cargar</a>
+                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Certificado afiliación a EPS
+                    <input type="file" name="picture" class="form-control" @change="onFlieChange1($event, 'eps')" required />
                   </div>
                   <div class="form-group align-center letra-p row mx-auto">
-                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Certificado Médico <a class="btn btn-warning mg-20" href="#">Cargar</a>
+                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Certificado Médico
+                    <input type="file" name="picture" class="form-control" @change="onFlieChange1($event, 'medical_certificate')" required />
                   </div>
                   <div class="form-group align-center letra-p row mx-auto">
-                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Certificado laboral de los padres de familia <a class="btn btn-warning mg-20" href="#">Cargar</a>
+                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Certificado laboral de los padres de familia
+                    <input type="file" name="picture" class="form-control" @change="onFlieChange1($event, 'labor_parent')" required />
                   </div>
                   <div class="form-group align-center letra-p row mx-auto">
-                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Certificado laboral <a class="btn btn-warning mg-20" href="#">Cargar</a>
+                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Certificado laboral
+                    <input type="file" name="picture" class="form-control" @change="onFlieChange1($event, 'labor_son')" required />
                   </div>
                   <div class="form-group align-center letra-p row mx-auto">
-                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Paz y Salvo colegio anterior <a class="btn btn-warning mg-20" href="#">Cargar</a>
+                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Paz y Salvo colegio anterior
+                    <input type="file" name="picture" class="form-control" @change="onFlieChange1($event, 'paz_salvo')" required />
                   </div>
+                  <a class="btn btn-trikele-lg" @click.prevent="saveDocs()">Guardar</a>
                 </div>
               </tab-content>
               <tab-content title="Video" icon="fas fa-id-card">
                 <div class="card-body">
                   <div class="form-group align-center letra-p row mx-auto">
-                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Video de presentacion del estudiante <a class="btn btn-warning mg-20" href="#">Cargar</a>
+                    <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt />Video de presentacion del estudiante
+                    <input type="file" name="picture" class="form-control" @change="onFlieChange1($event, 'video')" required />
                   </div>
                 </div>
               </tab-content>
@@ -119,6 +128,17 @@ export default {
       page: 1,
       numPages: 0,
       rotate: 0,
+      allowedExtensions: ["pdf", "jpg", "jpeg", "png", "doc", "mp4"],
+      idcard_parent: "",
+      idcard_son: "",
+      form: {},
+      last_certificate: "",
+      eps: "",
+      medical_certificate: "",
+      labor_parent: "",
+      labor_son: "",
+      paz_salvo: "",
+      video: "",
       terminos: [],
     };
   },
@@ -148,6 +168,55 @@ export default {
         .catch((error) => {
           this.errors = error.response.data;
         });
+    },
+    onFlieChange1(e, value) {
+      let file = e.target.files[0];
+      if (value == "form") {
+        this.form = file;
+      } else if (value == "idcard_son") {
+        this.idcard_son = file;
+      } else if (value == "idcard_parent") {
+        this.idcard_parent = file;
+      } else if (value == "last_certificate") {
+        this.last_certificate = file;
+      } else if (value == "eps") {
+        this.eps = file;
+      } else if (value == "medical_certificate") {
+        this.medical_certificate = file;
+      } else if (value == "labor_parent") {
+        this.labor_parent = file;
+      } else if (value == "labor_son") {
+        this.labor_son = file;
+      } else if (value == "paz_salvo") {
+        this.paz_salvo = file;
+      }
+    },
+    saveDocs() {
+      var url = window.location.origin + "/saveLead";
+      let formData = new FormData();
+      // idcard_parent
+      formData.append("idcard_son", this.idcard_son);
+      formData.append("form", this.form);
+      formData.append("last_certificate", this.last_certificate);
+      formData.append("eps", this.eps);
+      formData.append("medical_certificate", this.medical_certificate);
+      formData.append("labor_parent", this.labor_parent);
+      formData.append("labor_son", this.labor_son);
+      formData.append("paz_salvo", this.paz_salvo);
+
+      axios
+        .post(url, formData)
+        .then((response) => {
+          console.log(response.data);
+          this.getAdmisiones();
+        })
+        .catch((error) => {
+          console.log(response.data);
+          this.errors = response.data;
+        });
+    },
+    chooseFile() {
+      $("#file").click();
     },
   },
 };
