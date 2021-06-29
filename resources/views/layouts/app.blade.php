@@ -21,14 +21,15 @@
     src="https://www.facebook.com/tr?id=1141409596328634&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Facebook Pixel Code -->
-     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9YVJXR81KE"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-188981300-1">
+    </script>
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'G-9YVJXR81KE');
+    gtag('config', 'UA-188981300-1');
     </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
