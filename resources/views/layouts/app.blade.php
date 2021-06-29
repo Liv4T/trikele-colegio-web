@@ -33,7 +33,6 @@
     </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="facebook-domain-verification" content="fzn5mgyk9xq1weqb0y8wr0k73mdzum" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Trikele') }}</title>
