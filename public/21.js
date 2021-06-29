@@ -293,7 +293,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.background2 {\r\n  background: url(" + escape(__webpack_require__(/*! ../assets/img/Fondo5.jpg */ "./resources/js/assets/img/Fondo5.jpg")) + ");\r\n  background-size: contain;\r\n  background-repeat: no-repeat;\r\n  background-position: center;\r\n  position: relative;\n}\n.question-module{\r\n  padding:10px;\n}\n.question-module label{\r\n  padding:10px;\n}\n.question-module .q-option{\r\n  background-color:#f2f2f2;\r\n  border-radius:5px;\r\n  padding:5px;\r\n  margin:5px;\r\n  border:1px solid #f2f2f2;\r\n  width:100%;\n}\n.question-module .q-option:hover{\r\n    background-color:#f5e18d;\r\n    cursor:pointer;\n}\n.q-option-checked{\r\n   background-color:#91ffcf !important;\r\n  border-radius:5px;\r\n  padding:5px;\r\n  margin:5px;\r\n  border:1px solid #91ffcf;\n}\r\n", ""]);
+exports.push([module.i, "\n.background2 {\n  background: url(" + escape(__webpack_require__(/*! ../assets/img/Fondo5.jpg */ "./resources/js/assets/img/Fondo5.jpg")) + ");\n  background-size: contain;\n  background-repeat: no-repeat;\n  background-position: center;\n  position: relative;\n}\n.question-module{\n  padding:10px;\n}\n.question-module label{\n  padding:10px;\n}\n.question-module .q-option{\n  background-color:#f2f2f2;\n  border-radius:5px;\n  padding:5px;\n  margin:5px;\n  border:1px solid #f2f2f2;\n  width:100%;\n}\n.question-module .q-option:hover{\n    background-color:#f5e18d;\n    cursor:pointer;\n}\n.q-option-checked{\n   background-color:#91ffcf !important;\n  border-radius:5px;\n  padding:5px;\n  margin:5px;\n  border:1px solid #91ffcf;\n}\n", ""]);
 
 // exports
 

@@ -8,5 +8,5 @@ class Leads extends Model
 {
     protected $table =  'leads';
 
-    protected $fillable = ['name_parent', 'phone_parent', 'email_parent,', 'name_son', 'age', 'grade'];
+    protected $fillable = ['name_parent', 'phone_parent', 'email_parent', 'name_son', 'age', 'grade'];
 }

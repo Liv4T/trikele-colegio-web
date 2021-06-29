@@ -479,7 +479,7 @@ var render = function() {
                                     }
                                   }
                                 }),
-                                _vm._v("%\r\n                    "),
+                                _vm._v("%\n                    "),
                                 _c("span", [
                                   _c(
                                     "a",

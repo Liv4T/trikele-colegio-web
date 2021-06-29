@@ -47,7 +47,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.div-circle{margin:auto;height:60px;width:60px;background-color:#f2f2f2;border-radius:50%;display:flex;justify-content:center;align-items:center;color:#b2b2b2;font-weight:bold;border:3px solid #f2f2f2;box-shadow:1px 1px 1px 1px rgba(0, 0, 0, 0.2);}\n.div-circle.active{background-color:#f79d52;color:white;}\n.title{font-size:0.5em;color:grey;}\n@media (min-width: 1200px) {\n.title{font-size:0.9em;}\n}\n@media (min-width: 992px) {\n.title{font-size:0.9em;}\n}\n@media (min-width: 768px) {\n.title{font-size:0.8em;}\n}\n@media (min-width: 576px) {\n.title{font-size:0.7em;}\n}\r\n", ""]);
+exports.push([module.i, "\n.div-circle{margin:auto;height:60px;width:60px;background-color:#f2f2f2;border-radius:50%;display:flex;justify-content:center;align-items:center;color:#b2b2b2;font-weight:bold;border:3px solid #f2f2f2;box-shadow:1px 1px 1px 1px rgba(0, 0, 0, 0.2);}\n.div-circle.active{background-color:#f79d52;color:white;}\n.title{font-size:0.5em;color:grey;}\n@media (min-width: 1200px) {\n.title{font-size:0.9em;}\n}\n@media (min-width: 992px) {\n.title{font-size:0.9em;}\n}\n@media (min-width: 768px) {\n.title{font-size:0.8em;}\n}\n@media (min-width: 576px) {\n.title{font-size:0.7em;}\n}\n", ""]);
 
 // exports
 

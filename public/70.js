@@ -660,7 +660,7 @@ var render = function() {
                                         value:
                                           t || (!t && _vm.inputs.length > 1),
                                         expression:
-                                          "\r\n                                                        t ||\r\n                                                            (!t &&\r\n                                                                inputs.length >\r\n                                                                    1)\r\n                                                    "
+                                          "\n                                                        t ||\n                                                            (!t &&\n                                                                inputs.length >\n                                                                    1)\n                                                    "
                                       }
                                     ],
                                     staticClass: "badge badge-danger",
@@ -684,7 +684,7 @@ var render = function() {
                                         rawName: "v-show",
                                         value: t == _vm.inputs.length - 1,
                                         expression:
-                                          "\r\n                                                        t == inputs.length - 1\r\n                                                    "
+                                          "\n                                                        t == inputs.length - 1\n                                                    "
                                       }
                                     ],
                                     staticClass: "badge badge-primary",
@@ -819,7 +819,7 @@ var render = function() {
                           _c("div", { attrs: { align: "center" } }, [
                             _c("strong", [
                               _vm._v(
-                                "\r\n                        Logro 1   20%   \r\n                        "
+                                "\n                        Logro 1   20%   \n                        "
                               ),
                               _c(
                                 "button",
@@ -887,7 +887,7 @@ var render = function() {
                           _c("div", { attrs: { align: "center" } }, [
                             _c("strong", [
                               _vm._v(
-                                "\r\n                        Logro 2    40%   \r\n                        "
+                                "\n                        Logro 2    40%   \n                        "
                               ),
                               _c(
                                 "button",
@@ -955,7 +955,7 @@ var render = function() {
                           _c("div", { attrs: { align: "center" } }, [
                             _c("strong", [
                               _vm._v(
-                                "\r\n                        Logro 3    20%   \r\n                        "
+                                "\n                        Logro 3    20%   \n                        "
                               ),
                               _c(
                                 "button",
@@ -1023,7 +1023,7 @@ var render = function() {
                           _c("div", { attrs: { align: "center" } }, [
                             _c("strong", [
                               _vm._v(
-                                "\r\n                        Logro 4    20%   \r\n                        "
+                                "\n                        Logro 4    20%   \n                        "
                               ),
                               _c(
                                 "button",
@@ -1135,7 +1135,7 @@ var render = function() {
                             _c("div", { staticClass: "col-md-6" }, [
                               _c("label", { attrs: { for: "name" } }, [
                                 _vm._v(
-                                  "\r\n                      Unidad    \r\n                      "
+                                  "\n                      Unidad    \n                      "
                                 ),
                                 _c(
                                   "button",

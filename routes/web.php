@@ -589,8 +589,9 @@ Route::middleware('auth')->get('/student/lectives/activities', function () {
     return view('lectivesStudentActivities');
 });
 
-// Archivos cliente
-Route::post('saveLead', 'ClienteController@uploadFile')->name('saveLead');
+/* LEADS */
+Route::post('saveLead', 'ClienteController@saveLead')->name('saveLead');
+Route::post('saveLeadFiles', 'ClienteController@uploadFile')->name('saveLeadFiles');
 
 
 // CLASES

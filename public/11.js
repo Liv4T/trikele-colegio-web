@@ -272,7 +272,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.relationship{\r\n    background-color:#e9ecefb5;\r\n    padding:5px;\n}\n.relationship .icon-remove-button{\r\n  background-color:white;\r\n  height:30px;\r\n  width:100px;\r\n  display:flex;\r\n  flex-direction:row;\r\n  justify-content:center;\r\n  align-items:center;\r\n  cursor:default;\r\n  color:rgb(255, 0, 21);\r\n  font-weight:600;\n}\n.relationship .icon-remove-button:hover{ background-color:#f2f2f2;}\n.relation-container{\r\n    border:2px solid #f2f2f2;\r\n    padding:5px;\r\n    border-radius: 5px;\r\n    min-height:100px;\r\n    text-align: center;\n}\n.relation-container_draggable:hover{\r\n    border:2px solid #aeff44;\r\n    background-color:#ebffd2;\n}\n.relation-container_drop:hover{\r\n    border:2px solid #ffbe44;\r\n    background-color:#ffe7bb;\n}\r\n", ""]);
+exports.push([module.i, "\n.relationship{\n    background-color:#e9ecefb5;\n    padding:5px;\n}\n.relationship .icon-remove-button{\n  background-color:white;\n  height:30px;\n  width:100px;\n  display:flex;\n  flex-direction:row;\n  justify-content:center;\n  align-items:center;\n  cursor:default;\n  color:rgb(255, 0, 21);\n  font-weight:600;\n}\n.relationship .icon-remove-button:hover{ background-color:#f2f2f2;}\n.relation-container{\n    border:2px solid #f2f2f2;\n    padding:5px;\n    border-radius: 5px;\n    min-height:100px;\n    text-align: center;\n}\n.relation-container_draggable:hover{\n    border:2px solid #aeff44;\n    background-color:#ebffd2;\n}\n.relation-container_drop:hover{\n    border:2px solid #ffbe44;\n    background-color:#ffe7bb;\n}\n", ""]);
 
 // exports
 

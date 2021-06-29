@@ -135,7 +135,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.class-inactive{\r\n    margin: 10px;\r\n    font-weight: bold;\r\n    color: #F79D52;\n}\r\n", ""]);
+exports.push([module.i, "\n.class-inactive{\n    margin: 10px;\n    font-weight: bold;\n    color: #F79D52;\n}\n", ""]);
 
 // exports
 

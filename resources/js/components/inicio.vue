@@ -195,6 +195,7 @@ export default {
       var url = window.location.origin + "/saveLead";
       let formData = new FormData();
       // idcard_parent
+      formData.append("idcard_parent", this.idcard_parent);
       formData.append("idcard_son", this.idcard_son);
       formData.append("form", this.form);
       formData.append("last_certificate", this.last_certificate);

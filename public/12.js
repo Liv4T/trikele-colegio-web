@@ -149,7 +149,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.class-active{\r\n    margin: 10px;\r\n    font-weight: bold;\r\n    color: #F79D52;\n}\r\n", ""]);
+exports.push([module.i, "\n.class-active{\n    margin: 10px;\n    font-weight: bold;\n    color: #F79D52;\n}\n", ""]);
 
 // exports
 

@@ -106,7 +106,7 @@ $(".collapse").on("show.bs.collapse", function () {
       /* var urlsel = "editGetWeek";
        axios.get(urlsel).then((response) => {
          this.week = response.data;
-           if (this.week.id_area == area && this.week.id_classroom == classroom) {
+          if (this.week.id_area == area && this.week.id_classroom == classroom) {
            this.semanal = true;
          } else {
            this.semanal = false;
@@ -130,7 +130,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.collapse-row.collapsed + tr {\r\n  display: none;\n}\n.btn.skool {\r\n  background-color: #c1e9eb;\r\n  color: white;\n}\r\n", ""]);
+exports.push([module.i, "\n.collapse-row.collapsed + tr {\n  display: none;\n}\n.btn.skool {\n  background-color: #c1e9eb;\n  color: white;\n}\n", ""]);
 
 // exports
 

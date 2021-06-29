@@ -159,19 +159,19 @@ __webpack_require__.r(__webpack_exports__);
     /*
         uploadQuestionFile(file){
             return new Promise((resolve,reject)=>{
-                  if(!file) resolve();
-                  let _fileNameSplit=file.name.split(".");
+                 if(!file) resolve();
+                 let _fileNameSplit=file.name.split(".");
                 let file_extension=_fileNameSplit[_fileNameSplit.length-1];
                 let file_name=file.name.replace(`.${file_extension}`,'');
                 let file_detail_name=`-editor-content-questions-${this.getRandom(1,9999999)}`;
                 let file_url=`${window.location.origin}/uploads/editor_content/${file_name.split(' ').join('_')}${file_detail_name}.${file_extension}`;
-                  let data = new FormData();
+                 let data = new FormData();
                 data.append("file", file);
                 data.append("name", `${file_name}${file_detail_name}`);
-                   axios.post("/api/file/upload/editor-content", data).then(response => {
+                  axios.post("/api/file/upload/editor-content", data).then(response => {
                       resolve(file_url);
                 }).catch(err=>{reject(err);});
-              });
+             });
         },*/
     getRandom: function getRandom(min, max) {
       return Math.random() * (max - min) + min;
@@ -207,7 +207,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.question{\r\n    background-color:#e9ecefb5;\n}\n.div-icon-add{\r\n  display:flex;\r\n  flex-direction:row;\r\n  justify-content:center;\r\n  align-items:center;\n}\n.icon-remove{\r\n  background-color:#f2f2f2;\r\n  height:30px;\r\n  width:40px;\r\n  border:2px solid #8f8f8f;\r\n  border-radius:5px;\r\n  display:flex;\r\n  flex-direction:row;\r\n  justify-content:center;\r\n  align-items:center;\r\n  cursor:default;\r\n\r\n  font-weight:900;\r\n  background-color:#ffc107;color:white;border-color:#ffc107;\n}\n.icon-remove:hover{ color:#ffc107;background-color:white;border-color:#ffc107;}\n.icon-add{\r\n  background-color:#233d68;\r\n  height:30px;\r\n  width:40px;\r\n  border:2px solid #233d68;\r\n  border-radius:5px;\r\n  display:flex;\r\n  flex-direction:row;\r\n  justify-content:center;\r\n  align-items:center;\r\n  cursor:default;\r\n\r\n  font-weight:900;\r\n  color:white;\n}\r\n/*Text Editor*/\n.editor{ border: 1px solid #ced4da;background-color:white;border-radius: 0.25rem;}\n.codex-editor__redactor{\r\n    padding-bottom: 50px !important;\n}\n.visor{border:1px solid #7b7b7b;}\n.question_container{font-family: \"Century Gothic\";width: 100%;padding:10px 20px;font-weight: 600;font-size:1.2em;border-radius:4px;}\n.q-option {\r\n    background-color: white;\r\n    border-radius: 5px;\r\n    padding: 10px 20px;\r\n    margin: 5px;\r\n    border: 1px solid #f2f2f2;\r\n    width: 100%;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-direction: row;\r\n    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);\n}\n.q-option:hover {\r\n    background-color: #ffe7a0;\r\n    cursor: pointer;\n}\n.q-option-checked {\r\n    background-color: #007bff !important;\r\n    color: white;\r\n    box-shadow: none;\n}\n.question-answer{\r\n    padding:10px;\r\n    background-color:white;\r\n    border-radius:5px;\n}\r\n", ""]);
+exports.push([module.i, "\n.question{\n    background-color:#e9ecefb5;\n}\n.div-icon-add{\n  display:flex;\n  flex-direction:row;\n  justify-content:center;\n  align-items:center;\n}\n.icon-remove{\n  background-color:#f2f2f2;\n  height:30px;\n  width:40px;\n  border:2px solid #8f8f8f;\n  border-radius:5px;\n  display:flex;\n  flex-direction:row;\n  justify-content:center;\n  align-items:center;\n  cursor:default;\n\n  font-weight:900;\n  background-color:#ffc107;color:white;border-color:#ffc107;\n}\n.icon-remove:hover{ color:#ffc107;background-color:white;border-color:#ffc107;}\n.icon-add{\n  background-color:#233d68;\n  height:30px;\n  width:40px;\n  border:2px solid #233d68;\n  border-radius:5px;\n  display:flex;\n  flex-direction:row;\n  justify-content:center;\n  align-items:center;\n  cursor:default;\n\n  font-weight:900;\n  color:white;\n}\n/*Text Editor*/\n.editor{ border: 1px solid #ced4da;background-color:white;border-radius: 0.25rem;}\n.codex-editor__redactor{\n    padding-bottom: 50px !important;\n}\n.visor{border:1px solid #7b7b7b;}\n.question_container{font-family: \"Century Gothic\";width: 100%;padding:10px 20px;font-weight: 600;font-size:1.2em;border-radius:4px;}\n.q-option {\n    background-color: white;\n    border-radius: 5px;\n    padding: 10px 20px;\n    margin: 5px;\n    border: 1px solid #f2f2f2;\n    width: 100%;\n    display: flex;\n    justify-content: space-between;\n    flex-direction: row;\n    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);\n}\n.q-option:hover {\n    background-color: #ffe7a0;\n    cursor: pointer;\n}\n.q-option-checked {\n    background-color: #007bff !important;\n    color: white;\n    box-shadow: none;\n}\n.question-answer{\n    padding:10px;\n    background-color:white;\n    border-radius:5px;\n}\n", ""]);
 
 // exports
 
