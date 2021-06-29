@@ -6,6 +6,7 @@
     <link rel="shortcat icon" href="images/icon.png" />
     @if(request()->getScheme()=="https")
     <!-- Facebook Pixel Code -->
+    <meta name="facebook-domain-verification" content="inzmp346eb3hl8bmbpn6lhttcpvd9k" />
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
