@@ -5,6 +5,7 @@
     <meta name="keywords" content="Bachillerato por ciclos,Bachillerato,Colegio,Colegio por ciclos,2 grados en 1 año"/>
     <link rel="shortcat icon" href="images/icon.png" />
     <!-- Facebook Pixel Code -->
+    <meta name="facebook-domain-verification" content="inzmp346eb3hl8bmbpn6lhttcpvd9k" />
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
