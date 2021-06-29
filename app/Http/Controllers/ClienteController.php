@@ -311,15 +311,51 @@ class ClienteController extends Controller
         $user = Auth::user();
         $validDocuments = ClientDocuments::where('id_user',$user->id)->get();
         if($validDocuments){
-            $validDocuments->form = ($form_file == 0) ? $validDocuments->form: $formFilePath;
-            $validDocuments->idcard_parent = ($idcard_parent_file == 0) ? $validDocuments->idcard_parent: $idcard_parentFilePath;
-            $validDocuments->idcard_son = ($idcard_son_file == 0)? $validDocuments->idcard_son : $idcard_sonFilePath;
-            $validDocuments->last_certificate = ($last_certificate_file == 0)? $validDocuments->last_certificate : $last_certificateFilePath;
-            $validDocuments->eps = ($eps_file == 0)? $validDocuments->eps : $epsFilePath;
-            $validDocuments->medical_certificate = ($medical_certificate_file == 0)? $validDocuments->medical_certificate : $medical_certificateFilePath;
-            $validDocuments->labor_parent = ($labor_parent_file == 0)? $validDocuments->labor_parent : $labor_parentFilePath;
-            $validDocuments->labor_son = ($labor_son_file == 0)? $validDocuments->labor_son : $labor_sonFilePath;
-            $validDocuments->paz_salvo = ($paz_salvo_file == 0)? $validDocuments->paz_salvo : $paz_salvoFilePath;
+            if($form_file == 1){
+                $filenameDeleteform = url('uploads/documentos_clientes/' . $validDocuments->form);
+                \File::delete($filenameDeleteform);
+                $validDocuments->form =  $formFilePath;
+            }
+            if($idcard_parent_file == 1){
+                $filenameDeleteidcard_parent = url('uploads/documentos_clientes/' . $validDocuments->idcard_parent);
+                \File::delete($filenameDeleteidcard_parent);
+                $validDocuments->idcard_parent =  $idcard_parentFilePath;
+            }
+            if($idcard_son_file == 1){
+                $filenameDeleteidcard_son = url('uploads/documentos_clientes/' . $validDocuments->idcard_son);
+                \File::delete($filenameDeleteidcard_son);
+                $validDocuments->idcard_son = $idcard_sonFilePath;
+            }
+            if($last_certificate_file == 1){
+                $filenameDeletelast_certificate = url('uploads/documentos_clientes/' . $validDocuments->last_certificate);
+                \File::delete($filenameDeletelast_certificate);
+                $validDocuments->last_certificate = $last_certificateFilePath;
+            }
+            if($eps_file == 1){
+                $filenameDeleteeps = url('uploads/documentos_clientes/' . $validDocuments->eps);
+                \File::delete($filenameDeleteeps);
+                $validDocuments->eps = $epsFilePath;
+            }
+            if($medical_certificate_file == 1){
+                $filenameDeletemedical_certificate = url('uploads/documentos_clientes/' . $validDocuments->medical_certificate);
+                \File::delete($filenameDeletemedical_certificate);
+                $validDocuments->medical_certificate = $medical_certificateFilePath;
+            }
+            if($labor_parent_file == 1){
+                $filenameDeletelabor_parent = url('uploads/documentos_clientes/' . $validDocuments->labor_parent);
+                \File::delete($filenameDeletelabor_parent);
+                $validDocuments->labor_parent = $labor_parentFilePath;
+            }
+            if($labor_son_file == 1){
+                $filenameDeletelabor_son = url('uploads/documentos_clientes/' . $validDocuments->labor_son);
+                \File::delete($filenameDeletelabor_son);
+                $validDocuments->labor_son = $labor_sonFilePath;
+            }
+            if($paz_salvo_file == 1){
+                $filenameDeletepaz_salvo = url('uploads/documentos_clientes/' . $validDocuments->paz_salvo);
+                \File::delete($filenameDeletepaz_salvo);
+                $validDocuments->paz_salvo = $paz_salvoFilePath;
+            }
             $validDocuments->save();
             return "ok";
         }else{
@@ -356,6 +392,48 @@ class ClienteController extends Controller
             $fileName = strtr($fileName_1, " ", "_");
             // file with path
             $filePath = url('up "-" . $Time .loads/clases/' . $fileName . $number . "." . $extension);
+            //Move Uploaded File
+            $destinationPath = 'uploads/clases/';
+            if ($extension == "flv" || $extension == "mp4" || $extension == "m3u8" || $extension == "ts" || $extension == "3gp" || $extension == "mov" || $extension == "avi" || $extension == "wmv") {
+                $type = 2;
+            } else {
+                $type = 1;
+            }
+            //se elimina el archivo anterior
+            $filenameDelete = url('uploads/clases/' . $fileName . $number . "." . $extension);
+            \File::delete($filenameDelete);
+            //se añade el nuevo archivo
+            if ($file->move($destinationPath, $fileName . $number . "." . $extension)) {
+                $files_prevoiusly = Files::where('path', $filePath)->orderBy('id', 'DESC')->first();
+                if (isset($files_prevoiusly)) {
+                    $files_prevoiusly->delete();
+                }
+                $file = Files::create([
+                    'path' => $filePath,
+                    'unit' => $fileName_1,
+                    'type' => $type,
+                ]);
+                return "ok";
+            }
+            return "error";
+        }
+    }
+
+    public function uploadFileUpdate(Request $request)
+    {
+        // return $request;
+        $file = request('file');
+        // dd($file);
+        if (!empty($file)) {
+            $fileName = $file->getClientOriginalName();
+            $div_file_name = explode(".", $fileName);
+            $div_file_name = end($div_file_name);
+            $extension = $div_file_name;
+            $fileName_1 = request('name');
+            $number = request('count');
+            $fileName = strtr($fileName_1, " ", "_");
+            // file with path
+            $filePath = url('uploads/clases/' . $fileName . $number . "." . $extension);
             //Move Uploaded File
             $destinationPath = 'uploads/clases/';
             if ($extension == "flv" || $extension == "mp4" || $extension == "m3u8" || $extension == "ts" || $extension == "3gp" || $extension == "mov" || $extension == "avi" || $extension == "wmv") {
