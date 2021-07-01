@@ -49,7 +49,7 @@
           <h3 class="card-header fondo">¡BIENVENIDO!</h3>
           <form class="needs-validation" novalidate>
             <form-wizard title subtitle color="orange" layout="vertical" next-button-text="Siguiente" back-button-text="Atrás" finish-button-text="Finalizar">
-              <tab-content title="Documentos requeridos" icon="fas fa-id-card">
+              <tab-content title="Documentos requeridos">
                 <h3>Para iniciar con el proceso de matricula debes cargar los siguientes documentos:</h3>
 
                 <div class="card-body pd-20">
@@ -131,7 +131,7 @@ export default {
       allowedExtensions: ["pdf", "jpg", "jpeg", "png", "doc", "mp4"],
       idcard_parent: "",
       idcard_son: "",
-      form: {},
+      form: "",
       last_certificate: "",
       eps: "",
       medical_certificate: "",
@@ -192,7 +192,7 @@ export default {
       }
     },
     saveDocs() {
-      var url = window.location.origin + "/saveLead";
+      var url = window.location.origin + "/saveLeadFiles";
       let formData = new FormData();
       // idcard_parent
       formData.append("idcard_parent", this.idcard_parent);

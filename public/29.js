@@ -81,44 +81,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 (function () {
   "use strict";
 
@@ -374,7 +336,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.alertaPass {\n  color: red;\n}\n.pd-20 {\n  padding-left: 7em;\n}\n.align-center {\n  align-items: center;\n}\n.letra-p {\n  font-size: 20px;\n}\n", ""]);
+exports.push([module.i, "\n.alertaPass {\n  color: red;\n}\n.pd-20 {\n  padding-left: 7em;\n}\n.align-center {\n  align-items: center;\n}\n.letra-p {\n  font-size: 20px;\n}\n.vue-form-wizard #step-Bienvenida0 .wizard-icon-container {\n  background-image: url(\"http://localhost:8000/uploads/home/MATRÍCULA-Y-ADMISIONES1.png\") !important;\n  background-size: 110px;\n  background-repeat: no-repeat;\n  background-position: right;\n  background-color: transparent !important;\n}\n.vue-form-wizard.md .wizard-icon-circle {\n  width: 120px;\n  height: 120px;\n  font-size: 24px;\n  background-image: url(\"http://localhost:8000/uploads/home/MATRÍCULA-Y-ADMISIONES1.png\");\n  background-size: 110px;\n  background-repeat: no-repeat;\n  background-position: right;\n  border-color: transparent !important;\n}\n.vue-form-wizard #step-Documentosrequeridos2 .wizard-icon-container {\n  background-image: url(\"http://localhost:8000/uploads/home/MATRÍCULA-Y-ADMISIONES2.png\") !important;\n  background-size: 110px;\n  background-repeat: no-repeat;\n  background-position: right;\n  background-color: transparent !important;\n}\n.vue-form-wizard.md #step-Documentosrequeridos2 {\n  background-image: url(\"http://localhost:8000/uploads/home/MATRÍCULA-Y-ADMISIONES2.png\") !important;\n  background-size: 110px;\n  background-repeat: no-repeat;\n  background-position: right;\n  background-color: transparent !important;\n}\n", ""]);
 
 // exports
 
@@ -453,51 +415,45 @@ var render = function() {
                   on: { "on-complete": _vm.createNames }
                 },
                 [
-                  _c(
-                    "tab-content",
-                    { attrs: { title: "Bienvenida", icon: "fas fa-user" } },
-                    [
-                      _c("div", { staticClass: "card-body pd-20" }, [
-                        _c("h3", { staticClass: "row" }, [
-                          _vm._v("ADMISIONES")
-                        ]),
-                        _vm._v(" "),
-                        _c("h3", { staticClass: "row" }, [
-                          _vm._v("¡BIENVENIDO!")
-                        ]),
-                        _vm._v(" "),
-                        _c("h4", { staticClass: "row" }, [
-                          _vm._v("Proceso de admisión en 5 sencillos pasos:")
-                        ]),
-                        _vm._v(" "),
-                        _c("h5", { staticClass: "row" }, [
-                          _vm._v("1.Información de documentos requeridos")
-                        ]),
-                        _vm._v(" "),
-                        _c("h5", { staticClass: "row" }, [
-                          _vm._v(
-                            "2.Compra y descarga el formulario de inscripción."
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("h5", { staticClass: "row" }, [
-                          _vm._v(
-                            "3.Entregar formulario de inscripción y documentos"
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("h5", { staticClass: "row" }, [
-                          _vm._v(
-                            "4.Entregar video de presentación del estudiante"
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("h5", { staticClass: "row" }, [
-                          _vm._v("5.Matricular en fecha y hora asignada.")
-                        ])
+                  _c("tab-content", { attrs: { title: "Bienvenida" } }, [
+                    _c("div", { staticClass: "card-body pd-20" }, [
+                      _c("h3", { staticClass: "row" }, [_vm._v("ADMISIONES")]),
+                      _vm._v(" "),
+                      _c("h3", { staticClass: "row" }, [
+                        _vm._v("¡BIENVENIDO!")
+                      ]),
+                      _vm._v(" "),
+                      _c("h4", { staticClass: "row" }, [
+                        _vm._v("Proceso de admisión en 5 sencillos pasos:")
+                      ]),
+                      _vm._v(" "),
+                      _c("h5", { staticClass: "row" }, [
+                        _vm._v("1.Información de documentos requeridos")
+                      ]),
+                      _vm._v(" "),
+                      _c("h5", { staticClass: "row" }, [
+                        _vm._v(
+                          "2.Compra y descarga el formulario de inscripción."
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("h5", { staticClass: "row" }, [
+                        _vm._v(
+                          "3.Entregar formulario de inscripción y documentos"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("h5", { staticClass: "row" }, [
+                        _vm._v(
+                          "4.Entregar video de presentación del estudiante"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("h5", { staticClass: "row" }, [
+                        _vm._v("5.Matricular en fecha y hora asignada.")
                       ])
-                    ]
-                  ),
+                    ])
+                  ]),
                   _vm._v(" "),
                   _c(
                     "tab-content",
@@ -704,156 +660,10 @@ var render = function() {
           )
         ])
       ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "modal fade", attrs: { id: "editu" } }, [
-      _c("div", { staticClass: "modal-dialog" }, [
-        _c("div", { staticClass: "modal-content" }, [
-          _c(
-            "form",
-            {
-              staticClass: "needs-validation",
-              attrs: { novalidate: "" },
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.createEvent($event)
-                }
-              }
-            },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c(
-                  "div",
-                  { staticClass: "form-group row justify-content-center" },
-                  [
-                    _c("div", { staticClass: "col-md-10" }, [
-                      _c("label", { attrs: { for: "name" } }, [
-                        _vm._v("Nombre del evento")
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.nameEvent,
-                            expression: "nameEvent"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text", name: "name" },
-                        domProps: { value: _vm.nameEvent },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.nameEvent = $event.target.value
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v("Please fill out this field")
-                      ])
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _c(
-                    "div",
-                    { staticClass: "col" },
-                    [
-                      _c("label", { attrs: { for: "name" } }, [
-                        _vm._v("Desde")
-                      ]),
-                      _vm._v(" "),
-                      _c("datetime", {
-                        attrs: { format: "YYYY-MM-DD H:i:s", width: "200px" },
-                        model: {
-                          value: _vm.desde,
-                          callback: function($$v) {
-                            _vm.desde = $$v
-                          },
-                          expression: "desde"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v("Please fill out this field")
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col" },
-                    [
-                      _c("label", { attrs: { for: "name" } }, [
-                        _vm._v("Hasta")
-                      ]),
-                      _vm._v(" "),
-                      _c("datetime", {
-                        attrs: { format: "YYYY-MM-DD H:i:s", width: "200px" },
-                        model: {
-                          value: _vm.hasta,
-                          callback: function($$v) {
-                            _vm.hasta = $$v
-                          },
-                          expression: "hasta"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "invalid-feedback" })
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
-                _vm._m(1)
-              ])
-            ]
-          )
-        ])
-      ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("h4", [_vm._v("Crear evento")]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_c("span", [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c("input", {
-        staticClass: "btn btn-warning",
-        attrs: { type: "submit", value: "Guardar" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

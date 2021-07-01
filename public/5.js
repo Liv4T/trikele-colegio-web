@@ -142,7 +142,7 @@ __webpack_require__.r(__webpack_exports__);
       allowedExtensions: ["pdf", "jpg", "jpeg", "png", "doc", "mp4"],
       idcard_parent: "",
       idcard_son: "",
-      form: {},
+      form: "",
       last_certificate: "",
       eps: "",
       medical_certificate: "",
@@ -207,9 +207,10 @@ __webpack_require__.r(__webpack_exports__);
     saveDocs: function saveDocs() {
       var _this3 = this;
 
-      var url = window.location.origin + "/saveLead";
+      var url = window.location.origin + "/saveLeadFiles";
       var formData = new FormData(); // idcard_parent
 
+      formData.append("idcard_parent", this.idcard_parent);
       formData.append("idcard_son", this.idcard_son);
       formData.append("form", this.form);
       formData.append("last_certificate", this.last_certificate);
@@ -247,7 +248,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .back-calendar {\n  padding-left: 290px;\n} */\n.pd-20 {\n  padding-left: 7em;\n}\n.align-center {\n  align-items: center;\n}\n.letra-p {\n  font-size: 20px;\n}\n.mg-20 {\n  margin: 10px;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .back-calendar {\n  padding-left: 290px;\n} */\n.pd-20 {\n  padding-left: 7em;\n}\n.align-center {\n  align-items: center;\n}\n.letra-p {\n  font-size: 20px;\n}\n.mg-20 {\n  margin: 10px;\n}\n", ""]);
 
 // exports
 
@@ -327,12 +328,7 @@ var render = function() {
                 [
                   _c(
                     "tab-content",
-                    {
-                      attrs: {
-                        title: "Documentos requeridos",
-                        icon: "fas fa-id-card"
-                      }
-                    },
+                    { attrs: { title: "Documentos requeridos" } },
                     [
                       _c("h3", [
                         _vm._v(

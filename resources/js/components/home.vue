@@ -314,7 +314,7 @@
                       </div>
                     </div>
                     <div class="text-center">
-                      <a class="btn btn-lg btn-warning" href="/matricula">EMPEZAR</a>
+                      <a class="btn btn-lg btn-warning" @click.prevent="saveLead1()">EMPEZAR</a>
                     </div>
                   </form>
                 </div>
@@ -486,7 +486,7 @@ export default {
     modalmatricula() {
       $("#myModal2").modal("show");
     },
-    saveLead() {
+    saveLead1() {
       if (this.nameParent != "" && this.nameSon != "" && this.email != "" && this.phone != "") {
         var url = window.location.origin + "/saveLead";
         axios
