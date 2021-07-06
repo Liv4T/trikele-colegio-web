@@ -3,14 +3,14 @@
     <div class="seccion desktop1">
       <div class="form-group">
         <a href="/ciclos">
-          <img src="uploads/home/5.png" width="100%" />
+          <img src="uploads/home/23.png" width="100%" />
         </a>
       </div>
     </div>
     <div class="mobile1">
       <div class="form-group">
         <a href="/ciclos">
-          <img src="uploads/home/mobile-1.png" width="100%" />
+          <img src="uploads/home/24.png" width="100%" />
         </a>
       </div>
     </div>
