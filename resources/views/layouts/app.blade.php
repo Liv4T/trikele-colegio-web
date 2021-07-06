@@ -4,6 +4,7 @@
     <meta name="description" content="Bachillerato por ciclos,Bachillerato,Colegio,Colegio por ciclos,2 grados en 1 año"/>
     <meta name="keywords" content="Bachillerato por ciclos,Bachillerato,Colegio,Colegio por ciclos,2 grados en 1 año"/>
     <link rel="shortcat icon" href="images/icon.png" />
+    @if(request()->getScheme()=="https")
     <!-- Facebook Pixel Code -->
     <meta name="facebook-domain-verification" content="inzmp346eb3hl8bmbpn6lhttcpvd9k" />
     <script>
@@ -32,12 +33,13 @@
 
     gtag('config', 'UA-188981300-1');
     </script>
+    <meta name="facebook-domain-verification" content="fzn5mgyk9xq1weqb0y8wr0k73mdzum" />
+    @endif
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Trikele') }}</title>
-
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://kit.fontawesome.com/a72f7eba65.js" crossorigin="anonymous"></script>

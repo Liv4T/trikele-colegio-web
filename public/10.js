@@ -1,14 +1,15 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[10],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/activityQuestionaryComponent.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/activityQuestionaryComponent.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/activityCrosswordComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/activityCrosswordComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue2_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue2-editor */ "./node_modules/vue2-editor/dist/vue2-editor.esm.js");
 //
 //
 //
@@ -104,101 +105,249 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['module', 'disabled', 'playing'],
   data: function data() {
     return {
-      question_types: [{
-        label: 'RESPUESTA ÚNICA',
-        id: 'SIMPLE_RTA'
-      }, {
-        label: 'RESPUESTA ABIERTA',
-        id: 'OPEN_RTA'
-      }]
+      loading_component: true,
+      rows: 15,
+      cols: 15,
+      table: [],
+      words: []
     };
   },
-  methods: {
-    AddQuestionEvent: function AddQuestionEvent() {
-      this.module.questions.push({
-        question: "",
-        type_question: 'SIMPLE_RTA',
-        options: [{
-          content: ''
-        }, {
-          content: ''
-        }],
-        valid_answer_index: 0,
-        justify: ""
-      });
-    },
-    RemoveQuestionEvent: function RemoveQuestionEvent(index) {
-      this.module.questions.splice(index, 1);
-    },
-    AddOptionOnQuestion: function AddOptionOnQuestion(index) {
-      this.module.questions[index].options.push({
-        content: ''
-      });
-    },
-    RemoveOptionOnQuestion: function RemoveOptionOnQuestion(index_question, index) {
-      this.module.questions[index_question].options.splice(index, 1);
-    },
+  mounted: function mounted() {
+    var _this = this;
 
-    /*
-        uploadQuestionFile(file){
-            return new Promise((resolve,reject)=>{
-                  if(!file) resolve();
-                  let _fileNameSplit=file.name.split(".");
-                let file_extension=_fileNameSplit[_fileNameSplit.length-1];
-                let file_name=file.name.replace(`.${file_extension}`,'');
-                let file_detail_name=`-editor-content-questions-${this.getRandom(1,9999999)}`;
-                let file_url=`${window.location.origin}/uploads/editor_content/${file_name.split(' ').join('_')}${file_detail_name}.${file_extension}`;
-                  let data = new FormData();
-                data.append("file", file);
-                data.append("name", `${file_name}${file_detail_name}`);
-                   axios.post("/api/file/upload/editor-content", data).then(response => {
-                      resolve(file_url);
-                }).catch(err=>{reject(err);});
+    if (this.module.table === undefined || this.module.table.length == 0) {
+      this.module.table = [];
+      this.table = [];
+
+      for (var r = 0; r < this.rows; r++) {
+        var cols = [];
+
+        for (var c = 0; c < this.cols; c++) {
+          cols.push({
+            index: c,
+            letter: ''
+          });
+        }
+
+        this.table.push({
+          index: r,
+          cols: cols
+        });
+        cols = [];
+      }
+    } else {
+      this.table = [];
+      this.words = this.module.words;
+      this.module.table.forEach(function (r) {
+        var col = [];
+        r.cols.forEach(function (c) {
+          if (c.letter == null) {
+            c.letter = '';
+            c.response = '';
+            c.title = false;
+          }
+
+          col.push(c);
+        });
+        r.cols = col;
+
+        _this.table.push(r);
+      });
+      this.validateWords();
+
+      if (this.playing) {
+        var w_i = 1;
+        this.words.forEach(function (w) {
+          if (w.letters[0].r == w.letters[1].r) {
+            var _c = w.letters[0].c - 1;
+
+            _this.table[w.letters[0].r].cols[_c] = {
+              letter: w_i,
+              response: w_i,
+              title: true
+            };
+          } else {
+            var _r = w.letters[0].r - 1;
+
+            _this.table[_r].cols[w.letters[0].c] = {
+              letter: w_i,
+              response: w_i,
+              title: true
+            };
+          }
+
+          w_i++;
+        });
+      }
+    }
+
+    this.loadingComponent();
+  },
+  methods: {
+    loadingComponent: function loadingComponent() {
+      var _this2 = this;
+
+      this.loading_component = true;
+      setTimeout(function () {
+        _this2.loading_component = false;
+      }, 1000);
+    },
+    downEvent: function downEvent(k_row, k_col) {
+      if (this.cols == k_col + 1) return;
+      var refs = this.$refs;
+      var input = '';
+      eval('input=refs.input_' + k_row + '_' + (k_col + 1));
+      if (!input || input.length == 0) return;
+      input[0].focus();
+      input[0].select();
+    },
+    rightEvent: function rightEvent(k_row, k_col) {
+      if (this.rows == k_row + 1) return;
+      var refs = this.$refs;
+      var input = '';
+      eval('input=refs.input_' + (k_row + 1) + '_' + k_col);
+      if (!input || input.length == 0) return;
+      input[0].focus();
+      input[0].select();
+    },
+    topEvent: function topEvent(k_row, k_col) {
+      if (0 == k_col) return;
+      var refs = this.$refs;
+      var input = '';
+      eval('input=refs.input_' + k_row + '_' + (k_col - 1));
+      if (!input || input.length == 0) return;
+      input[0].focus();
+      input[0].select();
+    },
+    leftEvent: function leftEvent(k_row, k_col) {
+      if (0 == k_row) return;
+      var refs = this.$refs;
+      var input = '';
+      eval('input=refs.input_' + (k_row - 1) + '_' + k_col);
+      if (!input || input.length == 0) return;
+      input[0].focus();
+      input[0].select();
+    },
+    InputChanged: function InputChanged(k_row, k_col) {
+      this.module.table = this.table;
+    },
+    InputResponseChanged: function InputResponseChanged(k_row, k_col) {
+      this.module.table = this.table;
+      this.validateResponse();
+    },
+    validateWords: function validateWords() {
+      var word = '';
+      var existLetter = false;
+      var letters = [];
+
+      for (var r = 0; r < this.rows; r++) {
+        for (var c = 0; c < this.cols; c++) {
+          var cell = this.table[r].cols[c];
+          word += cell.letter;
+          letters.push({
+            r: r,
+            c: c
+          });
+
+          if (cell.letter != '' && !existLetter) {
+            word = cell.letter;
+            letters = [{
+              r: r,
+              c: c
+            }];
+          } else if (cell.letter == '' && existLetter && word.length > 1) {
+            if (this.words.filter(function (p) {
+              return p.word === word.trim();
+            }).length == 0) {
+              this.words.push({
+                word: word,
+                content: '',
+                letters: letters
               });
-        },*/
-    getRandom: function getRandom(min, max) {
-      return Math.random() * (max - min) + min;
+            }
+
+            existLetter = false;
+            word = '';
+            letters = [];
+          }
+
+          existLetter = cell.letter != '';
+        }
+      }
+
+      for (var _c2 = 0; _c2 < this.cols; _c2++) {
+        for (var _r2 = 0; _r2 < this.rows; _r2++) {
+          var _cell = this.table[_r2].cols[_c2];
+          word += _cell.letter;
+          letters.push({
+            r: _r2,
+            c: _c2
+          });
+
+          if (_cell.letter != '' && !existLetter) {
+            word = _cell.letter;
+            letters = [{
+              r: _r2,
+              c: _c2
+            }];
+          } else if (_cell.letter == '' && existLetter && word.length > 1) {
+            if (this.words.filter(function (p) {
+              return p.word === word.trim();
+            }).length == 0) {
+              this.words.push({
+                word: word,
+                content: '',
+                letters: letters
+              });
+            }
+
+            existLetter = false;
+            word = '';
+            letters = [];
+          }
+
+          existLetter = _cell.letter != '';
+        }
+      }
+
+      if (this.words.length == 0) {
+        alert('Por favor ingrese las palabras del crucigrama en la tabla.');
+      } else {
+        this.module.words = this.words;
+        this.module.table = this.table;
+      }
     },
-    SetQuestionEvent: function SetQuestionEvent(content, ix_question) {
-      this.module.questions[ix_question].question = content;
+    validateResponse: function validateResponse() {
+      var _this3 = this;
+
+      this.words.forEach(function (w) {
+        w.response = '';
+        w.letters.forEach(function (l) {
+          if (_this3.table[l.r].cols[l.c].response) {
+            w.response += _this3.table[l.r].cols[l.c].response;
+          }
+        });
+      });
+      this.module.words = this.words;
     },
-    SetJustifyEvent: function SetJustifyEvent(content, ix_question) {
-      this.module.questions[ix_question].justify = content;
-    },
-    SetResponseEvent: function SetResponseEvent(content, ix_question) {
-      this.module.questions[ix_question].response = content;
-    },
-    SelectOptionEvent: function SelectOptionEvent(ix_question, ix_option) {
-      this.module.questions[ix_question].response = ix_option;
-      this.module.questions = JSON.parse(JSON.stringify(this.module.questions));
-      console.log(this.module.questions[ix_question]);
+    SetWordContentEvent: function SetWordContentEvent(content, k_word) {
+      this.words[k_word].content = content;
+      this.module.words = this.words;
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/activityQuestionaryComponent.vue?vue&type=style&index=0&lang=css&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/activityQuestionaryComponent.vue?vue&type=style&index=0&lang=css& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/activityCrosswordComponent.vue?vue&type=style&index=0&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/activityCrosswordComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -207,22 +356,22 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.question{\r\n    background-color:#e9ecefb5;\n}\n.div-icon-add{\r\n  display:flex;\r\n  flex-direction:row;\r\n  justify-content:center;\r\n  align-items:center;\n}\n.icon-remove{\r\n  background-color:#f2f2f2;\r\n  height:30px;\r\n  width:40px;\r\n  border:2px solid #8f8f8f;\r\n  border-radius:5px;\r\n  display:flex;\r\n  flex-direction:row;\r\n  justify-content:center;\r\n  align-items:center;\r\n  cursor:default;\r\n\r\n  font-weight:900;\r\n  background-color:#ffc107;color:white;border-color:#ffc107;\n}\n.icon-remove:hover{ color:#ffc107;background-color:white;border-color:#ffc107;}\n.icon-add{\r\n  background-color:#233d68;\r\n  height:30px;\r\n  width:40px;\r\n  border:2px solid #233d68;\r\n  border-radius:5px;\r\n  display:flex;\r\n  flex-direction:row;\r\n  justify-content:center;\r\n  align-items:center;\r\n  cursor:default;\r\n\r\n  font-weight:900;\r\n  color:white;\n}\r\n/*Text Editor*/\n.editor{ border: 1px solid #ced4da;background-color:white;border-radius: 0.25rem;}\n.codex-editor__redactor{\r\n    padding-bottom: 50px !important;\n}\n.visor{border:1px solid #7b7b7b;}\n.question_container{font-family: \"Century Gothic\";width: 100%;padding:10px 20px;font-weight: 600;font-size:1.2em;border-radius:4px;}\n.q-option {\r\n    background-color: white;\r\n    border-radius: 5px;\r\n    padding: 10px 20px;\r\n    margin: 5px;\r\n    border: 1px solid #f2f2f2;\r\n    width: 100%;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-direction: row;\r\n    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);\n}\n.q-option:hover {\r\n    background-color: #ffe7a0;\r\n    cursor: pointer;\n}\n.q-option-checked {\r\n    background-color: #007bff !important;\r\n    color: white;\r\n    box-shadow: none;\n}\n.question-answer{\r\n    padding:10px;\r\n    background-color:white;\r\n    border-radius:5px;\n}\r\n", ""]);
+exports.push([module.i, "\n.crossword{\r\n    background-color:#e9ecefb5;\r\n    padding:5px;\n}\n.crossword_table{\r\n    width:100%;\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.crossword_table_row{\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.crossword_table_col{\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: center;\r\n    align-items: center;\r\n    border:1px solid #e2e2e2;\n}\n.crossword_table_col_input{\r\n    width:40px;\r\n    height: 40px;\r\n    text-align: center;\r\n    border:2px solid #fff;\r\n    text-transform: uppercase;\n}\n.crossword_table_col_input-active\r\n{\r\n    border:2px solid #4b87f7;\n}\n.crossword_table_col_resp_input{\r\n  width:40px;\r\n  height: 40px;\r\n  padding:1px;\n}\n.crossword_table_col_resp_input-active\r\n{\r\n    border:1px solid #4b87f7;\n}\r\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/activityQuestionaryComponent.vue?vue&type=style&index=0&lang=css&":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/activityQuestionaryComponent.vue?vue&type=style&index=0&lang=css& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/activityCrosswordComponent.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/activityCrosswordComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./activityQuestionaryComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/activityQuestionaryComponent.vue?vue&type=style&index=0&lang=css&");
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./activityCrosswordComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/activityCrosswordComponent.vue?vue&type=style&index=0&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -244,10 +393,10 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/activityQuestionaryComponent.vue?vue&type=template&id=c6902e56&":
-/*!*******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/activityQuestionaryComponent.vue?vue&type=template&id=c6902e56& ***!
-  \*******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/activityCrosswordComponent.vue?vue&type=template&id=1f48e3cd&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/activityCrosswordComponent.vue?vue&type=template&id=1f48e3cd& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -259,466 +408,544 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "row question" }, [
-      _c(
-        "div",
-        { staticClass: "col-12" },
-        [
-          _c("div", { staticClass: "row" }, [
+  return _c(
+    "section",
+    { staticClass: "crossword" },
+    [
+      !_vm.playing
+        ? _c("div", { staticClass: "row " }, [
             _vm._m(0),
             _vm._v(" "),
-            _c("div", { staticClass: "col-4 text-right" }, [
-              !_vm.disabled && !_vm.playing
-                ? _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.AddQuestionEvent()
-                        }
-                      }
-                    },
-                    [_vm._v(" Agregar pregunta ")]
-                  )
-                : _vm._e()
-            ])
-          ]),
-          _vm._v(" "),
-          !_vm.playing
-            ? _vm._l(_vm.module.questions, function(question, k_q) {
-                return _c("div", { key: k_q, staticClass: "row" }, [
-                  _c(
-                    "div",
-                    { staticClass: "col-12" },
-                    [
-                      _c("div", { staticClass: "row" }, [
-                        _c(
+            _c("div", { staticClass: "col-4 text-right" })
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.disabled && !_vm.playing
+        ? _c("div", { staticClass: "row" }, [_vm._m(1)])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.loading_component
+        ? _c("div", { staticClass: "row" }, [_vm._m(2)])
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.loading_component
+        ? [
+            !_vm.playing
+              ? _c("div", [
+                  _c("div", { staticClass: "card padding-10" }, [
+                    _c(
+                      "div",
+                      { staticClass: "crossword_table" },
+                      _vm._l(_vm.table, function(row, k_row) {
+                        return _c(
                           "div",
-                          { staticClass: "col-12 text-left" },
-                          [
-                            _c("div", { staticClass: "row" }, [
-                              _c("div", { staticClass: "col-7" }, [
-                                _c("label", [
-                                  _c("span", { staticClass: "required" }, [
-                                    _vm._v("*")
-                                  ]),
-                                  _vm._v(
-                                    "Pregunta N° " + _vm._s(k_q + 1) + " :"
-                                  )
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "col-5 text-right" }, [
-                                k_q > 0 && !_vm.disabled
-                                  ? _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-warning",
-                                        attrs: { alt: "Remover pregunta" },
-                                        on: {
-                                          click: function($event) {
-                                            $event.preventDefault()
-                                            return _vm.RemoveQuestionEvent(k_q)
-                                          }
-                                        }
-                                      },
-                                      [_vm._v("Remover pregunta")]
-                                    )
-                                  : _vm._e()
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "row" }, [
-                              _vm._m(1, true),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "col-12 text-left" }, [
-                                _c(
-                                  "select",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: question.type_question,
-                                        expression: "question.type_question"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    attrs: { readonly: _vm.disabled },
-                                    on: {
-                                      change: function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
-                                        _vm.$set(
-                                          question,
-                                          "type_question",
-                                          $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        )
-                                      }
-                                    }
-                                  },
-                                  _vm._l(_vm.question_types, function(
-                                    option,
-                                    k_op
-                                  ) {
-                                    return _c(
-                                      "option",
-                                      {
-                                        key: k_op,
-                                        domProps: { value: option.id }
-                                      },
-                                      [_vm._v(_vm._s(option.label))]
-                                    )
-                                  }),
-                                  0
-                                )
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("editor-component", {
-                              attrs: {
-                                content: question.question,
-                                readonly: _vm.disabled
-                              },
-                              on: {
-                                updateText: function($event) {
-                                  return _vm.SetQuestionEvent($event, k_q)
-                                }
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ]),
-                      _vm._v(" "),
-                      question.type_question != "OPEN_RTA"
-                        ? _vm._l(question.options, function(option, k_op) {
+                          { key: k_row, staticClass: "crossword_table_row" },
+                          _vm._l(row.cols, function(col, k_col) {
                             return _c(
                               "div",
-                              { key: k_op, staticClass: "row" },
+                              {
+                                key: k_col,
+                                staticClass: "crossword_table_col"
+                              },
                               [
-                                _c("div", { staticClass: "col-11 text-left" }, [
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: option.content,
-                                        expression: "option.content"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    attrs: {
-                                      type: "text",
-                                      placeholder: "Opción " + (k_op + 1),
-                                      readonly: _vm.disabled
-                                    },
-                                    domProps: { value: option.content },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
+                                k_row > 0 && k_col > 0
+                                  ? _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: col.letter,
+                                          expression: "col.letter"
                                         }
-                                        _vm.$set(
-                                          option,
-                                          "content",
-                                          $event.target.value
-                                        )
+                                      ],
+                                      ref: "input_" + k_row + "_" + k_col,
+                                      refInFor: true,
+                                      staticClass: "crossword_table_col_input ",
+                                      class: {
+                                        "crossword_table_col_input-active":
+                                          col.letter != "" && col.letter != null
+                                      },
+                                      attrs: { maxlength: 1, type: "text" },
+                                      domProps: { value: col.letter },
+                                      on: {
+                                        change: function($event) {
+                                          return _vm.InputChanged(k_row, k_col)
+                                        },
+                                        input: [
+                                          function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              col,
+                                              "letter",
+                                              $event.target.value
+                                            )
+                                          },
+                                          function($event) {
+                                            col.letter = $event.target.value.toUpperCase()
+                                          }
+                                        ],
+                                        keyup: [
+                                          function($event) {
+                                            if (
+                                              !$event.type.indexOf("key") &&
+                                              _vm._k(
+                                                $event.keyCode,
+                                                "down",
+                                                40,
+                                                $event.key,
+                                                ["Down", "ArrowDown"]
+                                              )
+                                            ) {
+                                              return null
+                                            }
+                                            return _vm.downEvent(k_row, k_col)
+                                          },
+                                          function($event) {
+                                            if (
+                                              !$event.type.indexOf("key") &&
+                                              _vm._k(
+                                                $event.keyCode,
+                                                "right",
+                                                39,
+                                                $event.key,
+                                                ["Right", "ArrowRight"]
+                                              )
+                                            ) {
+                                              return null
+                                            }
+                                            if (
+                                              "button" in $event &&
+                                              $event.button !== 2
+                                            ) {
+                                              return null
+                                            }
+                                            return _vm.rightEvent(k_row, k_col)
+                                          },
+                                          function($event) {
+                                            if (
+                                              !$event.type.indexOf("key") &&
+                                              _vm._k(
+                                                $event.keyCode,
+                                                "up",
+                                                38,
+                                                $event.key,
+                                                ["Up", "ArrowUp"]
+                                              )
+                                            ) {
+                                              return null
+                                            }
+                                            return _vm.topEvent(k_row, k_col)
+                                          },
+                                          function($event) {
+                                            if (
+                                              !$event.type.indexOf("key") &&
+                                              _vm._k(
+                                                $event.keyCode,
+                                                "left",
+                                                37,
+                                                $event.key,
+                                                ["Left", "ArrowLeft"]
+                                              )
+                                            ) {
+                                              return null
+                                            }
+                                            if (
+                                              "button" in $event &&
+                                              $event.button !== 0
+                                            ) {
+                                              return null
+                                            }
+                                            return _vm.leftEvent(k_row, k_col)
+                                          }
+                                        ]
                                       }
-                                    }
-                                  })
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "col-1 div-icon-add" },
-                                  [
-                                    k_op == 0
-                                      ? _c(
-                                          "div",
-                                          {
-                                            staticClass: "icon-add",
-                                            attrs: { alt: "Agregar opción" },
-                                            on: {
-                                              click: function($event) {
-                                                $event.preventDefault()
-                                                return _vm.AddOptionOnQuestion(
-                                                  k_q
-                                                )
-                                              }
-                                            }
-                                          },
-                                          [_vm._v("+")]
-                                        )
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    k_op > 1
-                                      ? _c(
-                                          "div",
-                                          {
-                                            staticClass: "icon-remove",
-                                            attrs: { alt: "Remover opción" },
-                                            on: {
-                                              click: function($event) {
-                                                $event.preventDefault()
-                                                return _vm.RemoveOptionOnQuestion(
-                                                  k_q,
-                                                  k_op
-                                                )
-                                              }
-                                            }
-                                          },
-                                          [_vm._v("-")]
-                                        )
-                                      : _vm._e()
-                                  ]
-                                )
+                                    })
+                                  : _vm._e()
                               ]
                             )
-                          })
-                        : _vm._e(),
+                          }),
+                          0
+                        )
+                      }),
+                      0
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c(
+                        "div",
+                        { staticClass: "col-sm padding-10 text-center" },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary",
+                              on: { click: _vm.validateWords }
+                            },
+                            [_vm._v("Ingresar contenido")]
+                          )
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "card padding-10" },
+                    [
+                      _vm._m(3),
                       _vm._v(" "),
-                      question.type_question != "OPEN_RTA"
-                        ? _c("div", { staticClass: "row" }, [
-                            _c("div", { staticClass: "col-12" }, [
-                              _vm._m(2, true),
-                              _vm._v(" "),
-                              _c(
-                                "select",
-                                {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: question.valid_answer_index,
-                                      expression: "question.valid_answer_index"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  attrs: { readonly: _vm.disabled },
-                                  on: {
-                                    change: function($event) {
-                                      var $$selectedVal = Array.prototype.filter
-                                        .call($event.target.options, function(
-                                          o
-                                        ) {
-                                          return o.selected
-                                        })
-                                        .map(function(o) {
-                                          var val =
-                                            "_value" in o ? o._value : o.value
-                                          return val
-                                        })
-                                      _vm.$set(
-                                        question,
-                                        "valid_answer_index",
-                                        $event.target.multiple
-                                          ? $$selectedVal
-                                          : $$selectedVal[0]
-                                      )
-                                    }
-                                  }
-                                },
-                                _vm._l(question.options, function(
-                                  option,
-                                  k_op
-                                ) {
-                                  return _c(
-                                    "option",
-                                    { key: k_op, domProps: { value: k_op } },
-                                    [_vm._v(_vm._s(option.content))]
-                                  )
-                                }),
-                                0
-                              )
-                            ])
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "row" }, [
-                        _c(
-                          "div",
-                          { staticClass: "col-12" },
-                          [
-                            _vm._m(3, true),
+                      _vm._l(_vm.words, function(word, k_word) {
+                        return _c("div", { key: k_word, staticClass: "row" }, [
+                          _c("div", { staticClass: "col-sm-4 padding-10" }, [
+                            _c("label", [_vm._v("Palabra:")]),
                             _vm._v(" "),
-                            _c("editor-component", {
-                              attrs: {
-                                content: question.justify,
-                                readonly: _vm.disabled
-                              },
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: word.word,
+                                  expression: "word.word"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "text", disabled: true },
+                              domProps: { value: word.word },
                               on: {
-                                updateText: function($event) {
-                                  return _vm.SetJustifyEvent($event, k_q)
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(word, "word", $event.target.value)
                                 }
                               }
                             })
-                          ],
-                          1
-                        )
-                      ])
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "col-sm-8 padding-10" },
+                            [
+                              _c("label", [_vm._v("Pregunta")]),
+                              _vm._v(" "),
+                              _c("editor-component", {
+                                attrs: {
+                                  content: word.content,
+                                  readonly: _vm.disabled
+                                },
+                                on: {
+                                  updateText: function($event) {
+                                    return _vm.SetWordContentEvent(
+                                      $event,
+                                      k_word
+                                    )
+                                  }
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ])
+                      })
                     ],
                     2
                   )
                 ])
-              })
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.playing
-            ? _vm._l(_vm.module.questions, function(question, k_q) {
-                return _c("div", { key: k_q, staticClass: "row" }, [
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.playing
+              ? _c("div", [
                   _c(
                     "div",
-                    { staticClass: "col-12" },
+                    { staticClass: "card padding-10" },
                     [
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-12 text-left" }, [
-                          _c("div", { staticClass: "row" }, [
-                            _c("div", { staticClass: "col-7" }, [
-                              _c("label", [
-                                _c("span", { staticClass: "required" }, [
-                                  _vm._v("*")
-                                ]),
-                                _vm._v("Pregunta N° " + _vm._s(k_q + 1) + " :")
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-5 text-right" }, [
-                              k_q > 0 && !_vm.disabled
-                                ? _c(
-                                    "button",
-                                    {
-                                      staticClass: "btn btn-warning",
-                                      attrs: { alt: "Remover pregunta" },
-                                      on: {
-                                        click: function($event) {
-                                          $event.preventDefault()
-                                          return _vm.RemoveQuestionEvent(k_q)
-                                        }
-                                      }
-                                    },
-                                    [_vm._v("Remover pregunta")]
-                                  )
-                                : _vm._e()
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", {
-                            staticClass: "question_container",
-                            domProps: { innerHTML: _vm._s(question.question) }
-                          })
-                        ])
-                      ]),
+                      _vm._m(4),
                       _vm._v(" "),
-                      question.type_question != "OPEN_RTA"
-                        ? _vm._l(question.options, function(option, k_op) {
-                            return _c(
-                              "div",
-                              { key: k_op, staticClass: "row" },
-                              [
-                                _c("div", { staticClass: "col-12 text-left" }, [
-                                  _c(
-                                    "button",
-                                    {
-                                      staticClass: "q-option",
-                                      class: {
-                                        "q-option-checked":
-                                          question.response == k_op
-                                      },
-                                      attrs: { disabled: _vm.disabled },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.SelectOptionEvent(
-                                            k_q,
-                                            k_op
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _vm._v(_vm._s(option.content) + " "),
-                                      k_op == question.valid_answer_index &&
-                                      _vm.disabled
-                                        ? _c("i", {
-                                            staticClass: "fa fa-check"
-                                          })
-                                        : _vm._e()
-                                    ]
-                                  )
-                                ])
-                              ]
-                            )
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      question.type_question == "OPEN_RTA"
-                        ? [
-                            _c("div", { staticClass: "row" }, [
-                              _c(
-                                "div",
-                                { staticClass: "col-12" },
-                                [
-                                  _c("editor-component", {
-                                    attrs: {
-                                      content: question.response,
-                                      readonly: _vm.disabled
-                                    },
-                                    on: {
-                                      updateText: function($event) {
-                                        return _vm.SetResponseEvent($event, k_q)
-                                      }
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            ])
-                          ]
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.disabled
-                        ? _c("div", { staticClass: "row " }, [
-                            _c("div", { staticClass: "col-12" }, [
+                      _vm._l(_vm.words, function(word, k_word) {
+                        return _c("div", { key: k_word, staticClass: "row" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "col-sm-8 padding-10",
+                              staticStyle: {
+                                display: "flex",
+                                "flex-direction": "row"
+                              }
+                            },
+                            [
                               _c(
                                 "label",
-                                { attrs: { for: "question-answer" } },
-                                [_vm._v("Justificación:")]
+                                {
+                                  staticStyle: {
+                                    "margin-right": "10px",
+                                    "font-weight": "bold"
+                                  }
+                                },
+                                [_vm._v(_vm._s(k_word + 1) + ". ")]
                               ),
                               _vm._v(" "),
                               _c("div", {
-                                staticClass: "question-answer",
-                                domProps: {
-                                  innerHTML: _vm._s(question.justify)
-                                }
-                              })
-                            ])
-                          ])
-                        : _vm._e()
+                                staticStyle: { "margin-right": "10px" },
+                                domProps: { innerHTML: _vm._s(word.content) }
+                              }),
+                              _vm._v(" "),
+                              word.response &&
+                              word.response.toUpperCase() ==
+                                word.word.toUpperCase() &&
+                              _vm.disabled
+                                ? _c("small", [
+                                    _c(
+                                      "svg",
+                                      {
+                                        attrs: {
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          viewBox: "0 0 16 16",
+                                          width: "16",
+                                          height: "16"
+                                        }
+                                      },
+                                      [
+                                        _c("path", {
+                                          staticStyle: { fill: "#48DA7E" },
+                                          attrs: {
+                                            "fill-rule": "evenodd",
+                                            d:
+                                              "M1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0zM0 8a8 8 0 1116 0A8 8 0 010 8zm11.78-1.72a.75.75 0 00-1.06-1.06L6.75 9.19 5.28 7.72a.75.75 0 00-1.06 1.06l2 2a.75.75 0 001.06 0l4.5-4.5z"
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" (" + _vm._s(word.word) + "). ")
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              word.response &&
+                              word.response.toUpperCase() !=
+                                word.word.toUpperCase() &&
+                              _vm.disabled
+                                ? _c("small", [
+                                    _c(
+                                      "svg",
+                                      {
+                                        attrs: {
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          viewBox: "0 0 24 24",
+                                          width: "16",
+                                          height: "16"
+                                        }
+                                      },
+                                      [
+                                        _c("path", {
+                                          staticStyle: { fill: "#D61D5A" },
+                                          attrs: {
+                                            d:
+                                              "M9.036 7.976a.75.75 0 00-1.06 1.06L10.939 12l-2.963 2.963a.75.75 0 101.06 1.06L12 13.06l2.963 2.964a.75.75 0 001.061-1.06L13.061 12l2.963-2.964a.75.75 0 10-1.06-1.06L12 10.939 9.036 7.976z"
+                                          }
+                                        }),
+                                        _c("path", {
+                                          staticStyle: { fill: "#D61D5A" },
+                                          attrs: {
+                                            "fill-rule": "evenodd",
+                                            d:
+                                              "M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zM2.5 12a9.5 9.5 0 1119 0 9.5 9.5 0 01-19 0z"
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(
+                                      " (" +
+                                        _vm._s(word.word) +
+                                        "). Respondiste: " +
+                                        _vm._s(word.response)
+                                    )
+                                  ])
+                                : _vm._e()
+                            ]
+                          )
+                        ])
+                      })
                     ],
                     2
-                  )
+                  ),
+                  _vm._v(" "),
+                  !_vm.disabled
+                    ? _c("div", { staticClass: "card padding-10" }, [
+                        _c(
+                          "div",
+                          { staticClass: "crossword_table" },
+                          _vm._l(_vm.table, function(row, k_row) {
+                            return _c(
+                              "div",
+                              {
+                                key: k_row,
+                                staticClass: "crossword_table_row"
+                              },
+                              _vm._l(row.cols, function(col, k_col) {
+                                return _c(
+                                  "div",
+                                  {
+                                    key: k_col,
+                                    staticClass:
+                                      "crossword_table_col_resp_input"
+                                  },
+                                  [
+                                    !col.title && col.letter
+                                      ? _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: col.response,
+                                              expression: "col.response"
+                                            }
+                                          ],
+                                          ref: "input_" + k_row + "_" + k_col,
+                                          refInFor: true,
+                                          staticClass:
+                                            "crossword_table_col_input ",
+                                          class: {
+                                            "crossword_table_col_resp_input-active":
+                                              col.letter != "" &&
+                                              col.letter != null
+                                          },
+                                          attrs: { maxlength: 1, type: "text" },
+                                          domProps: { value: col.response },
+                                          on: {
+                                            change: function($event) {
+                                              return _vm.InputResponseChanged(
+                                                k_row,
+                                                k_col
+                                              )
+                                            },
+                                            input: [
+                                              function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  col,
+                                                  "response",
+                                                  $event.target.value
+                                                )
+                                              },
+                                              function($event) {
+                                                col.response = $event.target.value.toUpperCase()
+                                              }
+                                            ],
+                                            keyup: [
+                                              function($event) {
+                                                if (
+                                                  !$event.type.indexOf("key") &&
+                                                  _vm._k(
+                                                    $event.keyCode,
+                                                    "down",
+                                                    40,
+                                                    $event.key,
+                                                    ["Down", "ArrowDown"]
+                                                  )
+                                                ) {
+                                                  return null
+                                                }
+                                                return _vm.downEvent(
+                                                  k_row,
+                                                  k_col
+                                                )
+                                              },
+                                              function($event) {
+                                                if (
+                                                  !$event.type.indexOf("key") &&
+                                                  _vm._k(
+                                                    $event.keyCode,
+                                                    "right",
+                                                    39,
+                                                    $event.key,
+                                                    ["Right", "ArrowRight"]
+                                                  )
+                                                ) {
+                                                  return null
+                                                }
+                                                if (
+                                                  "button" in $event &&
+                                                  $event.button !== 2
+                                                ) {
+                                                  return null
+                                                }
+                                                return _vm.rightEvent(
+                                                  k_row,
+                                                  k_col
+                                                )
+                                              },
+                                              function($event) {
+                                                if (
+                                                  !$event.type.indexOf("key") &&
+                                                  _vm._k(
+                                                    $event.keyCode,
+                                                    "up",
+                                                    38,
+                                                    $event.key,
+                                                    ["Up", "ArrowUp"]
+                                                  )
+                                                ) {
+                                                  return null
+                                                }
+                                                return _vm.topEvent(
+                                                  k_row,
+                                                  k_col
+                                                )
+                                              },
+                                              function($event) {
+                                                if (
+                                                  !$event.type.indexOf("key") &&
+                                                  _vm._k(
+                                                    $event.keyCode,
+                                                    "left",
+                                                    37,
+                                                    $event.key,
+                                                    ["Left", "ArrowLeft"]
+                                                  )
+                                                ) {
+                                                  return null
+                                                }
+                                                if (
+                                                  "button" in $event &&
+                                                  $event.button !== 0
+                                                ) {
+                                                  return null
+                                                }
+                                                return _vm.leftEvent(
+                                                  k_row,
+                                                  k_col
+                                                )
+                                              }
+                                            ]
+                                          }
+                                        })
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    col.title
+                                      ? _c("span", [
+                                          _vm._v(_vm._s(col.response))
+                                        ])
+                                      : _vm._e()
+                                  ]
+                                )
+                              }),
+                              0
+                            )
+                          }),
+                          0
+                        )
+                      ])
+                    : _vm._e()
                 ])
-              })
-            : _vm._e()
-        ],
-        2
-      )
-    ])
-  ])
+              : _vm._e()
+          ]
+        : _vm._e()
+    ],
+    2
+  )
 }
 var staticRenderFns = [
   function() {
@@ -726,17 +953,18 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-8 text-left" }, [
-      _c("h4", [_vm._v("Cuestionario")])
+      _c("h4", [_vm._v("Crucigrama")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12" }, [
-      _c("label", [
-        _c("span", { staticClass: "required" }, [_vm._v("*")]),
-        _vm._v("Tipo de pregunta:")
+    return _c("div", { staticClass: "col-sm padding-10" }, [
+      _c("p", [
+        _vm._v(
+          "*Ingrese cada letra de cada palabra en el orden vertical u horizontal que desee."
+        )
       ])
     ])
   },
@@ -744,18 +972,32 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "question" } }, [
-      _c("span", { staticClass: "required" }, [_vm._v("*")]),
-      _vm._v("Respuesta correcta:")
+    return _c("div", { staticClass: "col-sm padding-10" }, [
+      _c("span", [_vm._v("Cargando...")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "question-answer" } }, [
-      _c("span", { staticClass: "required" }, [_vm._v("*")]),
-      _vm._v("Justificación:")
+    return _c("div", { staticClass: "row " }, [
+      _c("div", { staticClass: "col-8 text-left" }, [
+        _c("h4", [_vm._v("Preguntas del crucigrama")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-4 text-right" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row " }, [
+      _c("div", { staticClass: "col-8 text-left" }, [
+        _c("h4", [_vm._v("Preguntas:")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-4 text-right" })
     ])
   }
 ]
@@ -765,18 +1007,18 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/activityQuestionaryComponent.vue":
-/*!******************************************************************!*\
-  !*** ./resources/js/components/activityQuestionaryComponent.vue ***!
-  \******************************************************************/
+/***/ "./resources/js/components/activityCrosswordComponent.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/activityCrosswordComponent.vue ***!
+  \****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _activityQuestionaryComponent_vue_vue_type_template_id_c6902e56___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./activityQuestionaryComponent.vue?vue&type=template&id=c6902e56& */ "./resources/js/components/activityQuestionaryComponent.vue?vue&type=template&id=c6902e56&");
-/* harmony import */ var _activityQuestionaryComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./activityQuestionaryComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/activityQuestionaryComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _activityQuestionaryComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./activityQuestionaryComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/activityQuestionaryComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _activityCrosswordComponent_vue_vue_type_template_id_1f48e3cd___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./activityCrosswordComponent.vue?vue&type=template&id=1f48e3cd& */ "./resources/js/components/activityCrosswordComponent.vue?vue&type=template&id=1f48e3cd&");
+/* harmony import */ var _activityCrosswordComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./activityCrosswordComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/activityCrosswordComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _activityCrosswordComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./activityCrosswordComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/activityCrosswordComponent.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -787,9 +1029,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _activityQuestionaryComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _activityQuestionaryComponent_vue_vue_type_template_id_c6902e56___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _activityQuestionaryComponent_vue_vue_type_template_id_c6902e56___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _activityCrosswordComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _activityCrosswordComponent_vue_vue_type_template_id_1f48e3cd___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _activityCrosswordComponent_vue_vue_type_template_id_1f48e3cd___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -799,54 +1041,54 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/activityQuestionaryComponent.vue"
+component.options.__file = "resources/js/components/activityCrosswordComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/activityQuestionaryComponent.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************!*\
-  !*** ./resources/js/components/activityQuestionaryComponent.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************/
+/***/ "./resources/js/components/activityCrosswordComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/activityCrosswordComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_activityQuestionaryComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./activityQuestionaryComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/activityQuestionaryComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_activityQuestionaryComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_activityCrosswordComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./activityCrosswordComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/activityCrosswordComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_activityCrosswordComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/activityQuestionaryComponent.vue?vue&type=style&index=0&lang=css&":
-/*!***************************************************************************************************!*\
-  !*** ./resources/js/components/activityQuestionaryComponent.vue?vue&type=style&index=0&lang=css& ***!
-  \***************************************************************************************************/
+/***/ "./resources/js/components/activityCrosswordComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/activityCrosswordComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_activityQuestionaryComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./activityQuestionaryComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/activityQuestionaryComponent.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_activityQuestionaryComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_activityQuestionaryComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_activityQuestionaryComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_activityQuestionaryComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_activityQuestionaryComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_activityCrosswordComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./activityCrosswordComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/activityCrosswordComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_activityCrosswordComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_activityCrosswordComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_activityCrosswordComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_activityCrosswordComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_activityCrosswordComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/js/components/activityQuestionaryComponent.vue?vue&type=template&id=c6902e56&":
-/*!*************************************************************************************************!*\
-  !*** ./resources/js/components/activityQuestionaryComponent.vue?vue&type=template&id=c6902e56& ***!
-  \*************************************************************************************************/
+/***/ "./resources/js/components/activityCrosswordComponent.vue?vue&type=template&id=1f48e3cd&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/activityCrosswordComponent.vue?vue&type=template&id=1f48e3cd& ***!
+  \***********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_activityQuestionaryComponent_vue_vue_type_template_id_c6902e56___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./activityQuestionaryComponent.vue?vue&type=template&id=c6902e56& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/activityQuestionaryComponent.vue?vue&type=template&id=c6902e56&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_activityQuestionaryComponent_vue_vue_type_template_id_c6902e56___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_activityCrosswordComponent_vue_vue_type_template_id_1f48e3cd___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./activityCrosswordComponent.vue?vue&type=template&id=1f48e3cd& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/activityCrosswordComponent.vue?vue&type=template&id=1f48e3cd&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_activityCrosswordComponent_vue_vue_type_template_id_1f48e3cd___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_activityQuestionaryComponent_vue_vue_type_template_id_c6902e56___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_activityCrosswordComponent_vue_vue_type_template_id_1f48e3cd___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

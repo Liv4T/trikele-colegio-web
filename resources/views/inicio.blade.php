@@ -8,7 +8,7 @@
   @endif
   @if (Auth::user()->type_user == '3')
     <menu-lateral></menu-lateral>
-    <inicio-component></inicio-component>
+    <bienvenida-estudiantes></bienvenida-estudiantes>
  @endif
   @if (Auth::user()->type_user == '1')
     <menu-adm></menu-adm>

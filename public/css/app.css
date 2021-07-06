@@ -1,14 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
-
-@font-face {
-  font-family: "Poppins";
-  src: url(/fonts/PoppinsRegular.ttf?8b6af8e5e8324edfd77af8b3b35d7f9c) format("truetype");
-}
-
-@font-face {
-  font-family: "PoppinsBold";
-  src: url(/fonts/PoppinsSemiBold.ttf?4cdacb8f89d588d69e8570edcbe49507) format("truetype");
-}
+@import url(https://fonts.googleapis.com/css?family=Nunito);/* (ignored) *//* (ignored) *//* (ignored) *//* (ignored) *//* (ignored) *//* (ignored) */@charset "UTF-8";
 
 /*!
  * Bootstrap v4.4.1 (https://getbootstrap.com/)
@@ -10902,6 +10892,16 @@ a.text-dark:focus {
   src: url(/fonts/PoppinsSemiBold.ttf?4cdacb8f89d588d69e8570edcbe49507) format("truetype");
 }
 
+@font-face {
+  font-family: "Poppins";
+  src: url(/fonts/PoppinsRegular.ttf?8b6af8e5e8324edfd77af8b3b35d7f9c) format("truetype");
+}
+
+@font-face {
+  font-family: "PoppinsBold";
+  src: url(/fonts/PoppinsSemiBold.ttf?4cdacb8f89d588d69e8570edcbe49507) format("truetype");
+}
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -11043,4 +11043,174 @@ body {
   color: #ffffff;
 }
 
-/* (ignored) *//* (ignored) *//* (ignored) *//* (ignored) *//* (ignored) */
+/*CUSTOM ELEMENTS*/
+
+.classroom-label {
+  color: #233d68;
+  padding: 10px;
+  margin-top: 15px;
+  font-size: 1.2em;
+}
+
+.classroom-planning-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.classroom-planning-section > span {
+  margin-left: 20px;
+}
+
+.btn.btn-Azul {
+  background: #ff7900;
+  text-decoration: none;
+}
+
+.btn.btn-Azul:hover {
+  color: white;
+  text-decoration: none;
+  background-color: #ac5000;
+}
+
+.btn.btn-collapsed {
+  text-decoration: none;
+  outline: none;
+  font-weight: 700;
+}
+
+.btn.btn-collapsed:focus,
+.btn.btn-collapsed.focus {
+  box-shadow: none;
+}
+
+.classroom-label {
+  margin-top: 20px;
+}
+
+strong {
+  font-family: "Century Gothic";
+}
+
+/*
+.card,h4,h3,h5,a,.section3P{
+    font-family: "Caviar Dreams";
+}*/
+
+.card-header {
+  text-align: center;
+}
+
+.btn-outline-primary {
+  border-color: #ff7900 !important;
+  color: #ff7900 !important;
+}
+
+.btn-outline-primary:hover {
+  color: #fff !important;
+  background-color: #ff7900 !important;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f0f0f0;
+}
+
+.padding-10 {
+  padding: 10px;
+}
+
+.padding-20 {
+  padding: 20px;
+}
+
+.height-50 {
+  height: 50px;
+}
+
+.text-error {
+  color: #e3342f !important;
+}
+
+.margin-top-20 {
+  margin-top: 20px;
+}
+
+.margin-top-50 {
+  margin-top: 50px;
+}
+
+.margin-bottom-10 {
+  margin-bottom: 50px;
+}
+
+.margin-left-5 {
+  margin-left: 5px;
+}
+
+.content-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.label-required {
+  color: #e3342f;
+}
+
+a:not(.md-button):hover {
+  text-decoration: none !important;
+}
+
+.card-header.fondo {
+  background-color: #ffc039 !important;
+  color: white;
+}
+
+.padding-10_p {
+  padding: 10%;
+}
+
+.padding-left-5 {
+  padding-left: 5px !important;
+}
+
+.table-hover th tbody tr {
+  background-color: rgba(255, 255, 255, 0.515);
+}
+
+.etiqueta-trikele {
+  color: #ff4700;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: "boldfont";
+}
+
+.letra-boldfont {
+  font-family: "boldfont";
+}
+
+.letra-poppins {
+  font-family: "Poppins" !important;
+}
+
+.letra-poppins-bold {
+  font-family: "PoppinsBold" !important;
+}
+
+.fondo-lista {
+  min-height: 80vh;
+  background-image: url("/uploads/home/fondo-lista.jpg");
+}
+
+.caviar {
+  font-family: "Caviar Dreams";
+}
+
+p.caviar {
+  font-size: 18px;
+  text-align: justify;
+  text-transform: none;
+}
+

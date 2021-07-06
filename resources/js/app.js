@@ -108,6 +108,7 @@ Vue.component("editarc-component", require("./components/editarClase.vue").defau
 
 
 
+Vue.component("bienvenida-estudiantes",() => import("./components/Bienvenida.vue"));
 Vue.component("inicio-component", () => import("./components/inicio.vue"));
 Vue.component("ciclos-component", ()=>import("./components/homeCiclos.vue"));
 Vue.component("userinfo", ()=>import("./components/UserInfo"));
@@ -201,5 +202,18 @@ Vue.component("teacher-student-class-select", () => import ("./components/teache
 Vue.component("teacher-student-class-content", () => import ("./components/teacherStudentClassContentComponent.vue"));
 Vue.component("notification-component", () => import ("./components/notificationComponent.vue"));
 Vue.use(CKEditor);
+
+Vue.component("purchase-plan", () => import ("./components/purchasePlanComponent.vue"));
+Vue.component("purchase-plan-login", () => import ("./components/purchasePlanLoginComponent.vue"));
+Vue.component("purchase-module-login", () => import ("./components/purchaseModuleLoginComponent.vue"));
+Vue.component("purchase-area-login", () => import ("./components/purchaseAreaLoginComponent.vue"));
+Vue.component("purchase-plan-resume", () => import ("./components/purchasePlanResumeComponent.vue"));
+Vue.component("purchase-module-resume", () => import ("./components/purchaseModuleResumeComponent.vue"));
+Vue.component("purchase-area-resume", () => import ("./components/purchaseAreaResumeComponent.vue"));
+Vue.component("purchase-plan-pay-mercadopago-result", () => import ("./components/purchasePlanPayResultMercadopagoComponent.vue"));
+Vue.component("purchase-plan-pay-payu-result", () => import ("./components/purchasePlanPayResultPayuComponent.vue"));
+Vue.component("purchase-plan-pay-error", () => import ("./components/purchasePlanPayErrorComponent.vue"));
+Vue.component("purchase-tutorial-resume", () => import ("./components/purchaseTutorialResumeComponent.vue"));
+Vue.component("purchase-tutorial-login", () => import ("./components/purchaseTutorialLoginComponent.vue"));
 
 const app = new Vue({el: "#app", data: {}, store});
