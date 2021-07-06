@@ -408,7 +408,7 @@
 
           if (response.data.length > 0) {
             this.current_plan.plan_price = response.data[0];
-            //this.getEnglishModule(this.current_plan.plan_price.grade);
+            this.getEnglishModule(this.current_plan.plan_price.grade);
           }
         });
       },

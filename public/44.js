@@ -428,7 +428,9 @@ __webpack_require__.r(__webpack_exports__);
         _this2.plan_prices = response.data;
 
         if (response.data.length > 0) {
-          _this2.current_plan.plan_price = response.data[0]; //this.getEnglishModule(this.current_plan.plan_price.grade);
+          _this2.current_plan.plan_price = response.data[0];
+
+          _this2.getEnglishModule(_this2.current_plan.plan_price.grade);
         }
       });
     },
