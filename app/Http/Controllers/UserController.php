@@ -207,7 +207,7 @@ class UserController extends Controller
             return 'false';
         }
     }
-       /**
+    /**
      * login
      */
     public function loginClientWeb(Request $request)

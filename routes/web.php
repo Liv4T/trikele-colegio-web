@@ -190,6 +190,9 @@ Route::middleware('auth')->get('/anuncio_mc', function () {
 Route::middleware('auth')->get('/inicio', function () {
     return view('inicio');
 });
+Route::middleware('auth')->get('/bienvenido', function () {
+    return view('inicio');
+});
 Route::middleware('auth')->get('/juegos', function () {
     return view('juegos');
 });
@@ -602,6 +605,9 @@ Route::middleware('auth')->get('/student/lectives/activities', function () {
     return view('lectivesStudentActivities');
 });
 
+/* LEADS */
+Route::post('saveLead', 'ClienteController@saveLead')->name('saveLead');
+Route::post('saveLeadFiles', 'ClienteController@uploadFile')->name('saveLeadFiles');
 
 
 // CLASES
@@ -798,4 +804,3 @@ Route::get('/api/document-type/{id}', 'DocumentTypeController@get');
 Route::put('/api/document-type/{id}', 'DocumentTypeController@update');
 Route::post('/api/document-type', 'DocumentTypeController@insert');
 Route::delete('/api/document-type/{id}', 'DocumentTypeController@delete');
-
