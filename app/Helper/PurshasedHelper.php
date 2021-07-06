@@ -23,10 +23,21 @@ class PurshasedHelper
 
         $plan_area_exclude=CustomerPlanRule::where('feature','EXCLUDE_AREAS')->where('customer_plan_id',$plan->id)->where('deleted',0)->first();
 
+
+
         $exclude_areas=[];
         if(isset($plan_area_exclude))
         {
             $exclude_areas=json_decode($plan_area_exclude->value,true);
+        }
+
+
+        $plan_only_grade=CustomerPlanRule::where('feature','ONLY_GRADE')->where('customer_plan_id',$plan->id)->where('deleted',0)->first();
+
+        $only_grades=[];
+        if(isset($plan_only_grade))
+        {
+            $only_grades=json_decode($plan_only_grade->value,true);
         }
 
 
@@ -49,33 +60,63 @@ class PurshasedHelper
 
            if(!isset($credits_item))  return response()->json(['message'=>'Registro de creditos no realizado.'],403);
 
-           $classroom=Classroom::where('name',$plan->grade)->first();
 
-           if(!isset($classroom))  return response()->json(['message'=>'Classroom no válido.'],403);
+            if(count($only_grades)>0){
+                //PLAN BY GRADE RULE
+                $weekly_modules =[];
+                foreach ($only_grades as  $gradeId) {
 
-           $itemWeekly=CustomerInvoiceItemWeekly::where('customer_invoice_item_id',$invoice_item->id)->where('deleted',0)->first();
+                    $classroom=Classroom::where('id_grade', $gradeId)->first();
 
-            if(isset($itemWeekly))
-            {
-                $weekly_modules =Weekly::where('id', $itemWeekly->weekly_id)->get();
-            }
-            else
-            {
-                $itemArea=CustomerInvoiceItemArea::where('customer_invoice_item_id',$invoice_item->id)->where('deleted',0)->first();
+                    if(!isset($classroom))  return response()->json(['message'=>'Classroom no válido.'],403);
 
-                if(isset($itemArea))
-                {
-                    array_push($only_areas,$itemArea->area_id);
+                    $_weekly_modules =Weekly::where('id_classroom',$classroom->id)->where('deleted',0)->get();
 
-                    $weekly_modules =Weekly::when(count($only_areas)>0,function($query)use($only_areas){return $query->whereIn('id_area', $only_areas);})->where('id_classroom',$classroom->id)->where('deleted',0)->get();
-                }
-                else{
-                    $weekly_modules =Weekly::when(count($exclude_areas)>0,function($query)use($exclude_areas){return $query->whereNotIn('id_area', $exclude_areas);})->when(count($only_areas)>0,function($query)use($only_areas){return $query->whereIn('id_area', $only_areas);})->where('id_classroom',$classroom->id)->where('deleted',0)->get();
+                    foreach ($_weekly_modules as $item) {
+                       array_push($weekly_modules,$item);
+                    }
+
                 }
 
 
+            }else{
+                //PLAN BY GRADE
+                $classroom=Classroom::where('name',$plan->grade)->first();
+
+                if(!isset($classroom))  return response()->json(['message'=>'Classroom no válido.'],403);
+
+                $itemWeekly=CustomerInvoiceItemWeekly::where('customer_invoice_item_id',$invoice_item->id)->where('deleted',0)->first();
+
+                 if(isset($itemWeekly))
+                 {
+                     //PLAN BY INVOICE ITEM WEEKLY
+                     $weekly_modules =Weekly::where('id', $itemWeekly->weekly_id)->get();
+                 }
+                 else
+                 {
+                     $itemArea=CustomerInvoiceItemArea::where('customer_invoice_item_id',$invoice_item->id)->where('deleted',0)->first();
+
+                     if(isset($itemArea))
+                     {
+                          //PLAN BY INVOICE ITEM AREA
+                         array_push($only_areas,$itemArea->area_id);
+
+                         $weekly_modules =Weekly::when(count($only_areas)>0,function($query)use($only_areas){return $query->whereIn('id_area', $only_areas);})->where('id_classroom',$classroom->id)->where('deleted',0)->get();
+                     }
+                     else{
+
+                        //PLAN BY DEFAULT
+                         $weekly_modules =Weekly::when(count($exclude_areas)>0,function($query)use($exclude_areas){return $query->whereNotIn('id_area', $exclude_areas);})->when(count($only_areas)>0,function($query)use($only_areas){return $query->whereIn('id_area', $only_areas);})->where('id_classroom',$classroom->id)->where('deleted',0)->get();
+                     }
+
+
+
+                 }
 
             }
+
+
+
 
            foreach ($weekly_modules as $i_module => $weekly_module) {
 

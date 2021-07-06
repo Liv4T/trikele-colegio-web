@@ -62,7 +62,7 @@
         "emojionearea": "^3.0.0",
         "es6-promise": "^4.2.8",
         "ffmpeg": "0.0.4",
-        "firebase": "^8.0.1",
+        "firebase": "^8.7.0",
         "jquery.emojiarea.js": "^0.1.8-beta",
         "laravel-echo": "^1.7.0",
         "luxon": "^1.24.1",

@@ -849,9 +849,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 1:
-/*!**********************!*\
-  !*** zlib (ignored) ***!
-  \**********************/
+/*!************************!*\
+  !*** canvas (ignored) ***!
+  \************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -872,7 +872,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ 3:
 /*!**********************!*\
-  !*** http (ignored) ***!
+  !*** zlib (ignored) ***!
   \**********************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -882,6 +882,17 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 4:
+/*!**********************!*\
+  !*** http (ignored) ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 5:
 /*!***********************!*\
   !*** https (ignored) ***!
   \***********************/
@@ -892,7 +903,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 5:
+/***/ 6:
 /*!*********************!*\
   !*** url (ignored) ***!
   \*********************/

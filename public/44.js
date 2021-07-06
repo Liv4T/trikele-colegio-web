@@ -322,6 +322,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["plan_type", "voucher"],
   mounted: function mounted() {
@@ -409,9 +428,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.plan_prices = response.data;
 
         if (response.data.length > 0) {
-          _this2.current_plan.plan_price = response.data[0];
-
-          _this2.getEnglishModule(_this2.current_plan.plan_price.grade);
+          _this2.current_plan.plan_price = response.data[0]; //this.getEnglishModule(this.current_plan.plan_price.grade);
         }
       });
     },
@@ -633,8 +650,12 @@ var render = function() {
                                       _c("h4", [
                                         _vm._v(
                                           _vm._s(
-                                            _vm.current_plan.plan_price.name
-                                          )
+                                            _vm.current_plan.plan_price.type
+                                          ) +
+                                            " " +
+                                            _vm._s(
+                                              _vm.current_plan.plan_price.name
+                                            )
                                         )
                                       ]),
                                       _vm._v(" "),
@@ -716,6 +737,105 @@ var render = function() {
                                                               _vm._s(
                                                                 item.grade
                                                               ) +
+                                                              " "
+                                                          ),
+                                                          item.customer_plan_id !=
+                                                          _vm.current_plan
+                                                            .plan_price
+                                                            .customer_plan_id
+                                                            ? _c("small", [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    item.label_total_price
+                                                                  )
+                                                                )
+                                                              ])
+                                                            : _vm._e()
+                                                        ]
+                                                      )
+                                                    }
+                                                  ),
+                                                  0
+                                                )
+                                              : _vm._e()
+                                          ])
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _vm.plan_prices.length > 1
+                                        ? _c("div", [
+                                            _c("span", [
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm.plan_type != "CREDITO"
+                                                    ? "Plan:"
+                                                    : "Cantidad"
+                                                )
+                                              )
+                                            ]),
+                                            _vm._v(" "),
+                                            _vm.plan_type != "CREDITO"
+                                              ? _c(
+                                                  "select",
+                                                  {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.current_plan
+                                                            .plan_price,
+                                                        expression:
+                                                          "current_plan.plan_price"
+                                                      }
+                                                    ],
+                                                    staticClass: "form-control",
+                                                    on: {
+                                                      change: [
+                                                        function($event) {
+                                                          var $$selectedVal = Array.prototype.filter
+                                                            .call(
+                                                              $event.target
+                                                                .options,
+                                                              function(o) {
+                                                                return o.selected
+                                                              }
+                                                            )
+                                                            .map(function(o) {
+                                                              var val =
+                                                                "_value" in o
+                                                                  ? o._value
+                                                                  : o.value
+                                                              return val
+                                                            })
+                                                          _vm.$set(
+                                                            _vm.current_plan,
+                                                            "plan_price",
+                                                            $event.target
+                                                              .multiple
+                                                              ? $$selectedVal
+                                                              : $$selectedVal[0]
+                                                          )
+                                                        },
+                                                        function($event) {
+                                                          return _vm.PlanPriceChangeEvent()
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  _vm._l(
+                                                    _vm.plan_prices,
+                                                    function(item, index) {
+                                                      return _c(
+                                                        "option",
+                                                        {
+                                                          key: index,
+                                                          domProps: {
+                                                            value: item
+                                                          }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(item.name) +
                                                               " "
                                                           ),
                                                           item.customer_plan_id !=
@@ -1289,94 +1409,201 @@ var render = function() {
                                       )
                                     ]),
                                     _vm._v(" "),
-                                    _c("span", [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm.plan_type != "CREDITO"
-                                            ? "Grado:"
-                                            : "Cantidad"
-                                        )
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _vm.plan_type != "CREDITO"
-                                      ? _c(
-                                          "select",
-                                          {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value:
-                                                  _vm.current_plan.plan_price,
-                                                expression:
-                                                  "current_plan.plan_price"
-                                              }
-                                            ],
-                                            staticClass: "form-control",
-                                            on: {
-                                              change: [
-                                                function($event) {
-                                                  var $$selectedVal = Array.prototype.filter
-                                                    .call(
-                                                      $event.target.options,
-                                                      function(o) {
-                                                        return o.selected
-                                                      }
-                                                    )
-                                                    .map(function(o) {
-                                                      var val =
-                                                        "_value" in o
-                                                          ? o._value
-                                                          : o.value
-                                                      return val
-                                                    })
-                                                  _vm.$set(
-                                                    _vm.current_plan,
-                                                    "plan_price",
-                                                    $event.target.multiple
-                                                      ? $$selectedVal
-                                                      : $$selectedVal[0]
-                                                  )
-                                                },
-                                                function($event) {
-                                                  return _vm.PlanPriceChangeEvent()
-                                                }
-                                              ]
-                                            }
-                                          },
-                                          _vm._l(_vm.plan_prices, function(
-                                            item,
-                                            index
-                                          ) {
-                                            return _c(
-                                              "option",
-                                              {
-                                                key: index,
-                                                domProps: { value: item }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "Grado " +
-                                                    _vm._s(item.grade) +
-                                                    " "
-                                                ),
-                                                item.customer_plan_id !=
-                                                _vm.current_plan.plan_price
-                                                  .customer_plan_id
-                                                  ? _c("small", [
-                                                      _vm._v(
-                                                        _vm._s(
-                                                          item.label_total_price
-                                                        )
-                                                      )
-                                                    ])
-                                                  : _vm._e()
-                                              ]
+                                    _vm.current_plan.plan_price.grade
+                                      ? _c("div", [
+                                          _c("span", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.plan_type != "CREDITO"
+                                                  ? "Grado:"
+                                                  : "Cantidad"
+                                              )
                                             )
-                                          }),
-                                          0
-                                        )
+                                          ]),
+                                          _vm._v(" "),
+                                          _vm.plan_type != "CREDITO"
+                                            ? _c(
+                                                "select",
+                                                {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value:
+                                                        _vm.current_plan
+                                                          .plan_price,
+                                                      expression:
+                                                        "current_plan.plan_price"
+                                                    }
+                                                  ],
+                                                  staticClass: "form-control",
+                                                  on: {
+                                                    change: [
+                                                      function($event) {
+                                                        var $$selectedVal = Array.prototype.filter
+                                                          .call(
+                                                            $event.target
+                                                              .options,
+                                                            function(o) {
+                                                              return o.selected
+                                                            }
+                                                          )
+                                                          .map(function(o) {
+                                                            var val =
+                                                              "_value" in o
+                                                                ? o._value
+                                                                : o.value
+                                                            return val
+                                                          })
+                                                        _vm.$set(
+                                                          _vm.current_plan,
+                                                          "plan_price",
+                                                          $event.target.multiple
+                                                            ? $$selectedVal
+                                                            : $$selectedVal[0]
+                                                        )
+                                                      },
+                                                      function($event) {
+                                                        return _vm.PlanPriceChangeEvent()
+                                                      }
+                                                    ]
+                                                  }
+                                                },
+                                                _vm._l(
+                                                  _vm.plan_prices,
+                                                  function(item, index) {
+                                                    return _c(
+                                                      "option",
+                                                      {
+                                                        key: index,
+                                                        domProps: {
+                                                          value: item
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "Grado " +
+                                                            _vm._s(item.grade) +
+                                                            " "
+                                                        ),
+                                                        item.customer_plan_id !=
+                                                        _vm.current_plan
+                                                          .plan_price
+                                                          .customer_plan_id
+                                                          ? _c("small", [
+                                                              _vm._v(
+                                                                _vm._s(
+                                                                  item.label_total_price
+                                                                )
+                                                              )
+                                                            ])
+                                                          : _vm._e()
+                                                      ]
+                                                    )
+                                                  }
+                                                ),
+                                                0
+                                              )
+                                            : _vm._e()
+                                        ])
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.plan_prices.length > 1
+                                      ? _c("div", [
+                                          _c("span", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.plan_type != "CREDITO"
+                                                  ? "Plan:"
+                                                  : "Cantidad"
+                                              )
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _vm.plan_type != "CREDITO"
+                                            ? _c(
+                                                "select",
+                                                {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value:
+                                                        _vm.current_plan
+                                                          .plan_price,
+                                                      expression:
+                                                        "current_plan.plan_price"
+                                                    }
+                                                  ],
+                                                  staticClass: "form-control",
+                                                  on: {
+                                                    change: [
+                                                      function($event) {
+                                                        var $$selectedVal = Array.prototype.filter
+                                                          .call(
+                                                            $event.target
+                                                              .options,
+                                                            function(o) {
+                                                              return o.selected
+                                                            }
+                                                          )
+                                                          .map(function(o) {
+                                                            var val =
+                                                              "_value" in o
+                                                                ? o._value
+                                                                : o.value
+                                                            return val
+                                                          })
+                                                        _vm.$set(
+                                                          _vm.current_plan,
+                                                          "plan_price",
+                                                          $event.target.multiple
+                                                            ? $$selectedVal
+                                                            : $$selectedVal[0]
+                                                        )
+                                                      },
+                                                      function($event) {
+                                                        return _vm.PlanPriceChangeEvent()
+                                                      }
+                                                    ]
+                                                  }
+                                                },
+                                                _vm._l(
+                                                  _vm.plan_prices,
+                                                  function(item, index) {
+                                                    return _c(
+                                                      "option",
+                                                      {
+                                                        key: index,
+                                                        domProps: {
+                                                          value: item
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(item.name) +
+                                                            " "
+                                                        ),
+                                                        item.customer_plan_id !=
+                                                        _vm.current_plan
+                                                          .plan_price
+                                                          .customer_plan_id
+                                                          ? _c("small", [
+                                                              _vm._v(
+                                                                _vm._s(
+                                                                  item.label_total_price
+                                                                )
+                                                              )
+                                                            ])
+                                                          : _vm._e()
+                                                      ]
+                                                    )
+                                                  }
+                                                ),
+                                                0
+                                              )
+                                            : _vm._e()
+                                        ])
                                       : _vm._e()
                                   ]),
                                   _vm._v(" "),

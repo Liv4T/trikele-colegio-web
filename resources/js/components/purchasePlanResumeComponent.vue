@@ -34,12 +34,20 @@
                               <img v-else src="/images/Botonplan1.png" alt="plan 1" />
                             </div>
                             <div class="col-8 col-md-6 div-plan-title">
-                              <h4>{{ current_plan.plan_price.name }}</h4>
+                              <h4>{{ current_plan.plan_price.type }} {{ current_plan.plan_price.name }}</h4>
                               <div v-if="current_plan.plan_price.grade">
                                 <span>{{ plan_type != "CREDITO" ? "Grado:" : "Cantidad" }}</span>
                                 <select class="form-control" v-model="current_plan.plan_price" @change="PlanPriceChangeEvent()" v-if="plan_type != 'CREDITO'">
                                   <option v-for="(item, index) in plan_prices" v-bind:key="index" v-bind:value="item"
                                     >Grado {{ item.grade }} <small v-if="item.customer_plan_id != current_plan.plan_price.customer_plan_id">{{ item.label_total_price }}</small></option
+                                  >
+                                </select>
+                              </div>
+                              <div v-if="plan_prices.length > 1">
+                                <span>{{ plan_type != "CREDITO" ? "Plan:" : "Cantidad" }}</span>
+                                <select class="form-control" v-model="current_plan.plan_price" @change="PlanPriceChangeEvent()" v-if="plan_type != 'CREDITO'">
+                                  <option v-for="(item, index) in plan_prices" v-bind:key="index" v-bind:value="item"
+                                    >{{ item.name }} <small v-if="item.customer_plan_id != current_plan.plan_price.customer_plan_id">{{ item.label_total_price }}</small></option
                                   >
                                 </select>
                               </div>
@@ -187,12 +195,23 @@
                             </div>
                             <div class="col-9 col-md-6">
                               <h4>{{ current_plan.plan_price.name }}</h4>
-                              <span>{{ plan_type != "CREDITO" ? "Grado:" : "Cantidad" }}</span>
-                              <select class="form-control" v-model="current_plan.plan_price" @change="PlanPriceChangeEvent()" v-if="plan_type != 'CREDITO'">
-                                <option v-for="(item, index) in plan_prices" v-bind:key="index" v-bind:value="item"
-                                  >Grado {{ item.grade }} <small v-if="item.customer_plan_id != current_plan.plan_price.customer_plan_id">{{ item.label_total_price }}</small></option
-                                >
-                              </select>
+                              <div v-if="current_plan.plan_price.grade">
+                                <span>{{ plan_type != "CREDITO" ? "Grado:" : "Cantidad" }}</span>
+                                <select class="form-control" v-model="current_plan.plan_price" @change="PlanPriceChangeEvent()" v-if="plan_type != 'CREDITO'">
+                                  <option v-for="(item, index) in plan_prices" v-bind:key="index" v-bind:value="item"
+                                    >Grado {{ item.grade }} <small v-if="item.customer_plan_id != current_plan.plan_price.customer_plan_id">{{ item.label_total_price }}</small></option
+                                  >
+                                </select>
+                              </div>
+
+                              <div v-if="plan_prices.length > 1">
+                                <span>{{ plan_type != "CREDITO" ? "Plan:" : "Cantidad" }}</span>
+                                <select class="form-control" v-model="current_plan.plan_price" @change="PlanPriceChangeEvent()" v-if="plan_type != 'CREDITO'">
+                                  <option v-for="(item, index) in plan_prices" v-bind:key="index" v-bind:value="item"
+                                    >{{ item.name }} <small v-if="item.customer_plan_id != current_plan.plan_price.customer_plan_id">{{ item.label_total_price }}</small></option
+                                  >
+                                </select>
+                              </div>
                             </div>
                             <div class="col-12 col-md-4 text-center">
                               <a v-if="current_plan.plan_price.presentation_url" target="_blank" v-bind:href="evalue(current_plan.plan_price.presentation_url)">Ver detalle</a>
@@ -389,7 +408,7 @@
 
           if (response.data.length > 0) {
             this.current_plan.plan_price = response.data[0];
-            this.getEnglishModule(this.current_plan.plan_price.grade);
+            //this.getEnglishModule(this.current_plan.plan_price.grade);
           }
         });
       },
