@@ -2,15 +2,29 @@
   <div>
     <div class="seccion desktop1">
       <div class="form-group">
-        <a href="/ciclos">
-          <img src="uploads/home/23.png" width="100%" />
+        <a  href @click.prevent="modalmatricula()" >
+          <img src="uploads/home/23.jpg" width="100%" />
         </a>
       </div>
     </div>
     <div class="mobile1">
       <div class="form-group">
-        <a href="/ciclos">
-          <img src="uploads/home/24.png" width="100%" />
+        <a  href @click.prevent="modalmatricula()">
+          <img src="uploads/home/24.jpg" width="100%" />
+        </a>
+      </div>
+    </div>
+    <div class="seccion desktop1">
+      <div class="form-group">
+        <a href="https://www.eltiempo.com/contenido-comercial/emprenda-su-propio-camino-de-aprendizaje-con-una-educacion-por-ciclos-601160" target="_blank" >
+          <img src="uploads/home/27.jpg" width="100%" />
+        </a>
+      </div>
+    </div>
+     <div class="mobile1">
+      <div class="form-group">
+        <a href="https://www.eltiempo.com/contenido-comercial/emprenda-su-propio-camino-de-aprendizaje-con-una-educacion-por-ciclos-601160" target="_blank">
+          <img src="uploads/home/28.jpg" width="100%" />
         </a>
       </div>
     </div>
@@ -487,7 +501,7 @@ export default {
       $("#myModal2").modal("show");
     },
     saveLead1() {
-      if (this.nameParent != "" && this.nameSon != "" && this.email != "" && this.phone != "") {
+      if (this.nameParent != "" && this.nameSon != "" && this.emailParent != "" && this.phoneParent != "") {
         var url = window.location.origin + "/saveLead";
         axios
           .post(url, {
