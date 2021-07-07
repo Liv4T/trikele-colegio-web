@@ -2,14 +2,14 @@
   <div>
     <div class="seccion desktop1">
       <div class="form-group">
-        <a  href @click.prevent="modalmatricula()" >
+        <a  href >
           <img src="uploads/home/23.jpg" width="100%" />
         </a>
       </div>
     </div>
     <div class="mobile1">
       <div class="form-group">
-        <a  href @click.prevent="modalmatricula()">
+        <a  href ><!--@click.prevent="modalmatricula()"-->
           <img src="uploads/home/24.jpg" width="100%" />
         </a>
       </div>
@@ -32,7 +32,7 @@
       <h4 class="text-center">ÚNETE A NUESTRA COMUNIDAD TRIKELE</h4>
       <h3 class="text-center">Emprende tu propio camino de aprendizaje</h3>
       <div class="text-center">
-        <a class="btn btn-lg btn-trikele" href @click.prevent="modalmatricula()">ÚNETE</a>
+        <a class="btn btn-lg btn-trikele" href="https://www.eltiempo.com/contenido-comercial/emprenda-su-propio-camino-de-aprendizaje-con-una-educacion-por-ciclos-601160" target="_blank">Lee el artículo completo</a>
       </div>
     </div>
     <br />
