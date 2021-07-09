@@ -1068,7 +1068,7 @@ class PurchasedController extends Controller
 
 
         if (!isset($data['id'])) {
-            return response('Datos inválidos', 400);
+            return response('Datos inválidos:'.json_encode($data), 200);
         }
 
         try {
