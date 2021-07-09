@@ -797,6 +797,7 @@ Route::post('/api/customer', 'CustomerController@addCustomer');
 Route::delete('/api/customer/{id}', 'CustomerController@delete');
 Route::post('/api/payment/confirmation/payu', 'PurchasedController@payConfirmationPayu');
 Route::post('/api/payment/confirmation/mercadopago', 'PurchasedController@payConfirmationMercadopago');
+Route::get('/api/payment/confirmation/mercadopago', 'PurchasedController@payConfirmationMercadopago');
 
 Route::get('/api/document-type', 'DocumentTypeController@all');
 Route::get('/api/document-type/state/ACTIVE', 'DocumentTypeController@allActive');
