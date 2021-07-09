@@ -1032,7 +1032,7 @@ class PurchasedController extends Controller
         $data = $request->all();
 
         if (!isset($data)) {
-            return response('Datos inválidos', 400);
+            return response('Datos inválidos', 200);
         }
 
         $type = $request->get('type');
