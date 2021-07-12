@@ -114,7 +114,7 @@ class ClienteController extends Controller
 
         $lead->save();
         if ($lead->save()) {
-            $email_to = "colegiotrikele@gmail.com";
+            $email_to = env("MAIL_LEADS", "trikeleeducacion@gmail.com");
             $subject = "Nuevo registro formulario de admisiones";
 
             \Mail::send('emails.contactus', ["subject" => $subject, "nombre" => $lead->name_parent, "telefono" => $lead->phone_parent, "correo" => $lead->email_parent], function ($message) use ($email_to) {
