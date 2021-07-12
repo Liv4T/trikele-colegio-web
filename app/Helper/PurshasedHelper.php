@@ -11,6 +11,7 @@ use App\TutorScheduleReservation;
 use App\TutorScheduleStudent;
 use App\Weekly;
 use App\WeeklyPlanUser;
+use Illuminate\Support\Facades\Log;
 
 class PurshasedHelper
 {
@@ -64,11 +65,14 @@ class PurshasedHelper
             if(count($only_grades)>0){
                 //PLAN BY GRADE RULE
                 $weekly_modules =[];
+                Log::info($only_grades);
                 foreach ($only_grades as  $gradeId) {
 
                     $classroom=Classroom::where('id_grade', $gradeId)->first();
 
-                    if(!isset($classroom))  return response()->json(['message'=>'Classroom no válido.'],403);
+                    if(!isset($classroom))  {
+                        return response()->json(['message'=>'Classroom no válido.'],403);
+                    }
 
                     $_weekly_modules =Weekly::where('id_classroom',$classroom->id)->where('deleted',0)->get();
 

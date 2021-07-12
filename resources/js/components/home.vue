@@ -2,23 +2,37 @@
   <div>
     <div class="seccion desktop1">
       <div class="form-group">
-        <a href="/ciclos">
-          <img src="uploads/home/5.png" width="100%" />
+        <a  href >
+          <img src="uploads/home/23.jpg" width="100%" />
         </a>
       </div>
     </div>
     <div class="mobile1">
       <div class="form-group">
-        <a href="/ciclos">
-          <img src="uploads/home/mobile-1.png" width="100%" />
+        <a  href ><!--@click.prevent="modalmatricula()"-->
+          <img src="uploads/home/24.jpg" width="100%" />
+        </a>
+      </div>
+    </div>
+    <div class="seccion desktop1">
+      <div class="form-group">
+        <a href="https://www.eltiempo.com/contenido-comercial/emprenda-su-propio-camino-de-aprendizaje-con-una-educacion-por-ciclos-601160" target="_blank" >
+          <img src="uploads/home/27.jpg" width="100%" />
+        </a>
+      </div>
+    </div>
+     <div class="mobile1">
+      <div class="form-group">
+        <a href="https://www.eltiempo.com/contenido-comercial/emprenda-su-propio-camino-de-aprendizaje-con-una-educacion-por-ciclos-601160" target="_blank">
+          <img src="uploads/home/28.jpg" width="100%" />
         </a>
       </div>
     </div>
     <div class="form-group desktop2">
-      <h4 class="text-center">ÚNETE A NUESTRA COMUNIDAD TRIKELE</h4>
-      <h3 class="text-center">Emprende tu propio camino de aprendizaje</h3>
+      <!--<h4 class="text-center">ÚNETE A NUESTRA COMUNIDAD TRIKELE</h4>
+      <h3 class="text-center">Emprende tu propio camino de aprendizaje</h3>-->
       <div class="text-center">
-        <a class="btn btn-lg btn-trikele" href @click.prevent="modalmatricula()">ÚNETE</a>
+        <a class="btn btn-lg btn-trikele" href="https://www.eltiempo.com/contenido-comercial/emprenda-su-propio-camino-de-aprendizaje-con-una-educacion-por-ciclos-601160" target="_blank">Lee el artículo completo</a>
       </div>
     </div>
     <br />
@@ -487,7 +501,7 @@ export default {
       $("#myModal2").modal("show");
     },
     saveLead1() {
-      if (this.nameParent != "" && this.nameSon != "" && this.email != "" && this.phone != "") {
+      if (this.nameParent != "" && this.nameSon != "" && this.emailParent != "" && this.phoneParent != "") {
         var url = window.location.origin + "/saveLead";
         axios
           .post(url, {

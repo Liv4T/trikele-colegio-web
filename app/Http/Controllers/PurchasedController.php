@@ -1032,7 +1032,7 @@ class PurchasedController extends Controller
         $data = $request->all();
 
         if (!isset($data)) {
-            return response('Datos inválidos', 400);
+            return response('Datos inválidos', 200);
         }
 
         $type = $request->get('type');
@@ -1068,7 +1068,7 @@ class PurchasedController extends Controller
 
 
         if (!isset($data['id'])) {
-            return response('Datos inválidos', 400);
+            return response('Datos inválidos:'.json_encode($data), 200);
         }
 
         try {
@@ -1079,6 +1079,7 @@ class PurchasedController extends Controller
             $merchant_order = null;
             switch ($data["topic"]) {
                 case "payment":
+                    Log::info('Get Payment:'.$data["data_id"]);
                     $payment = MercadoPago\Payment::find_by_id($data["data_id"]);
 
                     break;

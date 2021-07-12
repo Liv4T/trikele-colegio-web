@@ -13,6 +13,7 @@ use App\Classroom;
 use App\ClassroomStudent;
 use App\ClassroomTeacher;
 use App\Classs;
+use App\WeeklyPlanUser;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -128,6 +129,30 @@ class CoursesController extends Controller
                     }
                 }
             }
+
+                //get areas by purshased plan
+                $list_exists=array();
+                $current_date=date('Y-m-d H:i:s');
+
+                $weekly_plans_user=WeeklyPlanUser::where('user_id',$auth->id)->where('initial_date','<=',$current_date)->where('expire_date','>=',$current_date)->where('state',1)->where('deleted',0)->get();
+
+                foreach ($weekly_plans_user as $key => $weekly_plan_user) {
+                    $weekly_plan=Weekly::find($weekly_plan_user->weekly_plan_id);
+                    $classroom=Classroom::find($weekly_plan->id_classroom);
+                    $area = Area::find($weekly_plan->id_area);
+
+                    if(!isset($list_exists[$weekly_plan->id_area.'_'.$weekly_plan->id_classroom]))
+                    {
+                        array_push($areas,[
+                            'id'=>$area->id,
+                            'text'=>$area->name.' '.$classroom->name,
+                            'id_classroom'=>$weekly_plan->id_classroom
+                        ]);
+                    }
+
+                    $list_exists[$weekly_plan->id_area.'_'.$weekly_plan->id_classroom]=true;
+
+                }
         }
         return response()->json($areas);
     }
