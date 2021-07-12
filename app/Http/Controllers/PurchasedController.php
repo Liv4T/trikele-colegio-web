@@ -1079,7 +1079,7 @@ class PurchasedController extends Controller
             $merchant_order = null;
             switch ($data["topic"]) {
                 case "payment":
-                    $payment = MercadoPago\Payment::find_by_id($data["data_id"]);
+                    $payment = MercadoPago\Payment::find_by_id($data["id"]);
 
                     break;
                 case "merchant_order":
