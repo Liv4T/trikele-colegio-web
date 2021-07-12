@@ -71,13 +71,10 @@ class PurshasedHelper
                     $classroom=Classroom::where('id_grade', $gradeId)->first();
 
                     if(!isset($classroom))  {
-                        Log::info($classroom);
                         return response()->json(['message'=>'Classroom no válido.'],403);
                     }
 
                     $_weekly_modules =Weekly::where('id_classroom',$classroom->id)->where('deleted',0)->get();
-
-                    Log::info($_weekly_modules);
 
                     foreach ($_weekly_modules as $item) {
                        array_push($weekly_modules,$item);
