@@ -304,7 +304,18 @@ var render = function() {
                   _vm.activetab === 3
                     ? _c("div", { staticClass: "tabcontent" }, [
                         _vm.idArea != "" && _vm.idClassroom != ""
-                          ? _c("div", [_c("p", [_vm._v("Three")])])
+                          ? _c(
+                              "div",
+                              [
+                                _c("notasd-component", {
+                                  attrs: {
+                                    id_area: _vm.idArea,
+                                    id_classroom: _vm.idClassroom
+                                  }
+                                })
+                              ],
+                              1
+                            )
                           : _vm._e()
                       ])
                     : _vm._e(),
@@ -312,7 +323,19 @@ var render = function() {
                   _vm.activetab === 4
                     ? _c("div", { staticClass: "tabcontent" }, [
                         _vm.idArea != "" && _vm.idClassroom != ""
-                          ? _c("div", [_c("p", [_vm._v("Four")])])
+                          ? _c(
+                              "div",
+                              [
+                                _c("repository-component", {
+                                  attrs: {
+                                    id_grade: undefined,
+                                    id_area: _vm.idArea,
+                                    id_classroom: _vm.idClassroom
+                                  }
+                                })
+                              ],
+                              1
+                            )
                           : _vm._e()
                       ])
                     : _vm._e()

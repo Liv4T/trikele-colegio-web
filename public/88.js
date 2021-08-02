@@ -101,34 +101,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
+ //  var firebaseConfig = {
+//             apiKey: "AIzaSyBUwPOBHWgSv10yWDO0VX_UCCOfHZ3jKYE",
+//             authDomain: "liv4t-skool.firebaseapp.com",
+//             databaseURL: "https://liv4t-skool.firebaseio.com",
+//             projectId: "liv4t-skool",
+//             storageBucket: "liv4t-skool.appspot.com",
+//             messagingSenderId: "346718353628",
+//             appId: "1:346718353628:web:abc0666c41b66fa472dc19",
+//             measurementId: "G-7L14TG5RRZ"
+//   };
+//   // Initialize Firebase
+//   firebase.initializeApp(firebaseConfig);
+//   firebase.analytics();
 
-var firebaseConfig = {
-  apiKey: "AIzaSyBUwPOBHWgSv10yWDO0VX_UCCOfHZ3jKYE",
-  authDomain: "liv4t-skool.firebaseapp.com",
-  databaseURL: "https://liv4t-skool.firebaseio.com",
-  projectId: "liv4t-skool",
-  storageBucket: "liv4t-skool.appspot.com",
-  messagingSenderId: "346718353628",
-  appId: "1:346718353628:web:abc0666c41b66fa472dc19",
-  measurementId: "G-7L14TG5RRZ"
-}; // Initialize Firebase
-
-firebase__WEBPACK_IMPORTED_MODULE_2__["default"].initializeApp(firebaseConfig);
-firebase__WEBPACK_IMPORTED_MODULE_2__["default"].analytics();
 Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["id_area", "id_classroom"],
+  props: ["id_area", "id_classroom", "backPage"],
   data: function data() {
     return {
       myOptions: [],
@@ -139,40 +130,49 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
       errors: [],
       nameFile: '',
       imageData: null,
-      message: ""
+      message: "",
+      area_id: null,
+      classroom_id: null
     };
   },
+  watch: {
+    id_area: function id_area(newVal, oldVal) {
+      if (newVal !== oldVal) {
+        this.area_id = newVal;
+      }
+    },
+    id_classroom: function id_classroom(newVal, oldVal) {
+      if (newVal !== oldVal) {
+        this.classroom_id = newVal;
+      }
+    }
+  },
   mounted: function mounted() {
-    var _this = this;
-
-    var url = "GetArearByUser";
-    axios.get(url).then(function (response) {
-      _this.myOptions = response.data;
-    });
+    this.area_id = this.id_area;
+    this.classroom_id = this.id_classroom;
   },
   methods: {
     getMenu: function getMenu() {
       window.location = "/repository";
     },
     createSemanal: function createSemanal() {
-      var _this2 = this;
+      var _this = this;
 
-      var url = window.location.origin + "/saveRepository";
-      this.nameArea = this.$refs.seleccionado.value;
+      var url = window.location.origin + "/saveRepository"; // this.nameArea = this.$refs.seleccionado.value;
+
+      console.log();
       axios.post(url, {
         //Cursos generales
-        id_area_class: this.nameArea,
+        id_area_class: "".concat(this.area_id, "/").concat(this.classroom_id),
         name: this.nameUnit,
         description: this.description,
         file: this.nameFile,
         date: this.newdate
       }).then(function (response) {
-        _this2.errors = [];
-        toastr.success("Nueva tarea creada exitosamente");
-
-        _this2.getMenu();
+        _this.errors = [];
+        toastr.success("Nueva tarea creada exitosamente"); // this.getMenu();
       })["catch"](function (error) {
-        _this2.errors = error.response.data;
+        _this.errors = error.response.data;
         toastr.danger("Complete todos los campos requeridos");
       });
     },
@@ -187,20 +187,20 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
       this.onUpload();
     },
     onUpload: function onUpload() {
-      var _this3 = this;
+      var _this2 = this;
 
       this.nameFile = null;
       var storageRef = firebase__WEBPACK_IMPORTED_MODULE_2__["default"].storage().ref("".concat(this.imageData.name)).put(this.imageData);
       storageRef.on("state_changed", function (snapshot) {
-        _this3.uploadValue = snapshot.bytesTransferred / snapshot.totalBytes * 100;
+        _this2.uploadValue = snapshot.bytesTransferred / snapshot.totalBytes * 100;
       }, function (error) {
         console.log(error.message);
       }, function () {
-        _this3.uploadValue = 100;
+        _this2.uploadValue = 100;
         storageRef.snapshot.ref.getDownloadURL().then(function (url) {
-          _this3.nameFile = url;
-          _this3.message = _this3.imageData.name;
-          console.log(_this3.nameFile);
+          _this2.nameFile = url;
+          _this2.message = _this2.imageData.name;
+          console.log(_this2.nameFile);
         });
       });
     }
@@ -225,9 +225,9 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "back" }, [
+    _c("div", [
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-11 mx-auto" }, [
+        _c("div", { staticClass: "col-md-12 mx-auto" }, [
           _c(
             "div",
             { staticClass: "custom-card text-center" },
@@ -251,37 +251,6 @@ var render = function() {
                 },
                 [
                   _c("tab-content", { attrs: { title: "Crear entrega" } }, [
-                    _c("div", { staticClass: "form-group mx-auto" }, [
-                      _c("div", { attrs: { align: "center" } }, [
-                        _c("div", { staticClass: "col-md-6" }, [
-                          _c("label", { attrs: { for: "" } }, [
-                            _vm._v("Materia:")
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "select",
-                            {
-                              ref: "seleccionado",
-                              staticClass: "form-control",
-                              attrs: { required: "" }
-                            },
-                            _vm._l(_vm.myOptions, function(option) {
-                              return _c(
-                                "option",
-                                {
-                                  domProps: {
-                                    value: option.id + "/" + option.id_classroom
-                                  }
-                                },
-                                [_vm._v(_vm._s(option.text))]
-                              )
-                            }),
-                            0
-                          )
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
                     _c("div", { staticClass: "form-group row mx-auto" }, [
                       _c("div", { staticClass: "col-md-6" }, [
                         _c("label", { attrs: { for: "name" } }, [
@@ -449,16 +418,18 @@ var render = function() {
                     _vm._v(" "),
                     _c("strong", [_vm._v("* Campos requeridos")]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "float-left" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-warning ",
-                          attrs: { href: "/repository" }
-                        },
-                        [_vm._v("Volver")]
-                      )
-                    ])
+                    _vm.backPage
+                      ? _c("div", { staticClass: "float-left" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-warning ",
+                              on: { click: _vm.backPage }
+                            },
+                            [_vm._v("Volver")]
+                          )
+                        ])
+                      : _vm._e()
                   ])
                 ],
                 1

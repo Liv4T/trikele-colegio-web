@@ -36,13 +36,13 @@
         
                             <div v-if="activetab === 3" class="tabcontent">
                                 <div v-if="idArea !='' && idClassroom != ''">
-                                    <p>Three</p>  
+                                    <notasd-component :id_area="idArea" :id_classroom="idClassroom"></notasd-component>
                                 </div>              
                             </div>
     
                             <div v-if="activetab === 4" class="tabcontent">
                                 <div v-if="idArea !='' && idClassroom != ''">
-                                    <p>Four</p>
+                                    <repository-component :id_grade="undefined" :id_area="idArea" :id_classroom="idClassroom"></repository-component>
                                 </div>
                             </div>
                         </div>

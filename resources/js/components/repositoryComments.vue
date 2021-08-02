@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div class="back">
+        <!-- <div class="back"> -->
+        <div>  
             <div class="row">
                 <div class="col-md-11 mx-auto">
                     <div class="custom-card text-center">
@@ -103,9 +104,9 @@
                                         </div>
                                     </div>
                                 </tab-content>
-                                   <div class="float-left">
-                                        <a :href="'/repository/students/'+id_repo" class="btn btn-warning ">Volver</a>
-                                </div>
+                                    <div v-if="backToPage" class="float-left">
+                                      <a v-on:click="backToPage" class="btn btn-warning ">Volver</a>
+                                    </div>
 
                             </form-wizard>
                     </div>
@@ -196,7 +197,7 @@ import firebase from 'firebase';
   firebase.analytics();
 Vue.use(VueFormWizard);
 export default {
-  props: ["id_repo","id_student"],
+  props: ["id_repo","id_student","backToPage"],
   data() {
     return {
       myOptions: [],

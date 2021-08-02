@@ -312,14 +312,10 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
       });
     },
     SaveDataEvent: function SaveDataEvent() {
-      var _this2 = this;
-
       console.log(this.course);
       axios.put("/api/teacher/module/".concat(this.id_module, "/class"), this.course).then(function (response) {
         // this.getPlanificationEvent(this.id_lective_planification);
-        toastr.success("Clases actualizadas correctamente");
-
-        _this2.returnPage();
+        toastr.success("Clases actualizadas correctamente"); // this.returnPage();
       }, function (error) {
         console.log(error);
         toastr.error("ERROR:Por favor valide que la información esta completa");
@@ -359,7 +355,7 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
       }
     },
     onFileChange: function onFileChange(file, item_index) {
-      var _this3 = this;
+      var _this2 = this;
 
       console.log(item_index);
       this.is_loading = true;
@@ -383,46 +379,46 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
         data.append("name", file_name);
         data.append("count", "-class-".concat(item_index));
         axios.post("/fileDocument", data).then(function (response) {
-          _this3.course.content[item_index].content = "".concat(window.location.origin, "/uploads/clases/").concat(file_name.split(' ').join('_'), "-class-").concat(item_index, ".").concat(file_extension);
+          _this2.course.content[item_index].content = "".concat(window.location.origin, "/uploads/clases/").concat(file_name.split(' ').join('_'), "-class-").concat(item_index, ".").concat(file_extension);
 
-          _this3.stopLooading(item_index);
+          _this2.stopLooading(item_index);
         })["catch"](function (err) {
-          _this3.stopLooading(item_index);
+          _this2.stopLooading(item_index);
         });
       } else {
         this.stopLooading(item_index);
       }
     },
     initLoading: function initLoading(item_index, percent) {
-      var _this4 = this;
+      var _this3 = this;
 
       if (this.course.content[item_index].progress_bar_percent != 0 && this.course.content[item_index].progress_bar_percent < percent && percent < 100) {
         this.course.content[item_index].progress_bar_percent = this.course.content[item_index].progress_bar_percent + 20;
         setTimeout(function () {
-          _this4.initLoading(item_index, percent + 20);
+          _this3.initLoading(item_index, percent + 20);
         }, 2000);
       }
     },
     stopLooading: function stopLooading(item_index) {
-      var _this5 = this;
+      var _this4 = this;
 
       this.course.content[item_index].progress_bar_percent = 100;
       setTimeout(function () {
-        _this5.course.content[item_index].progress_bar_percent = 0;
-        _this5.is_loading = false;
+        _this4.course.content[item_index].progress_bar_percent = 0;
+        _this4.is_loading = false;
       }, 500);
     },
     GetIndicatorsEvent: function GetIndicatorsEvent(activity) {
-      var _this6 = this;
+      var _this5 = this;
 
       if (!activity || !activity.id_achievement) return;
       if (this.indicators == null) this.indicators = [];
       axios.get("/api/achievement/".concat(activity.id_achievement, "/indicator")).then(function (response) {
         response.data.forEach(function (i) {
-          if (_this6.indicators.filter(function (p) {
+          if (_this5.indicators.filter(function (p) {
             return p.id == i.id;
           }).length == 0) {
-            _this6.indicators.push(i);
+            _this5.indicators.push(i);
           }
         });
       })["catch"](function (err) {

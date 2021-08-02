@@ -326,7 +326,7 @@ export default {
 
                // this.getPlanificationEvent(this.id_lective_planification);
                 toastr.success("Clases actualizadas correctamente");
-                this.returnPage();
+                // this.returnPage();
             },(error)=>{console.log(error);toastr.error("ERROR:Por favor valide que la información esta completa");});
 
         },

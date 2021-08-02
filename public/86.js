@@ -130,6 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var init = function init() {
   var tieneSoporteUserMedia = function tieneSoporteUserMedia() {
     return navigator.mediaDevices ? navigator.mediaDevices.getUserMedia : null;
@@ -213,7 +214,7 @@ firebase__WEBPACK_IMPORTED_MODULE_2__["default"].initializeApp(firebaseConfig);
 firebase__WEBPACK_IMPORTED_MODULE_2__["default"].analytics();
 Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["id_repo", "id_student"],
+  props: ["id_repo", "id_student", "backToPage"],
   data: function data() {
     return {
       myOptions: [],
@@ -414,7 +415,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "back" }, [
+    _c("div", [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-11 mx-auto" }, [
           _c(
@@ -695,16 +696,18 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "float-left" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-warning ",
-                        attrs: { href: "/repository/students/" + _vm.id_repo }
-                      },
-                      [_vm._v("Volver")]
-                    )
-                  ])
+                  _vm.backToPage
+                    ? _c("div", { staticClass: "float-left" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-warning ",
+                            on: { click: _vm.backToPage }
+                          },
+                          [_vm._v("Volver")]
+                        )
+                      ])
+                    : _vm._e()
                 ],
                 1
               )

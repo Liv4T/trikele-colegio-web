@@ -1,8 +1,9 @@
 <template>
   <div>
-    <div class="back">
+    <!-- <div class="back"> -->
+    <div>
       <div class="row">
-        <div class="col-md-11 mx-auto">
+        <div class="col-md-12 mx-auto">
           <div class="custom-card text-center">
             <h3 class="card-header fondo">Entregas</h3>
               <form-wizard
@@ -14,17 +15,7 @@
                 finish-button-text="Guardar"
                 @on-complete="createSemanal"
               >
-                <tab-content title="Crear entrega">
-                  <div class="form-group mx-auto">
-                    <div align="center">
-                      <div class="col-md-6">
-                        <label for>Materia:</label>
-                        <select class="form-control" ref="seleccionado" required>
-                          <option :value="option.id+'/'+option.id_classroom" v-for="option in myOptions">{{ option.text }}</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
+                <tab-content title="Crear entrega">                  
                   <div class="form-group row mx-auto">
                     <div class="col-md-6">
                       <label for="name">*Título</label>
@@ -83,8 +74,8 @@
 
                   </div>
                   <strong>* Campos requeridos</strong>
-                  <div class="float-left">
-                    <a href="/repository" class="btn btn-warning ">Volver</a>
+                  <div v-if="backPage" class="float-left">
+                    <a  v-on:click="backPage" class="btn btn-warning ">Volver</a>
                 </div>
                 </tab-content>
               </form-wizard>
@@ -99,22 +90,22 @@
 import VueFormWizard from "vue-form-wizard";
 import "vue-form-wizard/dist/vue-form-wizard.min.css";
 import firebase from 'firebase';
- var firebaseConfig = {
-            apiKey: "AIzaSyBUwPOBHWgSv10yWDO0VX_UCCOfHZ3jKYE",
-            authDomain: "liv4t-skool.firebaseapp.com",
-            databaseURL: "https://liv4t-skool.firebaseio.com",
-            projectId: "liv4t-skool",
-            storageBucket: "liv4t-skool.appspot.com",
-            messagingSenderId: "346718353628",
-            appId: "1:346718353628:web:abc0666c41b66fa472dc19",
-            measurementId: "G-7L14TG5RRZ"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
+//  var firebaseConfig = {
+//             apiKey: "AIzaSyBUwPOBHWgSv10yWDO0VX_UCCOfHZ3jKYE",
+//             authDomain: "liv4t-skool.firebaseapp.com",
+//             databaseURL: "https://liv4t-skool.firebaseio.com",
+//             projectId: "liv4t-skool",
+//             storageBucket: "liv4t-skool.appspot.com",
+//             messagingSenderId: "346718353628",
+//             appId: "1:346718353628:web:abc0666c41b66fa472dc19",
+//             measurementId: "G-7L14TG5RRZ"
+//   };
+//   // Initialize Firebase
+//   firebase.initializeApp(firebaseConfig);
+//   firebase.analytics();
 Vue.use(VueFormWizard);
 export default {
-  props: ["id_area", "id_classroom"],
+  props: ["id_area", "id_classroom","backPage"],
   data() {
     return {
       myOptions: [],
@@ -125,14 +116,27 @@ export default {
       errors: [],
       nameFile: '',
       imageData: null,
-      message:""
+      message:"",
+      area_id: null,
+      classroom_id: null
     };
   },
-  mounted() {
-     var url = "GetArearByUser";
-    axios.get(url).then((response) => {
-      this.myOptions = response.data;
-    });
+  watch:{
+    id_area: function(newVal, oldVal){
+      if(newVal !== oldVal){
+        this.area_id = newVal;
+      }
+    },
+
+    id_classroom: function(newVal, oldVal){
+      if(newVal !== oldVal){
+        this.classroom_id = newVal;
+      }
+    }
+  },
+  mounted(){
+    this.area_id = this.id_area;
+    this.classroom_id = this.id_classroom;
   },
   methods: {
     getMenu() {
@@ -140,12 +144,12 @@ export default {
     },
     createSemanal() {
       var url = window.location.origin + "/saveRepository";
-      this.nameArea = this.$refs.seleccionado.value;
-
+      // this.nameArea = this.$refs.seleccionado.value;
+      console.log()
       axios
         .post(url, {
           //Cursos generales
-          id_area_class: this.nameArea,
+          id_area_class: `${this.area_id}/${this.classroom_id}`,
           name: this.nameUnit,
           description: this.description,
           file: this.nameFile,
@@ -155,7 +159,7 @@ export default {
           this.errors = [];
 
           toastr.success("Nueva tarea creada exitosamente");
-          this.getMenu();
+          // this.getMenu();
         })
         .catch((error) => {
           this.errors = error.response.data;

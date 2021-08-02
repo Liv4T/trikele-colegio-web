@@ -1,12 +1,13 @@
 <template>
-  <div class="back">
+  <!-- <div class="back"> -->
+  <div>
     <div class="row justify-content-center">
-      <div id="crud" class="col-sm-10">
+      <div id="crud" class="col-sm-12">
         <div class="card text-center">
           <h3 class="card-header fondo">Notas</h3>
 
           <div class="card-body">
-            <table class="table table-responsive-xl table-hover table-striped center">
+            <!-- <table class="table table-responsive-xl table-hover table-striped center">
               <thead>
                 <tr>
                   <th colspan="1">&nbsp;</th>
@@ -26,14 +27,14 @@
                   <td>-</td>
                 </tr>
               </tbody>
-            </table>
-            <div class="modal-footer">
+            </table> -->
+            <!-- <div class="modal-footer">
               <input type="submit" class="btn btn-warning" value="Volver" />
-            </div>
-          </div>
+            </div> -->
+          <!-- </div>
         </div>
-      </div>
-      <div class="modal fade" id="editu">
+      </div> -->
+      <!-- <div class="modal fade" id="editu">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="card">
@@ -43,7 +44,7 @@
                   <span>&times;</span>
                 </button>
               </h3>
-              <div class="card-body">
+              <div class="card-body"> -->
                 <table class="table table-responsive table-hover table-striped center">
                   <thead>
                     <tr>
@@ -52,45 +53,65 @@
                       <th>Nota</th>
                     </tr>
                   </thead>
-                  <tbody v-for="stud in students">
+                  <tbody v-for="(stud, key) in students" :key="key">
                     <tr>
-                      <td>{{ stud.name}}</td>
+                      <td>{{stud.name}}</td>
                       <td>{{stud.score}}</td>
                     </tr>
                   </tbody>
                 </table>
-              </div>
             </div>
-          </div>
+            <!-- </div>
+          </div>-->
         </div>
-      </div>
+      </div> 
     </div>
   </div>
 </template>
 <script>
 export default {
+  props:["id_area","id_classroom"],
   data() {
     return {
       students: [],
       areas: [],
+      area_id:null,
+      classroom_id: null
     };
   },
-  created() {},
+  watch:{
+    id_area: function(newVal, OldVal){
+      if(newVal !== OldVal){
+        this.area_id = newVal;
+        this.editNames();
+      }
+    },
+    id_classroom: function(newVal, OldVal){
+      if(newVal !== OldVal){
+        this.classroom_id = newVal;
+        this.editNames();
+      }
+    }
+  },
   mounted() {
-    var url = "GetArearByUser";
-    axios.get(url).then((response) => {
-      this.areas = response.data;
-    });
+    this.area_id = this.id_area;
+    this.classroom_id = this.id_classroom;
+    this.editNames();
+    // var url = "GetArearByUser";
+    // axios.get(url).then((response) => {
+    //   this.areas = response.data;
+    // });
 
     console.log("Component mounted.");
   },
   methods: {
-    editNames(area, clas) {
-      var urlr = "StudentsByArea/" + area + "/" + clas;
+    editNames() {
+      this.students =[]
+      var urlr = "StudentsByArea/" + this.area_id + "/" + this.classroom_id;
       axios.get(urlr).then((response) => {
         this.students = response.data;
       });
-      $("#editu").modal("show");
+      // $("#editu").modal("show");
     },
   },
 };
