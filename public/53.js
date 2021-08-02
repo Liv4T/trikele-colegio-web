@@ -67,10 +67,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["id_module"],
+  props: ["id_module", "backPage"],
   data: function data() {
     return {
       clases: [],
@@ -85,7 +84,9 @@ __webpack_require__.r(__webpack_exports__);
       nameWeekly: "",
       nameArea: "",
       id_area: "",
-      id_classroom: ""
+      id_classroom: "",
+      clas_id: undefined,
+      showSection: "listClass"
     };
   },
   created: function created() {},
@@ -117,6 +118,18 @@ __webpack_require__.r(__webpack_exports__);
         _this3.id_area = response.data.area.id;
         _this3.id_classroom = response.data.classroom.id;
       });
+    },
+    getSection: function getSection(showSection, data) {
+      if (showSection === 'createClass') {
+        this.showSection = 'createClass';
+      } else if (showSection === 'editClass') {
+        this.clas_id = data.id;
+        this.showSection = 'editClass';
+      }
+    },
+    backToPage: function backToPage() {
+      this.showSection = 'listClass';
+      this.clas_id = undefined;
     }
   }
 });
@@ -187,78 +200,131 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "back" }, [
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-sm-10", attrs: { id: "crud" } }, [
-        _c("div", { staticClass: "card text-center" }, [
-          _c("h5", { staticClass: "card-header fondo" }, [_vm._v("Ciclo")]),
-          _vm._v(" "),
-          _c("h3", { staticClass: "card-header fondo" }, [
-            _vm._v(_vm._s(_vm.nameWeekly))
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "classroom-label" }, [
-            _vm._v(_vm._s(_vm.nameArea))
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("div", { staticClass: "text-left" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "btn btn-primary",
-                  attrs: {
-                    href: "/docente/modulo/" + _vm.id_module + "/clase/nueva"
-                  }
-                },
-                [_vm._v("Crear Clase")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("br"),
-            _vm._v(" "),
-            _c(
-              "table",
-              {
-                staticClass:
-                  "table table-responsive-xl table-hover table-striped center"
-              },
-              [
-                _vm._m(0),
+  return _vm.showSection === "listClass"
+    ? _c("div", [
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c("div", { staticClass: "col-sm-12", attrs: { id: "crud" } }, [
+            _c("div", { staticClass: "card text-center" }, [
+              _c("h5", { staticClass: "card-header fondo" }, [_vm._v("Ciclo")]),
+              _vm._v(" "),
+              _c("h3", { staticClass: "card-header fondo" }, [
+                _vm._v(_vm._s(_vm.nameWeekly))
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "classroom-label" }, [
+                _vm._v(_vm._s(_vm.nameArea))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "float-left" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-primary",
+                      staticStyle: { color: "white" },
+                      on: {
+                        click: function($event) {
+                          return _vm.getSection("createClass")
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            Crear Clase\n                        "
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm.backPage
+                  ? _c("div", { staticClass: "float-right" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          on: { click: _vm.backPage }
+                        },
+                        [_vm._v("Volver")]
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("br"),
                 _vm._v(" "),
                 _c(
-                  "tbody",
-                  _vm._l(_vm.fillS, function(clas, t) {
-                    return _c("tr", { key: t }, [
-                      _c("td", [_vm._v(_vm._s(clas.name))]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-primary",
-                            attrs: {
-                              href:
-                                "/docente/modulo/" +
-                                _vm.id_module +
-                                "/clase/" +
-                                clas.id
-                            }
-                          },
-                          [_vm._v("Ir a clase")]
-                        )
-                      ])
-                    ])
-                  }),
-                  0
+                  "table",
+                  {
+                    staticClass:
+                      "table table-responsive-xl table-hover table-striped center"
+                  },
+                  [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.fillS, function(clas, t) {
+                        return _c("tr", { key: t }, [
+                          _c("td", [_vm._v(_vm._s(clas.name))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-primary",
+                                staticStyle: { color: "white" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.getSection("editClass", clas)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                        Ir a clase\n                                    "
+                                )
+                              ]
+                            )
+                          ])
+                        ])
+                      }),
+                      0
+                    )
+                  ]
                 )
-              ]
-            )
+              ])
+            ])
           ])
         ])
       ])
-    ])
-  ])
+    : _vm.showSection === "createClass"
+    ? _c(
+        "div",
+        [
+          _c("teacher-course", {
+            attrs: {
+              id_module: _vm.id_module,
+              id_class: _vm.clas_id,
+              backToPage: _vm.backToPage
+            }
+          })
+        ],
+        1
+      )
+    : _vm.showSection === "editClass"
+    ? _c(
+        "div",
+        [
+          _c("teacher-course", {
+            attrs: {
+              id_module: _vm.id_module,
+              id_class: _vm.clas_id,
+              backToPage: _vm.backToPage
+            }
+          })
+        ],
+        1
+      )
+    : _vm._e()
 }
 var staticRenderFns = [
   function() {

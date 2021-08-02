@@ -805,3 +805,7 @@ Route::get('/api/document-type/{id}', 'DocumentTypeController@get');
 Route::put('/api/document-type/{id}', 'DocumentTypeController@update');
 Route::post('/api/document-type', 'DocumentTypeController@insert');
 Route::delete('/api/document-type/{id}', 'DocumentTypeController@delete');
+
+Route::middleware('auth')->get('/planClass', function () {
+    return view('planclass');
+});

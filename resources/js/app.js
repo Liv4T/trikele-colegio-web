@@ -216,4 +216,6 @@ Vue.component("purchase-plan-pay-error", () => import ("./components/purchasePla
 Vue.component("purchase-tutorial-resume", () => import ("./components/purchaseTutorialResumeComponent.vue"));
 Vue.component("purchase-tutorial-login", () => import ("./components/purchaseTutorialLoginComponent.vue"));
 
+Vue.component("plan-class-component", ()=>import("./components/planClassComponent.vue"));
+
 const app = new Vue({el: "#app", data: {}, store});

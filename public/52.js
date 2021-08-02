@@ -177,6 +177,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 (function () {
   "use strict";
 
@@ -201,7 +202,7 @@ __webpack_require__.r(__webpack_exports__);
 
 Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["id_module", "id_class"],
+  props: ["id_module", "id_class", "backToPage"],
   data: function data() {
     return {
       tmp: {},
@@ -504,9 +505,9 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "back" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-11 mx-auto" }, [
+    _c("div", [
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-12 mx-auto" }, [
           _c("div", { staticClass: "custom-card text-center" }, [
             _c("h5", { staticClass: "card-header fondo" }, [
               _vm._v(_vm._s(_vm.weekly_plan.name))
@@ -1483,10 +1484,7 @@ var render = function() {
           _c("div", { staticClass: "div-weekly-plan-btn-save" }, [
             _c(
               "a",
-              {
-                staticClass: "btn btn-warning",
-                attrs: { href: "/docente/modulo/" + _vm.id_module }
-              },
+              { staticClass: "btn btn-warning", on: { click: _vm.backToPage } },
               [_vm._v("Cancelar")]
             ),
             _vm._v(" "),

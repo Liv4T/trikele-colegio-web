@@ -1,8 +1,9 @@
 <template>
     <div>
-        <div class="back">
-            <div class="row">
-                <div class="col-md-11 mx-auto">
+        <!-- <div class="back"> -->
+        <div>
+            <div class="row justify-content-center">
+                <div class="col-md-12 mx-auto">
                     <div class="custom-card text-center">
                         <h5 class="card-header fondo">{{ weekly_plan.name }}</h5>
                           <span class="classroom-label">{{ nameArea }}</span>
@@ -152,7 +153,7 @@
 
                     </div>
                     <div class="div-weekly-plan-btn-save">
-                       <a class="btn btn-warning" :href="'/docente/modulo/'+id_module">Cancelar</a>
+                       <a class="btn btn-warning" v-on:click="backToPage">Cancelar</a>
                        <button class="btn btn-primary" v-on:click="SaveDataEvent()" :disabled="is_loading" v-if="course.state==1">Guardar y enviar</button>
                     </div>
 
@@ -194,7 +195,7 @@ import VueFormWizard from "vue-form-wizard";
 import "vue-form-wizard/dist/vue-form-wizard.min.css";
 Vue.use(VueFormWizard);
 export default {
-    props: ["id_module", "id_class"],
+    props: ["id_module", "id_class", "backToPage"],
     data() {
         return {
             tmp:{},

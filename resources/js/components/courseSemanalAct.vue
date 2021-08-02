@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="back">
+    <!-- <div class="back"> -->
+    <div>
       <div class="row">
         <div class="col-md-11 mx-auto">
           <div class="custom-card text-center">
@@ -50,7 +51,10 @@
                     <a href="#" class="btn btn-warning float-right">Guardar</a>
                   </div>-->
                 </tab-content>
-              </form-wizard>
+                <div class="float-left" v-if="backPage">
+                  <button class="btn btn-primary" v-on:click="backPage">Volver</button>
+                </div>
+              </form-wizard>              
             </form>
           </div>
         </div>
@@ -104,7 +108,7 @@ import VueFormWizard from "vue-form-wizard";
 import "vue-form-wizard/dist/vue-form-wizard.min.css";
 Vue.use(VueFormWizard);
 export default {
-  props: ["id_area", "id_classroom"],
+  props: ["id_area", "id_classroom","backPage"],
   data() {
     return {
       inputs: [
