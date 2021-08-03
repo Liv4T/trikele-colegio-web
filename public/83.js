@@ -1,14 +1,20 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[83],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/planClassComponent.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/planClassComponent.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/planAdm.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/planAdm.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_form_wizard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-form-wizard */ "./node_modules/vue-form-wizard/dist/vue-form-wizard.js");
+/* harmony import */ var vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_form_wizard_dist_vue_form_wizard_min_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-form-wizard/dist/vue-form-wizard.min.css */ "./node_modules/vue-form-wizard/dist/vue-form-wizard.min.css");
+/* harmony import */ var vue_form_wizard_dist_vue_form_wizard_min_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_form_wizard_dist_vue_form_wizard_min_css__WEBPACK_IMPORTED_MODULE_1__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -64,87 +70,391 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+(function () {
+  "use strict";
+
+  window.addEventListener("load", function () {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName("needs-validation"); // Loop over them and prevent submission
+
+    var validation = Array.prototype.filter.call(forms, function (form) {
+      form.addEventListener("submit", function (event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        form.classList.add("was-validated");
+      }, false);
+    });
+  }, false);
+})();
+
+$(function () {
+  // Get the form fields and hidden div
+  var checkbox = $("#gridCheck1");
+  var hidden = $("#hidden_fields1");
+  hidden.hide();
+  checkbox.change(function () {
+    if (checkbox.is(":checked")) {
+      // Show the hidden fields.
+      hidden.show();
+    } else {
+      hidden.hide();
+    }
+  });
+});
+
+
+Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
-      areas: [],
-      activetab: null,
-      idArea: '',
-      idClassroom: ''
-    };
+    var _ref;
+
+    return _ref = {
+      inputs: [{
+        name: "",
+        contenido: "",
+        observation: ""
+      }],
+      newTrimestre: [],
+      observation: "",
+      newLogro1: "",
+      newLogro2: "",
+      newLogro3: "",
+      newLogro4: ""
+    }, _defineProperty(_ref, "newTrimestre", []), _defineProperty(_ref, "trimestre", false), _defineProperty(_ref, "logro_1", ""), _defineProperty(_ref, "logro_2", ""), _defineProperty(_ref, "logro_3", ""), _defineProperty(_ref, "logro_4", ""), _defineProperty(_ref, "fillC", []), _defineProperty(_ref, "anual", []), _defineProperty(_ref, "newAnual", []), _defineProperty(_ref, "errors", []), _ref;
   },
   mounted: function mounted() {
     var _this = this;
 
-    axios.get("/GetArearByUser").then(function (response) {
-      _this.areas = response.data;
+    var urlsel = "Courses";
+    axios.get(urlsel).then(function (response) {
+      _this.fillC = response.data;
+
+      if (_this.fillC.courses.length > 0) {
+        _this.trimestre = true;
+
+        for (var i = 0; i < _this.fillC.courses.length; i++) {
+          _this.logro_1 = _this.fillC.courses[i].achievement_1;
+          _this.logro_2 = _this.fillC.courses[i].achievement_2;
+          _this.logro_3 = _this.fillC.courses[i].achievement_3;
+          _this.logro_4 = _this.fillC.courses[i].achievement_4;
+        }
+      }
     });
   },
   methods: {
-    ShowSelected: function ShowSelected(data) {
-      var dataArea = JSON.parse(data.target.value);
-      this.idArea = dataArea.id;
-      this.idClassroom = dataArea.id_classroom;
-      this.idAreaClass = dataArea.id + '/' + dataArea.id_classroom;
+    getMenu: function getMenu() {
+      window.location = "/planificacion";
+    },
+    add: function add(index) {
+      this.inputs.push({
+        name: "",
+        contenido: ""
+      });
+    },
+    remove: function remove(index) {
+      this.inputs.splice(index, 1);
+    },
+    createCourses: function createCourses() {
+      var _this2 = this;
+
+      var url = "Courses";
+
+      if (this.inputs.length >= 1) {
+        for (var i = 0; i < this.inputs.length; i++) {
+          this.newTrimestre.push(this.inputs[i]);
+        }
+      }
+
+      axios.post(url, {
+        //Cursos generales
+        materia: "1",
+        logro1: this.newLogro1,
+        logro2: this.newLogro2,
+        logro3: this.newLogro3,
+        logro4: this.newLogro4,
+        trimestre: this.newTrimestre
+      }).then(function (response) {
+        _this2.errors = [];
+        toastr.success("Nuevo plan general creado exitosamente");
+
+        _this2.getMenu();
+      })["catch"](function (error) {
+        _this2.errors = error.response.data;
+      });
+    },
+    updateCourses: function updateCourses() {
+      window.location = "/planificacion";
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/planClassComponent.vue?vue&type=style&index=0&lang=css&":
-/*!************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/planClassComponent.vue?vue&type=style&index=0&lang=css& ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.mg-btn {\r\n  margin: 10px;\r\n  min-width: 165px;\n}\n.width-r {\r\n  max-width: 97%;\r\n  border: 1px solid #cccccc82;\r\n  border-radius: 10px;\r\n  box-shadow: 3px 3px 3px 3px #b0acac;\n}\n.tabs {\r\n  margin-top: 20px;\r\n  overflow: hidden;\r\n  margin-left: 90px;\r\n  margin-bottom: -2px;\n}\n.tabs ul {\r\n  list-style-type: none;\r\n  margin-left: 20px;\n}\n.tabs a {\r\n  float: left;\r\n  cursor: pointer;\r\n  padding: 12px 24px;\r\n  transition: background-color 0.2s;\r\n  border: 1px solid #ccc;\r\n  border-right: none;\r\n  background-color: #bfbfbf;\r\n  border-radius: 10px 10px 0 0;\r\n  font-weight: bold;\r\n  color: #fff !important;\n}\n.tabs a:last-child {\r\n  border-right: 1px solid #ccc;\n}\n.pd-20 {\r\n  padding: 20px;\n}\r\n\r\n/* Change background color of tabs on hover */\n.tabs a:hover {\r\n  background-color: #aaa;\r\n  color: #fff;\n}\r\n\r\n/* Styling for active tab */\n.tabs a.active {\r\n  background-color: #00cbcec1;\r\n  color: #fff;\r\n  border-bottom: 2px solid #fff;\r\n  cursor: default;\n}\n.tabcontent {\r\n  border: 1px solid #ccc;\r\n  border-radius: 10px;\r\n  box-shadow: 3px 3px 6px #e1e1e1;\n}\n.content-azul {\r\n  background-color: #00cbcec6;\n}\n.flotante {\r\n  position: fixed;\r\n  top: 380px;\r\n  z-index: 1020;\n}\r\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/planClassComponent.vue?vue&type=style&index=0&lang=css&":
-/*!****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/planClassComponent.vue?vue&type=style&index=0&lang=css& ***!
-  \****************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./planClassComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/planClassComponent.vue?vue&type=style&index=0&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/planClassComponent.vue?vue&type=template&id=0a096c79&":
-/*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/planClassComponent.vue?vue&type=template&id=0a096c79& ***!
-  \*********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/planAdm.vue?vue&type=template&id=d1e31c74&":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/planAdm.vue?vue&type=template&id=d1e31c74& ***!
+  \**********************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -156,219 +466,898 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "back" }, [
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _c(
-        "div",
-        { staticClass: "col-sm-11", attrs: { id: "crud text-center" } },
-        [
-          _c("div", { staticClass: "form-group col-md-5 mx-auto" }, [
-            _c("div", { staticClass: "text-center" }, [
-              _c(
-                "select",
-                {
-                  staticClass: "btn btn-warning letra-boldfont",
-                  attrs: { name: "type" },
-                  on: { change: _vm.ShowSelected }
-                },
-                [
-                  _c(
-                    "option",
-                    {
-                      attrs: {
-                        disabled: "",
-                        selected: "",
-                        hidden: "",
-                        value: ""
-                      }
-                    },
-                    [_vm._v("CURSOS")]
-                  ),
-                  _vm._v(" "),
-                  _vm._l(_vm.areas, function(area, key) {
-                    return _c(
-                      "option",
-                      { key: key, domProps: { value: JSON.stringify(area) } },
-                      [_vm._v(_vm._s(area.text))]
-                    )
-                  })
-                ],
-                2
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "back" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-10 mx-auto" }, [
+          _c("div", { staticClass: "custom-card text-center" }, [
+            _c("h3", { staticClass: "card-header fondo" }, [
+              _vm._v("Planificación general")
+            ]),
+            _vm._v(" "),
             _c(
-              "div",
-              { staticClass: "col-md-10 mx-auto", attrs: { id: "tabs" } },
+              "form",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.trimestre == false,
+                    expression: "trimestre==false"
+                  }
+                ],
+                staticClass: "needs-validation",
+                attrs: { novalidate: "" }
+              },
               [
-                _c("div", { staticClass: "tabs" }, [
-                  _c(
-                    "a",
-                    {
-                      class: [_vm.activetab === 1 ? "active" : ""],
-                      on: {
-                        click: function($event) {
-                          _vm.activetab = 1
-                        }
-                      }
+                _c(
+                  "form-wizard",
+                  {
+                    attrs: {
+                      title: "",
+                      subtitle: "",
+                      color: "#ffc107",
+                      "next-button-text": "Siguiente",
+                      "back-button-text": "Atrás",
+                      "finish-button-text": "Guardar y enviar"
                     },
-                    [
-                      _c("h4", { staticClass: "letra-poppins-bold" }, [
-                        _vm._v("CLASES")
+                    on: { "on-complete": _vm.createCourses }
+                  },
+                  [
+                    _c("tab-content", { attrs: { title: "Anual" } }, [
+                      _c("div", { staticClass: "form-group mx-auto" }, [
+                        _c("div", { attrs: { align: "center" } }, [
+                          _c("strong", [_vm._v("Logro 1")])
+                        ]),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.newLogro1,
+                              expression: "newLogro1"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { name: "welcome", required: "" },
+                          domProps: { value: _vm.newLogro1 },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.newLogro1 = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v("Please fill out this field")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group mx-auto" }, [
+                        _c("div", { attrs: { align: "center" } }, [
+                          _c("strong", [_vm._v("Logro 2")])
+                        ]),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.newLogro2,
+                              expression: "newLogro2"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { name: "intentioned", required: "" },
+                          domProps: { value: _vm.newLogro2 },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.newLogro2 = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v("Please fill out this field")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group mx-auto" }, [
+                        _c("div", { attrs: { align: "center" } }, [
+                          _c("strong", [_vm._v("Logro 3")])
+                        ]),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.newLogro3,
+                              expression: "newLogro3"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { name: "intentioned", required: "" },
+                          domProps: { value: _vm.newLogro3 },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.newLogro3 = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v("Please fill out this field")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group mx-auto" }, [
+                        _c("div", { attrs: { align: "center" } }, [
+                          _c("strong", [_vm._v("Logro 4")])
+                        ]),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.newLogro4,
+                              expression: "newLogro4"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { name: "competences", required: "" },
+                          domProps: { value: _vm.newLogro4 },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.newLogro4 = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v("Please fill out this field")
+                        ])
                       ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      class: [_vm.activetab === 2 ? "active" : ""],
-                      on: {
-                        click: function($event) {
-                          _vm.activetab = 2
-                        }
-                      }
-                    },
-                    [
-                      _c("h4", { staticClass: "letra-poppins-bold" }, [
-                        _vm._v("ACTIVIDADES")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      class: [_vm.activetab === 3 ? "active" : ""],
-                      on: {
-                        click: function($event) {
-                          _vm.activetab = 3
-                        }
-                      }
-                    },
-                    [
-                      _c("h4", { staticClass: "letra-poppins-bold" }, [
-                        _vm._v("NOTAS")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      class: [_vm.activetab === 4 ? "active" : ""],
-                      on: {
-                        click: function($event) {
-                          _vm.activetab = 4
-                        }
-                      }
-                    },
-                    [
-                      _c("h4", { staticClass: "letra-poppins-bold" }, [
-                        _vm._v("ENTREGAS")
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _vm.activetab === 1
-                    ? _c("div", { staticClass: "tabcontent" }, [
-                        _vm.idArea != ""
-                          ? _c(
-                              "div",
-                              [
-                                _c("teacher-courses", {
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "tab-content",
+                      { attrs: { title: "Trimestral" } },
+                      _vm._l(_vm.inputs, function(input, t) {
+                        return _c(
+                          "div",
+                          { key: t, staticClass: "form-group row mx-auto" },
+                          [
+                            _c("div", { staticClass: "col-md-6" }, [
+                              _c("label", { attrs: { for: "name" } }, [
+                                _vm._v("Unidad")
+                              ]),
+                              _vm._v(" "),
+                              _c("span", [
+                                _c(
+                                  "a",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value:
+                                          t || (!t && _vm.inputs.length > 1),
+                                        expression:
+                                          "\r\n                                                        t ||\r\n                                                            (!t &&\r\n                                                                inputs.length >\r\n                                                                    1)\r\n                                                    "
+                                      }
+                                    ],
+                                    staticClass: "badge badge-danger",
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.remove(t)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("-")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: t == _vm.inputs.length - 1,
+                                        expression:
+                                          "\r\n                                                        t == inputs.length - 1\r\n                                                    "
+                                      }
+                                    ],
+                                    staticClass: "badge badge-primary",
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.add(t)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("+")]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: input.name,
+                                      expression: "input.name"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
                                   attrs: {
-                                    id_area: _vm.idArea,
-                                    id_classroom: _vm.idClassroom
+                                    type: "text",
+                                    name: "objetive1",
+                                    placeholder: "Nombre de la unidad",
+                                    required: ""
+                                  },
+                                  domProps: { value: input.name },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        input,
+                                        "name",
+                                        $event.target.value
+                                      )
+                                    }
                                   }
                                 })
-                              ],
-                              1
-                            )
-                          : _vm._e()
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.activetab === 2
-                    ? _c("div", { staticClass: "tabcontent" }, [
-                        _vm.idArea != "" && _vm.idClassroom != ""
-                          ? _c("div", [_c("p", [_vm._v("Two")])])
-                          : _vm._e()
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.activetab === 3
-                    ? _c("div", { staticClass: "tabcontent" }, [
-                        _vm.idArea != "" && _vm.idClassroom != ""
-                          ? _c(
-                              "div",
-                              [
-                                _c("notasd-component", {
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-6" }, [
+                              _c("label", { attrs: { for: "name" } }, [
+                                _vm._v("Contenido")
+                              ]),
+                              _vm._v(" "),
+                              _c("textarea", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: input.contenido,
+                                    expression: "input.contenido"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  name: "competences",
+                                  placeholder:
+                                    "Es la explicacion o sintesis de la unidad.",
+                                  required: ""
+                                },
+                                domProps: { value: input.contenido },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      input,
+                                      "contenido",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "invalid-feedback" }, [
+                                _vm._v("Please fill out this field")
+                              ])
+                            ])
+                          ]
+                        )
+                      }),
+                      0
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "form",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.trimestre == true,
+                    expression: "trimestre==true"
+                  }
+                ]
+              },
+              [
+                _c(
+                  "form-wizard",
+                  {
+                    attrs: {
+                      title: "",
+                      subtitle: "",
+                      color: "#ffc107",
+                      "next-button-text": "Siguiente",
+                      "back-button-text": "Atrás",
+                      "finish-button-text": "Guardar"
+                    },
+                    on: { "on-complete": _vm.updateCourses }
+                  },
+                  [
+                    _c("tab-content", { attrs: { title: "Anual" } }, [
+                      _c("div", [
+                        _c("div", { staticClass: "form-group mx-auto" }, [
+                          _c("div", { attrs: { align: "center" } }, [
+                            _c("strong", [
+                              _vm._v(
+                                "\r\n                        Logro 1   20%   \r\n                        "
+                              ),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-outline-success btn-sm",
                                   attrs: {
-                                    id_area: _vm.idArea,
-                                    id_classroom: _vm.idClassroom
+                                    onclick:
+                                      "confirm('Seguro de confirmar el cumplimiento del logro')",
+                                    type: "submit"
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fas fa-check-circle"
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-outline-danger btn-sm",
+                                  attrs: {
+                                    onclick: "confirm('Esta seguro?')",
+                                    type: "submit"
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fas fa-times-circle"
+                                  })
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.logro_1,
+                                expression: "logro_1"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { name: "welcome" },
+                            domProps: { value: _vm.logro_1 },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.logro_1 = $event.target.value
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v("Please fill out this field")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group mx-auto" }, [
+                          _c("div", { attrs: { align: "center" } }, [
+                            _c("strong", [
+                              _vm._v(
+                                "\r\n                        Logro 2    40%   \r\n                        "
+                              ),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-outline-success btn-sm",
+                                  attrs: {
+                                    onclick:
+                                      "confirm('Seguro de confirmar el cumplimiento del logro')",
+                                    type: "submit"
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fas fa-check-circle"
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-outline-danger btn-sm",
+                                  attrs: {
+                                    onclick: "confirm('Esta seguro?')",
+                                    type: "submit"
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fas fa-times-circle"
+                                  })
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.logro_2,
+                                expression: "logro_2"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { name: "welcome" },
+                            domProps: { value: _vm.logro_2 },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.logro_2 = $event.target.value
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v("Please fill out this field")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group mx-auto" }, [
+                          _c("div", { attrs: { align: "center" } }, [
+                            _c("strong", [
+                              _vm._v(
+                                "\r\n                        Logro 3    20%   \r\n                        "
+                              ),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-outline-success btn-sm",
+                                  attrs: {
+                                    onclick:
+                                      "confirm('Seguro de confirmar el cumplimiento del logro')",
+                                    type: "submit"
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fas fa-check-circle"
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-outline-danger btn-sm",
+                                  attrs: {
+                                    onclick: "confirm('Esta seguro?')",
+                                    type: "submit"
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fas fa-times-circle"
+                                  })
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.logro_3,
+                                expression: "logro_3"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { name: "welcome" },
+                            domProps: { value: _vm.logro_3 },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.logro_3 = $event.target.value
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v("Please fill out this field")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group mx-auto" }, [
+                          _c("div", { attrs: { align: "center" } }, [
+                            _c("strong", [
+                              _vm._v(
+                                "\r\n                        Logro 4    20%   \r\n                        "
+                              ),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-outline-success btn-sm",
+                                  attrs: {
+                                    onclick:
+                                      "confirm('Seguro de confirmar el cumplimiento del logro')",
+                                    type: "submit"
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fas fa-check-circle"
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-outline-danger btn-sm",
+                                  attrs: {
+                                    onclick: "confirm('Esta seguro?')",
+                                    type: "submit"
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fas fa-times-circle"
+                                  })
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.logro_4,
+                                expression: "logro_4"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { name: "welcome" },
+                            domProps: { value: _vm.logro_4 },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.logro_4 = $event.target.value
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v("Please fill out this field")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group mx-auto" }, [
+                          _c("div", { attrs: { align: "center" } }, [
+                            _c("strong", [_vm._v("Observación")])
+                          ]),
+                          _vm._v(" "),
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.observation,
+                                expression: "observation"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              name: "welcome",
+                              placeholder: "Comentarios"
+                            },
+                            domProps: { value: _vm.observation },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.observation = $event.target.value
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v("Please fill out this field")
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "tab-content",
+                      { attrs: { title: "Trimestral" } },
+                      _vm._l(_vm.fillC.quaterly, function(input, t) {
+                        return _c(
+                          "div",
+                          { key: t, staticClass: "form-group row mx-auto" },
+                          [
+                            _c("div", { staticClass: "col-md-6" }, [
+                              _c("label", { attrs: { for: "name" } }, [
+                                _vm._v(
+                                  "\r\n                      Unidad    \r\n                      "
+                                ),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-outline-success btn-sm",
+                                    attrs: {
+                                      onclick:
+                                        "confirm('Seguro de confirmar el cumplimiento del logro')",
+                                      type: "submit"
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-check-circle"
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-outline-danger btn-sm",
+                                    attrs: {
+                                      onclick: "confirm('Esta seguro?')",
+                                      type: "submit"
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-times-circle"
+                                    })
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: input.unit_name,
+                                      expression: "input.unit_name"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: {
+                                    type: "text",
+                                    name: "objetive1",
+                                    placeholder: "Nombre de la unidad"
+                                  },
+                                  domProps: { value: input.unit_name },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        input,
+                                        "unit_name",
+                                        $event.target.value
+                                      )
+                                    }
                                   }
                                 })
-                              ],
-                              1
-                            )
-                          : _vm._e()
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.activetab === 4
-                    ? _c("div", { staticClass: "tabcontent" }, [
-                        _vm.idArea != "" && _vm.idClassroom != ""
-                          ? _c(
-                              "div",
-                              [
-                                _c("repository-component", {
-                                  attrs: {
-                                    id_grade: undefined,
-                                    id_area: _vm.idArea,
-                                    id_classroom: _vm.idClassroom
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-6" }, [
+                              _c("label", { attrs: { for: "name" } }, [
+                                _vm._v("Contenido")
+                              ]),
+                              _vm._v(" "),
+                              _c("textarea", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: input.content,
+                                    expression: "input.content"
                                   }
-                                })
-                              ],
-                              1
-                            )
-                          : _vm._e()
-                      ])
-                    : _vm._e()
-                ])
-              ]
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  name: "competences",
+                                  placeholder:
+                                    "Es la explicacion o sintesis de la unidad."
+                                },
+                                domProps: { value: input.content },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      input,
+                                      "content",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "invalid-feedback" }, [
+                                _vm._v("Please fill out this field")
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-6" }, [
+                              _c("label", { attrs: { for: "name" } }, [
+                                _vm._v("Observación")
+                              ]),
+                              _vm._v(" "),
+                              _c("textarea", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: input.observation,
+                                    expression: "input.observation"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  name: "competences",
+                                  placeholder: "Comentarios"
+                                },
+                                domProps: { value: input.observation },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      input,
+                                      "observation",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "invalid-feedback" }, [
+                                _vm._v("Please fill out this field")
+                              ])
+                            ])
+                          ]
+                        )
+                      }),
+                      0
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
             )
           ])
-        ]
-      )
+        ])
+      ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("head", [
+      _c("link", {
+        attrs: {
+          rel: "stylesheet",
+          href: "https://use.fontawesome.com/releases/v5.8.2/css/solid.css",
+          integrity:
+            "sha384-ioUrHig76ITq4aEJ67dHzTvqjsAP/7IzgwE7lgJcg2r7BRNGYSK0LwSmROzYtgzs",
+          crossorigin: "anonymous"
+        }
+      }),
+      _vm._v(" "),
+      _c("link", {
+        attrs: {
+          rel: "stylesheet",
+          href: "https://use.fontawesome.com/releases/v5.8.2/css/brands.css",
+          integrity:
+            "sha384-i2PyM6FMpVnxjRPi0KW/xIS7hkeSznkllv+Hx/MtYDaHA5VcF0yL3KVlvzp8bWjQ",
+          crossorigin: "anonymous"
+        }
+      }),
+      _vm._v(" "),
+      _c("link", {
+        attrs: {
+          rel: "stylesheet",
+          href:
+            "https://use.fontawesome.com/releases/v5.8.2/css/fontawesome.css",
+          integrity:
+            "sha384-sri+NftO+0hcisDKgr287Y/1LVnInHJ1l+XC7+FOabmTTIK0HnE2ID+xxvJ21c5J",
+          crossorigin: "anonymous"
+        }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 
 
 /***/ }),
 
-/***/ "./resources/js/components/planClassComponent.vue":
-/*!********************************************************!*\
-  !*** ./resources/js/components/planClassComponent.vue ***!
-  \********************************************************/
+/***/ "./resources/js/components/planAdm.vue":
+/*!*********************************************!*\
+  !*** ./resources/js/components/planAdm.vue ***!
+  \*********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _planClassComponent_vue_vue_type_template_id_0a096c79___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./planClassComponent.vue?vue&type=template&id=0a096c79& */ "./resources/js/components/planClassComponent.vue?vue&type=template&id=0a096c79&");
-/* harmony import */ var _planClassComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./planClassComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/planClassComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _planClassComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./planClassComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/planClassComponent.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
+/* harmony import */ var _planAdm_vue_vue_type_template_id_d1e31c74___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./planAdm.vue?vue&type=template&id=d1e31c74& */ "./resources/js/components/planAdm.vue?vue&type=template&id=d1e31c74&");
+/* harmony import */ var _planAdm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./planAdm.vue?vue&type=script&lang=js& */ "./resources/js/components/planAdm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -376,10 +1365,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _planClassComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _planClassComponent_vue_vue_type_template_id_0a096c79___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _planClassComponent_vue_vue_type_template_id_0a096c79___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _planAdm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _planAdm_vue_vue_type_template_id_d1e31c74___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _planAdm_vue_vue_type_template_id_d1e31c74___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -389,54 +1378,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/planClassComponent.vue"
+component.options.__file = "resources/js/components/planAdm.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/planClassComponent.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/components/planClassComponent.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************/
+/***/ "./resources/js/components/planAdm.vue?vue&type=script&lang=js&":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/planAdm.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_planClassComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./planClassComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/planClassComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_planClassComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_planAdm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./planAdm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/planAdm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_planAdm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/planClassComponent.vue?vue&type=style&index=0&lang=css&":
-/*!*****************************************************************************************!*\
-  !*** ./resources/js/components/planClassComponent.vue?vue&type=style&index=0&lang=css& ***!
-  \*****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_planClassComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./planClassComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/planClassComponent.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_planClassComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_planClassComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_planClassComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_planClassComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_planClassComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./resources/js/components/planClassComponent.vue?vue&type=template&id=0a096c79&":
-/*!***************************************************************************************!*\
-  !*** ./resources/js/components/planClassComponent.vue?vue&type=template&id=0a096c79& ***!
-  \***************************************************************************************/
+/***/ "./resources/js/components/planAdm.vue?vue&type=template&id=d1e31c74&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/planAdm.vue?vue&type=template&id=d1e31c74& ***!
+  \****************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_planClassComponent_vue_vue_type_template_id_0a096c79___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./planClassComponent.vue?vue&type=template&id=0a096c79& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/planClassComponent.vue?vue&type=template&id=0a096c79&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_planClassComponent_vue_vue_type_template_id_0a096c79___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_planAdm_vue_vue_type_template_id_d1e31c74___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./planAdm.vue?vue&type=template&id=d1e31c74& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/planAdm.vue?vue&type=template&id=d1e31c74&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_planAdm_vue_vue_type_template_id_d1e31c74___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_planClassComponent_vue_vue_type_template_id_0a096c79___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_planAdm_vue_vue_type_template_id_d1e31c74___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

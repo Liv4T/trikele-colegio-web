@@ -218,4 +218,6 @@ Vue.component("purchase-tutorial-login", () => import ("./components/purchaseTut
 
 Vue.component("plan-class-component", ()=>import("./components/planClassComponent.vue"));
 
+Vue.component("activities-teacher-component", ()=>import("./components/ActivitiesTeacher.vue"));
+
 const app = new Vue({el: "#app", data: {}, store});

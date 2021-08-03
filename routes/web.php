@@ -806,6 +806,8 @@ Route::put('/api/document-type/{id}', 'DocumentTypeController@update');
 Route::post('/api/document-type', 'DocumentTypeController@insert');
 Route::delete('/api/document-type/{id}', 'DocumentTypeController@delete');
 
+Route::get('/getActivitiesTeacher/{id_area}/{id_classroom}','ActivityController@getActivitiesTeacher');
+
 Route::middleware('auth')->get('/planClass', function () {
     return view('planclass');
 });

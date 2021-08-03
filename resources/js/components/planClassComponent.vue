@@ -30,7 +30,7 @@
         
                             <div v-if="activetab === 2" class="tabcontent">
                                 <div v-if="idArea !='' && idClassroom != ''">
-                                    <p>Two</p>
+                                    <activities-teacher-component :idArea="idArea" :idClassroom="idClassroom"></activities-teacher-component>
                                 </div>
                             </div>
         
