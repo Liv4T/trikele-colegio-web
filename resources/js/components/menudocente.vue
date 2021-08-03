@@ -64,6 +64,16 @@
                 </li>
               </a>
             </div>
+            <a href="/planClass">
+              <li class="item-menu">
+                <img
+                  width="35px"
+                  src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/ANUNCIOS_naranja.png?alt=media&token=539c1428-c480-43bf-a132-73be35386940"
+                  alt
+               />
+                <span class="menu">Planificación Clases</span>
+              </li>
+            </a>
             <div class="dropdown2">
               <a>
                 <li class="item-menu">
