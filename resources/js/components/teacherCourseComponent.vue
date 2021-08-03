@@ -61,6 +61,18 @@
                                         </template>
                                 </multiselect>
                             </div>
+                            <div class="col-12">                                                                    
+                                <label for="work">                                    
+                                    Tarea
+                                </label>
+                                <textarea class="form-control" v-model="work" name="work" id="work"></textarea>
+                            </div>
+                            <div class="col-12">                                                                    
+                                <label for="transversals">                                    
+                                    Habilidades Transversales
+                                </label>
+                                <textarea class="form-control" v-model="transversals" name="transversals" id="transversals"></textarea>
+                            </div>
                             <div class="row justify-content-center">
                                   <div class="col-5 div-resource" v-for="(item_content,key_c) in course.content" v-bind:key="key_c">
 
@@ -236,6 +248,8 @@ export default {
             activityForPIARStudents: false,
             activityForSelectStudents: false,
             saveStudent:[],
+            work: "",
+            transversals:"",
             selectedStudentsData:[],
             studentsOptions:[],
             piarStudents:[],
@@ -317,7 +331,19 @@ export default {
             if(this.activityForAllStudents == false && this.activityForPIARStudents == true || this.activityForSelectStudents == true && newVal){
                 this.course.selectedStudents = JSON.stringify(this.saveStudent);
             }
-        }
+        },
+
+        work: function(newVal){
+            if(newVal){
+                this.course.work = this.work;
+            }
+        },
+
+        transversals: function(newVal){
+            if(newVal){
+                this.course.transversals = this.transversals;
+            }
+        },
     },
     mounted() {
 
@@ -348,7 +374,9 @@ export default {
         if(this.id_class!=0)
         {
             axios.get(`/api/teacher/module/${this.id_module}/class/${this.id_class}`).then((response) => {
-                    this.course=response.data;
+                    this.course=response.data;                    
+                    this.work = response.data.work;
+                    this.transversals = response.data.transversals;
 
                     if(this.course.content.length==0)
                     {
