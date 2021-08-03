@@ -178,6 +178,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 (function () {
   "use strict";
 
@@ -205,6 +239,13 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
   props: ["id_module", "id_class", "backToPage"],
   data: function data() {
     return {
+      activityForAllStudents: true,
+      activityForPIARStudents: false,
+      activityForSelectStudents: false,
+      saveStudent: [],
+      selectedStudentsData: [],
+      studentsOptions: [],
+      piarStudents: [],
       tmp: {},
       is_loading: false,
       weekly_plan: {},
@@ -237,12 +278,66 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
       }], ["image"]]
     };
   },
+  watch: {
+    activityForAllStudents: function activityForAllStudents(newVal) {
+      if (newVal == true) {
+        this.course.activityForPIARStudents = 0;
+        this.course.activityForSelectStudents = 0;
+        this.course.activityForAllStudents = 1;
+        this.course.selectedStudents = "[]";
+        this.activityForPIARStudents = false;
+        this.activityForSelectStudents = false;
+        this.saveStudent = [];
+      }
+    },
+    activityForPIARStudents: function activityForPIARStudents(newVal) {
+      if (newVal == true) {
+        this.course.activityForPIARStudents = 1;
+        this.course.activityForSelectStudents = 0;
+        this.course.activityForAllStudents = 0;
+        this.course.selectedStudents = JSON.stringify(this.saveStudent);
+        this.activityForAllStudents = false;
+        this.activityForSelectStudents = false;
+        this.selectedStudentsData = this.piarStudents;
+      }
+    },
+    activityForSelectStudents: function activityForSelectStudents(newVal) {
+      if (newVal == true) {
+        this.course.activityForPIARStudents = 0;
+        this.course.activityForSelectStudents = 1;
+        this.course.activityForAllStudents = 0;
+        this.course.selectedStudents = JSON.stringify(this.saveStudent);
+        this.activityForPIARStudents = false;
+        this.activityForAllStudents = false;
+        this.selectedStudentsData = this.studentsOptions;
+      }
+    },
+    saveStudent: function saveStudent(newVal) {
+      if (this.activityForAllStudents == false && this.activityForPIARStudents == true || this.activityForSelectStudents == true && newVal) {
+        this.course.selectedStudents = JSON.stringify(this.saveStudent);
+      }
+    }
+  },
   mounted: function mounted() {
     var _this = this;
 
     axios.get("/showClass/".concat(this.id_module)).then(function (response) {
       _this.achievements = response.data.achievements;
       _this.nameArea = "".concat(response.data.area.name, " ").concat(response.data.classroom.name);
+      axios.get("/PIARStudentsByArea/".concat(response.data.area.id, "/").concat(response.data.classroom.id)).then(function (response) {
+        _this.piarStudents = Object.values(response.data);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      axios.get("/StudentsByArea/".concat(response.data.area.id, "/").concat(response.data.classroom.id)).then(function (response) {
+        var data = response.data;
+        data.forEach(function (e) {
+          _this.studentsOptions.push({
+            id: e.id_student,
+            text: e.name
+          });
+        });
+      });
     });
     axios.get("/GetNameWeekly/".concat(this.id_module)).then(function (response) {
       _this.weekly_plan = {
@@ -615,6 +710,244 @@ var render = function() {
                     })
                   ])
                 ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row ml-4" }, [
+                  _c("div", { staticClass: "col-4" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.activityForAllStudents,
+                          expression: "activityForAllStudents"
+                        }
+                      ],
+                      attrs: {
+                        type: "checkbox",
+                        id: "students",
+                        name: "students"
+                      },
+                      domProps: {
+                        checked: Array.isArray(_vm.activityForAllStudents)
+                          ? _vm._i(_vm.activityForAllStudents, null) > -1
+                          : _vm.activityForAllStudents
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$a = _vm.activityForAllStudents,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = null,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                (_vm.activityForAllStudents = $$a.concat([$$v]))
+                            } else {
+                              $$i > -1 &&
+                                (_vm.activityForAllStudents = $$a
+                                  .slice(0, $$i)
+                                  .concat($$a.slice($$i + 1)))
+                            }
+                          } else {
+                            _vm.activityForAllStudents = $$c
+                          }
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-check-label",
+                        attrs: { for: "flexCheckDefault" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                                    Todos los Estudiantes\n                                "
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-4" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.activityForPIARStudents,
+                          expression: "activityForPIARStudents"
+                        }
+                      ],
+                      attrs: { type: "checkbox", id: "piar", name: "students" },
+                      domProps: {
+                        checked: Array.isArray(_vm.activityForPIARStudents)
+                          ? _vm._i(_vm.activityForPIARStudents, null) > -1
+                          : _vm.activityForPIARStudents
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$a = _vm.activityForPIARStudents,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = null,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                (_vm.activityForPIARStudents = $$a.concat([
+                                  $$v
+                                ]))
+                            } else {
+                              $$i > -1 &&
+                                (_vm.activityForPIARStudents = $$a
+                                  .slice(0, $$i)
+                                  .concat($$a.slice($$i + 1)))
+                            }
+                          } else {
+                            _vm.activityForPIARStudents = $$c
+                          }
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-check-label",
+                        attrs: { for: "flexCheckDefault1" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                                    Estudiantes PIAR\n                                "
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-4" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.activityForSelectStudents,
+                          expression: "activityForSelectStudents"
+                        }
+                      ],
+                      attrs: {
+                        type: "checkbox",
+                        id: "specific",
+                        name: "students"
+                      },
+                      domProps: {
+                        checked: Array.isArray(_vm.activityForSelectStudents)
+                          ? _vm._i(_vm.activityForSelectStudents, null) > -1
+                          : _vm.activityForSelectStudents
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$a = _vm.activityForSelectStudents,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = null,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                (_vm.activityForSelectStudents = $$a.concat([
+                                  $$v
+                                ]))
+                            } else {
+                              $$i > -1 &&
+                                (_vm.activityForSelectStudents = $$a
+                                  .slice(0, $$i)
+                                  .concat($$a.slice($$i + 1)))
+                            }
+                          } else {
+                            _vm.activityForSelectStudents = $$c
+                          }
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-check-label",
+                        attrs: { for: "flexCheckDefault2" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                                    Estudiantes en especifico\n                                "
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm.activityForPIARStudents == true ||
+                _vm.activityForSelectStudents == true
+                  ? _c(
+                      "div",
+                      [
+                        _c("label", [_vm._v("Seleccione a los Estudiantes")]),
+                        _vm._v(" "),
+                        _c("multiselect", {
+                          attrs: {
+                            options: _vm.selectedStudentsData,
+                            multiple: true,
+                            "close-on-select": false,
+                            "clear-on-select": false,
+                            "preserve-search": true,
+                            placeholder: "Seleccione una o varias",
+                            label: "text",
+                            "track-by": "id",
+                            "preselect-first": false
+                          },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "selection",
+                                fn: function(ref) {
+                                  var values = ref.values
+                                  var isOpen = ref.isOpen
+                                  return [
+                                    values.length && !isOpen
+                                      ? _c(
+                                          "span",
+                                          {
+                                            staticClass: "multiselect__single"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(values.length) +
+                                                "\n                                            opciones\n                                            selecionadas\n                                        "
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  ]
+                                }
+                              }
+                            ],
+                            null,
+                            false,
+                            2541663438
+                          ),
+                          model: {
+                            value: _vm.saveStudent,
+                            callback: function($$v) {
+                              _vm.saveStudent = $$v
+                            },
+                            expression: "saveStudent"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  : _vm._e(),
                 _vm._v(" "),
                 _c(
                   "div",

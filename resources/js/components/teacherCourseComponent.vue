@@ -21,11 +21,45 @@
                                     <input type="number" class="form-control" v-model="course.hourly_intensity" v-bind:readonly="course.state==2"/>
                                 </div>
                             </div>
-                             <div class="row">
+                            <div class="row">
                                 <div class="col-12">
                                     <label><span class="required">*</span>Descripción:</label>
                                     <textarea class="form-control" cols="40" rows="4" v-model="course.description" v-bind:readonly="course.state==2"></textarea>
                                 </div>
+                            </div>
+                            <div class="row ml-4">
+                                <div class="col-4">                                
+                                    <input type="checkbox" id="students" name="students" v-model="activityForAllStudents">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Todos los Estudiantes
+                                    </label>
+                                </div>
+                                <div class="col-4">                                    
+                                    <input type="checkbox" id="piar" name="students" v-model="activityForPIARStudents">
+                                    <label class="form-check-label" for="flexCheckDefault1">
+                                        Estudiantes PIAR
+                                    </label>
+                                </div>
+                                <div class="col-4">                                    
+                                    <input type="checkbox" id="specific" name="students" v-model="activityForSelectStudents">
+                                    <label class="form-check-label" for="flexCheckDefault2">
+                                        Estudiantes en especifico
+                                    </label>
+                                </div>
+                            </div>
+                            <div v-if="activityForPIARStudents == true || activityForSelectStudents == true">
+                                <label>Seleccione a los Estudiantes</label>
+                                <multiselect v-model="saveStudent" :options="selectedStudentsData" :multiple="true"
+                                    :close-on-select="false" :clear-on-select="false"
+                                    :preserve-search="true" placeholder="Seleccione una o varias"
+                                    label="text" track-by="id" :preselect-first="false">
+                                        <template slot="selection" slot-scope="{ values, isOpen }">
+                                            <span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }}
+                                                opciones
+                                                selecionadas
+                                            </span>
+                                        </template>
+                                </multiselect>
                             </div>
                             <div class="row justify-content-center">
                                   <div class="col-5 div-resource" v-for="(item_content,key_c) in course.content" v-bind:key="key_c">
@@ -198,6 +232,13 @@ export default {
     props: ["id_module", "id_class", "backToPage"],
     data() {
         return {
+            activityForAllStudents: true,
+            activityForPIARStudents: false,
+            activityForSelectStudents: false,
+            saveStudent:[],
+            selectedStudentsData:[],
+            studentsOptions:[],
+            piarStudents:[],
             tmp:{},
             is_loading:false,
             weekly_plan:{},
@@ -232,15 +273,77 @@ export default {
 
         };
     },
+    watch:{
+        activityForAllStudents: function(newVal){
+            if(newVal == true){
+                this.course.activityForPIARStudents = 0;
+                this.course.activityForSelectStudents = 0;
+                this.course.activityForAllStudents = 1;
+                this.course.selectedStudents = "[]"
+                
+                this.activityForPIARStudents = false;
+                this.activityForSelectStudents = false;
+                this.saveStudent = []
+            }
+        },
+
+        activityForPIARStudents: function(newVal){
+            if(newVal == true){
+                this.course.activityForPIARStudents = 1;
+                this.course.activityForSelectStudents = 0;
+                this.course.activityForAllStudents = 0;
+                this.course.selectedStudents = JSON.stringify(this.saveStudent);
+
+                this.activityForAllStudents = false;
+                this.activityForSelectStudents = false;
+                this.selectedStudentsData = this.piarStudents;
+            }
+        },
+
+        activityForSelectStudents: function(newVal){
+            if(newVal == true){
+                this.course.activityForPIARStudents = 0;
+                this.course.activityForSelectStudents = 1;
+                this.course.activityForAllStudents = 0;
+                this.course.selectedStudents = JSON.stringify(this.saveStudent);
+
+                this.activityForPIARStudents = false;
+                this.activityForAllStudents = false;
+                this.selectedStudentsData = this.studentsOptions;
+            }
+        },
+
+        saveStudent: function(newVal){
+            if(this.activityForAllStudents == false && this.activityForPIARStudents == true || this.activityForSelectStudents == true && newVal){
+                this.course.selectedStudents = JSON.stringify(this.saveStudent);
+            }
+        }
+    },
     mounted() {
 
         axios.get(`/showClass/${this.id_module}`).then((response) => {
             this.achievements=response.data.achievements;
-             this.nameArea = `${response.data.area.name} ${response.data.classroom.name}`;
+            this.nameArea = `${response.data.area.name} ${response.data.classroom.name}`;
+
+            axios.get(`/PIARStudentsByArea/${response.data.area.id}/${response.data.classroom.id}`).then((response)=>{
+                this.piarStudents = Object.values(response.data);
+            }).catch((error)=>{
+                console.log(error)
+            });
+
+            axios.get(`/StudentsByArea/${response.data.area.id}/${response.data.classroom.id}`).then((response)=>{
+                let data = response.data;
+                data.forEach((e)=>{
+                    this.studentsOptions.push({
+                        id: e.id_student,
+                        text: e.name
+                    })
+                });                
+            })
         });
         axios.get(`/GetNameWeekly/${this.id_module}`).then((response) => {
             this.weekly_plan={name:response.data};
-        });
+        });        
 
         if(this.id_class!=0)
         {
@@ -268,8 +371,6 @@ export default {
                             ];
                     }
 
-
-
                     if(this.course.activities.length>0)
                     {
                         this.course.activities.forEach(act=>{
@@ -281,14 +382,8 @@ export default {
             });
 
         }
-
-
-
-
-
     },
     methods: {
-
         returnPage() {
           window.location =`/docente/modulo/${this.id_module}`;
         },

@@ -808,6 +808,10 @@ Route::delete('/api/document-type/{id}', 'DocumentTypeController@delete');
 
 Route::get('/getActivitiesTeacher/{id_area}/{id_classroom}','ActivityController@getActivitiesTeacher');
 
+Route::resource('piar', 'PIARController');
+Route::get('getPIARStudents', 'PIARController@getPIARStudents');
+Route::get('PIARStudentsByArea/{id_1}/{id_2}', 'PIARController@getPIARStudentsArea');
+
 Route::middleware('auth')->get('/planClass', function () {
     return view('planclass');
 });
