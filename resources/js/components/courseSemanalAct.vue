@@ -46,6 +46,10 @@
                       <textarea name="competences" 
                       class="form-control" v-model="act.observation"></textarea>
                     </div>
+                    <div class="col-md-6">
+                      <label for="name">Fecha</label>
+                      <input type="datetime-local" v-model="act.datetime" class="form-control">
+                    </div>
                   </div>
                   <!-- <div class="modal-footer">
                     <a href="#" class="btn btn-warning float-right">Guardar</a>
@@ -178,7 +182,7 @@ export default {
           this.errors = [];
 
           toastr.success("Nueva semana creada exitosamente");
-          this.getMenu();
+          // this.getMenu();
         })
         .catch((error) => {
           this.errors = error.response.data;
@@ -202,7 +206,7 @@ export default {
           this.errors = [];
 
           toastr.success("Actualizado plan semanal exitosamente");
-          this.getMenu();
+          // this.getMenu();
         })
         .catch((error) => {
           this.errors = error.response.data;
