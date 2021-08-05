@@ -815,3 +815,7 @@ Route::get('PIARStudentsByArea/{id_1}/{id_2}', 'PIARController@getPIARStudentsAr
 Route::middleware('auth')->get('/planClass', function () {
     return view('planclass');
 });
+
+Route::middleware('auth')->get('/clasesTeacher', function () {
+    return view('clasesTeacher');
+});

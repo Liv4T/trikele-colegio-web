@@ -2,7 +2,7 @@
 
 @section('content')
   
-  <menu-docente></menu-docente>
+  <menu-docente-2></menu-docente-2>
   <plan-class-component></plan-class-component>
   <footers></footers>
 <div class="container">
