@@ -3,7 +3,7 @@
 @section('content')
  {{-- <examp></examp> --}}
    @if (Auth::user()->type_user == '2')
-        <menu-docente></menu-docente>
+        <menu-docente-2></menu-docente-2>
         <inicio-component></inicio-component>
   @endif
   @if (Auth::user()->type_user == '3')

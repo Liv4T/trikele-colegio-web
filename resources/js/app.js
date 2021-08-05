@@ -47,6 +47,7 @@ Vue.component("unit-class", require("./components/unitComponent.vue").default);
 Vue.component("free-component", require("./components/freeComponent.vue").default);
 Vue.component("freeu-component", require("./components/freeUnitComponent.vue").default);
 Vue.component("course-component", () => import ("./components/courseComponent.vue"));
+Vue.component("course-trimestre-component", () => import ("./components/courseTrimestreComponent.vue"));
 Vue.component("course-view", require("./components/CourseView.vue").default);
 Vue.component("semanal-component", require("./components/courseSemanalComponet.vue").default);
 Vue.component("semanalact-component", require("./components/courseSemanalAct.vue").default);
@@ -84,6 +85,7 @@ Vue.component("actividad-component", require("./components/tareas.vue").default)
 Vue.component("notas-component", require("./components/notas.vue").default);
 Vue.component("boletin-component", require("./components/boletin.vue").default);
 Vue.component("menu-docente", () => import ("./components/menudocente.vue"));
+Vue.component("menu-docente-2", () => import ("./components/menudocente2.vue"));
 Vue.component("perfil-docente", require("./components/perfildocente.vue").default);
 Vue.component("anuncio-docente", require("./components/anunciodocente.vue").default);
 Vue.component("actividadg-docente",  () => import ("./components/actividadGDocente.vue"));
@@ -219,5 +221,7 @@ Vue.component("purchase-tutorial-login", () => import ("./components/purchaseTut
 Vue.component("plan-class-component", ()=>import("./components/planClassComponent.vue"));
 
 Vue.component("activities-teacher-component", ()=>import("./components/ActivitiesTeacher.vue"));
+
+Vue.component("clases-teacher",()=>import("./components/clasesTeacher.vue"));
 
 const app = new Vue({el: "#app", data: {}, store});

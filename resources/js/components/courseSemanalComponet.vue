@@ -1,90 +1,78 @@
 <template>
-  <div>
-    <div class="back">
-      <div class="row">
-        <div class="col-md-11 mx-auto">
-          <div class="custom-card text-center">
-            <h3 class="card-header fondo">Mis Cursos</h3>
-            <form class="needs-validation" novalidate>
-              <form-wizard
-                title
-                subtitle
-                color="#ffc107"
-                next-button-text="Siguiente"
-                back-button-text="Atrás"
-                finish-button-text="Guardar y enviar"
-                @on-complete="createSemana"
-              >
-                <tab-content title="Ciclo">
-                  <div class="form-group row mx-auto" v-for="(input, t) in inputs" :key="t">
-                    <div class="col-md-6">
-                      <label for="name">Pregunta conductora o nombre</label>
-                      <span>
-                        <a
-                          href="#"
-                          class="badge badge-danger"
-                          @click.prevent="remove(t)"
-                          v-show="
-                                                        t ||
-                                                            (!t &&
-                                                                inputs.length >
-                                                                    1)
-                                                    "
-                        >-</a>
-                        <a
-                          href="#"
-                          class="badge badge-primary"
-                          @click.prevent="add(t)"
-                          v-show="
-                                                        t == inputs.length - 1
-                                                    "
-                        >+</a>
-                      </span>
-                      <div>
-                        <input
-                          type="text"
-                          name="objetive1"
-                          class="form-control"
-                          v-on:change="contentUpdateEvent(t,'driving_question')"
-                          v-model="
-                                                        input.driving_question
-                                                    "
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <label for="name">Desarrollo de la clase</label>
-                      <textarea
-                        name="competences"
-                        class="form-control"
-                        v-model="
-                                                    input.class_development
-                                                "
-                        placeholder="Es la explicacion o sintesis de la clase."
-                        v-on:change="contentUpdateEvent(t,'class_development')"
-                        required
-                      ></textarea>
-                      <div class="invalid-feedback">Please fill out this field</div>
-                    </div>
-                    <div class="col-md-6">
-                      <label for="name">Observación</label>
-                      <textarea name="competences" 
-                        v-on:change="contentUpdateEvent(t,'observation')"
-                      class="form-control" v-model="input.observation"></textarea>
-                    </div>
-                  </div>
-                  <!-- <div class="modal-footer">
-                    <a href="#" class="btn btn-warning float-right">Guardar</a>
-                  </div>-->
-                </tab-content>
-              </form-wizard>
-            </form>
-          </div>
+    <div>
+        <!-- <div class="back"> -->
+        <div class="row">
+            <div class="col-md-12 mx-auto">
+                <div class="custom-card text-center">
+                    <h3 class="card-header fondo">Mis Cursos</h3>
+                    <form class="needs-validation" novalidate>
+                        <form-wizard
+                            title
+                            subtitle
+                            color="#ffc107"
+                            next-button-text="Siguiente"
+                            back-button-text="Atrás"
+                            finish-button-text="Guardar y enviar"
+                            @on-complete="createSemana"
+                        >
+                            <tab-content title="Ciclo">
+                                <div class="form-group row mx-auto" v-for="(input, t) in inputs" :key="t">
+                                    <div class="col-md-6">
+                                        <label for="name">Pregunta conductora o nombre</label>
+                                        <span>
+                                            <a
+                                                href="#"
+                                                class="badge badge-danger"
+                                                @click.prevent="remove(t)"
+                                                v-show="t || (!t && inputs.length > 1)"
+                                            >-</a>
+                                            <a
+                                                href="#"
+                                                class="badge badge-primary"
+                                                @click.prevent="add(t)"
+                                                v-show="t == inputs.length - 1"
+                                            >+</a>
+                                        </span>
+                                        <div>
+                                            <input
+                                                type="text"
+                                                name="objetive1"
+                                                class="form-control"
+                                                v-on:change="contentUpdateEvent(t,'driving_question')"
+                                                v-model="input.driving_question"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="name">Desarrollo de la clase</label>
+                                        <textarea
+                                            name="competences"
+                                            class="form-control"
+                                            v-model="input.class_development"
+                                            placeholder="Es la explicacion o sintesis de la clase."
+                                            v-on:change="contentUpdateEvent(t,'class_development')"
+                                            required
+                                        ></textarea>
+                                        <div class="invalid-feedback">Please fill out this field</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="name">Observación</label>
+                                        <textarea name="competences" 
+                                            v-on:change="contentUpdateEvent(t,'observation')"
+                                        class="form-control" v-model="input.observation"></textarea>
+                                    </div>
+                                </div>
+                                <!-- <div class="modal-footer">
+                                    <a href="#" class="btn btn-warning float-right">Guardar</a>
+                                </div>-->
+                            </tab-content>
+                        </form-wizard>
+                    </form>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </template>
 <script>
 (function () {
@@ -185,7 +173,7 @@ export default {
           this.errors = [];
 
           toastr.success("Nueva semana creada exitosamente");
-          this.getMenu();
+          // this.getMenu();
         })
         .catch((error) => {
           this.errors = error.response;

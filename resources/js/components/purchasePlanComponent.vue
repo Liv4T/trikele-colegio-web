@@ -5,14 +5,14 @@
                 <div class="card text-center">
                     <div class="div-plan-icon">
                         <img
-                            class="section3I"
-                            src="/images/Botonplan1.png"
-                            alt="boton plan 1"
+                        class="section3I"
+                        src="/images/Botonplan1.png"
+                        alt="boton plan 1"
                         />
                     </div>
                     <div class="row">
                         <div class="col-12 text-center">
-                          <h4>PLAN ANUAL</h4>
+                            <h4>PLAN ANUAL</h4>
                         </div>
                     </div>
                     <div class="row height-50 margin-top-50">
@@ -46,12 +46,13 @@
                         </div>
                     </div>
                     <div class="row padding-20">
-                        <div class="col-12">
+                            <div class="col-12">
 
-                        </div>
+                            </div>
                     </div>
                 </div>
             </div>
+      
             <div class="col-md-5 margin-top-100">
                 <div class="card text-center">
                     <div class="div-plan-icon fondoplan">
@@ -95,15 +96,14 @@
                         <div class="col-12">
                             <button @click="SelectPlanEvent('MENSUAL')"   class="btn btn-Azul">Comprar</button>
                         </div>
-                    </div>          
-
+                    </div>
                     <div class="row padding-20">
                         <div class="col-12">
 
                         </div>
                     </div>
                 </div>
-            </div>      
+            </div>
 
             <div class="col-md-5 margin-top-100">
                 <div class="card text-center">
@@ -207,7 +207,7 @@
                         </div>
                     </div>
                 </div>
-            </div>      
+            </div>
         </div>
     </div>
 </template>
