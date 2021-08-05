@@ -120,6 +120,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: {
     logout: function logout() {
@@ -205,8 +206,6 @@ var render = function() {
         _c("div", { staticClass: "left" }, [
           _vm._m(0),
           _vm._v(" "),
-          _vm._m(1),
-          _vm._v(" "),
           _c("div", { staticClass: "text-center" }, [
             _c(
               "a",
@@ -280,13 +279,17 @@ var staticRenderFns = [
               }
             },
             [
-              _vm._v("\n                PLANIFICACION\n                "),
+              _vm._v(
+                "\n                                PLANIFICACION\n                            "
+              ),
               _c("br")
             ]
           ),
           _vm._v(" "),
           _c("p", { staticStyle: { "margin-left": "1rem" } }, [
-            _vm._v("\n                GENERAL                \n              ")
+            _vm._v(
+              "\n                                GENERAL                \n                            "
+            )
           ])
         ])
       ]),
@@ -302,11 +305,17 @@ var staticRenderFns = [
                 "margin-left": "1rem"
               }
             },
-            [_vm._v("\n                PLANIFICACION\n              ")]
+            [
+              _vm._v(
+                "\n                                PLANIFICACION\n                            "
+              )
+            ]
           ),
           _vm._v(" "),
           _c("p", { staticStyle: { "margin-left": "1rem" } }, [
-            _vm._v(" \n                CLASES\n              ")
+            _vm._v(
+              " \n                                CLASES\n                            "
+            )
           ])
         ])
       ]),
@@ -319,31 +328,9 @@ var staticRenderFns = [
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "dropdown2-content" }, [
-              _c("a", { attrs: { href: "/duplicar-semana" } }, [
-                _vm._v(" Duplicar ")
-              ]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "/duplicarGeneral" } }, [
-                _vm._v("Duplicar Planificación General")
-              ]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "/resportSendParents" } }, [
-                _vm._v(" Reporte Mensual Padres           ")
-              ]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "/board" } }, [_vm._v(" Pizarra ")]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "/duplicar-semana/" } }, [
-                _vm._v(" Duplicar ciclo ")
-              ])
+              _c("a", { attrs: { href: "/board" } }, [_vm._v(" Pizarra ")])
             ])
           ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("a", { attrs: { href: "/observer" } }, [
-        _c("li", { staticClass: "item-menu" }, [
-          _c("span", { staticClass: "menu" }, [_vm._v("OBSERVADOR")])
         ])
       ]),
       _vm._v(" "),
@@ -354,7 +341,7 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("div", { staticClass: "dropdown2-content" }, [
               _c("a", { attrs: { href: "/teacher/lectives/planning" } }, [
-                _vm._v(" Planificación")
+                _vm._v(" Planificación ")
               ]),
               _vm._v(" "),
               _c("a", { attrs: { href: "/teacher/lectives/courses" } }, [
@@ -366,11 +353,7 @@ var staticRenderFns = [
               ]),
               _vm._v(" "),
               _c("a", { attrs: { href: "/teacher/lectives/activities" } }, [
-                _vm._v(" Mis actividades")
-              ]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "/teacher/lectives/notes" } }, [
-                _vm._v(" Notas")
+                _vm._v(" Mis actividades ")
               ])
             ])
           ])
@@ -399,55 +382,6 @@ var staticRenderFns = [
           ])
         ]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-center" }, [
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-warning letra-poppins-bold mg-btn",
-          staticStyle: {
-            "background-color": "#e26100",
-            "border-color": "#e26100"
-          },
-          attrs: { href: "/chat" }
-        },
-        [_c("h4", [_vm._v("CHAT")])]
-      ),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-warning letra-poppins-bold mg-btn",
-          staticStyle: {
-            "background-color": "#e26100",
-            "border-color": "#e26100"
-          },
-          attrs: { href: "/questions" }
-        },
-        [_c("h4", [_vm._v("FOROS")])]
-      ),
-      _c("br"),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-warning letra-poppins-bold mg-btn",
-          staticStyle: {
-            "background-color": "#e26100",
-            "border-color": "#e26100"
-          },
-          attrs: { href: "/mensajes" }
-        },
-        [_c("h4", [_vm._v("MENSAJES")])]
-      ),
-      _c("br")
     ])
   }
 ]

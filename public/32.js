@@ -335,6 +335,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: {
     logout: function logout() {
@@ -491,7 +517,7 @@ var staticRenderFns = [
                   }
                 }),
                 _vm._v(
-                  "\n                                         Mensajes\n                                     "
+                  "\n                                        Mensajes\n                                    "
                 )
               ]),
               _vm._v(" "),
@@ -504,7 +530,9 @@ var staticRenderFns = [
                     alt: ""
                   }
                 }),
-                _vm._v("\n                   Foro\n                 ")
+                _vm._v(
+                  "\n                                        Foro\n                                    "
+                )
               ]),
               _vm._v(" "),
               _c("a", { attrs: { href: "/chat" } }, [
@@ -516,7 +544,9 @@ var staticRenderFns = [
                     alt: ""
                   }
                 }),
-                _vm._v("\n                   Chat\n                 ")
+                _vm._v(
+                  "\n                                        Chat\n                                    "
+                )
               ]),
               _vm._v(" "),
               _c("a", { attrs: { href: "/mensajes" } }, [
@@ -528,7 +558,9 @@ var staticRenderFns = [
                     alt: ""
                   }
                 }),
-                _vm._v("\n                   Psicología\n                 ")
+                _vm._v(
+                  "\n                                        Psicología\n                                    "
+                )
               ])
             ])
           ])
@@ -563,7 +595,9 @@ var staticRenderFns = [
             }),
             _vm._v(" "),
             _c("span", { staticClass: "menu" }, [
-              _vm._v("Académico          ")
+              _vm._v(
+                "\n                                    Académico          \n                                "
+              )
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "dropdown2-content" }, [
@@ -576,7 +610,9 @@ var staticRenderFns = [
                     alt: ""
                   }
                 }),
-                _vm._v("\n                   Planificación\n                 ")
+                _vm._v(
+                  "\n                                        Planificación\n                                    "
+                )
               ]),
               _vm._v(" "),
               _c("a", { attrs: { href: "/docente/clases" } }, [
@@ -588,7 +624,9 @@ var staticRenderFns = [
                     alt: ""
                   }
                 }),
-                _vm._v("\n                   Mis clases\n                 ")
+                _vm._v(
+                  "\n                                        Mis clases\n                                    "
+                )
               ]),
               _vm._v(" "),
               _c("a", { attrs: { href: "/docente/estudiantes" } }, [
@@ -601,7 +639,7 @@ var staticRenderFns = [
                   }
                 }),
                 _vm._v(
-                  "\n                   Mis Estudiantes\n                 "
+                  "\n                                        Mis Estudiantes\n                                    "
                 )
               ]),
               _vm._v(" "),
@@ -614,7 +652,9 @@ var staticRenderFns = [
                     alt: ""
                   }
                 }),
-                _vm._v("Entregas")
+                _vm._v(
+                  "\n                                            Entregas\n                                    "
+                )
               ]),
               _vm._v(" "),
               _c("a", { attrs: { href: "/notas_d" } }, [
@@ -626,7 +666,9 @@ var staticRenderFns = [
                     alt: ""
                   }
                 }),
-                _vm._v("\n                   Notas\n                 ")
+                _vm._v(
+                  "\n                                        Notas\n                                    "
+                )
               ]),
               _vm._v(" "),
               _c("a", { attrs: { href: "/board" } }, [
@@ -638,7 +680,9 @@ var staticRenderFns = [
                     alt: ""
                   }
                 }),
-                _vm._v("\n                   Pizarra\n                 ")
+                _vm._v(
+                  "\n                                        Pizarra\n                                    "
+                )
               ])
             ])
           ])
@@ -657,7 +701,11 @@ var staticRenderFns = [
               }
             }),
             _vm._v(" "),
-            _c("span", { staticClass: "menu" }, [_vm._v("Mis Electivas")]),
+            _c("span", { staticClass: "menu" }, [
+              _vm._v(
+                "\n                                    Mis Electivas\n                                "
+              )
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "dropdown2-content" }, [
               _c("a", { attrs: { href: "/teacher/lectives/planning" } }, [
@@ -669,7 +717,9 @@ var staticRenderFns = [
                     alt: ""
                   }
                 }),
-                _vm._v("Planificación")
+                _vm._v(
+                  "\n                                                Planificación\n                                    "
+                )
               ]),
               _vm._v(" "),
               _c("a", { attrs: { href: "/teacher/lectives/courses" } }, [
@@ -681,7 +731,9 @@ var staticRenderFns = [
                     alt: ""
                   }
                 }),
-                _vm._v("Mis clases\n                 ")
+                _vm._v(
+                  "\n                                            Mis clases\n                                    "
+                )
               ]),
               _vm._v(" "),
               _c("a", { attrs: { href: "/teacher/lectives/students" } }, [
@@ -693,7 +745,9 @@ var staticRenderFns = [
                     alt: ""
                   }
                 }),
-                _vm._v("Mis alumnos\n                     ")
+                _vm._v(
+                  "\n                                                Mis alumnos\n                                    "
+                )
               ]),
               _vm._v(" "),
               _c("a", { attrs: { href: "/teacher/lectives/activities" } }, [
@@ -705,7 +759,9 @@ var staticRenderFns = [
                     alt: ""
                   }
                 }),
-                _vm._v("Mis actividades")
+                _vm._v(
+                  "\n                                                Mis actividades\n                                    "
+                )
               ])
             ])
           ])
