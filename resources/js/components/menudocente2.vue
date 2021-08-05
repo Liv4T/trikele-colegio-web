@@ -45,21 +45,30 @@
                                 </p>
                             </li>
                         </a>
-
-                        <div class="dropdown2">
+                        <a href="/docente/estudiantes">
+                            <li class="item-menu">
+                                <span class="menu">MIS ESTUDIANTES</span>
+                            </li>
+                        </a>
+                        <!-- <div class="dropdown2">
                             <a>
                                 <li class="item-menu">
                                     <span class="menu">ACADÉMICO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                    <div class="dropdown2-content">
+                                    <div class="dropdown2-content"> -->
                                         <!-- <a href="/duplicar-semana"> Duplicar </a>
                                         <a href="/duplicarGeneral"> Duplicar Planificación General </a> -->
                                         <!-- <a href="/resportSendParents"> Reporte Mensual Padres&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a> -->
-                                        <a href="/board"> Pizarra </a>
+                                        <a href="/board">
+                                        <li class="item-menu">
+                                            <span class="menu">PIZARRA</span>
+                                        </li>
+                                             
+                                        </a>
                                         <!-- <a href="/duplicar-semana/"> Duplicar ciclo </a> -->
-                                    </div>
+                                    <!-- </div>
                                 </li>
-                            </a>
-                        </div>
+                            </a> -->
+                        <!-- </div> -->
                         <!-- <a href="/observer">
                             <li class="item-menu">
                                 <span class="menu">OBSERVADOR</span>

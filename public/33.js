@@ -121,6 +121,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: {
     logout: function logout() {
@@ -320,17 +329,15 @@ var staticRenderFns = [
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "dropdown2" }, [
-        _c("a", [
-          _c("li", { staticClass: "item-menu" }, [
-            _c("span", { staticClass: "menu" }, [
-              _vm._v("ACADÉMICO          ")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "dropdown2-content" }, [
-              _c("a", { attrs: { href: "/board" } }, [_vm._v(" Pizarra ")])
-            ])
-          ])
+      _c("a", { attrs: { href: "/docente/estudiantes" } }, [
+        _c("li", { staticClass: "item-menu" }, [
+          _c("span", { staticClass: "menu" }, [_vm._v("MIS ESTUDIANTES")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("a", { attrs: { href: "/board" } }, [
+        _c("li", { staticClass: "item-menu" }, [
+          _c("span", { staticClass: "menu" }, [_vm._v("PIZARRA")])
         ])
       ]),
       _vm._v(" "),
