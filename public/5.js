@@ -351,7 +351,7 @@ var render = function() {
                             target: "_blank"
                           }
                         },
-                        [_vm._v("Formulario de Matricula")]
+                        [_vm._v("Descarga aquí tu Formulario de Matricula")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "card-body pd-20" }, [
