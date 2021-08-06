@@ -341,6 +341,19 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-primary col-md-4",
+                          attrs: {
+                            href:
+                              "https://firebasestorage.googleapis.com/v0/b/myapp90119.appspot.com/o/Formulario%20Admisi%C3%B3n.pdf?alt=media&token=8ce93156-b860-4161-be02-5b7c054929b5",
+                            target: "_blank"
+                          }
+                        },
+                        [_vm._v("Formulario de Matricula")]
+                      ),
+                      _vm._v(" "),
                       _c("div", { staticClass: "card-body pd-20" }, [
                         _c(
                           "div",
