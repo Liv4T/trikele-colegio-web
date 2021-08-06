@@ -48,11 +48,11 @@
         <div class="custom-card text-center">
           <h3 class="card-header fondo">¡BIENVENIDO!</h3>
           <form class="needs-validation" novalidate>
-            <form-wizard title subtitle color="orange" layout="vertical" next-button-text="Siguiente" back-button-text="Atrás" finish-button-text="Finalizar">
-              <tab-content title="Documentos requeridos">
-                <h3>Para iniciar con el proceso de matricula debes cargar los siguientes documentos:</h3>
-
-                <div class="card-body pd-20">
+            <form-wizard title subtitle color="orange" layout="vertical" next-button-text="Siguiente" back-button-text="Atrás" finish-button-text="Finalizar">              
+              <tab-content title="Documentos requeridos">                
+                <h3>Para iniciar con el proceso de matricula debes cargar los siguientes documentos:</h3>      
+                <a href="https://firebasestorage.googleapis.com/v0/b/myapp90119.appspot.com/o/Formulario%20Admisi%C3%B3n.pdf?alt=media&token=8ce93156-b860-4161-be02-5b7c054929b5" target="_blank" class="btn btn-primary col-md-4">Formulario de Matricula</a>            
+                <div class="card-body pd-20">                  
                   <div class="form-group align-center letra-p row mx-auto">
                     <img width="35px" src="uploads/home/cargar.png" alt />Formulario de admisión
                     <input type="file" name="picture" class="form-control" @change="onFlieChange1($event, 'form')" required />
