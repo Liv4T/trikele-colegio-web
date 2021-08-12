@@ -161,12 +161,13 @@ export default {
           this.newSemanal.push(this.inputs[i]);
         }
       }
+      let ids = this.id_area.split('/');
 
       axios
         .post(url, {
           //Cursos generales
-          id_area: this.id_area,
-          id_classroom: this.id_classroom,
+          id_area: ids[0],
+          id_classroom: ids[1],
           semana: this.newSemanal,
         })
         .then((response) => {

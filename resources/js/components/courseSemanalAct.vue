@@ -45,11 +45,7 @@
                                             <label for="name">Observación</label>
                                             <textarea name="competences" 
                                             class="form-control" v-model="act.observation"></textarea>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="name">Fecha</label>
-                                            <input type="datetime-local" v-model="act.datetime" class="form-control">
-                                        </div>
+                                        </div>                                        
                                     </div>
                                     <!-- <div class="modal-footer">
                                         <a href="#" class="btn btn-warning float-right">Guardar</a>

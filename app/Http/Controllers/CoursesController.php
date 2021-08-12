@@ -376,7 +376,6 @@ class CoursesController extends Controller
             $week_update = Weekly::findOrFail($week['id']);
             $week_update->driving_question = $week['text'];
             $week_update->class_development = $week['class'];
-            $week_update->datetime = $week['datetime'];
             $week_update->observation = $week['observation'];
             $week_update->save();
         }
@@ -511,8 +510,7 @@ class CoursesController extends Controller
                 'id'   => $week->id,
                 'text' => $week->driving_question,
                 'class' => $week->class_development,
-                'observation' => $week->observation,
-                'datetime' => $week->datetime,
+                'observation' => $week->observation,                
                 'id_area' =>  $week->id_area,
                 'id_classroom' =>  $week->id_classroom,
             ];

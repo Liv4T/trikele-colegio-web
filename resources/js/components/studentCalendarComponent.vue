@@ -319,10 +319,10 @@ components: {
 .fc-daygrid-event .fc-event-title{color:black;}
 .fc-daygrid-event .fc-event-time{color:black;}
 .fc-button-primary{
-    background-color: #ffc039;
+    background-color: #FFE164;
     font-weight: 600;
     color: #ffffff;
-    border-color: #ffc039;
+    border-color: #FFE164;
 }
 .class-event{
     display: flex;

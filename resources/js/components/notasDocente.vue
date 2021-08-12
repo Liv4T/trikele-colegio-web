@@ -3,8 +3,11 @@
   <div>
     <div class="row justify-content-center">
       <div id="crud" class="col-sm-12">
+          <div class="card-container">
         <div class="card text-center">
-          <h3 class="card-header fondo">Notas</h3>
+           <div class="card-header">
+              <h3>Notas</h3>
+            </div>
 
           <div class="card-body">
             <!-- <table class="table table-responsive-xl table-hover table-striped center">
@@ -64,7 +67,8 @@
             <!-- </div>
           </div>-->
         </div>
-      </div> 
+          </div>
+      </div>
     </div>
   </div>
 </template>

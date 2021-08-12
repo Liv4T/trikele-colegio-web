@@ -16,7 +16,14 @@
     font-family: "PoppinsBold";
     src: url('fonts/PoppinsSemiBold.ttf') format("truetype");
 }
-
+@font-face {
+    font-family: "Caviar Dreams";
+    src: url(fonts/CaviarDreams.ttf) format("truetype");
+}
+@font-face {
+    font-family: "boldfont";
+    src: url(fonts/theboldfont.ttf) format("truetype");
+}
 
 @font-face {
     font-family: "Poppins";
@@ -39,7 +46,9 @@ body{
 .letra-poppins {
     font-family: "Poppins";
 }
-
+.letra-boldfont{
+    font-family: "boldfont";
+}
 
 /*CUSTOM ELEMENTS*/
 .classroom-label{
@@ -91,17 +100,17 @@ body{
     background-color:$color-1;
     font-weight: 600;
     border-color: $color-1;
-     color: $color-2;
+     color: $color-5;
 }
 .btn-warning:hover{
-    background-color: $color-1-6;
+    background-color: $color-1-6 !important;
     border-color: $color-1-6;
     text-decoration: none;
-    color:$color-2;
+    color:$color-5;
 }
 .btn-warning:not(:disabled):not(.disabled):active, .btn-warning:not(:disabled):not(.disabled).active, .show > .btn-warning.dropdown-toggle{
     text-decoration: none;
-    color: $color-2;
+    color:$color-5;
 }
 
 
@@ -190,12 +199,24 @@ body{
 }
 strong {
     font-family: "Century Gothic";
-}/*
-.card,h4,h3,h5,a,.section3P{
-    font-family: "Caviar Dreams";
-}*/
+}
+.card-container{
+    background-color: $color-6;
+    padding: 10px;
+}
 .card-header{
     text-align: center;
+    background-color: transparent;
+    border: none;
+}
+.card-header>h3{
+    background-color: $color-3;
+    padding: 8px;
+    font-family: "boldfont" !important;
+    max-width: 300px;
+    margin: auto;
+    border-radius: 8px;
+    color: white;
 }
 .btn-outline-primary{
     border-color: $default-btn !important;
@@ -220,10 +241,7 @@ strong {
 .label-required{color:$red}
 a:not(.md-button):hover{text-decoration: none !important;}
 
-.card-header.fondo {
-background-color: $orange !important;
-color: white;
-}
+
 .padding-10_p{padding:10%;}
 .padding-left-5{padding-left: 5px !important;}
 .table-hover th tbody tr{
@@ -236,7 +254,7 @@ color: white;
     font-family: "boldfont";
 }
 .letra-boldfont{
-    font-family: "boldfont";
+    font-family: "boldfont" !important;
 }
 .letra-poppins{
     font-family: "Poppins" !important;

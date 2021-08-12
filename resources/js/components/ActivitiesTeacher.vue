@@ -2,8 +2,11 @@
     <div>
         <div class="justify-content-center">
             <div id="crud" class="col-sm-12">
+                <div class="card-container">
                 <div class="card text-center">
-                    <h3 class="card-header fondo">Actividades Pendientes por Calificar</h3>
+                    <div class="card-header">
+                        <h3>Actividades Pendientes por Calificar</h3>
+                    </div>
                     <div class="card-body">
                         <div class="float-right">
                             <label for="">Buscar</label>
@@ -14,18 +17,19 @@
                                 <thead >
                                     <tr>
                                         <th>Nombre</th>
-                                        <th>Fecha de entrega</th>                                        
+                                        <th>Fecha de entrega</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr v-for="(row, index) in filteredRows" :key="index">
                                         <td width="200px" style="font-size: 16px" v-html="highlightMatches(row.name)"></td>
-                                        <td style="font-size: 16px" v-html="highlightMatches(row.delivery_max_date)"></td>                                    
+                                        <td style="font-size: 16px" v-html="highlightMatches(row.delivery_max_date)"></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -42,7 +46,7 @@
             };
         },
         mounted() {
-            this.getData();   
+            this.getData();
         },
         watch:{
             idArea(newVal, oldVal){
@@ -58,7 +62,7 @@
                     let activities = response.data.filter(
                         o => hash[o.id] ? false : hash[o.id] = true
                     );
-                    activities.forEach(element=>{                        
+                    activities.forEach(element=>{
                         if(moment(element.delivery_max_date).format("YYYY-MM-DD") > moment().format("YYYY-MM-DD")){
                             this.activities.push(element)
                         }

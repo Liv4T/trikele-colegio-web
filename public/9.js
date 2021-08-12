@@ -45,37 +45,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 $(".collapse").on("show.bs.collapse", function () {
   $(".collapse.in").collapse("hide");
 });
@@ -141,7 +110,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.collapse-row.collapsed + tr {\r\n  display: none;\n}\n.btn.skool {\r\n  background-color: #c1e9eb;\r\n  color: white;\n}\r\n", ""]);
+exports.push([module.i, "\n.collapse-row.collapsed + tr {\n  display: none;\n}\n.btn.skool {\n  background-color: #c1e9eb;\n  color: white;\n}\n", ""]);
 
 // exports
 
@@ -196,168 +165,184 @@ var render = function() {
   return _c("div", { staticClass: "back" }, [
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "col-sm-10", attrs: { id: "crud" } }, [
-        _c("div", { staticClass: "card text-center" }, [
-          _c("h3", { staticClass: "card-header fondo" }, [
-            _vm._v("Planificación General")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c(
-              "div",
-              { staticClass: "accordion", attrs: { id: "accordionExample" } },
-              _vm._l(_vm.areas, function(area, t) {
-                return _c("div", { key: t, staticClass: "card" }, [
-                  _c("div", { staticClass: "card-header" }, [
-                    _c("h2", { staticClass: "mb-0" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-link",
-                          attrs: {
-                            type: "button",
-                            "data-toggle": "collapse",
-                            "data-target": "#collapse" + t,
-                            "aria-expanded": "false",
-                            "aria-controls": "collapse"
+        _c("div", { staticClass: "card-container" }, [
+          _c("div", { staticClass: "card text-center" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c(
+                "div",
+                { staticClass: "accordion", attrs: { id: "accordionExample" } },
+                _vm._l(_vm.areas, function(area, t) {
+                  return _c("div", { key: t, staticClass: "card" }, [
+                    _c("div", { staticClass: "card-header" }, [
+                      _c("h2", { staticClass: "mb-0" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-link",
+                            attrs: {
+                              type: "button",
+                              "data-toggle": "collapse",
+                              "data-target": "#collapse" + t,
+                              "aria-expanded": "false",
+                              "aria-controls": "collapse"
+                            },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.botones(area.id, area.id_classroom)
+                              }
+                            }
                           },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              return _vm.botones(area.id, area.id_classroom)
+                          [_c("label", [_vm._v(_vm._s(area.text))])]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "collapse hide accordion-content",
+                        attrs: {
+                          id: "collapse" + t,
+                          "aria-labelledby": "heading",
+                          "data-parent": "#accordionExample"
+                        }
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-warning",
+                            attrs: {
+                              href:
+                                "/course/" + area.id + "/" + area.id_classroom
                             }
-                          }
-                        },
-                        [_c("label", [_vm._v(_vm._s(area.text))])]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "collapse hide accordion-content",
-                      attrs: {
-                        id: "collapse" + t,
-                        "aria-labelledby": "heading",
-                        "data-parent": "#accordionExample"
-                      }
-                    },
-                    [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-warning",
-                          attrs: {
-                            href: "/course/" + area.id + "/" + area.id_classroom
-                          }
-                        },
-                        [_vm._v("General")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-warning",
-                          attrs: {
-                            href:
-                              "/duplicar/" + area.id + "/" + area.id_classroom
-                          }
-                        },
-                        [_vm._v("Duplicar")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.general == true,
-                              expression: "general==true"
+                          },
+                          [_vm._v("General")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-warning",
+                            attrs: {
+                              href:
+                                "/duplicar/" + area.id + "/" + area.id_classroom
                             }
-                          ],
-                          staticClass: "btn btn-warning",
-                          attrs: {
-                            href:
-                              "/porcentaje/" + area.id + "/" + area.id_classroom
-                          }
-                        },
-                        [_vm._v("Porcentaje de notas")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.general == true,
-                              expression: "general==true"
+                          },
+                          [_vm._v("Duplicar")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.general == true,
+                                expression: "general == true"
+                              }
+                            ],
+                            staticClass: "btn btn-warning",
+                            attrs: {
+                              href:
+                                "/porcentaje/" +
+                                area.id +
+                                "/" +
+                                area.id_classroom
                             }
-                          ],
-                          staticClass: "btn btn-warning",
-                          attrs: { href: "/duplicar-semana/" }
-                        },
-                        [_vm._v("Duplicar Ciclo")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.general == true,
-                              expression: "general==true"
+                          },
+                          [_vm._v("Porcentaje de notas")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.general == true,
+                                expression: "general == true"
+                              }
+                            ],
+                            staticClass: "btn btn-warning",
+                            attrs: { href: "/duplicar-semana/" }
+                          },
+                          [_vm._v("Duplicar Ciclo")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.general == true,
+                                expression: "general == true"
+                              }
+                            ],
+                            staticClass: "btn btn-warning",
+                            attrs: {
+                              href:
+                                "/crear_semana/" +
+                                area.id +
+                                "/" +
+                                area.id_classroom
                             }
-                          ],
-                          staticClass: "btn btn-warning",
-                          attrs: {
-                            href:
-                              "/crear_semana/" +
-                              area.id +
-                              "/" +
-                              area.id_classroom
-                          }
-                        },
-                        [_vm._v("Crear Ciclo")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.general == true,
-                              expression: "general==true"
+                          },
+                          [_vm._v("Crear Ciclo")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.general == true,
+                                expression: "general == true"
+                              }
+                            ],
+                            staticClass: "btn btn-warning",
+                            attrs: {
+                              href:
+                                "/act_semana/" +
+                                area.id +
+                                "/" +
+                                area.id_classroom
                             }
-                          ],
-                          staticClass: "btn btn-warning",
-                          attrs: {
-                            href:
-                              "/act_semana/" + area.id + "/" + area.id_classroom
-                          }
-                        },
-                        [_vm._v("Actualizar Ciclo")]
-                      )
-                    ]
-                  )
-                ])
-              }),
-              0
-            )
+                          },
+                          [_vm._v("Actualizar Ciclo")]
+                        )
+                      ]
+                    )
+                  ])
+                }),
+                0
+              )
+            ])
           ])
         ])
       ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", [_vm._v("Planificación General")])
+    ])
+  }
+]
 render._withStripped = true
 
 

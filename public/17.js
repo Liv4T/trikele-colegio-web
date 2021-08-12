@@ -146,58 +146,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -249,7 +197,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.background2 {\r\n  background: url(" + escape(__webpack_require__(/*! ../assets/img/Fondo5.jpg */ "./resources/js/assets/img/Fondo5.jpg")) + ");\r\n  background-size: contain;\r\n  background-repeat: no-repeat;\r\n  background-position: center;\r\n  position: relative;\n}\r\n", ""]);
+exports.push([module.i, "\n.background2 {\n  background: url(" + escape(__webpack_require__(/*! ../assets/img/Fondo5.jpg */ "./resources/js/assets/img/Fondo5.jpg")) + ");\n  background-size: contain;\n  background-repeat: no-repeat;\n  background-position: center;\n  position: relative;\n}\n", ""]);
 
 // exports
 
@@ -304,55 +252,55 @@ var render = function() {
   return _c("div", { staticClass: "back" }, [
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "col-sm-10", attrs: { id: "crud" } }, [
-        _c("div", { staticClass: "card text-center" }, [
-          _c("h3", { staticClass: "card-header fondo" }, [
-            _vm._v("Mis clases")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c(
-              "table",
-              {
-                staticClass:
-                  "table table-responsive-xl table-hover table-striped center"
-              },
-              [
-                _c("tbody", [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _c(
-                    "tr",
-                    _vm._l(_vm.clases, function(clas, t) {
-                      return _c("td", { key: t }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "collapse",
-                            attrs: { id: "accordion" }
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-warning",
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    return _vm.editNames(clas.id)
+        _c("div", { staticClass: "card-container" }, [
+          _c("div", { staticClass: "card text-center" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c(
+                "table",
+                {
+                  staticClass:
+                    "table table-responsive-xl table-hover table-striped center"
+                },
+                [
+                  _c("tbody", [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c(
+                      "tr",
+                      _vm._l(_vm.clases, function(clas, t) {
+                        return _c("td", { key: t }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "collapse",
+                              attrs: { id: "accordion" }
+                            },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "btn btn-warning",
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.editNames(clas.id)
+                                    }
                                   }
-                                }
-                              },
-                              [_vm._v("Ciclo " + _vm._s(t + 1))]
-                            )
-                          ]
-                        )
-                      ])
-                    }),
-                    0
-                  )
-                ])
-              ]
-            )
+                                },
+                                [_vm._v("Ciclo " + _vm._s(t + 1))]
+                              )
+                            ]
+                          )
+                        ])
+                      }),
+                      0
+                    )
+                  ])
+                ]
+              )
+            ])
           ])
         ])
       ]),
@@ -361,9 +309,9 @@ var render = function() {
         _c("div", { staticClass: "modal-dialog" }, [
           _c("div", { staticClass: "modal-content" }, [
             _c("div", { staticClass: "card" }, [
-              _vm._m(1),
-              _vm._v(" "),
               _vm._m(2),
+              _vm._v(" "),
+              _vm._m(3),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
                 _c(
@@ -417,7 +365,7 @@ var render = function() {
                               { staticClass: "form-group row mx-auto" },
                               [
                                 _c("div", { staticClass: "col-md-6" }, [
-                                  _vm._m(3, true),
+                                  _vm._m(4, true),
                                   _vm._v(" "),
                                   _c("div", [_vm._v(_vm._s(clas.name))])
                                 ]),
@@ -490,7 +438,7 @@ var render = function() {
                                 _c("div", { staticClass: "col-md-6" }, [
                                   _c("label", { attrs: { for: "name" } }, [
                                     _vm._v(
-                                      "\n                            Enlace de\n                            apoyo\n                          "
+                                      "\n                            Enlace de apoyo\n                          "
                                     )
                                   ]),
                                   _vm._v(" "),
@@ -514,7 +462,7 @@ var render = function() {
                               ]
                             ),
                             _vm._v(" "),
-                            _vm._m(4, true),
+                            _vm._m(5, true),
                             _vm._v(" "),
                             _c(
                               "div",
@@ -556,6 +504,14 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", [_vm._v("Mis clases")])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

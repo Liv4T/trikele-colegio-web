@@ -23,8 +23,11 @@
   <div class="back">
     <div class="row">
       <div class="col-md-10 mx-auto">
+           <div class="card-container">
         <div class="custom-card text-center">
-          <h3 class="card-header fondo">Actividad</h3>
+             <div class="card-header">
+            <h3>Actividad</h3>
+          </div>
           <form class="needs-validation" novalidate>
             <form-wizard
               title
@@ -213,6 +216,7 @@
             </form-wizard>
           </form>
         </div>
+           </div>
       </div>
     </div>
   </div>

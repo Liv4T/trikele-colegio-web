@@ -78,7 +78,7 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     padding: 10px;
-    border:2px solid #ffc039;
+    border:2px solid #FFE164;
     border-radius:4px;
     margin-top:10px;
     transition: background 0.8s;
@@ -89,18 +89,18 @@ export default {
 .module_container:hover{
       box-shadow: 0 0 11px rgba(33,33,33,.2);
       cursor: default;
-      background: #ffc039 radial-gradient(circle, transparent 1%, white 1%) center/15000%;
+      background: #FFE164 radial-gradient(circle, transparent 1%, white 1%) center/15000%;
       color:#000;
 }
 .module_container:active {
-  background-color: #ffc039;
+  background-color: #FFE164;
   background-size: 100%;
   text-decoration: none;
   transition: background 0s;
    color:white;
 }
 .module_container-active{
-     background-color: #ffc039;
+     background-color: #FFE164;
      color:#000;
 }
 .module_notify{

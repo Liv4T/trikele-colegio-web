@@ -2,7 +2,7 @@
     <div class="back">
         <div class="row justify-content-center">
             <div id="crud text-center" class="col-sm-11">
-                    
+
                 <div class="form-group col-md-5 mx-auto">
                     <div class="text-center">
                         <select class="btn btn-warning letra-boldfont" name="type" @change="ShowSelected">
@@ -15,10 +15,10 @@
                 <div class="row">
                     <div id="tabs" class="col-md-10 mx-auto">
                         <div class="tabs">
-                            <a v-on:click="activetab = 1" v-bind:class="[activetab === 1 ? 'active' : '']"><h4 class="letra-poppins-bold">CLASES</h4></a>
-                            <a v-on:click="activetab = 2" v-bind:class="[activetab === 2 ? 'active' : '']"><h4 class="letra-poppins-bold">ACTIVIDADES</h4></a>
-                            <a v-on:click="activetab = 3" v-bind:class="[activetab === 3 ? 'active' : '']"><h4 class="letra-poppins-bold">NOTAS</h4></a>
-                            <a v-on:click="activetab = 4" v-bind:class="[activetab === 4 ? 'active' : '']"><h4 class="letra-poppins-bold">ENTREGAS</h4></a>
+                            <a v-on:click="activetab = 1" v-bind:class="[activetab === 1 ? 'active' : '']"><h4 class="letra-boldfont">CLASES</h4></a>
+                            <a v-on:click="activetab = 2" v-bind:class="[activetab === 2 ? 'active' : '']"><h4 class="letra-boldfont">ACTIVIDADES</h4></a>
+                            <a v-on:click="activetab = 3" v-bind:class="[activetab === 3 ? 'active' : '']"><h4 class="letra-boldfont">NOTAS</h4></a>
+                            <a v-on:click="activetab = 4" v-bind:class="[activetab === 4 ? 'active' : '']"><h4 class="letra-boldfont">ENTREGAS</h4></a>
                         </div>
 
                         <div>
@@ -27,28 +27,28 @@
                                     <teacher-courses :id_area="idArea" :id_classroom="idClassroom"></teacher-courses>
                                 </div>
                             </div>
-        
+
                             <div v-if="activetab === 2" class="tabcontent">
                                 <div v-if="idArea !='' && idClassroom != ''">
                                     <activities-teacher-component :idArea="idArea" :idClassroom="idClassroom"></activities-teacher-component>
                                 </div>
                             </div>
-        
+
                             <div v-if="activetab === 3" class="tabcontent">
                                 <div v-if="idArea !='' && idClassroom != ''">
                                     <notasd-component :id_area="idArea" :id_classroom="idClassroom"></notasd-component>
-                                </div>              
+                                </div>
                             </div>
-    
+
                             <div v-if="activetab === 4" class="tabcontent">
                                 <div v-if="idArea !='' && idClassroom != ''">
                                     <repository-component :id_grade="undefined" :id_area="idArea" :id_classroom="idClassroom"></repository-component>
                                 </div>
                             </div>
                         </div>
-                    </div>                        
+                    </div>
                 </div>
-                                
+
             </div>
         </div>
     </div>
@@ -128,7 +128,7 @@ export default {
 
 /* Styling for active tab */
 .tabs a.active {
-  background-color: #00cbcec1;
+  background-color: #09708C;
   color: #fff;
   border-bottom: 2px solid #fff;
   cursor: default;
