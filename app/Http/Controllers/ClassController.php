@@ -23,6 +23,8 @@ use App\ClassContentInteraction;
 use App\ClassInteraction;
 use App\Classroom;
 use App\User;
+use App\Grade;
+use App\ClassSubject;
 use Illuminate\Http\Request;
 use Auth;
 use PhpParser\Node\Stmt\Foreach_;
@@ -1147,6 +1149,45 @@ class ClassController extends Controller
             ];
         }
         return response()->json($data);
+    }
+    public function getAllClass()
+    {
+        // $Classes =[];
+        $price_credit = 7000;
+        $class_subjects = ClassSubject::inRandomOrder()->get();
+        // Recorremod todos los modulos que ya estan aprovados
+        foreach ($class_subjects as $class_subject) {
+            $weekly = Weekly::where('id', $class_subject->id_weekly)->first();
+            $count_class = Classs::where('id_weekly_plan', $class_subject->id_weekly)->count();
+            if (isset($weekly)) {
+                $area = Area::find($weekly->id_area);
+                $grade=Grade::find($area->id_grade);
+                // Validamos si existe la imagen del modulo
+                if (!is_null($area->images) && isset($area->images) && $area->images !== "") {
+                    $arrayImg = $area->images;
+                    $array = explode('",', $arrayImg);
+                    $var_random = rand(0, 2);
+                    $img_subject_first = $array[$var_random];
+                    $img_subject = str_replace('"', '', $img_subject_first);
+                    $img_subject = str_replace('[', '', $img_subject);
+                    // $img_subject = substr($img_subject_first, 2);
+                } else {
+                    $img_subject = null;
+                }
+                // return $Classe;
+                // Asignamos la imagen, descripcion y precio del modulo
+                $class_subject->name = $weekly->driving_question;
+                $class_subject->image = $img_subject;
+                $class_subject->quantity_class = $count_class;
+                $class_subject->price = $weekly->credits_quantity * $price_credit;
+                $class_subject->area_name=$area->name;
+                $class_subject->grade_name=$grade->name;
+            } else {
+                $class_subject->name = "Módulo";
+            }
+        }
+
+        return response()->json($class_subjects);
     }
     /**
      * Display a listing of the resource.

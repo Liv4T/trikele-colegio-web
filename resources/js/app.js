@@ -223,5 +223,10 @@ Vue.component("plan-class-component", ()=>import("./components/planClassComponen
 Vue.component("activities-teacher-component", ()=>import("./components/ActivitiesTeacher.vue"));
 
 Vue.component("clases-teacher",()=>import("./components/clasesTeacher.vue"));
+//Refuerzo Escolar
+Vue.component("homeGrados",()=>import("./components/homeGrados.vue"));
+Vue.component("home-class",() => import ("./components/homeClassModule.vue"));
+
+Vue.component("home-modulos", () => import ("./components/homeModulos.vue"));
 
 const app = new Vue({el: "#app", data: {}, store});

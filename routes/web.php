@@ -819,3 +819,25 @@ Route::middleware('auth')->get('/planClass', function () {
 Route::middleware('auth')->get('/clasesTeacher', function () {
     return view('clasesTeacher');
 });
+
+//Refuerzo Escolar
+Route::get('/plan_estudio', function () {
+    return view('menuhome')->with('plan', $_GET['plan'] ?? '');
+});
+Route::get('getAllGrades', 'AdministratorController@getAllGrades')->name('getAllGrades');
+Route::get('getAllClass', 'ClassController@getAllClass');
+Route::get('/modulo_clases/{id_weekly}', function (String $id_weekly) {
+    return view('homeClassModul')->with('id_weekly', $id_weekly)->with('plan', isset($_GET['plan']) ? $_GET['plan'] : '');
+});
+
+Route::get('/modulo_clases/{id_weekly}', function (String $id_weekly) {
+    return view('homeClassModul')->with('id_weekly', $id_weekly)->with('plan', isset($_GET['plan']) ? $_GET['plan'] : '');
+});
+Route::get('findClassByModule/{id}', 'LandingController@findClassByModule')->name('findClassByModule');
+Route::get('findWeeklyById/{id}', 'LandingController@findWeeklyById')->name('findWeeklyById');
+
+Route::get('/modulos_home/{id_area}/{id_grade}', function (String $id_area, String $id_grade) {
+    return view('homeModulos')->with('id_area', $id_area)->with('id_grade', $id_grade)->with('plan', isset($_GET['plan']) ? $_GET['plan'] : '');
+});
+Route::get('findClassroomByGrade/{id}', 'LandingController@findClassroomByGrade')->name('findClassroomByGrade');
+Route::get('findAreaById/{id}', 'LandingController@findAreaById')->name('findAreaById');

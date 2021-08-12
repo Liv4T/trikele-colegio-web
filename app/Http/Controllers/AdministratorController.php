@@ -15,6 +15,7 @@ use App\User;
 use App\ClassroomStudent;
 use App\ClassroomTeacher;
 use Auth;
+use DB;
 
 class AdministratorController extends Controller
 {
@@ -398,6 +399,37 @@ class AdministratorController extends Controller
                     'grade' => $val->name,
                     'institution' => $value->name,
                 ];
+            }
+        }
+        return $grades;
+    }
+
+    public function getAllGrades()
+    {
+        $institution = Institution::all();
+        // $grades = [];
+
+        foreach ($institution as $key => $value) {
+            $grade = Grade::where('id_institution', $value->id)->get();
+            foreach ($grade as $key => $val) {
+                $areas = DB::table('area')
+                ->join('weekly_plan', 'weekly_plan.id_area', '=', 'area.id')
+                ->where('weekly_plan.deleted',0)
+                ->where('area.id_grade', $val->id)
+                ->select('area.id','area.name','area.images',DB::raw('sum(weekly_plan.credits_quantity)*7000 as precio'))
+                ->groupBy('area.id','area.name','area.images')
+                ->get();
+
+
+                //Area::where('id_grade',$val->id)->get();
+                // foreach($areas as $area){
+                    $grades[] = [
+                        'id' => $val->id,
+                        'grade' => $val->name,
+                        'institution' => $value->name,
+                        'areas' => $areas,
+                    ];
+                // }
             }
         }
         return $grades;
