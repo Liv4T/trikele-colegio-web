@@ -2,8 +2,11 @@
   <div class="back">
     <div class="row justify-content-center">
       <div id="crud" class="col-sm-10">
+           <div class="card-container">
         <div class="card text-center">
-          <h3 class="card-header fondo">Mis clases</h3>
+        <div class="card-header">
+              <h3>Mis clases</h3>
+            </div>
           <div class="card-body">
             <div class="accordion" id="accordionExample">
               <div class="card" v-for="(area,t) in areas" :key="t">
@@ -53,6 +56,7 @@
             </div>
           </div>
         </div>
+           </div>
       </div>
       <div class="modal fade" id="editu">
         <div class="modal-dialog">

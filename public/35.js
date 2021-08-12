@@ -64,7 +64,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\na:not(.md-button):hover{\n   text-decoration: none;\n}\n.navbar a{\n  text-align: left !important;\n}\n.event_container{\n    width: 450px;\n    padding: 5px;\n    max-height: 200px;\n    overflow:auto;\n}\n.event_all a{\n  width:100%;\n  text-align: center !important;\n  padding: 10px;\n  background: #278080;\n  color:white;\n  text-decoration: none;\n}\n.list-group-item-action{\n  text-align: left;\n  width:100%;\n  word-wrap: break-word;\n}\n.list-group-item-action:hover{\n  text-decoration: none;\n  background: #ffc039;\n  font-weight: 600;\n  color:white;\n}\n\n", ""]);
+exports.push([module.i, "\na:not(.md-button):hover{\n   text-decoration: none;\n}\n.navbar a{\n  text-align: left !important;\n}\n.event_container{\n    width: 450px;\n    padding: 5px;\n    max-height: 200px;\n    overflow:auto;\n}\n.event_all a{\n  width:100%;\n  text-align: center !important;\n  padding: 10px;\n  background: #278080;\n  color:white;\n  text-decoration: none;\n}\n.list-group-item-action{\n  text-align: left;\n  width:100%;\n  word-wrap: break-word;\n}\n.list-group-item-action:hover{\n  text-decoration: none;\n  background: #FFE164;\n  font-weight: 600;\n  color:white;\n}\n\n", ""]);
 
 // exports
 
@@ -183,7 +183,7 @@ var staticRenderFns = [
       [
         _c("i", {
           pre: true,
-          attrs: { style: "color:#ffc039", class: "fas fa-bell" }
+          attrs: { style: "color:#FFE164", class: "fas fa-bell" }
         }),
         _vm._v(" "),
         _c(

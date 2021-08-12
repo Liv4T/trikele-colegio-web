@@ -21,9 +21,9 @@
           <!-- <div class="content-azul"> -->
                     <div>
                         <div v-if="activetab === 1" class="tabcontent">
-                            <div v-if="idArea !=='' ">                
+                            <div v-if="idArea !=='' ">
                                 <course-component :id_area="idArea" :id_classroom="idClassroom"></course-component>
-                            </div>              
+                            </div>
                         </div>
                         <div v-if="activetab === 2" class="tabcontent">
                             <div v-if="idArea !=='' ">
@@ -38,7 +38,7 @@
                         <div v-if="activetab === 4" class="tabcontent">
                             <div v-if="idArea !=='' ">
                                 <div class="accordion" id="accordionExample">
-                                    <div class="card">                                        
+                                    <div class="card">
                                         <div class="card-header" id="headingOne">
                                             <h2 class="mb-0">
                                                 <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -53,7 +53,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                
+
                                     <div class="card">
                                         <div class="card-header" id="headingTwo">
                                             <h2 class="mb-0">
@@ -67,8 +67,8 @@
                                                 <semanalact-component :id_area="idArea" :id_classroom="idClassroom"></semanalact-component>
                                             </div>
                                         </div>
-                                    </div>                                
-                                </div>                                                    
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -183,7 +183,7 @@ export default {
 
 /* Styling for active tab */
 .tabs a.active {
-  background-color: #00cbcec1;
+  background-color: #09708C;
   color: #fff;
   border-bottom: 2px solid #fff;
   cursor: default;

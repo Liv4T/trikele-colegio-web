@@ -119,18 +119,18 @@ export default {
 .area_container:hover{
       box-shadow: 0 0 11px rgba(33,33,33,.2);
       cursor: default;
-      background: #ffc039 radial-gradient(circle, transparent 1%, white 1%) center/15000%;
+      background: #FFE164 radial-gradient(circle, transparent 1%, white 1%) center/15000%;
       color:#000;
 }
 .area_container:active {
-  background-color: #ffc039;
+  background-color: #FFE164;
   background-size: 100%;
   text-decoration: none;
   transition: background 0s;
    color:white;
 }
 .area_container-active{
-     background-color: #ffc039;
+     background-color: #FFE164;
      color:#000;
 }
 .student_info{

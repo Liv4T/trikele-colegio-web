@@ -129,7 +129,7 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     padding: 10px;
-    border:2px solid #ffc039;
+    border:2px solid #FFE164;
     border-radius:4px;
     margin-top:10px;
     transition: background 0.8s;

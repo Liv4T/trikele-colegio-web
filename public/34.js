@@ -157,7 +157,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.left {\r\n  width: 225px;\r\n  height: auto;\r\n  background: #f5f5f5;\r\n  white-space: nowrap;\r\n  transition: width 0.5s;\r\n  position: absolute;\r\n  z-index: 1;\n}\n.left ul {\r\n  padding: 0;\r\n  list-style-type: none;\r\n  text-align: left;\n}\n.mg-btn {\r\n  margin: 10px;\r\n  min-width: 165px;\n}\n.left li {\r\n  width: auto;\r\n  height: 60px;\r\n  line-height: 50px;\r\n  padding-left: 18px;\n}\n.left li:hover {\r\n  background: #01aeb1c1;\r\n  color: white;\n}\n.left .item-menu {\r\n  height: 50px;\r\n  overflow: hidden;\r\n  color: white;\n}\n.left a {\r\n  color: white;\r\n  text-decoration: none;\r\n  font-weight: bold;\n}\nspan.menu {\r\n  padding-left: 17px;\n}\n.t_search {\r\n  color: rgb(200, 200, 200);\r\n  height: 35px;\r\n  margin-left: 15px;\r\n  width: 190px;\n}\n.dropdown {\r\n  position: relative;\r\n  display: inline-block;\n}\n.dropdown-content {\r\n  display: none;\r\n  position: absolute;\r\n  background-color: #f5f5f5;\r\n  min-width: 160px;\r\n  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);\r\n  z-index: 1;\n}\n.dropdown-content a {\r\n  color: black;\r\n  padding: 12px 16px;\r\n  text-decoration: none;\r\n  display: block;\n}\n.left li {\r\n  background: #00cbcec1;\r\n  margin: 8px;\n}\n.left #electivas {\r\n  background: #ffc039;\r\n  margin: 8px;\n}\n.dropdown-content a:hover {\r\n  background: #01aeb1c1;\r\n  color: white;\n}\n.dropdown:hover .dropdown-content {\r\n  display: block;\n}\n.dropdown2 {\r\n  position: relative;\n}\n.dropdown2-content {\r\n  display: none;\r\n  position: absolute;\r\n  background-color: #f5f5f5;\r\n  min-width: 160px;\r\n  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);\r\n  z-index: 1;\n}\n.dropdown2-content a {\r\n  color: black;\r\n  padding: 12px 16px;\r\n  text-decoration: none;\r\n  display: block;\n}\n.dropdown2-content a:hover {\r\n  background: #01aeb1c1;\r\n  color: white;\n}\n.dropdown2:hover .dropdown2-content {\r\n  display: block;\n}\r\n", ""]);
+exports.push([module.i, "\n.left {\n  width: 225px;\n  height: auto;\n  background: #f5f5f5;\n  white-space: nowrap;\n  transition: width 0.5s;\n  position: absolute;\n  z-index: 1;\n}\n.left ul {\n  padding: 0;\n  list-style-type: none;\n  text-align: left;\n}\n.mg-btn {\n  margin: 10px;\n  min-width: 165px;\n}\n.left li {\n  width: auto;\n  height: 60px;\n  line-height: 50px;\n  padding-left: 18px;\n}\n.left li:hover {\n  background: #09708C;\n  color: white;\n}\n.left .item-menu {\n  height: 50px;\n  overflow: hidden;\n  color: white;\n}\n.left a {\n  color: white;\n  text-decoration: none;\n  font-weight: bold;\n}\nspan.menu {\n  padding-left: 17px;\n}\n.t_search {\n  color: rgb(200, 200, 200);\n  height: 35px;\n  margin-left: 15px;\n  width: 190px;\n}\n.dropdown {\n  position: relative;\n  display: inline-block;\n}\n.dropdown-content {\n  display: none;\n  position: absolute;\n  background-color: #f5f5f5;\n  min-width: 160px;\n  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);\n  z-index: 1;\n}\n.dropdown-content a {\n  color: black;\n  padding: 12px 16px;\n  text-decoration: none;\n  display: block;\n}\n.left li {\n  background: #09708C;\n  margin: 8px;\n  border-radius: 5px;\n}\n.left #electivas {\n  margin: 8px;\n}\n.dropdown-content a:hover {\n  background: #09708C;\n  color: white;\n}\n.dropdown:hover .dropdown-content {\n  display: block;\n}\n.dropdown2 {\n  position: relative;\n}\n.dropdown2-content {\n  display: none;\n  position: absolute;\n  background-color: #f5f5f5;\n  min-width: 160px;\n  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);\n  z-index: 1;\n}\n.dropdown2-content a {\n  color: black;\n  padding: 12px 16px;\n  text-decoration: none;\n  display: block;\n}\n.dropdown2-content a:hover {\n  background: #09708C;\n  color: white;\n}\n.dropdown2:hover .dropdown2-content {\n  display: block;\n}\n", ""]);
 
 // exports
 
@@ -219,7 +219,7 @@ var render = function() {
             _c(
               "a",
               {
-                staticClass: "btn btn-warning",
+                staticClass: "btn btn-warning letra-boldfont",
                 attrs: { href: "#" },
                 on: {
                   click: function($event) {
@@ -247,7 +247,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "dropdown" }, [
         _c("a", [
           _c("li", { staticClass: "item-menu" }, [
-            _c("span", { staticClass: "menu" }, [
+            _c("span", { staticClass: "menu letra-boldfont" }, [
               _vm._v("COMUNICACIONES          ")
             ]),
             _vm._v(" "),
@@ -272,12 +272,14 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("a", { attrs: { href: "/calendar" } }, [
         _c("li", { staticClass: "item-menu" }, [
-          _c("span", { staticClass: "menu" }, [_vm._v("CALENDARIO")])
+          _c("span", { staticClass: "menu letra-boldfont" }, [
+            _vm._v("CALENDARIO")
+          ])
         ])
       ]),
       _vm._v(" "),
       _c("a", { attrs: { href: "/clasesTeacher" } }, [
-        _c("li", { staticClass: "item-menu" }, [
+        _c("li", { staticClass: "item-menu letra-boldfont" }, [
           _c(
             "p",
             {
@@ -297,14 +299,14 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("p", { staticStyle: { "margin-left": "1rem" } }, [
             _vm._v(
-              "\n                                GENERAL                \n                            "
+              "\n                                GENERAL\n                            "
             )
           ])
         ])
       ]),
       _vm._v(" "),
       _c("a", { attrs: { href: "/planClass" } }, [
-        _c("li", { staticClass: "item-menu" }, [
+        _c("li", { staticClass: "item-menu letra-boldfont" }, [
           _c(
             "p",
             {
@@ -323,7 +325,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("p", { staticStyle: { "margin-left": "1rem" } }, [
             _vm._v(
-              " \n                                CLASES\n                            "
+              "\n                                CLASES\n                            "
             )
           ])
         ])
@@ -331,22 +333,28 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("a", { attrs: { href: "/docente/estudiantes" } }, [
         _c("li", { staticClass: "item-menu" }, [
-          _c("span", { staticClass: "menu" }, [_vm._v("MIS ESTUDIANTES")])
+          _c("span", { staticClass: "menu letra-boldfont" }, [
+            _vm._v("MIS ESTUDIANTES")
+          ])
         ])
       ]),
       _vm._v(" "),
       _c("a", { attrs: { href: "/board" } }, [
         _c("li", { staticClass: "item-menu" }, [
-          _c("span", { staticClass: "menu" }, [_vm._v("PIZARRA")])
+          _c("span", { staticClass: "menu letra-boldfont" }, [
+            _vm._v("PIZARRA")
+          ])
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "dropdown2" }, [
         _c("a", [
           _c("li", { staticClass: "item-menu", attrs: { id: "electivas" } }, [
-            _c("span", { staticClass: "menu" }, [_vm._v("ELECTIVAS")]),
+            _c("span", { staticClass: "menu letra-boldfont" }, [
+              _vm._v("ELECTIVAS")
+            ]),
             _vm._v(" "),
-            _c("div", { staticClass: "dropdown2-content" }, [
+            _c("div", { staticClass: "dropdown2-content letra-boldfont" }, [
               _c("a", { attrs: { href: "/teacher/lectives/planning" } }, [
                 _vm._v(" Planificación ")
               ]),
@@ -369,7 +377,9 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("a", { attrs: { href: "/manual" } }, [
         _c("li", { staticClass: "item-menu" }, [
-          _c("span", { staticClass: "menu" }, [_vm._v("MANUAL DE USUARIO")])
+          _c("span", { staticClass: "menu letra-boldfont" }, [
+            _vm._v("MANUAL DE USUARIO")
+          ])
         ])
       ]),
       _vm._v(" "),

@@ -50,14 +50,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['id_area', 'id_classroom'],
+  props: ["id_area", "id_classroom"],
   data: function data() {
     return {
       clases: [],
       area_id: "",
       classroom_id: "",
-      showSection: 'principal',
+      showSection: "principal",
       id_area_selected: null,
       id_classroom_selected: null,
       id_module: null
@@ -92,19 +96,19 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getSelectedData: function getSelectedData(showSection, data) {
-      if (showSection === 'edit') {
+      if (showSection === "edit") {
         this.id_area_selected = data.id_area;
         this.id_classroom_selected = data.id_classroom;
-        this.showSection = 'edit';
-      } else if (showSection === 'cycle') {
+        this.showSection = "edit";
+      } else if (showSection === "cycle") {
         this.id_module = data.id;
-        this.showSection = 'cycle';
+        this.showSection = "cycle";
       }
     },
     backPage: function backPage() {
       this.id_area_selected = null;
       this.id_classroom_selected = null;
-      this.showSection = 'principal';
+      this.showSection = "principal";
       this.id_module = null;
     }
   }
@@ -130,74 +134,77 @@ var render = function() {
   return _vm.showSection === "principal"
     ? _c("div", { staticClass: "row justify-content-center" }, [
         _c("div", { staticClass: "col-sm-12", attrs: { id: "crud" } }, [
-          _c("div", { staticClass: "card text-center" }, [
-            _c("h3", { staticClass: "card-header fondo" }, [
-              _vm._v("Mis clases")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c(
-                "table",
-                {
-                  staticClass:
-                    "table table-responsive-xl table-hover table-striped center"
-                },
-                [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _vm._l(_vm.clases, function(clas, k) {
-                    return _c(
-                      "tbody",
-                      { key: k },
-                      [
+          _c("div", { staticClass: "card-container" }, [
+            _c("div", { staticClass: "card text-center" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c(
+                  "table",
+                  {
+                    staticClass:
+                      "table table-responsive-xl table-hover table-striped center"
+                  },
+                  [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _vm._l(_vm.clases, function(clas, k) {
+                      return _c(
+                        "tbody",
+                        { key: k },
                         [
-                          _c("tr", [
-                            _c("td", [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "btn btn-primary",
-                                  staticStyle: { color: "white" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.getSelectedData("edit", clas)
+                          [
+                            _c("tr", [
+                              _c("td", [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-primary",
+                                    staticStyle: { color: "white" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.getSelectedData("edit", clas)
+                                      }
                                     }
-                                  }
-                                },
-                                [_vm._v("Editar")]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(clas.text))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "btn btn-primary",
-                                  staticStyle: { color: "white" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.getSelectedData("cycle", clas)
+                                  },
+                                  [_vm._v("Editar")]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(clas.text))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-primary",
+                                    staticStyle: { color: "white" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.getSelectedData(
+                                          "cycle",
+                                          clas
+                                        )
+                                      }
                                     }
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                        Ir a Ciclo\n                                    "
-                                  )
-                                ]
-                              )
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                      Ir a Ciclo\n                    "
+                                    )
+                                  ]
+                                )
+                              ])
                             ])
-                          ])
-                        ]
-                      ],
-                      2
-                    )
-                  })
-                ],
-                2
-              )
+                          ]
+                        ],
+                        2
+                      )
+                    })
+                  ],
+                  2
+                )
+              ])
             ])
           ])
         ])
@@ -229,6 +236,14 @@ var render = function() {
     : _vm._e()
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", [_vm._v("Mis clases")])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

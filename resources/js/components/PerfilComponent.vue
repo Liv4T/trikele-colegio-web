@@ -166,7 +166,5 @@ export default {
 .inputfile + label {
   cursor: pointer; /* "hand" cursor */
 }
-.btn-warning {
-  color: white;
-}
+
 </style>

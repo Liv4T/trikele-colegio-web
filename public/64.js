@@ -44,6 +44,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["idArea", "idClassroom"],
@@ -124,81 +128,83 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "justify-content-center" }, [
       _c("div", { staticClass: "col-sm-12", attrs: { id: "crud" } }, [
-        _c("div", { staticClass: "card text-center" }, [
-          _c("h3", { staticClass: "card-header fondo" }, [
-            _vm._v("Actividades Pendientes por Calificar")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("div", { staticClass: "float-right" }, [
-              _c("label", { attrs: { for: "" } }, [_vm._v("Buscar")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.filter,
-                    expression: "filter"
-                  }
-                ],
-                attrs: { type: "text", placeholder: "Módulo" },
-                domProps: { value: _vm.filter },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.filter = $event.target.value
-                  }
-                }
-              })
-            ]),
+        _c("div", { staticClass: "card-container" }, [
+          _c("div", { staticClass: "card text-center" }, [
+            _vm._m(0),
             _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "table-responsive",
-                staticStyle: { "border-radius": "20px" }
-              },
-              [
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-hover table-striped",
-                    staticStyle: { "border-collapse": "separate !important" }
-                  },
-                  [
-                    _vm._m(0),
-                    _vm._v(" "),
-                    _c(
-                      "tbody",
-                      _vm._l(_vm.filteredRows, function(row, index) {
-                        return _c("tr", { key: index }, [
-                          _c("td", {
-                            staticStyle: { "font-size": "16px" },
-                            attrs: { width: "200px" },
-                            domProps: {
-                              innerHTML: _vm._s(_vm.highlightMatches(row.name))
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("td", {
-                            staticStyle: { "font-size": "16px" },
-                            domProps: {
-                              innerHTML: _vm._s(
-                                _vm.highlightMatches(row.delivery_max_date)
-                              )
-                            }
-                          })
-                        ])
-                      }),
-                      0
-                    )
-                  ]
-                )
-              ]
-            )
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "float-right" }, [
+                _c("label", { attrs: { for: "" } }, [_vm._v("Buscar")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.filter,
+                      expression: "filter"
+                    }
+                  ],
+                  attrs: { type: "text", placeholder: "Módulo" },
+                  domProps: { value: _vm.filter },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.filter = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "table-responsive",
+                  staticStyle: { "border-radius": "20px" }
+                },
+                [
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-hover table-striped",
+                      staticStyle: { "border-collapse": "separate !important" }
+                    },
+                    [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.filteredRows, function(row, index) {
+                          return _c("tr", { key: index }, [
+                            _c("td", {
+                              staticStyle: { "font-size": "16px" },
+                              attrs: { width: "200px" },
+                              domProps: {
+                                innerHTML: _vm._s(
+                                  _vm.highlightMatches(row.name)
+                                )
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("td", {
+                              staticStyle: { "font-size": "16px" },
+                              domProps: {
+                                innerHTML: _vm._s(
+                                  _vm.highlightMatches(row.delivery_max_date)
+                                )
+                              }
+                            })
+                          ])
+                        }),
+                        0
+                      )
+                    ]
+                  )
+                ]
+              )
+            ])
           ])
         ])
       ])
@@ -206,6 +212,14 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", [_vm._v("Actividades Pendientes por Calificar")])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

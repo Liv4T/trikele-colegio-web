@@ -1,7 +1,7 @@
 <template>
     <div>
         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-            <i style="color:#ffc039" class="fas fa-bell"></i> <span id="span-counter" class="badge badge-light">0</span> <span class="caret"></span>
+            <i style="color:#FFE164" class="fas fa-bell"></i> <span id="span-counter" class="badge badge-light">0</span> <span class="caret"></span>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <div class="event_container">
@@ -66,7 +66,7 @@ export default {
     }
     .list-group-item-action:hover{
       text-decoration: none;
-      background: #ffc039;
+      background: #FFE164;
       font-weight: 600;
       color:white;
     }

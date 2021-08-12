@@ -59,30 +59,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 (function () {
   "use strict";
 
@@ -241,158 +217,167 @@ var render = function() {
     _c("div", { staticClass: "back" }, [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-11 mx-auto" }, [
-          _c("div", { staticClass: "custom-card text-center" }, [
-            _c("h3", { staticClass: "card-header fondo" }, [
-              _vm._v("Perfiles")
-            ]),
-            _vm._v(" "),
-            _c(
-              "form",
-              { staticClass: "needs-validation", attrs: { novalidate: "" } },
-              [
-                _c(
-                  "form-wizard",
-                  {
-                    attrs: {
-                      title: "",
-                      subtitle: "",
-                      color: "#ffc107",
-                      "next-button-text": "Siguiente",
-                      "back-button-text": "Atrás",
-                      "finish-button-text": "Guardar y enviar"
+          _c("div", { staticClass: "card-container" }, [
+            _c("div", { staticClass: "custom-card text-center" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "form",
+                { staticClass: "needs-validation", attrs: { novalidate: "" } },
+                [
+                  _c(
+                    "form-wizard",
+                    {
+                      attrs: {
+                        title: "",
+                        subtitle: "",
+                        color: "#ffc107",
+                        "next-button-text": "Siguiente",
+                        "back-button-text": "Atrás",
+                        "finish-button-text": "Guardar y enviar"
+                      },
+                      on: { "on-complete": _vm.createAs }
                     },
-                    on: { "on-complete": _vm.createAs }
-                  },
-                  [
-                    _c("tab-content", [
-                      _c("div", { staticClass: "form-group row mx-auto" }, [
-                        _c("div", { staticClass: "col-md-6" }, [
-                          _c("label", { attrs: { for: "" } }, [
-                            _vm._v("Docente:")
+                    [
+                      _c("tab-content", [
+                        _c("div", { staticClass: "form-group row mx-auto" }, [
+                          _c("div", { staticClass: "col-md-6" }, [
+                            _c("label", { attrs: { for: "" } }, [
+                              _vm._v("Docente:")
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.user_id,
+                                    expression: "user_id"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { required: "" },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.user_id = $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  }
+                                }
+                              },
+                              _vm._l(_vm.myOptions, function(option) {
+                                return _c(
+                                  "option",
+                                  { domProps: { value: option.id } },
+                                  [_vm._v(_vm._s(option.name))]
+                                )
+                              }),
+                              0
+                            )
                           ]),
                           _vm._v(" "),
-                          _c(
-                            "select",
-                            {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.user_id,
-                                  expression: "user_id"
-                                }
+                          _c("div", { staticClass: "col-md-6" }, [
+                            _c("label", { attrs: { for: "name" } }, [
+                              _vm._v("Salones")
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              [
+                                _c("multiselect", {
+                                  attrs: {
+                                    options: _vm.optionse,
+                                    "tag-placeholder": "Add this as new tag",
+                                    placeholder: "Search or add a tag",
+                                    label: "clasroom",
+                                    "track-by": "id",
+                                    multiple: true,
+                                    taggable: true
+                                  },
+                                  on: { tag: _vm.addTage },
+                                  model: {
+                                    value: _vm.salon,
+                                    callback: function($$v) {
+                                      _vm.salon = $$v
+                                    },
+                                    expression: "salon"
+                                  }
+                                })
                               ],
-                              staticClass: "form-control",
-                              attrs: { required: "" },
-                              on: {
-                                change: function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.user_id = $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                }
-                              }
-                            },
-                            _vm._l(_vm.myOptions, function(option) {
-                              return _c(
-                                "option",
-                                { domProps: { value: option.id } },
-                                [_vm._v(_vm._s(option.name))]
-                              )
-                            }),
-                            0
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-6" }, [
-                          _c("label", { attrs: { for: "name" } }, [
-                            _vm._v("Salones")
+                              1
+                            )
                           ]),
                           _vm._v(" "),
                           _c(
                             "div",
+                            { staticClass: "col-md-6" },
                             [
+                              _c("label", { attrs: { for: "name" } }, [
+                                _vm._v("Materias")
+                              ]),
+                              _vm._v(" "),
                               _c("multiselect", {
                                 attrs: {
-                                  options: _vm.optionse,
+                                  options: _vm.materias,
                                   "tag-placeholder": "Add this as new tag",
                                   placeholder: "Search or add a tag",
-                                  label: "clasroom",
+                                  label: "area",
                                   "track-by": "id",
                                   multiple: true,
                                   taggable: true
                                 },
-                                on: { tag: _vm.addTage },
+                                on: { tag: _vm.addTagM },
                                 model: {
-                                  value: _vm.salon,
+                                  value: _vm.materia,
                                   callback: function($$v) {
-                                    _vm.salon = $$v
+                                    _vm.materia = $$v
                                   },
-                                  expression: "salon"
+                                  expression: "materia"
                                 }
-                              })
+                              }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "invalid-feedback" }, [
+                                _vm._v("Please fill out this field")
+                              ])
                             ],
                             1
                           )
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "col-md-6" },
-                          [
-                            _c("label", { attrs: { for: "name" } }, [
-                              _vm._v("Materias")
-                            ]),
-                            _vm._v(" "),
-                            _c("multiselect", {
-                              attrs: {
-                                options: _vm.materias,
-                                "tag-placeholder": "Add this as new tag",
-                                placeholder: "Search or add a tag",
-                                label: "area",
-                                "track-by": "id",
-                                multiple: true,
-                                taggable: true
-                              },
-                              on: { tag: _vm.addTagM },
-                              model: {
-                                value: _vm.materia,
-                                callback: function($$v) {
-                                  _vm.materia = $$v
-                                },
-                                expression: "materia"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v("Please fill out this field")
-                            ])
-                          ],
-                          1
-                        )
+                        ])
                       ])
-                    ])
-                  ],
-                  1
-                )
-              ],
-              1
-            )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ])
           ])
         ])
       ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", [_vm._v("Perfiles")])
+    ])
+  }
+]
 render._withStripped = true
 
 

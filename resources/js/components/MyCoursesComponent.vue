@@ -452,10 +452,7 @@ td {
 .hola2 {
   color: black;
 }
-@import url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
-.card-header {
-  background-color: #e9ecefb5;
-}
+
 #accordion1 li.panel {
   margin-bottom: 0px;
 }

@@ -653,10 +653,7 @@ td {
 .hola2 {
   color: black;
 }
-@import url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
-.card-header {
-  background-color: #e9ecefb5;
-}
+
 .selectc {
   background-color: #e9ecef00;
   border-color: rgba(0, 0, 0, 0);

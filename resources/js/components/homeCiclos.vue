@@ -525,9 +525,7 @@ a {
 
   color: rgb(255, 214, 32);
 }
-.card-header {
-  background-color: #e9ecefb5;
-}
+
 .etiqueta {
   color: black;
 }

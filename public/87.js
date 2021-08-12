@@ -210,124 +210,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 (function () {
   "use strict";
 
@@ -472,252 +354,288 @@ var render = function() {
     _c("div", { staticClass: "back" }, [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-10 mx-auto" }, [
-          _c("div", { staticClass: "custom-card text-center" }, [
-            _c("h3", { staticClass: "card-header fondo" }, [
-              _vm._v("Planificación general")
-            ]),
-            _vm._v(" "),
-            _c(
-              "form",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.trimestre == false,
-                    expression: "trimestre==false"
-                  }
-                ],
-                staticClass: "needs-validation",
-                attrs: { novalidate: "" }
-              },
-              [
-                _c(
-                  "form-wizard",
-                  {
-                    attrs: {
-                      title: "",
-                      subtitle: "",
-                      color: "#ffc107",
-                      "next-button-text": "Siguiente",
-                      "back-button-text": "Atrás",
-                      "finish-button-text": "Guardar y enviar"
+          _c("div", { staticClass: "card-container" }, [
+            _c("div", { staticClass: "custom-card text-center" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.trimestre == false,
+                      expression: "trimestre == false"
+                    }
+                  ],
+                  staticClass: "needs-validation",
+                  attrs: { novalidate: "" }
+                },
+                [
+                  _c(
+                    "form-wizard",
+                    {
+                      attrs: {
+                        title: "",
+                        subtitle: "",
+                        color: "#ffc107",
+                        "next-button-text": "Siguiente",
+                        "back-button-text": "Atrás",
+                        "finish-button-text": "Guardar y enviar"
+                      },
+                      on: { "on-complete": _vm.createCourses }
                     },
-                    on: { "on-complete": _vm.createCourses }
-                  },
-                  [
-                    _c("tab-content", { attrs: { title: "Anual" } }, [
-                      _c("div", { staticClass: "form-group mx-auto" }, [
-                        _c("div", { attrs: { align: "center" } }, [
-                          _c("strong", [_vm._v("Logro 1")])
+                    [
+                      _c("tab-content", { attrs: { title: "Anual" } }, [
+                        _c("div", { staticClass: "form-group mx-auto" }, [
+                          _c("div", { attrs: { align: "center" } }, [
+                            _c("strong", [_vm._v("Logro 1")])
+                          ]),
+                          _vm._v(" "),
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.newLogro1,
+                                expression: "newLogro1"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { name: "welcome", required: "" },
+                            domProps: { value: _vm.newLogro1 },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.newLogro1 = $event.target.value
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v("Please fill out this field")
+                          ])
                         ]),
                         _vm._v(" "),
-                        _c("textarea", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.newLogro1,
-                              expression: "newLogro1"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { name: "welcome", required: "" },
-                          domProps: { value: _vm.newLogro1 },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
+                        _c("div", { staticClass: "form-group mx-auto" }, [
+                          _c("div", { attrs: { align: "center" } }, [
+                            _c("strong", [_vm._v("Logro 2")])
+                          ]),
+                          _vm._v(" "),
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.newLogro2,
+                                expression: "newLogro2"
                               }
-                              _vm.newLogro1 = $event.target.value
+                            ],
+                            staticClass: "form-control",
+                            attrs: { name: "intentioned", required: "" },
+                            domProps: { value: _vm.newLogro2 },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.newLogro2 = $event.target.value
+                              }
                             }
-                          }
-                        }),
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v("Please fill out this field")
+                          ])
+                        ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v("Please fill out this field")
+                        _c("div", { staticClass: "form-group mx-auto" }, [
+                          _c("div", { attrs: { align: "center" } }, [
+                            _c("strong", [_vm._v("Logro 3")])
+                          ]),
+                          _vm._v(" "),
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.newLogro3,
+                                expression: "newLogro3"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { name: "intentioned", required: "" },
+                            domProps: { value: _vm.newLogro3 },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.newLogro3 = $event.target.value
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v("Please fill out this field")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group mx-auto" }, [
+                          _c("div", { attrs: { align: "center" } }, [
+                            _c("strong", [_vm._v("Logro 4")])
+                          ]),
+                          _vm._v(" "),
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.newLogro4,
+                                expression: "newLogro4"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { name: "competences", required: "" },
+                            domProps: { value: _vm.newLogro4 },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.newLogro4 = $event.target.value
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v("Please fill out this field")
+                          ])
                         ])
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "form-group mx-auto" }, [
-                        _c("div", { attrs: { align: "center" } }, [
-                          _c("strong", [_vm._v("Logro 2")])
-                        ]),
-                        _vm._v(" "),
-                        _c("textarea", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.newLogro2,
-                              expression: "newLogro2"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { name: "intentioned", required: "" },
-                          domProps: { value: _vm.newLogro2 },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.newLogro2 = $event.target.value
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v("Please fill out this field")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group mx-auto" }, [
-                        _c("div", { attrs: { align: "center" } }, [
-                          _c("strong", [_vm._v("Logro 3")])
-                        ]),
-                        _vm._v(" "),
-                        _c("textarea", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.newLogro3,
-                              expression: "newLogro3"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { name: "intentioned", required: "" },
-                          domProps: { value: _vm.newLogro3 },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.newLogro3 = $event.target.value
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v("Please fill out this field")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group mx-auto" }, [
-                        _c("div", { attrs: { align: "center" } }, [
-                          _c("strong", [_vm._v("Logro 4")])
-                        ]),
-                        _vm._v(" "),
-                        _c("textarea", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.newLogro4,
-                              expression: "newLogro4"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { name: "competences", required: "" },
-                          domProps: { value: _vm.newLogro4 },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.newLogro4 = $event.target.value
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v("Please fill out this field")
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "tab-content",
-                      { attrs: { title: "Trimestral" } },
-                      _vm._l(_vm.inputs, function(input, t) {
-                        return _c(
-                          "div",
-                          { key: t, staticClass: "form-group row mx-auto" },
-                          [
-                            _c("div", { staticClass: "col-md-6" }, [
-                              _c("label", { attrs: { for: "name" } }, [
-                                _vm._v("Unidad")
-                              ]),
-                              _vm._v(" "),
-                              _c("span", [
-                                _c(
-                                  "a",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "show",
-                                        rawName: "v-show",
-                                        value:
-                                          t || (!t && _vm.inputs.length > 1),
-                                        expression:
-                                          "\r\n                                                        t ||\r\n                                                            (!t &&\r\n                                                                inputs.length >\r\n                                                                    1)\r\n                                                    "
-                                      }
-                                    ],
-                                    staticClass: "badge badge-danger",
-                                    attrs: { href: "#" },
-                                    on: {
-                                      click: function($event) {
-                                        $event.preventDefault()
-                                        return _vm.remove(t)
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("-")]
-                                ),
+                      _c(
+                        "tab-content",
+                        { attrs: { title: "Trimestral" } },
+                        _vm._l(_vm.inputs, function(input, t) {
+                          return _c(
+                            "div",
+                            { key: t, staticClass: "form-group row mx-auto" },
+                            [
+                              _c("div", { staticClass: "col-md-6" }, [
+                                _c("label", { attrs: { for: "name" } }, [
+                                  _vm._v("Unidad")
+                                ]),
                                 _vm._v(" "),
-                                _c(
-                                  "a",
-                                  {
+                                _c("span", [
+                                  _c(
+                                    "a",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "show",
+                                          rawName: "v-show",
+                                          value:
+                                            t || (!t && _vm.inputs.length > 1),
+                                          expression:
+                                            "t || (!t && inputs.length > 1)"
+                                        }
+                                      ],
+                                      staticClass: "badge badge-danger",
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          return _vm.remove(t)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("-")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "a",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "show",
+                                          rawName: "v-show",
+                                          value: t == _vm.inputs.length - 1,
+                                          expression: "t == inputs.length - 1"
+                                        }
+                                      ],
+                                      staticClass: "badge badge-primary",
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          return _vm.add(t)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("+")]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", [
+                                  _c("input", {
                                     directives: [
                                       {
-                                        name: "show",
-                                        rawName: "v-show",
-                                        value: t == _vm.inputs.length - 1,
-                                        expression:
-                                          "\r\n                                                        t == inputs.length - 1\r\n                                                    "
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: input.name,
+                                        expression: "input.name"
                                       }
                                     ],
-                                    staticClass: "badge badge-primary",
-                                    attrs: { href: "#" },
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      type: "text",
+                                      name: "objetive1",
+                                      placeholder: "Nombre de la unidad",
+                                      required: ""
+                                    },
+                                    domProps: { value: input.name },
                                     on: {
-                                      click: function($event) {
-                                        $event.preventDefault()
-                                        return _vm.add(t)
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          input,
+                                          "name",
+                                          $event.target.value
+                                        )
                                       }
                                     }
-                                  },
-                                  [_vm._v("+")]
-                                )
+                                  })
+                                ])
                               ]),
                               _vm._v(" "),
-                              _c("div", [
-                                _c("input", {
+                              _c("div", { staticClass: "col-md-6" }, [
+                                _c("label", { attrs: { for: "name" } }, [
+                                  _vm._v("Contenido")
+                                ]),
+                                _vm._v(" "),
+                                _c("textarea", {
                                   directives: [
                                     {
                                       name: "model",
                                       rawName: "v-model",
-                                      value: input.name,
-                                      expression: "input.name"
+                                      value: input.contenido,
+                                      expression: "input.contenido"
                                     }
                                   ],
                                   staticClass: "form-control",
                                   attrs: {
-                                    type: "text",
-                                    name: "objetive1",
-                                    placeholder: "Nombre de la unidad",
+                                    name: "competences",
+                                    placeholder:
+                                      "Es la explicacion o sintesis de la unidad.",
                                     required: ""
                                   },
-                                  domProps: { value: input.name },
+                                  domProps: { value: input.contenido },
                                   on: {
                                     input: function($event) {
                                       if ($event.target.composing) {
@@ -725,417 +643,63 @@ var render = function() {
                                       }
                                       _vm.$set(
                                         input,
-                                        "name",
+                                        "contenido",
                                         $event.target.value
                                       )
                                     }
                                   }
-                                })
+                                }),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "invalid-feedback" }, [
+                                  _vm._v("Please fill out this field")
+                                ])
                               ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-md-6" }, [
-                              _c("label", { attrs: { for: "name" } }, [
-                                _vm._v("Contenido")
-                              ]),
-                              _vm._v(" "),
-                              _c("textarea", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: input.contenido,
-                                    expression: "input.contenido"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: {
-                                  name: "competences",
-                                  placeholder:
-                                    "Es la explicacion o sintesis de la unidad.",
-                                  required: ""
-                                },
-                                domProps: { value: input.contenido },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      input,
-                                      "contenido",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "invalid-feedback" }, [
-                                _vm._v("Please fill out this field")
-                              ])
-                            ])
-                          ]
-                        )
-                      }),
-                      0
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "form",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.trimestre == true,
-                    expression: "trimestre==true"
-                  }
-                ]
-              },
-              [
-                _c(
-                  "form-wizard",
-                  {
-                    attrs: {
-                      title: "",
-                      subtitle: "",
-                      color: "#ffc107",
-                      "next-button-text": "Siguiente",
-                      "back-button-text": "Atrás",
-                      "finish-button-text": "Guardar"
+                            ]
+                          )
+                        }),
+                        0
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.trimestre == true,
+                      expression: "trimestre == true"
+                    }
+                  ]
+                },
+                [
+                  _c(
+                    "form-wizard",
+                    {
+                      attrs: {
+                        title: "",
+                        subtitle: "",
+                        color: "#ffc107",
+                        "next-button-text": "Siguiente",
+                        "back-button-text": "Atrás",
+                        "finish-button-text": "Guardar"
+                      },
+                      on: { "on-complete": _vm.updateCourses }
                     },
-                    on: { "on-complete": _vm.updateCourses }
-                  },
-                  [
-                    _c("tab-content", { attrs: { title: "Anual" } }, [
-                      _c("div", [
-                        _c("div", { staticClass: "form-group mx-auto" }, [
-                          _c("div", { attrs: { align: "center" } }, [
-                            _c("strong", [
-                              _vm._v(
-                                "\r\n                        Logro 1   20%   \r\n                        "
-                              ),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-outline-success btn-sm",
-                                  attrs: {
-                                    onclick:
-                                      "confirm('Seguro de confirmar el cumplimiento del logro')",
-                                    type: "submit"
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fas fa-check-circle"
-                                  })
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-outline-danger btn-sm",
-                                  attrs: {
-                                    onclick: "confirm('Esta seguro?')",
-                                    type: "submit"
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fas fa-times-circle"
-                                  })
-                                ]
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("textarea", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.logro_1,
-                                expression: "logro_1"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { name: "welcome" },
-                            domProps: { value: _vm.logro_1 },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.logro_1 = $event.target.value
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "invalid-feedback" }, [
-                            _vm._v("Please fill out this field")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group mx-auto" }, [
-                          _c("div", { attrs: { align: "center" } }, [
-                            _c("strong", [
-                              _vm._v(
-                                "\r\n                        Logro 2    40%   \r\n                        "
-                              ),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-outline-success btn-sm",
-                                  attrs: {
-                                    onclick:
-                                      "confirm('Seguro de confirmar el cumplimiento del logro')",
-                                    type: "submit"
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fas fa-check-circle"
-                                  })
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-outline-danger btn-sm",
-                                  attrs: {
-                                    onclick: "confirm('Esta seguro?')",
-                                    type: "submit"
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fas fa-times-circle"
-                                  })
-                                ]
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("textarea", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.logro_2,
-                                expression: "logro_2"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { name: "welcome" },
-                            domProps: { value: _vm.logro_2 },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.logro_2 = $event.target.value
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "invalid-feedback" }, [
-                            _vm._v("Please fill out this field")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group mx-auto" }, [
-                          _c("div", { attrs: { align: "center" } }, [
-                            _c("strong", [
-                              _vm._v(
-                                "\r\n                        Logro 3    20%   \r\n                        "
-                              ),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-outline-success btn-sm",
-                                  attrs: {
-                                    onclick:
-                                      "confirm('Seguro de confirmar el cumplimiento del logro')",
-                                    type: "submit"
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fas fa-check-circle"
-                                  })
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-outline-danger btn-sm",
-                                  attrs: {
-                                    onclick: "confirm('Esta seguro?')",
-                                    type: "submit"
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fas fa-times-circle"
-                                  })
-                                ]
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("textarea", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.logro_3,
-                                expression: "logro_3"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { name: "welcome" },
-                            domProps: { value: _vm.logro_3 },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.logro_3 = $event.target.value
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "invalid-feedback" }, [
-                            _vm._v("Please fill out this field")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group mx-auto" }, [
-                          _c("div", { attrs: { align: "center" } }, [
-                            _c("strong", [
-                              _vm._v(
-                                "\r\n                        Logro 4    20%   \r\n                        "
-                              ),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-outline-success btn-sm",
-                                  attrs: {
-                                    onclick:
-                                      "confirm('Seguro de confirmar el cumplimiento del logro')",
-                                    type: "submit"
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fas fa-check-circle"
-                                  })
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-outline-danger btn-sm",
-                                  attrs: {
-                                    onclick: "confirm('Esta seguro?')",
-                                    type: "submit"
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fas fa-times-circle"
-                                  })
-                                ]
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("textarea", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.logro_4,
-                                expression: "logro_4"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { name: "welcome" },
-                            domProps: { value: _vm.logro_4 },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.logro_4 = $event.target.value
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "invalid-feedback" }, [
-                            _vm._v("Please fill out this field")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group mx-auto" }, [
-                          _c("div", { attrs: { align: "center" } }, [
-                            _c("strong", [_vm._v("Observación")])
-                          ]),
-                          _vm._v(" "),
-                          _c("textarea", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.observation,
-                                expression: "observation"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              name: "welcome",
-                              placeholder: "Comentarios"
-                            },
-                            domProps: { value: _vm.observation },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.observation = $event.target.value
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "invalid-feedback" }, [
-                            _vm._v("Please fill out this field")
-                          ])
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "tab-content",
-                      { attrs: { title: "Trimestral" } },
-                      _vm._l(_vm.fillC.quaterly, function(input, t) {
-                        return _c(
-                          "div",
-                          { key: t, staticClass: "form-group row mx-auto" },
-                          [
-                            _c("div", { staticClass: "col-md-6" }, [
-                              _c("label", { attrs: { for: "name" } }, [
+                    [
+                      _c("tab-content", { attrs: { title: "Anual" } }, [
+                        _c("div", [
+                          _c("div", { staticClass: "form-group mx-auto" }, [
+                            _c("div", { attrs: { align: "center" } }, [
+                              _c("strong", [
                                 _vm._v(
-                                  "\r\n                      Unidad    \r\n                      "
+                                  "\n                          Logro 1   20%   \n                          "
                                 ),
                                 _c(
                                   "button",
@@ -1171,25 +735,386 @@ var render = function() {
                                     })
                                   ]
                                 )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.logro_1,
+                                  expression: "logro_1"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { name: "welcome" },
+                              domProps: { value: _vm.logro_1 },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.logro_1 = $event.target.value
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "invalid-feedback" }, [
+                              _vm._v("Please fill out this field")
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group mx-auto" }, [
+                            _c("div", { attrs: { align: "center" } }, [
+                              _c("strong", [
+                                _vm._v(
+                                  "\n                          Logro 2    40%   \n                          "
+                                ),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-outline-success btn-sm",
+                                    attrs: {
+                                      onclick:
+                                        "confirm('Seguro de confirmar el cumplimiento del logro')",
+                                      type: "submit"
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-check-circle"
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-outline-danger btn-sm",
+                                    attrs: {
+                                      onclick: "confirm('Esta seguro?')",
+                                      type: "submit"
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-times-circle"
+                                    })
+                                  ]
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.logro_2,
+                                  expression: "logro_2"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { name: "welcome" },
+                              domProps: { value: _vm.logro_2 },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.logro_2 = $event.target.value
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "invalid-feedback" }, [
+                              _vm._v("Please fill out this field")
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group mx-auto" }, [
+                            _c("div", { attrs: { align: "center" } }, [
+                              _c("strong", [
+                                _vm._v(
+                                  "\n                          Logro 3    20%   \n                          "
+                                ),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-outline-success btn-sm",
+                                    attrs: {
+                                      onclick:
+                                        "confirm('Seguro de confirmar el cumplimiento del logro')",
+                                      type: "submit"
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-check-circle"
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-outline-danger btn-sm",
+                                    attrs: {
+                                      onclick: "confirm('Esta seguro?')",
+                                      type: "submit"
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-times-circle"
+                                    })
+                                  ]
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.logro_3,
+                                  expression: "logro_3"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { name: "welcome" },
+                              domProps: { value: _vm.logro_3 },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.logro_3 = $event.target.value
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "invalid-feedback" }, [
+                              _vm._v("Please fill out this field")
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group mx-auto" }, [
+                            _c("div", { attrs: { align: "center" } }, [
+                              _c("strong", [
+                                _vm._v(
+                                  "\n                          Logro 4    20%   \n                          "
+                                ),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-outline-success btn-sm",
+                                    attrs: {
+                                      onclick:
+                                        "confirm('Seguro de confirmar el cumplimiento del logro')",
+                                      type: "submit"
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-check-circle"
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-outline-danger btn-sm",
+                                    attrs: {
+                                      onclick: "confirm('Esta seguro?')",
+                                      type: "submit"
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-times-circle"
+                                    })
+                                  ]
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.logro_4,
+                                  expression: "logro_4"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { name: "welcome" },
+                              domProps: { value: _vm.logro_4 },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.logro_4 = $event.target.value
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "invalid-feedback" }, [
+                              _vm._v("Please fill out this field")
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group mx-auto" }, [
+                            _c("div", { attrs: { align: "center" } }, [
+                              _c("strong", [_vm._v("Observación")])
+                            ]),
+                            _vm._v(" "),
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.observation,
+                                  expression: "observation"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                name: "welcome",
+                                placeholder: "Comentarios"
+                              },
+                              domProps: { value: _vm.observation },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.observation = $event.target.value
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "invalid-feedback" }, [
+                              _vm._v("Please fill out this field")
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "tab-content",
+                        { attrs: { title: "Trimestral" } },
+                        _vm._l(_vm.fillC.quaterly, function(input, t) {
+                          return _c(
+                            "div",
+                            { key: t, staticClass: "form-group row mx-auto" },
+                            [
+                              _c("div", { staticClass: "col-md-6" }, [
+                                _c("label", { attrs: { for: "name" } }, [
+                                  _vm._v(
+                                    "\n                        Unidad    \n                        "
+                                  ),
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn btn-outline-success btn-sm",
+                                      attrs: {
+                                        onclick:
+                                          "confirm('Seguro de confirmar el cumplimiento del logro')",
+                                        type: "submit"
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fas fa-check-circle"
+                                      })
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn btn-outline-danger btn-sm",
+                                      attrs: {
+                                        onclick: "confirm('Esta seguro?')",
+                                        type: "submit"
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fas fa-times-circle"
+                                      })
+                                    ]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: input.unit_name,
+                                        expression: "input.unit_name"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      type: "text",
+                                      name: "objetive1",
+                                      placeholder: "Nombre de la unidad"
+                                    },
+                                    domProps: { value: input.unit_name },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          input,
+                                          "unit_name",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ])
                               ]),
                               _vm._v(" "),
-                              _c("div", [
-                                _c("input", {
+                              _c("div", { staticClass: "col-md-6" }, [
+                                _c("label", { attrs: { for: "name" } }, [
+                                  _vm._v("Contenido")
+                                ]),
+                                _vm._v(" "),
+                                _c("textarea", {
                                   directives: [
                                     {
                                       name: "model",
                                       rawName: "v-model",
-                                      value: input.unit_name,
-                                      expression: "input.unit_name"
+                                      value: input.content,
+                                      expression: "input.content"
                                     }
                                   ],
                                   staticClass: "form-control",
                                   attrs: {
-                                    type: "text",
-                                    name: "objetive1",
-                                    placeholder: "Nombre de la unidad"
+                                    name: "competences",
+                                    placeholder:
+                                      "Es la explicacion o sintesis de la unidad."
                                   },
-                                  domProps: { value: input.unit_name },
+                                  domProps: { value: input.content },
                                   on: {
                                     input: function($event) {
                                       if ($event.target.composing) {
@@ -1197,104 +1122,68 @@ var render = function() {
                                       }
                                       _vm.$set(
                                         input,
-                                        "unit_name",
+                                        "content",
                                         $event.target.value
                                       )
                                     }
                                   }
-                                })
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-md-6" }, [
-                              _c("label", { attrs: { for: "name" } }, [
-                                _vm._v("Contenido")
+                                }),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "invalid-feedback" }, [
+                                  _vm._v("Please fill out this field")
+                                ])
                               ]),
                               _vm._v(" "),
-                              _c("textarea", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: input.content,
-                                    expression: "input.content"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: {
-                                  name: "competences",
-                                  placeholder:
-                                    "Es la explicacion o sintesis de la unidad."
-                                },
-                                domProps: { value: input.content },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
+                              _c("div", { staticClass: "col-md-6" }, [
+                                _c("label", { attrs: { for: "name" } }, [
+                                  _vm._v("Observación")
+                                ]),
+                                _vm._v(" "),
+                                _c("textarea", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: input.observation,
+                                      expression: "input.observation"
                                     }
-                                    _vm.$set(
-                                      input,
-                                      "content",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "invalid-feedback" }, [
-                                _vm._v("Please fill out this field")
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-md-6" }, [
-                              _c("label", { attrs: { for: "name" } }, [
-                                _vm._v("Observación")
-                              ]),
-                              _vm._v(" "),
-                              _c("textarea", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: input.observation,
-                                    expression: "input.observation"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: {
-                                  name: "competences",
-                                  placeholder: "Comentarios"
-                                },
-                                domProps: { value: input.observation },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: {
+                                    name: "competences",
+                                    placeholder: "Comentarios"
+                                  },
+                                  domProps: { value: input.observation },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        input,
+                                        "observation",
+                                        $event.target.value
+                                      )
                                     }
-                                    _vm.$set(
-                                      input,
-                                      "observation",
-                                      $event.target.value
-                                    )
                                   }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "invalid-feedback" }, [
-                                _vm._v("Please fill out this field")
+                                }),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "invalid-feedback" }, [
+                                  _vm._v("Please fill out this field")
+                                ])
                               ])
-                            ])
-                          ]
-                        )
-                      }),
-                      0
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            )
+                            ]
+                          )
+                        }),
+                        0
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ])
           ])
         ])
       ])
@@ -1337,6 +1226,14 @@ var staticRenderFns = [
           crossorigin: "anonymous"
         }
       })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", [_vm._v("Planificación general")])
     ])
   }
 ]
