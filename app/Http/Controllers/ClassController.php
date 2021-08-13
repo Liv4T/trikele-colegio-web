@@ -106,8 +106,8 @@ class ClassController extends Controller
                 'order'=>$resource->order,
                 'content_type'=>$resource->content_type,
                 'description'=>$resource->description,
-                'content'=>$resource->content,
-                'observation'=>$resource->observation,
+                'content'=>$resource->content,                
+                'observation'=>$resource->observation,                
                 'is_required'=>$resource->is_required,
                 'interaction'=> $class_content_interaction
 
@@ -134,6 +134,8 @@ class ClassController extends Controller
             'hourly_intensity'=>$course->hourly_intensity,
             'content'=>$class_resources,
             'activities'=>[],
+            'work'=>$course->work,
+            'transversals'=>$course->transversals,
             'activity_quantity'=>$course->activity_quantity,
             'content_quantity'=>$course->content_quantity,
             'class_interaction'=>$class_interaction,
@@ -616,7 +618,16 @@ class ClassController extends Controller
 
         if(isset($data['id_class']))
         {
-            Classs::where('id',$data['id_class'])->update(array('name'=>$data['name'],'description'=>$data['description'],'hourly_intensity'=>$data['hourly_intensity'],'activity_quantity'=>count($data['activities']),'content_quantity'=>count($data['content'])));
+            Classs::where('id',$data['id_class'])->update(
+                array(
+                    'name'=>$data['name'],
+                    'description'=>$data['description'],
+                    'hourly_intensity'=>$data['hourly_intensity'], 
+                    'work'=> isset($data['work']) ? $data['work'] : '',
+                    'transversals' => isset($data['transversals']) ? $data['transversals'] : '', 
+                    'activity_quantity'=>count($data['activities']),
+                    'content_quantity'=>count($data['content']))
+                );
             $id_course=$data['id_class'];
         }
         else{
@@ -628,6 +639,8 @@ class ClassController extends Controller
                 'id_weekly_plan'=>$id_module,
                 'activity_quantity'=>count($data['activities']),
                 'content_quantity'=>count($data['content']),
+                'work'=> $data['work'] ? $data['work'] : '',
+                'transversals' => $data['transversals'] ? $data['transversals'] : '',
                 'state'=>1,
                 'updated_user'=>$auth->id,
                 'deleted'=>0

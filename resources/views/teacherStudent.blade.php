@@ -2,7 +2,7 @@
 
 @section('content')
   @if (Auth::user()->type_user == '2')
-        <menu-docente></menu-docente>
+        <menu-docente-2></menu-docente-2>
   @endif
 <teacher-student  :id_class="{{ $id_class??'null' }}"  :id_module="{{ $id_module??'null' }}" :id_area="{{ $id_area }}" :id_classroom="{{ $id_classroom }}" :id_student="{{ $id_student }}"></teacher-student>
 <footers></footers>

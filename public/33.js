@@ -325,6 +325,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: {
     logout: function logout() {
@@ -481,7 +517,7 @@ var staticRenderFns = [
                   }
                 }),
                 _vm._v(
-                  "\n                                         Mensajes\n                                     "
+                  "\n                                        Mensajes\n                                    "
                 )
               ]),
               _vm._v(" "),
@@ -494,7 +530,9 @@ var staticRenderFns = [
                     alt: ""
                   }
                 }),
-                _vm._v("\n                   Foro\n                 ")
+                _vm._v(
+                  "\n                                        Foro\n                                    "
+                )
               ]),
               _vm._v(" "),
               _c("a", { attrs: { href: "/chat" } }, [
@@ -506,7 +544,9 @@ var staticRenderFns = [
                     alt: ""
                   }
                 }),
-                _vm._v("\n                   Chat\n                 ")
+                _vm._v(
+                  "\n                                        Chat\n                                    "
+                )
               ]),
               _vm._v(" "),
               _c("a", { attrs: { href: "/mensajes" } }, [
@@ -518,7 +558,131 @@ var staticRenderFns = [
                     alt: ""
                   }
                 }),
-                _vm._v("\n                   Psicología\n                 ")
+                _vm._v(
+                  "\n                                        Psicología\n                                    "
+                )
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("a", { attrs: { href: "/planClass" } }, [
+        _c("li", { staticClass: "item-menu" }, [
+          _c("img", {
+            attrs: {
+              width: "35px",
+              src:
+                "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/ANUNCIOS_naranja.png?alt=media&token=539c1428-c480-43bf-a132-73be35386940",
+              alt: ""
+            }
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "menu" }, [_vm._v("Planificación Clases")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "dropdown2" }, [
+        _c("a", [
+          _c("li", { staticClass: "item-menu" }, [
+            _c("img", {
+              attrs: {
+                width: "35px",
+                src:
+                  "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/ANUNCIOS_naranja.png?alt=media&token=539c1428-c480-43bf-a132-73be35386940",
+                alt: ""
+              }
+            }),
+            _vm._v(" "),
+            _c("span", { staticClass: "menu" }, [
+              _vm._v(
+                "\n                                    Académico          \n                                "
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "dropdown2-content" }, [
+              _c("a", { attrs: { href: "/actividad_g" } }, [
+                _c("img", {
+                  attrs: {
+                    width: "35px",
+                    src:
+                      "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MIS-CURSOS.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad",
+                    alt: ""
+                  }
+                }),
+                _vm._v(
+                  "\n                                        Planificación\n                                    "
+                )
+              ]),
+              _vm._v(" "),
+              _c("a", { attrs: { href: "/docente/clases" } }, [
+                _c("img", {
+                  attrs: {
+                    width: "35px",
+                    src:
+                      "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/ACTIVIDADES_naranja.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad",
+                    alt: ""
+                  }
+                }),
+                _vm._v(
+                  "\n                                        Mis clases\n                                    "
+                )
+              ]),
+              _vm._v(" "),
+              _c("a", { attrs: { href: "/docente/estudiantes" } }, [
+                _c("img", {
+                  attrs: {
+                    width: "35px",
+                    src:
+                      "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/ACTIVIDADES_naranja.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad",
+                    alt: ""
+                  }
+                }),
+                _vm._v(
+                  "\n                                        Mis Estudiantes\n                                    "
+                )
+              ]),
+              _vm._v(" "),
+              _c("a", { attrs: { href: "/repository" } }, [
+                _c("img", {
+                  attrs: {
+                    width: "35px",
+                    src:
+                      "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/NOTAS_naranja.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad",
+                    alt: ""
+                  }
+                }),
+                _vm._v(
+                  "\n                                            Entregas\n                                    "
+                )
+              ]),
+              _vm._v(" "),
+              _c("a", { attrs: { href: "/notas_d" } }, [
+                _c("img", {
+                  attrs: {
+                    width: "35px",
+                    src:
+                      "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/NOTAS_naranja.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad",
+                    alt: ""
+                  }
+                }),
+                _vm._v(
+                  "\n                                        Notas\n                                    "
+                )
+              ]),
+              _vm._v(" "),
+              _c("a", { attrs: { href: "/board" } }, [
+                _c("img", {
+                  attrs: {
+                    width: "35px",
+                    src:
+                      "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/NOTAS_naranja.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad",
+                    alt: ""
+                  }
+                }),
+                _vm._v(
+                  "\n                                        Pizarra\n                                    "
+                )
               ])
             ])
           ])
@@ -538,101 +702,10 @@ var staticRenderFns = [
             }),
             _vm._v(" "),
             _c("span", { staticClass: "menu" }, [
-              _vm._v("Académico          ")
+              _vm._v(
+                "\n                                    Mis Electivas\n                                "
+              )
             ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "dropdown2-content" }, [
-              _c("a", { attrs: { href: "/actividad_g" } }, [
-                _c("img", {
-                  attrs: {
-                    width: "35px",
-                    src:
-                      "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MIS-CURSOS.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad",
-                    alt: ""
-                  }
-                }),
-                _vm._v("\n                   Planificación\n                 ")
-              ]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "/docente/clases" } }, [
-                _c("img", {
-                  attrs: {
-                    width: "35px",
-                    src:
-                      "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/ACTIVIDADES_naranja.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad",
-                    alt: ""
-                  }
-                }),
-                _vm._v("\n                   Mis clases\n                 ")
-              ]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "/docente/estudiantes" } }, [
-                _c("img", {
-                  attrs: {
-                    width: "35px",
-                    src:
-                      "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/ACTIVIDADES_naranja.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad",
-                    alt: ""
-                  }
-                }),
-                _vm._v(
-                  "\n                   Mis Estudiantes\n                 "
-                )
-              ]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "/repository" } }, [
-                _c("img", {
-                  attrs: {
-                    width: "35px",
-                    src:
-                      "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/NOTAS_naranja.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad",
-                    alt: ""
-                  }
-                }),
-                _vm._v("Entregas")
-              ]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "/notas_d" } }, [
-                _c("img", {
-                  attrs: {
-                    width: "35px",
-                    src:
-                      "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/NOTAS_naranja.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad",
-                    alt: ""
-                  }
-                }),
-                _vm._v("\n                   Notas\n                 ")
-              ]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "/board" } }, [
-                _c("img", {
-                  attrs: {
-                    width: "35px",
-                    src:
-                      "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/NOTAS_naranja.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad",
-                    alt: ""
-                  }
-                }),
-                _vm._v("\n                   Pizarra\n                 ")
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "dropdown2" }, [
-        _c("a", [
-          _c("li", { staticClass: "item-menu" }, [
-            _c("img", {
-              attrs: {
-                width: "35px",
-                src:
-                  "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/ANUNCIOS_naranja.png?alt=media&token=539c1428-c480-43bf-a132-73be35386940",
-                alt: ""
-              }
-            }),
-            _vm._v(" "),
-            _c("span", { staticClass: "menu" }, [_vm._v("Mis Electivas")]),
             _vm._v(" "),
             _c("div", { staticClass: "dropdown2-content" }, [
               _c("a", { attrs: { href: "/teacher/lectives/planning" } }, [
@@ -644,7 +717,9 @@ var staticRenderFns = [
                     alt: ""
                   }
                 }),
-                _vm._v("Planificación")
+                _vm._v(
+                  "\n                                                Planificación\n                                    "
+                )
               ]),
               _vm._v(" "),
               _c("a", { attrs: { href: "/teacher/lectives/courses" } }, [
@@ -656,7 +731,9 @@ var staticRenderFns = [
                     alt: ""
                   }
                 }),
-                _vm._v("Mis clases\n                 ")
+                _vm._v(
+                  "\n                                            Mis clases\n                                    "
+                )
               ]),
               _vm._v(" "),
               _c("a", { attrs: { href: "/teacher/lectives/students" } }, [
@@ -668,7 +745,9 @@ var staticRenderFns = [
                     alt: ""
                   }
                 }),
-                _vm._v("Mis alumnos\n                     ")
+                _vm._v(
+                  "\n                                                Mis alumnos\n                                    "
+                )
               ]),
               _vm._v(" "),
               _c("a", { attrs: { href: "/teacher/lectives/activities" } }, [
@@ -680,7 +759,9 @@ var staticRenderFns = [
                     alt: ""
                   }
                 }),
-                _vm._v("Mis actividades")
+                _vm._v(
+                  "\n                                                Mis actividades\n                                    "
+                )
               ])
             ])
           ])

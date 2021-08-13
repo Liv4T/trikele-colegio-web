@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[78],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/importAdm.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/importAdm.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/crearMemoria.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/crearMemoria.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13,6 +13,115 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_form_wizard_dist_vue_form_wizard_min_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-form-wizard/dist/vue-form-wizard.min.css */ "./node_modules/vue-form-wizard/dist/vue-form-wizard.min.css");
 /* harmony import */ var vue_form_wizard_dist_vue_form_wizard_min_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_form_wizard_dist_vue_form_wizard_min_css__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -92,137 +201,166 @@ __webpack_require__.r(__webpack_exports__);
 
 Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["id_area", "id_classroom"],
   data: function data() {
     return {
-      allowedExtensions: ["xlsx"]
+      myOptions: [],
+      nameUnit: "",
+      description: "",
+      nameFile: "",
+      nameUrl: "",
+      nameUrl1: "",
+      nameUrl2: "",
+      newDocument: [],
+      newDocument1: [],
+      newDocument2: [],
+      semanal: false,
+      newVideo: "",
+      newVideo1: "",
+      newVideo2: "",
+      numero: "",
+      nameArea: "",
+      errors: [],
+      message: ""
     };
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    var _this = this;
+
+    var url = window.location.origin + "/GetNameArea/" + this.id_area + "/" + this.id_classroom;
+    axios.get(url).then(function (response) {
+      _this.nameArea = response.data;
+    });
+    var urlsel = window.location.origin + "/editOneWeek/" + this.id_area + "/" + this.id_classroom;
+    axios.get(urlsel).then(function (response) {
+      _this.myOptions = response.data;
+    });
+    this.messageVideo = "";
+  },
   methods: {
     getMenu: function getMenu() {
-      window.location = "/salon_adm";
+      window.location = "/clases_d";
+    },
+    click1: function click1() {
+      this.$refs.input1.click();
+    },
+    createSemanal: function createSemanal() {
+      var _this2 = this;
+
+      var url = window.location.origin + "/Class";
+      this.seleccionado = this.$refs.seleccionado.value;
+      axios.post(url, {
+        //Cursos generales
+        id_weekly_plan: this.seleccionado,
+        name: this.nameUnit,
+        description: this.description,
+        name_document: this.nameFile,
+        document: this.newDocument,
+        document1: this.newDocument1,
+        document2: this.newDocument2,
+        url: this.nameUrl,
+        url1: this.nameUrl1,
+        url2: this.nameUrl2,
+        video: this.newVideo,
+        video1: this.newVideo1,
+        video2: this.newVideo2,
+        hourly_intensity: this.numero
+      }).then(function (response) {
+        _this2.errors = [];
+        toastr.success("Nueva clase creada exitosamente");
+
+        _this2.getMenu();
+      })["catch"](function (error) {
+        _this2.errors = error.response.data;
+      });
     },
     onFlieChange: function onFlieChange(file) {
-      var _this = this;
+      var _this3 = this;
 
       var files = file.target.files || file.dataTransfer.files;
       var data = new FormData();
 
       if (files.length > 0) {
-        var _file = files[0];
-        var filename = _file.name;
-        var filesize = _file.size;
-        var extension = this.findExtension(filename); // if uploaded file is valid with validation rules
+        var _file = files[0]; // if uploaded file is valid with validation rules
 
-        if (this.validateFile(filesize, extension)) {
-          data.append("file", files[0]);
-          axios.post("/documentoimp", data).then(function (response) {
-            _this.emitMessage(response);
-          });
+        data.append("file", files[0]);
+        data.append("name", this.nameUnit);
+        data.append("count", 1);
+        this.newDocument = data;
+        axios.post("/fileDocument", data).then(function (response) {
+          _this3.emitMessage(response);
+        });
+      }
+    },
+    onFlieChange1: function onFlieChange1(file) {
+      var _this4 = this;
+
+      var files = file.target.files || file.dataTransfer.files;
+      var data = new FormData();
+
+      if (files.length > 0) {
+        var _file2 = files[0]; // if uploaded file is valid with validation rules
+
+        data.append("file", files[0]);
+        data.append("name", this.nameUnit);
+        data.append("count", 2);
+        this.newDocument1 = data;
+        axios.post("/fileDocument", data).then(function (response) {
+          _this4.emitMessage(response);
+        });
+      }
+    },
+    onFlieChange2: function onFlieChange2(file) {
+      var _this5 = this;
+
+      var files = file.target.files || file.dataTransfer.files;
+      var data = new FormData();
+
+      if (files.length > 0) {
+        var _file3 = files[0]; // if uploaded file is valid with validation rules
+
+        data.append("file", files[0]);
+        data.append("name", this.nameUnit);
+        data.append("count", 3);
+        this.newDocument2 = data;
+        axios.post("/fileDocument", data).then(function (response) {
+          _this5.emitMessage(response);
+        });
+      }
+    },
+    updateSemanal: function updateSemanal() {
+      var _this6 = this;
+
+      var url = "updateCourseWeekly";
+
+      if (this.fillS.length >= 1) {
+        for (var i = 0; i < this.fillS.length; i++) {
+          this.newSemanal.push(this.fillS[i]);
         }
       }
-    },
 
-    /**
-     * show error messages
-     * @param  {string} title
-     * @param  {string} message
-     * @return {void}
-     */
-    showError: function showError(title, message) {
-      swal({
-        title: title,
-        text: message,
-        type: "error",
-        confirmButtonText: "Ok"
+      axios.put(url, {
+        //Cursos generales
+        id_materia: "1",
+        semana: this.newSemanal
+      }).then(function (response) {
+        _this6.errors = [];
+        toastr.success("Actualizado plan semanal exitosamente");
+
+        _this6.getMenu();
+      })["catch"](function (error) {
+        _this6.errors = error.response.data;
       });
-    },
-
-    /**
-     * find extension of uploaded file
-     * @param  {string} filename
-     * @return {string}
-     */
-    findExtension: function findExtension(filename) {
-      return filename.split(".").pop().toLowerCase();
-    },
-
-    /**
-     * to validate file size
-     * @param  {integer} filesize
-     * @return {boolean}
-     */
-    validateSize: function validateSize(filesize) {
-      // 2*1024*1024 = 2097152 = 2mb
-      if (filesize > 2097152) {
-        this.title = "File size limit exceed!";
-        this.message = "Please upload file less than 2MB.";
-        this.showError(this.title, this.message);
-        return false;
-      }
-
-      return true;
-    },
-
-    /**
-     * to validate file extension
-     * @param  {string} extension
-     * @return {bolean}
-     */
-    validateExtension: function validateExtension(extension) {
-      if ($.inArray(extension, this.allowedExtensions) !== -1) {
-        return true;
-      } else {
-        this.title = "Invalid file!";
-        this.message = "Please upload jpg,png,pdf or doc file only.";
-        this.showError(this.title, this.message);
-        return false;
-      }
-    },
-
-    /**
-     * validate file
-     * @param  {integer} filesize
-     * @param  {string} extension
-     * @return {boolean}
-     */
-    validateFile: function validateFile(filesize, extension) {
-      if (this.validateSize(filesize) && this.validateExtension(extension)) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    emitMessage: function emitMessage(response) {
-      var message = response.data.output.message;
-      var user = response.data.output.user;
-
-      if (message) {
-        this.$emit("messagesent", {
-          message: message.message,
-          user: user.name,
-          time: message.created_at,
-          image_path: $("#default_image").val(),
-          //user.image_path,
-          type: message.type,
-          file_path: message.file_path,
-          file_name: message.file_name
-        });
-        console.log(message.file_path);
-      }
-    },
-    chooseFile: function chooseFile() {
-      $("#file").click();
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/importAdm.vue?vue&type=template&id=60263e8a&":
-/*!************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/importAdm.vue?vue&type=template&id=60263e8a& ***!
-  \************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/crearMemoria.vue?vue&type=template&id=62223654&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/crearMemoria.vue?vue&type=template&id=62223654& ***!
+  \***************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -239,9 +377,7 @@ var render = function() {
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-11 mx-auto" }, [
           _c("div", { staticClass: "custom-card text-center" }, [
-            _c("h3", { staticClass: "card-header fondo" }, [
-              _vm._v("Importación")
-            ]),
+            _c("h3", { staticClass: "card-header fondo" }, [_vm._v("Memoria")]),
             _vm._v(" "),
             _c(
               "form",
@@ -256,74 +392,483 @@ var render = function() {
                       color: "#ffc107",
                       "next-button-text": "Siguiente",
                       "back-button-text": "Atrás",
-                      "finish-button-text": "Finalizar"
+                      "finish-button-text": "Guardar y enviar"
                     },
-                    on: {
-                      "on-complete": function($event) {
-                        return _vm.getMenu()
-                      }
-                    }
+                    on: { "on-complete": _vm.createSemanal }
                   },
                   [
-                    _c("tab-content", [
+                    _c("tab-content", { attrs: { title: "Memoria" } }, [
+                      _c("div", { staticClass: "form-group mx-auto" }, [
+                        _c("div", { attrs: { align: "center" } })
+                      ]),
+                      _vm._v(" "),
                       _c("div", { staticClass: "form-group row mx-auto" }, [
                         _c("div", { staticClass: "col-md-6" }, [
-                          _c("label", { attrs: { for: "" } }, [_vm._v("Rol:")]),
+                          _c("label", { attrs: { for: "name" } }, [
+                            _vm._v("*1. Archivo")
+                          ]),
                           _vm._v(" "),
                           _c(
-                            "select",
+                            "button",
                             {
-                              ref: "seleccionado",
                               staticClass: "form-control",
-                              attrs: { required: "" }
+                              on: { click: _vm.click1 }
                             },
-                            [
-                              _c("option", { attrs: { value: "4" } }, [
-                                _vm._v("Coordinador")
-                              ]),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "2" } }, [
-                                _vm._v("Docente")
-                              ]),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "3" } }, [
-                                _vm._v("Estudiante")
+                            [_vm._v("Seleccione un archivo")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            ref: "input1",
+                            staticStyle: { display: "none" },
+                            attrs: { type: "file" },
+                            on: { change: _vm.previewImage }
+                          }),
+                          _vm._v(" "),
+                          _vm.message != "" && _vm.message != null
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "green",
+                                      "font-size": "20px"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "Archivo cargado con exito nombre:" +
+                                        _vm._s(_vm.message) +
+                                        " "
+                                    )
+                                  ]
+                                )
                               ])
-                            ]
-                          )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.message == null
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "red",
+                                      "font-size": "18px"
+                                    }
+                                  },
+                                  [_vm._v("Espere estamos cargando su archivo")]
+                                )
+                              ])
+                            : _vm._e()
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-6" }, [
                           _c("label", { attrs: { for: "name" } }, [
-                            _vm._v("Archivo")
+                            _vm._v("*2. Archivo ")
                           ]),
                           _vm._v(" "),
-                          _c("div", [
-                            _c("input", {
+                          _c(
+                            "button",
+                            {
                               staticClass: "form-control",
-                              attrs: {
-                                type: "file",
-                                name: "picture",
-                                accept:
-                                  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                                required: ""
-                              },
-                              on: { change: _vm.onFlieChange }
-                            })
-                          ])
+                              on: { click: _vm.click1 }
+                            },
+                            [_vm._v("Seleccione un archivo")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            ref: "input1",
+                            staticStyle: { display: "none" },
+                            attrs: { type: "file" },
+                            on: { change: _vm.previewImage }
+                          }),
+                          _vm._v(" "),
+                          _vm.message != "" && _vm.message != null
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "green",
+                                      "font-size": "20px"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "Archivo cargado con exito nombre:" +
+                                        _vm._s(_vm.message) +
+                                        " "
+                                    )
+                                  ]
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.message == null
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "red",
+                                      "font-size": "18px"
+                                    }
+                                  },
+                                  [_vm._v("Espere estamos cargando su archivo")]
+                                )
+                              ])
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _c("label", { attrs: { for: "name" } }, [
+                            _vm._v("*3. Archivo ")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "form-control",
+                              on: { click: _vm.click1 }
+                            },
+                            [_vm._v("Seleccione un archivo")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            ref: "input1",
+                            staticStyle: { display: "none" },
+                            attrs: { type: "file" },
+                            on: { change: _vm.previewImage }
+                          }),
+                          _vm._v(" "),
+                          _vm.message != "" && _vm.message != null
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "green",
+                                      "font-size": "20px"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "Archivo cargado con exito nombre:" +
+                                        _vm._s(_vm.message) +
+                                        " "
+                                    )
+                                  ]
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.message == null
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "red",
+                                      "font-size": "18px"
+                                    }
+                                  },
+                                  [_vm._v("Espere estamos cargando su archivo")]
+                                )
+                              ])
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _c("label", { attrs: { for: "name" } }, [
+                            _vm._v("*4. Archivo")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "form-control",
+                              on: { click: _vm.click1 }
+                            },
+                            [_vm._v("Seleccione un archivo")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            ref: "input1",
+                            staticStyle: { display: "none" },
+                            attrs: { type: "file" },
+                            on: { change: _vm.previewImage }
+                          }),
+                          _vm._v(" "),
+                          _vm.message != "" && _vm.message != null
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "green",
+                                      "font-size": "20px"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "Archivo cargado con exito nombre:" +
+                                        _vm._s(_vm.message) +
+                                        " "
+                                    )
+                                  ]
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.message == null
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "red",
+                                      "font-size": "18px"
+                                    }
+                                  },
+                                  [_vm._v("Espere estamos cargando su archivo")]
+                                )
+                              ])
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _c("label", { attrs: { for: "name" } }, [
+                            _vm._v("*5. Archivo")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "form-control",
+                              on: { click: _vm.click1 }
+                            },
+                            [_vm._v("Seleccione un archivo")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            ref: "input1",
+                            staticStyle: { display: "none" },
+                            attrs: { type: "file" },
+                            on: { change: _vm.previewImage }
+                          }),
+                          _vm._v(" "),
+                          _vm.message != "" && _vm.message != null
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "green",
+                                      "font-size": "20px"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "Archivo cargado con exito nombre:" +
+                                        _vm._s(_vm.message) +
+                                        " "
+                                    )
+                                  ]
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.message == null
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "red",
+                                      "font-size": "18px"
+                                    }
+                                  },
+                                  [_vm._v("Espere estamos cargando su archivo")]
+                                )
+                              ])
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _c("label", { attrs: { for: "name" } }, [
+                            _vm._v("*6. Archivo ")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "form-control",
+                              on: { click: _vm.click1 }
+                            },
+                            [_vm._v("Seleccione un archivo")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            ref: "input1",
+                            staticStyle: { display: "none" },
+                            attrs: { type: "file" },
+                            on: { change: _vm.previewImage }
+                          }),
+                          _vm._v(" "),
+                          _vm.message != "" && _vm.message != null
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "green",
+                                      "font-size": "20px"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "Archivo cargado con exito nombre:" +
+                                        _vm._s(_vm.message) +
+                                        " "
+                                    )
+                                  ]
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.message == null
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "red",
+                                      "font-size": "18px"
+                                    }
+                                  },
+                                  [_vm._v("Espere estamos cargando su archivo")]
+                                )
+                              ])
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _c("label", { attrs: { for: "name" } }, [
+                            _vm._v("*7. Archivo ")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "form-control",
+                              on: { click: _vm.click1 }
+                            },
+                            [_vm._v("Seleccione un archivo")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            ref: "input1",
+                            staticStyle: { display: "none" },
+                            attrs: { type: "file" },
+                            on: { change: _vm.previewImage }
+                          }),
+                          _vm._v(" "),
+                          _vm.message != "" && _vm.message != null
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "green",
+                                      "font-size": "20px"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "Archivo cargado con exito nombre:" +
+                                        _vm._s(_vm.message) +
+                                        " "
+                                    )
+                                  ]
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.message == null
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "red",
+                                      "font-size": "18px"
+                                    }
+                                  },
+                                  [_vm._v("Espere estamos cargando su archivo")]
+                                )
+                              ])
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _c("label", { attrs: { for: "name" } }, [
+                            _vm._v("*8. Archivo")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "form-control",
+                              on: { click: _vm.click1 }
+                            },
+                            [_vm._v("Seleccione un archivo")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            ref: "input1",
+                            staticStyle: { display: "none" },
+                            attrs: { type: "file" },
+                            on: { change: _vm.previewImage }
+                          }),
+                          _vm._v(" "),
+                          _vm.message != "" && _vm.message != null
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "green",
+                                      "font-size": "20px"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "Archivo cargado con exito nombre:" +
+                                        _vm._s(_vm.message) +
+                                        " "
+                                    )
+                                  ]
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.message == null
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticStyle: {
+                                      color: "red",
+                                      "font-size": "18px"
+                                    }
+                                  },
+                                  [_vm._v("Espere estamos cargando su archivo")]
+                                )
+                              ])
+                            : _vm._e()
                         ])
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "modal-footer" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-warning float-right",
-                            attrs: { href: "/import" }
-                          },
-                          [_vm._v("Importar")]
-                        )
-                      ])
+                      _c("strong", [_vm._v("* Campos requeridos")])
                     ])
                   ],
                   1
@@ -344,17 +889,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/importAdm.vue":
-/*!***********************************************!*\
-  !*** ./resources/js/components/importAdm.vue ***!
-  \***********************************************/
+/***/ "./resources/js/components/crearMemoria.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/components/crearMemoria.vue ***!
+  \**************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _importAdm_vue_vue_type_template_id_60263e8a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./importAdm.vue?vue&type=template&id=60263e8a& */ "./resources/js/components/importAdm.vue?vue&type=template&id=60263e8a&");
-/* harmony import */ var _importAdm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./importAdm.vue?vue&type=script&lang=js& */ "./resources/js/components/importAdm.vue?vue&type=script&lang=js&");
+/* harmony import */ var _crearMemoria_vue_vue_type_template_id_62223654___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./crearMemoria.vue?vue&type=template&id=62223654& */ "./resources/js/components/crearMemoria.vue?vue&type=template&id=62223654&");
+/* harmony import */ var _crearMemoria_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./crearMemoria.vue?vue&type=script&lang=js& */ "./resources/js/components/crearMemoria.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -364,9 +909,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _importAdm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _importAdm_vue_vue_type_template_id_60263e8a___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _importAdm_vue_vue_type_template_id_60263e8a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _crearMemoria_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _crearMemoria_vue_vue_type_template_id_62223654___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _crearMemoria_vue_vue_type_template_id_62223654___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -376,38 +921,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/importAdm.vue"
+component.options.__file = "resources/js/components/crearMemoria.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/importAdm.vue?vue&type=script&lang=js&":
-/*!************************************************************************!*\
-  !*** ./resources/js/components/importAdm.vue?vue&type=script&lang=js& ***!
-  \************************************************************************/
+/***/ "./resources/js/components/crearMemoria.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/crearMemoria.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_importAdm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./importAdm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/importAdm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_importAdm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_crearMemoria_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./crearMemoria.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/crearMemoria.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_crearMemoria_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/importAdm.vue?vue&type=template&id=60263e8a&":
-/*!******************************************************************************!*\
-  !*** ./resources/js/components/importAdm.vue?vue&type=template&id=60263e8a& ***!
-  \******************************************************************************/
+/***/ "./resources/js/components/crearMemoria.vue?vue&type=template&id=62223654&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/crearMemoria.vue?vue&type=template&id=62223654& ***!
+  \*********************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_importAdm_vue_vue_type_template_id_60263e8a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./importAdm.vue?vue&type=template&id=60263e8a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/importAdm.vue?vue&type=template&id=60263e8a&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_importAdm_vue_vue_type_template_id_60263e8a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_crearMemoria_vue_vue_type_template_id_62223654___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./crearMemoria.vue?vue&type=template&id=62223654& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/crearMemoria.vue?vue&type=template&id=62223654&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_crearMemoria_vue_vue_type_template_id_62223654___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_importAdm_vue_vue_type_template_id_60263e8a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_crearMemoria_vue_vue_type_template_id_62223654___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
