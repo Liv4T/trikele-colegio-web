@@ -190,6 +190,9 @@ Route::middleware('auth')->get('/anuncio_mc', function () {
 Route::middleware('auth')->get('/inicio', function () {
     return view('inicio');
 });
+Route::middleware('auth')->get('/inscripcion-documentos', function () {
+    return view('inscripcionDocumentos');
+});
 Route::middleware('auth')->get('/bienvenido', function () {
     return view('inicio');
 });
