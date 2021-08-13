@@ -45,19 +45,15 @@
     </div> -->
     <div class="row">
       <div class="col-md-11 mx-auto">
-        <div class="row">
-          <div class="col">
-            <img src="/uploads/home/welcome-21.png" alt="welcome" />
+        <div class="row justify-content-md-center">
+          <div class="col text-center">
+            <img src="/uploads/home/welcome-21.png" alt="welcome" width="65%" />
           </div>
         </div>
         <div class="row">
           <div class="col">
             <div class="card-container">
-
-               <div>
-                <iframe width="100%" style="height:600px !important" src="https://www.youtube.com/embed/F-nQuuixxfU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              </div>
-
+              <iframe width="100%" style="height:600px !important" src="https://www.youtube.com/embed/F-nQuuixxfU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
           </div>
         </div>
@@ -196,7 +192,7 @@
   }
   .c-header > h3 {
     font-family: "PoppinsBold";
-    color:#FF7536;
+    color: #ff7536;
     font-weight: 900;
     font-size: 2.5em;
   }
@@ -204,8 +200,11 @@
     background-color: #ffdec2;
     padding: 20px;
     border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
   }
-  .back-calendar{
-    background-image: url('/uploads/home/fondo-lista.jpg');
+  .back-calendar {
+    background-image: url("/uploads/home/fondo-lista.jpg");
   }
 </style>
