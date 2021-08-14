@@ -21,22 +21,22 @@
           <!-- <div class="content-azul"> -->
                     <div>
                         <div v-if="activetab === 1" class="tabcontent">
-                            <div v-if="idArea !=='' ">
-                                <course-component :id_area="idArea" :id_classroom="idClassroom"></course-component>
+                            <div v-if="Area_id !=='' ">
+                                <course-component :id_area="Area_id" :id_classroom="idClassroom"></course-component>
                             </div>
                         </div>
                         <div v-if="activetab === 2" class="tabcontent">
-                            <div v-if="idArea !=='' ">
-                                <course-trimestre-component :id_area="idArea" :id_classroom="idClassroom"></course-trimestre-component>
+                            <div v-if="Area_id !=='' ">
+                                <course-trimestre-component :id_area="Area_id" :id_classroom="idClassroom"></course-trimestre-component>
                             </div>
                         </div>
                         <div v-if="activetab === 3" class="tabcontent">
-                            <div v-if="idArea !=='' ">
-                                <notasd-component :id_area="idArea" :id_classroom="idClassroom"></notasd-component>
+                            <div v-if="Area_id !=='' ">
+                                <notasd-component :id_area="Area_id" :id_classroom="idClassroom"></notasd-component>
                             </div>
                         </div>
                         <div v-if="activetab === 4" class="tabcontent">
-                            <div v-if="idArea !=='' ">
+                            <div v-if="Area_id !=='' ">
                                 <div class="accordion" id="accordionExample">
                                     <div class="card">
                                         <div class="card-header" id="headingOne">
@@ -49,7 +49,7 @@
 
                                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                                             <div class="card-body">
-                                                <semanal-component :id_area="idArea" :id_classroom="idClassroom"></semanal-component>
+                                                <semanal-component :id_area="Area_id" :id_classroom="idClassroom"></semanal-component>
                                             </div>
                                         </div>
                                     </div>
@@ -64,7 +64,7 @@
                                         </div>
                                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                                             <div class="card-body">
-                                                <semanalact-component :id_area="idArea" :id_classroom="idClassroom"></semanalact-component>
+                                                <semanalact-component :id_area="Area_id" :id_classroom="idClassroom"></semanalact-component>
                                             </div>
                                         </div>
                                     </div>
@@ -99,9 +99,19 @@ export default {
       nameArea: "",
       planifications: "",
       idArea: "",
+      Area_id:"",
       idClassroom: "",
       planif:"general"
     };
+  },
+  watch:{
+    idArea:function(newVal, oldVal){
+      if(newVal !== oldVal){
+        let ids = newVal.split('/');
+        this.Area_id = ids[0];
+        this.idClassroom = ids[1]
+      }
+    }
   },
   mounted() {
     axios.get("/api/lectives").then((response) => {

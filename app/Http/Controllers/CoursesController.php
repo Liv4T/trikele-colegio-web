@@ -221,7 +221,7 @@ class CoursesController extends Controller
                 $course = $courses[0];
             }
 
-            $achievements = $data['logros'];
+            $achievements = isset($data['logros']) ? $data['logros'] : [];
 
             foreach ($achievements as $index => $achievement) {
 
@@ -244,7 +244,7 @@ class CoursesController extends Controller
                 }
             }
 
-            $Quarterlies = $data['trimestres'];
+            $Quarterlies = isset($data['trimestres']) ? $data['trimestres'] : [];
 
             foreach ($Quarterlies as $index => $Quarterly) {
 

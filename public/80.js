@@ -156,11 +156,13 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
         name: "",
         contenido: ""
       }],
-      inputs1: [{
-        logro: "",
-        porcentaje: "0"
-      }],
-      inputs1_saved: [],
+      // inputs1: [
+      //     {
+      //     logro: "",
+      //     porcentaje: "0",
+      //     },
+      // ],
+      // inputs1_saved:[],
       inputs_saved: [],
       newTrimestre: [],
       newLogro1: "",
@@ -194,17 +196,12 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
       axios.get(urlsel).then(function (response) {
         _this.fillC = response.data; //set current data
 
-        if (response.data.achievements.length > 0 && response.data.quaterly.length > 0) {
-          _this.inputs1 = [];
-          response.data.achievements.forEach(function (e) {
-            _this.inputs1.push({
-              id_plannification: e.id_planification,
-              id_achievement: e.id,
-              logro: e.achievement,
-              porcentaje: e.percentage
-            });
-          });
-          _this.inputs1_saved = JSON.parse(JSON.stringify(_this.inputs1));
+        if (response.data.quaterly.length > 0) {
+          // this.inputs1=[];
+          // response.data.achievements.forEach((e)=>{
+          //     this.inputs1.push({id_plannification:e.id_planification,id_achievement:e.id, logro: e.achievement, porcentaje: e.percentage });
+          // });
+          // this.inputs1_saved= JSON.parse(JSON.stringify(this.inputs1));
           _this.inputs = [];
           response.data.quaterly.forEach(function (e) {
             _this.inputs.push({
@@ -221,12 +218,11 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
             if (JSON.stringify(savedInputModel.inputs) != JSON.stringify(_this.inputs)) {
               _this.inputs = savedInputModel.inputs;
               _this.isSynchronized = false;
-            }
+            } // if(JSON.stringify(savedInputModel.inputs1)!=JSON.stringify(this.inputs1)){
+            //     this.inputs1=savedInputModel.inputs1;
+            //     this.isSynchronized=false;
+            // }
 
-            if (JSON.stringify(savedInputModel.inputs1) != JSON.stringify(_this.inputs1)) {
-              _this.inputs1 = savedInputModel.inputs1;
-              _this.isSynchronized = false;
-            }
           }
         }
 
@@ -242,9 +238,11 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
 
       if (type == 'inputs') {
         this.inputs[i][property] = this.inputs[i][property].replace(/[^a-zA-Z0-9-.ñáéíóú_*+-/=&%$#!()?¡¿ ]/g, "|");
-      } else if (type == 'inputs1') {
-        this.inputs1[i][property] = this.inputs1[i][property].replace(/[^a-zA-Z0-9-.ñáéíóú_*+-/=&%$#!()?¡¿ ]/g, "|");
-      } //console.log(l.normalize('NFD').replace(/([^n\u0300-\u036f]|n(?!\u0303(?![\u0300-\u036f])))[\u0300-\u036f]+/gi,"$1"));
+      } // else if (type=='inputs1')
+      // {
+      //     this.inputs1[i][property]=this.inputs1[i][property].replace(/[^a-zA-Z0-9-.ñáéíóú_*+-/=&%$#!()?¡¿ ]/g, "|");
+      // }
+      //console.log(l.normalize('NFD').replace(/([^n\u0300-\u036f]|n(?!\u0303(?![\u0300-\u036f])))[\u0300-\u036f]+/gi,"$1"));
       //serialize data on localstorage
 
 
@@ -267,15 +265,12 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
     remove: function remove(index) {
       this.inputs.splice(index, 1);
     },
-    add1: function add1(index) {
-      this.inputs1.push({
-        logro: "",
-        porcentaje: "0"
-      });
-    },
-    remove1: function remove1(index) {
-      this.inputs1.splice(index, 1);
-    },
+    // add1(index) {
+    //     this.inputs1.push({ logro: "", porcentaje: "0" });
+    // },
+    // remove1(index) {
+    //     this.inputs1.splice(index, 1);
+    // },
     isLoadingEvent: function isLoadingEvent() {
       return this.isLoading;
     },
@@ -284,27 +279,25 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
 
       this.isLoading = true;
       var url = window.location.origin + "/Courses";
-      if (this.inputs.length < 1 || this.inputs1.length < 1) return;
-      this.newTrimestre = [];
-      this.newLogro = [];
+      if (this.inputs.length < 1) return;
+      this.newTrimestre = []; // this.newLogro = [];
 
       if (this.inputs.length >= 1) {
         for (var i = 0; i < this.inputs.length; i++) {
           this.newTrimestre.push(this.inputs[i]);
         }
-      }
+      } // if (this.inputs1.length >= 1) {
+      //     for (let i = 0; i < this.inputs1.length; i++) {
+      //         this.newLogro.push(this.inputs1[i]);
+      //     }
+      // }
 
-      if (this.inputs1.length >= 1) {
-        for (var _i = 0; _i < this.inputs1.length; _i++) {
-          this.newLogro.push(this.inputs1[_i]);
-        }
-      }
 
       axios.post(url, {
         //Cursos generales
         id_area: this.id_area,
         id_classroom: this.id_classroom,
-        logros: this.newLogro,
+        // logros: this.newLogro,
         trimestres: this.newTrimestre
       }).then(function (response) {
         _this2.errors = [];

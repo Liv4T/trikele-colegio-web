@@ -110,9 +110,19 @@ __webpack_require__.r(__webpack_exports__);
       nameArea: "",
       planifications: "",
       idArea: "",
+      Area_id: "",
       idClassroom: "",
       planif: "general"
     };
+  },
+  watch: {
+    idArea: function idArea(newVal, oldVal) {
+      if (newVal !== oldVal) {
+        var ids = newVal.split('/');
+        this.Area_id = ids[0];
+        this.idClassroom = ids[1];
+      }
+    }
   },
   mounted: function mounted() {
     var _this = this;
@@ -342,13 +352,13 @@ var render = function() {
           _c("div", [
             _vm.activetab === 1
               ? _c("div", { staticClass: "tabcontent" }, [
-                  _vm.idArea !== ""
+                  _vm.Area_id !== ""
                     ? _c(
                         "div",
                         [
                           _c("course-component", {
                             attrs: {
-                              id_area: _vm.idArea,
+                              id_area: _vm.Area_id,
                               id_classroom: _vm.idClassroom
                             }
                           })
@@ -361,13 +371,13 @@ var render = function() {
             _vm._v(" "),
             _vm.activetab === 2
               ? _c("div", { staticClass: "tabcontent" }, [
-                  _vm.idArea !== ""
+                  _vm.Area_id !== ""
                     ? _c(
                         "div",
                         [
                           _c("course-trimestre-component", {
                             attrs: {
-                              id_area: _vm.idArea,
+                              id_area: _vm.Area_id,
                               id_classroom: _vm.idClassroom
                             }
                           })
@@ -380,13 +390,13 @@ var render = function() {
             _vm._v(" "),
             _vm.activetab === 3
               ? _c("div", { staticClass: "tabcontent" }, [
-                  _vm.idArea !== ""
+                  _vm.Area_id !== ""
                     ? _c(
                         "div",
                         [
                           _c("notasd-component", {
                             attrs: {
-                              id_area: _vm.idArea,
+                              id_area: _vm.Area_id,
                               id_classroom: _vm.idClassroom
                             }
                           })
@@ -399,7 +409,7 @@ var render = function() {
             _vm._v(" "),
             _vm.activetab === 4
               ? _c("div", { staticClass: "tabcontent" }, [
-                  _vm.idArea !== ""
+                  _vm.Area_id !== ""
                     ? _c("div", [
                         _c(
                           "div",
@@ -428,7 +438,7 @@ var render = function() {
                                     [
                                       _c("semanal-component", {
                                         attrs: {
-                                          id_area: _vm.idArea,
+                                          id_area: _vm.Area_id,
                                           id_classroom: _vm.idClassroom
                                         }
                                       })
@@ -459,7 +469,7 @@ var render = function() {
                                     [
                                       _c("semanalact-component", {
                                         attrs: {
-                                          id_area: _vm.idArea,
+                                          id_area: _vm.Area_id,
                                           id_classroom: _vm.idClassroom
                                         }
                                       })

@@ -13,8 +13,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_form_wizard_dist_vue_form_wizard_min_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-form-wizard/dist/vue-form-wizard.min.css */ "./node_modules/vue-form-wizard/dist/vue-form-wizard.min.css");
 /* harmony import */ var vue_form_wizard_dist_vue_form_wizard_min_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_form_wizard_dist_vue_form_wizard_min_css__WEBPACK_IMPORTED_MODULE_1__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -99,26 +97,39 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["id_area", "id_classroom"],
   data: function data() {
-    var _ref;
-
-    return _ref = {
+    return {
       serialLocalStorage: "9f284918-f0f6-4369-a368-eaf6321b6807",
-      inputs: [{
-        name: "",
-        contenido: ""
-      }],
+      // inputs: [
+      //   {
+      //     name: "",
+      //     contenido: "",
+      //   },
+      // ],
       inputs1: [{
         logro: "",
         porcentaje: "0"
       }],
       inputs1_saved: [],
-      inputs_saved: [],
-      newTrimestre: [],
+      // inputs_saved: [],
+      // newTrimestre: [],
       newLogro1: "",
       newLogro2: "",
       newLogro3: "",
-      newLogro4: ""
-    }, _defineProperty(_ref, "newTrimestre", []), _defineProperty(_ref, "newLogro", []), _defineProperty(_ref, "trimestre", false), _defineProperty(_ref, "logro_1", ""), _defineProperty(_ref, "logro_2", ""), _defineProperty(_ref, "logro_3", ""), _defineProperty(_ref, "logro_4", ""), _defineProperty(_ref, "fillC", []), _defineProperty(_ref, "anual", []), _defineProperty(_ref, "newAnual", []), _defineProperty(_ref, "errors", []), _defineProperty(_ref, "isSynchronized", true), _defineProperty(_ref, "isLoading", false), _ref;
+      newLogro4: "",
+      // newTrimestre: [],
+      newLogro: [],
+      // trimestre: false,
+      logro_1: "",
+      logro_2: "",
+      logro_3: "",
+      logro_4: "",
+      fillC: [],
+      anual: [],
+      newAnual: [],
+      errors: [],
+      isSynchronized: true,
+      isLoading: false
+    };
   },
   mounted: function mounted() {
     this.getData();
@@ -145,7 +156,7 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
       axios.get(urlsel).then(function (response) {
         _this.fillC = response.data; //set current data
 
-        if (response.data.achievements.length > 0 && response.data.quaterly.length > 0) {
+        if (response.data.achievements.length > 0) {
           _this.inputs1 = [];
           response.data.achievements.forEach(function (e) {
             _this.inputs1.push({
@@ -155,45 +166,38 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
               porcentaje: e.percentage
             });
           });
-          _this.inputs1_saved = JSON.parse(JSON.stringify(_this.inputs1));
-          _this.inputs = [];
-          response.data.quaterly.forEach(function (e) {
-            _this.inputs.push({
-              id_quaterly: e.id,
-              name: e.unit_name,
-              contenido: e.content
-            });
-          });
-          _this.inputs_saved = JSON.parse(JSON.stringify(_this.inputs));
+          _this.inputs1_saved = JSON.parse(JSON.stringify(_this.inputs1)); // this.inputs = [];
+          // response.data.quaterly.forEach((e) => {
+          //   this.inputs.push({ id_quaterly: e.id, name: e.unit_name, contenido: e.content });
+          // });
+          // this.inputs_saved = JSON.parse(JSON.stringify(this.inputs));
         } else {
           if (localStorage.getItem(_this.serialLocalStorage)) {
-            var savedInputModel = JSON.parse(decodeURIComponent(escape(window.atob(localStorage.getItem(_this.serialLocalStorage)))));
-
-            if (JSON.stringify(savedInputModel.inputs) != JSON.stringify(_this.inputs)) {
-              _this.inputs = savedInputModel.inputs;
-              _this.isSynchronized = false;
-            }
+            var savedInputModel = JSON.parse(decodeURIComponent(escape(window.atob(localStorage.getItem(_this.serialLocalStorage))))); // if (JSON.stringify(savedInputModel.inputs) != JSON.stringify(this.inputs)) {
+            //   this.inputs = savedInputModel.inputs;
+            //   this.isSynchronized = false;
+            // }
 
             if (JSON.stringify(savedInputModel.inputs1) != JSON.stringify(_this.inputs1)) {
               _this.inputs1 = savedInputModel.inputs1;
               _this.isSynchronized = false;
             }
           }
-        }
+        } // if (this.fillC.quaterly.length > 0) {
+        //   this.trimestre = true;
+        // } else {
+        //   this.trimestre = false;
+        // }
 
-        if (_this.fillC.quaterly.length > 0) {
-          _this.trimestre = true;
-        } else {
-          _this.trimestre = false;
-        }
       });
     },
     annualContentUpdateEvent: function annualContentUpdateEvent(e, i, type) {
       var property = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
 
-      if (type == "inputs") {
-        this.inputs[i][property] = this.inputs[i][property].replace(/[^a-zA-Z0-9-.ñáéíóú_*+-/=&%$#!()?¡¿ ]/g, "|");
-      } else if (type == "inputs1") {
+      // if (type == "inputs") {
+      //   this.inputs[i][property] = this.inputs[i][property].replace(/[^a-zA-Z0-9-.ñáéíóú_*+-/=&%$#!()?¡¿ ]/g, "|");
+      // }  
+      if (type == "inputs1") {
         this.inputs1[i][property] = this.inputs1[i][property].replace(/[^a-zA-Z0-9-.ñáéíóú_*+-/=&%$#!()?¡¿ ]/g, "|");
       } //console.log(l.normalize('NFD').replace(/([^n\u0300-\u036f]|n(?!\u0303(?![\u0300-\u036f])))[\u0300-\u036f]+/gi,"$1"));
       //serialize data on localstorage
@@ -209,15 +213,12 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
       //  window.location = "/actividad_g";
       this.isLoading = false;
     },
-    add: function add(index) {
-      this.inputs.push({
-        name: "",
-        contenido: ""
-      });
-    },
-    remove: function remove(index) {
-      this.inputs.splice(index, 1);
-    },
+    // add(index) {
+    //   this.inputs.push({ name: "", contenido: "" });
+    // },
+    // remove(index) {
+    //   this.inputs.splice(index, 1);
+    // },
     add1: function add1(index) {
       this.inputs1.push({
         logro: "",
@@ -234,20 +235,18 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
       var _this2 = this;
 
       this.isLoading = true;
-      var url = window.location.origin + "/Courses";
-      if (this.inputs.length < 1 || this.inputs1.length < 1) return;
-      this.newTrimestre = [];
-      this.newLogro = [];
+      var url = window.location.origin + "/Courses"; // if (this.inputs.length < 1 || this.inputs1.length < 1) return;
+      // this.newTrimestre = [];
 
-      if (this.inputs.length >= 1) {
-        for (var i = 0; i < this.inputs.length; i++) {
-          this.newTrimestre.push(this.inputs[i]);
-        }
-      }
+      this.newLogro = []; // if (this.inputs.length >= 1) {
+      //   for (let i = 0; i < this.inputs.length; i++) {
+      //     this.newTrimestre.push(this.inputs[i]);
+      //   }
+      // }
 
       if (this.inputs1.length >= 1) {
-        for (var _i = 0; _i < this.inputs1.length; _i++) {
-          this.newLogro.push(this.inputs1[_i]);
+        for (var i = 0; i < this.inputs1.length; i++) {
+          this.newLogro.push(this.inputs1[i]);
         }
       }
 
@@ -255,8 +254,8 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
         //Cursos generales
         id_area: this.id_area,
         id_classroom: this.id_classroom,
-        logros: this.newLogro,
-        trimestres: this.newTrimestre
+        logros: this.newLogro // trimestres: this.newTrimestre,
+
       }).then(function (response) {
         _this2.errors = [];
         toastr.success("Nuevo plan general creado exitosamente");

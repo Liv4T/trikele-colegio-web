@@ -93,12 +93,12 @@
     data() {
       return {
         serialLocalStorage: "9f284918-f0f6-4369-a368-eaf6321b6807",
-        inputs: [
-          {
-            name: "",
-            contenido: "",
-          },
-        ],
+        // inputs: [
+        //   {
+        //     name: "",
+        //     contenido: "",
+        //   },
+        // ],
         inputs1: [
           {
             logro: "",
@@ -106,15 +106,15 @@
           },
         ],
         inputs1_saved: [],
-        inputs_saved: [],
-        newTrimestre: [],
+        // inputs_saved: [],
+        // newTrimestre: [],
         newLogro1: "",
         newLogro2: "",
         newLogro3: "",
         newLogro4: "",
-        newTrimestre: [],
+        // newTrimestre: [],
         newLogro: [],
-        trimestre: false,
+        // trimestre: false,
         logro_1: "",
         logro_2: "",
         logro_3: "",
@@ -144,33 +144,32 @@
       },
     },
     methods: {
-      getData() {
+      getData() {        
         //load from localstorage
         this.serialLocalStorage = this.serialLocalStorage + "-" + this.id_area + "-" + this.id_classroom;
 
         var urlsel = window.location.origin + "/coursePlanification/" + this.id_area + "/" + this.id_classroom;
         axios.get(urlsel).then((response) => {
           this.fillC = response.data;
-
           //set current data
-          if (response.data.achievements.length > 0 && response.data.quaterly.length > 0) {
-            this.inputs1 = [];
+          if (response.data.achievements.length > 0) {
+            this.inputs1 = [];            
             response.data.achievements.forEach((e) => {
               this.inputs1.push({ id_plannification: e.id_planification, id_achievement: e.id, logro: e.achievement, porcentaje: e.percentage });
             });
-            this.inputs1_saved = JSON.parse(JSON.stringify(this.inputs1));
-            this.inputs = [];
-            response.data.quaterly.forEach((e) => {
-              this.inputs.push({ id_quaterly: e.id, name: e.unit_name, contenido: e.content });
-            });
-            this.inputs_saved = JSON.parse(JSON.stringify(this.inputs));
+            this.inputs1_saved = JSON.parse(JSON.stringify(this.inputs1));            
+            // this.inputs = [];
+            // response.data.quaterly.forEach((e) => {
+            //   this.inputs.push({ id_quaterly: e.id, name: e.unit_name, contenido: e.content });
+            // });
+            // this.inputs_saved = JSON.parse(JSON.stringify(this.inputs));
           } else {
             if (localStorage.getItem(this.serialLocalStorage)) {
               let savedInputModel = JSON.parse(decodeURIComponent(escape(window.atob(localStorage.getItem(this.serialLocalStorage)))));
-              if (JSON.stringify(savedInputModel.inputs) != JSON.stringify(this.inputs)) {
-                this.inputs = savedInputModel.inputs;
-                this.isSynchronized = false;
-              }
+              // if (JSON.stringify(savedInputModel.inputs) != JSON.stringify(this.inputs)) {
+              //   this.inputs = savedInputModel.inputs;
+              //   this.isSynchronized = false;
+              // }
 
               if (JSON.stringify(savedInputModel.inputs1) != JSON.stringify(this.inputs1)) {
                 this.inputs1 = savedInputModel.inputs1;
@@ -179,17 +178,18 @@
             }
           }
 
-          if (this.fillC.quaterly.length > 0) {
-            this.trimestre = true;
-          } else {
-            this.trimestre = false;
-          }
+          // if (this.fillC.quaterly.length > 0) {
+          //   this.trimestre = true;
+          // } else {
+          //   this.trimestre = false;
+          // }
         });
       },
       annualContentUpdateEvent(e, i, type, property = null) {
-        if (type == "inputs") {
-          this.inputs[i][property] = this.inputs[i][property].replace(/[^a-zA-Z0-9-.ñáéíóú_*+-/=&%$#!()?¡¿ ]/g, "|");
-        } else if (type == "inputs1") {
+        // if (type == "inputs") {
+        //   this.inputs[i][property] = this.inputs[i][property].replace(/[^a-zA-Z0-9-.ñáéíóú_*+-/=&%$#!()?¡¿ ]/g, "|");
+        // }  
+        if (type == "inputs1") {
           this.inputs1[i][property] = this.inputs1[i][property].replace(/[^a-zA-Z0-9-.ñáéíóú_*+-/=&%$#!()?¡¿ ]/g, "|");
         }
         //console.log(l.normalize('NFD').replace(/([^n\u0300-\u036f]|n(?!\u0303(?![\u0300-\u036f])))[\u0300-\u036f]+/gi,"$1"));
@@ -202,12 +202,12 @@
         //  window.location = "/actividad_g";
         this.isLoading = false;
       },
-      add(index) {
-        this.inputs.push({ name: "", contenido: "" });
-      },
-      remove(index) {
-        this.inputs.splice(index, 1);
-      },
+      // add(index) {
+      //   this.inputs.push({ name: "", contenido: "" });
+      // },
+      // remove(index) {
+      //   this.inputs.splice(index, 1);
+      // },
       add1(index) {
         this.inputs1.push({ logro: "", porcentaje: "0" });
       },
@@ -221,16 +221,16 @@
         this.isLoading = true;
         var url = window.location.origin + "/Courses";
 
-        if (this.inputs.length < 1 || this.inputs1.length < 1) return;
+        // if (this.inputs.length < 1 || this.inputs1.length < 1) return;
 
-        this.newTrimestre = [];
+        // this.newTrimestre = [];
         this.newLogro = [];
 
-        if (this.inputs.length >= 1) {
-          for (let i = 0; i < this.inputs.length; i++) {
-            this.newTrimestre.push(this.inputs[i]);
-          }
-        }
+        // if (this.inputs.length >= 1) {
+        //   for (let i = 0; i < this.inputs.length; i++) {
+        //     this.newTrimestre.push(this.inputs[i]);
+        //   }
+        // }
 
         if (this.inputs1.length >= 1) {
           for (let i = 0; i < this.inputs1.length; i++) {
@@ -244,7 +244,7 @@
             id_area: this.id_area,
             id_classroom: this.id_classroom,
             logros: this.newLogro,
-            trimestres: this.newTrimestre,
+            // trimestres: this.newTrimestre,
           })
           .then((response) => {
             this.errors = [];
