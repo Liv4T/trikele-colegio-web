@@ -290,13 +290,14 @@ class CoursesController extends Controller
             $count = 1;
             foreach ($Weeks as $index => $week) {
                 $subCate = Weekly::create([
-                    'driving_question' => $week['text'],
+                    'driving_question'  => $week['text'],
                     'class_development' => $week['class'],
-                    'observation' => $week['observation'],
-                    'id_area'    => $data['id_area'],
-                    'id_classroom'    => $data['id_classroom'],
-                    'week'    => $count,
-                    'id_teacher'     =>  Auth::user()->id,
+                    'observation'       => $week['observation'],
+                    'id_area'           => $data['id_area'],
+                    'id_classroom'      => $data['id_classroom'],     
+                    'id_bimestre'       => $data['id_bimestre'],               
+                    'week'              => $count,
+                    'id_teacher'        => Auth::user()->id,
                 ]);
                 $count = $count + 1;
             }
@@ -312,12 +313,13 @@ class CoursesController extends Controller
             foreach ($Weeks as $index => $week) {
                 foreach ($weeksTeacher as $key => $weekTeacher) {
                     if ($countWeek <= $totalWeeks && $key == $index) {
-                        $weekTeacher->driving_question = $week['text'];
+                        $weekTeacher->driving_question  = $week['text'];
                         $weekTeacher->class_development = $week['class'];
-                        $weekTeacher->observation = $week['observation'];
-                        $weekTeacher->id_area    = $data['id_area'];
-                        $weekTeacher->id_classroom    = $data['id_classroom'];
-                        $weekTeacher->id_teacher     =  Auth::user()->id;
+                        $weekTeacher->observation       = $week['observation'];
+                        $weekTeacher->id_area           = $data['id_area'];
+                        $weekTeacher->id_classroom      = $data['id_classroom'];
+                        $weekTeacher->id_bimestre       = $data['id_bimestre'];
+                        $weekTeacher->id_teacher        = Auth::user()->id;
                         $weekTeacher->save();
                         $countWeek = $countWeek + 1;
                     }
@@ -327,13 +329,14 @@ class CoursesController extends Controller
             foreach ($Weeks as $index => $week) {
                 if ($index > ($totalWeeks - 1)) {
                     $subCate = Weekly::create([
-                        'driving_question' => $week['text'],
+                        'driving_question'  => $week['text'],
                         'class_development' => $week['class'],
-                        'observation' => $week['observation'],
-                        'id_area'    => $data['id_area'],
-                        'id_classroom'    => $data['id_classroom'],
-                        'week'    => $count,
-                        'id_teacher'     =>  Auth::user()->id,
+                        'observation'       => $week['observation'],
+                        'id_area'           => $data['id_area'],
+                        'id_classroom'      => $data['id_classroom'],
+                        'id_bimestre'       => $data['id_bimestre'],
+                        'week'              => $count,
+                        'id_teacher'        => Auth::user()->id,
                     ]);
                     $count = $count + 1;
                 }
@@ -346,13 +349,14 @@ class CoursesController extends Controller
             $count = 1;
             foreach ($Weeks as $index => $week) {
                 $subCate = Weekly::create([
-                    'driving_question' => $week['driving_question'],
+                    'driving_question'  => $week['driving_question'],
                     'class_development' => $week['class_development'],
-                    'observation' => $week['observation'],
-                    'id_area'    => $data['id_area'],
-                    'id_classroom'    => $data['id_classroom'],
-                    'week'    => $count,
-                    'id_teacher'     =>  Auth::user()->id,
+                    'observation'       => $week['observation'],
+                    'id_area'           => $data['id_area'],
+                    'id_classroom'      => $data['id_classroom'],
+                    'id_bimestre'       => $data['id_bimestre'],
+                    'week'              => $count,
+                    'id_teacher'        => Auth::user()->id,
                 ]);
                 $count = $count + 1;
             }
@@ -377,6 +381,7 @@ class CoursesController extends Controller
             $week_update->driving_question = $week['text'];
             $week_update->class_development = $week['class'];
             $week_update->observation = $week['observation'];
+            $week_update->id_bimestre = $week['id_bimestre'];
             $week_update->save();
         }
         return "ok";
@@ -535,6 +540,7 @@ class CoursesController extends Controller
                 'observation' => $week->observation,                
                 'id_area' =>  $week->id_area,
                 'id_classroom' =>  $week->id_classroom,
+                'id_bimestre' => $week->id_bimestre,
             ];
         }
         return response()->json($data);

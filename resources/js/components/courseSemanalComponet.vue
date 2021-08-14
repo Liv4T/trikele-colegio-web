@@ -45,6 +45,20 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
+                                      <label for="bimestre">Seleccione el Bimestre</label>                                      
+                                      <select class="form-control" v-model="bimestreId" required>
+                                        <option :value="bim.id" v-for="(bim, key) in bimestres" :key="key">
+                                          {{ bim.name }}
+                                        </option>
+                                      </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="name">Observación</label>
+                                        <textarea name="competences" 
+                                            v-on:change="contentUpdateEvent(t,'observation')"
+                                        class="form-control" v-model="input.observation"></textarea>
+                                    </div>
+                                    <div class="col-md-6">
                                         <label for="name">Desarrollo de la clase</label>
                                         <textarea
                                             name="competences"
@@ -55,12 +69,6 @@
                                             required
                                         ></textarea>
                                         <div class="invalid-feedback">Please fill out this field</div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="name">Observación</label>
-                                        <textarea name="competences" 
-                                            v-on:change="contentUpdateEvent(t,'observation')"
-                                        class="form-control" v-model="input.observation"></textarea>
                                     </div>
                                 </div>
                                 <!-- <div class="modal-footer">
@@ -117,8 +125,10 @@ $(function () {
   });
 });
 import VueFormWizard from "vue-form-wizard";
+import Multiselect from "vue-multiselect";
 import "vue-form-wizard/dist/vue-form-wizard.min.css";
 Vue.use(VueFormWizard);
+Vue.component("multiselect", Multiselect);
 export default {
   props: ["id_area", "id_classroom"],
   data() {
@@ -134,9 +144,23 @@ export default {
 
       semanal: false,
       errors: [],
+      bimestres:[],
+      bimestreId:null,
     };
   },
-  mounted() {},
+  mounted() {
+    axios.get('bimestres').then((response)=>{
+      let bimestresData = response.data;
+      bimestresData.forEach(bimestre=>{
+        if(bimestre.status === 1){
+          this.bimestres.push({
+            id: bimestre.id,
+            name: bimestre.name
+          })
+        }        
+      })
+    })
+  },
   methods: {
     contentUpdateEvent(index,property){
       this.inputs[index][property]=this.inputs[index][property].replace(/[^a-zA-Z0-9-.ñáéíóú_*+-/=&%$#!()?¡¿ ]/g, "|");
@@ -161,14 +185,14 @@ export default {
           this.newSemanal.push(this.inputs[i]);
         }
       }
-      let ids = this.id_area.split('/');
-
+      let ids = this.id_area.split('/');      
       axios
         .post(url, {
           //Cursos generales
           id_area: ids[0],
           id_classroom: ids[1],
           semana: this.newSemanal,
+          id_bimestre: this.bimestreId
         })
         .then((response) => {
           this.errors = [];

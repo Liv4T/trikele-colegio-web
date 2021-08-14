@@ -31,6 +31,21 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
+                                            <label for="bimestre">Seleccione el Bimestre</label>                                      
+                                            <select class="form-control" v-model="act.id_bimestre" required>
+                                                <option :value="bim.id" v-for="(bim, key) in bimestres" :key="key">
+                                                {{ bim.name }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <label for="name">Observación</label>
+                                            <textarea name="competences" 
+                                            class="form-control" v-model="act.observation"></textarea>
+                                        </div> 
+
+                                        <div class="col-md-6">
                                             <label for="name">Desarrollo de la clase</label>
                                             <textarea
                                                 name="competences"
@@ -40,12 +55,7 @@
                                                 required
                                             ></textarea>
                                             <div class="invalid-feedback">Please fill out this field</div>
-                                        </div>
-                                            <div class="col-md-6">
-                                            <label for="name">Observación</label>
-                                            <textarea name="competences" 
-                                            class="form-control" v-model="act.observation"></textarea>
-                                        </div>                                        
+                                        </div>                                       
                                     </div>
                                     <!-- <div class="modal-footer">
                                         <a href="#" class="btn btn-warning float-right">Guardar</a>
@@ -129,6 +139,7 @@ export default {
             ],
             semanal: false,
             errors: [],
+            bimestres:[]
         };
     },
     watch:{
@@ -148,6 +159,18 @@ export default {
     },
     methods: {
         getData(){
+            axios.get('bimestres').then((response)=>{
+                let bimestresData = response.data;
+                bimestresData.forEach(bimestre=>{
+                    if(bimestre.status === 1){
+                    this.bimestres.push({
+                        id: bimestre.id,
+                        name: bimestre.name
+                    })
+                    }        
+                })
+            });
+            
             var urlsel = window.location.origin + "/editOneWeek/" + this.id_area + "/" + this.id_classroom;
             axios.get(urlsel).then((response) => {
                 this.fillS = response.data;
@@ -197,11 +220,10 @@ export default {
                     this.newSemanal.push(this.fillS[i]);
                 }
             }
-            
             axios.put(url, {
                 //Cursos generales
                 id_materia: "1",
-                semana: this.newSemanal,
+                semana: this.newSemanal,                
             }).then((response) => {
                 this.errors = [];
                 toastr.success("Actualizado plan semanal exitosamente");
