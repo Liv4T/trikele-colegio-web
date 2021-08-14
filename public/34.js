@@ -335,6 +335,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: {
     logout: function logout() {
@@ -665,6 +674,18 @@ var staticRenderFns = [
                 _vm._v(
                   "\n                    Ciclos y clases\n                  "
                 )
+              ]),
+              _vm._v(" "),
+              _c("a", { attrs: { href: "/bimestre" } }, [
+                _c("img", {
+                  attrs: {
+                    width: "35px",
+                    src:
+                      "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MIS-CURSOS.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad",
+                    alt: ""
+                  }
+                }),
+                _vm._v("\n                    Bimestres\n                  ")
               ]),
               _vm._v(" "),
               _c("a", { attrs: { href: "/notas_d" } }, [

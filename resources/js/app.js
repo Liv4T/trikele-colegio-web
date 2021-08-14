@@ -228,5 +228,6 @@ Vue.component("homeGrados",()=>import("./components/homeGrados.vue"));
 Vue.component("home-class",() => import ("./components/homeClassModule.vue"));
 
 Vue.component("home-modulos", () => import ("./components/homeModulos.vue"));
+Vue.component("bimestre-component", ()=> import("./components/bimestre.vue"));
 
 const app = new Vue({el: "#app", data: {}, store});

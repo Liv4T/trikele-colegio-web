@@ -841,3 +841,8 @@ Route::get('/modulos_home/{id_area}/{id_grade}', function (String $id_area, Stri
 });
 Route::get('findClassroomByGrade/{id}', 'LandingController@findClassroomByGrade')->name('findClassroomByGrade');
 Route::get('findAreaById/{id}', 'LandingController@findAreaById')->name('findAreaById');
+
+Route::resource('bimestres','BimestreController');
+Route::get('/bimestre', function () {
+    return view('bimestre');
+});
