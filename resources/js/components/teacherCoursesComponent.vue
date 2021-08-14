@@ -45,7 +45,7 @@
 </template>
 <script>
   export default {
-    props: ["id_area", "id_classroom"],
+    props: ["id_area", "id_classroom","id_bimestre"],
     data() {
       return {
         clases: [],
@@ -71,16 +71,24 @@
           this.getData();
         }
       },
+
+      id_bimestre: function(newVal, OldVal){
+        if (newVal !== OldVal) {
+          this.bimestre_id = newVal;
+          this.getData();
+        } 
+      }
     },
-    mounted() {
+    mounted() {      
       this.area_id = this.id_area;
       this.classroom_id = this.id_classroom;
+      this.bimestre_id = this.id_bimestre;
       this.getData();
     },
     methods: {
       getData() {
         this.clases = [];
-        axios.get(`/editGetWeek/${this.area_id}/${this.classroom_id}`).then((response) => {
+        axios.get(`/editGetWeek/${this.area_id}/${this.classroom_id}/${this.bimestre_id}`).then((response) => {
           this.clases = response.data;
         });
       },

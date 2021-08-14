@@ -348,6 +348,7 @@ Route::get('getEvenNearStudent/{id_area}/{id_classroom}', 'EventsController@even
 
 Route::get('GetWeek', 'CoursesController@getWeek');
 Route::get('editGetWeek/{id_area}/{id_classroom}', 'CoursesController@editGetWeek')->name('editGetWeek');
+Route::get('editGetWeek/{id_area}/{id_classroom}/{id_bimestre}', 'CoursesController@editGetWeekTeacher');
 Route::get('editOneWeek/{id_area}/{id_classroom}', 'CoursesController@editOneWeek')->name('editOneWeek');
 Route::get('viewGetWeek/{id_area}/{id_classrom}', 'CoursesController@viewGetWeek')->name('viewGetWeek');
 Route::get('showWeek/{id}', 'CoursesController@showWeek');

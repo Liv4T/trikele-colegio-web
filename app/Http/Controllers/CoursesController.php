@@ -445,6 +445,28 @@ class CoursesController extends Controller
         return response()->json($data);
     }
 
+    public function editGetWeekTeacher(String $id_area, String $id_classroom, String $id_bimestre)
+    {
+        $user = Auth::user();
+        $data = [];
+        if ($user->type_user == 2) {
+            $Weeks = Weekly::where('id_teacher', $user->id)->where('id_area', $id_area)->where('id_classroom', $id_classroom)->where('id_bimestre', $id_bimestre)->get();
+            $data = [];            
+            foreach ($Weeks as $key => $week) {
+                $data[$key] = [
+                    'id'   => $week->id,
+                    'text' => $week->driving_question,
+                    'class' => $week->class_development,
+                    'observation' => $week->observation,
+                    'id_area' =>  $week->id_area,
+                    'id_classroom' =>  $week->id_classroom,
+                    'id_bimestre' => $week->id_bimestre,
+                ];
+            }
+        }
+        return response()->json($data);
+    }
+
     public function editGetWeek(String $id_area, String $id_classroom)
     {
         $user = Auth::user();

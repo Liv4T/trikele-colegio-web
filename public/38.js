@@ -280,7 +280,7 @@ var render = function() {
                           ? _c(
                               "div",
                               [
-                                _c("teacher-courses", {
+                                _c("bimestre-list-component", {
                                   attrs: {
                                     id_area: _vm.idArea,
                                     id_classroom: _vm.idClassroom

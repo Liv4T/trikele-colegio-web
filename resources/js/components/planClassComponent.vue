@@ -23,8 +23,8 @@
 
                         <div>
                             <div v-if="activetab === 1" class="tabcontent">
-                                <div v-if="idArea !=''">
-                                    <teacher-courses :id_area="idArea" :id_classroom="idClassroom"></teacher-courses>
+                                <div v-if="idArea !=''">                                    
+                                    <bimestre-list-component :id_area="idArea" :id_classroom="idClassroom"></bimestre-list-component>
                                 </div>
                             </div>
 
