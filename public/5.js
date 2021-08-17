@@ -73,6 +73,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -196,7 +199,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  /* .back-calendar {\n  padding-left: 290px;\n} */\n.pd-20 {\n    padding-left: 7em;\n}\n.align-center {\n    align-items: center;\n}\n.letra-p {\n    font-size: 20px;\n}\n.mg-20 {\n    margin: 10px;\n}\n.c-header {\n    background: transparent;\n    padding: 10px;\n}\n.c-header > h3 {\n    font-family: \"PoppinsBold\";\n    color: #ff7536;\n    font-weight: 900;\n    font-size: 2.5em;\n}\n.card-container {\n    background-color: #ffdec2;\n    padding: 20px;\n    border-radius: 10px;\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n}\n.back-calendar {\n    background-image: url(\"/uploads/home/fondo-lista.jpg\");\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  /* .back-calendar {\n  padding-left: 290px;\n} */\n.pd-20 {\n    padding-left: 7em;\n}\n.align-center {\n    align-items: center;\n}\n.letra-p {\n    font-size: 20px;\n}\n.mg-20 {\n    margin: 10px;\n}\n.c-header {\n    background: transparent;\n    padding: 10px;\n}\n.c-header > h3 {\n    font-family: \"PoppinsBold\";\n    color: #ff7536;\n    font-weight: 900;\n    font-size: 2.5em;\n}\n.card-container {\n    background-color: #ffdec2;\n    padding: 20px;\n    border-radius: 10px;\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n}\n.back-calendar {\n    background-image: url(\"/uploads/home/fondo-lista.jpg\");\n}\n", ""]);
 
 // exports
 
@@ -248,47 +251,57 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "back-calendar" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-11 mx-auto" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _c("div", { staticClass: "col text-center" }, [
+          _c("img", { attrs: { src: "/images/calendario.png", alt: "Image" } })
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "back-calendar" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-11 mx-auto" }, [
-          _c(
-            "div",
-            { staticClass: "row justify-content-md-center text-center" },
-            [
-              _c("div", { staticClass: "col text-center" }, [
-                _c("img", {
-                  staticStyle: { width: "65%" },
-                  attrs: { src: "/uploads/home/welcome-21.png", alt: "welcome" }
-                })
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col" }, [
-              _c("div", { staticClass: "card-container" }, [
-                _c("iframe", {
-                  staticStyle: { height: "600px !important" },
-                  attrs: {
-                    width: "100%",
-                    src: "https://www.youtube.com/embed/F-nQuuixxfU",
-                    title: "YouTube video player",
-                    frameborder: "0",
-                    allow:
-                      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
-                    allowfullscreen: ""
-                  }
-                })
-              ])
-            ])
-          ])
+    return _c(
+      "div",
+      { staticClass: "row justify-content-md-center text-center" },
+      [
+        _c("div", { staticClass: "col text-center" }, [
+          _c("img", {
+            staticStyle: { width: "65%" },
+            attrs: { src: "/uploads/home/welcome-21.png", alt: "welcome" }
+          })
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col" }, [
+        _c("div", { staticClass: "card-container" }, [
+          _c("iframe", {
+            staticStyle: { height: "600px !important" },
+            attrs: {
+              width: "100%",
+              src: "https://www.youtube.com/embed/F-nQuuixxfU",
+              title: "YouTube video player",
+              frameborder: "0",
+              allow:
+                "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
+              allowfullscreen: ""
+            }
+          })
         ])
       ])
     ])

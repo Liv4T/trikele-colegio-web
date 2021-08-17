@@ -57,6 +57,9 @@
             </div>
           </div>
         </div>
+        <div class="col text-center">
+          <img :src="'/images/calendario.png'" alt="Image"/>
+        </div>
       </div>
     </div>
   </div>
