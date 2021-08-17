@@ -1,6 +1,6 @@
   <template>
   <div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" v-if="moduleId === ''">
       <div id="crud" class="col-sm-12">
         <div class="card text-center">
           <h3 class="card-header fondo">Mis clases</h3>
@@ -40,10 +40,9 @@
                       <tr v-if="clas.id_classroom==classroom_id && clas.id_area==area_id">
                         <td>{{ clas.text }}</td>
                         <td>
-                          <a
-                            class="btn btn-primary"
-                            :href="'/estudiante/modulo/'+clas.id"
-                          >Ir a Ciclo</a>
+                          <a class="btn btn-primary" v-on:click="()=>getModuleId(clas.id)">
+                            Ir a Ciclo
+                          </a>
 
                         </td>
                         <td>
@@ -75,11 +74,14 @@
         </div>
       </div>
     </div>
+    <div v-else-if="moduleId !== ''">
+      <student-module :id_module="moduleId" :backPage="backPage"></student-module>
+    </div>
   </div>
 </template>
 <script>
 export default {
-  props:["id_area","id_classroom"],
+  props:["id_area","id_classroom","id_bimestre"],
   data() {
     return {
       clases: [],
@@ -92,7 +94,9 @@ export default {
       errors: [],
       fillS: [],
       area_id: "",
-      classroom_id:""
+      classroom_id:"",
+      bimestre_id:"",
+      moduleId:"",
     };
   },
   watch:{
@@ -108,11 +112,19 @@ export default {
         this.classroom_id = newVal;
         this.botones();
       }
+    },
+
+    id_bimestre:function(newVal){
+      if(newVal){
+        this.bimestre_id = newVal;
+        this.botones();
+      }
     }
   },
   mounted() {
     this.area_id = this.id_area;
     this.classroom_id = this.id_classroom;
+    this.bimestre_id = this.id_bimestre;
     this.botones();
     // var url = "/GetArearByUser";
     // axios.get(url).then((response) => {
@@ -123,11 +135,19 @@ export default {
   },
   methods: {
     botones() {
-      var urlsel = "/viewGetWeek/" + this.area_id + "/" + this.classroom_id;
+      var urlsel = "/viewGetWeek/" + this.area_id + "/" + this.classroom_id + "/" + this.bimestre_id;
       axios.get(urlsel).then((response) => {
         this.clases = response.data;
       });
     },
+
+    getModuleId(clasId){
+      this.moduleId = clasId;
+    },
+
+    backPage(){
+      this.moduleId = "";
+    }
   },
 };
 </script>

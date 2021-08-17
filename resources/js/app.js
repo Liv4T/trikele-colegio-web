@@ -112,6 +112,7 @@ Vue.component("editarc-component", require("./components/editarClase.vue").defau
 
 Vue.component("bienvenida-estudiantes",() => import("./components/Bienvenida.vue"));
 Vue.component("inicio-component", () => import("./components/inicio.vue"));
+Vue.component("inscripcion-documentos",() => import("./components/formInscription.vue"));
 Vue.component("ciclos-component", ()=>import("./components/homeCiclos.vue"));
 Vue.component("userinfo", ()=>import("./components/UserInfo"));
 Vue.component("answer", ()=>import("./components/Answer"));

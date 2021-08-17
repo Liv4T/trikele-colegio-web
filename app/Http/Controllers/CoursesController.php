@@ -546,9 +546,9 @@ class CoursesController extends Controller
         return response()->json($data);
     }
 
-    public function viewGetWeek(String $id_area, String $id_classroom)
+    public function viewGetWeek(String $id_area, String $id_classroom, String $id_bimestre)
     {
-        $Weeks = Weekly::where('id_area', $id_area)->where('id_classroom', $id_classroom)->get();
+        $Weeks = Weekly::where('id_area', $id_area)->where('id_classroom', $id_classroom)->where('id_bimestre', $id_bimestre)->get();
         $data = [];
         foreach ($Weeks as $key => $week) {
             $data[$key] = [

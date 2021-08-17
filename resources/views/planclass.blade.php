@@ -3,7 +3,7 @@
 @section('content')
   
   <menu-docente-2></menu-docente-2>
-  <plan-class-component></plan-class-component>
+  <plan-class-component :user="{{ Auth::user()->type_user }}"></plan-class-component>
   <footers></footers>
 <div class="container">
   <!--<app-vue></app-vue>-->

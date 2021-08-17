@@ -1,14 +1,7 @@
 <template>
     <div class="back-calendar">
         <div class="form-group width-r mx-auto">
-            <div class="row pd-20">
-                <div class="dropdown col-md-2">
-                    <!-- <button class="btn btn-warning dropdown-toggle mg-btn" type="button" id="admin" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #49CEFB; border-color: #49CEFB; box-shadow: 3px 3px 3px 3px #b0acac">{{ $t('lang.area.electivas') }}</button> -->
-                    <div class="dropdown-menu" aria-labelledby="admin" v-for="(area, k) in planifications" :key="k">
-                        <a class="dropdown-item" href="" @click.prevent="nameArea = area.lective.name, id_lective_planification = area.id_planification, idArea = '', idClassroom = ''">{{ area.lective.name }}</a>
-                    </div>
-                </div>
-
+            <div class="row pd-20">                
                 <div class="col-md-2" v-for="(area, t) in areas" :key="t">
                     <a v-on:click="cleanOtherSection" href="http://" class="btn btn-warning mg-btn" :style="area.style" @click.prevent="nameArea = area.text, colorTitle = area.titleColor, idArea = area.id, idClassroom = area.id_classroom">
                         <h6 class="letra-poppins-bold" style="color: black">{{ nameMinus(area.text) }}</h6>
@@ -33,8 +26,8 @@
                     <div v-if="showSection === 'inicio'">
                         <!-- <div v-if="activetab === 1" class="tabcontent"><calendar-component :type_u="3" :user="user"></calendar-component></div> -->
                         <div v-if="activetab === 2" class="tabcontent">   
-                            <div v-if="idArea !== ''">
-                                <student-courses :id_area="idArea" :id_classroom="idClassroom"></student-courses>
+                            <div v-if="idArea !== ''">                                
+                                <bimestre-list-component :id_area="idArea" :id_classroom="idClassroom" :type_u="user"></bimestre-list-component>
                             </div>
                         </div>
                             

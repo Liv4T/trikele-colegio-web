@@ -1,7 +1,7 @@
 <template>
-  <div class="back">
+  <div v-if="classId === ''">
     <div class="row justify-content-center">
-      <div id="crud" class="col-sm-10">
+      <div id="crud" class="col-sm-12">
         <div class="card text-center">
           <h5 class="card-header fondo">Ciclo</h5>
           <h3 class="card-header fondo">{{ nameWeekly }}</h3>
@@ -23,9 +23,7 @@
                   <td class="row justify-content-center">
                     <a
                       class="btn btn-primary"
-                      :href="
-                        '/estudiante/modulo/' + id_module + '/clase/' + clas.id
-                      "
+                      v-on:click="()=>getClassId(clas.id)"                      
                       >Ir a clase</a
                     >
 
@@ -73,17 +71,20 @@
               </tbody>
             </table>
             <div class="float-left">
-              <a class="btn btn-warning" href="/estudiante/clases">Regresar</a>
+              <a class="btn btn-warning" v-on:click="backPage">Regresar</a>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <div v-else-if="classId!==''">
+    <student-course :id_module="id_module" :id_class="classId" :returnPage="returnPage"></student-course>
+  </div>
 </template>
 <script>
 export default {
-  props: ["id_module"],
+  props: ["id_module","backPage"],
   data() {
     return {
       clases: [],
@@ -99,7 +100,7 @@ export default {
       nameArea: "",
       id_area: "",
       id_classroom: "",
-
+      classId:"",
     };
   },
   created() {},
@@ -117,7 +118,14 @@ export default {
       this.nameWeekly = response.data;
     });
   },
-  methods: {},
+  methods: {
+    getClassId(classId){
+      this.classId= classId;
+    },
+    returnPage(){
+      this.classId = ""
+    }
+  },
 };
 </script>
 <style>

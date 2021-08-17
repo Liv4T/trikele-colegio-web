@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="back">
+        <div>
             <div class="row">
                 <div class="col-md-11 mx-auto">
                     <div class="custom-card text-center">
@@ -267,10 +267,10 @@
                     <div class="div-weekly-plan-btn-save">
                         <a
                             class="btn btn-warning"
-                            :href="'/estudiante/modulo/' + id_module"
+                            v-on:click="returnPage"
                             >Regresar</a
                         >
-                        <a
+                        <!-- <a
                             class="btn btn-primary float-right"
                             v-show="
                                 course.progress == 100 &&
@@ -283,8 +283,8 @@
                                     course.next_class
                             "
                             >Continuar</a
-                        >
-                        <a
+                        > -->
+                        <!-- <a
                             class="btn btn-primary float-right"
                             v-show="
                                 course.progress == 100 &&
@@ -292,7 +292,7 @@
                             "
                             :href="'/encuesta_estudiante/' + id_module"
                             >Continuar</a
-                        >
+                        > -->
                     </div>
                 </div>
             </div>
@@ -330,7 +330,7 @@ import VueFormWizard from "vue-form-wizard";
 import "vue-form-wizard/dist/vue-form-wizard.min.css";
 Vue.use(VueFormWizard);
 export default {
-    props: ["id_module", "id_class"],
+    props: ["id_module", "id_class", "returnPage"],
     data() {
         return {
             is_loading: false,
@@ -534,9 +534,9 @@ export default {
                     this.closeQuestion();
                 });
         },
-        returnPage() {
-            window.location = `/estudiante/modulo/${this.id_module}`;
-        },
+        // returnPage() {
+        //     window.location = `/estudiante/modulo/${this.id_module}`;
+        // },
         addResource(resource_type) {
             this.course.content.push({
                 content_type: resource_type,
@@ -570,7 +570,7 @@ export default {
                     response => {
                         // this.getPlanificationEvent(this.id_lective_planification);
                         toastr.success("Clases actualizadas correctamente");
-                        this.returnPage();
+                        // this.returnPage();
                     },
                     error => {
                         console.log(error);

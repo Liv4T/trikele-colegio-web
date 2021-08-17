@@ -195,6 +195,9 @@ Route::middleware('auth')->get('/materiasEst', function () {
     return view('materiasEstudiantes');
 });
 
+Route::middleware('auth')->get('/inscripcion-documentos', function () {
+    return view('inscripcionDocumentos');
+});
 Route::middleware('auth')->get('/bienvenido', function () {
     return view('inicio');
 });
@@ -355,7 +358,7 @@ Route::get('GetWeek', 'CoursesController@getWeek');
 Route::get('editGetWeek/{id_area}/{id_classroom}', 'CoursesController@editGetWeek')->name('editGetWeek');
 Route::get('editGetWeek/{id_area}/{id_classroom}/{id_bimestre}', 'CoursesController@editGetWeekTeacher');
 Route::get('editOneWeek/{id_area}/{id_classroom}', 'CoursesController@editOneWeek')->name('editOneWeek');
-Route::get('viewGetWeek/{id_area}/{id_classrom}', 'CoursesController@viewGetWeek')->name('viewGetWeek');
+Route::get('viewGetWeek/{id_area}/{id_classrom}/{id_bimestre}', 'CoursesController@viewGetWeek')->name('viewGetWeek');
 Route::get('showWeek/{id}', 'CoursesController@showWeek');
 Route::put('updateCourseWeekly', 'CoursesController@updateCourseWeekly');
 Route::resource('course_unit', 'Course_unitController', ['except' => 'show', 'create', 'edit']);;

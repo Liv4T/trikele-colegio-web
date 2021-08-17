@@ -24,7 +24,7 @@
                         <div>
                             <div v-if="activetab === 1" class="tabcontent">
                                 <div v-if="idArea !=''">                                    
-                                    <bimestre-list-component :id_area="idArea" :id_classroom="idClassroom"></bimestre-list-component>
+                                    <bimestre-list-component :id_area="idArea" :id_classroom="idClassroom" :type_u="user"></bimestre-list-component>
                                 </div>
                             </div>
 
@@ -55,6 +55,7 @@
 </template>
 <script>
 export default {
+    props:["user"],
     data() {
         return {
             areas: [],

@@ -14,10 +14,18 @@
                                             </button>
                                         </h5>
                                     </div>
-
-                                    <div :id="`collapse${key}`" class="collapse hide" :aria-labelledby="`heading${key}`" data-parent="#accordion">
-                                        <div class="card-body" v-if="id_bimestre_to_courses !== null">
-                                            <teacher-courses :id_area="idArea" :id_classroom="idClassroom" :id_bimestre="id_bimestre_to_courses"></teacher-courses>
+                                    <div v-if="type_u === 2">
+                                        <div :id="`collapse${key}`" class="collapse hide" :aria-labelledby="`heading${key}`" data-parent="#accordion">
+                                            <div class="card-body" v-if="id_bimestre_to_courses !== null">
+                                                <teacher-courses :id_area="idArea" :id_classroom="idClassroom" :id_bimestre="id_bimestre_to_courses"></teacher-courses>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div v-else-if="type_u === 3">
+                                         <div :id="`collapse${key}`" class="collapse hide" :aria-labelledby="`heading${key}`" data-parent="#accordion">
+                                            <div class="card-body" v-if="id_bimestre_to_courses !== null">
+                                                <student-courses :id_area="idArea" :id_classroom="idClassroom" :id_bimestre="id_bimestre_to_courses"></student-courses>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>                                
@@ -32,7 +40,7 @@
 <script>
 
 export default {
-    props:["id_area","id_classroom"],
+    props:["id_area","id_classroom","type_u"],
     data() {
         return {
             bimestres:[],
@@ -47,6 +55,7 @@ export default {
     mounted() {
         this.idArea = this.id_area;
         this.idClassroom =this.id_classroom;
+        console.log("Usuario: ",this.type_u)
         this.getData();
     },
     watch:{

@@ -24,7 +24,7 @@
                   /> -->
                   <span
                     class="menu"
-                  >Comunicaciones&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  >Comunicaciones&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                   <div class="dropdown-content">
                     <a href="/mensajes">
                       <!-- <img
@@ -186,11 +186,10 @@
                 />
                 <span class="menu">Manual de usuario</span>
               </li>
-            </a> -->            
-            <a href="/inicio" class="">              
+            </a> -->                        
+            <a href="/inscripcion-documentos">
               <li class="item-menu" style="margin-top: 9%;">
-                <p style="margin-top:-9px; margin-bottom:-29px; margin-left: 0.5rem;">
-                  <!-- <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/NOTAS_naranja.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad" alt style="margin-right: 1rem;"/> -->
+                <p style="margin-top:-9px; margin-bottom:-29px; margin-left: 0.5rem;">                  
                   Cargue de
                   <br>
                 </p>
@@ -198,12 +197,7 @@
                   Documentos                
                 </p>
               </li>
-            </a>
-            <a href="../../uploads/Terminos _Condiciones_liv4t.pdf" target="_blank">
-              <li class="item-menu">
-                <span class="menu">Términos y condiciones</span>
-              </li>
-            </a>
+            </a>            
           </ul>
           <div class="text-center">
             <a href="#" @click.prevent="logout" class="btn btn-warning">X Salir</a>
