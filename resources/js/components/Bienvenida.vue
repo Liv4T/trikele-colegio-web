@@ -45,9 +45,9 @@
     </div> -->
     <div class="row">
       <div class="col-md-11 mx-auto">
-        <div class="row justify-content-md-center">
+        <div class="row justify-content-md-center text-center">
           <div class="col text-center">
-            <img src="/uploads/home/welcome-21.png" alt="welcome" width="65%" />
+            <img src="/uploads/home/welcome-21.png" alt="welcome" style="width:65%;" />
           </div>
         </div>
         <div class="row">

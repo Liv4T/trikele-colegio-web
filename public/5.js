@@ -258,17 +258,18 @@ var staticRenderFns = [
     return _c("div", { staticClass: "back-calendar" }, [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-11 mx-auto" }, [
-          _c("div", { staticClass: "row justify-content-md-center" }, [
-            _c("div", { staticClass: "col text-center" }, [
-              _c("img", {
-                attrs: {
-                  src: "/uploads/home/welcome-21.png",
-                  alt: "welcome",
-                  width: "65%"
-                }
-              })
-            ])
-          ]),
+          _c(
+            "div",
+            { staticClass: "row justify-content-md-center text-center" },
+            [
+              _c("div", { staticClass: "col text-center" }, [
+                _c("img", {
+                  staticStyle: { width: "65%" },
+                  attrs: { src: "/uploads/home/welcome-21.png", alt: "welcome" }
+                })
+              ])
+            ]
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col" }, [
