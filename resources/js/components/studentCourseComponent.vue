@@ -139,7 +139,7 @@
                                         />
                                     </div>
                                     <div class="form-item">
-                                        <div class="form-button">
+                                        <div class="form-button">                                                                                      
                                             <a
                                                 class="btn btn-primary"
                                                 v-if="
@@ -328,6 +328,7 @@
 
 import VueFormWizard from "vue-form-wizard";
 import "vue-form-wizard/dist/vue-form-wizard.min.css";
+import downloadjs from 'downloadjs';
 Vue.use(VueFormWizard);
 export default {
     props: ["id_module", "id_class", "returnPage"],
@@ -428,10 +429,9 @@ export default {
 
             this.activity.completed = complete;
         },
-        openDocument(resource) {
-            try {
-                this.saveInteraction(resource);
-              //  window.open(resource.content);
+        openDocument(resource) {            
+            try {              
+                downloadjs(resource.content);
             } catch {}
         },
         openLink(resource) {
@@ -445,7 +445,7 @@ export default {
         },
         saveInteraction(resource) {
             axios
-                .put(
+                .get(
                     `/api/student/module/${this.id_module}/class/${this.id_class}/resource/${resource.id}/interaction`
                 )
                 .then(response => {
