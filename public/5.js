@@ -225,11 +225,9 @@ __webpack_require__.r(__webpack_exports__);
       formData.append("labor_son", this.labor_son);
       formData.append("paz_salvo", this.paz_salvo);
       axios.post(url, formData).then(function (response) {
-        console.log(response.data);
-
-        _this3.getAdmisiones();
+        console.log(response.data); // this.getAdmisiones();
       })["catch"](function (error) {
-        console.log(response.data);
+        console.log(error.data);
         _this3.errors = response.data;
       });
     },

@@ -230,5 +230,6 @@ Vue.component("home-class",() => import ("./components/homeClassModule.vue"));
 Vue.component("home-modulos", () => import ("./components/homeModulos.vue"));
 Vue.component("bimestre-component", ()=> import("./components/bimestre.vue"));
 Vue.component("bimestre-list-component", ()=> import("./components/bimestreList.vue"));
+Vue.component("inicio-materias-component", ()=>import("./components/materiasEstudiantes.vue"));
 
 const app = new Vue({el: "#app", data: {}, store});

@@ -1,11 +1,11 @@
   <template>
-  <div class="back">
+  <div>
     <div class="row justify-content-center">
-      <div id="crud" class="col-sm-10">
+      <div id="crud" class="col-sm-12">
         <div class="card text-center">
           <h3 class="card-header fondo">Mis clases</h3>
           <div class="card-body">
-            <div class="accordion" id="accordionExample">
+            <!-- <div class="accordion" id="accordionExample">
               <div class="card" v-for="(area,t) in areas" :key="t">
                 <div class="card-header">
                   <h2 class="mb-0">
@@ -27,7 +27,7 @@
                   class="collapse hide"
                   aria-labelledby="heading"
                   data-parent="#accordionExample"
-                >
+                > -->
                   <table class="table table-responsive-xl table-hover table-striped center">
                     <thead>
                       <tr>
@@ -36,12 +36,8 @@
                         <th></th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr
-                        v-for="(clas, k) in clases"
-                        :key="k"
-                        v-if="clas.id_classroom==area.id_classroom && clas.id_area==area.id"
-                      >
+                    <tbody v-for="(clas, k) in clases" :key="k">
+                      <tr v-if="clas.id_classroom==classroom_id && clas.id_area==area_id">
                         <td>{{ clas.text }}</td>
                         <td>
                           <a
@@ -72,9 +68,9 @@
                       </tr>
                     </tbody>
                   </table>
-                </div>
+                <!-- </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -83,6 +79,7 @@
 </template>
 <script>
 export default {
+  props:["id_area","id_classroom"],
   data() {
     return {
       clases: [],
@@ -94,20 +91,39 @@ export default {
       id_act: "",
       errors: [],
       fillS: [],
+      area_id: "",
+      classroom_id:""
     };
   },
-  created() {},
-  mounted() {
-    var url = "/GetArearByUser";
-    axios.get(url).then((response) => {
-      this.areas = response.data;
-    });
+  watch:{
+    id_area:function(newVal){
+      if(newVal){
+        this.area_id = newVal;
+        this.botones();
+      }
+    },
 
-    console.log("Component mounted.");
+    id_classroom:function(newVal){
+      if(newVal){
+        this.classroom_id = newVal;
+        this.botones();
+      }
+    }
+  },
+  mounted() {
+    this.area_id = this.id_area;
+    this.classroom_id = this.id_classroom;
+    this.botones();
+    // var url = "/GetArearByUser";
+    // axios.get(url).then((response) => {
+    //   this.areas = response.data;
+    // });
+
+    // console.log("Component mounted.");
   },
   methods: {
-    botones(area, classroom) {
-      var urlsel = "/viewGetWeek/" + area + "/" + classroom;
+    botones() {
+      var urlsel = "/viewGetWeek/" + this.area_id + "/" + this.classroom_id;
       axios.get(urlsel).then((response) => {
         this.clases = response.data;
       });

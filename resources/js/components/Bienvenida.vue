@@ -214,10 +214,10 @@ export default {
         .post(url, formData)
         .then((response) => {
           console.log(response.data);
-          this.getAdmisiones();
+          // this.getAdmisiones();
         })
         .catch((error) => {
-          console.log(response.data);
+          console.log(error.data);
           this.errors = response.data;
         });
     },

@@ -6,32 +6,32 @@
           <ul>
                <a href="/estudiante/calendario">
               <li class="item-menu">
-                <img
+                <!-- <img
                         width="35px"
                         src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/HORARIO_narnja.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad"
                         alt
-                />
+                /> -->
                 <span class="menu">Calendario</span>
               </li>
             </a>
             <div class="dropdown">
               <a>
                 <li class="item-menu">
-                  <img
+                  <!-- <img
                     width="35px"
                     src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/ANUNCIOS_naranja.png?alt=media&token=539c1428-c480-43bf-a132-73be35386940"
                     alt
-                  />
+                  /> -->
                   <span
                     class="menu"
                   >Comunicaciones&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                   <div class="dropdown-content">
                     <a href="/mensajes">
-                      <img
+                      <!-- <img
                         width="35px"
                         src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MENSAJES_naranja.png?alt=media&token=f76f98f1-1c57-469b-a839-d98e64651818"
                         alt
-                      />
+                      /> -->
                       Mensajes
                     </a>
 
@@ -44,19 +44,19 @@
                                             Mi horario
                     </a>-->
                     <a href="/questions">
-                      <img
+                      <!-- <img
                         width="35px"
                         src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/FOROS_naranja.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad"
                         alt
-                      />
+                      /> -->
                       Foro
                     </a>
                     <a href="/chat">
-                      <img
+                      <!-- <img
                         width="35px"
                         src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/FOROS_naranja.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad"
                         alt
-                      />
+                      /> -->
                       Chat
                     </a>
                   </div>
@@ -64,33 +64,33 @@
               </a>
             </div>
             <div class="dropdown2">
-              <a>
+              <a href="/materiasEst">
                 <li class="item-menu">
-                  <img
+                  <!-- <img
                     width="35px"
                     src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MIS-CURSOS.png?alt=media&token=47515df0-5b95-48b4-bb08-10257108169b"
                     alt
-                  />
+                  /> -->
                   <span
                     class="menu"
                   >Mis clases&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                  <div class="dropdown2-content">
-                    <a href="/estudiante/clases">
+                  <!-- <div class="dropdown2-content"> -->
+                    <!-- <a href="/estudiante/clases">
                       <img
                         width="35px"
                         src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/TAREAS_naranja.png?alt=media&token=0ffb3c21-349a-4615-b57c-50dac3db8285"
                         alt
                       />
                       Mis materias
-                    </a>
-                    <a href="/Actividad">
+                    </a> -->
+                    <!-- <a href="/Actividad">
                       <img
                         width="35px"
                         src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/ACTIVIDADES_naranja.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad"
                         alt
                       />
                       Mis actividades
-                    </a>
+                    </a> -->
                     <!-- <a href="/juegos">
                       <img
                         width="35px"
@@ -99,22 +99,18 @@
                       />
                       Juegos
                     </a>-->
-                    <a href="/repository/student">
-                     <img
-                                                width="35px"
-                                                src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/NOTAS_naranja.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad"
-                                                alt
-                                            />
+                    <!-- <a href="/repository/student">
+                      <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/NOTAS_naranja.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad" alt/>
                       Entregas
-                    </a>
-                     <a href="/board">
+                    </a> -->
+                    <!-- <a href="/board">
                       <img
                         width="35px"
                         src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/NOTAS_naranja.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad"
                         alt
                       />
                       Pizarra
-                    </a>
+                    </a> -->
                     <!-- <a href="/notas_d">
                                             <img
                                                 width="35px"
@@ -131,11 +127,11 @@
                                             />
                                             Boletín de notas
                     </a>-->
-                  </div>
+                  <!-- </div> -->
                 </li>
               </a>
             </div>
-            <div class="dropdown2">
+            <!-- <div class="dropdown2">
               <a>
                 <li class="item-menu">
                   <img
@@ -169,8 +165,8 @@
                   </div>
                 </li>
               </a>
-            </div>
-              <a href="/mensajes">
+            </div> -->
+            <!-- <a href="/mensajes">
               <li class="item-menu">
                 <img
                         width="35px"
@@ -180,8 +176,8 @@
                        <span class="menu"> Psicología</span>
 
               </li>
-            </a>
-            <a href="/manual">
+            </a> -->
+            <!-- <a href="/manual">
               <li class="item-menu">
                 <img
                   width="35px"
@@ -189,6 +185,18 @@
                   alt
                 />
                 <span class="menu">Manual de usuario</span>
+              </li>
+            </a> -->            
+            <a href="/inicio" class="">              
+              <li class="item-menu" style="margin-top: 9%;">
+                <p style="margin-top:-9px; margin-bottom:-29px; margin-left: 0.5rem;">
+                  <!-- <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/NOTAS_naranja.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad" alt style="margin-right: 1rem;"/> -->
+                  Cargue de
+                  <br>
+                </p>
+                <p style=" margin-left: 0.5rem;">
+                  Documentos                
+                </p>
               </li>
             </a>
             <a href="../../uploads/Terminos _Condiciones_liv4t.pdf" target="_blank">
@@ -240,6 +248,10 @@ export default {
   list-style-type: none;
   text-align: left;
 }
+.mg-btn {
+  margin: 10px;
+  min-width: 165px;
+}
 .left li {
   width: auto;
   height: 60px;
@@ -247,14 +259,14 @@ export default {
   padding-left: 18px;
 }
 .left li:hover {
-  background: #278080;
+  background: #09708C;
   color: white;
 }
 
 .left .item-menu {
   height: 50px;
   overflow: hidden;
-  color: black;
+  color: white;
 }
 .left a {
   color: white;
@@ -291,9 +303,17 @@ span.menu {
   text-decoration: none;
   display: block;
 }
+.left li {
+  background: #09708C;
+  margin: 8px;
+  border-radius: 5px;
+}
+.left #electivas {
+  margin: 8px;
+}
 
 .dropdown-content a:hover {
-  background: #278080;
+  background: #09708C;
   color: white;
 }
 
@@ -321,7 +341,7 @@ span.menu {
 }
 
 .dropdown2-content a:hover {
-  background: #278080;
+  background: #09708C;
   color: white;
 }
 

@@ -1,7 +1,7 @@
 <template>
-  <div class="back">
-    <div class="row justify-content-center">
-      <div id="crud" class="col-sm-10">
+  <div>
+    <div>
+      <div id="crud" class="col-sm-12">
         <div class="card-container">
           <div class="card text-center">
             <div class="card-header">
