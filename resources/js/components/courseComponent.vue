@@ -154,7 +154,7 @@
           //set current data
           if (response.data.achievements.length > 0) {
             this.inputs1 = [];            
-            response.data.achievements.forEach((e) => {
+            response.data.achievements.forEach((e) => {              
               this.inputs1.push({ id_plannification: e.id_planification, id_achievement: e.id, logro: e.achievement, porcentaje: e.percentage });
             });
             this.inputs1_saved = JSON.parse(JSON.stringify(this.inputs1));            
@@ -171,9 +171,18 @@
               //   this.isSynchronized = false;
               // }
 
-              if (JSON.stringify(savedInputModel.inputs1) != JSON.stringify(this.inputs1)) {
-                this.inputs1 = savedInputModel.inputs1;
-                this.isSynchronized = false;
+              if (JSON.stringify(savedInputModel.inputs1) != JSON.stringify(this.inputs1)) {                
+                if(savedInputModel.inputs1){
+                  this.inputs1 = savedInputModel.inputs1;
+                }else{
+                  this.inputs1 = [
+                    {
+                      logro: "",
+                      porcentaje: "0",
+                    },
+                  ]
+                }
+                this.isSynchronized = false;                
               }
             }
           }
@@ -194,7 +203,7 @@
         }
         //console.log(l.normalize('NFD').replace(/([^n\u0300-\u036f]|n(?!\u0303(?![\u0300-\u036f])))[\u0300-\u036f]+/gi,"$1"));
         //serialize data on localstorage
-        localStorage.setItem(this.serialLocalStorage, window.btoa(unescape(encodeURIComponent(JSON.stringify({ inputs1: this.inputs1, inputs: this.inputs })))));
+        localStorage.setItem(this.serialLocalStorage, window.btoa(unescape(encodeURIComponent(JSON.stringify({ inputs1: this.inputs1 })))));
 
         this.isSynchronized = false;
       },

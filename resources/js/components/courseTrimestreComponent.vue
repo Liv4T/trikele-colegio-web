@@ -200,7 +200,6 @@ export default {
             var urlsel = window.location.origin + "/coursePlanification/" + this.id_area + "/" + this.id_classroom;
             axios.get(urlsel).then((response) => {
                 this.fillC = response.data;
-
                 //set current data
                 if(response.data.quaterly.length>0)
                 {
@@ -218,9 +217,18 @@ export default {
         
                     if(localStorage.getItem(this.serialLocalStorage)) {
                         let savedInputModel=JSON.parse(decodeURIComponent(escape(window.atob(localStorage.getItem(this.serialLocalStorage)))));        
-                        if(JSON.stringify(savedInputModel.inputs)!=JSON.stringify(this.inputs)){
-                            this.inputs=savedInputModel.inputs;
-                            this.isSynchronized=false;
+                        if(JSON.stringify(savedInputModel.inputs)!=JSON.stringify(this.inputs)){                            
+                            if(savedInputModel.inputs){
+                                this.inputs=savedInputModel.inputs;
+                            }else{
+                                this.inputs =[
+                                    {
+                                    name: "",
+                                    contenido: "",
+                                    },
+                                ]
+                            }
+                            this.isSynchronized=false;                            
                         }
 
                         // if(JSON.stringify(savedInputModel.inputs1)!=JSON.stringify(this.inputs1)){
@@ -229,7 +237,6 @@ export default {
                         // }
                     }
                 }
-        
 
                 if (this.fillC.quaterly.length > 0) {
                     this.trimestre = true;
@@ -249,7 +256,7 @@ export default {
             // }
             //console.log(l.normalize('NFD').replace(/([^n\u0300-\u036f]|n(?!\u0303(?![\u0300-\u036f])))[\u0300-\u036f]+/gi,"$1"));
             //serialize data on localstorage
-            localStorage.setItem(this.serialLocalStorage, window.btoa(unescape(encodeURIComponent(JSON.stringify({inputs1:this.inputs1,inputs:this.inputs})))));
+            localStorage.setItem(this.serialLocalStorage, window.btoa(unescape(encodeURIComponent(JSON.stringify({inputs:this.inputs})))));
 
             this.isSynchronized=false;
         },

@@ -179,7 +179,15 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
             // }
 
             if (JSON.stringify(savedInputModel.inputs1) != JSON.stringify(_this.inputs1)) {
-              _this.inputs1 = savedInputModel.inputs1;
+              if (savedInputModel.inputs1) {
+                _this.inputs1 = savedInputModel.inputs1;
+              } else {
+                _this.inputs1 = [{
+                  logro: "",
+                  porcentaje: "0"
+                }];
+              }
+
               _this.isSynchronized = false;
             }
           }
@@ -204,8 +212,7 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
 
 
       localStorage.setItem(this.serialLocalStorage, window.btoa(unescape(encodeURIComponent(JSON.stringify({
-        inputs1: this.inputs1,
-        inputs: this.inputs
+        inputs1: this.inputs1
       })))));
       this.isSynchronized = false;
     },

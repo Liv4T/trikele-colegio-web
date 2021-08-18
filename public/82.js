@@ -216,7 +216,15 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
             var savedInputModel = JSON.parse(decodeURIComponent(escape(window.atob(localStorage.getItem(_this.serialLocalStorage)))));
 
             if (JSON.stringify(savedInputModel.inputs) != JSON.stringify(_this.inputs)) {
-              _this.inputs = savedInputModel.inputs;
+              if (savedInputModel.inputs) {
+                _this.inputs = savedInputModel.inputs;
+              } else {
+                _this.inputs = [{
+                  name: "",
+                  contenido: ""
+                }];
+              }
+
               _this.isSynchronized = false;
             } // if(JSON.stringify(savedInputModel.inputs1)!=JSON.stringify(this.inputs1)){
             //     this.inputs1=savedInputModel.inputs1;
@@ -247,7 +255,6 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
 
 
       localStorage.setItem(this.serialLocalStorage, window.btoa(unescape(encodeURIComponent(JSON.stringify({
-        inputs1: this.inputs1,
         inputs: this.inputs
       })))));
       this.isSynchronized = false;
