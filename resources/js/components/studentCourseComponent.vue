@@ -430,7 +430,7 @@ export default {
             this.activity.completed = complete;
         },
         openDocument(resource) {            
-            try {              
+            try {
                 downloadjs(resource.content);
             } catch {}
         },
