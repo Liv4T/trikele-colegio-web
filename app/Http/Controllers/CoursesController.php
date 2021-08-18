@@ -109,8 +109,8 @@ class CoursesController extends Controller
                     $class = Area::find($area->id_area);                
                     $areas[$key] = [
                         'id'           => isset($class->id) ? $class->id : '',
-                        'text'         => $class->name . " - " . $classroom->name,
-                        'id_classroom' => $classroom->id,
+                        'text'         => isset($class->name) ? $class->name : '' . " - " . isset($classroom->name) ? $classroom->name : '',
+                        'id_classroom' => isset($classroom->id) ? $classroom->id : '',
                     ];                                        
                 }
             }
