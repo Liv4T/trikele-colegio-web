@@ -432,7 +432,7 @@ export default {
         openDocument(resource) {                
             let data = resource.content.split('trikele.com');                
             let documentDownloaded = `https://trikele.edu.co${data[1]}`;
-            console.log('Documento Descargado',documentDownloaded);
+            console.log('Documento Descargado',asset(documentDownloaded));
             try {
                 downloadjs(documentDownloaded);
             } catch {}
