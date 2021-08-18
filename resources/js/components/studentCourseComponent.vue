@@ -141,14 +141,12 @@
                                     <div class="form-item">
                                         <div class="form-button">                                            
                                             <a
-
+                                                :href="item_content.content"
                                                 class="btn btn-primary"
                                                 v-if="
                                                     item_content.content_type ==='DOCUMENT'
                                                 "
-                                                v-on:click="
-                                                    openDocument(item_content)
-                                                "
+                                                download
                                                 >Leer documento</a
                                             >
                                             <a

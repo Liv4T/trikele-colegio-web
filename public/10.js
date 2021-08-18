@@ -315,8 +315,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 (function () {
   "use strict";
 
@@ -1179,12 +1177,9 @@ var render = function() {
                                           "a",
                                           {
                                             staticClass: "btn btn-primary",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.openDocument(
-                                                  item_content
-                                                )
-                                              }
+                                            attrs: {
+                                              href: item_content.content,
+                                              download: ""
                                             }
                                           },
                                           [_vm._v("Leer documento")]
