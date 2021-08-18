@@ -100,7 +100,11 @@ class ClassController extends Controller
                 $class_content_interaction= ClassContentInteraction::where('id_class_content',$resource->id)->where('deleted',0)->where('id_student',$user->id)->first();
             }
             if($resource->content_type === 'DOCUMENT'){
-                $resultado = str_replace("trikele.com", "https://trikele.edu.co", $resource->content);
+                if(strpos($resource->content, "http:") != false) {
+                    $resultado = str_replace("http://trikele.com", "https://trikele.edu.co", $resource->content);
+                 }else{
+                    $resultado = str_replace("https://trikele.com", "https://trikele.edu.co", $resource->content);
+                }
             }else{
                 $resultado =  $resource->content;
             }
