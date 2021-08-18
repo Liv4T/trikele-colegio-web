@@ -429,12 +429,11 @@ export default {
 
             this.activity.completed = complete;
         },
-        openDocument(resource) {    
-            console.log('Link de descarga',resource.content); 
-            let data = resource.content.split('://');    
-            console.log('Link corregido',`https://${data[1]}`); 
+        openDocument(resource) {                
+            let data = resource.content.split('://');                
+            let documentDownloaded = `https://${data[1]}`;
             try {
-                downloadjs(resource.content);
+                downloadjs(documentDownloaded);
             } catch {}
         },
         openLink(resource) {

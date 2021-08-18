@@ -428,12 +428,11 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
       this.activity.completed = complete;
     },
     openDocument: function openDocument(resource) {
-      console.log('Link de descarga', resource.content);
       var data = resource.content.split('://');
-      console.log('Link corregido', "https://".concat(data[1]));
+      var documentDownloaded = "https://".concat(data[1]);
 
       try {
-        downloadjs__WEBPACK_IMPORTED_MODULE_2___default()(resource.content);
+        downloadjs__WEBPACK_IMPORTED_MODULE_2___default()(documentDownloaded);
       } catch (_unused) {}
     },
     openLink: function openLink(resource) {
