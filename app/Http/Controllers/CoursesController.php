@@ -106,12 +106,12 @@ class CoursesController extends Controller
             if (isset($user_asignated)) {
                 foreach ($user_asignated as $key => $area) {
                     $classroom = Classroom::find($area->id_classroom);
-                    $class = Area::find($area->id_area);                
+                    $class = Area::find($area->id_area);
                     $areas[$key] = [
-                        'id'           => isset($class->id) ? $class->id : '',
-                        'text'         => isset($class->name) ? $class->name : '' . " - " . isset($classroom->name) ? $classroom->name : '',
-                        'id_classroom' => isset($classroom->id) ? $classroom->id : '',
-                    ];                                        
+                        'id'           => $class->id,
+                        'text'         => $class->name . " - " . $classroom->name,
+                        'id_classroom' => $classroom->id,
+                    ];
                 }
             }
         } elseif ($user->type_user == 3) {
