@@ -433,9 +433,9 @@ export default {
             let data = resource.content.split('trikele.com');                
             let documentDownloaded = `https://trikele.edu.co${data[1]}`;
             console.log('Documento Descargado',documentDownloaded);
-            try {
+            // try {
                 downloadjs(documentDownloaded);
-            } catch {}
+            // } catch {}
         },
         openLink(resource) {
             try {

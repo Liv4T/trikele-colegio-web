@@ -430,17 +430,15 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
     openDocument: function openDocument(resource) {
       var data = resource.content.split('trikele.com');
       var documentDownloaded = "https://trikele.edu.co".concat(data[1]);
-      console.log('Documento Descargado', documentDownloaded);
+      console.log('Documento Descargado', documentDownloaded); // try {
 
-      try {
-        downloadjs__WEBPACK_IMPORTED_MODULE_2___default()(documentDownloaded);
-      } catch (_unused) {}
+      downloadjs__WEBPACK_IMPORTED_MODULE_2___default()(documentDownloaded); // } catch {}
     },
     openLink: function openLink(resource) {
       try {
         this.saveInteraction(resource);
         window.open(resource.content);
-      } catch (_unused2) {}
+      } catch (_unused) {}
     },
     playVideo: function playVideo(resource) {
       this.saveInteraction(resource);
