@@ -329,9 +329,7 @@
 import VueFormWizard from "vue-form-wizard";
 import "vue-form-wizard/dist/vue-form-wizard.min.css";
 import downloadjs from 'downloadjs';
-import cors from 'cors';
 Vue.use(VueFormWizard);
-Vue.use(cors);
 export default {
     props: ["id_module", "id_class", "returnPage"],
     data() {
@@ -432,8 +430,9 @@ export default {
             this.activity.completed = complete;
         },
         openDocument(resource) {                
-            let data = resource.content.split('://');                
-            let documentDownloaded = `https://${data[1]}`;
+            let data = resource.content.split('trikele.com');                
+            let documentDownloaded = `https://trikele.edu.co${data[1]}`;
+            console.log('Documento Descargado',documentDownloaded);
             try {
                 downloadjs(documentDownloaded);
             } catch {}
