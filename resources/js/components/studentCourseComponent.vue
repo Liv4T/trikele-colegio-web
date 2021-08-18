@@ -329,7 +329,9 @@
 import VueFormWizard from "vue-form-wizard";
 import "vue-form-wizard/dist/vue-form-wizard.min.css";
 import downloadjs from 'downloadjs';
+import cors from 'cors';
 Vue.use(VueFormWizard);
+Vue.use(cors);
 export default {
     props: ["id_module", "id_class", "returnPage"],
     data() {

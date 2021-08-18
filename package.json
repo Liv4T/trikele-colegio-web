@@ -59,6 +59,7 @@
         "@trevoreyre/autocomplete-vue": "^2.2.0",
         "babel-preset-env": "^1.7.0",
         "bootstrap-vue": "^2.13.1",
+        "cors": "^2.8.5",
         "dayspan-vuetify": "^0.4.0",
         "downloadjs": "^1.4.7",
         "emojionearea": "^3.0.0",
