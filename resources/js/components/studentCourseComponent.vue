@@ -139,8 +139,9 @@
                                         />
                                     </div>
                                     <div class="form-item">
-                                        <div class="form-button">                                                                                      
+                                        <div class="form-button">                                            
                                             <a
+
                                                 class="btn btn-primary"
                                                 v-if="
                                                     item_content.content_type ==='DOCUMENT'
@@ -398,7 +399,6 @@ export default {
 
 
         this.getCourseData();
-
     },
     methods: {
         selectOption(id_question, ix_option, question) {
@@ -431,10 +431,11 @@ export default {
         },
         openDocument(resource) {                
             let data = resource.content.split('trikele.com');                
-            let documentDownloaded = `https://trikele.edu.co${data[1]}`;
-            console.log('Documento Descargado',documentDownloaded);
+            this.documentDownloaded = `https://trikele.edu.co${data[1]}`;
+
+            console.log('Documento Descargado',this.documentDownloaded);
             // try {
-                downloadjs(documentDownloaded);
+                downloadjs(this.documentDownloaded);
             // } catch {}
         },
         openLink(resource) {

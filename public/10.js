@@ -316,6 +316,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 (function () {
   "use strict";
 
@@ -429,10 +430,10 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
     },
     openDocument: function openDocument(resource) {
       var data = resource.content.split('trikele.com');
-      var documentDownloaded = "https://trikele.edu.co".concat(data[1]);
-      console.log('Documento Descargado', documentDownloaded); // try {
+      this.documentDownloaded = "https://trikele.edu.co".concat(data[1]);
+      console.log('Documento Descargado', this.documentDownloaded); // try {
 
-      downloadjs__WEBPACK_IMPORTED_MODULE_2___default()(documentDownloaded); // } catch {}
+      downloadjs__WEBPACK_IMPORTED_MODULE_2___default()(this.documentDownloaded); // } catch {}
     },
     openLink: function openLink(resource) {
       try {
