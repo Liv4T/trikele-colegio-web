@@ -855,3 +855,5 @@ Route::resource('bimestres','BimestreController');
 Route::get('/bimestre', function () {
     return view('bimestre');
 });
+
+Route::get('contratoEducativo','CalificationController@educativeContract')->name('contratoEducativo');
