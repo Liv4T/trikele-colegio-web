@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Weekly;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use Illuminate\Http\Request;
 
 class CalificationController extends Controller
 {
@@ -263,11 +264,11 @@ class CalificationController extends Controller
         return  response()->json($classes);
     }
 
-    public function educativeContract(String $motherName, String $fatherName, String $ccFather, String $ccMother, String $ccOther){
+    public function educativeContract(String $motherName, String $fatherName, String $ccFather, String $ccMother, String $ccOther){           
         $html=" <h1 style='margin-left:22%'>MATRICULA 2021 – 2022</h1>
             <h1 style='margin-left:10%'>CONTRATO DE SERVICIO EDUCATIVO</h1>
 
-            <p style='margin-bottom: 3%;'>Entre los suscritos a saber <strong>"+$motherName+"</strong> y <strong>"+$fatherName+"</strong>
+            <p style='margin-bottom: 3%;'>Entre los suscritos a saber <strong>".$motherName."</strong> y <strong>".$fatherName."</strong>
             mayores de edad, vecinos y residentes en Bogotá D.C., identificados como aparece al pie de sus firmas,
             responsables designados del alumno: ___________________________ de la clase, _________ y el Representante Legal ______________________ del establecimiento educativo denominado COLEGIO TRIKELE, 
             con licencia de funcionamiento expedida por la Secretaria de Educación de Chía, 
@@ -412,9 +413,9 @@ class CalificationController extends Controller
                 </thead>
                 <tbody>
                     <tr>
-                        <td>CC:"+$ccFather+"</td>
-                        <td>CC:"+$ccMother+"</td>
-                        <td>CC:"+$ccOther+"</td>
+                        <td>CC:".$ccFather."</td>
+                        <td>CC:".$ccMother."</td>
+                        <td>CC:".$ccOther."</td>
                     </tr>
                 </tbody>
             </table>
@@ -440,7 +441,7 @@ class CalificationController extends Controller
 
         return response()->make(file_get_contents($filename), 200, [
             'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="Contrato Educativo.pdf"'
+            'Content-Disposition' => 'download; filename="Contrato Educativo.pdf"'
         ]);
     }
 
