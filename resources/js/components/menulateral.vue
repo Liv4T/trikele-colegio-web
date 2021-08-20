@@ -197,6 +197,17 @@
                   Documentos                
                 </p>
               </li>
+            </a>
+            <a href="/contrato-educativo">
+              <li class="item-menu" style="margin-top: 9%;">
+                <p style="margin-top:-9px; margin-bottom:-29px; margin-left: 0.5rem;">                  
+                  Contrato
+                  <br>
+                </p>
+                <p style=" margin-left: 0.5rem;">
+                  Estudiantil                
+                </p>
+              </li>
             </a>            
           </ul>
           <div class="text-center">
