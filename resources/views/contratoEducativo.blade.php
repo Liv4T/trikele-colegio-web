@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+  <menu-lateral></menu-lateral>
   <contrato-educativo></contrato-educativo>
   <footers></footers>
 <div class="container">

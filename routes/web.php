@@ -856,7 +856,7 @@ Route::get('/bimestre', function () {
     return view('bimestre');
 });
 
-Route::get('contratoEducativo/{motherName}/{fatherName}/{ccMother}/{ccFather}/{ccOther}','CalificationController@educativeContract')->name('contratoEducativo');
+Route::post('contratoEducativo','CalificationController@educativeContract')->name('contratoEducativo');
 Route::get('/contrato-educativo', function () {
     return view('contratoEducativo');
 });
