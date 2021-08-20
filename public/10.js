@@ -452,6 +452,7 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
       if (this.id_class != 0) {
         axios.get("/api/teacher/module/".concat(this.id_module, "/class/").concat(this.id_class)).then(function (response) {
           _this3.course = response.data;
+          console.log("Datos del curso", response.data);
 
           if (_this3.course.content.length == 0) {
             _this3.course.content = [{

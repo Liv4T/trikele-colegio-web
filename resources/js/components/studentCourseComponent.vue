@@ -462,7 +462,7 @@ export default {
                     )
                     .then(response => {
                         this.course = response.data;
-
+                        console.log("Datos del curso",response.data);
                         if (this.course.content.length == 0) {
                             this.course.content = [
                                 {
