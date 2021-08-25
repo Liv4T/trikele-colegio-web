@@ -55,7 +55,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["id_area", "id_classroom", "id_bimestre"],
+  props: ["user", "id_area", "id_classroom", "id_bimestre"],
   data: function data() {
     return {
       clases: [],
@@ -98,9 +98,16 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.clases = [];
-      axios.get("/editGetWeek/".concat(this.area_id, "/").concat(this.classroom_id, "/").concat(this.bimestre_id)).then(function (response) {
-        _this.clases = response.data;
-      });
+
+      if (this.user && this.user.type_user === 1) {
+        axios.get("/GetWeek").then(function (response) {
+          _this.clases = response.data;
+        });
+      } else {
+        axios.get("/editGetWeek/".concat(this.area_id, "/").concat(this.classroom_id, "/").concat(this.bimestre_id)).then(function (response) {
+          _this.clases = response.data;
+        });
+      }
     },
     getSelectedData: function getSelectedData(showSection, data) {
       if (showSection === "edit") {
@@ -139,8 +146,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm.showSection === "principal"
-    ? _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-sm-12", attrs: { id: "crud" } }, [
+    ? _c("div", { staticClass: "back row justify-content-center" }, [
+        _c("div", { staticClass: "col-sm-10", attrs: { id: "crud" } }, [
           _c("div", { staticClass: "card-container" }, [
             _c("div", { staticClass: "card text-center" }, [
               _vm._m(0),

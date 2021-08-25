@@ -10,7 +10,7 @@
   @if (Auth::user()->type_user == '1')
     <menu-adm></menu-adm>
  @endif
-<teacher-courses></teacher-courses>
+<list-area-component :user="{{ Auth::user() }}"></list-area-component>
 <footers></footers>
 <div class="container">
     <div class="row justify-content-center">

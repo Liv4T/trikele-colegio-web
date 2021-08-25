@@ -1,6 +1,6 @@
 <template>
-  <div v-if="showSection === 'principal'" class="row justify-content-center">
-    <div id="crud" class="col-sm-12">
+  <div v-if="showSection === 'principal'" class="back row justify-content-center">
+    <div id="crud" class="col-sm-10">
       <div class="card-container">
         <div class="card text-center">
           <div class="card-header">
@@ -45,7 +45,7 @@
 </template>
 <script>
   export default {
-    props: ["id_area", "id_classroom","id_bimestre"],
+    props: ["user","id_area", "id_classroom","id_bimestre"],
     data() {
       return {
         clases: [],
@@ -86,11 +86,17 @@
       this.getData();
     },
     methods: {
-      getData() {
+      getData() {        
         this.clases = [];
-        axios.get(`/editGetWeek/${this.area_id}/${this.classroom_id}/${this.bimestre_id}`).then((response) => {
-          this.clases = response.data;
-        });
+        if(this.user && this.user.type_user === 1){
+          axios.get(`/GetWeek`).then((response) => {
+            this.clases = response.data;
+          });
+        }else{
+          axios.get(`/editGetWeek/${this.area_id}/${this.classroom_id}/${this.bimestre_id}`).then((response) => {
+            this.clases = response.data;
+          });
+        }
       },
       getSelectedData(showSection, data) {
         if (showSection === "edit") {

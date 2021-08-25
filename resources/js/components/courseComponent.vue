@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="back">    
     <head>
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/solid.css" integrity="sha384-ioUrHig76ITq4aEJ67dHzTvqjsAP/7IzgwE7lgJcg2r7BRNGYSK0LwSmROzYtgzs" crossorigin="anonymous" />
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/brands.css" integrity="sha384-i2PyM6FMpVnxjRPi0KW/xIS7hkeSznkllv+Hx/MtYDaHA5VcF0yL3KVlvzp8bWjQ" crossorigin="anonymous" />
@@ -7,8 +7,8 @@
     </head>
     <!-- <div class="back"> -->
     <div>
-      <div class="row">
-        <div class="col-md-12 mx-auto">
+      <div class="row justify-content-center">
+        <div class="col-md-10 mx-auto">
           <div class="card-container">
             <div class="card text-center">
               <div class="card-header">
