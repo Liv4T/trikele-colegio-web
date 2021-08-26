@@ -316,7 +316,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 (function () {
   "use strict";
 
@@ -480,7 +479,7 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
     },
     openActivity: function openActivity(id_activity) {
       this.activity = this.course.activities[id_activity];
-      console.log(this.activity);
+      console.log('Actividad a iterar', this.activity);
       /*
                   axios
                       .put(
@@ -1182,8 +1181,7 @@ var render = function() {
                                             staticClass: "btn btn-primary",
                                             attrs: {
                                               href: item_content.content,
-                                              download: "",
-                                              target: "_blank"
+                                              download: ""
                                             },
                                             on: {
                                               click: function($event) {
@@ -1394,6 +1392,8 @@ var render = function() {
                                     ])
                                   ]),
                                   _vm._v(" "),
+                                  _vm.activity.activity_type ==
+                                    "CUESTIONARIO_UNICA_RTA" ||
                                   _vm.activity.activity_type == "CUESTIONARIO"
                                     ? _c("activity-questionary", {
                                         attrs: {

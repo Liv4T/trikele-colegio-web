@@ -150,14 +150,14 @@ class ClassController extends Controller
 
 
 
-        $activities=Activity::where('id_class', $course->id)->where('deleted',0)->get();
+        $activities=Activity::where('id_class', $id_course)->where('deleted',0)->get();
 
 
         foreach($activities as $i_activity => $activity) {
 
             $module=[];
 
-            if($activity->activity_type=='CUESTIONARIO')
+            if($activity->activity_type=='CUESTIONARIO_UNICA_RTA' || $activity->activity_type=='CUESTIONARIO')
             {
 
                 $module=[
