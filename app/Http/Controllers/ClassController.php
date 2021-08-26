@@ -169,18 +169,18 @@ class ClassController extends Controller
                 foreach($activity_questions as $i_question => $question) {
                     $student_response=[];
                     $response='';
-                    if($user->type_user==3)//student
-                    {
-                        $student_response=ActivityQuestionInteraction::where('id_activity_question',$question->id)->where('id_student',$user->id)->where('deleted',0)->first();
+                    // if($user->type_user==3)//student
+                    // {
+                    //     $student_response=ActivityQuestionInteraction::where('id_activity_question',$question->id)->where('id_student',$user->id)->where('deleted',0)->first();
 
-                        if(!isset($student_response))
-                        {
-                            $student_response=['response'=>-1];
-                        }
-                        else{
-                            $response=$student_response->response;
-                        }
-                    }
+                    //     if(!isset($student_response))
+                    //     {
+                    //         $student_response=['response'=>-1];
+                    //     }
+                    //     else{
+                    //         $response=$student_response->response;
+                    //     }
+                    // }
 
                     array_push($module['questions'],[
                         'id'=>$question->id,
@@ -190,8 +190,8 @@ class ClassController extends Controller
                         'valid_answer_index'=>json_decode($question->correct_answer),
                         'justify'=>$question->justify,
                         'state'=>$question->state,
-                        'student_response'=>$student_response,
-                        'response'=>$response
+                        // 'student_response'=>$student_response,
+                        // 'response'=>$response
                     ]);
                 }
             }
