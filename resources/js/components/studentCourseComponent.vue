@@ -147,7 +147,6 @@
                                                     item_content.content_type ==='DOCUMENT'
                                                 "
                                                 download
-                                                target="_blank"
                                                 v-on:click="openDocument(item_content)"
                                                 >Leer documento</a
                                             >
