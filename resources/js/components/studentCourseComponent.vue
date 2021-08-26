@@ -147,6 +147,8 @@
                                                     item_content.content_type ==='DOCUMENT'
                                                 "
                                                 download
+                                                target="_blank"
+                                                v-on:click="openDocument(item_content)"
                                                 >Leer documento</a
                                             >
                                             <a
@@ -427,14 +429,12 @@ export default {
 
             this.activity.completed = complete;
         },
-        openDocument(resource) {                
-            let data = resource.content.split('trikele.com');                
-            this.documentDownloaded = `https://trikele.edu.co${data[1]}`;
-
-            console.log('Documento Descargado',this.documentDownloaded);
-            // try {
-                downloadjs(this.documentDownloaded);
-            // } catch {}
+        openDocument(resource) {
+            try {
+                this.saveInteraction(resource);
+            } catch {
+                console.log("Falló")
+            }
         },
         openLink(resource) {
             try {
@@ -447,10 +447,10 @@ export default {
         },
         saveInteraction(resource) {
             axios
-                .get(
+                .put(
                     `/api/student/module/${this.id_module}/class/${this.id_class}/resource/${resource.id}/interaction`
                 )
-                .then(response => {
+                .then(response => {                    
                     //this.getCourseData();
                 });
         },
