@@ -1,6 +1,6 @@
 <template>
-  <div v-if="showSection === 'principal'" class="back row justify-content-center">
-    <div id="crud" class="col-sm-10">
+  <div v-if="showSection === 'principal'" class="justify-content-center">
+    <div id="crud" class="col-sm-12">
       <div class="card-container">
         <div class="card text-center">
           <div class="card-header">
@@ -79,7 +79,7 @@
         } 
       }
     },
-    mounted() {      
+    mounted() {           
       this.area_id = this.id_area;
       this.classroom_id = this.id_classroom;
       this.bimestre_id = this.id_bimestre;
@@ -88,15 +88,15 @@
     methods: {
       getData() {        
         this.clases = [];
-        if(this.user && this.user.type_user === 1){
-          axios.get(`/GetWeek`).then((response) => {
-            this.clases = response.data;
-          });
-        }else{
+        // if(this.user && this.user.type_user === 1){
+        //   axios.get(`/GetWeek`).then((response) => {
+        //     this.clases = response.data;
+        //   });
+        // }else{
           axios.get(`/editGetWeek/${this.area_id}/${this.classroom_id}/${this.bimestre_id}`).then((response) => {
             this.clases = response.data;
           });
-        }
+        // }
       },
       getSelectedData(showSection, data) {
         if (showSection === "edit") {

@@ -5,26 +5,22 @@
         <div class="card text-center">
           <h3 class="card-header fondo">Trimestre</h3>
           <div class="card-body">
-            <div class="accordion" id="accordionExample">
-              <div class="card" v-for="(area,t) in areas" :key="t">
-                <div class="card-header">
-                  <h2 class="mb-0">
-                    <button class="btn btn-link"
-                      style="color:grey"
-                      type="button"
-                      data-toggle="collapselistA"
-                      :data-target="'#collapselistA'+t"
-                      aria-expanded="false"
-                      @click.prevent="botones(area.id, area.id_classroom)"
-                      aria-controls="collapselistA">
-                      <label>{{ area.text }}</label>
+            <div id="acordeon">
+              <div class="card" v-for="(area, key) in areas" :key="key">
+                <div class="card-header" :id="`head${key}`">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" v-on:click="botones(key, area.id, area.id_classroom)" data-toggle="collapse" :data-target="`#desplegable${key}`" aria-expanded="true" :aria-controls="`desplegable${key}`">
+                      {{area.text}}
                     </button>
-                  </h2>
+                  </h5>
                 </div>
-                <div :id="'collapselistA'+t" class="collapselistA hide" aria-labelledby="heading" data-parent="#accordionExample">
-                  <bimestre-list-component :id_area="area.id" :id_classroom="area.id_classroom" :type_u="user.type_user"></bimestre-list-component>
+
+                <div :id="`desplegable${key}`" class="collapse hide" :aria-labelledby="`head${key}`" data-parent="#acordeon">
+                  <div class="card-body" v-if="keyShow === key">                    
+                      <bimestre-list-component :id_area="area_id" :id_classroom="classroom_id" :type_u="user.type_user" :user="user"></bimestre-list-component>
+                  </div>
                 </div>
-              </div>
+              </div>              
             </div>
           </div>
         </div>
@@ -41,11 +37,10 @@ export default {
   props:["user"],
   data() {
     return {
-      week: [],
-      semanal: false,
-      general: false,
-      anual: [],
       areas: [],
+      area_id:"",
+      classroom_id:"",
+      keyShow: null
     };
   },
 
@@ -56,31 +51,10 @@ export default {
     });
   },
   methods: {
-    botones(area, classroom) {
-      var urlsl =
-        window.location.origin +
-        "/coursePlanification/" +
-        area +
-        "/" +
-        classroom;
-      axios.get(urlsl).then((response) => {
-        this.anual = response.data;
-        if (this.anual.quaterly.length > 0) {
-          this.general = true;
-        } else {
-          this.general = false;
-        }
-      });
-     /* var urlsel = "editGetWeek";
-      axios.get(urlsel).then((response) => {
-        this.week = response.data;
-
-        if (this.week.id_area == area && this.week.id_classroom == classroom) {
-          this.semanal = true;
-        } else {
-          this.semanal = false;
-        }
-      });*/
+    botones(key, area, classroom) {
+      this.keyShow = key
+      this.area_id = area;
+      this.classroom_id = classroom;
     },
   },
 };
