@@ -365,7 +365,7 @@ class ClassController extends Controller
         $g_index=0;
         $g_is_qualified=true;
 
-        if($data['activity_type']=='CUESTIONARIO')
+        if($data['activity_type']=='CUESTIONARIO' || $data['activity_type']=='CUESTIONARIO_UNICA_RTA')
         {
 
             foreach($data['module']['questions'] as $i_question => $question) {
@@ -581,7 +581,15 @@ class ClassController extends Controller
 
         if(isset($data['interaction']) && isset($data['interaction']['id']))
         {
-            ActivityInteraction::where('id',$data['interaction']['id'])->update(array('latest_access_date'=>date("Y-m-d H:i"), 'score'=>($g_score/($g_index>0?$g_index:1))*$base_score,'state'=>($g_is_qualified?3:2),'deleted'=>0,'updated_user'=>$auth->id));
+            ActivityInteraction::where('id',$data['interaction']['id'])->update(
+                array(
+                    'latest_access_date'=>date("Y-m-d H:i"), 
+                    'score'=>($g_score/($g_index>0?$g_index:1))*$base_score,
+                    'state'=>($g_is_qualified?3:2),
+                    'deleted'=>0,
+                    'updated_user'=>$auth->id,
+                    'is_qualified' => $is_qualified?2:1
+                ));
         }
         else{
             ActivityInteraction::create([
@@ -591,7 +599,8 @@ class ClassController extends Controller
                 'score'=>($g_score/($g_index>0?$g_index:1))*$base_score,
                 'state'=>($g_is_qualified?3:2),
                 'deleted'=>0,
-                'updated_user'=>$auth->id
+                'updated_user'=>$auth->id,
+                'is_qualified' => $is_qualified?2:1
             ]);
         }
 
