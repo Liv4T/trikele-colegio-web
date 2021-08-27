@@ -95,7 +95,7 @@ class EventsController extends Controller
                         "dateFrom" => $evento->date_from,
                         "dateTo" => $evento->date_to,
                         "hangout" => $evento->url,
-                        "area" => $area->name,
+                        "area" => $area ? $area->name : '',
                         "classroom" => $classroom ? $classroom->name : '',
                     ]);
 
