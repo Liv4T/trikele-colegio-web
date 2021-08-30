@@ -22,7 +22,7 @@
                     <div>
                         <div v-if="activetab === 1" class="tabcontent">
                             <div v-if="Area_id !=='' ">
-                                <course-component :id_area="Area_id" :id_classroom="idClassroom"></course-component>
+                                <course-component :id_area="Area_id" :id_classroom="idClassroom" :user="user"></course-component>
                             </div>
                         </div>
                         <div v-if="activetab === 2" class="tabcontent">
@@ -32,7 +32,7 @@
                         </div>
                         <div v-if="activetab === 3" class="tabcontent">
                             <div v-if="Area_id !=='' ">
-                                <notasd-component :id_area="Area_id" :id_classroom="idClassroom"></notasd-component>
+                                <notasd-component :id_area="Area_id" :id_classroom="idClassroom" :user="user"></notasd-component>
                             </div>
                         </div>
                         <div v-if="activetab === 4" class="tabcontent">

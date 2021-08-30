@@ -1,5 +1,5 @@
 <template>
-  <div class="back">    
+  <div :class="user && user.type_user === 1 ? 'back' : ''">    
     <head>
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/solid.css" integrity="sha384-ioUrHig76ITq4aEJ67dHzTvqjsAP/7IzgwE7lgJcg2r7BRNGYSK0LwSmROzYtgzs" crossorigin="anonymous" />
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/brands.css" integrity="sha384-i2PyM6FMpVnxjRPi0KW/xIS7hkeSznkllv+Hx/MtYDaHA5VcF0yL3KVlvzp8bWjQ" crossorigin="anonymous" />
@@ -8,7 +8,7 @@
     <!-- <div class="back"> -->
     <div>
       <div class="row justify-content-center">
-        <div class="col-md-10 mx-auto">
+        <div :class="user && user.type_user === 1 ? 'col-md-11 mx-auto' : 'col-md-12 mx-auto'">
           <div class="card-container">
             <div class="card text-center">
               <div class="card-header">
@@ -89,7 +89,7 @@
   import "vue-form-wizard/dist/vue-form-wizard.min.css";
   Vue.use(VueFormWizard);
   export default {
-    props: ["id_area", "id_classroom"],
+    props: ["id_area", "id_classroom","user"],
     data() {
       return {
         serialLocalStorage: "9f284918-f0f6-4369-a368-eaf6321b6807",

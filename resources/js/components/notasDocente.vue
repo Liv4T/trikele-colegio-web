@@ -1,7 +1,7 @@
 <template>
-  <div class="back">
+  <div :class="user && user.type_user === 1 ? 'back' : ''">
     <div class="row justify-content-center">
-      <div id="crud" class="col-sm-10">
+      <div id="crud" :class="user && user.type_user === 1 ? 'col-sm-10' : 'col-sm-12'">
           <div class="card-container">
         <div class="card text-center">
            <div class="card-header">
@@ -73,7 +73,7 @@
 </template>
 <script>
 export default {
-  props:["id_area","id_classroom"],
+  props:["id_area","id_classroom","user"],
   data() {
     return {
       students: [],
