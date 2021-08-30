@@ -860,3 +860,13 @@ Route::post('contratoEducativo','CalificationController@educativeContract')->nam
 Route::get('/contrato-educativo', function () {
     return view('contratoEducativo');
 });
+
+Route::get('/trimestre/{id_area}/{id_classroom}', function (String $id_area, String $id_classroom) {
+    return view('trimestre')->with('id_area', $id_area)->with('id_classroom', $id_classroom);
+});
+
+Route::get('/notesStudentsADM', function(){
+    return view('notasADM');
+});
+
+Route::resource('progressAdminStudent','ProgressStudentAdminController');

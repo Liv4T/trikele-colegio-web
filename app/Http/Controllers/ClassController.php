@@ -150,14 +150,14 @@ class ClassController extends Controller
 
 
 
-        $activities=Activity::where('id_class', $course->id)->where('deleted',0)->get();
+        $activities=Activity::where('id_class', $id_course)->where('deleted',0)->get();
 
 
         foreach($activities as $i_activity => $activity) {
 
             $module=[];
 
-            if($activity->activity_type=='CUESTIONARIO')
+            if($activity->activity_type=='CUESTIONARIO_UNICA_RTA' || $activity->activity_type=='CUESTIONARIO')
             {
 
                 $module=[
@@ -169,18 +169,18 @@ class ClassController extends Controller
                 foreach($activity_questions as $i_question => $question) {
                     $student_response=[];
                     $response='';
-                    if($user->type_user==3)//student
-                    {
-                        $student_response=ActivityQuestionInteraction::where('id_activity_question',$question->id)->where('id_student',$user->id)->where('deleted',0)->first();
+                    // if($user->type_user==3)//student
+                    // {
+                    //     $student_response=ActivityQuestionInteraction::where('id_activity_question',$question->id)->where('id_student',$user->id)->where('deleted',0)->first();
 
-                        if(!isset($student_response))
-                        {
-                            $student_response=['response'=>-1];
-                        }
-                        else{
-                            $response=$student_response->response;
-                        }
-                    }
+                    //     if(!isset($student_response))
+                    //     {
+                    //         $student_response=['response'=>-1];
+                    //     }
+                    //     else{
+                    //         $response=$student_response->response;
+                    //     }
+                    // }
 
                     array_push($module['questions'],[
                         'id'=>$question->id,
@@ -190,8 +190,8 @@ class ClassController extends Controller
                         'valid_answer_index'=>json_decode($question->correct_answer),
                         'justify'=>$question->justify,
                         'state'=>$question->state,
-                        'student_response'=>$student_response,
-                        'response'=>$response
+                        // 'student_response'=>$student_response,
+                        // 'response'=>$response
                     ]);
                 }
             }
@@ -365,7 +365,7 @@ class ClassController extends Controller
         $g_index=0;
         $g_is_qualified=true;
 
-        if($data['activity_type']=='CUESTIONARIO')
+        if($data['activity_type']=='CUESTIONARIO' || $data['activity_type']=='CUESTIONARIO_UNICA_RTA')
         {
 
             foreach($data['module']['questions'] as $i_question => $question) {
@@ -581,7 +581,15 @@ class ClassController extends Controller
 
         if(isset($data['interaction']) && isset($data['interaction']['id']))
         {
-            ActivityInteraction::where('id',$data['interaction']['id'])->update(array('latest_access_date'=>date("Y-m-d H:i"), 'score'=>($g_score/($g_index>0?$g_index:1))*$base_score,'state'=>($g_is_qualified?3:2),'deleted'=>0,'updated_user'=>$auth->id));
+            ActivityInteraction::where('id',$data['interaction']['id'])->update(
+                array(
+                    'latest_access_date'=>date("Y-m-d H:i"), 
+                    'score'=>($g_score/($g_index>0?$g_index:1))*$base_score,
+                    'state'=>($g_is_qualified?3:2),
+                    'deleted'=>0,
+                    'updated_user'=>$auth->id,
+                    'is_qualified' => $is_qualified?2:1
+                ));
         }
         else{
             ActivityInteraction::create([
@@ -591,7 +599,8 @@ class ClassController extends Controller
                 'score'=>($g_score/($g_index>0?$g_index:1))*$base_score,
                 'state'=>($g_is_qualified?3:2),
                 'deleted'=>0,
-                'updated_user'=>$auth->id
+                'updated_user'=>$auth->id,
+                'is_qualified' => $is_qualified?2:1
             ]);
         }
 

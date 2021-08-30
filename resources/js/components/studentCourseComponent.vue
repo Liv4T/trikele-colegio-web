@@ -147,6 +147,7 @@
                                                     item_content.content_type ==='DOCUMENT'
                                                 "
                                                 download
+                                                v-on:click="openDocument(item_content)"
                                                 >Leer documento</a
                                             >
                                             <a
@@ -247,7 +248,7 @@
                                                     ></textarea>
                                                 </div>
                                             </div>
-                                            <activity-questionary v-if="activity.activity_type=='CUESTIONARIO'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-questionary>
+                                            <activity-questionary v-if="activity.activity_type=='CUESTIONARIO_UNICA_RTA' || activity.activity_type =='CUESTIONARIO'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-questionary>
                                             <activity-complete-sentence v-if="activity.activity_type=='COMPLETAR_ORACION'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-complete-sentence>
                                             <activity-relationship v-if="activity.activity_type=='RELACION'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-relationship>
                                             <activity-crossword v-if="activity.activity_type=='CRUCIGRAMA'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-crossword>
@@ -427,14 +428,12 @@ export default {
 
             this.activity.completed = complete;
         },
-        openDocument(resource) {                
-            let data = resource.content.split('trikele.com');                
-            this.documentDownloaded = `https://trikele.edu.co${data[1]}`;
-
-            console.log('Documento Descargado',this.documentDownloaded);
-            // try {
-                downloadjs(this.documentDownloaded);
-            // } catch {}
+        openDocument(resource) {
+            try {
+                this.saveInteraction(resource);
+            } catch {
+                console.log("Falló")
+            }
         },
         openLink(resource) {
             try {
@@ -447,10 +446,10 @@ export default {
         },
         saveInteraction(resource) {
             axios
-                .get(
+                .put(
                     `/api/student/module/${this.id_module}/class/${this.id_class}/resource/${resource.id}/interaction`
                 )
-                .then(response => {
+                .then(response => {                    
                     //this.getCourseData();
                 });
         },
@@ -462,7 +461,7 @@ export default {
                     )
                     .then(response => {
                         this.course = response.data;
-                        console.log(response.data);
+                        console.log("Datos del curso",response.data);
                         if (this.course.content.length == 0) {
                             this.course.content = [
                                 {
@@ -492,7 +491,7 @@ export default {
         },
         openActivity(id_activity) {
             this.activity = this.course.activities[id_activity];
-            console.log(this.activity);
+            console.log('Actividad a iterar',this.activity);
 /*
             axios
                 .put(

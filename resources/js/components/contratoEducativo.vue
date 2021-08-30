@@ -127,9 +127,10 @@
                 days:this.days,
                 month:this.month,
             }).then((response)=>{
-                console.log(response.data)                
-                download(response.data, "Contrato Educativo.pdf");
-                toastr.success('Documento Descargado, recuerda leerlo y completarlo');
+                if(response.data){
+                    download(response.data, "Contrato Educativo.pdf");
+                    toastr.success('Documento Descargado, recuerda leerlo y completarlo');
+                }
             }).catch((error)=>{
                 console.log(error);
                 toastr.info('Ha ocurrido un error, intenta de nuevo mas tarde');

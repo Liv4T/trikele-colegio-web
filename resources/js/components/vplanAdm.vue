@@ -35,6 +35,11 @@
                   >General</a>
 
                   <a
+                    :href="'/trimestre/'+ area.id +'/'+ area.id_classroom"
+                    class="btn btn-warning"
+                  >Trimestral</a>
+
+                  <a
                     :href="'/porcentaje/'+ area.id +'/'+ area.id_classroom"
                     class="btn btn-warning"
                   >Porcentaje de notas</a>

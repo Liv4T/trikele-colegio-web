@@ -234,4 +234,8 @@ Vue.component("bimestre-list-component", ()=> import("./components/bimestreList.
 Vue.component("inicio-materias-component", ()=>import("./components/materiasEstudiantes.vue"));
 Vue.component("contrato-educativo", ()=>import("./components/contratoEducativo.vue"));
 
+Vue.component("list-area-component", ()=>import("./components/listAreasAdm.vue"));
+
+Vue.component("student-progress-adm", ()=>import("./components/notasAdminStudets.vue"));
+
 const app = new Vue({el: "#app", data: {}, store});

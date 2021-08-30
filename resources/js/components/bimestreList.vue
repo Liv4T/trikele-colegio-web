@@ -14,13 +14,13 @@
                                             </button>
                                         </h5>
                                     </div>
-                                    <div v-if="type_u === 2">
+                                    <div v-if="type_u === 1 || type_u === 2">
                                         <div :id="`collapse${key}`" class="collapse hide" :aria-labelledby="`heading${key}`" data-parent="#accordion">
                                             <div class="card-body" v-if="id_bimestre_to_courses !== null">
-                                                <teacher-courses :id_area="idArea" :id_classroom="idClassroom" :id_bimestre="id_bimestre_to_courses"></teacher-courses>
+                                                <teacher-courses :user="user" :id_area="idArea" :id_classroom="idClassroom" :id_bimestre="id_bimestre_to_courses"></teacher-courses>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>                                    
                                     <div v-else-if="type_u === 3">
                                          <div :id="`collapse${key}`" class="collapse hide" :aria-labelledby="`heading${key}`" data-parent="#accordion">
                                             <div class="card-body" v-if="id_bimestre_to_courses !== null">
@@ -40,7 +40,7 @@
 <script>
 
 export default {
-    props:["id_area","id_classroom","type_u"],
+    props:["id_area","id_classroom","type_u", "user"],
     data() {
         return {
             bimestres:[],
@@ -55,7 +55,6 @@ export default {
     mounted() {
         this.idArea = this.id_area;
         this.idClassroom =this.id_classroom;
-        console.log("Usuario: ",this.type_u)
         this.getData();
     },
     watch:{
@@ -72,9 +71,9 @@ export default {
         }
     },
     methods: {
-        getData(){
+        getData(){            
             axios.get('/bimestres').then((response) => {
-                this.bimestres = response.data;
+                this.bimestres = response.data;                
             });
         },   
         sendId(idBim){

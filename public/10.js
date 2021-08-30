@@ -315,6 +315,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 (function () {
   "use strict";
 
@@ -427,23 +428,23 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
       this.activity.completed = complete;
     },
     openDocument: function openDocument(resource) {
-      var data = resource.content.split('trikele.com');
-      this.documentDownloaded = "https://trikele.edu.co".concat(data[1]);
-      console.log('Documento Descargado', this.documentDownloaded); // try {
-
-      downloadjs__WEBPACK_IMPORTED_MODULE_2___default()(this.documentDownloaded); // } catch {}
+      try {
+        this.saveInteraction(resource);
+      } catch (_unused) {
+        console.log("Falló");
+      }
     },
     openLink: function openLink(resource) {
       try {
         this.saveInteraction(resource);
         window.open(resource.content);
-      } catch (_unused) {}
+      } catch (_unused2) {}
     },
     playVideo: function playVideo(resource) {
       this.saveInteraction(resource);
     },
     saveInteraction: function saveInteraction(resource) {
-      axios.get("/api/student/module/".concat(this.id_module, "/class/").concat(this.id_class, "/resource/").concat(resource.id, "/interaction")).then(function (response) {//this.getCourseData();
+      axios.put("/api/student/module/".concat(this.id_module, "/class/").concat(this.id_class, "/resource/").concat(resource.id, "/interaction")).then(function (response) {//this.getCourseData();
       });
     },
     getCourseData: function getCourseData() {
@@ -452,7 +453,7 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
       if (this.id_class != 0) {
         axios.get("/api/teacher/module/".concat(this.id_module, "/class/").concat(this.id_class)).then(function (response) {
           _this3.course = response.data;
-          console.log(response.data);
+          console.log("Datos del curso", response.data);
 
           if (_this3.course.content.length == 0) {
             _this3.course.content = [{
@@ -478,7 +479,7 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
     },
     openActivity: function openActivity(id_activity) {
       this.activity = this.course.activities[id_activity];
-      console.log(this.activity);
+      console.log('Actividad a iterar', this.activity);
       /*
                   axios
                       .put(
@@ -1181,6 +1182,13 @@ var render = function() {
                                             attrs: {
                                               href: item_content.content,
                                               download: ""
+                                            },
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.openDocument(
+                                                  item_content
+                                                )
+                                              }
                                             }
                                           },
                                           [_vm._v("Leer documento")]
@@ -1384,6 +1392,8 @@ var render = function() {
                                     ])
                                   ]),
                                   _vm._v(" "),
+                                  _vm.activity.activity_type ==
+                                    "CUESTIONARIO_UNICA_RTA" ||
                                   _vm.activity.activity_type == "CUESTIONARIO"
                                     ? _c("activity-questionary", {
                                         attrs: {
