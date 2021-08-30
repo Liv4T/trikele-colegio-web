@@ -359,7 +359,8 @@ var render = function() {
                           _c("course-component", {
                             attrs: {
                               id_area: _vm.Area_id,
-                              id_classroom: _vm.idClassroom
+                              id_classroom: _vm.idClassroom,
+                              user: _vm.user
                             }
                           })
                         ],
@@ -397,7 +398,8 @@ var render = function() {
                           _c("notasd-component", {
                             attrs: {
                               id_area: _vm.Area_id,
-                              id_classroom: _vm.idClassroom
+                              id_classroom: _vm.idClassroom,
+                              user: _vm.user
                             }
                           })
                         ],

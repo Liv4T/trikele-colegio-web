@@ -39,6 +39,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 $(".collapselistA").on("show.bs.collapselistA", function () {
   $(".collapselistA.in").collapselistA("hide");
 });
@@ -49,7 +54,8 @@ $(".collapselistA").on("show.bs.collapselistA", function () {
       areas: [],
       area_id: "",
       classroom_id: "",
-      keyShow: null
+      keyShow: null,
+      filter: ""
     };
   },
   mounted: function mounted() {
@@ -65,6 +71,20 @@ $(".collapselistA").on("show.bs.collapselistA", function () {
       this.keyShow = key;
       this.area_id = area;
       this.classroom_id = classroom;
+    }
+  },
+  computed: {
+    filteredRows: function filteredRows() {
+      var _this2 = this;
+
+      if (!this.areas.filter) return false;
+      return this.areas.filter(function (row) {
+        var name = row.text.toString().toLowerCase();
+
+        var searchTerm = _this2.filter.toLowerCase();
+
+        return name.includes(searchTerm);
+      });
     }
   }
 });
@@ -139,13 +159,39 @@ var render = function() {
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "col-sm-10", attrs: { id: "crud" } }, [
         _c("div", { staticClass: "card text-center" }, [
-          _c("h3", { staticClass: "card-header fondo" }, [_vm._v("Trimestre")]),
+          _c("h3", { staticClass: "card-header fondo" }, [
+            _vm._v("\n                Trimestre\n                ")
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "mb-2" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.filter,
+                    expression: "filter"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", placeholder: "Buscar Trimestre" },
+                domProps: { value: _vm.filter },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.filter = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
             _c(
               "div",
               { attrs: { id: "acordeon" } },
-              _vm._l(_vm.areas, function(area, key) {
+              _vm._l(_vm.filteredRows, function(area, key) {
                 return _c("div", { key: key, staticClass: "card" }, [
                   _c(
                     "div",
@@ -174,9 +220,9 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                    " +
+                              "\n                                    " +
                                 _vm._s(area.text) +
-                                "\n                  "
+                                "\n                                    "
                             )
                           ]
                         )

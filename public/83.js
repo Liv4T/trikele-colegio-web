@@ -95,7 +95,7 @@ $(function () {
 
 Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["id_area", "id_classroom"],
+  props: ["id_area", "id_classroom", "user"],
   data: function data() {
     return {
       serialLocalStorage: "9f284918-f0f6-4369-a368-eaf6321b6807",
@@ -303,93 +303,199 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "back" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-10 mx-auto" }, [
-          _c("div", { staticClass: "card-container" }, [
-            _c("div", { staticClass: "card text-center" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c("span", { staticClass: "classroom-label" }, [
-                _vm._v(_vm._s(_vm.fillC.classroom_name))
-              ]),
-              _vm._v(" "),
-              _c(
-                "span",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: !_vm.isSynchronized,
-                      expression: "!isSynchronized"
-                    }
-                  ]
-                },
-                [_vm._v("(Hay cambios que no han sido guardados)")]
-              ),
-              _vm._v(" "),
-              _c(
-                "form",
-                { staticClass: "needs-validation", attrs: { novalidate: "" } },
-                [
+  return _c(
+    "div",
+    { class: _vm.user && _vm.user.type_user === 1 ? "back" : "" },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", [
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c(
+            "div",
+            {
+              class:
+                _vm.user && _vm.user.type_user === 1
+                  ? "col-md-11 mx-auto"
+                  : "col-md-12 mx-auto"
+            },
+            [
+              _c("div", { staticClass: "card-container" }, [
+                _c("div", { staticClass: "card text-center" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "classroom-label" }, [
+                    _vm._v(_vm._s(_vm.fillC.classroom_name))
+                  ]),
+                  _vm._v(" "),
                   _c(
-                    "form-wizard",
+                    "span",
                     {
-                      attrs: {
-                        title: "",
-                        subtitle: "",
-                        color: "#ffc107",
-                        "next-button-text": "Siguiente",
-                        "back-button-text": "Atrás",
-                        "finish-button-text": "Guardar y enviar"
-                      },
-                      on: { "on-complete": _vm.createCourses }
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.isSynchronized,
+                          expression: "!isSynchronized"
+                        }
+                      ]
+                    },
+                    [_vm._v("(Hay cambios que no han sido guardados)")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "form",
+                    {
+                      staticClass: "needs-validation",
+                      attrs: { novalidate: "" }
                     },
                     [
-                      _vm.isLoading
-                        ? _c("span", {
-                            staticClass: "spinner-border spinner-border",
-                            attrs: { role: "status", "aria-hidden": "true" }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
                       _c(
-                        "tab-content",
-                        { attrs: { title: "Anual" } },
-                        _vm._l(_vm.inputs1, function(input1, t) {
-                          return _c(
-                            "div",
-                            { key: t, staticClass: "form-group mx-auto" },
-                            [
-                              _c(
+                        "form-wizard",
+                        {
+                          attrs: {
+                            title: "",
+                            subtitle: "",
+                            color: "#ffc107",
+                            "next-button-text": "Siguiente",
+                            "back-button-text": "Atrás",
+                            "finish-button-text": "Guardar y enviar"
+                          },
+                          on: { "on-complete": _vm.createCourses }
+                        },
+                        [
+                          _vm.isLoading
+                            ? _c("span", {
+                                staticClass: "spinner-border spinner-border",
+                                attrs: { role: "status", "aria-hidden": "true" }
+                              })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c(
+                            "tab-content",
+                            { attrs: { title: "Anual" } },
+                            _vm._l(_vm.inputs1, function(input1, t) {
+                              return _c(
                                 "div",
-                                { staticClass: "classroom-planning-section" },
+                                { key: t, staticClass: "form-group mx-auto" },
                                 [
-                                  _c("strong", [_vm._v("Logro:")]),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "classroom-planning-section"
+                                    },
+                                    [
+                                      _c("strong", [_vm._v("Logro:")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: input1.porcentaje,
+                                            expression: "input1.porcentaje"
+                                          }
+                                        ],
+                                        staticClass:
+                                          "form-control form-control-sm",
+                                        staticStyle: { width: "50px" },
+                                        attrs: { type: "number" },
+                                        domProps: { value: input1.porcentaje },
+                                        on: {
+                                          change: function($event) {
+                                            return _vm.annualContentUpdateEvent(
+                                              $event,
+                                              t,
+                                              "inputs1"
+                                            )
+                                          },
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              input1,
+                                              "porcentaje",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v("%\n                      "),
+                                      _c("span", [
+                                        _c(
+                                          "a",
+                                          {
+                                            directives: [
+                                              {
+                                                name: "show",
+                                                rawName: "v-show",
+                                                value:
+                                                  t > 0 &&
+                                                  _vm.inputs1_saved.length <= t,
+                                                expression:
+                                                  "t > 0 && inputs1_saved.length <= t"
+                                              }
+                                            ],
+                                            staticClass: "badge badge-danger",
+                                            attrs: { href: "#" },
+                                            on: {
+                                              click: function($event) {
+                                                $event.preventDefault()
+                                                return _vm.remove1(t)
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("-")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "a",
+                                          {
+                                            directives: [
+                                              {
+                                                name: "show",
+                                                rawName: "v-show",
+                                                value:
+                                                  t == _vm.inputs1.length - 1,
+                                                expression:
+                                                  "t == inputs1.length - 1"
+                                              }
+                                            ],
+                                            staticClass: "badge badge-primary",
+                                            attrs: { href: "#" },
+                                            on: {
+                                              click: function($event) {
+                                                $event.preventDefault()
+                                                return _vm.add1(t)
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("+")]
+                                        )
+                                      ])
+                                    ]
+                                  ),
                                   _vm._v(" "),
-                                  _c("input", {
+                                  _c("textarea", {
                                     directives: [
                                       {
                                         name: "model",
                                         rawName: "v-model",
-                                        value: input1.porcentaje,
-                                        expression: "input1.porcentaje"
+                                        value: input1.logro,
+                                        expression: "input1.logro"
                                       }
                                     ],
-                                    staticClass: "form-control form-control-sm",
-                                    staticStyle: { width: "50px" },
-                                    attrs: { type: "number" },
-                                    domProps: { value: input1.porcentaje },
+                                    staticClass: "form-control",
+                                    attrs: { name: "welcome", required: "" },
+                                    domProps: { value: input1.logro },
                                     on: {
                                       change: function($event) {
                                         return _vm.annualContentUpdateEvent(
                                           $event,
                                           t,
-                                          "inputs1"
+                                          "inputs1",
+                                          "logro"
                                         )
                                       },
                                       input: function($event) {
@@ -398,121 +504,37 @@ var render = function() {
                                         }
                                         _vm.$set(
                                           input1,
-                                          "porcentaje",
+                                          "logro",
                                           $event.target.value
                                         )
                                       }
                                     }
                                   }),
-                                  _vm._v("%\n                      "),
-                                  _c("span", [
-                                    _c(
-                                      "a",
-                                      {
-                                        directives: [
-                                          {
-                                            name: "show",
-                                            rawName: "v-show",
-                                            value:
-                                              t > 0 &&
-                                              _vm.inputs1_saved.length <= t,
-                                            expression:
-                                              "t > 0 && inputs1_saved.length <= t"
-                                          }
-                                        ],
-                                        staticClass: "badge badge-danger",
-                                        attrs: { href: "#" },
-                                        on: {
-                                          click: function($event) {
-                                            $event.preventDefault()
-                                            return _vm.remove1(t)
-                                          }
-                                        }
-                                      },
-                                      [_vm._v("-")]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "a",
-                                      {
-                                        directives: [
-                                          {
-                                            name: "show",
-                                            rawName: "v-show",
-                                            value: t == _vm.inputs1.length - 1,
-                                            expression:
-                                              "t == inputs1.length - 1"
-                                          }
-                                        ],
-                                        staticClass: "badge badge-primary",
-                                        attrs: { href: "#" },
-                                        on: {
-                                          click: function($event) {
-                                            $event.preventDefault()
-                                            return _vm.add1(t)
-                                          }
-                                        }
-                                      },
-                                      [_vm._v("+")]
-                                    )
-                                  ])
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "invalid-feedback" },
+                                    [_vm._v("Please fill out this field")]
+                                  )
                                 ]
-                              ),
-                              _vm._v(" "),
-                              _c("textarea", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: input1.logro,
-                                    expression: "input1.logro"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: { name: "welcome", required: "" },
-                                domProps: { value: input1.logro },
-                                on: {
-                                  change: function($event) {
-                                    return _vm.annualContentUpdateEvent(
-                                      $event,
-                                      t,
-                                      "inputs1",
-                                      "logro"
-                                    )
-                                  },
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      input1,
-                                      "logro",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "invalid-feedback" }, [
-                                _vm._v("Please fill out this field")
-                              ])
-                            ]
+                              )
+                            }),
+                            0
                           )
-                        }),
-                        0
+                        ],
+                        1
                       )
                     ],
                     1
                   )
-                ],
-                1
-              )
-            ])
-          ])
+                ])
+              ])
+            ]
+          )
         ])
       ])
-    ])
-  ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {

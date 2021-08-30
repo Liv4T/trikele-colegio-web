@@ -6,11 +6,13 @@
                     <div class="card text-center">
                         <div class="card-header">
                             <h3>Avance de Estudiantes</h3>
-                        </div>
-
+                        </div>                        
                         <div class="card-body">
+                            <div class="mb-2">                            
+                                <input type="text" placeholder="Buscar Grado" class="form-control" v-model="filter" />
+                            </div>           
                             <div id="accordion">
-                                <div class="card" v-for="(grade, t) in grades" :key="t">
+                                <div class="card" v-for="(grade, t) in filteredRows" :key="t">
                                     <div class="card-header" :id="`heading${t}`">
                                         <h5 class="mb-0">
                                             <button class="btn btn-link" v-on:click="()=>getStudentsGrade(grade.id)" data-toggle="collapse" :data-target="`#collapse${t}`" aria-expanded="true" :aria-controls="`collapse${t}`">
@@ -38,9 +40,9 @@
                                                             <div class="card" v-for="(area, l) in grade.areas" :key="l">
                                                                 <div class="card-header" :id="`areasHeadingOne${k}${grade.id}${student.id}`">
                                                                     <h5 class="mb-0">
-                                                                        <button class="btn btn-primary" v-on:click="getIds(area.id, student.id, grade.id)">
+                                                                        <a :href="`docente/area/${area.id}/curso/${grade.id}/estudiante/${student.id}`" class="btn btn-primary">
                                                                             {{area.name}}
-                                                                        </button>
+                                                                        </a>
                                                                     </h5>
                                                                 </div>                                                                
                                                             </div>
@@ -66,7 +68,8 @@
         data() {
             return {
                 grades:[],
-                students:[]
+                students:[],
+                filter:''
             };
         },
         mounted() {
@@ -75,8 +78,7 @@
         methods: {
             getGrades(){
                 axios.get('getAllGrades').then((response)=>{        
-                    this.grades = response.data;
-                    console.log('Grados: ',response.data);
+                    this.grades = response.data;                    
                 })
             },
 
@@ -85,12 +87,19 @@
                     this.students = response.data;
                 })
             },
+        },
 
-            getIds(area_id, student_id, grade_id){
-                console.log('id_area: ',area_id);
-                console.log('id_student: ',student_id);
-                console.log('id_grade: ',grade_id);
-            }
+        computed: {
+            filteredRows() {
+                if(!this.grades.filter) return false;
+
+                return this.grades.filter((row) => {
+                    const name = row.grade.toString().toLowerCase();
+                    const searchTerm = this.filter.toLowerCase();
+
+                    return name.includes(searchTerm);
+                });
+            },
         },
     };
 </script>

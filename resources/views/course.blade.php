@@ -11,7 +11,7 @@
   @if (Auth::user()->type_user == '1')
     <menu-adm></menu-adm>
  @endif
-<course-component :id_area="{{ $id_area }}" :id_classroom="{{ $id_classroom }}"></course-component>
+<course-component :id_area="{{ $id_area }}" :id_classroom="{{ $id_classroom }}" :user="{{Auth::user()}}"></course-component>
  <footers></footers>
 <div class="container">
 
