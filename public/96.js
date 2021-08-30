@@ -74,6 +74,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -219,135 +233,155 @@ var render = function() {
                       },
                       [
                         _c("div", { staticClass: "card-body" }, [
-                          _c(
-                            "div",
-                            { attrs: { id: "accordion1" } },
-                            _vm._l(_vm.students, function(student, k) {
-                              return _c(
-                                "div",
-                                { key: k, staticClass: "card" },
-                                [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass: "card-header",
-                                      attrs: {
-                                        id: "studentHeadingOne" + k + grade.id
-                                      }
-                                    },
-                                    [
-                                      _c("h5", { staticClass: "mb-0" }, [
+                          _c("div", { attrs: { id: "accordion1" } }, [
+                            _vm.students.length > 0
+                              ? _c(
+                                  "div",
+                                  _vm._l(_vm.students, function(student, k) {
+                                    return _c(
+                                      "div",
+                                      { key: k, staticClass: "card" },
+                                      [
                                         _c(
-                                          "button",
+                                          "div",
                                           {
-                                            staticClass: "btn btn-link",
+                                            staticClass: "card-header",
                                             attrs: {
-                                              "data-toggle": "collapse",
-                                              "data-target":
-                                                "#collapseStudents" +
-                                                k +
-                                                grade.id,
-                                              "aria-expanded": "true",
-                                              "aria-controls":
-                                                "collapseStudents" +
+                                              id:
+                                                "studentHeadingOne" +
                                                 k +
                                                 grade.id
                                             }
                                           },
                                           [
-                                            _vm._v(
-                                              "\n                                                            " +
-                                                _vm._s(
-                                                  student.name +
-                                                    " " +
-                                                    student.last_name
-                                                ) +
-                                                "\n                                                        "
-                                            )
-                                          ]
-                                        )
-                                      ])
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass: "collapse hide",
-                                      attrs: {
-                                        id: "collapseStudents" + k + grade.id,
-                                        "aria-labelledby":
-                                          "studentHeadingOne" + k + grade.id,
-                                        "data-parent": "#accordion1"
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "div",
-                                        { staticClass: "card-body" },
-                                        _vm._l(grade.areas, function(area, l) {
-                                          return _c(
-                                            "div",
-                                            { key: l, staticClass: "card" },
-                                            [
+                                            _c("h5", { staticClass: "mb-0" }, [
                                               _c(
-                                                "div",
+                                                "button",
                                                 {
-                                                  staticClass: "card-header",
+                                                  staticClass: "btn btn-link",
                                                   attrs: {
-                                                    id:
-                                                      "areasHeadingOne" +
+                                                    "data-toggle": "collapse",
+                                                    "data-target":
+                                                      "#collapseStudents" +
                                                       k +
-                                                      grade.id +
-                                                      student.id
+                                                      grade.id,
+                                                    "aria-expanded": "true",
+                                                    "aria-controls":
+                                                      "collapseStudents" +
+                                                      k +
+                                                      grade.id
                                                   }
                                                 },
                                                 [
-                                                  _c(
-                                                    "h5",
-                                                    { staticClass: "mb-0" },
-                                                    [
-                                                      _c(
-                                                        "a",
-                                                        {
-                                                          staticClass:
-                                                            "btn btn-primary",
-                                                          attrs: {
-                                                            href:
-                                                              "docente/area/" +
-                                                              area.id +
-                                                              "/curso/" +
-                                                              grade.id +
-                                                              "/estudiante/" +
-                                                              student.id
-                                                          }
-                                                        },
-                                                        [
-                                                          _vm._v(
-                                                            "\n                                                                        " +
-                                                              _vm._s(
-                                                                area.name
-                                                              ) +
-                                                              "\n                                                                    "
-                                                          )
-                                                        ]
-                                                      )
-                                                    ]
+                                                  _vm._v(
+                                                    "\n                                                                " +
+                                                      _vm._s(
+                                                        student.name +
+                                                          " " +
+                                                          student.last_name
+                                                      ) +
+                                                      "\n                                                            "
                                                   )
                                                 ]
                                               )
-                                            ]
-                                          )
-                                        }),
-                                        0
-                                      )
-                                    ]
-                                  )
-                                ]
-                              )
-                            }),
-                            0
-                          )
+                                            ])
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass: "collapse hide",
+                                            attrs: {
+                                              id:
+                                                "collapseStudents" +
+                                                k +
+                                                grade.id,
+                                              "aria-labelledby":
+                                                "studentHeadingOne" +
+                                                k +
+                                                grade.id,
+                                              "data-parent": "#accordion1"
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "div",
+                                              { staticClass: "card-body" },
+                                              _vm._l(grade.areas, function(
+                                                area,
+                                                l
+                                              ) {
+                                                return _c(
+                                                  "div",
+                                                  {
+                                                    key: l,
+                                                    staticClass: "card"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "card-header",
+                                                        attrs: {
+                                                          id:
+                                                            "areasHeadingOne" +
+                                                            k +
+                                                            grade.id +
+                                                            student.id
+                                                        }
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "h5",
+                                                          {
+                                                            staticClass: "mb-0"
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "a",
+                                                              {
+                                                                staticClass:
+                                                                  "btn btn-primary",
+                                                                attrs: {
+                                                                  href:
+                                                                    "docente/area/" +
+                                                                    area.id +
+                                                                    "/curso/" +
+                                                                    grade.id +
+                                                                    "/estudiante/" +
+                                                                    student.id
+                                                                }
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  "\n                                                                            " +
+                                                                    _vm._s(
+                                                                      area.name
+                                                                    ) +
+                                                                    "\n                                                                        "
+                                                                )
+                                                              ]
+                                                            )
+                                                          ]
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              }),
+                                              0
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  }),
+                                  0
+                                )
+                              : _c("div", [_vm._m(1, true)])
+                          ])
                         ])
                       ]
                     )
@@ -369,6 +403,28 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("h3", [_vm._v("Avance de Estudiantes")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "accordionNoStudent" } }, [
+      _c("div", { staticClass: "card" }, [
+        _c(
+          "div",
+          { staticClass: "card-header", attrs: { id: "headingNoStudents" } },
+          [
+            _c("h5", { staticClass: "mb-0" }, [
+              _c("p", [
+                _vm._v(
+                  "\n                                                                    Sin Estudiantes Registrados\n                                                                "
+                )
+              ])
+            ])
+          ]
+        )
+      ])
     ])
   }
 ]
