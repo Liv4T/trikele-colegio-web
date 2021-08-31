@@ -74,7 +74,7 @@
                             </form>
                             
                             <div class="modal-footer">
-                                <button v-on:click="DownloadFile" class="btn btn-primary">Descargar</button>
+                                <button v-on:click="DownloadFile" class="btn btn-primary">Descargar</button>                                
                             </div>
                         </div>                    
                     </div>
@@ -126,9 +126,9 @@
                 dateInitSchool:this.dateInitSchool,
                 days:this.days,
                 month:this.month,
-            }).then((response)=>{
-                if(response.data){
-                    download(response.data, "Contrato Educativo.pdf");
+            }).then((response)=>{                
+                if(response.data){                    
+                    download(response.data, "Contrato Educativo.pdf", "pdf");
                     toastr.success('Documento Descargado, recuerda leerlo y completarlo');
                 }
             }).catch((error)=>{
