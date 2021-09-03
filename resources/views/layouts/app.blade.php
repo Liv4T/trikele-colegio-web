@@ -96,7 +96,8 @@
     <div id="app">
         <nav class="navbar navbar-light">
             <div class="container-fluid">
-                <div  class="navbar-brand" >                 
+                <div  class="navbar-brand" >
+                        <i class="fas fa-phone-alt"></i>                 
                         <p class="navbar-brand">+57 311 3157161</p>
                         <p class="navbar-brand">+57 304 1560991</p>
                        <!-- <a class="navbar-brand" href="https://www.facebook.com/TrikelePlataformaEducativa/" target="_blank"  class="icons">

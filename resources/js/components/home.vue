@@ -227,7 +227,9 @@
             <a href="https://www.instagram.com/trikele_/" target="_blank" class="">
               <i class="fab fa-instagram fa-2x"></i>
             </a>
-            <div>
+
+            <div>              
+              <i class="fas fa-phone-alt fa-2x"></i>
               <h3 class="navbar-brand">+57 311 3157161</h3>
               <h3 class="navbar-brand">+57 304 1560991</h3>
             </div>            
