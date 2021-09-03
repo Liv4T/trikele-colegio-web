@@ -265,13 +265,13 @@ class CalificationController extends Controller
         return  response()->json($classes);
     }
 
-    public function educativeContract(Request $request){
+    public function educativeContract(String $motherName,  String $fatherName, String $studentName, String $ccMother, String $ccFather, String $ccStudent, String $classStudent, String $contraprestacion, String $yearContraprestacion, String $grade, String $price, String $dateFinish, String $quotes, String $dateInitSchool, String $days, String $month){
         $html=" <h1 style='margin-left:22%;'>MATRICULA 2021 – 2022</h1>
             <h1 style='margin-left:10%'>CONTRATO DE SERVICIO EDUCATIVO</h1>
 
-            <p style='margin-bottom: 3%;'>Entre los suscritos a saber <strong>".$request['motherName']."</strong> y <strong>".$request['fatherName']."</strong>
+            <p style='margin-bottom: 3%;'>Entre los suscritos a saber <strong>".$motherName."</strong> y <strong>".$fatherName."</strong>
             mayores de edad, vecinos y residentes en Bogotá D.C., identificados como aparece al pie de sus firmas,
-            responsables designados del alumno: ".$request['studentName']." de la clase,". $request['classStudent']." y el Representante Legal ______________________ del establecimiento educativo denominado COLEGIO TRIKELE, 
+            responsables designados del alumno: <strong>".$studentName."</strong> de la clase, <strong>". $classStudent."</strong> y el Representante Legal ______________________ del establecimiento educativo denominado COLEGIO TRIKELE, 
             con licencia de funcionamiento expedida por la Secretaria de Educación de Chía, 
             en la resolución No. 1123 del 13 de abril de 2021,
             suscribimos el presente contrato de SERVICIO EDUCATIVO,
@@ -329,7 +329,7 @@ class CalificationController extends Controller
 
             <h3><strong>SEXTA - OBLIGACIONES PECUNIARIAS: </strong></h3>                    
             <p>Los responsables legales y/o financieros se comprometen a la suscripción del presente contrato, </p>
-            <p>a cancelar como contraprestación al servicio educativo que se le prestará al alumno la suma correspondiente al grado reestudio del mismo a partir del mes de".$request['contraprestacion']."de ".$request['dateFinish'].", </p>
+            <p>a cancelar como contraprestación al servicio educativo que se le prestará al alumno la suma correspondiente al grado reestudio del mismo a partir del mes de <strong>".$contraprestacion." </strong> de <strong>".$dateFinish."</strong>, </p>
             <p style='margin-bottom: 3%;'>pagaderas anticipadamente dentro de los cinco (5) primeros días calendario de cada mes, 
             y conforme al procedimiento establecido por EL COLEGIO. 
             La cuota mensual a la que se hace referencia corresponde a la tarifa que se ha fijado en concordancia con lo establecido en la resolución Nº 1123 del 13 de abril de 2021. 
@@ -338,7 +338,7 @@ class CalificationController extends Controller
 
             <h3><strong>PARAGRAFO PRIMERO: </strong></h3>
             <p style='margin-bottom: 6%;'>El valor del contrato estará determinado por los costos educativos aprobados en la resolución 1123 del 13 de abril de 2021,
-            por concepto de matrícula y pensión para el grado de".$request['grade']." por el valor de".$request['price'].",
+            por concepto de matrícula y pensión para el grado de <strong>".$grade."</strong> por el valor de <strong>".$price."</strong>,
             como los cobros por concepto de carné y seguro estudiantil por un valor de $15.000 y $85.000 respectivamente.
             Cualquier retardo en el pago anterior dará derecho al COLEGIO para exigir el pago de un interés por la mora establecida equivalente a la tasa máxima legal fijada por las autoridades competentes. 
             El presente derecho subsistirá aún en el caso de haber recibido EL COLEGIO, 
@@ -354,8 +354,8 @@ class CalificationController extends Controller
             hábitos de pago y en general al cumplimiento de sus obligaciones pecuniarias. </p>
 
             <h3><strong>PARAGRAFO TERCERO: </strong></h3>
-            <p style='margin-bottom: 3%;'>Si los responsables legales y/o financieros optan por cancelar en un solo contado, hasta el treinta (30) de ".$request['month']." de 2021,
-            la totalidad de las (".$request['quotes'].") cuotas indicadas,
+            <p style='margin-bottom: 3%;'>Si los responsables legales y/o financieros optan por cancelar en un solo contado, hasta el treinta (30) de <strong>".$month."</strong> de 2021,
+            la totalidad de las (<strong>".$quotes."</strong>) cuotas indicadas,
             podrá deducir de las mismas un diez por ciento (10%) del total.</p>
 
             <h3><strong>PARAGRAFO CUARTO: </strong></h3>
@@ -367,7 +367,7 @@ class CalificationController extends Controller
 
             <h3><strong>PARAGRAFO QUINTO: </strong></h3>
             <p>El valor pagado por matrícula, únicamente será reintegrado si al inicio del año escolar 
-            <p style='margin-bottom: 3%;'>(mes de ".$request['dateInitSchool']."),por razones de cambio de sede de trabajo los padres se trasladan a vivir fuera de la ciudad de Bogotá, 
+            <p style='margin-bottom: 3%;'>(mes de <strong>".$dateInitSchool."</strong>),por razones de cambio de sede de trabajo los padres se trasladan a vivir fuera de la ciudad de Bogotá, 
             Chía o por razones de fuerza mayor.</p>
 
             <h3><strong>SEXTA - VIGENCIA:</strong></h3>
@@ -377,7 +377,7 @@ class CalificationController extends Controller
             correspondiente.</p>
                     
             <h3><strong>SÉPTIMA - RENOVACIÓN: </strong></h3>
-            <p style='margin-bottom: 50%;'>El presente contrato podrá ser renovado, de año en año, sin perjuicio del incremento en los costos de matrícula y pensión, 
+            <p>El presente contrato podrá ser renovado, de año en año, sin perjuicio del incremento en los costos de matrícula y pensión, 
             si quienes lo suscriben han dado cumplimiento a las obligaciones contenidas en las cláusulas tercera y sexta aquí contenidas y además según el caso, 
             puede ser promovido a un nivel a superior.</p>
                                       
@@ -395,16 +395,16 @@ class CalificationController extends Controller
             <br>
             <br>
             <br>
-            <p style='margin-bottom: 10%;'>Firmado en Bogotá D.C., a los ".$request['days']." de ".$request['month']." de 2021.</p>
+            <p style='margin-bottom: 10%;'>Firmado en Bogotá D.C., a los <strong>".$days."</strong> de <strong>".$month."</strong></p>
 
             <p style='margin-bottom: 4%;'>Rectora</p>
             <p>_________________________________</p>
 
-            <p style='margin-bottom: 15%;'><strong>PAOLA GARCÍA CASTILLO</strong></p>
+            <p style='margin-bottom: 10%;'><strong>PAOLA GARCÍA CASTILLO</strong></p>
 
-            <p style='margin-bottom: 12%;'><strong>RESPONSABLES LEGALES</strong></p>
+            <p style='margin-bottom: 5%;'><strong>RESPONSABLES LEGALES</strong></p>
 
-            <table style='margin-bottom: 25%;'>
+            <table style='margin-bottom: 10%;'>
                 <thead>
                     <tr>
                         <th>PADRE</th>
@@ -414,15 +414,15 @@ class CalificationController extends Controller
                 </thead>
                 <tbody>
                     <tr>
-                        <td>CC:".$request['ccFather']."</td>
-                        <td>CC:".$request['ccMother']."</td>
+                        <td>CC: <strong>".$ccFather."</strong> </td>
+                        <td>CC: <strong>".$ccMother."</strong> </td>
                         <td>CC:________________________</td>
                     </tr>
                 </tbody>
             </table>
 
             <p>____________________________</p>
-            <p style='margin-bottom: 20%;'>FIRMA</p>
+            <p style='margin-bottom: 10%;'>FIRMA</p>
 
             <h3 style='margin-bottom: 5%;'><strong>RESPONSABLES FINANCIEROS </strong></h3>
             <h3 style='margin-bottom: 6%;'><strong>Nombre y Apellidos</strong></h3>

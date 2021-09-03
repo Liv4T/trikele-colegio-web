@@ -64,7 +64,7 @@
                                         <label for="">Dia de la firma del Contrato</label>
                                         <input type="text" class="form-control" v-model="days">
 
-                                        <label for="">Mes de la firma del Contrato</label>
+                                        <label for="">Mes y año de la firma del Contrato</label>
                                         <input type="text" class="form-control" v-model="month">
 
                                         <label for="">Firma</label>
@@ -73,7 +73,7 @@
                                 </div>
                             </form>
                             
-                            <div class="modal-footer">
+                            <div class="modal-footer">                                
                                 <button v-on:click="DownloadFile" class="btn btn-primary">Descargar</button>                                
                             </div>
                         </div>                    
@@ -108,34 +108,10 @@
       };
     },
     methods: {
-        DownloadFile(){            
-            axios.post('contratoEducativo',{
-                motherName:this.motherName,
-                fatherName:this.fatherName,
-                studentName:this.studentName,
-                ccMother:this.ccMother,
-                ccFather:this.ccFather,
-                ccStudent:this.ccStudent,
-                classStudent:this.classStudent,
-                contraprestacion:this.contraprestacion,
-                yearContraprestacion:this.yearContraprestacion,
-                grade:this.grade,
-                price:this.price,
-                dateFinish:this.dateFinish,
-                quotes:this.quotes,
-                dateInitSchool:this.dateInitSchool,
-                days:this.days,
-                month:this.month,
-            }).then((response)=>{                
-                if(response.data){                    
-                    download(response.data, "Contrato Educativo.pdf", "pdf");
-                    toastr.success('Documento Descargado, recuerda leerlo y completarlo');
-                }
-            }).catch((error)=>{
-                console.log(error);
-                toastr.info('Ha ocurrido un error, intenta de nuevo mas tarde');
-            })
+        DownloadFile(){                 
+            window.open(`contratoEducativo/${this.motherName}/${this.fatherName}/${this.studentName}/${this.ccMother}/${this.ccFather}/${this.ccStudent}/${this.classStudent}/${this.contraprestacion}/${this.yearContraprestacion}/${this.grade}/${this.price}/${this.dateFinish}/${this.quotes}/${this.dateInitSchool}/${this.days}/${this.month}`);            
         }
+        
     },
   };
 </script>
