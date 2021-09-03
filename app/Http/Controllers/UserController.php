@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use DB;
 
 class UserController extends Controller
 {
@@ -18,8 +19,25 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('created_at', 'desc')->get();
-        return $users;
+        $teachers = DB::table('users')
+        ->join('classroom_teacher','users.id','=','classroom_teacher.id_user')
+        ->join('area','area.id','=','classroom_teacher.id_area')
+        ->select('area.name as area_name','users.*')
+        ->get();
+
+        $students = DB::table('classroom_student')
+        ->join('classroom','classroom_student.id_classroom','=','classroom.id')
+        ->join('grade','classroom.id_grade','=','grade.id')
+        ->join('users','classroom_student.id_user','=','users.id')
+        ->select('grade.name as grade_name','users.*')
+        ->get();
+
+        $users = [
+            $teachers,
+            $students,
+        ];
+            
+        return response()->json($users);
         /*[
          'pagination'      => [
             'total'        => $users->total(),
