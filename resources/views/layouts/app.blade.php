@@ -96,13 +96,15 @@
     <div id="app">
         <nav class="navbar navbar-light">
             <div class="container-fluid">
-                <div  class="navbar-brand" >
-                       <a class="navbar-brand" href="https://www.facebook.com/TrikelePlataformaEducativa/" target="_blank"  class="icons">
+                <div  class="navbar-brand" >                 
+                        <p class="navbar-brand">+57 311 3157161</p>
+                        <p class="navbar-brand">+57 304 1560991</p>
+                       <!-- <a class="navbar-brand" href="https://www.facebook.com/TrikelePlataformaEducativa/" target="_blank"  class="icons">
                             <i class="fab fa-facebook fa-2x"></i>
                         </a>
                         <a class="navbar-brand" href="https://www.instagram.com/trikele_/"  target="_blank"  class="icons">
                             <i class="fab fa-instagram fa-2x"></i>
-                        </a>
+                        </a> -->
                 </div>
                 <form class="d-flex">
                     <a href="/loginNew"><img class="btn-colegio" src="{{ asset('uploads/home/btncolegio.png') }}" alt=""></a>
