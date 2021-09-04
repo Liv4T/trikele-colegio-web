@@ -13,7 +13,7 @@
                             <a class="btn btn-info float-left" href="#" v-on:click.prevent="btD()" style="margin: 10px;">
                                 Docentes
                             </a>
-                            <a class="btn btn-info float-left" href="#" v-on:click.prevent="btE()" style="margin: 10px;">
+                            <a v-if="user.type_user !== 3" class="btn btn-info float-left" href="#" v-on:click.prevent="btE()" style="margin: 10px;">
                                 Estudiantes
                             </a>
                         </div>
@@ -47,7 +47,7 @@
                             ></multiselect>
                         </div>
                         <br />
-                        <div v-show="acudiente == true">
+                        <div v-show="acudiente == true ">
                             <label for>Acudientes</label>
                             <multiselect
                                 v-model="cacudiente"
@@ -90,6 +90,7 @@
     export default {
     // OR register locally
         components: { Multiselect },
+        props:['user'],
         data() {
             return {
                 editor: DecoupledEditor,
@@ -110,7 +111,7 @@
                 correos: [],
             };
         },
-        mounted() {
+        mounted() {            
             this.getData();
         },
         methods: {
@@ -132,7 +133,7 @@
                         for (let i = 0; i < dataTeacherCleaned.length; i++) {
                             this.optionsd.push({
                                 id: dataTeacherCleaned[i].id,                            
-                                name: dataTeacherCleaned[i].name+' '+'('+dataTeacherCleaned[i].area_name+')'                            
+                                name: dataTeacherCleaned[i].name+' '+dataTeacherCleaned[i].last_name+' '+'('+dataTeacherCleaned[i].area_name+')'                            
                             });
                         }
                     }
@@ -141,7 +142,7 @@
                         for (let i = 0; i < dataStudentCleaned.length; i++) {
                             this.optionse.push({                            
                                 id: dataStudentCleaned[i].id,                        
-                                name: dataStudentCleaned[i].name+' '+'('+dataStudentCleaned[i].grade_name+')'                            
+                                name: dataStudentCleaned[i].name+' '+dataStudentCleaned[i].last_name+' '+'('+dataStudentCleaned[i].grade_name+')'                            
                             });
                         }
                     }
