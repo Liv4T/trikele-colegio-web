@@ -608,4 +608,11 @@ class AdministratorController extends Controller
     {
         //
     }
+
+    public function assignCoord(Request $request){
+        $coord = User::findOrFail($request->id);
+        $coord->new_coord_area = $request->new_coord_area;
+        $coord->save();
+        return response()->json('El usuario '.$coord->name.'Fué asignado a '.$request->new_coord_area);
+    }
 }

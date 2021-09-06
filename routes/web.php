@@ -871,3 +871,5 @@ Route::get('/notesStudentsADM', function(){
 });
 
 Route::resource('progressAdminStudent','ProgressStudentAdminController');
+
+Route::post('assignCoord','AdministratorController@assignCoord');

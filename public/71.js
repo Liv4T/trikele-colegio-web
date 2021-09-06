@@ -82,6 +82,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 (function () {
   "use strict";
 
@@ -146,7 +150,7 @@ Vue.component("multiselect", vue_multiselect__WEBPACK_IMPORTED_MODULE_1___defaul
   mounted: function mounted() {
     var _this = this;
 
-    var urlUsers = "getStudents";
+    var urlUsers = "getCoords";
     axios.get(urlUsers).then(function (response) {
       _this.optionse = response.data;
     });
@@ -165,30 +169,24 @@ Vue.component("multiselect", vue_multiselect__WEBPACK_IMPORTED_MODULE_1___defaul
       this.optionse.push(tag);
     },
     getMenu: function getMenu() {
-      window.location = "/instituciones_adm";
+      window.location = "/coordinador_adm";
     },
     createAs: function createAs() {
       var _this2 = this;
 
-      var url = "aisgn";
+      var url = "assignCoord";
+      this.cestudiante.forEach(function (element) {
+        axios.post(url, {
+          id: element.id,
+          new_coord_area: _this2.new_coord_area
+        }).then(function (response) {
+          _this2.errors = [];
+          toastr.success(response.data);
 
-      if (this.cestudiante.length >= 1) {
-        for (var i = 0; i < this.cestudiante.length; i++) {
-          this.estudiantes.push(this.cestudiante[i].id);
-        }
-      }
-
-      axios.post(url, {
-        rol: this.Newrol,
-        users: this.estudiantes,
-        id_secction: this.seccion
-      }).then(function (response) {
-        _this2.errors = [];
-        toastr.success("Nueva asignacion creada exitosamente");
-
-        _this2.getMenu();
-      })["catch"](function (error) {
-        _this2.errors = error.response.data;
+          _this2.getMenu();
+        })["catch"](function (error) {
+          _this2.errors = error.response.data;
+        });
       });
     }
   }
@@ -317,20 +315,21 @@ var render = function() {
                                   }
                                 }
                               },
-                              _vm._l(_vm.myOptions.sections, function(option) {
-                                return _c(
+                              [
+                                _c("option", { attrs: { value: "Primaria" } }, [
+                                  _vm._v(" Primaria ")
+                                ]),
+                                _vm._v(" "),
+                                _c(
                                   "option",
-                                  { domProps: { value: option.id } },
-                                  [
-                                    _vm._v(
-                                      "\n                          " +
-                                        _vm._s(option.name) +
-                                        "\n                        "
-                                    )
-                                  ]
-                                )
-                              }),
-                              0
+                                  { attrs: { value: "Secundaria" } },
+                                  [_vm._v(" Secundaria ")]
+                                ),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "General" } }, [
+                                  _vm._v("General")
+                                ])
+                              ]
                             )
                           ])
                         ]),
