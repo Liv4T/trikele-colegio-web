@@ -5,51 +5,29 @@
                 <div class="card text-center">
                     <h3 class="card-header fondo">Coordinadores</h3>
                     <div class="card-body">
-                        <a
-                            class="btn btn-warning"
-                            href="#"
-                            v-on:click.prevent="createS()"
-                            >Crear Coordinador</a
-                        >
-                        <a class="btn btn-warning" href="/perfil_asignar"
-                            >Asignar perfil</a
-                        >
+                        <a class="btn btn-warning" href="#" v-on:click.prevent="createS()">
+                            Crear Coordinador
+                        </a>
+                        <a class="btn btn-warning" href="/perfil_asignar">
+                            Asignar perfil
+                        </a>
                         <br />
                         <br />
-                        <table
-                            class="table table-responsive-xl table-hover table-striped center"
-                        >
-                            <tbody>
-                                <tr
-                                    data-toggle="collapse"
-                                    data-target="#accordion"
-                                    class="clickable"
-                                >
-                                    <td>Coordinador 1</td>
-                                    <td></td>
-                                    <td></td>
+                        <table class="table table-responsive-xl table-hover table-striped center">
+                            <tbody v-for="(coord,key) in coords" :key="key">
+                                <tr v-show="coord.deleted === 0" data-toggle="collapse" data-target="#accordion" class="clickable">
+                                    <td>{{coord.name+' '+coord.last_name}}</td>
+                                    
 
                                     <td class="float-right">
-                                        <a
-                                            class="btn btn-sm"
-                                            href="#"
-                                            style="color: grey;"
-                                        >
-                                            <i class="fa fa-eye"></i>
+                                        <a class="btn btn-sm" v-on:click="()=>viewInfoCoord('show', coord)" style="color: grey;">
+                                            <i class="fa fa-eye"></i>                                            
                                         </a>
-                                        <a
-                                            class="btn btn-sm"
-                                            href="#"
-                                            style="color: grey;"
-                                        >
+                                        <a class="btn btn-sm" v-on:click="()=>viewInfoCoord('edit', coord)" style="color: grey;">
                                             <i class="fa fa-edit"></i>
                                         </a>
 
-                                        <a
-                                            class="btn btn-sm"
-                                            href="#"
-                                            style="color: grey;"
-                                        >
+                                        <a class="btn btn-sm" v-on:click="()=>viewInfoCoord('delete', coord)" style="color: grey;">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </td>
@@ -65,56 +43,33 @@
                         <div class="card">
                             <h3 class="card-header fondo text-center">
                                 Usuarios
-                                <button
-                                    type="button"
-                                    class="close"
-                                    data-dismiss="modal"
-                                >
+                                <button type="button" class="close" data-dismiss="modal">
                                     <span>&times;</span>
                                 </button>
                             </h3>
 
                             <div class="card-body">
-                                <form
-                                    class="needs-validation"
-                                    v-on:submit.prevent="createUser"
-                                    novalidate
-                                >
+                                <form class="needs-validation" v-on:submit.prevent="createUser" novalidate>
                                     <div class="form-group row mx-auto">
-                                        <div
-                                            class="col-md-8 text-center mx-auto"
-                                        >
+                                        <div class="col-md-8 text-center mx-auto">
                                             <label for="name">
-                                                <img
-                                                    width="35px"
-                                                    src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0"
-                                                    alt
-                                                />Rol
+                                                <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt/>
+                                                Rol
                                             </label>
                                             <div>
-                                                <select
-                                                    class="form-control"
-                                                    v-model="newType_user"
-                                                    style="background: gainsboro;"
-                                                    required
-                                                >
-                                                    <option value="4"
-                                                        >Coordinador</option
-                                                    >
+                                                <select class="form-control" v-model="newType_user" style="background: gainsboro;" required>
+                                                    <option value="4">
+                                                        Coordinador
+                                                    </option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group row mx-auto">
-                                        <div
-                                            class="col-md-8 text-center mx-auto"
-                                        >
+                                        <div class="col-md-8 text-center mx-auto">
                                             <label for="name">
-                                                <img
-                                                    width="35px"
-                                                    src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MIS-CURSOS.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0"
-                                                    alt
-                                                />Institución
+                                                <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MIS-CURSOS.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0" alt/>
+                                                    Institución
                                             </label>
                                             <div>
                                                 <select
@@ -123,10 +78,8 @@
                                                     style="background: gainsboro;"
                                                     required
                                                 >
-                                                    <option
-                                                        :value="option.id"
-                                                        v-for="option in myOptions"
-                                                        >{{
+                                                    <option :value="option.id" v-for="(option, key) in myOptions" :key="key">
+                                                        {{
                                                             option.name
                                                         }}</option
                                                     >
@@ -443,7 +396,8 @@
                 </div>
             </div>
         </div>
-    </div>
+        <modal-coord :type="type_view" :data="data" :coord="coord_name"></modal-coord>
+    </div>    
 </template>
 <script>
 export default {
@@ -475,15 +429,24 @@ export default {
                 {
                     name: ""
                 }
-            ]
+            ],
+            coords:[],
+            type_view:"show",
+            data:{},
+            coord_name:""
         };
     },
     created() {},
     mounted() {
         var urlr = "getInstitution";
         axios.get(urlr).then(response => {
-            this.myOptions = response.data;
+            this.myOptions = response.data;            
         });
+
+        axios.get('getCoords').then((response)=>{
+            this.coords = response.data;
+        });
+
         console.log("Component mounted.");
     },
     methods: {
@@ -639,6 +602,12 @@ export default {
         },
         chooseFile() {
             $("#file").click();
+        },
+        viewInfoCoord(type, data){            
+            this.type_view = type;
+            this.data = data;
+            this.coord_name = data.name+' '+data.last_name
+            $('#viewCoordInfo').modal('show');
         }
     }
 };

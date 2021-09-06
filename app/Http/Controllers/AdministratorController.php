@@ -60,6 +60,12 @@ class AdministratorController extends Controller
         return $users;
     }
 
+    public function indexCoords()
+    {        
+        $coords = User::where('type_user',4)->get();
+        return response()->json($coords);
+    }
+
 
     /**
      * Display a listing of the resource.

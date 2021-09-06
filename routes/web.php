@@ -432,6 +432,7 @@ Route::middleware('auth')->get('/enviados', function () {
 
 Route::get('getUsers', 'AdministratorController@indexUsers')->name('getUsers');
 Route::get('getStudents', 'AdministratorController@indexStudents')->name('getStudents');
+Route::get('getCoords', 'AdministratorController@indexCoords')->name('getCoords');
 Route::get('getTeachers', 'AdministratorController@indexTeachers')->name('getTeachers');
 Route::get('getUsersAssigned', 'AdministratorController@indexStudentsTeachersAssigned')->name('getUsersAssigned');
 Route::post('assignStudents', 'AdministratorController@assignStudents')->name('assignStudents');

@@ -173,7 +173,8 @@ class UserController extends Controller
     public function destroy($id)
     {
         $users = User::findOrFail($id);
-        $users->delete();
+        $users->deleted = 1;
+        $users->update();
     }
     public function uploadFile(Request $request)
     {
