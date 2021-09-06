@@ -169,7 +169,7 @@ export default {
                 this.emisor = this.emessages.emisor;
                 this.asunto = this.emessages.subject;
                 this.editorData = this.emessages.message;
-                console.log(this.emessages);
+                // console.log(this.emessages);
             });
             $("#createMessage").modal("show");
         },

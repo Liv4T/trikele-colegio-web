@@ -186,8 +186,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(__webpack_require__(/*! vue-momen
         _this2.emessages = response.data;
         _this2.emisor = _this2.emessages.emisor;
         _this2.asunto = _this2.emessages.subject;
-        _this2.editorData = _this2.emessages.message;
-        console.log(_this2.emessages);
+        _this2.editorData = _this2.emessages.message; // console.log(this.emessages);
       });
       $("#createMessage").modal("show");
     },
