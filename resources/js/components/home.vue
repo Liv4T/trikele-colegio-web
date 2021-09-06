@@ -55,14 +55,14 @@
     <div class="section-naranja desktop-mision">
       <div class="row mx-auto" style="padding: 20px; justify-content: center">
         <div class="col-md-4 text-center">
-          <img width="100%" src="/uploads/home/vision.png" alt="" />
+          <img width="30%" src="/uploads/home/vision.png" alt="" />
           <br />
           <p class="letra-poppins-bold" style="font-size: 25px; padding: 0 55px 0 55px; line-height: 35px">
             <span class="realistic-marker-highlight">Transformar</span> la educación para formar <span class="realistic-marker-highlight">ciudadanos del mundo</span> capaces de cuestionar y <span class="realistic-marker-highlight">cambiar el status quo.</span>
           </p>
         </div>
         <div class="col-md-4 text-center">
-          <img width="100%" src="/uploads/home/mision.png" alt="" />
+          <img width="30%" src="/uploads/home/mision.png" alt="" />
           <br />
           <p class="letra-poppins-bold" style="font-size: 25px; padding: 0 55px 0 55px; line-height: 35px">Trikele busca brindar <span class="realistic-marker-highlight"> educación de excelente calidad,</span> integral e innovadora, a través de la mediación con herramientas tecnológicas.</p>
         </div>
