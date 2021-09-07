@@ -276,11 +276,20 @@ var render = function() {
                                   }
                                 }
                               },
-                              _vm._l(_vm.myOptions, function(option) {
+                              _vm._l(_vm.myOptions, function(option, key) {
                                 return _c(
                                   "option",
-                                  { domProps: { value: option.id } },
-                                  [_vm._v(_vm._s(option.name))]
+                                  { key: key, domProps: { value: option.id } },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        option.name +
+                                          " " +
+                                          option.last_name +
+                                          " (Docente)"
+                                      )
+                                    )
+                                  ]
                                 )
                               }),
                               0

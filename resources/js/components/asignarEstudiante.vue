@@ -28,7 +28,7 @@
                       <label for="name">Salon</label>
                       <div>
                         <select class="form-control" v-model="seccion" required>
-                          <option :value="option.id" v-for="option in myOptions">
+                          <option :value="option.id" v-for="(option, key) in myOptions" :key="key">
                             {{
                             option.clasroom
                             }}
@@ -43,7 +43,7 @@
                         :options="optionse"
                         tag-placeholder="Add this as new tag"
                         placeholder="Search or add a tag"
-                        label="name"
+                        label="complete_name"
                         track-by="id"
                         :multiple="true"
                         :taggable="true"
@@ -137,8 +137,32 @@ export default {
   },
   mounted() {
     var urlUsers = "getStudents";
-    axios.get(urlUsers).then((response) => {
-      this.optionse = response.data;
+    axios.get(urlUsers).then((response) => {      
+      response.data.forEach((element) =>{
+        this.optionse.push({
+          address: element.address,
+          created_at: element.created_at,
+          deleted: element.deleted,
+          document_type: element.document_type,
+          email: element.email,
+          email_verified_at: element.email_verified_at,
+          experience: element.experience,
+          id: element.id,
+          id_number: element.id_number,
+          last_name: element.last_name,
+          name:element.last_name,
+          complete_name: element.name+' '+element.last_name+' (Estudiante)',
+          new_coord_area: element.new_coord_area,
+          parent: element.parent,
+          parent_phone: element.parent_phone,
+          phone: element.phone,
+          picture: element.picture,
+          state: element.state,
+          type_user: element.type_user,
+          updated_at: element.updated_at,
+          user_name: element.user_name,
+        })
+      })
     });
     var urlUsers = "getClassroom";
     axios.get(urlUsers).then((response) => {

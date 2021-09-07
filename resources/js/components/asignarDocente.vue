@@ -15,7 +15,7 @@
                       <div class="col-md-6">
                         <label for>Docente:</label>
                         <select class="form-control" v-model="user_id" required>
-                          <option :value="option.id" v-for="option in myOptions">{{ option.name }}</option>
+                          <option :value="option.id" v-for="(option, key) in myOptions" :key="key">{{ option.name+' ' +option.last_name+' (Docente)'}}</option>
                         </select>
                       </div>
 

@@ -147,7 +147,31 @@ Vue.component("multiselect", vue_multiselect__WEBPACK_IMPORTED_MODULE_1___defaul
 
     var urlUsers = "getStudents";
     axios.get(urlUsers).then(function (response) {
-      _this.optionse = response.data;
+      response.data.forEach(function (element) {
+        _this.optionse.push({
+          address: element.address,
+          created_at: element.created_at,
+          deleted: element.deleted,
+          document_type: element.document_type,
+          email: element.email,
+          email_verified_at: element.email_verified_at,
+          experience: element.experience,
+          id: element.id,
+          id_number: element.id_number,
+          last_name: element.last_name,
+          name: element.last_name,
+          complete_name: element.name + ' ' + element.last_name + ' (Estudiante)',
+          new_coord_area: element.new_coord_area,
+          parent: element.parent,
+          parent_phone: element.parent_phone,
+          phone: element.phone,
+          picture: element.picture,
+          state: element.state,
+          type_user: element.type_user,
+          updated_at: element.updated_at,
+          user_name: element.user_name
+        });
+      });
     });
     var urlUsers = "getClassroom";
     axios.get(urlUsers).then(function (response) {
@@ -314,10 +338,10 @@ var render = function() {
                                   }
                                 }
                               },
-                              _vm._l(_vm.myOptions, function(option) {
+                              _vm._l(_vm.myOptions, function(option, key) {
                                 return _c(
                                   "option",
-                                  { domProps: { value: option.id } },
+                                  { key: key, domProps: { value: option.id } },
                                   [
                                     _vm._v(
                                       "\n                          " +
@@ -345,7 +369,7 @@ var render = function() {
                                 options: _vm.optionse,
                                 "tag-placeholder": "Add this as new tag",
                                 placeholder: "Search or add a tag",
-                                label: "name",
+                                label: "complete_name",
                                 "track-by": "id",
                                 multiple: true,
                                 taggable: true
