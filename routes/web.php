@@ -870,6 +870,11 @@ Route::get('/notesStudentsADM', function(){
     return view('notasADM');
 });
 
+Route::get('/deleteUser', function(){
+    return view('deleteUser');
+});
+Route::get('getAllUsersPaginated', 'UserController@getAllUsersPaginated');
+
 Route::resource('progressAdminStudent','ProgressStudentAdminController');
 
 Route::post('assignCoord','AdministratorController@assignCoord');

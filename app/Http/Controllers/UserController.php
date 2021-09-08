@@ -51,6 +51,16 @@ class UserController extends Controller
      ];*/
     }
 
+    public function getAllUsersPaginated(){
+        $user = Auth::user();
+        if($user->type_user === 1){
+            $users = DB::table('users')->paginate(20);
+            return response()->json($users);
+        }else{
+            return [];
+        }
+    }
+
     /**
      * login
      */
@@ -60,7 +70,11 @@ class UserController extends Controller
         $password = $request->input('password');
         if (Auth::attempt(['user_name' => $user_name, 'password' => $password], false)) {
             $user = Auth::user();
-            return redirect('/inicio');
+            if($user->deleted === 0){
+                return redirect('/inicio');
+            }else{
+                return redirect('/login')->with('status', 'Usuario Desactivado!');
+            }
         } else {
             return redirect('/login')->with('status', 'Usuario no encontrado!');
         }

@@ -238,5 +238,6 @@ Vue.component("contrato-educativo", ()=>import("./components/contratoEducativo.v
 Vue.component("list-area-component", ()=>import("./components/listAreasAdm.vue"));
 
 Vue.component("student-progress-adm", ()=>import("./components/notasAdminStudets.vue"));
+Vue.component("delete-user", ()=>import('./components/deleteUsers.vue'));
 
 const app = new Vue({el: "#app", data: {}, store});
