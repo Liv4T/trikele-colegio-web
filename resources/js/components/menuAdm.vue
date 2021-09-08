@@ -207,6 +207,16 @@
                 </li>
               </a>
             </div>
+            <a href="/deleteUser">
+              <li class="item-menu">
+                <img
+                  width="35px"
+                  src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0"
+                  alt
+                />
+                <span class="menu">Usuarios</span>
+              </li>
+            </a>
             <!-- <div class="dropdown">
               <a href="/actividad_g">
                 <li class="item-menu">
