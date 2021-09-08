@@ -163,9 +163,14 @@ __webpack_require__.r(__webpack_exports__);
       $('#exampleModal').modal('show');
     },
     deleteUser: function deleteUser(id) {
+      var _this2 = this;
+
       if (window.confirm('Seguro que desea desactivar este dato?')) {
         axios["delete"]("users/".concat(id)).then(function (response) {
           toastr.success(response.data);
+          $('#exampleModal').modal('hide');
+
+          _this2.getUsers();
         });
       }
     },
@@ -388,45 +393,53 @@ var render = function() {
                   return _c("tbody", { key: key }, [
                     _vm.search_filter == "" || _vm.filterUserName(user.name)
                       ? _c("tr", [
-                          _c("td", [_vm._v(_vm._s(user.name))]),
+                          user.deleted === 0
+                            ? _c("td", [_vm._v(_vm._s(user.name))])
+                            : _vm._e(),
                           _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(user.last_name))]),
+                          user.deleted === 0
+                            ? _c("td", [_vm._v(_vm._s(user.last_name))])
+                            : _vm._e(),
                           _vm._v(" "),
-                          _c("td", [
-                            _vm._v(
-                              _vm._s(
-                                user.type_user === 1
-                                  ? "Administrador"
-                                  : user.type_user === 2
-                                  ? "Docente"
-                                  : user.type_user === 3
-                                  ? "Estudiante"
-                                  : user.type_user === 4
-                                  ? "Coordinador"
-                                  : "( Usuario Sin Asignar )"
-                              ) + "\n                                "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("td", [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-primary",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function() {
-                                    return _vm.getUser(user)
-                                  }
-                                }
-                              },
-                              [
+                          user.deleted === 0
+                            ? _c("td", [
                                 _vm._v(
-                                  "\n                                        Desactivar\n                                    "
+                                  _vm._s(
+                                    user.type_user === 1
+                                      ? "Administrador"
+                                      : user.type_user === 2
+                                      ? "Docente"
+                                      : user.type_user === 3
+                                      ? "Estudiante"
+                                      : user.type_user === 4
+                                      ? "Coordinador"
+                                      : "( Usuario Sin Asignar )"
+                                  ) + "\n                                "
                                 )
-                              ]
-                            )
-                          ])
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          user.deleted === 0
+                            ? _c("td", [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-primary",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function() {
+                                        return _vm.getUser(user)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                        Desactivar\n                                    "
+                                    )
+                                  ]
+                                )
+                              ])
+                            : _vm._e()
                         ])
                       : _vm._e()
                   ])

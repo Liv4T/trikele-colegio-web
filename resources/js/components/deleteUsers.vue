@@ -53,9 +53,9 @@
                             </thead>
                             <tbody v-for="(user, key) in users" :key="key">
                                 <tr v-if="search_filter =='' || filterUserName(user.name)">
-                                    <td>{{user.name}}</td>
-                                    <td>{{user.last_name}}</td>
-                                    <td>{{ 
+                                    <td v-if="user.deleted === 0">{{user.name}}</td>
+                                    <td v-if="user.deleted === 0">{{user.last_name}}</td>
+                                    <td v-if="user.deleted === 0">{{ 
                                             user.type_user === 1 ? 'Administrador' : 
                                             user.type_user === 2 ? 'Docente'       :
                                             user.type_user === 3 ? 'Estudiante'    :
@@ -63,7 +63,7 @@
                                             '( Usuario Sin Asignar )'
                                         }}
                                     </td>
-                                    <td>
+                                    <td v-if="user.deleted === 0"> 
                                         <button type="button" class="btn btn-primary" v-on:click="()=>getUser(user)">
                                             Desactivar
                                         </button>
@@ -156,6 +156,8 @@ export default {
             if(window.confirm('Seguro que desea desactivar este dato?')){
                 axios.delete(`users/${id}`).then((response)=>{
                     toastr.success(response.data);
+                    $('#exampleModal').modal('hide');
+                    this.getUsers();
                 })
             }            
         },

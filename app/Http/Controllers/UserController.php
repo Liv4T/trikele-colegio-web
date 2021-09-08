@@ -189,6 +189,7 @@ class UserController extends Controller
         $users = User::findOrFail($id);
         $users->deleted = 1;
         $users->update();
+        return response()->json('Usuario Desactivado');
     }
     public function uploadFile(Request $request)
     {
