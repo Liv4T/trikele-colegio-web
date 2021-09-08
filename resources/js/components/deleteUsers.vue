@@ -10,7 +10,10 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm">
-                                    <input type="text" class="form-control" placeholder="Buscar por Nombre" v-model="search_filter">
+                                    <input type="text" class="form-control" placeholder="Buscar por Nombre" v-model="search_filter">                                    
+                                </div>
+                                <div class="col-sm">
+                                    <button class="btn btn-primary" v-on:click="filterUserName(search_filter)">Buscar</button>
                                 </div>
                                 <div class="col-sm">
                                     <nav aria-label="Page navigation example">
@@ -52,10 +55,10 @@
                                 </tr>
                             </thead>
                             <tbody v-for="(user, key) in users" :key="key">
-                                <tr v-if="search_filter =='' || filterUserName(user.name)">
-                                    <td v-if="user.deleted === 0">{{user.name}}</td>
-                                    <td v-if="user.deleted === 0">{{user.last_name}}</td>
-                                    <td v-if="user.deleted === 0">{{ 
+                                <tr v-if="user.deleted === 0">
+                                    <td >{{user.name}}</td>
+                                    <td>{{user.last_name}}</td>
+                                    <td>{{ 
                                             user.type_user === 1 ? 'Administrador' : 
                                             user.type_user === 2 ? 'Docente'       :
                                             user.type_user === 3 ? 'Estudiante'    :
@@ -63,7 +66,7 @@
                                             '( Usuario Sin Asignar )'
                                         }}
                                     </td>
-                                    <td v-if="user.deleted === 0"> 
+                                    <td> 
                                         <button type="button" class="btn btn-primary" v-on:click="()=>getUser(user)">
                                             Desactivar
                                         </button>
@@ -85,6 +88,11 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <div class="form-group">
+                        <label for="">Cargo</label>
+                        <input type="text" class="form-control" disabled v-model="user.cargo">
+                    </div>
+
                     <div class="form-group">
                         <label for="">Nombre</label>
                         <input type="text" class="form-control" disabled v-model="user.name">
@@ -129,13 +137,23 @@ export default {
     },
     mounted() {
         this.getUsers();
+
+        axios.get('getAllUsers').then((response)=>{
+            this.allUsers = response.data;
+        })
     },
     watch:{
-       actualPage: function(newVal, oldVal){
+        actualPage: function(newVal, oldVal){
             if(newVal !== oldVal){
                this.getUsers();
             }
-       } 
+        },
+
+        search_filter: function(newVal){
+            if(newVal === ''){
+                this.getUsers();
+            }
+        }
     },
     methods: {        
         getUsers(){
@@ -149,6 +167,11 @@ export default {
 
         getUser(user){
             this.user = user;
+            this.user.cargo = user.type_user === 1 ? 'Administrador' : 
+                        user.type_user === 2 ? 'Docente'       :
+                        user.type_user === 3 ? 'Estudiante'    :
+                        user.type_user === 4 ? 'Coordinador'   :
+                        '( Usuario Sin Asignar )'
             $('#exampleModal').modal('show');
         },
 
@@ -174,8 +197,9 @@ export default {
         },
 
         filterUserName(userName){
-            let data = userName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(this.search_filter.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""));            
-            return data            
+            axios.get(`specificUser/${userName}`).then((response)=>{
+                this.users = response.data
+            })
         },
     },
 };

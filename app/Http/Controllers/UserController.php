@@ -61,6 +61,11 @@ class UserController extends Controller
         }
     }
 
+    public function specificUser(String $name){
+        $user = User::where('name',$name)->get();
+        return response()->json($user);
+    }
+
     /**
      * login
      */

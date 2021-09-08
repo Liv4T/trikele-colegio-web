@@ -874,6 +874,7 @@ Route::get('/deleteUser', function(){
     return view('deleteUser');
 });
 Route::get('getAllUsersPaginated', 'UserController@getAllUsersPaginated');
+Route::get('specificUser/{name}','UserController@specificUser');
 
 Route::resource('progressAdminStudent','ProgressStudentAdminController');
 

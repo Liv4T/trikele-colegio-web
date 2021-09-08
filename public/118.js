@@ -125,6 +125,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -138,39 +146,50 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
+    var _this = this;
+
     this.getUsers();
+    axios.get('getAllUsers').then(function (response) {
+      _this.allUsers = response.data;
+    });
   },
   watch: {
     actualPage: function actualPage(newVal, oldVal) {
       if (newVal !== oldVal) {
         this.getUsers();
       }
+    },
+    search_filter: function search_filter(newVal) {
+      if (newVal === '') {
+        this.getUsers();
+      }
     }
   },
   methods: {
     getUsers: function getUsers() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get("getAllUsersPaginated?page=".concat(this.actualPage)).then(function (response) {
-        _this.totalPages = response.data.total;
-        _this.users = response.data.data;
-        _this.last_page = response.data.last_page;
+        _this2.totalPages = response.data.total;
+        _this2.users = response.data.data;
+        _this2.last_page = response.data.last_page;
         console.log(response.data);
       });
     },
     getUser: function getUser(user) {
       this.user = user;
+      this.user.cargo = user.type_user === 1 ? 'Administrador' : user.type_user === 2 ? 'Docente' : user.type_user === 3 ? 'Estudiante' : user.type_user === 4 ? 'Coordinador' : '( Usuario Sin Asignar )';
       $('#exampleModal').modal('show');
     },
     deleteUser: function deleteUser(id) {
-      var _this2 = this;
+      var _this3 = this;
 
       if (window.confirm('Seguro que desea desactivar este dato?')) {
         axios["delete"]("users/".concat(id)).then(function (response) {
           toastr.success(response.data);
           $('#exampleModal').modal('hide');
 
-          _this2.getUsers();
+          _this3.getUsers();
         });
       }
     },
@@ -184,8 +203,11 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     filterUserName: function filterUserName(userName) {
-      var data = userName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(this.search_filter.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
-      return data;
+      var _this4 = this;
+
+      axios.get("specificUser/".concat(userName)).then(function (response) {
+        _this4.users = response.data;
+      });
     }
   }
 });
@@ -238,6 +260,21 @@ var render = function() {
                       }
                     }
                   })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: {
+                        click: function($event) {
+                          return _vm.filterUserName(_vm.search_filter)
+                        }
+                      }
+                    },
+                    [_vm._v("Buscar")]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm" }, [
@@ -391,55 +428,47 @@ var render = function() {
                 _vm._v(" "),
                 _vm._l(_vm.users, function(user, key) {
                   return _c("tbody", { key: key }, [
-                    _vm.search_filter == "" || _vm.filterUserName(user.name)
+                    user.deleted === 0
                       ? _c("tr", [
-                          user.deleted === 0
-                            ? _c("td", [_vm._v(_vm._s(user.name))])
-                            : _vm._e(),
+                          _c("td", [_vm._v(_vm._s(user.name))]),
                           _vm._v(" "),
-                          user.deleted === 0
-                            ? _c("td", [_vm._v(_vm._s(user.last_name))])
-                            : _vm._e(),
+                          _c("td", [_vm._v(_vm._s(user.last_name))]),
                           _vm._v(" "),
-                          user.deleted === 0
-                            ? _c("td", [
+                          _c("td", [
+                            _vm._v(
+                              _vm._s(
+                                user.type_user === 1
+                                  ? "Administrador"
+                                  : user.type_user === 2
+                                  ? "Docente"
+                                  : user.type_user === 3
+                                  ? "Estudiante"
+                                  : user.type_user === 4
+                                  ? "Coordinador"
+                                  : "( Usuario Sin Asignar )"
+                              ) + "\n                                "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function() {
+                                    return _vm.getUser(user)
+                                  }
+                                }
+                              },
+                              [
                                 _vm._v(
-                                  _vm._s(
-                                    user.type_user === 1
-                                      ? "Administrador"
-                                      : user.type_user === 2
-                                      ? "Docente"
-                                      : user.type_user === 3
-                                      ? "Estudiante"
-                                      : user.type_user === 4
-                                      ? "Coordinador"
-                                      : "( Usuario Sin Asignar )"
-                                  ) + "\n                                "
+                                  "\n                                        Desactivar\n                                    "
                                 )
-                              ])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          user.deleted === 0
-                            ? _c("td", [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-primary",
-                                    attrs: { type: "button" },
-                                    on: {
-                                      click: function() {
-                                        return _vm.getUser(user)
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                        Desactivar\n                                    "
-                                    )
-                                  ]
-                                )
-                              ])
-                            : _vm._e()
+                              ]
+                            )
+                          ])
                         ])
                       : _vm._e()
                   ])
@@ -473,6 +502,32 @@ var render = function() {
               _vm._m(2),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "" } }, [_vm._v("Cargo")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.user.cargo,
+                        expression: "user.cargo"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", disabled: "" },
+                    domProps: { value: _vm.user.cargo },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.user, "cargo", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", { attrs: { for: "" } }, [_vm._v("Nombre")]),
                   _vm._v(" "),
