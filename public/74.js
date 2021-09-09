@@ -821,7 +821,7 @@ var render = function() {
                   staticClass: "btn btn-secondary",
                   attrs: { type: "button", "data-dismiss": "modal" }
                 },
-                [_vm._v("Close")]
+                [_vm._v("Cerrar")]
               ),
               _vm._v(" "),
               _c(
@@ -835,7 +835,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Save changes")]
+                [_vm._v("Guardar Cambios")]
               )
             ])
           ])

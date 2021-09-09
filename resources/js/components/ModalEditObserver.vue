@@ -82,7 +82,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-Primary" data-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary" v-on:click="updateObservation()">Save changes</button>
+                        <button type="button" class="btn btn-primary" v-on:click="updateObservation()">Actualizar</button>
                     </div>
                 </div>
             </div>

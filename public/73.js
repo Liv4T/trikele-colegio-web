@@ -704,7 +704,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Save changes")]
+                [_vm._v("Actualizar")]
               )
             ])
           ])
