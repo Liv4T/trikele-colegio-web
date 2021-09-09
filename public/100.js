@@ -401,7 +401,7 @@ var render = function() {
   return _c("div", [
     _vm._m(0),
     _vm._v(" "),
-    _c("div", { staticClass: "back" }, [
+    _c("div", [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-11 mx-auto" }, [
           _c("div", { staticClass: "custom-card text-center" }, [
@@ -566,7 +566,7 @@ var render = function() {
                                                   opt,
                                                   i
                                                 ) {
-                                                  return _c("tr", [
+                                                  return _c("tr", { key: i }, [
                                                     _c("td", [
                                                       _vm._v(
                                                         _vm._s(

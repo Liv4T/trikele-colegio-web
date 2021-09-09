@@ -89,6 +89,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -395,11 +396,10 @@ var render = function() {
                     ? _c(
                         "div",
                         [
-                          _c("notasd-component", {
+                          _c("porcentaje-component", {
                             attrs: {
                               id_area: _vm.Area_id,
-                              id_classroom: _vm.idClassroom,
-                              user: _vm.user
+                              id_classroom: _vm.idClassroom
                             }
                           })
                         ],

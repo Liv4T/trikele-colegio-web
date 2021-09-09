@@ -32,7 +32,8 @@
                         </div>
                         <div v-if="activetab === 3" class="tabcontent">
                             <div v-if="Area_id !=='' ">
-                                <notasd-component :id_area="Area_id" :id_classroom="idClassroom" :user="user"></notasd-component>
+                                <!-- <notasd-component :id_area="Area_id" :id_classroom="idClassroom" :user="user"></notasd-component> -->
+                                <porcentaje-component :id_area="Area_id" :id_classroom="idClassroom"></porcentaje-component>
                             </div>
                         </div>
                         <div v-if="activetab === 4" class="tabcontent">

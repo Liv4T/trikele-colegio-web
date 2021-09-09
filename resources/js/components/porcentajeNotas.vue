@@ -20,7 +20,7 @@
       crossorigin="anonymous"
     />
   </head>
-  <div class="back">
+  <div>
     <div class="row">
       <div class="col-md-11 mx-auto">
         <div class="custom-card text-center">
@@ -82,7 +82,7 @@
 
                                 <td>Eliminar</td>
                               </tr>
-                              <tr v-for="(opt,i) in fillI">
+                              <tr v-for="(opt,i) in fillI" :key="i">
                                 <td>{{ opt.type_activity }}</td>
 
                                 <td>{{ opt.activity_rate }}</td>
