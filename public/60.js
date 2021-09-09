@@ -348,6 +348,7 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
     if (this.id_class != 0) {
       axios.get("/api/teacher/module/".concat(this.id_module, "/class/").concat(this.id_class)).then(function (response) {
         _this.course = response.data;
+        console.log('Cursos', response.data);
 
         if (_this.course.content.length == 0) {
           _this.course.content = [{
@@ -367,7 +368,7 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
 
         if (_this.course.activities.length > 0) {
           _this.course.activities.forEach(function (act) {
-            act.delivery_max_date = act.delivery_max_date.replace(" ", "T");
+            act.delivery_max_date = act.delivery_max_date && delivery_max_date.replace(" ", "T");
             act.feedback_date = act.feedback_date.replace(" ", "T");
 
             _this.GetIndicatorsEvent(act);
@@ -1462,7 +1463,11 @@ var render = function() {
                                       _vm._v(" "),
                                       _c(
                                         "option",
-                                        { attrs: { value: "CUESTIONARIO" } },
+                                        {
+                                          attrs: {
+                                            value: "CUESTIONARIO_UNICA_RTA"
+                                          }
+                                        },
                                         [_vm._v("Cuestionario")]
                                       ),
                                       _vm._v(" "),
@@ -1762,7 +1767,8 @@ var render = function() {
                                 ])
                               ]),
                               _vm._v(" "),
-                              activity.activity_type == "CUESTIONARIO"
+                              activity.activity_type == "CUESTIONARIO" ||
+                              activity.activity_type == "CUESTIONARIO_UNICA_RTA"
                                 ? _c("activity-questionary", {
                                     attrs: {
                                       module: activity.module,

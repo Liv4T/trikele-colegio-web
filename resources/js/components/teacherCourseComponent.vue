@@ -126,9 +126,9 @@
                                                     </div>
                                                     <div class="col-4">
                                                         <label><span class="required">*</span>Tipo de actividad:</label>
-                                                        <select id="activity_type" class="form-control"  @change="selectActivityType(key_a,activity);"   v-model="activity.activity_type" v-bind:readonly="course.state==2">
+                                                        <select id="activity_type" class="form-control"  @change="selectActivityType(key_a,activity);" v-model="activity.activity_type" v-bind:readonly="course.state==2">
                                                                 <option value="">-- Seleccione --</option>
-                                                                <option value="CUESTIONARIO">Cuestionario</option>
+                                                                <option value="CUESTIONARIO_UNICA_RTA">Cuestionario</option>
                                                                 <option value="COMPLETAR_ORACION">Completar la oración</option>
                                                                 <option value="CRUCIGRAMA">Crucigrama</option>
                                                                 <option value="RELACION">Relación</option>
@@ -171,7 +171,7 @@
                                                         <input type="datetime-local" class="form-control" v-model="activity.feedback_date" />
                                                     </div>
                                                 </div>
-                                                <activity-questionary v-if="activity.activity_type=='CUESTIONARIO'" v-bind:module="activity.module" v-bind:disabled="course.state==2"></activity-questionary>
+                                                <activity-questionary v-if="activity.activity_type=='CUESTIONARIO' || activity.activity_type == 'CUESTIONARIO_UNICA_RTA'" v-bind:module="activity.module" v-bind:disabled="course.state==2"></activity-questionary>
                                                 <activity-complete-sentence v-if="activity.activity_type=='COMPLETAR_ORACION'" v-bind:module="activity.module" v-bind:disabled="course.state==2"></activity-complete-sentence>
                                                 <activity-relationship v-if="activity.activity_type=='RELACION'" v-bind:module="activity.module" v-bind:disabled="course.state==2"></activity-relationship>
                                                 <activity-crossword v-if="activity.activity_type=='CRUCIGRAMA'" v-bind:module="activity.module" v-bind:disabled="course.state==2"></activity-crossword>
@@ -349,6 +349,7 @@ export default {
         {
             axios.get(`/api/teacher/module/${this.id_module}/class/${this.id_class}`).then((response) => {
                     this.course=response.data;
+                    console.log('Cursos',response.data)
 
                     if(this.course.content.length==0)
                     {
@@ -374,7 +375,7 @@ export default {
                     if(this.course.activities.length>0)
                     {
                         this.course.activities.forEach(act=>{
-                            act.delivery_max_date=act.delivery_max_date.replace(" ","T");
+                            act.delivery_max_date=act.delivery_max_date && delivery_max_date.replace(" ","T");
                             act.feedback_date=act.feedback_date.replace(" ","T");
                             this.GetIndicatorsEvent(act);
                         });
