@@ -91,16 +91,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {},
   mounted: function mounted() {
-    var _this = this;
-
-    this.fillS = [];
-    this.getClasses();
-    var urls = window.location.origin + "/GetNameWeekly/" + this.id_module;
-    axios.get(urls).then(function (response) {
-      _this.nameWeekly = response.data;
-    });
+    this.getData();
   },
   methods: {
+    getData: function getData() {
+      var _this = this;
+
+      this.fillS = [];
+      this.getClasses();
+      var urls = window.location.origin + "/GetNameWeekly/" + this.id_module;
+      axios.get(urls).then(function (response) {
+        _this.nameWeekly = response.data;
+      });
+    },
     enabledClass: function enabledClass(clas) {
       var _this2 = this;
 
@@ -130,6 +133,7 @@ __webpack_require__.r(__webpack_exports__);
     backToPage: function backToPage() {
       this.showSection = 'listClass';
       this.clas_id = undefined;
+      this.getData();
     }
   }
 });

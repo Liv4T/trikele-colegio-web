@@ -207,11 +207,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 (function () {
   "use strict";
 
@@ -1814,7 +1809,7 @@ var render = function() {
             _c(
               "a",
               { staticClass: "btn btn-warning", on: { click: _vm.backToPage } },
-              [_vm._v("Cancelar")]
+              [_vm._v("Volder")]
             ),
             _vm._v(" "),
             _vm.course.state == 1

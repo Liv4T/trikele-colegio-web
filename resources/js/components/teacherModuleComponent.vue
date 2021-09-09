@@ -80,14 +80,17 @@ export default {
     },
     created() {},
     mounted() {
-        this.fillS = [];
-        this.getClasses();
-        var urls = window.location.origin + "/GetNameWeekly/" + this.id_module;
-        axios.get(urls).then(response => {
-            this.nameWeekly = response.data;
-        });
+        this.getData();
     },
     methods: {
+        getData(){
+            this.fillS = [];
+            this.getClasses();
+            var urls = window.location.origin + "/GetNameWeekly/" + this.id_module;
+            axios.get(urls).then(response => {
+                this.nameWeekly = response.data;
+            });
+        },
         enabledClass: function (clas){
             axios.put(`/api/admin/module/${this.id_module}/class/${clas.id}/close`).then(response => {
                 this.getClasses();
@@ -118,6 +121,7 @@ export default {
         backToPage(){
             this.showSection = 'listClass';
             this.clas_id = undefined;
+            this.getData();
         }
     }
 };

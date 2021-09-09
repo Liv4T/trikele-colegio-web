@@ -182,16 +182,11 @@
                                     </div><!--card -->
                                 </div>
                             </div>
-
-
-
-                    </div>
+                        </div>
                     <div class="div-weekly-plan-btn-save">
-                       <a class="btn btn-warning" v-on:click="backToPage">Cancelar</a>
+                       <a class="btn btn-warning" v-on:click="backToPage">Volder</a>
                        <button class="btn btn-primary" v-on:click="SaveDataEvent()" :disabled="is_loading" v-if="course.state==1">Guardar y enviar</button>
                     </div>
-
-
                 </div>
             </div>
         </div>
