@@ -185,24 +185,21 @@ export default {
           this.newSemanal.push(this.inputs[i]);
         }
       }
-      let ids = this.id_area.split('/');      
-      axios
-        .post(url, {
-          //Cursos generales
-          id_area: ids[0],
-          id_classroom: ids[1],
-          semana: this.newSemanal,
-          id_bimestre: this.bimestreId
-        })
-        .then((response) => {
-          this.errors = [];
+      let ids = this.id_area.split('/');
+      axios.post(url, {
+        //Cursos generales
+        id_area: ids[0] ? ids[0] : this.id_area,
+        id_classroom: ids[1] ? ids[1] : this.id_classroom,
+        semana: this.newSemanal,
+        id_bimestre: this.bimestreId
+      }).then((response) => {
+        this.errors = [];
 
-          toastr.success("Nueva semana creada exitosamente");
+        toastr.success("Nueva semana creada exitosamente");
           // this.getMenu();
-        })
-        .catch((error) => {
-          this.errors = error.response;
-        });
+      }).catch((error) => {
+        this.errors = error.response;
+      });
     },
   },
 };
