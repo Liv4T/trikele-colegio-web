@@ -56,7 +56,7 @@ class AdministratorController extends Controller
         foreach ($studentAssigned as $key => $stud) {
             $students[$key] = $stud->id_user;
         }
-        $users = User::where('type_user', 3)->whereNotIn('id', $students)->get();
+        $users = User::where('type_user', 3)->get();
         return $users;
     }
 

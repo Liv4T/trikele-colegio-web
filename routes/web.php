@@ -879,3 +879,8 @@ Route::get('specificUser/{name}','UserController@specificUser');
 Route::resource('progressAdminStudent','ProgressStudentAdminController');
 
 Route::post('assignCoord','AdministratorController@assignCoord');
+
+//Observer
+Route::resource('/observer', 'ObserverController');
+Route::get('/dataUsers', 'ObserverController@getDataParentsStudents');
+Route::get('getParents/{parent_id}', 'UserController@getParents');

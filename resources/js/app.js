@@ -240,4 +240,10 @@ Vue.component("list-area-component", ()=>import("./components/listAreasAdm.vue")
 Vue.component("student-progress-adm", ()=>import("./components/notasAdminStudets.vue"));
 Vue.component("delete-user", ()=>import('./components/deleteUsers.vue'));
 
+//Observer
+Vue.component("observer-component", () => import("./components/Observer.vue"));
+Vue.component("modal-observer-component", () => import("./components/ModalObserver.vue"));
+Vue.component("modal-edit-observer-component", () => import("./components/ModalEditObserver.vue"));
+Vue.component("modal-view-observer-component", () => import("./components/ModalViewObserver.vue"));
+
 const app = new Vue({el: "#app", data: {}, store});

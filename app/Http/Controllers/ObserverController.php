@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Observer;
+use App\User;
+use App\ClassroomTeacher;
+use App\ClassroomStudent;
+use Auth;
 use Illuminate\Http\Request;
 
 class ObserverController extends Controller
@@ -14,7 +18,19 @@ class ObserverController extends Controller
      */
     public function index()
     {
-        //
+        return view('observer');
+    }
+
+    public function getDataParentsStudents(){
+        $user_name = Auth::user()->name;
+        $user = Auth::user();
+        if($user->type_user == 1){
+            $observer = Observer::all();
+            return response()->json($observer);
+        }else{
+            $observer = Observer::where('user_creator','=', $user_name)->get();
+            return response()->json($observer);
+        }
     }
 
     /**
@@ -25,9 +41,9 @@ class ObserverController extends Controller
      */
     public function store(Request $request)
     {
-        $observer = new Observer();
-        $observer->creare($request->all());
-        return response()->json('Observación creada');
+        $observer = new Observer;
+        $observer->create($request->all());
+        return $observer;
     }
 
     /**
@@ -42,6 +58,17 @@ class ObserverController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Observer  $observer
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Observer $observer)
+    {
+        //
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -50,8 +77,11 @@ class ObserverController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Observer::find($id)->update($request->all());
-        return response()->json('Observación actualizada');
+        $observer = Observer::findOrFail($id);
+        $data = $request->all();
+        $observer->fill($data)->save();
+
+        return response()->json('Data Updated');
     }
 
     /**
@@ -62,9 +92,8 @@ class ObserverController extends Controller
      */
     public function destroy(Observer $observer)
     {
-        $observer = Observer::find($id)->get();
-        $observer->deleted = 1;
-
-        return response()->json('Observación desactivada');
+        $observer = Observer::find($id);
+        $observer->delete();
+        return response()->json('Data Deleted');
     }
 }

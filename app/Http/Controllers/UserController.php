@@ -287,4 +287,9 @@ class UserController extends Controller
         // Volvemos al login y mostramos un mensaje indicando que se cerró la sesión
         return Redirect::to('login');
     }
+
+    public function getParents(String $id){
+        $parents = User::where('parent_id','=',$id)->get();
+        return response()->json($parents);
+    }
 }

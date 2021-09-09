@@ -14,16 +14,30 @@ class CreateObserversTable extends Migration
     public function up()
     {
         Schema::create('observers', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('id_instructor');
-            $table->integer('id_student');            
-            $table->string('id_father');
-            $table->string('id_mother');
-            $table->string('father_profession');
-            $table->string('mother_profession');
-            $table->string('age_student');
-            $table->string('observation');
-            $table->boolean('deleted');
+            $table->increments('id');
+            $table->string('name_student');
+            $table->integer('id_student')->unsigned();
+            $table->integer('age');
+            $table->date('date_birth');
+            $table->string('size');
+            $table->string('weight');
+            $table->bigInteger('identification');
+            $table->string('father_name')->nullable();
+            $table->string('office_father')->nullable();
+            $table->string('mother_name')->nullable();
+            $table->string('office_mother')->nullable();
+            $table->string('user_creator');
+            $table->string('address');
+            $table->string('phone');
+            $table->boolean('repitent');
+            $table->text('observation');
+
+            $table->foreign('id_student')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
             $table->timestamps();
         });
     }
