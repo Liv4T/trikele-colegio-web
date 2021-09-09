@@ -20,7 +20,7 @@
       crossorigin="anonymous"
     />
   </head>
-  <div class="back">
+  <div>
     <div class="row">
       <div class="col-md-11 mx-auto">
         <div class="custom-card text-center">
@@ -82,7 +82,7 @@
 
                                 <td>Eliminar</td>
                               </tr>
-                              <tr v-for="(opt,i) in fillI">
+                              <tr v-for="(opt,i) in fillI" :key="i">
                                 <td>{{ opt.type_activity }}</td>
 
                                 <td>{{ opt.activity_rate }}</td>
@@ -153,7 +153,7 @@
                     <input
                       type="submit"
                       class="btn btn-warning"
-                      v-on:click.prevent="createIndicator()"
+                      v-on:click="createIndicator()"
                       value="Guardar"
                     />
                   </div>
@@ -277,17 +277,20 @@ export default {
     };
   },
   mounted() {
-    var urlsel =
-      window.location.origin +
-      "/coursePlanification/" +
-      this.id_area +
-      "/" +
-      this.id_classroom;
-    axios.get(urlsel).then((response) => {
-      this.fillC = response.data;
-    });
+    this.getData();
   },
   methods: {
+    getData(){
+      var urlsel =
+        window.location.origin +
+        "/coursePlanification/" +
+        this.id_area +
+        "/" +
+        this.id_classroom;
+      axios.get(urlsel).then((response) => {
+        this.fillC = response.data;
+      });
+    },
     getMenu() {
       window.location = "/actividad_g";
     },
@@ -328,10 +331,10 @@ export default {
         })
         .then((response) => {
           this.errors = [];
-
           toastr.success("Nueva actividad creada exitosamente");
-
-          this.getInd();
+          // this.getInd();
+          this.getData();
+          $("#createZ").modal('hide');
         })
         .catch((error) => {
           this.errors = error.response.data;
@@ -382,7 +385,8 @@ export default {
 
           toastr.success("Actividad eliminada exitosamente");
           this.fillI.splice(this.index,1);
-          this.getInd();
+          // this.getInd();
+          this.getData();
         })
         .catch((error) => {
           this.errors = error.response.data;

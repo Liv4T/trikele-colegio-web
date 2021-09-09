@@ -738,7 +738,18 @@ class ClassController extends Controller
                 if(isset($activity['id']))
                 {
                     $id_activity=$activity['id'];
-                    Activity::where('id',$activity['id'])->update(array('deleted'=>0,'state'=>1,'id_achievement'=>$activity['id_achievement'],'name'=>$activity['name'],'description'=>$activity['description'],'activity_type'=>$activity['activity_type'],'is_required'=>1,'updated_user'=>$auth->id,'delivery_max_date'=>$activity['delivery_max_date'],'feedback_date'=>$activity['feedback_date']));
+                    Activity::where('id',$activity['id'])->update(array(
+                        'deleted'=>0,
+                        'state'=>1,
+                        'id_achievement'=>$activity['id_achievement'],
+                        'name'=>$activity['name'],
+                        'description'=>$activity['description'],
+                        'activity_type'=>$activity['activity_type'],
+                        'is_required'=>1,'updated_user'=>$auth->id,
+                        'delivery_max_date'=>$activity['delivery_max_date'],
+                        'feedback_date'=>$activity['feedback_date'],
+                        'id_indicator'=>$activity['id_indicator']),                        
+                    );
                 }
                 else
                 {

@@ -108,7 +108,7 @@
           this.showSection = "cycle";
         }
       },
-      backPage() {
+      backPage() {        
         this.id_area_selected = null;
         this.id_classroom_selected = null;
         this.showSection = "principal";
