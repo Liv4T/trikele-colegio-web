@@ -153,7 +153,7 @@
                     <input
                       type="submit"
                       class="btn btn-warning"
-                      v-on:click.prevent="createIndicator()"
+                      v-on:click="createIndicator()"
                       value="Guardar"
                     />
                   </div>
@@ -277,17 +277,20 @@ export default {
     };
   },
   mounted() {
-    var urlsel =
-      window.location.origin +
-      "/coursePlanification/" +
-      this.id_area +
-      "/" +
-      this.id_classroom;
-    axios.get(urlsel).then((response) => {
-      this.fillC = response.data;
-    });
+    this.getData();
   },
   methods: {
+    getData(){
+      var urlsel =
+        window.location.origin +
+        "/coursePlanification/" +
+        this.id_area +
+        "/" +
+        this.id_classroom;
+      axios.get(urlsel).then((response) => {
+        this.fillC = response.data;
+      });
+    },
     getMenu() {
       window.location = "/actividad_g";
     },
@@ -328,10 +331,10 @@ export default {
         })
         .then((response) => {
           this.errors = [];
-
           toastr.success("Nueva actividad creada exitosamente");
-
-          this.getInd();
+          // this.getInd();
+          this.getData();
+          $("#createZ").modal('hide');
         })
         .catch((error) => {
           this.errors = error.response.data;
@@ -382,7 +385,8 @@ export default {
 
           toastr.success("Actividad eliminada exitosamente");
           this.fillI.splice(this.index,1);
-          this.getInd();
+          // this.getInd();
+          this.getData();
         })
         .catch((error) => {
           this.errors = error.response.data;

@@ -268,14 +268,17 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
     }, _defineProperty(_ref, "newTrimestre", []), _defineProperty(_ref, "newLogro", []), _defineProperty(_ref, "trimestre", false), _defineProperty(_ref, "logro_1", ""), _defineProperty(_ref, "logro_2", ""), _defineProperty(_ref, "logro_3", ""), _defineProperty(_ref, "logro_4", ""), _defineProperty(_ref, "fillC", []), _defineProperty(_ref, "fillI", []), _defineProperty(_ref, "anual", []), _defineProperty(_ref, "newAnual", []), _defineProperty(_ref, "errors", []), _defineProperty(_ref, "id_logro", ""), _defineProperty(_ref, "id_indicator", 0), _defineProperty(_ref, "index", 0), _ref;
   },
   mounted: function mounted() {
-    var _this = this;
-
-    var urlsel = window.location.origin + "/coursePlanification/" + this.id_area + "/" + this.id_classroom;
-    axios.get(urlsel).then(function (response) {
-      _this.fillC = response.data;
-    });
+    this.getData();
   },
   methods: {
+    getData: function getData() {
+      var _this = this;
+
+      var urlsel = window.location.origin + "/coursePlanification/" + this.id_area + "/" + this.id_classroom;
+      axios.get(urlsel).then(function (response) {
+        _this.fillC = response.data;
+      });
+    },
     getMenu: function getMenu() {
       window.location = "/actividad_g";
     },
@@ -322,9 +325,11 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
         activity_rate: this.porcentaje
       }).then(function (response) {
         _this3.errors = [];
-        toastr.success("Nueva actividad creada exitosamente");
+        toastr.success("Nueva actividad creada exitosamente"); // this.getInd();
 
-        _this3.getInd();
+        _this3.getData();
+
+        $("#createZ").modal('hide');
       })["catch"](function (error) {
         _this3.errors = error.response.data;
       });
@@ -371,9 +376,10 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
         _this4.errors = [];
         toastr.success("Actividad eliminada exitosamente");
 
-        _this4.fillI.splice(_this4.index, 1);
+        _this4.fillI.splice(_this4.index, 1); // this.getInd();
 
-        _this4.getInd();
+
+        _this4.getData();
       })["catch"](function (error) {
         _this4.errors = error.response.data;
       });
@@ -776,7 +782,6 @@ var render = function() {
                           attrs: { type: "submit", value: "Guardar" },
                           on: {
                             click: function($event) {
-                              $event.preventDefault()
                               return _vm.createIndicator()
                             }
                           }
