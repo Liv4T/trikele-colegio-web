@@ -13,6 +13,19 @@
                 <div class="modal-body">
                     <h3>Información del Estudiante</h3>
                     <div class="row">
+                        <div v-if="areas.length > 0" class="col-6">
+                            <label for="name">Area</label>
+                            <multiselect v-model="areaToSave" :options="areas" :multiple="false"
+                                :close-on-select="false" :clear-on-select="false" :preserve-search="true"
+                                placeholder="Seleccione una o varias" label="text" track-by="id"
+                                :preselect-first="false">
+                                <template slot="selection" slot-scope="{ values, isOpen }"><span
+                                        class="multiselect__single"
+                                        required
+                                        v-if="values.length &amp;&amp; !isOpen">{{ values.length }} opciones
+                                        selecionadas</span></template>
+                            </multiselect>
+                        </div>
                         <div class="col-6">
                             <label for="name">Nombre</label>
                             <multiselect v-model="studentToSave" :options="studentsOptions" :multiple="false"
@@ -141,6 +154,7 @@
                 parents:[],
                 students:[],
                 areas:[],
+                areaToSave:{},
                 current_area:{}
             }
         },
@@ -150,12 +164,14 @@
         mounted(){
             if(this.user.type_user === 2){
                 axios.get('/GetArearByUser').then(response => {
-                    this.areas = response.data;
-
-                    if(this.areas.length>0)
-                    {
-                        this.current_area=this.areas[0];
-                        this.getStudents();
+                    this.areas = [];
+                    for(let i = 0; response.data.length > i; i++){
+                        this.areas.push({
+                            id: i,
+                            id_area:response.data[i].id,
+                            text: response.data[i].text,
+                            id_classroom: response.data[i].id_classroom
+                        })
                     }
                 });
             }else if(this.user.type_user === 1){
@@ -166,6 +182,12 @@
             studentToSave: function(newVal, oldVal){                
                 if(newVal.id !== oldVal.id){                    
                     this.getParents(newVal.id);
+                }
+            },
+
+            areaToSave: function(newVal, oldVal){
+                if(newVal !== oldVal){
+                    this.getStudents();
                 }
             }
         },
@@ -187,6 +209,8 @@
 
             getStudents(){
                 this.students = [];
+                this.studentsOptions = [];
+                
                 if(this.user.type_user === 1){
                     axios.get(`getStudents`).then(response => {
                         this.students = response.data;
@@ -201,7 +225,7 @@
                 }
 
                 if(this.user.type_user === 2){
-                    axios.get(`/api/teacher/area/${this.current_area.id}/classroom/${this.current_area.id_classroom}/student`).then(response => {
+                    axios.get(`/api/teacher/area/${this.areaToSave.id_area}/classroom/${this.areaToSave.id_classroom}/student`).then(response => {
                         this.students = response.data;
                         this.students.forEach(e => {   
                             this.studentsOptions.push({

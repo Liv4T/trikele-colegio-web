@@ -126,6 +126,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 Vue.component("multiselect", vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -153,6 +166,7 @@ Vue.component("multiselect", vue_multiselect__WEBPACK_IMPORTED_MODULE_0___defaul
       parents: [],
       students: [],
       areas: [],
+      areaToSave: {},
       current_area: {}
     };
   },
@@ -164,12 +178,15 @@ Vue.component("multiselect", vue_multiselect__WEBPACK_IMPORTED_MODULE_0___defaul
 
     if (this.user.type_user === 2) {
       axios.get('/GetArearByUser').then(function (response) {
-        _this.areas = response.data;
+        _this.areas = [];
 
-        if (_this.areas.length > 0) {
-          _this.current_area = _this.areas[0];
-
-          _this.getStudents();
+        for (var i = 0; response.data.length > i; i++) {
+          _this.areas.push({
+            id: i,
+            id_area: response.data[i].id,
+            text: response.data[i].text,
+            id_classroom: response.data[i].id_classroom
+          });
         }
       });
     } else if (this.user.type_user === 1) {
@@ -180,6 +197,11 @@ Vue.component("multiselect", vue_multiselect__WEBPACK_IMPORTED_MODULE_0___defaul
     studentToSave: function studentToSave(newVal, oldVal) {
       if (newVal.id !== oldVal.id) {
         this.getParents(newVal.id);
+      }
+    },
+    areaToSave: function areaToSave(newVal, oldVal) {
+      if (newVal !== oldVal) {
+        this.getStudents();
       }
     }
   },
@@ -205,6 +227,7 @@ Vue.component("multiselect", vue_multiselect__WEBPACK_IMPORTED_MODULE_0___defaul
       var _this3 = this;
 
       this.students = [];
+      this.studentsOptions = [];
 
       if (this.user.type_user === 1) {
         axios.get("getStudents").then(function (response) {
@@ -221,7 +244,7 @@ Vue.component("multiselect", vue_multiselect__WEBPACK_IMPORTED_MODULE_0___defaul
       }
 
       if (this.user.type_user === 2) {
-        axios.get("/api/teacher/area/".concat(this.current_area.id, "/classroom/").concat(this.current_area.id_classroom, "/student")).then(function (response) {
+        axios.get("/api/teacher/area/".concat(this.areaToSave.id_area, "/classroom/").concat(this.areaToSave.id_classroom, "/student")).then(function (response) {
           _this3.students = response.data;
 
           _this3.students.forEach(function (e) {
@@ -309,6 +332,71 @@ var render = function() {
               _c("h3", [_vm._v("Información del Estudiante")]),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
+                _vm.areas.length > 0
+                  ? _c(
+                      "div",
+                      { staticClass: "col-6" },
+                      [
+                        _c("label", { attrs: { for: "name" } }, [
+                          _vm._v("Area")
+                        ]),
+                        _vm._v(" "),
+                        _c("multiselect", {
+                          attrs: {
+                            options: _vm.areas,
+                            multiple: false,
+                            "close-on-select": false,
+                            "clear-on-select": false,
+                            "preserve-search": true,
+                            placeholder: "Seleccione una o varias",
+                            label: "text",
+                            "track-by": "id",
+                            "preselect-first": false
+                          },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "selection",
+                                fn: function(ref) {
+                                  var values = ref.values
+                                  var isOpen = ref.isOpen
+                                  return [
+                                    values.length && !isOpen
+                                      ? _c(
+                                          "span",
+                                          {
+                                            staticClass: "multiselect__single",
+                                            attrs: { required: "" }
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(values.length) +
+                                                " opciones\n                                    selecionadas"
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  ]
+                                }
+                              }
+                            ],
+                            null,
+                            false,
+                            2219469933
+                          ),
+                          model: {
+                            value: _vm.areaToSave,
+                            callback: function($$v) {
+                              _vm.areaToSave = $$v
+                            },
+                            expression: "areaToSave"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
                 _c(
                   "div",
                   { staticClass: "col-6" },
