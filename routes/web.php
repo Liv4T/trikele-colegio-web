@@ -889,3 +889,8 @@ Route::middleware('auth')->get('/pariente_asignar', function () {
     return view('asignarPariente');
 });
 Route::put('assignParent/{user_id}','AdministratorController@assignParent');
+
+Route::middleware('auth')->get('/getParentsObserver', function () {
+    return view('/getParentsObserver');
+});
+Route::get('/dataObserver', 'ParentsController@getDataObserverStudents');

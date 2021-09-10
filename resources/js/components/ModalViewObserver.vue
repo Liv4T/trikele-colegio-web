@@ -69,7 +69,7 @@
                         </div>
                         <div class="col-6 mt-3">    
                             <label for="Repitente">Repitente</label>
-                            <input disabled type="checkbox" class="ml-2" id="Repitent" v-model="newStudentView.repitent" required>
+                            <input disabled type="checkbox" class="ml-2" id="Repitent" :checked="newStudentView.repitent === 0 ? false : true" required>
                         </div>
                     </div>
                     <h3 class="mt-2">Anotación de la Observación</h3>

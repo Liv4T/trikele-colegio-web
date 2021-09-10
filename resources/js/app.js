@@ -247,4 +247,8 @@ Vue.component("modal-edit-observer-component", () => import("./components/ModalE
 Vue.component("modal-view-observer-component", () => import("./components/ModalViewObserver.vue"));
 Vue.component("asignar-pariente",()=>import('./components/asignarPariente.vue'));
 
+//Menu Padres
+Vue.component("menu-padres",()=>import("./components/menuPadres.vue"));
+Vue.component("parents-observer", () => import("./components/ParentsObserver.vue"));
+
 const app = new Vue({el: "#app", data: {}, store});
