@@ -432,6 +432,7 @@ Route::middleware('auth')->get('/enviados', function () {
 
 Route::get('getUsers', 'AdministratorController@indexUsers')->name('getUsers');
 Route::get('getStudents', 'AdministratorController@indexStudents')->name('getStudents');
+Route::get('getParents','AdministratorController@getParents');
 Route::get('getCoords', 'AdministratorController@indexCoords')->name('getCoords');
 Route::get('getTeachers', 'AdministratorController@indexTeachers')->name('getTeachers');
 Route::get('getUsersAssigned', 'AdministratorController@indexStudentsTeachersAssigned')->name('getUsersAssigned');
@@ -884,3 +885,7 @@ Route::post('assignCoord','AdministratorController@assignCoord');
 Route::resource('/observer', 'ObserverController');
 Route::get('/dataUsers', 'ObserverController@getDataParentsStudents');
 Route::get('getParents/{parent_id}', 'UserController@getParents');
+Route::middleware('auth')->get('/pariente_asignar', function () {
+    return view('asignarPariente');
+});
+Route::put('assignParent/{user_id}','AdministratorController@assignParent');

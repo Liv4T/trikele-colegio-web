@@ -245,5 +245,6 @@ Vue.component("observer-component", () => import("./components/Observer.vue"));
 Vue.component("modal-observer-component", () => import("./components/ModalObserver.vue"));
 Vue.component("modal-edit-observer-component", () => import("./components/ModalEditObserver.vue"));
 Vue.component("modal-view-observer-component", () => import("./components/ModalViewObserver.vue"));
+Vue.component("asignar-pariente",()=>import('./components/asignarPariente.vue'));
 
 const app = new Vue({el: "#app", data: {}, store});

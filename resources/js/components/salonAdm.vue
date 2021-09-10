@@ -32,9 +32,15 @@
                         >
                         <a
                             class="btn btn-warning float-right"
+                            href="/pariente_asignar"
+                            style="margin-left:10px;"
+                            >Asignar Pariente</a
+                        >
+                        <a
+                            class="btn btn-warning float-right"
                             href="/docente_asignar"
                             >Asignar docente</a
-                        >
+                        >                        
 
                         <br />
                         <br />
@@ -137,6 +143,9 @@
                                                     >
                                                     <option value="3"
                                                         >Estudiante</option
+                                                    >
+                                                    <option value="5"
+                                                        >Pariente</option
                                                     >
                                                 </select>
                                             </div>

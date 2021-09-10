@@ -60,6 +60,18 @@ class AdministratorController extends Controller
         return $users;
     }
 
+    public function getParents(){
+        $users = User::where('type_user',5)->get();
+        return $users;
+    }
+
+    public function assignParent(Request $request, $id){        
+        $parent = User::where('id',$id)->first();        
+        $parent->parent_id = $request->parent_id;
+        $parent->update();
+        return response()->json('Asignación Realizada');
+    }
+
     public function indexCoords()
     {        
         $coords = User::where('type_user',4)->get();
