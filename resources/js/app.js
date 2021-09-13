@@ -253,4 +253,6 @@ Vue.component("parents-observer", () => import("./components/ParentsObserver.vue
 
 Vue.component("modal-preview",()=>import("./components/ModalPreviewClass.vue"));
 
+Vue.component("change-grade",()=>import("./components/changeGrade.vue"));
+
 const app = new Vue({el: "#app", data: {}, store});

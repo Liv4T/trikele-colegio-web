@@ -894,3 +894,9 @@ Route::middleware('auth')->get('/getParentsObserver', function () {
     return view('/getParentsObserver');
 });
 Route::get('/dataObserver', 'ParentsController@getDataObserverStudents');
+
+Route::get('getStudentsByGrade/{grade_id}','ChangeGradeController@getStudentsByGrade');
+
+Route::middleware('auth')->get('/changeGrade', function () {
+    return view('changeGrade');
+});
