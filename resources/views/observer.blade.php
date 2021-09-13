@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <menu-adm></menu-adm>
+    @if (Auth::user()->type_user == '1')
+        <menu-adm></menu-adm>
+    @endif
+    @if (Auth::user()->type_user == '2')
+        <menu-docente-2></menu-docente-2>
+    @endif    
     <observer-component :user="{{Auth::user()}}"></observer-component>
     <footers></footers>
 <div class="container">

@@ -11,6 +11,9 @@
   @if (Auth::user()->type_user == '1')
     <menu-adm></menu-adm>
  @endif
+ @if (Auth::user()->type_user == '5')
+    <menu-padres></menu-padres>
+ @endif
   <student-calendar-component :type_u="{{ $type_user }}"></student-calendar-component>
   <footers></footers>
 <div class="container">

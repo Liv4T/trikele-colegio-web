@@ -34,8 +34,14 @@
                                     </div>
                                 </li>
                             </a>
-                        </div>                        
-                        <a href="/observer">
+                        </div>         
+                        <a href="/estudiante/calendario">
+                            <li class="item-menu">
+                                <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/HORARIO_narnja.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad" alt/>
+                                <span class="menu">Calendario</span>
+                            </li>
+                        </a>               
+                        <a href="/getParentsObserver">
                             <li class="item-menu">
                                 <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MIS-CURSOS.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad" alt/>
                                 <span class="menu">Observador</span>

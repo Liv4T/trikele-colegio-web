@@ -46,9 +46,15 @@
                             </li>
                         </a>
                         <a href="/docente/estudiantes">
-                            <li class="item-menu">
-                                <span class="menu letra-boldfont">MIS ESTUDIANTES</span>
-                            </li>
+                          <li class="item-menu">
+                              <span class="menu letra-boldfont">MIS ESTUDIANTES</span>
+                          </li>
+                        </a>
+                        <a href="/observer">
+                          <li class="item-menu">
+                            <span class="menu letra-boldfont">OBSERVADOR</span>
+                          </li>
+                         
                         </a>
                         <!-- <div class="dropdown2">
                             <a>

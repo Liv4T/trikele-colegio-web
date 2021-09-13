@@ -209,12 +209,12 @@ class EventsController extends Controller
         $date =  Carbon::now();
 
 
-       if (isset($user) && $user->type_user == 3) {
+       if (isset($user)) {
 
         $events_student=DB::table('classroom_student')
                         ->join('eventos', 'classroom_student.id_classroom', '=', 'eventos.id_classroom')
                         ->select('eventos.*')
-                        ->where('classroom_student.id_user', $user->id)
+                        ->where('classroom_student.id_user', $user->type_user == 3 ? $user->id : $user->parent_id)
                         ->where('eventos.date_to','>=',$current_date)
                         ->orderBy('eventos.date_from')
                         ->get();
@@ -244,7 +244,7 @@ class EventsController extends Controller
             }
 
             //lectives events
-            $plans_student = LectiveStudent::where('id_student', $user->id)->where('deleted', 0)->get();
+            $plans_student = LectiveStudent::where('id_student', $user->type_user == 3 ? $user->id : $user->parent_id)->where('deleted', 0)->get();
             foreach ($plans_student as $i_plan_student => $plan_student) {
                 $planifications = LectivePlanification::where('id', $plan_student->id_lective_planification)->where('deleted', 0)->where('state', 1)->get();
 
