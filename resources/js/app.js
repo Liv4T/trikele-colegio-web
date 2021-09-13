@@ -251,4 +251,6 @@ Vue.component("asignar-pariente",()=>import('./components/asignarPariente.vue'))
 Vue.component("menu-padres",()=>import("./components/menuPadres.vue"));
 Vue.component("parents-observer", () => import("./components/ParentsObserver.vue"));
 
+Vue.component("modal-preview",()=>import("./components/ModalPreviewClass.vue"));
+
 const app = new Vue({el: "#app", data: {}, store});

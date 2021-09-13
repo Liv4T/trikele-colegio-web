@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="showPreview === false">
         <!-- <div class="back"> -->
         <div>
             <div class="row justify-content-center">
@@ -182,19 +182,18 @@
                                     </div><!--card -->
                                 </div>
                             </div>
-
-
-
                     </div>
                     <div class="div-weekly-plan-btn-save">
                        <a class="btn btn-warning" v-on:click="backToPage">Cancelar</a>
+                       <a class="btn btn-primary" v-on:click="getPreview" >Previsualización de clase</a>
                        <button class="btn btn-primary" v-on:click="SaveDataEvent()" :disabled="is_loading" v-if="course.state==1">Guardar y enviar</button>
                     </div>
-
-
                 </div>
             </div>
         </div>
+    </div>
+    <div v-else-if="showPreview === true">
+        <modal-preview :course="course" :backPreview="backPreview"></modal-preview>
     </div>
 </template>
 <script>
@@ -243,6 +242,7 @@ export default {
             is_loading:false,
             weekly_plan:{},
             errors: [],
+            showPreview:false,
             weekly_plan_detail:[],
 
             course:{
@@ -375,7 +375,7 @@ export default {
                     if(this.course.activities.length>0)
                     {
                         this.course.activities.forEach(act=>{
-                            act.delivery_max_date=act.delivery_max_date && delivery_max_date.replace(" ","T");
+                            act.delivery_max_date=act.delivery_max_date ? act.delivery_max_date && delivery_max_date.replace(" ","T") : '';
                             act.feedback_date=act.feedback_date.replace(" ","T");
                             this.GetIndicatorsEvent(act);
                         });
@@ -537,6 +537,14 @@ export default {
             return this.indicators.filter(item => {
                 return item.id_achievement==id_achievement;
             })
+        },
+        getPreview(){
+            this.showPreview = true;
+            $("#previewClassModal").modal("show");
+        },
+        backPreview(){
+            this.showPreview = false;
+            $("#previewClassModal").modal("hide");
         }
 
     },

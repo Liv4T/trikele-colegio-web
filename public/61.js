@@ -211,7 +211,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 (function () {
   "use strict";
 
@@ -250,6 +249,7 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
       is_loading: false,
       weekly_plan: {},
       errors: [],
+      showPreview: false,
       weekly_plan_detail: [],
       course: {
         content: [{
@@ -368,7 +368,7 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
 
         if (_this.course.activities.length > 0) {
           _this.course.activities.forEach(function (act) {
-            act.delivery_max_date = act.delivery_max_date && delivery_max_date.replace(" ", "T");
+            act.delivery_max_date = act.delivery_max_date ? act.delivery_max_date && delivery_max_date.replace(" ", "T") : '';
             act.feedback_date = act.feedback_date.replace(" ", "T");
 
             _this.GetIndicatorsEvent(act);
@@ -525,6 +525,14 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
       return this.indicators.filter(function (item) {
         return item.id_achievement == id_achievement;
       });
+    },
+    getPreview: function getPreview() {
+      this.showPreview = true;
+      $("#previewClassModal").modal("show");
+    },
+    backPreview: function backPreview() {
+      this.showPreview = false;
+      $("#previewClassModal").modal("hide");
     }
   },
   computed: {}
@@ -596,1253 +604,1337 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-12 mx-auto" }, [
-          _c("div", { staticClass: "custom-card text-center" }, [
-            _c("h5", { staticClass: "card-header fondo" }, [
-              _vm._v(_vm._s(_vm.weekly_plan.name))
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "classroom-label" }, [
-              _vm._v(_vm._s(_vm.nameArea))
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "div-classes" }, [
-            _c(
-              "div",
-              { staticClass: "div-class" },
-              [
-                _c("div", { staticClass: "title row" }, [
-                  _c("div", { staticClass: "col-8" }, [
-                    _vm._m(0),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.course.name,
-                          expression: "course.name"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "text", readonly: _vm.course.state == 2 },
-                      domProps: { value: _vm.course.name },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.course, "name", $event.target.value)
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-4" }, [
-                    _vm._m(1),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.course.hourly_intensity,
-                          expression: "course.hourly_intensity"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "number",
-                        readonly: _vm.course.state == 2
-                      },
-                      domProps: { value: _vm.course.hourly_intensity },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.course,
-                            "hourly_intensity",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    })
-                  ])
+  return _vm.showPreview === false
+    ? _c("div", [
+        _c("div", [
+          _c("div", { staticClass: "row justify-content-center" }, [
+            _c("div", { staticClass: "col-md-12 mx-auto" }, [
+              _c("div", { staticClass: "custom-card text-center" }, [
+                _c("h5", { staticClass: "card-header fondo" }, [
+                  _vm._v(_vm._s(_vm.weekly_plan.name))
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-12" }, [
-                    _vm._m(2),
-                    _vm._v(" "),
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.course.description,
-                          expression: "course.description"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        cols: "40",
-                        rows: "4",
-                        readonly: _vm.course.state == 2
-                      },
-                      domProps: { value: _vm.course.description },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.course,
-                            "description",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "row ml-4" }, [
-                  _c("div", { staticClass: "col-4" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.activityForAllStudents,
-                          expression: "activityForAllStudents"
-                        }
-                      ],
-                      attrs: {
-                        type: "checkbox",
-                        id: "students",
-                        name: "students"
-                      },
-                      domProps: {
-                        checked: Array.isArray(_vm.activityForAllStudents)
-                          ? _vm._i(_vm.activityForAllStudents, null) > -1
-                          : _vm.activityForAllStudents
-                      },
-                      on: {
-                        change: function($event) {
-                          var $$a = _vm.activityForAllStudents,
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = null,
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 &&
-                                (_vm.activityForAllStudents = $$a.concat([$$v]))
-                            } else {
-                              $$i > -1 &&
-                                (_vm.activityForAllStudents = $$a
-                                  .slice(0, $$i)
-                                  .concat($$a.slice($$i + 1)))
-                            }
-                          } else {
-                            _vm.activityForAllStudents = $$c
-                          }
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-check-label",
-                        attrs: { for: "flexCheckDefault" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                                    Todos los Estudiantes\n                                "
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-4" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.activityForPIARStudents,
-                          expression: "activityForPIARStudents"
-                        }
-                      ],
-                      attrs: { type: "checkbox", id: "piar", name: "students" },
-                      domProps: {
-                        checked: Array.isArray(_vm.activityForPIARStudents)
-                          ? _vm._i(_vm.activityForPIARStudents, null) > -1
-                          : _vm.activityForPIARStudents
-                      },
-                      on: {
-                        change: function($event) {
-                          var $$a = _vm.activityForPIARStudents,
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = null,
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 &&
-                                (_vm.activityForPIARStudents = $$a.concat([
-                                  $$v
-                                ]))
-                            } else {
-                              $$i > -1 &&
-                                (_vm.activityForPIARStudents = $$a
-                                  .slice(0, $$i)
-                                  .concat($$a.slice($$i + 1)))
-                            }
-                          } else {
-                            _vm.activityForPIARStudents = $$c
-                          }
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-check-label",
-                        attrs: { for: "flexCheckDefault1" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                                    Estudiantes PIAR\n                                "
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-4" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.activityForSelectStudents,
-                          expression: "activityForSelectStudents"
-                        }
-                      ],
-                      attrs: {
-                        type: "checkbox",
-                        id: "specific",
-                        name: "students"
-                      },
-                      domProps: {
-                        checked: Array.isArray(_vm.activityForSelectStudents)
-                          ? _vm._i(_vm.activityForSelectStudents, null) > -1
-                          : _vm.activityForSelectStudents
-                      },
-                      on: {
-                        change: function($event) {
-                          var $$a = _vm.activityForSelectStudents,
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = null,
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 &&
-                                (_vm.activityForSelectStudents = $$a.concat([
-                                  $$v
-                                ]))
-                            } else {
-                              $$i > -1 &&
-                                (_vm.activityForSelectStudents = $$a
-                                  .slice(0, $$i)
-                                  .concat($$a.slice($$i + 1)))
-                            }
-                          } else {
-                            _vm.activityForSelectStudents = $$c
-                          }
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-check-label",
-                        attrs: { for: "flexCheckDefault2" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                                    Estudiantes en especifico\n                                "
-                        )
-                      ]
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _vm.activityForPIARStudents == true ||
-                _vm.activityForSelectStudents == true
-                  ? _c(
-                      "div",
-                      [
-                        _c("label", [_vm._v("Seleccione a los Estudiantes")]),
-                        _vm._v(" "),
-                        _c("multiselect", {
-                          attrs: {
-                            options: _vm.selectedStudentsData,
-                            multiple: true,
-                            "close-on-select": false,
-                            "clear-on-select": false,
-                            "preserve-search": true,
-                            placeholder: "Seleccione una o varias",
-                            label: "text",
-                            "track-by": "id",
-                            "preselect-first": false
-                          },
-                          scopedSlots: _vm._u(
-                            [
-                              {
-                                key: "selection",
-                                fn: function(ref) {
-                                  var values = ref.values
-                                  var isOpen = ref.isOpen
-                                  return [
-                                    values.length && !isOpen
-                                      ? _c(
-                                          "span",
-                                          {
-                                            staticClass: "multiselect__single"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(values.length) +
-                                                "\n                                            opciones\n                                            selecionadas\n                                        "
-                                            )
-                                          ]
-                                        )
-                                      : _vm._e()
-                                  ]
-                                }
-                              }
-                            ],
-                            null,
-                            false,
-                            2541663438
-                          ),
-                          model: {
-                            value: _vm.saveStudent,
-                            callback: function($$v) {
-                              _vm.saveStudent = $$v
-                            },
-                            expression: "saveStudent"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
+                _c("span", { staticClass: "classroom-label" }, [
+                  _vm._v(_vm._s(_vm.nameArea))
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "div-classes" }, [
                 _c(
                   "div",
-                  { staticClass: "row justify-content-center" },
+                  { staticClass: "div-class" },
                   [
-                    _vm._l(_vm.course.content, function(item_content, key_c) {
-                      return _c(
-                        "div",
-                        { key: key_c, staticClass: "col-5 div-resource" },
-                        [
-                          _c(
-                            "span",
+                    _c("div", { staticClass: "title row" }, [
+                      _c("div", { staticClass: "col-8" }, [
+                        _vm._m(0),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
                             {
-                              staticClass: "closed-icon",
-                              on: {
-                                click: function($event) {
-                                  return _vm.removeResource(key_c)
-                                }
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.course.name,
+                              expression: "course.name"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            readonly: _vm.course.state == 2
+                          },
+                          domProps: { value: _vm.course.name },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
                               }
-                            },
-                            [
-                              key_c > 2
-                                ? _c("i", { staticClass: "fa fa-minus" })
-                                : _vm._e()
-                            ]
-                          ),
-                          _vm._v(" "),
-                          item_content.content_type === "DOCUMENT"
-                            ? _c("h4", [_vm._v("Documento")])
-                            : item_content.content_type === "LINK"
-                            ? _c("h4", [_vm._v("Enlace")])
-                            : item_content.content_type === "VIDEO"
-                            ? _c("h4", [_vm._v("Video")])
-                            : item_content.content_type === "YOUTUBE"
-                            ? _c("h4", [_vm._v("Video Youtube")])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "form-item" }, [
-                            _c("label", [_vm._v("Descripción")]),
-                            _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: item_content.description,
-                                  expression: "item_content.description"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: {
-                                type: "text",
-                                readonly: _vm.course.state == 2
-                              },
-                              domProps: { value: item_content.description },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    item_content,
-                                    "description",
-                                    $event.target.value
-                                  )
-                                }
+                              _vm.$set(_vm.course, "name", $event.target.value)
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-4" }, [
+                        _vm._m(1),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.course.hourly_intensity,
+                              expression: "course.hourly_intensity"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "number",
+                            readonly: _vm.course.state == 2
+                          },
+                          domProps: { value: _vm.course.hourly_intensity },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
                               }
-                            })
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "form-item" }, [
-                            item_content.content_type === "DOCUMENT"
-                              ? _c("label", [_vm._v("Archivo")])
-                              : item_content.content_type === "LINK"
-                              ? _c("label", [_vm._v("Enlace")])
-                              : item_content.content_type === "VIDEO"
-                              ? _c("label", [_vm._v("Video (.mp4)")])
-                              : item_content.content_type === "YOUTUBE"
-                              ? _c("label", [_vm._v("Link Youtube")])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            item_content.content_type === "DOCUMENT"
-                              ? _c("input", {
-                                  staticClass: "form-control",
-                                  attrs: {
-                                    type: "file",
-                                    readonly: _vm.course.state == 2
-                                  },
-                                  on: {
-                                    change: function($event) {
-                                      return _vm.onFileChange($event, key_c)
-                                    }
-                                  }
-                                })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            item_content.content_type === "VIDEO"
-                              ? _c("input", {
-                                  staticClass: "form-control",
-                                  attrs: {
-                                    type: "file",
-                                    readonly: _vm.course.state == 2
-                                  },
-                                  on: {
-                                    change: function($event) {
-                                      return _vm.onFileChange($event, key_c)
-                                    }
-                                  }
-                                })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            item_content.content_type == "LINK"
-                              ? _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: item_content.content,
-                                      expression: "item_content.content"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  attrs: {
-                                    type: "text",
-                                    readonly: _vm.course.state == 2
-                                  },
-                                  domProps: { value: item_content.content },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        item_content,
-                                        "content",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            item_content.content_type == "YOUTUBE"
-                              ? _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: item_content.content,
-                                      expression: "item_content.content"
-                                    }
-                                  ],
-                                  staticClass: "form-control",
-                                  attrs: {
-                                    type: "text",
-                                    readonly: _vm.course.state == 2
-                                  },
-                                  domProps: { value: item_content.content },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        item_content,
-                                        "content",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                })
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "progress" }, [
-                              _vm.course.content[key_c].progress_bar_percent > 0
-                                ? _c("div", {
-                                    staticClass: "progress-bar",
-                                    style: {
-                                      width:
-                                        (_vm.course.content[key_c]
-                                          .progress_bar_percent
-                                          ? _vm.course.content[key_c]
-                                              .progress_bar_percent
-                                          : 0) + "%"
-                                    }
-                                  })
-                                : _vm._e()
+                              _vm.$set(
+                                _vm.course,
+                                "hourly_intensity",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-12" }, [
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.course.description,
+                              expression: "course.description"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            cols: "40",
+                            rows: "4",
+                            readonly: _vm.course.state == 2
+                          },
+                          domProps: { value: _vm.course.description },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.course,
+                                "description",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row ml-4" }, [
+                      _c("div", { staticClass: "col-4" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.activityForAllStudents,
+                              expression: "activityForAllStudents"
+                            }
+                          ],
+                          attrs: {
+                            type: "checkbox",
+                            id: "students",
+                            name: "students"
+                          },
+                          domProps: {
+                            checked: Array.isArray(_vm.activityForAllStudents)
+                              ? _vm._i(_vm.activityForAllStudents, null) > -1
+                              : _vm.activityForAllStudents
+                          },
+                          on: {
+                            change: function($event) {
+                              var $$a = _vm.activityForAllStudents,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = null,
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 &&
+                                    (_vm.activityForAllStudents = $$a.concat([
+                                      $$v
+                                    ]))
+                                } else {
+                                  $$i > -1 &&
+                                    (_vm.activityForAllStudents = $$a
+                                      .slice(0, $$i)
+                                      .concat($$a.slice($$i + 1)))
+                                }
+                              } else {
+                                _vm.activityForAllStudents = $$c
+                              }
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-check-label",
+                            attrs: { for: "flexCheckDefault" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    Todos los Estudiantes\n                                "
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-4" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.activityForPIARStudents,
+                              expression: "activityForPIARStudents"
+                            }
+                          ],
+                          attrs: {
+                            type: "checkbox",
+                            id: "piar",
+                            name: "students"
+                          },
+                          domProps: {
+                            checked: Array.isArray(_vm.activityForPIARStudents)
+                              ? _vm._i(_vm.activityForPIARStudents, null) > -1
+                              : _vm.activityForPIARStudents
+                          },
+                          on: {
+                            change: function($event) {
+                              var $$a = _vm.activityForPIARStudents,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = null,
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 &&
+                                    (_vm.activityForPIARStudents = $$a.concat([
+                                      $$v
+                                    ]))
+                                } else {
+                                  $$i > -1 &&
+                                    (_vm.activityForPIARStudents = $$a
+                                      .slice(0, $$i)
+                                      .concat($$a.slice($$i + 1)))
+                                }
+                              } else {
+                                _vm.activityForPIARStudents = $$c
+                              }
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-check-label",
+                            attrs: { for: "flexCheckDefault1" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    Estudiantes PIAR\n                                "
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-4" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.activityForSelectStudents,
+                              expression: "activityForSelectStudents"
+                            }
+                          ],
+                          attrs: {
+                            type: "checkbox",
+                            id: "specific",
+                            name: "students"
+                          },
+                          domProps: {
+                            checked: Array.isArray(
+                              _vm.activityForSelectStudents
+                            )
+                              ? _vm._i(_vm.activityForSelectStudents, null) > -1
+                              : _vm.activityForSelectStudents
+                          },
+                          on: {
+                            change: function($event) {
+                              var $$a = _vm.activityForSelectStudents,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = null,
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 &&
+                                    (_vm.activityForSelectStudents = $$a.concat(
+                                      [$$v]
+                                    ))
+                                } else {
+                                  $$i > -1 &&
+                                    (_vm.activityForSelectStudents = $$a
+                                      .slice(0, $$i)
+                                      .concat($$a.slice($$i + 1)))
+                                }
+                              } else {
+                                _vm.activityForSelectStudents = $$c
+                              }
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-check-label",
+                            attrs: { for: "flexCheckDefault2" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    Estudiantes en especifico\n                                "
+                            )
+                          ]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm.activityForPIARStudents == true ||
+                    _vm.activityForSelectStudents == true
+                      ? _c(
+                          "div",
+                          [
+                            _c("label", [
+                              _vm._v("Seleccione a los Estudiantes")
                             ]),
                             _vm._v(" "),
-                            item_content.content_type === "DOCUMENT" &&
-                            item_content.content != ""
-                              ? _c(
-                                  "a",
+                            _c("multiselect", {
+                              attrs: {
+                                options: _vm.selectedStudentsData,
+                                multiple: true,
+                                "close-on-select": false,
+                                "clear-on-select": false,
+                                "preserve-search": true,
+                                placeholder: "Seleccione una o varias",
+                                label: "text",
+                                "track-by": "id",
+                                "preselect-first": false
+                              },
+                              scopedSlots: _vm._u(
+                                [
                                   {
-                                    attrs: {
-                                      href: item_content.content,
-                                      target: "_blank",
-                                      readonly: _vm.course.state == 2
+                                    key: "selection",
+                                    fn: function(ref) {
+                                      var values = ref.values
+                                      var isOpen = ref.isOpen
+                                      return [
+                                        values.length && !isOpen
+                                          ? _c(
+                                              "span",
+                                              {
+                                                staticClass:
+                                                  "multiselect__single"
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(values.length) +
+                                                    "\n                                            opciones\n                                            selecionadas\n                                        "
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e()
+                                      ]
                                     }
-                                  },
-                                  [_vm._v(_vm._s(item_content.description))]
-                                )
-                              : _vm._e(),
-                            _vm._v(" "),
-                            item_content.content_type === "VIDEO" &&
-                            item_content.content != ""
-                              ? _c(
-                                  "a",
-                                  {
-                                    attrs: {
-                                      href: item_content.content,
-                                      target: "_blank",
-                                      readonly: _vm.course.state == 2
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(item_content.description))]
-                                )
-                              : _vm._e(),
-                            _vm._v(" "),
-                            item_content.content_type === "YOUTUBE" &&
-                            item_content.content != ""
-                              ? _c(
-                                  "a",
-                                  {
-                                    attrs: {
-                                      href: item_content.content,
-                                      target: "_blank",
-                                      readonly: _vm.course.state == 2
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(item_content.description))]
-                                )
-                              : _vm._e()
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "form-item text-center" }, [
-                            _c("div", { staticClass: "form-check" }, [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: item_content.is_required,
-                                    expression: "item_content.is_required"
                                   }
                                 ],
-                                staticClass: "form-check-input",
-                                attrs: {
-                                  type: "checkbox",
-                                  id: "isRequiredCheck"
+                                null,
+                                false,
+                                2541663438
+                              ),
+                              model: {
+                                value: _vm.saveStudent,
+                                callback: function($$v) {
+                                  _vm.saveStudent = $$v
                                 },
-                                domProps: {
-                                  checked: Array.isArray(
-                                    item_content.is_required
-                                  )
-                                    ? _vm._i(item_content.is_required, null) >
-                                      -1
-                                    : item_content.is_required
-                                },
-                                on: {
-                                  change: function($event) {
-                                    var $$a = item_content.is_required,
-                                      $$el = $event.target,
-                                      $$c = $$el.checked ? true : false
-                                    if (Array.isArray($$a)) {
-                                      var $$v = null,
-                                        $$i = _vm._i($$a, $$v)
-                                      if ($$el.checked) {
-                                        $$i < 0 &&
-                                          _vm.$set(
-                                            item_content,
-                                            "is_required",
-                                            $$a.concat([$$v])
-                                          )
-                                      } else {
-                                        $$i > -1 &&
-                                          _vm.$set(
-                                            item_content,
-                                            "is_required",
-                                            $$a
-                                              .slice(0, $$i)
-                                              .concat($$a.slice($$i + 1))
-                                          )
-                                      }
-                                    } else {
-                                      _vm.$set(item_content, "is_required", $$c)
+                                expression: "saveStudent"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "row justify-content-center" },
+                      [
+                        _vm._l(_vm.course.content, function(
+                          item_content,
+                          key_c
+                        ) {
+                          return _c(
+                            "div",
+                            { key: key_c, staticClass: "col-5 div-resource" },
+                            [
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "closed-icon",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.removeResource(key_c)
                                     }
                                   }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "label",
-                                {
-                                  staticClass: "form-check-label",
-                                  attrs: { for: "isRequiredCheck" }
                                 },
                                 [
-                                  _vm._v(
-                                    "Recurso obligatorio para el estudiante"
+                                  key_c > 2
+                                    ? _c("i", { staticClass: "fa fa-minus" })
+                                    : _vm._e()
+                                ]
+                              ),
+                              _vm._v(" "),
+                              item_content.content_type === "DOCUMENT"
+                                ? _c("h4", [_vm._v("Documento")])
+                                : item_content.content_type === "LINK"
+                                ? _c("h4", [_vm._v("Enlace")])
+                                : item_content.content_type === "VIDEO"
+                                ? _c("h4", [_vm._v("Video")])
+                                : item_content.content_type === "YOUTUBE"
+                                ? _c("h4", [_vm._v("Video Youtube")])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-item" }, [
+                                _c("label", [_vm._v("Descripción")]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: item_content.description,
+                                      expression: "item_content.description"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: {
+                                    type: "text",
+                                    readonly: _vm.course.state == 2
+                                  },
+                                  domProps: { value: item_content.description },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        item_content,
+                                        "description",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-item" }, [
+                                item_content.content_type === "DOCUMENT"
+                                  ? _c("label", [_vm._v("Archivo")])
+                                  : item_content.content_type === "LINK"
+                                  ? _c("label", [_vm._v("Enlace")])
+                                  : item_content.content_type === "VIDEO"
+                                  ? _c("label", [_vm._v("Video (.mp4)")])
+                                  : item_content.content_type === "YOUTUBE"
+                                  ? _c("label", [_vm._v("Link Youtube")])
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                item_content.content_type === "DOCUMENT"
+                                  ? _c("input", {
+                                      staticClass: "form-control",
+                                      attrs: {
+                                        type: "file",
+                                        readonly: _vm.course.state == 2
+                                      },
+                                      on: {
+                                        change: function($event) {
+                                          return _vm.onFileChange($event, key_c)
+                                        }
+                                      }
+                                    })
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                item_content.content_type === "VIDEO"
+                                  ? _c("input", {
+                                      staticClass: "form-control",
+                                      attrs: {
+                                        type: "file",
+                                        readonly: _vm.course.state == 2
+                                      },
+                                      on: {
+                                        change: function($event) {
+                                          return _vm.onFileChange($event, key_c)
+                                        }
+                                      }
+                                    })
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                item_content.content_type == "LINK"
+                                  ? _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: item_content.content,
+                                          expression: "item_content.content"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      attrs: {
+                                        type: "text",
+                                        readonly: _vm.course.state == 2
+                                      },
+                                      domProps: { value: item_content.content },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            item_content,
+                                            "content",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    })
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                item_content.content_type == "YOUTUBE"
+                                  ? _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: item_content.content,
+                                          expression: "item_content.content"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      attrs: {
+                                        type: "text",
+                                        readonly: _vm.course.state == 2
+                                      },
+                                      domProps: { value: item_content.content },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            item_content,
+                                            "content",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    })
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "progress" }, [
+                                  _vm.course.content[key_c]
+                                    .progress_bar_percent > 0
+                                    ? _c("div", {
+                                        staticClass: "progress-bar",
+                                        style: {
+                                          width:
+                                            (_vm.course.content[key_c]
+                                              .progress_bar_percent
+                                              ? _vm.course.content[key_c]
+                                                  .progress_bar_percent
+                                              : 0) + "%"
+                                        }
+                                      })
+                                    : _vm._e()
+                                ]),
+                                _vm._v(" "),
+                                item_content.content_type === "DOCUMENT" &&
+                                item_content.content != ""
+                                  ? _c(
+                                      "a",
+                                      {
+                                        attrs: {
+                                          href: item_content.content,
+                                          target: "_blank",
+                                          readonly: _vm.course.state == 2
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(item_content.description))]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                item_content.content_type === "VIDEO" &&
+                                item_content.content != ""
+                                  ? _c(
+                                      "a",
+                                      {
+                                        attrs: {
+                                          href: item_content.content,
+                                          target: "_blank",
+                                          readonly: _vm.course.state == 2
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(item_content.description))]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                item_content.content_type === "YOUTUBE" &&
+                                item_content.content != ""
+                                  ? _c(
+                                      "a",
+                                      {
+                                        attrs: {
+                                          href: item_content.content,
+                                          target: "_blank",
+                                          readonly: _vm.course.state == 2
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(item_content.description))]
+                                    )
+                                  : _vm._e()
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "form-item text-center" },
+                                [
+                                  _c("div", { staticClass: "form-check" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: item_content.is_required,
+                                          expression: "item_content.is_required"
+                                        }
+                                      ],
+                                      staticClass: "form-check-input",
+                                      attrs: {
+                                        type: "checkbox",
+                                        id: "isRequiredCheck"
+                                      },
+                                      domProps: {
+                                        checked: Array.isArray(
+                                          item_content.is_required
+                                        )
+                                          ? _vm._i(
+                                              item_content.is_required,
+                                              null
+                                            ) > -1
+                                          : item_content.is_required
+                                      },
+                                      on: {
+                                        change: function($event) {
+                                          var $$a = item_content.is_required,
+                                            $$el = $event.target,
+                                            $$c = $$el.checked ? true : false
+                                          if (Array.isArray($$a)) {
+                                            var $$v = null,
+                                              $$i = _vm._i($$a, $$v)
+                                            if ($$el.checked) {
+                                              $$i < 0 &&
+                                                _vm.$set(
+                                                  item_content,
+                                                  "is_required",
+                                                  $$a.concat([$$v])
+                                                )
+                                            } else {
+                                              $$i > -1 &&
+                                                _vm.$set(
+                                                  item_content,
+                                                  "is_required",
+                                                  $$a
+                                                    .slice(0, $$i)
+                                                    .concat($$a.slice($$i + 1))
+                                                )
+                                            }
+                                          } else {
+                                            _vm.$set(
+                                              item_content,
+                                              "is_required",
+                                              $$c
+                                            )
+                                          }
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "label",
+                                      {
+                                        staticClass: "form-check-label",
+                                        attrs: { for: "isRequiredCheck" }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "Recurso obligatorio para el estudiante"
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ]
+                              )
+                            ]
+                          )
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-5 div-resource" }, [
+                          _c("div", { staticClass: "form-item" }, [
+                            _vm.course.state == 1
+                              ? _c(
+                                  "span",
+                                  {
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.addResource("DOCUMENT")
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("+ Agregar Documento")]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.course.state == 1
+                              ? _c(
+                                  "span",
+                                  {
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.addResource("LINK")
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("+ Agregar Enlace")]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.course.state == 1
+                              ? _c(
+                                  "span",
+                                  {
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.addResource("YOUTUBE")
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("+ Agregar Video Youtube")]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.course.state == 1
+                              ? _c(
+                                  "span",
+                                  {
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.addResource("VIDEO")
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("+ Agregar Video")]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.course.state == 1
+                              ? _c(
+                                  "span",
+                                  {
+                                    staticClass: "blue",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.addActivity()
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("+ Agregar Actividad")]
+                                )
+                              : _vm._e()
+                          ])
+                        ])
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _vm._l(_vm.course.activities, function(activity, key_a) {
+                      return _c(
+                        "div",
+                        {
+                          key: key_a,
+                          staticClass:
+                            "row justify-content-center margin-top-50"
+                        },
+                        [
+                          _c("div", { staticClass: "col-10" }, [
+                            _c("div", { staticClass: "card" }, [
+                              _c(
+                                "div",
+                                { staticClass: "card-header card-title" },
+                                [
+                                  _c("h5", [
+                                    _vm._v("Actividad " + _vm._s(key_a + 1))
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "closed-icon",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.removeActivity(key_a)
+                                        }
+                                      }
+                                    },
+                                    [_c("i", { staticClass: "fa fa-minus" })]
                                   )
                                 ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "card-body" },
+                                [
+                                  _c("div", { staticClass: "row" }, [
+                                    _c("div", { staticClass: "col-8" }, [
+                                      _vm._m(3, true),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: activity.name,
+                                            expression: "activity.name"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        attrs: {
+                                          type: "text",
+                                          readonly: _vm.course.state == 2
+                                        },
+                                        domProps: { value: activity.name },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              activity,
+                                              "name",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "col-4" }, [
+                                      _vm._m(4, true),
+                                      _vm._v(" "),
+                                      _c(
+                                        "select",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: activity.activity_type,
+                                              expression:
+                                                "activity.activity_type"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          attrs: {
+                                            id: "activity_type",
+                                            readonly: _vm.course.state == 2
+                                          },
+                                          on: {
+                                            change: [
+                                              function($event) {
+                                                var $$selectedVal = Array.prototype.filter
+                                                  .call(
+                                                    $event.target.options,
+                                                    function(o) {
+                                                      return o.selected
+                                                    }
+                                                  )
+                                                  .map(function(o) {
+                                                    var val =
+                                                      "_value" in o
+                                                        ? o._value
+                                                        : o.value
+                                                    return val
+                                                  })
+                                                _vm.$set(
+                                                  activity,
+                                                  "activity_type",
+                                                  $event.target.multiple
+                                                    ? $$selectedVal
+                                                    : $$selectedVal[0]
+                                                )
+                                              },
+                                              function($event) {
+                                                return _vm.selectActivityType(
+                                                  key_a,
+                                                  activity
+                                                )
+                                              }
+                                            ]
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "" } },
+                                            [_vm._v("-- Seleccione --")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            {
+                                              attrs: {
+                                                value: "CUESTIONARIO_UNICA_RTA"
+                                              }
+                                            },
+                                            [_vm._v("Cuestionario")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            {
+                                              attrs: {
+                                                value: "COMPLETAR_ORACION"
+                                              }
+                                            },
+                                            [_vm._v("Completar la oración")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "CRUCIGRAMA" } },
+                                            [_vm._v("Crucigrama")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "RELACION" } },
+                                            [_vm._v("Relación")]
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "row" }, [
+                                    _c("div", { staticClass: "col-12" }, [
+                                      _vm._m(5, true),
+                                      _vm._v(" "),
+                                      _c("textarea", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: activity.description,
+                                            expression: "activity.description"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        attrs: {
+                                          readonly: _vm.course.state == 2
+                                        },
+                                        domProps: {
+                                          value: activity.description
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              activity,
+                                              "description",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      })
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "row" }, [
+                                    _c("div", { staticClass: "col-8" }, [
+                                      _vm._m(6, true),
+                                      _vm._v(" "),
+                                      _c(
+                                        "select",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: activity.id_achievement,
+                                              expression:
+                                                "activity.id_achievement"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          attrs: {
+                                            readonly: _vm.course.state == 2
+                                          },
+                                          on: {
+                                            change: [
+                                              function($event) {
+                                                var $$selectedVal = Array.prototype.filter
+                                                  .call(
+                                                    $event.target.options,
+                                                    function(o) {
+                                                      return o.selected
+                                                    }
+                                                  )
+                                                  .map(function(o) {
+                                                    var val =
+                                                      "_value" in o
+                                                        ? o._value
+                                                        : o.value
+                                                    return val
+                                                  })
+                                                _vm.$set(
+                                                  activity,
+                                                  "id_achievement",
+                                                  $event.target.multiple
+                                                    ? $$selectedVal
+                                                    : $$selectedVal[0]
+                                                )
+                                              },
+                                              function($event) {
+                                                return _vm.GetIndicatorsEvent(
+                                                  activity
+                                                )
+                                              }
+                                            ]
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "" } },
+                                            [_vm._v("-- Seleccione --")]
+                                          ),
+                                          _vm._v(" "),
+                                          _vm._l(_vm.achievements, function(
+                                            achievement,
+                                            k_achievement
+                                          ) {
+                                            return _c(
+                                              "option",
+                                              {
+                                                key: k_achievement,
+                                                domProps: {
+                                                  value: achievement.id
+                                                }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    achievement.achievement
+                                                  ) +
+                                                    " (" +
+                                                    _vm._s(
+                                                      achievement.percentage
+                                                    ) +
+                                                    " %)"
+                                                )
+                                              ]
+                                            )
+                                          })
+                                        ],
+                                        2
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "col-4" }, [
+                                      _vm._m(7, true),
+                                      _vm._v(" "),
+                                      _c(
+                                        "select",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: activity.id_indicator,
+                                              expression:
+                                                "activity.id_indicator"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          attrs: {
+                                            readonly: _vm.course.state == 2
+                                          },
+                                          on: {
+                                            change: function($event) {
+                                              var $$selectedVal = Array.prototype.filter
+                                                .call(
+                                                  $event.target.options,
+                                                  function(o) {
+                                                    return o.selected
+                                                  }
+                                                )
+                                                .map(function(o) {
+                                                  var val =
+                                                    "_value" in o
+                                                      ? o._value
+                                                      : o.value
+                                                  return val
+                                                })
+                                              _vm.$set(
+                                                activity,
+                                                "id_indicator",
+                                                $event.target.multiple
+                                                  ? $$selectedVal
+                                                  : $$selectedVal[0]
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "" } },
+                                            [_vm._v("-- Seleccione --")]
+                                          ),
+                                          _vm._v(" "),
+                                          _vm._l(
+                                            _vm.filteredIndicators(
+                                              activity.id_achievement
+                                            ),
+                                            function(indicator, k_indicator) {
+                                              return _c(
+                                                "option",
+                                                {
+                                                  key: k_indicator,
+                                                  domProps: {
+                                                    value: indicator.id
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      indicator.type_activity
+                                                    ) +
+                                                      " (" +
+                                                      _vm._s(
+                                                        indicator.activity_rate
+                                                      ) +
+                                                      " %)"
+                                                  )
+                                                ]
+                                              )
+                                            }
+                                          )
+                                        ],
+                                        2
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "row" }, [
+                                    _c("div", { staticClass: "col-6" }, [
+                                      _vm._m(8, true),
+                                      _vm._v(
+                                        "\n                                                    " +
+                                          _vm._s(activity.delivery_max_date) +
+                                          "\n                                                    "
+                                      ),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: activity.delivery_max_date,
+                                            expression:
+                                              "activity.delivery_max_date"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        attrs: { type: "datetime-local" },
+                                        domProps: {
+                                          value: activity.delivery_max_date
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              activity,
+                                              "delivery_max_date",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        attrs: {
+                                          type: "hidden",
+                                          id: "timezone",
+                                          name: "timezone",
+                                          value: "-05:00"
+                                        }
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "col-6" }, [
+                                      _vm._m(9, true),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: activity.feedback_date,
+                                            expression: "activity.feedback_date"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        attrs: { type: "datetime-local" },
+                                        domProps: {
+                                          value: activity.feedback_date
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              activity,
+                                              "feedback_date",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      })
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  activity.activity_type == "CUESTIONARIO" ||
+                                  activity.activity_type ==
+                                    "CUESTIONARIO_UNICA_RTA"
+                                    ? _c("activity-questionary", {
+                                        attrs: {
+                                          module: activity.module,
+                                          disabled: _vm.course.state == 2
+                                        }
+                                      })
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  activity.activity_type == "COMPLETAR_ORACION"
+                                    ? _c("activity-complete-sentence", {
+                                        attrs: {
+                                          module: activity.module,
+                                          disabled: _vm.course.state == 2
+                                        }
+                                      })
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  activity.activity_type == "RELACION"
+                                    ? _c("activity-relationship", {
+                                        attrs: {
+                                          module: activity.module,
+                                          disabled: _vm.course.state == 2
+                                        }
+                                      })
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  activity.activity_type == "CRUCIGRAMA"
+                                    ? _c("activity-crossword", {
+                                        attrs: {
+                                          module: activity.module,
+                                          disabled: _vm.course.state == 2
+                                        }
+                                      })
+                                    : _vm._e()
+                                ],
+                                1
                               )
                             ])
                           ])
                         ]
                       )
-                    }),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-5 div-resource" }, [
-                      _c("div", { staticClass: "form-item" }, [
-                        _vm.course.state == 1
-                          ? _c(
-                              "span",
-                              {
-                                on: {
-                                  click: function($event) {
-                                    return _vm.addResource("DOCUMENT")
-                                  }
-                                }
-                              },
-                              [_vm._v("+ Agregar Documento")]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.course.state == 1
-                          ? _c(
-                              "span",
-                              {
-                                on: {
-                                  click: function($event) {
-                                    return _vm.addResource("LINK")
-                                  }
-                                }
-                              },
-                              [_vm._v("+ Agregar Enlace")]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.course.state == 1
-                          ? _c(
-                              "span",
-                              {
-                                on: {
-                                  click: function($event) {
-                                    return _vm.addResource("YOUTUBE")
-                                  }
-                                }
-                              },
-                              [_vm._v("+ Agregar Video Youtube")]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.course.state == 1
-                          ? _c(
-                              "span",
-                              {
-                                on: {
-                                  click: function($event) {
-                                    return _vm.addResource("VIDEO")
-                                  }
-                                }
-                              },
-                              [_vm._v("+ Agregar Video")]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.course.state == 1
-                          ? _c(
-                              "span",
-                              {
-                                staticClass: "blue",
-                                on: {
-                                  click: function($event) {
-                                    return _vm.addActivity()
-                                  }
-                                }
-                              },
-                              [_vm._v("+ Agregar Actividad")]
-                            )
-                          : _vm._e()
-                      ])
-                    ])
+                    })
                   ],
                   2
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "div-weekly-plan-btn-save" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-warning",
+                    on: { click: _vm.backToPage }
+                  },
+                  [_vm._v("Cancelar")]
                 ),
                 _vm._v(" "),
-                _vm._l(_vm.course.activities, function(activity, key_a) {
-                  return _c(
-                    "div",
-                    {
-                      key: key_a,
-                      staticClass: "row justify-content-center margin-top-50"
-                    },
-                    [
-                      _c("div", { staticClass: "col-10" }, [
-                        _c("div", { staticClass: "card" }, [
-                          _c("div", { staticClass: "card-header card-title" }, [
-                            _c("h5", [
-                              _vm._v("Actividad " + _vm._s(key_a + 1))
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "span",
-                              {
-                                staticClass: "closed-icon",
-                                on: {
-                                  click: function($event) {
-                                    return _vm.removeActivity(key_a)
-                                  }
-                                }
-                              },
-                              [_c("i", { staticClass: "fa fa-minus" })]
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "card-body" },
-                            [
-                              _c("div", { staticClass: "row" }, [
-                                _c("div", { staticClass: "col-8" }, [
-                                  _vm._m(3, true),
-                                  _vm._v(" "),
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: activity.name,
-                                        expression: "activity.name"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    attrs: {
-                                      type: "text",
-                                      readonly: _vm.course.state == 2
-                                    },
-                                    domProps: { value: activity.name },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          activity,
-                                          "name",
-                                          $event.target.value
-                                        )
-                                      }
-                                    }
-                                  })
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "col-4" }, [
-                                  _vm._m(4, true),
-                                  _vm._v(" "),
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: activity.activity_type,
-                                          expression: "activity.activity_type"
-                                        }
-                                      ],
-                                      staticClass: "form-control",
-                                      attrs: {
-                                        id: "activity_type",
-                                        readonly: _vm.course.state == 2
-                                      },
-                                      on: {
-                                        change: [
-                                          function($event) {
-                                            var $$selectedVal = Array.prototype.filter
-                                              .call(
-                                                $event.target.options,
-                                                function(o) {
-                                                  return o.selected
-                                                }
-                                              )
-                                              .map(function(o) {
-                                                var val =
-                                                  "_value" in o
-                                                    ? o._value
-                                                    : o.value
-                                                return val
-                                              })
-                                            _vm.$set(
-                                              activity,
-                                              "activity_type",
-                                              $event.target.multiple
-                                                ? $$selectedVal
-                                                : $$selectedVal[0]
-                                            )
-                                          },
-                                          function($event) {
-                                            return _vm.selectActivityType(
-                                              key_a,
-                                              activity
-                                            )
-                                          }
-                                        ]
-                                      }
-                                    },
-                                    [
-                                      _c("option", { attrs: { value: "" } }, [
-                                        _vm._v("-- Seleccione --")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        {
-                                          attrs: {
-                                            value: "CUESTIONARIO_UNICA_RTA"
-                                          }
-                                        },
-                                        [_vm._v("Cuestionario")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        {
-                                          attrs: { value: "COMPLETAR_ORACION" }
-                                        },
-                                        [_vm._v("Completar la oración")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "CRUCIGRAMA" } },
-                                        [_vm._v("Crucigrama")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "RELACION" } },
-                                        [_vm._v("Relación")]
-                                      )
-                                    ]
-                                  )
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "row" }, [
-                                _c("div", { staticClass: "col-12" }, [
-                                  _vm._m(5, true),
-                                  _vm._v(" "),
-                                  _c("textarea", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: activity.description,
-                                        expression: "activity.description"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    attrs: { readonly: _vm.course.state == 2 },
-                                    domProps: { value: activity.description },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          activity,
-                                          "description",
-                                          $event.target.value
-                                        )
-                                      }
-                                    }
-                                  })
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "row" }, [
-                                _c("div", { staticClass: "col-8" }, [
-                                  _vm._m(6, true),
-                                  _vm._v(" "),
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: activity.id_achievement,
-                                          expression: "activity.id_achievement"
-                                        }
-                                      ],
-                                      staticClass: "form-control",
-                                      attrs: {
-                                        readonly: _vm.course.state == 2
-                                      },
-                                      on: {
-                                        change: [
-                                          function($event) {
-                                            var $$selectedVal = Array.prototype.filter
-                                              .call(
-                                                $event.target.options,
-                                                function(o) {
-                                                  return o.selected
-                                                }
-                                              )
-                                              .map(function(o) {
-                                                var val =
-                                                  "_value" in o
-                                                    ? o._value
-                                                    : o.value
-                                                return val
-                                              })
-                                            _vm.$set(
-                                              activity,
-                                              "id_achievement",
-                                              $event.target.multiple
-                                                ? $$selectedVal
-                                                : $$selectedVal[0]
-                                            )
-                                          },
-                                          function($event) {
-                                            return _vm.GetIndicatorsEvent(
-                                              activity
-                                            )
-                                          }
-                                        ]
-                                      }
-                                    },
-                                    [
-                                      _c("option", { attrs: { value: "" } }, [
-                                        _vm._v("-- Seleccione --")
-                                      ]),
-                                      _vm._v(" "),
-                                      _vm._l(_vm.achievements, function(
-                                        achievement,
-                                        k_achievement
-                                      ) {
-                                        return _c(
-                                          "option",
-                                          {
-                                            key: k_achievement,
-                                            domProps: { value: achievement.id }
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(achievement.achievement) +
-                                                " (" +
-                                                _vm._s(achievement.percentage) +
-                                                " %)"
-                                            )
-                                          ]
-                                        )
-                                      })
-                                    ],
-                                    2
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "col-4" }, [
-                                  _vm._m(7, true),
-                                  _vm._v(" "),
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: activity.id_indicator,
-                                          expression: "activity.id_indicator"
-                                        }
-                                      ],
-                                      staticClass: "form-control",
-                                      attrs: {
-                                        readonly: _vm.course.state == 2
-                                      },
-                                      on: {
-                                        change: function($event) {
-                                          var $$selectedVal = Array.prototype.filter
-                                            .call(
-                                              $event.target.options,
-                                              function(o) {
-                                                return o.selected
-                                              }
-                                            )
-                                            .map(function(o) {
-                                              var val =
-                                                "_value" in o
-                                                  ? o._value
-                                                  : o.value
-                                              return val
-                                            })
-                                          _vm.$set(
-                                            activity,
-                                            "id_indicator",
-                                            $event.target.multiple
-                                              ? $$selectedVal
-                                              : $$selectedVal[0]
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("option", { attrs: { value: "" } }, [
-                                        _vm._v("-- Seleccione --")
-                                      ]),
-                                      _vm._v(" "),
-                                      _vm._l(
-                                        _vm.filteredIndicators(
-                                          activity.id_achievement
-                                        ),
-                                        function(indicator, k_indicator) {
-                                          return _c(
-                                            "option",
-                                            {
-                                              key: k_indicator,
-                                              domProps: { value: indicator.id }
-                                            },
-                                            [
-                                              _vm._v(
-                                                _vm._s(
-                                                  indicator.type_activity
-                                                ) +
-                                                  " (" +
-                                                  _vm._s(
-                                                    indicator.activity_rate
-                                                  ) +
-                                                  " %)"
-                                              )
-                                            ]
-                                          )
-                                        }
-                                      )
-                                    ],
-                                    2
-                                  )
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "row" }, [
-                                _c("div", { staticClass: "col-6" }, [
-                                  _vm._m(8, true),
-                                  _vm._v(
-                                    "\n                                                    " +
-                                      _vm._s(activity.delivery_max_date) +
-                                      "\n                                                    "
-                                  ),
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: activity.delivery_max_date,
-                                        expression: "activity.delivery_max_date"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    attrs: { type: "datetime-local" },
-                                    domProps: {
-                                      value: activity.delivery_max_date
-                                    },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          activity,
-                                          "delivery_max_date",
-                                          $event.target.value
-                                        )
-                                      }
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("input", {
-                                    attrs: {
-                                      type: "hidden",
-                                      id: "timezone",
-                                      name: "timezone",
-                                      value: "-05:00"
-                                    }
-                                  })
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "col-6" }, [
-                                  _vm._m(9, true),
-                                  _vm._v(" "),
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: activity.feedback_date,
-                                        expression: "activity.feedback_date"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    attrs: { type: "datetime-local" },
-                                    domProps: { value: activity.feedback_date },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          activity,
-                                          "feedback_date",
-                                          $event.target.value
-                                        )
-                                      }
-                                    }
-                                  })
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              activity.activity_type == "CUESTIONARIO" ||
-                              activity.activity_type == "CUESTIONARIO_UNICA_RTA"
-                                ? _c("activity-questionary", {
-                                    attrs: {
-                                      module: activity.module,
-                                      disabled: _vm.course.state == 2
-                                    }
-                                  })
-                                : _vm._e(),
-                              _vm._v(" "),
-                              activity.activity_type == "COMPLETAR_ORACION"
-                                ? _c("activity-complete-sentence", {
-                                    attrs: {
-                                      module: activity.module,
-                                      disabled: _vm.course.state == 2
-                                    }
-                                  })
-                                : _vm._e(),
-                              _vm._v(" "),
-                              activity.activity_type == "RELACION"
-                                ? _c("activity-relationship", {
-                                    attrs: {
-                                      module: activity.module,
-                                      disabled: _vm.course.state == 2
-                                    }
-                                  })
-                                : _vm._e(),
-                              _vm._v(" "),
-                              activity.activity_type == "CRUCIGRAMA"
-                                ? _c("activity-crossword", {
-                                    attrs: {
-                                      module: activity.module,
-                                      disabled: _vm.course.state == 2
-                                    }
-                                  })
-                                : _vm._e()
-                            ],
-                            1
-                          )
-                        ])
-                      ])
-                    ]
-                  )
-                })
-              ],
-              2
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "div-weekly-plan-btn-save" }, [
-            _c(
-              "a",
-              { staticClass: "btn btn-warning", on: { click: _vm.backToPage } },
-              [_vm._v("Cancelar")]
-            ),
-            _vm._v(" "),
-            _vm.course.state == 1
-              ? _c(
-                  "button",
+                _c(
+                  "a",
                   {
                     staticClass: "btn btn-primary",
-                    attrs: { disabled: _vm.is_loading },
-                    on: {
-                      click: function($event) {
-                        return _vm.SaveDataEvent()
-                      }
-                    }
+                    on: { click: _vm.getPreview }
                   },
-                  [_vm._v("Guardar y enviar")]
-                )
-              : _vm._e()
+                  [_vm._v("Previsualización de clase")]
+                ),
+                _vm._v(" "),
+                _vm.course.state == 1
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { disabled: _vm.is_loading },
+                        on: {
+                          click: function($event) {
+                            return _vm.SaveDataEvent()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar y enviar")]
+                    )
+                  : _vm._e()
+              ])
+            ])
           ])
         ])
       ])
-    ])
-  ])
+    : _vm.showPreview === true
+    ? _c(
+        "div",
+        [
+          _c("modal-preview", {
+            attrs: { course: _vm.course, backPreview: _vm.backPreview }
+          })
+        ],
+        1
+      )
+    : _vm._e()
 }
 var staticRenderFns = [
   function() {
