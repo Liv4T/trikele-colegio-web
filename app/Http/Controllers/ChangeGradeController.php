@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\ChangeGrade;
+use App\Classroom;
+use App\ClassroomStudent;
 use Illuminate\Http\Request;
 use DB;
 
@@ -23,11 +25,22 @@ class ChangeGradeController extends Controller
             ->join('classroom','classroom_student.id_classroom','=','classroom.id')
             ->join('grade','classroom.id_grade','=','grade.id')
             ->join('users','classroom_student.id_user','=','users.id')
-            ->select('grade.id as grade_id','grade.name as grade_name','users.*')
+            ->select('grade.id as grade_id','grade.name as grade_name','classroom.id as classroom_id','users.*')
             ->where('grade.id','=',$grade_id)
             ->get();
 
         return response()->json($grade);
+    }
+
+    public function savePromGrade(Request $request, $id){
+        $grade = Classroom::where('id_grade',$request->id_grade)->first();
+
+        $student = ClassroomStudent::where('id_user',$id)->first();
+        $student->id_classroom = $grade->id;
+        $student->update();
+
+        return response()->json();
+
     }
     /**
      * Show the form for creating a new resource.

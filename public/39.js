@@ -371,6 +371,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: {
     logout: function logout() {
@@ -739,18 +743,6 @@ var staticRenderFns = [
                 _vm._v(
                   "\n                    Progreso Estudiantes          \n                  "
                 )
-              ]),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "/observer" } }, [
-                _c("img", {
-                  attrs: {
-                    width: "35px",
-                    src:
-                      "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/NOTAS_naranja.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad",
-                    alt: ""
-                  }
-                }),
-                _vm._v("\n                    Observador\n                  ")
               ])
             ])
           ])
@@ -814,6 +806,23 @@ var staticRenderFns = [
           }),
           _vm._v(" "),
           _c("span", { staticClass: "menu" }, [_vm._v("Usuarios")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("a", { attrs: { href: "/changeGrade" } }, [
+        _c("li", { staticClass: "item-menu" }, [
+          _c("img", {
+            attrs: {
+              width: "35px",
+              src:
+                "https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/ANUNCIOS_naranja.png?alt=media&token=539c1428-c480-43bf-a132-73be35386940",
+              alt: ""
+            }
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "menu" }, [
+            _vm._v("Promoción de Estudiantes")
+          ])
         ])
       ]),
       _vm._v(" "),

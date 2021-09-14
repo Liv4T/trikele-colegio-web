@@ -900,3 +900,5 @@ Route::get('getStudentsByGrade/{grade_id}','ChangeGradeController@getStudentsByG
 Route::middleware('auth')->get('/changeGrade', function () {
     return view('changeGrade');
 });
+
+Route::put('savePromGrade/{id_student}','ChangeGradeController@savePromGrade');
