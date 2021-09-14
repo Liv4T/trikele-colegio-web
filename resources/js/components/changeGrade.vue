@@ -10,11 +10,11 @@
                         </div> 
                         <form class="form-inline mt-2">
                             <div class="form-check form-group" v-for="(grade, key) in grades" :key="key">
-                                <label for="" class="mr-2">{{grade.grade}}</label>
+                                <label class="mr-2 ml-3">{{grade.grade}}</label>
                                 <input class="form-check-input mr-4" v-on:click="gradeSelected(grade.id, grade.grade)" type="radio" name="1" id="">                                
                             </div>
-                            <div class="form-group">
-                                <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#exampleModal" v-if="studentsGrades.length > 0">Promover</button>
+                            <div class="form-group">                                
+                                <button type="button" class="btn btn-primary mt-3 ml-3" data-toggle="modal" data-target="#exampleModal" v-if="studentsGrades.length > 0">Promover</button>
                             </div>
                         </form>      
 
@@ -22,12 +22,14 @@
                             <table class="table table-striped table hover">
                                 <thead>
                                     <tr>
+                                        <th><input type="checkbox" v-on:click="(e)=>checkedAll(e)"></th>
                                         <th>Nombre</th>
                                         <th>Grado</th>
                                     </tr>
                                 </thead>
                                 <tbody v-for="(studentsG, key) in studentsGrades" :key="key">
                                     <tr>
+                                        <td><input type="checkbox" name="checkStudents" :id="key" v-on:click="(e)=>setStudents(studentsG, e)"></td>
                                         <td>{{studentsG.name+' '+studentsG.last_name}}</td>
                                         <td>{{studentsG.grade_name}}</td>
                                     </tr>                                    
@@ -53,9 +55,17 @@
                     </div>
                     <div class="modal-body">
                         <p><strong>Seguro que desea Promover a los Siguientes estudiantes del grado {{grade_selected}}? </strong></p>
-                        <div class="mt-2" v-for="(students, key) in studentsGrades" :key="key">
-                            <p>{{students.name+' '+students.last_name}}</p>
+                        <div v-if="isChecked === true">
+                            <div class="mt-2" v-for="(students, key) in selectedStudens" :key="key">
+                                <p>{{students.name+' '+students.last_name}}</p>
+                            </div> 
                         </div>
+                        <div v-else-if="isChecked === false">
+                            <div class="mt-2" v-for="(students, key) in studentsGrades" :key="key">
+                                <p>{{students.name+' '+students.last_name}}</p>
+                            </div> 
+                        </div>
+                        
                         <label for="" class="mr-2"><strong>Seleccione el grado a Promover</strong></label>
                         <div class="form-check form-group" v-for="(grade, key) in grades" :key="key">                            
                             <label for="" class="mr-4">{{grade.grade}}</label>
@@ -77,8 +87,10 @@ export default {
         return {
             grades:[],
             studentsGrades:[],
+            selectedStudens:[],
             grade_prom:null,
-            grade_selected:null
+            grade_selected:null,
+            isChecked: false
         };
     },
 
@@ -103,8 +115,34 @@ export default {
             
         },
 
+        setStudents(student, e){   
+            this.isChecked = true;
+            if(e.target.checked === true){
+                this.selectedStudens.push(student);
+            }else{
+                this.selectedStudens = this.selectedStudens.filter((i) => i.id !== student.id); // filtramos                
+            }            
+        },
+
+        checkedAll(e){
+            if(e.target.checked){
+                $('input[type="checkbox"]' ).prop('checked', true);
+                this.isChecked = false;
+            }else{
+                $('input[type="checkbox"]' ).prop('checked', false);
+                this.selectedStudens = []                
+            }
+        },
+
         saveData(){
-            this.studentsGrades.forEach((el)=>{
+            let data = []
+            if(this.isChecked === true){
+                data = this.selectedStudens
+            }else{
+                data = this.studentsGrades
+            }
+
+            data.forEach((el)=>{
                 axios.put(`/savePromGrade/${el.id}`,{
                     id_grade: this.grade_prom,
                 }).then((response)=>{
@@ -113,7 +151,9 @@ export default {
                     toastr.info('Ha ocurrido un error, intenta de nuevo mas tarde');
                     console.log(error)
                 })
-            })
+            });
+
+            window.location = '/changeGrade';
         }
     },
 };

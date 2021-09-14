@@ -82,13 +82,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       grades: [],
       studentsGrades: [],
+      selectedStudens: [],
       grade_prom: null,
-      grade_selected: null
+      grade_selected: null,
+      isChecked: false
     };
   },
   mounted: function mounted() {
@@ -114,10 +126,38 @@ __webpack_require__.r(__webpack_exports__);
     promGrade: function promGrade(grade_id) {
       this.grade_prom = grade_id;
     },
+    setStudents: function setStudents(student, e) {
+      this.isChecked = true;
+
+      if (e.target.checked === true) {
+        this.selectedStudens.push(student);
+      } else {
+        this.selectedStudens = this.selectedStudens.filter(function (i) {
+          return i.id !== student.id;
+        }); // filtramos                
+      }
+    },
+    checkedAll: function checkedAll(e) {
+      if (e.target.checked) {
+        $('input[type="checkbox"]').prop('checked', true);
+        this.isChecked = false;
+      } else {
+        $('input[type="checkbox"]').prop('checked', false);
+        this.selectedStudens = [];
+      }
+    },
     saveData: function saveData() {
       var _this3 = this;
 
-      this.studentsGrades.forEach(function (el) {
+      var data = [];
+
+      if (this.isChecked === true) {
+        data = this.selectedStudens;
+      } else {
+        data = this.studentsGrades;
+      }
+
+      data.forEach(function (el) {
         axios.put("/savePromGrade/".concat(el.id), {
           id_grade: _this3.grade_prom
         }).then(function (response) {
@@ -127,6 +167,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
         });
       });
+      window.location = '/changeGrade';
     }
   }
 });
@@ -168,7 +209,7 @@ var render = function() {
                     "div",
                     { key: key, staticClass: "form-check form-group" },
                     [
-                      _c("label", { staticClass: "mr-2", attrs: { for: "" } }, [
+                      _c("label", { staticClass: "mr-2 ml-3" }, [
                         _vm._v(_vm._s(grade.grade))
                       ]),
                       _vm._v(" "),
@@ -190,7 +231,7 @@ var render = function() {
                     ? _c(
                         "button",
                         {
-                          staticClass: "btn btn-primary mt-3",
+                          staticClass: "btn btn-primary mt-3 ml-3",
                           attrs: {
                             type: "button",
                             "data-toggle": "modal",
@@ -211,11 +252,43 @@ var render = function() {
                     "table",
                     { staticClass: "table table-striped table hover" },
                     [
-                      _vm._m(1),
+                      _c("thead", [
+                        _c("tr", [
+                          _c("th", [
+                            _c("input", {
+                              attrs: { type: "checkbox" },
+                              on: {
+                                click: function(e) {
+                                  return _vm.checkedAll(e)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Nombre")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Grado")])
+                        ])
+                      ]),
                       _vm._v(" "),
                       _vm._l(_vm.studentsGrades, function(studentsG, key) {
                         return _c("tbody", { key: key }, [
                           _c("tr", [
+                            _c("td", [
+                              _c("input", {
+                                attrs: {
+                                  type: "checkbox",
+                                  name: "checkStudents",
+                                  id: key
+                                },
+                                on: {
+                                  click: function(e) {
+                                    return _vm.setStudents(studentsG, e)
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
                             _c("td", [
                               _vm._v(
                                 _vm._s(
@@ -260,7 +333,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
+              _vm._m(1),
               _vm._v(" "),
               _c(
                 "div",
@@ -276,15 +349,37 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _vm._l(_vm.studentsGrades, function(students, key) {
-                    return _c("div", { key: key, staticClass: "mt-2" }, [
-                      _c("p", [
-                        _vm._v(_vm._s(students.name + " " + students.last_name))
-                      ])
-                    ])
-                  }),
+                  _vm.isChecked === true
+                    ? _c(
+                        "div",
+                        _vm._l(_vm.selectedStudens, function(students, key) {
+                          return _c("div", { key: key, staticClass: "mt-2" }, [
+                            _c("p", [
+                              _vm._v(
+                                _vm._s(students.name + " " + students.last_name)
+                              )
+                            ])
+                          ])
+                        }),
+                        0
+                      )
+                    : _vm.isChecked === false
+                    ? _c(
+                        "div",
+                        _vm._l(_vm.studentsGrades, function(students, key) {
+                          return _c("div", { key: key, staticClass: "mt-2" }, [
+                            _c("p", [
+                              _vm._v(
+                                _vm._s(students.name + " " + students.last_name)
+                              )
+                            ])
+                          ])
+                        }),
+                        0
+                      )
+                    : _vm._e(),
                   _vm._v(" "),
-                  _vm._m(3),
+                  _vm._m(2),
                   _vm._v(" "),
                   _vm._l(_vm.grades, function(grade, key) {
                     return _c(
@@ -351,18 +446,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", [_c("p", [_vm._v("Seleccione el Grado :")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Nombre")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Grado")])
-      ])
-    ])
   },
   function() {
     var _vm = this
