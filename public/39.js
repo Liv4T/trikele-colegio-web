@@ -820,9 +820,7 @@ var staticRenderFns = [
             }
           }),
           _vm._v(" "),
-          _c("span", { staticClass: "menu" }, [
-            _vm._v("Promoción de Estudiantes")
-          ])
+          _c("span", { staticClass: "menu" }, [_vm._v("Promoción")])
         ])
       ]),
       _vm._v(" "),

@@ -226,7 +226,7 @@
                   src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/ANUNCIOS_naranja.png?alt=media&token=539c1428-c480-43bf-a132-73be35386940"
                   alt
                 />
-                <span class="menu">Promoción de Estudiantes</span>
+                <span class="menu">Promoción</span>
               </li>
             </a>
             <!-- <div class="dropdown">
