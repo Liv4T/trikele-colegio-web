@@ -112,7 +112,6 @@ export default {
         },
         promGrade(grade_id){            
             this.grade_prom = grade_id
-            
         },
 
         setStudents(student, e){   
