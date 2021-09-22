@@ -314,8 +314,8 @@ moment__WEBPACK_IMPORTED_MODULE_1___default.a.locale("es");
       this.activetab !== 2 ? this.activetab = 2 : this.activetab;
     },
     nameMinus: function nameMinus(name) {
-      var nameMinus = name.toLowerCase();
-      return nameMinus.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      var nameMinus = name;
+      return nameMinus.normalize("NFD");
     },
     showOtherSection: function showOtherSection(data) {
       var _this4 = this;

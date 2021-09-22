@@ -88,104 +88,102 @@
                             </div>
                             <div class="row justify-content-center">
                                 <template v-for="(item_content,key_c) in course.content">
-                                <div
-                                    class="col-10 div-resource"
-                                    style="border-radius:8px;"
-                                    v-if="item_content.content !='' && item_content.content !=null"
-                                    v-bind:key="key_c"
-                                >
-
-                                    <h4
-                                        style="color:#f79d52"
-                                        v-if="
-                                            item_content.content_type ===
-                                                'DOCUMENT'
-                                        "
-                                    >
-                                        Documento
-                                    </h4>
-                                    <h4
-                                        style="color:#f79d52"
-                                        v-else-if="
-                                            item_content.content_type === 'LINK'
-                                        "
-                                    >
-                                        Enlace
-                                    </h4>
-                                    <h4
-                                        style="color:#f79d52"
-                                        v-else-if="
-                                            item_content.content_type ===
-                                                'VIDEO'
-                                        "
-                                    >
-                                        Video
-                                    </h4>
-                                     <h4
-                                        style="color:#f79d52"
-                                        v-else-if="
-                                            item_content.content_type ===
-                                                'YOUTUBE'
-                                        "
-                                    >
-                                        Video
-                                    </h4>
-                                    <div class="form-item">
-                                        <input
-                                            class="form-control-plaintext"
-                                            type="text"
-                                            v-model="item_content.description"
-                                            readonly
-                                        />
-                                    </div>
-                                    <div class="form-item">
-                                        <div class="form-button">                                            
-                                            <a
-                                                :href="item_content.content"
-                                                class="btn btn-primary"
-                                                v-if="
-                                                    item_content.content_type ==='DOCUMENT'
-                                                "
-                                                download
-                                                v-on:click="openDocument(item_content)"
-                                                >Leer documento</a
-                                            >
-                                            <a
-                                                class="btn btn-primary"
-                                                v-if="
-                                                    item_content.content_type === 'LINK'
-                                                "
-                                                v-on:click="
-                                                    openLink(item_content)
-                                                "
-                                                 target="_blank"
-                                                >Vamos a trabajar</a
-                                            >
-                                            <video
-                                                id="vid"
-                                                @playing="
-                                                    playVideo(item_content)
-                                                "
-                                                v-if="
-                                                    item_content.content_type ==='VIDEO'
-                                                "
-                                                controls
-                                            >
-                                                <source
-                                                    v-bind:src="
-                                                        item_content.content
-                                                    "
-                                                    type="video/mp4"
-                                                />
-                                            </video>
-                                            <iframe v-if="item_content.content_type ==='YOUTUBE'" class="container_youtube"  v-bind:src="resolveYoutubeLink(item_content.content)" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                                            </iframe>
-
+                                    <div class="col-10 div-resource" style="border-radius:8px;" v-if="item_content.content !='' && item_content.content !=null && item_content.content_type != 'DOCUMENT'" v-bind:key="key_c">
+                                        
+                                        <!-- <h4 
+                                            v-show="hideDocuments"
+                                            style="color:#f79d52"
+                                            v-if="
+                                                item_content.content_type ===
+                                                    'DOCUMENT'
+                                            "
+                                        >
+                                            Documento
+                                        </h4> -->
+                                        <h4
+                                            style="color:#f79d52"
+                                            v-if="
+                                                item_content.content_type === 'LINK'
+                                            "
+                                        >
+                                            Enlace
+                                        </h4>
+                                        <h4
+                                            style="color:#f79d52"
+                                            v-else-if="
+                                                item_content.content_type ===
+                                                    'VIDEO'
+                                            "
+                                        >
+                                            Video
+                                        </h4>
+                                        <h4
+                                            style="color:#f79d52"
+                                            v-else-if="
+                                                item_content.content_type ===
+                                                    'YOUTUBE'
+                                            "
+                                        >
+                                            Video
+                                        </h4>
+                                        <div class="form-item">
+                                            <input
+                                                class="form-control-plaintext"
+                                                type="text"
+                                                v-model="item_content.description"
+                                                readonly
+                                            />
                                         </div>
-                                    </div>
+                                        <div class="form-item">
+                                            <div class="form-button">  
+                                                <!-- <div v-show="hideDocuments">
+                                                    <a
+                                                        :href="item_content.content"
+                                                        class="btn btn-primary"
+                                                        v-if="
+                                                            item_content.content_type ==='DOCUMENT'                                                    
+                                                        "
+                                                        download
+                                                        v-on:click="openDocument(item_content)"
+                                                        >Leer documento</a
+                                                    >
+                                                </div>                                                                                       -->
+                                                <a
+                                                    class="btn btn-primary"
+                                                    v-if="
+                                                        item_content.content_type === 'LINK'
+                                                    "
+                                                    v-on:click="
+                                                        openLink(item_content)
+                                                    "
+                                                    target="_blank"
+                                                    >Vamos a trabajar</a
+                                                >
+                                                <video
+                                                    id="vid"
+                                                    @playing="
+                                                        playVideo(item_content)
+                                                    "
+                                                    v-if="
+                                                        item_content.content_type ==='VIDEO'
+                                                    "
+                                                    controls
+                                                >
+                                                    <source
+                                                        v-bind:src="
+                                                            item_content.content
+                                                        "
+                                                        type="video/mp4"
+                                                    />
+                                                </video>
+                                                <iframe v-if="item_content.content_type ==='YOUTUBE'" class="container_youtube"  v-bind:src="resolveYoutubeLink(item_content.content)" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                                </iframe>
 
-                                </div>
-                                 </template>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </template>
                             </div>
                             <div
                                 class="row justify-content-center margin-top-50"
@@ -248,10 +246,10 @@
                                                     ></textarea>
                                                 </div>
                                             </div>
-                                            <activity-questionary v-if="activity.activity_type=='CUESTIONARIO_UNICA_RTA' || activity.activity_type =='CUESTIONARIO'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-questionary>
+                                            <!-- <activity-questionary v-if="activity.activity_type=='CUESTIONARIO_UNICA_RTA' || activity.activity_type =='CUESTIONARIO'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-questionary>
                                             <activity-complete-sentence v-if="activity.activity_type=='COMPLETAR_ORACION'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-complete-sentence>
                                             <activity-relationship v-if="activity.activity_type=='RELACION'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-relationship>
-                                            <activity-crossword v-if="activity.activity_type=='CRUCIGRAMA'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-crossword>
+                                            <activity-crossword v-if="activity.activity_type=='CRUCIGRAMA'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-crossword> -->
                                             <div class="activity_response-button">
                                                 <button class="btn btn-primary" v-if="activity.interaction.state==1" @click="SaveResponseEvent(activity)">Enviar respuestas</button>
 
@@ -374,15 +372,20 @@ export default {
             hour_event:"",
             link_event:"",
             id_area:"",
-            id_classroom:""
+            id_classroom:"",
+            hideDocuments: true,
         };
     },
-    mounted() {
+    mounted() {        
         axios.get(`/showClass/${this.id_module}`).then(response => {
             this.achievements = response.data.achievements;
 
             this.nameArea = `${response.data.area.name} ${response.data.classroom.name}`;
             this.id_area= `${response.data.area.id}/${response.data.classroom.id} `;
+            console.log('area_id',response.data.area.id)
+            if(response.data.area.id === 2 || response.data.area.id === 9 || response.data.area.id === 16 || response.data.area.id === 23 || response.data.area.id === 30  || response.data.area.id === 37 || response.data.area.id === 44){
+                this.hideDocuments = false
+            }
 
 
            axios.get(`/getEvenNearStudent/${this.id_area}`).then(response => {
