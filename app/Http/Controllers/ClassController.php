@@ -748,7 +748,7 @@ class ClassController extends Controller
                         'is_required'=>1,'updated_user'=>$auth->id,
                         'delivery_max_date'=>$activity['delivery_max_date'],
                         'feedback_date'=>$activity['feedback_date'],
-                        'id_indicator'=>$activity['id_indicator']),                        
+                        'id_indicator'=>$activity['id_indicator'])                       
                     );
                 }
                 else
