@@ -88,9 +88,9 @@
                             </div>
                             <div class="row justify-content-center">
                                 <template v-for="(item_content,key_c) in course.content">
-                                    <div class="col-10 div-resource" style="border-radius:8px;" v-if="item_content.content !='' && item_content.content !=null" v-bind:key="key_c">
+                                    <div class="col-10 div-resource" style="border-radius:8px;" v-if="item_content.content !='' && item_content.content !=null && item_content.content_type != 'DOCUMENT'" v-bind:key="key_c">
                                         
-                                        <h4 
+                                        <!-- <h4 
                                             v-show="hideDocuments"
                                             style="color:#f79d52"
                                             v-if="
@@ -99,10 +99,10 @@
                                             "
                                         >
                                             Documento
-                                        </h4>
+                                        </h4> -->
                                         <h4
                                             style="color:#f79d52"
-                                            v-else-if="
+                                            v-if="
                                                 item_content.content_type === 'LINK'
                                             "
                                         >
@@ -136,7 +136,7 @@
                                         </div>
                                         <div class="form-item">
                                             <div class="form-button">  
-                                                <div v-show="hideDocuments">
+                                                <!-- <div v-show="hideDocuments">
                                                     <a
                                                         :href="item_content.content"
                                                         class="btn btn-primary"
@@ -147,7 +147,7 @@
                                                         v-on:click="openDocument(item_content)"
                                                         >Leer documento</a
                                                     >
-                                                </div>                                                                                      
+                                                </div>                                                                                       -->
                                                 <a
                                                     class="btn btn-primary"
                                                     v-if="
@@ -246,10 +246,10 @@
                                                     ></textarea>
                                                 </div>
                                             </div>
-                                            <activity-questionary v-if="activity.activity_type=='CUESTIONARIO_UNICA_RTA' || activity.activity_type =='CUESTIONARIO'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-questionary>
+                                            <!-- <activity-questionary v-if="activity.activity_type=='CUESTIONARIO_UNICA_RTA' || activity.activity_type =='CUESTIONARIO'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-questionary>
                                             <activity-complete-sentence v-if="activity.activity_type=='COMPLETAR_ORACION'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-complete-sentence>
                                             <activity-relationship v-if="activity.activity_type=='RELACION'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-relationship>
-                                            <activity-crossword v-if="activity.activity_type=='CRUCIGRAMA'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-crossword>
+                                            <activity-crossword v-if="activity.activity_type=='CRUCIGRAMA'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-crossword> -->
                                             <div class="activity_response-button">
                                                 <button class="btn btn-primary" v-if="activity.interaction.state==1" @click="SaveResponseEvent(activity)">Enviar respuestas</button>
 

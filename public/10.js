@@ -1096,7 +1096,8 @@ var render = function() {
                     _vm._l(_vm.course.content, function(item_content, key_c) {
                       return [
                         item_content.content != "" &&
-                        item_content.content != null
+                        item_content.content != null &&
+                        item_content.content_type != "DOCUMENT"
                           ? _c(
                               "div",
                               {
@@ -1105,27 +1106,7 @@ var render = function() {
                                 staticStyle: { "border-radius": "8px" }
                               },
                               [
-                                item_content.content_type === "DOCUMENT"
-                                  ? _c(
-                                      "h4",
-                                      {
-                                        directives: [
-                                          {
-                                            name: "show",
-                                            rawName: "v-show",
-                                            value: _vm.hideDocuments,
-                                            expression: "hideDocuments"
-                                          }
-                                        ],
-                                        staticStyle: { color: "#f79d52" }
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                        Documento\n                                    "
-                                        )
-                                      ]
-                                    )
-                                  : item_content.content_type === "LINK"
+                                item_content.content_type === "LINK"
                                   ? _c(
                                       "h4",
                                       { staticStyle: { color: "#f79d52" } },
@@ -1189,42 +1170,6 @@ var render = function() {
                                 _vm._v(" "),
                                 _c("div", { staticClass: "form-item" }, [
                                   _c("div", { staticClass: "form-button" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        directives: [
-                                          {
-                                            name: "show",
-                                            rawName: "v-show",
-                                            value: _vm.hideDocuments,
-                                            expression: "hideDocuments"
-                                          }
-                                        ]
-                                      },
-                                      [
-                                        item_content.content_type === "DOCUMENT"
-                                          ? _c(
-                                              "a",
-                                              {
-                                                staticClass: "btn btn-primary",
-                                                attrs: {
-                                                  href: item_content.content,
-                                                  download: ""
-                                                },
-                                                on: {
-                                                  click: function($event) {
-                                                    return _vm.openDocument(
-                                                      item_content
-                                                    )
-                                                  }
-                                                }
-                                              },
-                                              [_vm._v("Leer documento")]
-                                            )
-                                          : _vm._e()
-                                      ]
-                                    ),
-                                    _vm._v(" "),
                                     item_content.content_type === "LINK"
                                       ? _c(
                                           "a",
@@ -1383,135 +1328,83 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _vm.activity.id == act.id
-                            ? _c(
-                                "div",
-                                { staticClass: "card-body" },
-                                [
-                                  _c("div", { staticClass: "row" }, [
-                                    _c("div", { staticClass: "col-12" }, [
-                                      _c("b", [_vm._v("Descripción:")]),
-                                      _vm._v(" "),
-                                      _c("textarea", {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value: _vm.activity.description,
-                                            expression:
-                                              "\n                                                        activity.description\n                                                    "
+                            ? _c("div", { staticClass: "card-body" }, [
+                                _c("div", { staticClass: "row" }, [
+                                  _c("div", { staticClass: "col-12" }, [
+                                    _c("b", [_vm._v("Descripción:")]),
+                                    _vm._v(" "),
+                                    _c("textarea", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.activity.description,
+                                          expression:
+                                            "\n                                                        activity.description\n                                                    "
+                                        }
+                                      ],
+                                      staticClass: "form-control-plaintext",
+                                      attrs: { readonly: "" },
+                                      domProps: {
+                                        value: _vm.activity.description
+                                      },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
                                           }
-                                        ],
-                                        staticClass: "form-control-plaintext",
-                                        attrs: { readonly: "" },
-                                        domProps: {
-                                          value: _vm.activity.description
-                                        },
-                                        on: {
-                                          input: function($event) {
-                                            if ($event.target.composing) {
-                                              return
-                                            }
-                                            _vm.$set(
-                                              _vm.activity,
-                                              "description",
-                                              $event.target.value
-                                            )
-                                          }
-                                        }
-                                      })
-                                    ])
-                                  ]),
-                                  _vm._v(" "),
-                                  _vm.activity.activity_type ==
-                                    "CUESTIONARIO_UNICA_RTA" ||
-                                  _vm.activity.activity_type == "CUESTIONARIO"
-                                    ? _c("activity-questionary", {
-                                        attrs: {
-                                          playing: true,
-                                          module: _vm.activity.module,
-                                          disabled:
-                                            _vm.activity.interaction.state > 1
-                                        }
-                                      })
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _vm.activity.activity_type ==
-                                  "COMPLETAR_ORACION"
-                                    ? _c("activity-complete-sentence", {
-                                        attrs: {
-                                          playing: true,
-                                          module: _vm.activity.module,
-                                          disabled:
-                                            _vm.activity.interaction.state > 1
-                                        }
-                                      })
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _vm.activity.activity_type == "RELACION"
-                                    ? _c("activity-relationship", {
-                                        attrs: {
-                                          playing: true,
-                                          module: _vm.activity.module,
-                                          disabled:
-                                            _vm.activity.interaction.state > 1
-                                        }
-                                      })
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _vm.activity.activity_type == "CRUCIGRAMA"
-                                    ? _c("activity-crossword", {
-                                        attrs: {
-                                          playing: true,
-                                          module: _vm.activity.module,
-                                          disabled:
-                                            _vm.activity.interaction.state > 1
-                                        }
-                                      })
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    { staticClass: "activity_response-button" },
-                                    [
-                                      _vm.activity.interaction.state == 1
-                                        ? _c(
-                                            "button",
-                                            {
-                                              staticClass: "btn btn-primary",
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.SaveResponseEvent(
-                                                    _vm.activity
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [_vm._v("Enviar respuestas")]
+                                          _vm.$set(
+                                            _vm.activity,
+                                            "description",
+                                            $event.target.value
                                           )
-                                        : _vm._e()
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _vm.activity.interaction.state == 3
-                                    ? _c("div", [
-                                        _vm._v("Calificación: "),
-                                        _c(
-                                          "span",
-                                          { staticClass: "activity_score" },
-                                          [
-                                            _vm._v(
-                                              _vm._s(
-                                                _vm.activity.interaction.score
-                                              )
-                                            ),
-                                            _c("small", [_vm._v("/5")])
-                                          ]
+                                        }
+                                      }
+                                    })
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "activity_response-button" },
+                                  [
+                                    _vm.activity.interaction.state == 1
+                                      ? _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-primary",
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.SaveResponseEvent(
+                                                  _vm.activity
+                                                )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Enviar respuestas")]
                                         )
-                                      ])
-                                    : _vm._e()
-                                ],
-                                1
-                              )
+                                      : _vm._e()
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _vm.activity.interaction.state == 3
+                                  ? _c("div", [
+                                      _vm._v("Calificación: "),
+                                      _c(
+                                        "span",
+                                        { staticClass: "activity_score" },
+                                        [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm.activity.interaction.score
+                                            )
+                                          ),
+                                          _c("small", [_vm._v("/5")])
+                                        ]
+                                      )
+                                    ])
+                                  : _vm._e()
+                              ])
                             : _vm._e()
                         ])
                       ])
