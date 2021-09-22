@@ -322,8 +322,8 @@ export default {
             this.activetab !== 2 ? this.activetab = 2 : this.activetab;
         },
         nameMinus(name){
-          var nameMinus=name.toLowerCase();
-          return nameMinus.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+          var nameMinus=name;
+          return nameMinus.normalize("NFD");
         },
         showOtherSection(data){            
             if(data === 'chat'){

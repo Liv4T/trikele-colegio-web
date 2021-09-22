@@ -314,8 +314,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 (function () {
   "use strict";
 
@@ -379,7 +377,8 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
       hour_event: "",
       link_event: "",
       id_area: "",
-      id_classroom: ""
+      id_classroom: "",
+      hideDocuments: true
     };
   },
   mounted: function mounted() {
@@ -389,6 +388,12 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
       _this.achievements = response.data.achievements;
       _this.nameArea = "".concat(response.data.area.name, " ").concat(response.data.classroom.name);
       _this.id_area = "".concat(response.data.area.id, "/").concat(response.data.classroom.id, " ");
+      console.log('area_id', response.data.area.id);
+
+      if (response.data.area.id === 2 || response.data.area.id === 9 || response.data.area.id === 16 || response.data.area.id === 23 || response.data.area.id === 30 || response.data.area.id === 37 || response.data.area.id === 44) {
+        _this.hideDocuments = false;
+      }
+
       axios.get("/getEvenNearStudent/".concat(_this.id_area)).then(function (response) {
         _this.name_event = response.data.name;
         _this.hour_event = response.data.date_from;
@@ -1103,10 +1108,20 @@ var render = function() {
                                 item_content.content_type === "DOCUMENT"
                                   ? _c(
                                       "h4",
-                                      { staticStyle: { color: "#f79d52" } },
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: _vm.hideDocuments,
+                                            expression: "hideDocuments"
+                                          }
+                                        ],
+                                        staticStyle: { color: "#f79d52" }
+                                      },
                                       [
                                         _vm._v(
-                                          "\n                                    Documento\n                                "
+                                          "\n                                        Documento\n                                    "
                                         )
                                       ]
                                     )
@@ -1116,7 +1131,7 @@ var render = function() {
                                       { staticStyle: { color: "#f79d52" } },
                                       [
                                         _vm._v(
-                                          "\n                                    Enlace\n                                "
+                                          "\n                                        Enlace\n                                    "
                                         )
                                       ]
                                     )
@@ -1126,7 +1141,7 @@ var render = function() {
                                       { staticStyle: { color: "#f79d52" } },
                                       [
                                         _vm._v(
-                                          "\n                                    Video\n                                "
+                                          "\n                                        Video\n                                    "
                                         )
                                       ]
                                     )
@@ -1136,7 +1151,7 @@ var render = function() {
                                       { staticStyle: { color: "#f79d52" } },
                                       [
                                         _vm._v(
-                                          "\n                                    Video\n                                "
+                                          "\n                                        Video\n                                    "
                                         )
                                       ]
                                     )
@@ -1174,26 +1189,41 @@ var render = function() {
                                 _vm._v(" "),
                                 _c("div", { staticClass: "form-item" }, [
                                   _c("div", { staticClass: "form-button" }, [
-                                    item_content.content_type === "DOCUMENT"
-                                      ? _c(
-                                          "a",
+                                    _c(
+                                      "div",
+                                      {
+                                        directives: [
                                           {
-                                            staticClass: "btn btn-primary",
-                                            attrs: {
-                                              href: item_content.content,
-                                              download: ""
-                                            },
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.openDocument(
-                                                  item_content
-                                                )
-                                              }
-                                            }
-                                          },
-                                          [_vm._v("Leer documento")]
-                                        )
-                                      : _vm._e(),
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: _vm.hideDocuments,
+                                            expression: "hideDocuments"
+                                          }
+                                        ]
+                                      },
+                                      [
+                                        item_content.content_type === "DOCUMENT"
+                                          ? _c(
+                                              "a",
+                                              {
+                                                staticClass: "btn btn-primary",
+                                                attrs: {
+                                                  href: item_content.content,
+                                                  download: ""
+                                                },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.openDocument(
+                                                      item_content
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [_vm._v("Leer documento")]
+                                            )
+                                          : _vm._e()
+                                      ]
+                                    ),
                                     _vm._v(" "),
                                     item_content.content_type === "LINK"
                                       ? _c(
