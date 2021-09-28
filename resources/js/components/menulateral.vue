@@ -4,7 +4,7 @@
       <div class="row">
         <div class="left">
           <ul>
-               <a href="/estudiante/calendario">
+            <a href="/estudiante/calendario">
               <li class="item-menu">
                 <!-- <img
                         width="35px"
@@ -131,6 +131,17 @@
                 </li>
               </a>
             </div>
+            <a :href="`/api/student/${user.id}/calification-report`" target="_blank">
+              <li class="item-menu" style="margin-top: 9%;">
+                <!-- <img
+                        width="35px"
+                        src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/HORARIO_narnja.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad"
+                        alt
+                /> -->
+                <span class="menu">Boletín</span>
+              </li>
+            </a>
+            
             <!-- <div class="dropdown2">
               <a>
                 <li class="item-menu">
@@ -221,7 +232,17 @@
 </template>
 <script>
 export default {
-  methods: {
+  data(){
+    return {
+      user:{}
+    }
+  },
+  mounted(){
+    axios.get('getDataUser').then((response)=>{      
+      this.user = response.data;
+    })
+  },
+  methods: {    
     logout: function () {
       axios
         .post("logout")

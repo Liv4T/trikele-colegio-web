@@ -292,4 +292,9 @@ class UserController extends Controller
         $parents = User::where('parent_id','=',$id)->get();
         return response()->json($parents);
     }
+
+    public function getUser(){
+        $user = Auth::user();
+        return response()->json($user);
+    }
 }

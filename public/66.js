@@ -50,6 +50,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['id_area', 'id_classroom', 'id_student', 'id_module', 'id_class'],
   data: function data() {
@@ -191,6 +194,23 @@ var render = function() {
                 _c("small", [_vm._v("Correo:")]),
                 _vm._v(" "),
                 _c("span", [_vm._v(_vm._s(_vm.current_student.email))])
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: {
+                      href:
+                        "/api/student/" +
+                        _vm.current_student.id +
+                        "/calification-report",
+                      target: "_blank"
+                    }
+                  },
+                  [_vm._v("Planilla de notas")]
+                )
               ])
             ]),
             _vm._v(" "),
