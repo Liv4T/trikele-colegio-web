@@ -40,6 +40,12 @@
                                 <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/HORARIO_narnja.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad" alt/>
                                 <span class="menu">Calendario</span>
                             </li>
+                        </a>
+                        <a href="/notasParents">
+                            <li class="item-menu">
+                                <img width="35px" src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/HORARIO_narnja.png?alt=media&token=93ec6b97-e5a6-4eca-891e-b63bf2a352ad" alt/>
+                                <span class="menu">Académico</span>
+                            </li>
                         </a>               
                         <a href="/getParentsObserver">
                             <li class="item-menu">

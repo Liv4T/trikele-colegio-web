@@ -256,5 +256,6 @@ Vue.component("modal-preview",()=>import("./components/ModalPreviewClass.vue"));
 Vue.component("change-grade",()=>import("./components/changeGrade.vue"));
 
 Vue.component("verify-registration", ()=>import("./components/VerifyRegistration.vue"));
+Vue.component("notas-padres", ()=>import("./components/notasPadres.vue"));
 
 const app = new Vue({el: "#app", data: {}, store});

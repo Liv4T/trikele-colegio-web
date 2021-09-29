@@ -911,3 +911,10 @@ Route::get('getPaymentAproved','VerifyRegistrationController@getPaymentAproved')
 Route::middleware('auth')->get('/verifyRegister', function () {
     return view('verifyRegistration');
 });
+
+Route::middleware('auth')->get('/notasParents', function () {
+    return view('notasParents');
+});
+
+Route::get('/getAreas', 'ParentsController@getAreas');
+Route::get('/getNotes/{id_student}/{id_area}/{id_classroom}', 'ParentsController@getNotes');
