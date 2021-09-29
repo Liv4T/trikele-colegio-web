@@ -16,7 +16,8 @@ class CreateVerifyRegistrationsTable extends Migration
         Schema::create('verify_registrations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_student');
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(0);
+            $table->integer('id_customer_invoice_payment');
             $table->tinyInteger('deleted')->default(0);
             $table->timestamps();
         });

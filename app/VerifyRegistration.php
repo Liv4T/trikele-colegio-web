@@ -12,6 +12,7 @@ class VerifyRegistration extends Model
 
     protected $fillable = [
         'id_student',
+        'id_customer_invoice_payment',
         'status',
         'deleted',
     ];

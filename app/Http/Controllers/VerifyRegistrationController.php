@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\VerifyRegistration;
 use Illuminate\Http\Request;
 use App\CustomerInvoicePayment;
+use App\User;
 
 class VerifyRegistrationController extends Controller
 {
@@ -22,10 +23,19 @@ class VerifyRegistrationController extends Controller
 
     public function getPaymentAproved(){
         $users = [];
-        $data = CustomerInvoicePayment::where('response_code','aproved')->get();
-        foreach($data as $key => $key){
-            $user = User::where('email',$key->buyer_email)->first();
-            array_push($users, $user);
+        $data = CustomerInvoicePayment::where('response_code','approved')->get();
+        
+        foreach($data as $key => $key){            
+            $user = User::where('email',$data[$key]->buyer_email)->first();
+            if(isset($user)){
+                array_push($users, [
+                    'id_student' => $user->id,
+                    'name' => $user->name,
+                    'last_name' => $user->last_name,
+                    'payment_date' => $data[$key]->payment_date,
+                    'id_customer_invoice_payment' => $data[$key]->id,
+                ]);
+            }            
         }
 
         return response()->json($users);
@@ -42,6 +52,7 @@ class VerifyRegistrationController extends Controller
         $verifyPayment = new VerifyRegistration();
         $verifyPayment->id_student = $request->id_student;
         $verifyPayment->status = $request->status;
+        $verifyPayment->id_customer_invoice_payment = $request->id_customer_invoice_payment;
 
         $verifyPayment->save();
 
@@ -56,7 +67,7 @@ class VerifyRegistrationController extends Controller
      */
     public function show($id)
     {
-        $showData = VerifyRegistration::where('id_student',$id)->first();
+        $showData = VerifyRegistration::where('id_student',$id)->orderBy('id_customer_invoice_payment','desc')->get();
         return response()->json($showData);
     }
 
@@ -72,6 +83,7 @@ class VerifyRegistrationController extends Controller
         $verifyPayment = VerifyRegistration::findOrFail($id);
         $verifyPayment->id_student = $request->id_student;    
         $verifyPayment->status = $request->status;
+        $verifyPayment->id_customer_invoice_payment = $request->id_customer_invoice_payment;
 
         $verifyPayment->update();
 

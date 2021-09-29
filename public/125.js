@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[125],{
 
-/***/ "./resources/js/components/lectivesAdmComponent.vue":
-/*!**********************************************************!*\
-  !*** ./resources/js/components/lectivesAdmComponent.vue ***!
-  \**********************************************************/
+/***/ "./resources/js/components/lectivesAdmAssingTeacherComponent.vue":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/lectivesAdmAssingTeacherComponent.vue ***!
+  \***********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -27,7 +27,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   
 )
 
-component.options.__file = "resources/js/components/lectivesAdmComponent.vue"
+component.options.__file = "resources/js/components/lectivesAdmAssingTeacherComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ })

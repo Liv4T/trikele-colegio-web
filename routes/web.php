@@ -903,6 +903,11 @@ Route::middleware('auth')->get('/changeGrade', function () {
 
 Route::put('savePromGrade/{id_student}','ChangeGradeController@savePromGrade');
 Route::get('/api/student/{student_id}/calification-report', 'CalificationController@generateTemplateCalification');
-Route::get('/getDataUser','UserController@getUser');
+Route::get('getDataUser','UserController@getUser');
+
 Route::resource('paymentRegistration','VerifyRegistrationController');
 Route::get('getPaymentAproved','VerifyRegistrationController@getPaymentAproved');
+
+Route::middleware('auth')->get('/verifyRegister', function () {
+    return view('verifyRegistration');
+});

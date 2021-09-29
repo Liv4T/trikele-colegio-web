@@ -131,7 +131,7 @@
                 </li>
               </a>
             </div>
-            <a :href="`/api/student/${user.id}/calification-report`" target="_blank">
+            <a v-if="validation === true" :href="`/api/student/${user.id}/calification-report`" target="_blank">
               <li class="item-menu" style="margin-top: 9%;">
                 <!-- <img
                         width="35px"
@@ -234,13 +234,24 @@
 export default {
   data(){
     return {
-      user:{}
+      validation:false,
+      user: {}
     }
   },
   mounted(){
-    axios.get('getDataUser').then((response)=>{      
-      this.user = response.data;
-    })
+    axios.get('getDataUser').then(async (response)=>{   
+      this.user = response.data;   
+      axios.get(`paymentRegistration/${response.data.id}`).then((response)=>{
+          let payment = response.data;          
+          payment.forEach(element => {
+              if(element.status === 1){
+                this.validation = true;
+              }else{
+                this.validation = false;
+              }
+          });
+      })
+    });        
   },
   methods: {    
     logout: function () {
