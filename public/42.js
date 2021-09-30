@@ -136,6 +136,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: {
     logout: function logout() {
@@ -341,6 +347,14 @@ var staticRenderFns = [
         _c("li", { staticClass: "item-menu" }, [
           _c("span", { staticClass: "menu letra-boldfont" }, [
             _vm._v("MIS ESTUDIANTES")
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("a", { attrs: { href: "/resportSendParents" } }, [
+        _c("li", { staticClass: "item-menu" }, [
+          _c("span", { staticClass: "menu letra-boldfont" }, [
+            _vm._v("Reporte Mensual")
           ])
         ])
       ]),

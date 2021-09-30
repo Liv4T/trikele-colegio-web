@@ -257,5 +257,7 @@ Vue.component("change-grade",()=>import("./components/changeGrade.vue"));
 
 Vue.component("verify-registration", ()=>import("./components/VerifyRegistration.vue"));
 Vue.component("notas-padres", ()=>import("./components/notasPadres.vue"));
+Vue.component("report-monthly-component", ()=>import("./components/montlyReport.vue")); 
+Vue.component("report-send-parents",()=>import("./components/reportSendParents.vue"));
 
 const app = new Vue({el: "#app", data: {}, store});

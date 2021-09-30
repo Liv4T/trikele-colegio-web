@@ -918,3 +918,13 @@ Route::middleware('auth')->get('/notasParents', function () {
 
 Route::get('/getAreas', 'ParentsController@getAreas');
 Route::get('/getNotes/{id_student}/{id_area}/{id_classroom}', 'ParentsController@getNotes');
+Route::get('getReportsByParent', 'ReportsParentsController@getReportsByParent');
+Route::middleware('auth')->get('/monthlyReport', function () {
+    return view('monthlyReportParents');
+});
+Route::resource('resportSendParents', 'ReportsParentsController');
+Route::post('sendSingleMessage', 'ReportsParentsController@sendSingleMessage');
+Route::get('getAllRecentActivities/{area_id}', 'ReportsParentsController@getAllRecentActivities');
+Route::get('getAllAssistances/{user_name}/{id_area}/{id_classroom}', 'ReportsParentsController@getAllAssistances');
+Route::get('getNotesBySudentAndArea/{student_id}/{id_area}', 'ReportsParentsController@getNotesBySudentAndArea');
+Route::get('showUser/{userid}', 'ReportsParentsController@user');

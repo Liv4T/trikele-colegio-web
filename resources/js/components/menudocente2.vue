@@ -50,6 +50,12 @@
                               <span class="menu letra-boldfont">MIS ESTUDIANTES</span>
                           </li>
                         </a>
+                        <a href="/resportSendParents">
+                          <li class="item-menu">
+                            <span class="menu letra-boldfont">Reporte Mensual</span>
+                          </li>
+                         
+                        </a>
                         <a href="/observer">
                           <li class="item-menu">
                             <span class="menu letra-boldfont">OBSERVADOR</span>
