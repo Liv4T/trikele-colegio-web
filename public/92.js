@@ -1,16 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[92],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/contratoEducativo.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/contratoEducativo.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/bimestreList.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/bimestreList.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -51,43 +49,54 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["id_area", "id_classroom", "type_u", "user"],
   data: function data() {
     return {
-      motherName: "",
-      fatherName: "",
-      ccMother: "",
-      ccFather: "",
-      ccOther: "",
-      downloadedFile: ""
+      bimestres: [],
+      idBimestre: null,
+      bimestre_name: "",
+      idArea: null,
+      idClassroom: null,
+      id_bimestre_to_courses: null
     };
   },
+  mounted: function mounted() {
+    this.idArea = this.id_area;
+    this.idClassroom = this.id_classroom;
+    this.getData();
+  },
+  watch: {
+    id_area: function id_area(newVal, oldVal) {
+      if (newVal !== oldVal) {
+        this.idArea = newVal;
+      }
+    },
+    id_classroom: function id_classroom(newVal, oldVal) {
+      if (newVal !== oldVal) {
+        this.idClassroom = newVal;
+      }
+    }
+  },
   methods: {
-    DownloadFile: function DownloadFile() {
+    getData: function getData() {
       var _this = this;
 
-      axios.post('contratoEducativo', {
-        motherName: this.motherName,
-        fatherName: this.fatherName,
-        ccFather: this.ccFather,
-        ccMother: this.ccMother,
-        ccOther: this.ccOther
-      }).then(function (response) {
-        _this.downloadedFile = response.data;
-        toastr.success('Documento Descargado, recuerda leerlo y completarlo');
-      })["catch"](function (error) {
-        console.log(error);
-        toastr.info('Ha ocurrido un error, intenta de nuevo mas tarde');
+      axios.get('/bimestres').then(function (response) {
+        _this.bimestres = response.data;
       });
+    },
+    sendId: function sendId(idBim) {
+      this.id_bimestre_to_courses = idBim;
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/contratoEducativo.vue?vue&type=template&id=5b2441ea&":
-/*!********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/contratoEducativo.vue?vue&type=template&id=5b2441ea& ***!
-  \********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/bimestreList.vue?vue&type=template&id=c1a1b108&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/bimestreList.vue?vue&type=template&id=c1a1b108& ***!
+  \***************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -100,207 +109,151 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", [
+    _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "col-sm-12", attrs: { id: "crud" } }, [
-        _c("div", { staticClass: "card-container" }, [
-          _c("div", { staticClass: "card text-center" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "motherName" } }, [
-                  _vm._v("Nombre de Madre")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.motherName,
-                      expression: "motherName"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text" },
-                  domProps: { value: _vm.motherName },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.motherName = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "motherName" } }, [
-                  _vm._v("Cedula de Madre")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.ccMother,
-                      expression: "ccMother"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text" },
-                  domProps: { value: _vm.ccMother },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.ccMother = $event.target.value
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "motherName" } }, [
-                  _vm._v("Nombre de Padre")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.fatherName,
-                      expression: "fatherName"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text" },
-                  domProps: { value: _vm.fatherName },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.fatherName = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "motherName" } }, [
-                  _vm._v("Cedula de Padre")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.ccFather,
-                      expression: "ccFather"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text" },
-                  domProps: { value: _vm.ccFather },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.ccFather = $event.target.value
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "motherName" } }, [
-                  _vm._v("Cedula Otro")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.ccOther,
-                      expression: "ccOther"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text" },
-                  domProps: { value: _vm.ccOther },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.ccOther = $event.target.value
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: {
-                      href:
-                        "contratoEducativo/" +
-                        _vm.motherName +
-                        "/" +
-                        _vm.fatherName +
-                        "/" +
-                        _vm.ccMother +
-                        "/" +
-                        _vm.ccFather +
-                        "/" +
-                        _vm.ccOther +
-                        "'",
-                      download: ""
-                    }
-                  },
-                  [_vm._v("Descargar")]
-                )
-              ])
-            ])
+        _c("div", { staticClass: "card text-center" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c(
+              "div",
+              { attrs: { id: "accordion" } },
+              _vm._l(_vm.bimestres, function(bim, key) {
+                return _c("div", { key: key, staticClass: "card" }, [
+                  bim.status === 1
+                    ? _c("div", [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "card-header",
+                            attrs: { id: "heading" + key }
+                          },
+                          [
+                            _c("h5", { staticClass: "mb-0" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-link",
+                                  attrs: {
+                                    "data-toggle": "collapse",
+                                    "data-target": "#collapse" + key,
+                                    "aria-expanded": "true",
+                                    "aria-controls": "collapse" + key
+                                  },
+                                  on: {
+                                    click: function() {
+                                      return _vm.sendId(bim.id)
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                            " +
+                                      _vm._s(bim.name) +
+                                      "\n                                        "
+                                  )
+                                ]
+                              )
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm.type_u === 1 || _vm.type_u === 2
+                          ? _c("div", [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "collapse hide",
+                                  attrs: {
+                                    id: "collapse" + key,
+                                    "aria-labelledby": "heading" + key,
+                                    "data-parent": "#accordion"
+                                  }
+                                },
+                                [
+                                  _vm.id_bimestre_to_courses !== null
+                                    ? _c(
+                                        "div",
+                                        { staticClass: "card-body" },
+                                        [
+                                          _c("teacher-courses", {
+                                            attrs: {
+                                              user: _vm.user,
+                                              id_area: _vm.idArea,
+                                              id_classroom: _vm.idClassroom,
+                                              id_bimestre:
+                                                _vm.id_bimestre_to_courses
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    : _vm._e()
+                                ]
+                              )
+                            ])
+                          : _vm.type_u === 3
+                          ? _c("div", [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "collapse hide",
+                                  attrs: {
+                                    id: "collapse" + key,
+                                    "aria-labelledby": "heading" + key,
+                                    "data-parent": "#accordion"
+                                  }
+                                },
+                                [
+                                  _vm.id_bimestre_to_courses !== null
+                                    ? _c(
+                                        "div",
+                                        { staticClass: "card-body" },
+                                        [
+                                          _c("student-courses", {
+                                            attrs: {
+                                              id_area: _vm.idArea,
+                                              id_classroom: _vm.idClassroom,
+                                              id_bimestre:
+                                                _vm.id_bimestre_to_courses
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    : _vm._e()
+                                ]
+                              )
+                            ])
+                          : _vm._e()
+                      ])
+                    : _vm._e()
+                ])
+              }),
+              0
+            )
           ])
         ])
       ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", [_vm._v("Datos para Contrato Educativo")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
 
 /***/ }),
 
-/***/ "./resources/js/components/contratoEducativo.vue":
-/*!*******************************************************!*\
-  !*** ./resources/js/components/contratoEducativo.vue ***!
-  \*******************************************************/
+/***/ "./resources/js/components/bimestreList.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/components/bimestreList.vue ***!
+  \**************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _contratoEducativo_vue_vue_type_template_id_5b2441ea___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./contratoEducativo.vue?vue&type=template&id=5b2441ea& */ "./resources/js/components/contratoEducativo.vue?vue&type=template&id=5b2441ea&");
-/* harmony import */ var _contratoEducativo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./contratoEducativo.vue?vue&type=script&lang=js& */ "./resources/js/components/contratoEducativo.vue?vue&type=script&lang=js&");
+/* harmony import */ var _bimestreList_vue_vue_type_template_id_c1a1b108___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bimestreList.vue?vue&type=template&id=c1a1b108& */ "./resources/js/components/bimestreList.vue?vue&type=template&id=c1a1b108&");
+/* harmony import */ var _bimestreList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bimestreList.vue?vue&type=script&lang=js& */ "./resources/js/components/bimestreList.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -310,9 +263,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _contratoEducativo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _contratoEducativo_vue_vue_type_template_id_5b2441ea___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _contratoEducativo_vue_vue_type_template_id_5b2441ea___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _bimestreList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _bimestreList_vue_vue_type_template_id_c1a1b108___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _bimestreList_vue_vue_type_template_id_c1a1b108___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -322,38 +275,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/contratoEducativo.vue"
+component.options.__file = "resources/js/components/bimestreList.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/contratoEducativo.vue?vue&type=script&lang=js&":
-/*!********************************************************************************!*\
-  !*** ./resources/js/components/contratoEducativo.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************/
+/***/ "./resources/js/components/bimestreList.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/bimestreList.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_contratoEducativo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./contratoEducativo.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/contratoEducativo.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_contratoEducativo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_bimestreList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./bimestreList.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/bimestreList.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_bimestreList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/contratoEducativo.vue?vue&type=template&id=5b2441ea&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/components/contratoEducativo.vue?vue&type=template&id=5b2441ea& ***!
-  \**************************************************************************************/
+/***/ "./resources/js/components/bimestreList.vue?vue&type=template&id=c1a1b108&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/bimestreList.vue?vue&type=template&id=c1a1b108& ***!
+  \*********************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_contratoEducativo_vue_vue_type_template_id_5b2441ea___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./contratoEducativo.vue?vue&type=template&id=5b2441ea& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/contratoEducativo.vue?vue&type=template&id=5b2441ea&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_contratoEducativo_vue_vue_type_template_id_5b2441ea___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_bimestreList_vue_vue_type_template_id_c1a1b108___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./bimestreList.vue?vue&type=template&id=c1a1b108& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/bimestreList.vue?vue&type=template&id=c1a1b108&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_bimestreList_vue_vue_type_template_id_c1a1b108___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_contratoEducativo_vue_vue_type_template_id_5b2441ea___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_bimestreList_vue_vue_type_template_id_c1a1b108___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

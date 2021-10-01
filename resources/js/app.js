@@ -260,4 +260,10 @@ Vue.component("notas-padres", ()=>import("./components/notasPadres.vue"));
 Vue.component("report-monthly-component", ()=>import("./components/montlyReport.vue")); 
 Vue.component("report-send-parents",()=>import("./components/reportSendParents.vue"));
 
+Vue.component("proceedings-parents-component", () => import ("./components/proceedingsParentsComponent.vue"));
+Vue.component("list-proceedings-parents-component", () => import ("./components/listProceedingsParents.vue"));
+Vue.component("modal-update-proceedings", () => import ("./components/modalUpdateProceedings.vue"));
+Vue.component("view-proceedings-pdf-component", () => import ("./components/viewProceedingsPdfComponent.vue"));
+
+
 const app = new Vue({el: "#app", data: {}, store});

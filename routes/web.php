@@ -928,3 +928,27 @@ Route::get('getAllRecentActivities/{area_id}', 'ReportsParentsController@getAllR
 Route::get('getAllAssistances/{user_name}/{id_area}/{id_classroom}', 'ReportsParentsController@getAllAssistances');
 Route::get('getNotesBySudentAndArea/{student_id}/{id_area}', 'ReportsParentsController@getNotesBySudentAndArea');
 Route::get('showUser/{userid}', 'ReportsParentsController@user');
+
+
+//Actas Padres
+Route::middleware('auth')->post('/saveProceedings', 'ProceedingsParentsController@save');
+Route::middleware('auth')->post('/saveProceedingsFile', 'ProceedingsParentsController@uploadFile');
+Route::middleware('auth')->get('/getProceedings', 'ProceedingsParentsController@indexProceedings');
+Route::middleware('auth')->get('/getProceedingsUrl/{id}', 'ProceedingsParentsController@urlArchive');
+Route::middleware('auth')->post('/update/acta/parents/{id}', 'ProceedingsParentsController@uploadFileUpdate');
+Route::middleware('auth')->post('/update/acta/parents/firmar/{id}', 'ProceedingsParentsController@uploadFileUpdateSign');
+Route::get('/api/proceedings/parents/pdf/{id}', 'ProceedingsParentsController@generatePdf');
+Route::middleware('auth')->post('/updateViewedProceedings/{id}', 'ProceedingsParentsController@updateViewed');
+Route::middleware('auth')->get('/api/proceedings/parents/download/{id}', 'ProceedingsParentsController@downloadProceedings');
+
+Route::middleware('auth')->get('/proceedings/parents', function () {
+    return view('proceedingsParents')->with('type_user', Auth::user()->type_user);
+});
+
+Route::middleware('auth')->get('/view/proceedings/{id}/{type_view}', function (int $id_proceeding, int $type_view) {
+    return view('viewProceedingsPdf')->with('id_proceeding', $id_proceeding)->with('type_view', $type_view);
+});
+
+Route::middleware('auth')->get('/list/proceedings/parents', function () {
+    return view('listProceedingsParents')->with('type_user', Auth::user()->type_user);
+});

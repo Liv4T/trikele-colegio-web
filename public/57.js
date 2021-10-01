@@ -1,14 +1,63 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[57],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/purchasePlanResumeComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/purchasePlanResumeComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -293,9 +342,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["group_name", "voucher", "area_id", "schedulearea_id", "time_index", "plan_type"],
+  props: ["plan_type", "voucher"],
   mounted: function mounted() {
     var _this = this;
+
+    this.getPlanInformation();
 
     if (this.voucher) {
       this.voucher_code = "".concat(this.voucher);
@@ -307,19 +358,9 @@ __webpack_require__.r(__webpack_exports__);
     window.onresize = function () {
       _this.fillWidthCalculate();
     };
-
-    if (this.plan_type == "TUTORIA_GRUPAL") {
-      this.type = "grupal"; // this.minStudents=3;
-    }
-
-    this.getPlanInformation().then(function () {
-      _this.getScheduleSelected();
-    });
   },
   data: function data() {
     return {
-      minStudents: 1,
-      type: "individual",
       fullWidth: true,
       current_plan: {
         quantity: 1,
@@ -331,7 +372,7 @@ __webpack_require__.r(__webpack_exports__);
         total_price: 0,
         total_tax: 0
       },
-      selected_english: true,
+      selected_english: false,
       events: {
         pay_loading: false,
         voucher_loading: false,
@@ -352,7 +393,7 @@ __webpack_require__.r(__webpack_exports__);
       return ret_stament;
     },
     TotalValue: function TotalValue() {
-      return this.current_plan.plan_price.total_price * this.current_plan.quantity;
+      return (this.current_plan.plan_price.total_price + this.current_plan.english_price.total_price) * this.current_plan.quantity;
     },
     VoucherDiscountApplied: function VoucherDiscountApplied() {
       if (!this.voucher_data) return "";
@@ -376,46 +417,25 @@ __webpack_require__.r(__webpack_exports__);
     getPlanInformation: function getPlanInformation() {
       var _this2 = this;
 
-      return new Promise(function (resolve, reject) {
-        axios.get("/api/customer-plan/type/".concat(_this2.plan_type)).then(function (response) {
-          _this2.plan_prices = response.data;
+      axios.get("/api/customer-plan/type/".concat(this.plan_type)).then(function (response) {
+        if (response.data.length == 0) {
+          toastr.error("Plan no es válido");
+          setTimeout(function () {
+            location.href = "/compra/plan";
+          }, 3000);
+        }
 
-          if (response.data.length == 0) {
-            toastr.error("Plan no es válido");
-            setTimeout(function () {
-              location.href = "/compra/plan";
-              resolve();
-            }, 3000);
-          } else {
-            _this2.current_plan.plan_price = response.data[0];
-            resolve();
-          }
-        }, function (e) {
-          return reject(e);
-        });
-      });
-    },
-    getScheduleSelected: function getScheduleSelected() {
-      var _this3 = this;
+        _this2.plan_prices = response.data;
 
-      return new Promise(function (resolve, reject) {
-        axios.get("/api/tutor/schedule/".concat(_this3.type, "/").concat(_this3.schedulearea_id, "/").concat(_this3.time_index)).then(function (response) {
-          _this3.current_plan = {
-            plan_name: "Tutor\xEDa ".concat(response.data[0].area_name),
-            icon: response.data[0].area_icon,
-            quantity: 1,
-            date_from: response.data[0].date_from,
-            date_to: response.data[0].date_to,
-            plan_price: {
-              total_price: response.data[0].rate * _this3.minStudents
-            },
-            english_price: {}
-          };
-        });
+        if (response.data.length > 0) {
+          _this2.current_plan.plan_price = response.data[0];
+
+          _this2.getEnglishModule(_this2.current_plan.plan_price.grade);
+        }
       });
     },
     validateVoucher: function validateVoucher() {
-      var _this4 = this;
+      var _this3 = this;
 
       this.events.voucher_loading = true;
       this.events.voucher_error = "";
@@ -423,22 +443,47 @@ __webpack_require__.r(__webpack_exports__);
       axios.post("/api/customer-voucher/validate", {
         voucher: this.voucher_code
       }).then(function (response) {
-        _this4.events.voucher_loading = false;
-        _this4.voucher_data = response.data;
-        console.log(_this4.voucher_data);
+        _this3.events.voucher_loading = false;
+        _this3.voucher_data = response.data;
+        console.log(_this3.voucher_data);
         toastr.success("Cupón aplicado");
       }, function (error) {
-        _this4.events.voucher_loading = false;
+        _this3.events.voucher_loading = false;
 
         if (error.response.data) {
-          _this4.events.voucher_error = error.response.data;
+          _this3.events.voucher_error = error.response.data;
           toastr.error(error.response.data);
         } else {
           console.log(error);
         }
       });
     },
-    PlanPriceChangeEvent: function PlanPriceChangeEvent() {//
+    getEnglishModule: function getEnglishModule(grade) {
+      var _this4 = this;
+
+      this.current_plan.english_price = {
+        total_price: 0,
+        total_tax: 0
+      };
+
+      if (this.plan_type != "CREDITO" && this.selected_english) {
+        axios.get("/api/customer-plan/type/INGLES_".concat(this.plan_type, "/grade/").concat(grade)).then(function (response) {
+          if (response.data) {
+            _this4.current_plan.english_price = response.data;
+          }
+        });
+      }
+    },
+    RemoveEnglishEvent: function RemoveEnglishEvent() {
+      this.selected_english = false;
+      this.getEnglishModule(this.current_plan.plan_price.grade);
+    },
+    AddEnglishEvent: function AddEnglishEvent() {
+      this.selected_english = true;
+      this.getEnglishModule(this.current_plan.plan_price.grade);
+    },
+    PlanPriceChangeEvent: function PlanPriceChangeEvent() {
+      this.getEnglishModule(this.current_plan.plan_price.grade);
     },
     formatPrice: function formatPrice(value) {
       var val = (value / 1).toFixed(0).replace(".", ",");
@@ -449,24 +494,21 @@ __webpack_require__.r(__webpack_exports__);
       if (this.current_plan.quantity > 20) this.current_plan.quantity = 20;
     },
     PayEvent: function PayEvent() {
-      var _this5 = this;
+      var _this$current_plan$en,
+          _this5 = this;
 
       this.events.pay_loading = true;
       var model = {
-        plan_id: this.plan_prices[0].id,
+        plan_id: this.current_plan.plan_price.customer_plan_id,
         quantity: this.current_plan.quantity,
-        date_from: this.current_plan.date_from,
-        date_to: this.current_plan.date_to,
-        english_id: 0,
-        tutorschedulearea_id: this.schedulearea_id,
-        time_index: this.time_index,
+        english_id: (_this$current_plan$en = this.current_plan.english_price.customer_plan_id) !== null && _this$current_plan$en !== void 0 ? _this$current_plan$en : 0,
         voucher: this.voucher_data ? this.voucher_data.code : null
       };
-      location.href = "/compra/plan/".concat(this.plan_type, "/tutoria/ingresar/p/").concat(encodeURI(window.btoa(JSON.stringify(model)))); //location.href=`/compra/pagar/mercadopago/${encodeURI(window.btoa(JSON.stringify(model)))}`;
-
       setTimeout(function () {
+        location.href = "/compra/plan/".concat(_this5.plan_type, "/ingresar/p/").concat(encodeURI(window.btoa(JSON.stringify(model)))); //location.href = `/compra/pagar/mercadopago/${encodeURI(window.btoa(JSON.stringify(model)))}`;
+
         _this5.events.pay_loading = false;
-      }, 4000);
+      }, 1000);
     },
     quantityEditEnabled: function quantityEditEnabled() {
       if (this.plan_type == "CREDITO") return false;
@@ -478,10 +520,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=style&index=0&lang=css&":
-/*!*************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=style&index=0&lang=css& ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/purchasePlanResumeComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/purchasePlanResumeComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -490,22 +532,22 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nh4 {\r\n  font-size: 1.2em;\n}\n.div-plan-icon {\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.div-plan-title {\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: flex-start;\r\n  align-items: flex-end;\n}\n.div-plan-item {\r\n  display: flex;\r\n  flex-direction: column;\n}\n.div-plan-item > div {\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-between;\n}\n.div-plan-item-total {\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-between;\n}\n.span-plan-name {\r\n  font-weight: bold;\r\n  font-size: 1.3em;\r\n  color: #51647c;\n}\n.span-plan-subtotal {\r\n  font-weight: bold;\r\n  font-size: 1.5em;\n}\n.span-plan-total {\r\n  font-weight: bold;\r\n  font-size: 1.8em;\n}\n.span-price {\r\n  font-weight: bold;\r\n  font-size: 1.5em;\n}\n.margin-top-100 {\r\n  margin-top: 100px;\n}\n.border-bottom-1 {\r\n  border-bottom: 1px solid #818181;\n}\n.div-plan-icon > img {\r\n  width: 100px;\n}\n.span-total {\r\n  font-weight: bold;\r\n  font-size: 2em;\n}\n.color-danger {\r\n  color: tomato;\n}\ncard {\r\n  display: flex;\r\n  justify-content: center;\n}\np {\r\n  font-family: \"Century Gothic\";\r\n  font-size: 1.2em;\n}\nspan {\r\n  font-family: \"Century Gothic\";\r\n  font-size: 1.2em;\n}\nul > li {\r\n  font-family: \"Century Gothic\";\r\n  text-align: left;\n}\na {\r\n  color: #0050e3;\n}\n.title-page-section {\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: center;\r\n  align-items: center;\r\n  margin-bottom: 50px;\n}\n.title-page {\r\n  background: #233d68;\r\n  color: white;\r\n  font-size: 2em;\r\n  padding: 20px;\r\n  border-radius: 5px;\r\n  box-shadow: -1px 4px 9px 0px rgba(148, 148, 148, 1);\n}\n.resume-container {\r\n  background: rgba(255, 121, 0, 0.38);\r\n  padding: 20px;\r\n  border-radius: 8px;\n}\n.resume-container .table {\r\n  margin-bottom: 20px;\n}\n.section-cupon {\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.resume-table {\r\n  background: #fff;\r\n  padding: 5px;\r\n  border-radius: 8px;\r\n  box-shadow: -1px 4px 9px 0px #7a7a7a;\r\n  width: 100%;\r\n  margin-bottom: 20px;\n}\n.resume-table .table thead th {\r\n  border-bottom: 2px solid #233d68;\n}\n.resume-table .table thead td {\r\n  display: flex;\r\n  flex-direction: row;\r\n  align-items: center;\n}\n.thead-resume th {\r\n  color: #ff7900;\n}\n.table-resume th {\r\n  color: #ff7900;\n}\n@media (max-width: 768px) {\n[class*=\"col-\"] {\r\n    margin-bottom: 15px;\n}\n.title-page {\r\n    font-size: 1.5em;\r\n    line-height: 40px;\n}\n}\r\n", ""]);
+exports.push([module.i, "\nh4 {\n  font-size: 1.2em;\n}\n.div-plan-item {\n  display: flex;\n  flex-direction: column;\n}\n.div-plan-item > div {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n}\n.div-plan-item-total {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n}\n.span-plan-name {\n  font-weight: bold;\n  font-size: 1.3em;\n  color: #51647c;\n}\n.span-plan-subtotal {\n  font-weight: bold;\n  font-size: 1.5em;\n}\n.span-plan-total {\n  font-weight: bold;\n  font-size: 1.8em;\n}\n.span-price {\n  font-weight: bold;\n  font-size: 1.5em;\n}\n.margin-top-100 {\n  margin-top: 100px;\n}\n.border-bottom-1 {\n  border-bottom: 1px solid #818181;\n}\n.div-plan-icon > img {\n  width: 100px;\n}\n.span-total {\n  font-weight: bold;\n  font-size: 2em;\n}\n.color-danger {\n  color: tomato;\n}\ncard {\n  display: flex;\n  justify-content: center;\n}\np {\n  font-family: \"Century Gothic\";\n  font-size: 1.2em;\n}\nspan {\n  font-family: \"Century Gothic\";\n  font-size: 1.2em;\n}\nul > li {\n  font-family: \"Century Gothic\";\n  text-align: left;\n}\na {\n  color: #0050e3;\n}\n.title-page-section {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  align-items: center;\n  margin-bottom: 50px;\n}\n.title-page {\n  background: #233d68;\n  color: white;\n  font-size: 2em;\n  padding: 20px;\n  border-radius: 5px;\n  box-shadow: -1px 4px 9px 0px rgba(148, 148, 148, 1);\n}\n.resume-container {\n  background: rgba(255, 121, 0, 0.38);\n  padding: 20px;\n  border-radius: 8px;\n}\n.resume-container .table {\n  margin-bottom: 20px;\n}\n.section-cupon {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n}\n.resume-table {\n  background: #fff;\n  padding: 5px;\n  border-radius: 8px;\n  box-shadow: -1px 4px 9px 0px #7a7a7a;\n  width: 100%;\n  margin-bottom: 20px;\n}\n.resume-table .table thead th {\n  border-bottom: 2px solid #233d68;\n}\n.resume-table .table thead td {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n.thead-resume th {\n  color: #ff7900;\n}\n.table-resume th {\n  color: #ff7900;\n}\n@media (max-width: 768px) {\n[class*=\"col-\"] {\n    margin-bottom: 15px;\n}\n.title-page {\n    font-size: 1.5em;\n    line-height: 40px;\n}\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=style&index=0&lang=css&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=style&index=0&lang=css& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/purchasePlanResumeComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/purchasePlanResumeComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./purchaseTutorialResumeComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=style&index=0&lang=css&");
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./purchasePlanResumeComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/purchasePlanResumeComponent.vue?vue&type=style&index=0&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -527,10 +569,10 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=template&id=8f9b9054&":
-/*!**********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=template&id=8f9b9054& ***!
-  \**********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/purchasePlanResumeComponent.vue?vue&type=template&id=72c56c2b&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/purchasePlanResumeComponent.vue?vue&type=template&id=72c56c2b& ***!
+  \******************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -570,14 +612,33 @@ var render = function() {
                                         "col-4 col-md-2 div-plan-icon"
                                     },
                                     [
-                                      _vm.current_plan.icon
+                                      _vm.plan_type == "ANUAL"
                                         ? _c("img", {
                                             attrs: {
-                                              src: _vm.current_plan.icon,
-                                              alt: "incono"
+                                              src: "/images/Botonplan1.png",
+                                              alt: "plan 1"
                                             }
                                           })
-                                        : _vm._e()
+                                        : _vm.plan_type == "MENSUAL"
+                                        ? _c("img", {
+                                            attrs: {
+                                              src: "/images/Botonplan2.png",
+                                              alt: "plan 2"
+                                            }
+                                          })
+                                        : _vm.plan_type == "CREDITO"
+                                        ? _c("img", {
+                                            attrs: {
+                                              src: "/images/Botonplan3.png",
+                                              alt: "plan 3"
+                                            }
+                                          })
+                                        : _c("img", {
+                                            attrs: {
+                                              src: "/images/Botonplan1.png",
+                                              alt: "plan 1"
+                                            }
+                                          })
                                     ]
                                   ),
                                   _vm._v(" "),
@@ -590,22 +651,216 @@ var render = function() {
                                     [
                                       _c("h4", [
                                         _vm._v(
-                                          "\n                              " +
-                                            _vm._s(_vm.current_plan.plan_name) +
-                                            " - " +
-                                            _vm._s(_vm.group_name) +
-                                            " "
-                                        ),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticStyle: {
-                                              "text-transform": "uppercase"
-                                            }
-                                          },
-                                          [_vm._v(_vm._s(_vm.type))]
+                                          _vm._s(
+                                            _vm.current_plan.plan_price.type
+                                          ) +
+                                            " " +
+                                            _vm._s(
+                                              _vm.current_plan.plan_price.name
+                                            )
                                         )
-                                      ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _vm.current_plan.plan_price.grade
+                                        ? _c("div", [
+                                            _c("span", [
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm.plan_type != "CREDITO"
+                                                    ? "Grado:"
+                                                    : "Cantidad"
+                                                )
+                                              )
+                                            ]),
+                                            _vm._v(" "),
+                                            _vm.plan_type != "CREDITO"
+                                              ? _c(
+                                                  "select",
+                                                  {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.current_plan
+                                                            .plan_price,
+                                                        expression:
+                                                          "current_plan.plan_price"
+                                                      }
+                                                    ],
+                                                    staticClass: "form-control",
+                                                    on: {
+                                                      change: [
+                                                        function($event) {
+                                                          var $$selectedVal = Array.prototype.filter
+                                                            .call(
+                                                              $event.target
+                                                                .options,
+                                                              function(o) {
+                                                                return o.selected
+                                                              }
+                                                            )
+                                                            .map(function(o) {
+                                                              var val =
+                                                                "_value" in o
+                                                                  ? o._value
+                                                                  : o.value
+                                                              return val
+                                                            })
+                                                          _vm.$set(
+                                                            _vm.current_plan,
+                                                            "plan_price",
+                                                            $event.target
+                                                              .multiple
+                                                              ? $$selectedVal
+                                                              : $$selectedVal[0]
+                                                          )
+                                                        },
+                                                        function($event) {
+                                                          return _vm.PlanPriceChangeEvent()
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  _vm._l(
+                                                    _vm.plan_prices,
+                                                    function(item, index) {
+                                                      return _c(
+                                                        "option",
+                                                        {
+                                                          key: index,
+                                                          domProps: {
+                                                            value: item
+                                                          }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "Grado " +
+                                                              _vm._s(
+                                                                item.grade
+                                                              ) +
+                                                              " "
+                                                          ),
+                                                          item.customer_plan_id !=
+                                                          _vm.current_plan
+                                                            .plan_price
+                                                            .customer_plan_id
+                                                            ? _c("small", [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    item.label_total_price
+                                                                  )
+                                                                )
+                                                              ])
+                                                            : _vm._e()
+                                                        ]
+                                                      )
+                                                    }
+                                                  ),
+                                                  0
+                                                )
+                                              : _vm._e()
+                                          ])
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _vm.plan_prices.length > 1
+                                        ? _c("div", [
+                                            _c("span", [
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm.plan_type != "CREDITO"
+                                                    ? "Plan:"
+                                                    : "Cantidad"
+                                                )
+                                              )
+                                            ]),
+                                            _vm._v(" "),
+                                            _vm.plan_type != "CREDITO"
+                                              ? _c(
+                                                  "select",
+                                                  {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.current_plan
+                                                            .plan_price,
+                                                        expression:
+                                                          "current_plan.plan_price"
+                                                      }
+                                                    ],
+                                                    staticClass: "form-control",
+                                                    on: {
+                                                      change: [
+                                                        function($event) {
+                                                          var $$selectedVal = Array.prototype.filter
+                                                            .call(
+                                                              $event.target
+                                                                .options,
+                                                              function(o) {
+                                                                return o.selected
+                                                              }
+                                                            )
+                                                            .map(function(o) {
+                                                              var val =
+                                                                "_value" in o
+                                                                  ? o._value
+                                                                  : o.value
+                                                              return val
+                                                            })
+                                                          _vm.$set(
+                                                            _vm.current_plan,
+                                                            "plan_price",
+                                                            $event.target
+                                                              .multiple
+                                                              ? $$selectedVal
+                                                              : $$selectedVal[0]
+                                                          )
+                                                        },
+                                                        function($event) {
+                                                          return _vm.PlanPriceChangeEvent()
+                                                        }
+                                                      ]
+                                                    }
+                                                  },
+                                                  _vm._l(
+                                                    _vm.plan_prices,
+                                                    function(item, index) {
+                                                      return _c(
+                                                        "option",
+                                                        {
+                                                          key: index,
+                                                          domProps: {
+                                                            value: item
+                                                          }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(item.name) +
+                                                              " "
+                                                          ),
+                                                          item.customer_plan_id !=
+                                                          _vm.current_plan
+                                                            .plan_price
+                                                            .customer_plan_id
+                                                            ? _c("small", [
+                                                                _vm._v(
+                                                                  _vm._s(
+                                                                    item.label_total_price
+                                                                  )
+                                                                )
+                                                              ])
+                                                            : _vm._e()
+                                                        ]
+                                                      )
+                                                    }
+                                                  ),
+                                                  0
+                                                )
+                                              : _vm._e()
+                                          ])
+                                        : _vm._e()
                                     ]
                                   ),
                                   _vm._v(" "),
@@ -652,7 +907,11 @@ var render = function() {
                                         _vm._v(
                                           "$" +
                                             _vm._s(
-                                              _vm.formatPrice(_vm.TotalValue())
+                                              _vm.formatPrice(
+                                                _vm.current_plan.plan_price
+                                                  .total_price *
+                                                  _vm.current_plan.quantity
+                                              )
                                             )
                                         )
                                       ])
@@ -662,7 +921,107 @@ var render = function() {
                               )
                             ]),
                             _vm._v(" "),
-                            _vm._m(2),
+                            _c("td", [
+                              _c(
+                                "div",
+                                { staticClass: "row align-items-center" },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "col-12 col-md-12 text-right"
+                                    },
+                                    [
+                                      _vm.plan_type != "CREDITO"
+                                        ? _c("span", [_vm._v("1")])
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _vm.plan_type == "CREDITO"
+                                        ? _c(
+                                            "select",
+                                            {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value:
+                                                    _vm.current_plan.plan_price,
+                                                  expression:
+                                                    "current_plan.plan_price"
+                                                }
+                                              ],
+                                              staticClass: "form-control",
+                                              on: {
+                                                change: [
+                                                  function($event) {
+                                                    var $$selectedVal = Array.prototype.filter
+                                                      .call(
+                                                        $event.target.options,
+                                                        function(o) {
+                                                          return o.selected
+                                                        }
+                                                      )
+                                                      .map(function(o) {
+                                                        var val =
+                                                          "_value" in o
+                                                            ? o._value
+                                                            : o.value
+                                                        return val
+                                                      })
+                                                    _vm.$set(
+                                                      _vm.current_plan,
+                                                      "plan_price",
+                                                      $event.target.multiple
+                                                        ? $$selectedVal
+                                                        : $$selectedVal[0]
+                                                    )
+                                                  },
+                                                  function($event) {
+                                                    return _vm.PlanPriceChangeEvent()
+                                                  }
+                                                ]
+                                              }
+                                            },
+                                            _vm._l(_vm.plan_prices, function(
+                                              item,
+                                              index
+                                            ) {
+                                              return _c(
+                                                "option",
+                                                {
+                                                  key: index,
+                                                  domProps: { value: item }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "Créditos " +
+                                                      _vm._s(
+                                                        item.credits_quantity
+                                                      ) +
+                                                      " "
+                                                  ),
+                                                  item.customer_plan_id !=
+                                                  _vm.current_plan.plan_price
+                                                    .customer_plan_id
+                                                    ? _c("small", [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            item.label_total_price
+                                                          )
+                                                        )
+                                                      ])
+                                                    : _vm._e()
+                                                ]
+                                              )
+                                            }),
+                                            0
+                                          )
+                                        : _vm._e()
+                                    ]
+                                  )
+                                ]
+                              )
+                            ]),
                             _vm._v(" "),
                             _c("td", [
                               _c(
@@ -679,7 +1038,11 @@ var render = function() {
                                         _vm._v(
                                           "$" +
                                             _vm._s(
-                                              _vm.formatPrice(_vm.TotalValue())
+                                              _vm.formatPrice(
+                                                _vm.current_plan.plan_price
+                                                  .total_price *
+                                                  _vm.current_plan.quantity
+                                              )
                                             )
                                         )
                                       ])
@@ -788,7 +1151,7 @@ var render = function() {
                     _c("div", { staticClass: "col-md-12" }, [
                       _c("div", { staticClass: "resume-table" }, [
                         _c("table", { staticClass: "table" }, [
-                          _vm._m(3),
+                          _vm._m(2),
                           _vm._v(" "),
                           _c("tbody", [
                             _c("tr", [
@@ -797,7 +1160,7 @@ var render = function() {
                                   "div",
                                   { staticClass: "row align-items-center" },
                                   [
-                                    _vm._m(4),
+                                    _vm._m(3),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -811,7 +1174,17 @@ var render = function() {
                                             "$" +
                                               _vm._s(
                                                 _vm.formatPrice(
-                                                  _vm.TotalValue()
+                                                  (_vm.current_plan.plan_price
+                                                    .total_price +
+                                                    _vm.current_plan
+                                                      .english_price
+                                                      .total_price -
+                                                    _vm.current_plan.plan_price
+                                                      .total_tax -
+                                                    _vm.current_plan
+                                                      .english_price
+                                                      .total_tax) *
+                                                    _vm.current_plan.quantity
                                                 )
                                               )
                                           )
@@ -887,7 +1260,7 @@ var render = function() {
                                   "div",
                                   { staticClass: "row align-items-center" },
                                   [
-                                    _vm._m(5),
+                                    _vm._m(4),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -985,7 +1358,7 @@ var render = function() {
                   _c("div", { staticClass: "col-md-12" }, [
                     _c("div", { staticClass: "resume-table" }, [
                       _c("table", { staticClass: "table table-resume" }, [
-                        _vm._m(6),
+                        _vm._m(5),
                         _vm._v(" "),
                         _c("tbody", [
                           _c("tr", [
@@ -1001,36 +1374,239 @@ var render = function() {
                                         "col-3 col-md-2 div-plan-icon"
                                     },
                                     [
-                                      _vm.current_plan.icon
+                                      _vm.plan_type == "ANUAL"
                                         ? _c("img", {
                                             attrs: {
-                                              src: _vm.current_plan.icon,
-                                              alt: "incono"
+                                              src: "/images/Botonplan1.png",
+                                              alt: "plan 1"
                                             }
                                           })
-                                        : _vm._e()
+                                        : _vm.plan_type == "MENSUAL"
+                                        ? _c("img", {
+                                            attrs: {
+                                              src: "/images/Botonplan2.png",
+                                              alt: "plan 2"
+                                            }
+                                          })
+                                        : _vm.plan_type == "CREDITO"
+                                        ? _c("img", {
+                                            attrs: {
+                                              src: "/images/Botonplan3.png",
+                                              alt: "plan 3"
+                                            }
+                                          })
+                                        : _c("img", {
+                                            attrs: {
+                                              src: "/images/Botonplan1.png",
+                                              alt: "plan 1"
+                                            }
+                                          })
                                     ]
                                   ),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "col-9 col-md-6" }, [
                                     _c("h4", [
                                       _vm._v(
-                                        "\n                              " +
-                                          _vm._s(_vm.current_plan.plan_name) +
-                                          " - " +
-                                          _vm._s(_vm.group_name) +
-                                          " "
-                                      ),
-                                      _c(
-                                        "span",
-                                        {
-                                          staticStyle: {
-                                            "text-transform": "uppercase"
-                                          }
-                                        },
-                                        [_vm._v(_vm._s(_vm.type))]
+                                        _vm._s(_vm.current_plan.plan_price.name)
                                       )
-                                    ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _vm.current_plan.plan_price.grade
+                                      ? _c("div", [
+                                          _c("span", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.plan_type != "CREDITO"
+                                                  ? "Grado:"
+                                                  : "Cantidad"
+                                              )
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _vm.plan_type != "CREDITO"
+                                            ? _c(
+                                                "select",
+                                                {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value:
+                                                        _vm.current_plan
+                                                          .plan_price,
+                                                      expression:
+                                                        "current_plan.plan_price"
+                                                    }
+                                                  ],
+                                                  staticClass: "form-control",
+                                                  on: {
+                                                    change: [
+                                                      function($event) {
+                                                        var $$selectedVal = Array.prototype.filter
+                                                          .call(
+                                                            $event.target
+                                                              .options,
+                                                            function(o) {
+                                                              return o.selected
+                                                            }
+                                                          )
+                                                          .map(function(o) {
+                                                            var val =
+                                                              "_value" in o
+                                                                ? o._value
+                                                                : o.value
+                                                            return val
+                                                          })
+                                                        _vm.$set(
+                                                          _vm.current_plan,
+                                                          "plan_price",
+                                                          $event.target.multiple
+                                                            ? $$selectedVal
+                                                            : $$selectedVal[0]
+                                                        )
+                                                      },
+                                                      function($event) {
+                                                        return _vm.PlanPriceChangeEvent()
+                                                      }
+                                                    ]
+                                                  }
+                                                },
+                                                _vm._l(
+                                                  _vm.plan_prices,
+                                                  function(item, index) {
+                                                    return _c(
+                                                      "option",
+                                                      {
+                                                        key: index,
+                                                        domProps: {
+                                                          value: item
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "Grado " +
+                                                            _vm._s(item.grade) +
+                                                            " "
+                                                        ),
+                                                        item.customer_plan_id !=
+                                                        _vm.current_plan
+                                                          .plan_price
+                                                          .customer_plan_id
+                                                          ? _c("small", [
+                                                              _vm._v(
+                                                                _vm._s(
+                                                                  item.label_total_price
+                                                                )
+                                                              )
+                                                            ])
+                                                          : _vm._e()
+                                                      ]
+                                                    )
+                                                  }
+                                                ),
+                                                0
+                                              )
+                                            : _vm._e()
+                                        ])
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.plan_prices.length > 1
+                                      ? _c("div", [
+                                          _c("span", [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.plan_type != "CREDITO"
+                                                  ? "Plan:"
+                                                  : "Cantidad"
+                                              )
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _vm.plan_type != "CREDITO"
+                                            ? _c(
+                                                "select",
+                                                {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value:
+                                                        _vm.current_plan
+                                                          .plan_price,
+                                                      expression:
+                                                        "current_plan.plan_price"
+                                                    }
+                                                  ],
+                                                  staticClass: "form-control",
+                                                  on: {
+                                                    change: [
+                                                      function($event) {
+                                                        var $$selectedVal = Array.prototype.filter
+                                                          .call(
+                                                            $event.target
+                                                              .options,
+                                                            function(o) {
+                                                              return o.selected
+                                                            }
+                                                          )
+                                                          .map(function(o) {
+                                                            var val =
+                                                              "_value" in o
+                                                                ? o._value
+                                                                : o.value
+                                                            return val
+                                                          })
+                                                        _vm.$set(
+                                                          _vm.current_plan,
+                                                          "plan_price",
+                                                          $event.target.multiple
+                                                            ? $$selectedVal
+                                                            : $$selectedVal[0]
+                                                        )
+                                                      },
+                                                      function($event) {
+                                                        return _vm.PlanPriceChangeEvent()
+                                                      }
+                                                    ]
+                                                  }
+                                                },
+                                                _vm._l(
+                                                  _vm.plan_prices,
+                                                  function(item, index) {
+                                                    return _c(
+                                                      "option",
+                                                      {
+                                                        key: index,
+                                                        domProps: {
+                                                          value: item
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(item.name) +
+                                                            " "
+                                                        ),
+                                                        item.customer_plan_id !=
+                                                        _vm.current_plan
+                                                          .plan_price
+                                                          .customer_plan_id
+                                                          ? _c("small", [
+                                                              _vm._v(
+                                                                _vm._s(
+                                                                  item.label_total_price
+                                                                )
+                                                              )
+                                                            ])
+                                                          : _vm._e()
+                                                      ]
+                                                    )
+                                                  }
+                                                ),
+                                                0
+                                              )
+                                            : _vm._e()
+                                        ])
+                                      : _vm._e()
                                   ]),
                                   _vm._v(" "),
                                   _c(
@@ -1082,7 +1658,11 @@ var render = function() {
                                         _vm._v(
                                           "$" +
                                             _vm._s(
-                                              _vm.formatPrice(_vm.TotalValue())
+                                              _vm.formatPrice(
+                                                _vm.current_plan.plan_price
+                                                  .total_price *
+                                                  _vm.current_plan.quantity
+                                              )
                                             )
                                         )
                                       ])
@@ -1093,7 +1673,113 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _vm._m(7),
+                          _c("tr", [
+                            _c("th", { staticClass: "letra-boldfont" }, [
+                              _vm._v("CANTIDAD")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "div",
+                                { staticClass: "row align-items-center" },
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "col-12 col-md-12 text-right"
+                                    },
+                                    [
+                                      _vm.plan_type != "CREDITO"
+                                        ? _c("span", [_vm._v("1")])
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _vm.plan_type == "CREDITO"
+                                        ? _c(
+                                            "select",
+                                            {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value:
+                                                    _vm.current_plan.plan_price,
+                                                  expression:
+                                                    "current_plan.plan_price"
+                                                }
+                                              ],
+                                              staticClass: "form-control",
+                                              on: {
+                                                change: [
+                                                  function($event) {
+                                                    var $$selectedVal = Array.prototype.filter
+                                                      .call(
+                                                        $event.target.options,
+                                                        function(o) {
+                                                          return o.selected
+                                                        }
+                                                      )
+                                                      .map(function(o) {
+                                                        var val =
+                                                          "_value" in o
+                                                            ? o._value
+                                                            : o.value
+                                                        return val
+                                                      })
+                                                    _vm.$set(
+                                                      _vm.current_plan,
+                                                      "plan_price",
+                                                      $event.target.multiple
+                                                        ? $$selectedVal
+                                                        : $$selectedVal[0]
+                                                    )
+                                                  },
+                                                  function($event) {
+                                                    return _vm.PlanPriceChangeEvent()
+                                                  }
+                                                ]
+                                              }
+                                            },
+                                            _vm._l(_vm.plan_prices, function(
+                                              item,
+                                              index
+                                            ) {
+                                              return _c(
+                                                "option",
+                                                {
+                                                  key: index,
+                                                  domProps: { value: item }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "Créditos " +
+                                                      _vm._s(
+                                                        item.credits_quantity
+                                                      ) +
+                                                      " "
+                                                  ),
+                                                  item.customer_plan_id !=
+                                                  _vm.current_plan.plan_price
+                                                    .customer_plan_id
+                                                    ? _c("small", [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            item.label_total_price
+                                                          )
+                                                        )
+                                                      ])
+                                                    : _vm._e()
+                                                ]
+                                              )
+                                            }),
+                                            0
+                                          )
+                                        : _vm._e()
+                                    ]
+                                  )
+                                ]
+                              )
+                            ])
+                          ]),
                           _vm._v(" "),
                           _c("tr", [
                             _c("th", { staticClass: "letra-boldfont" }, [
@@ -1115,7 +1801,11 @@ var render = function() {
                                         _vm._v(
                                           "$" +
                                             _vm._s(
-                                              _vm.formatPrice(_vm.TotalValue())
+                                              _vm.formatPrice(
+                                                _vm.current_plan.plan_price
+                                                  .total_price *
+                                                  _vm.current_plan.quantity
+                                              )
                                             )
                                         )
                                       ])
@@ -1186,7 +1876,7 @@ var render = function() {
                                             "button",
                                             {
                                               staticClass:
-                                                "btn btn-Azul letra-boldfont",
+                                                "btn btn-primary letra-boldfont",
                                               attrs: {
                                                 disabled: !_vm.voucher_code
                                               },
@@ -1225,7 +1915,7 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _vm._m(8),
+                          _vm._m(6),
                           _vm._v(" "),
                           _c("tr", [
                             _c("th", { staticClass: "letra-boldfont" }, [
@@ -1248,7 +1938,17 @@ var render = function() {
                                         _vm._v(
                                           "$" +
                                             _vm._s(
-                                              _vm.formatPrice(_vm.TotalValue())
+                                              _vm.formatPrice(
+                                                (_vm.current_plan.plan_price
+                                                  .total_price +
+                                                  _vm.current_plan.english_price
+                                                    .total_price -
+                                                  _vm.current_plan.plan_price
+                                                    .total_tax -
+                                                  _vm.current_plan.english_price
+                                                    .total_tax) *
+                                                  _vm.current_plan.quantity
+                                              )
                                             )
                                         )
                                       ])
@@ -1472,18 +2172,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("div", { staticClass: "row align-items-center" }, [
-        _c("div", { staticClass: "col-12 col-md-12 text-right" }, [
-          _c("span", [_vm._v("1")])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "thead-resume" }, [
       _c("tr", [
         _c(
@@ -1530,22 +2218,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("tr", [
-      _c("th", { staticClass: "letra-boldfont" }, [_vm._v("CANTIDAD")]),
-      _vm._v(" "),
-      _c("td", [
-        _c("div", { staticClass: "row align-items-center" }, [
-          _c("div", { staticClass: "col-12 col-md-12 text-right" }, [
-            _c("span", [_vm._v("1")])
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
       _c(
         "td",
         {
@@ -1564,18 +2236,18 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/purchaseTutorialResumeComponent.vue":
-/*!*********************************************************************!*\
-  !*** ./resources/js/components/purchaseTutorialResumeComponent.vue ***!
-  \*********************************************************************/
+/***/ "./resources/js/components/purchasePlanResumeComponent.vue":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/purchasePlanResumeComponent.vue ***!
+  \*****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _purchaseTutorialResumeComponent_vue_vue_type_template_id_8f9b9054___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./purchaseTutorialResumeComponent.vue?vue&type=template&id=8f9b9054& */ "./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=template&id=8f9b9054&");
-/* harmony import */ var _purchaseTutorialResumeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./purchaseTutorialResumeComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _purchaseTutorialResumeComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./purchaseTutorialResumeComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _purchasePlanResumeComponent_vue_vue_type_template_id_72c56c2b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./purchasePlanResumeComponent.vue?vue&type=template&id=72c56c2b& */ "./resources/js/components/purchasePlanResumeComponent.vue?vue&type=template&id=72c56c2b&");
+/* harmony import */ var _purchasePlanResumeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./purchasePlanResumeComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/purchasePlanResumeComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _purchasePlanResumeComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./purchasePlanResumeComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/purchasePlanResumeComponent.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -1586,9 +2258,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _purchaseTutorialResumeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _purchaseTutorialResumeComponent_vue_vue_type_template_id_8f9b9054___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _purchaseTutorialResumeComponent_vue_vue_type_template_id_8f9b9054___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _purchasePlanResumeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _purchasePlanResumeComponent_vue_vue_type_template_id_72c56c2b___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _purchasePlanResumeComponent_vue_vue_type_template_id_72c56c2b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -1598,54 +2270,54 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/purchaseTutorialResumeComponent.vue"
+component.options.__file = "resources/js/components/purchasePlanResumeComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************!*\
-  !*** ./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************/
+/***/ "./resources/js/components/purchasePlanResumeComponent.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/purchasePlanResumeComponent.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_purchaseTutorialResumeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./purchaseTutorialResumeComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_purchaseTutorialResumeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_purchasePlanResumeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./purchasePlanResumeComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/purchasePlanResumeComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_purchasePlanResumeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=style&index=0&lang=css&":
-/*!******************************************************************************************************!*\
-  !*** ./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=style&index=0&lang=css& ***!
-  \******************************************************************************************************/
+/***/ "./resources/js/components/purchasePlanResumeComponent.vue?vue&type=style&index=0&lang=css&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/purchasePlanResumeComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_purchaseTutorialResumeComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./purchaseTutorialResumeComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_purchaseTutorialResumeComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_purchaseTutorialResumeComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_purchaseTutorialResumeComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_purchaseTutorialResumeComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_purchaseTutorialResumeComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_purchasePlanResumeComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./purchasePlanResumeComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/purchasePlanResumeComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_purchasePlanResumeComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_purchasePlanResumeComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_purchasePlanResumeComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_purchasePlanResumeComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_purchasePlanResumeComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=template&id=8f9b9054&":
-/*!****************************************************************************************************!*\
-  !*** ./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=template&id=8f9b9054& ***!
-  \****************************************************************************************************/
+/***/ "./resources/js/components/purchasePlanResumeComponent.vue?vue&type=template&id=72c56c2b&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/components/purchasePlanResumeComponent.vue?vue&type=template&id=72c56c2b& ***!
+  \************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_purchaseTutorialResumeComponent_vue_vue_type_template_id_8f9b9054___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./purchaseTutorialResumeComponent.vue?vue&type=template&id=8f9b9054& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/purchaseTutorialResumeComponent.vue?vue&type=template&id=8f9b9054&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_purchaseTutorialResumeComponent_vue_vue_type_template_id_8f9b9054___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_purchasePlanResumeComponent_vue_vue_type_template_id_72c56c2b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./purchasePlanResumeComponent.vue?vue&type=template&id=72c56c2b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/purchasePlanResumeComponent.vue?vue&type=template&id=72c56c2b&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_purchasePlanResumeComponent_vue_vue_type_template_id_72c56c2b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_purchaseTutorialResumeComponent_vue_vue_type_template_id_8f9b9054___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_purchasePlanResumeComponent_vue_vue_type_template_id_72c56c2b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
