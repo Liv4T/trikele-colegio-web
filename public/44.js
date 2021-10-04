@@ -64,6 +64,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["user"],
   data: function data() {
@@ -271,6 +278,23 @@ var render = function() {
                         _vm._v("ENTREGAS")
                       ])
                     ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      class: [_vm.activetab === 5 ? "active" : ""],
+                      on: {
+                        click: function($event) {
+                          _vm.activetab = 5
+                        }
+                      }
+                    },
+                    [
+                      _c("h4", { staticClass: "letra-boldfont" }, [
+                        _vm._v("TALLERES")
+                      ])
+                    ]
                   )
                 ]),
                 _vm._v(" "),
@@ -342,6 +366,25 @@ var render = function() {
                                 _c("repository-component", {
                                   attrs: {
                                     id_grade: undefined,
+                                    id_area: _vm.idArea,
+                                    id_classroom: _vm.idClassroom
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          : _vm._e()
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.activetab === 5
+                    ? _c("div", { staticClass: "tabcontent" }, [
+                        _vm.idArea != "" && _vm.idClassroom != ""
+                          ? _c(
+                              "div",
+                              [
+                                _c("talleres", {
+                                  attrs: {
                                     id_area: _vm.idArea,
                                     id_classroom: _vm.idClassroom
                                   }

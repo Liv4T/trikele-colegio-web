@@ -255,4 +255,6 @@ Vue.component("modal-preview",()=>import("./components/ModalPreviewClass.vue"));
 
 Vue.component("change-grade",()=>import("./components/changeGrade.vue"));
 
+Vue.component("talleres",()=>import("./components/Talleres.vue"));
+
 const app = new Vue({el: "#app", data: {}, store});
