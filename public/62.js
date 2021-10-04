@@ -211,6 +211,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 (function () {
   "use strict";
 
@@ -1412,8 +1421,10 @@ var render = function() {
                                 { staticClass: "card-body" },
                                 [
                                   _c("div", { staticClass: "row" }, [
+                                    _vm._m(3, true),
+                                    _vm._v(" "),
                                     _c("div", { staticClass: "col-8" }, [
-                                      _vm._m(3, true),
+                                      _vm._m(4, true),
                                       _vm._v(" "),
                                       _c("input", {
                                         directives: [
@@ -1446,7 +1457,7 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "col-4" }, [
-                                      _vm._m(4, true),
+                                      _vm._m(5, true),
                                       _vm._v(" "),
                                       _c(
                                         "select",
@@ -1544,7 +1555,7 @@ var render = function() {
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
                                     _c("div", { staticClass: "col-12" }, [
-                                      _vm._m(5, true),
+                                      _vm._m(6, true),
                                       _vm._v(" "),
                                       _c("textarea", {
                                         directives: [
@@ -1580,7 +1591,7 @@ var render = function() {
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
                                     _c("div", { staticClass: "col-8" }, [
-                                      _vm._m(6, true),
+                                      _vm._m(7, true),
                                       _vm._v(" "),
                                       _c(
                                         "select",
@@ -1670,7 +1681,7 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "col-4" }, [
-                                      _vm._m(7, true),
+                                      _vm._m(8, true),
                                       _vm._v(" "),
                                       _c(
                                         "select",
@@ -1757,7 +1768,7 @@ var render = function() {
                                   _vm._v(" "),
                                   _c("div", { staticClass: "row" }, [
                                     _c("div", { staticClass: "col-6" }, [
-                                      _vm._m(8, true),
+                                      _vm._m(9, true),
                                       _vm._v(
                                         "\n                                                    " +
                                           _vm._s(activity.delivery_max_date) +
@@ -1803,7 +1814,7 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "col-6" }, [
-                                      _vm._m(9, true),
+                                      _vm._m(10, true),
                                       _vm._v(" "),
                                       _c("input", {
                                         directives: [
@@ -1962,6 +1973,27 @@ var staticRenderFns = [
     return _c("label", [
       _c("span", { staticClass: "required" }, [_vm._v("*")]),
       _vm._v("Descripción:")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-8" }, [
+      _c("label", [
+        _c("span", { staticClass: "required" }, [_vm._v("*")]),
+        _vm._v("Bimestre")
+      ]),
+      _vm._v(" "),
+      _c("select", [
+        _c("option", { attrs: { value: "1" } }, [_vm._v("Bimestre 1")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "2" } }, [_vm._v("Bimestre 2")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "3" } }, [_vm._v("Bimestre 3")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "4" } }, [_vm._v("Bimestre 4")])
+      ])
     ])
   },
   function() {

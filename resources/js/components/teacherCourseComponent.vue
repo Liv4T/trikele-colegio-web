@@ -121,6 +121,15 @@
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-8">
+                                                        <label><span class="required">*</span>Bimestre</label>
+                                                        <select>
+                                                            <option value="1">Bimestre 1</option>
+                                                            <option value="2">Bimestre 2</option>
+                                                            <option value="3">Bimestre 3</option>
+                                                            <option value="4">Bimestre 4</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-8">
                                                         <label><span class="required">*</span>Nombre de la actividad:</label>
                                                         <input type="text" class="form-control" v-model="activity.name" v-bind:readonly="course.state==2"/>
                                                     </div>
