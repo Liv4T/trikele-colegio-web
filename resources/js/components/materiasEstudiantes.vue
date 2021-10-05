@@ -16,12 +16,13 @@
                 </a>
             </div>
             <div>                
-                <div id="tabs" class="col-md-12 text-center mx-auto">
+                <div class="text-center mr-5">
                     <div v-if="showSection === 'inicio'" class="tabs">
                         <!-- <a v-on:click="activetab = 1" v-bind:class="[activetab === 1 ? 'active' : '']"><h2 class="letra-poppins-bold">CALENDARIO</h2></a> -->
                         <a v-on:click="activetab = 2" v-bind:class="[activetab === 2 ? 'active' : '']"><h2 class="letra-poppins-bold">CLASE</h2></a>
                         <a v-on:click="activetab = 3" v-bind:class="[activetab === 3 ? 'active' : '']"><h2 class="letra-poppins-bold">TAREA</h2></a>
                         <a v-on:click="activetab = 4" v-bind:class="[activetab === 4 ? 'active' : '']"><h2 class="letra-poppins-bold">GRADOS</h2></a>
+                        <a v-on:click="activetab = 5" v-bind:class="[activetab === 5 ? 'active' : '']"><h2 class="letra-poppins-bold">TALLERES</h2></a>
                     </div>
                     <div v-if="showSection === 'inicio'">
                         <!-- <div v-if="activetab === 1" class="tabcontent"><calendar-component :type_u="3" :user="user"></calendar-component></div> -->
@@ -35,6 +36,10 @@
                             <repo-student :nameArea="nameArea" :planifications="planifications" :id_lective_planification="id_lective_planification"></repo-student>
                         </div>
                         <div v-if="activetab === 4" class="tabcontent"><notas-component :idArea="idArea" :idClassroom="idClassroom" :user="user" :nameArea="nameArea" :planifications="planifications" :id_lective_planification="id_lective_planification"></notas-component></div>
+
+                        <div v-if="activetab === 5" class="tabcontent">
+                            <talleres :id_area="idArea" :id_classroom="idClassroom"></talleres>
+                        </div>
                     </div>
                     <div v-else-if="showSection === 'chat'">
                         <group-chat v-for="group in groups" :group="group" :key="group.id" :user_auth="user"></group-chat>
@@ -361,7 +366,7 @@ export default {
 .tabs {
   margin-top: 20px;
   overflow: hidden;
-  margin-left: 280px;
+  margin-left: 200px;
   margin-bottom: -2px;
 }
 

@@ -101,6 +101,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 moment__WEBPACK_IMPORTED_MODULE_1___default.a.tz.setDefault("America/Bogota");
@@ -356,7 +361,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.mg-btn {\r\n  margin: 10px;\r\n  min-width: 165px;\n}\n.width-r {\r\n  max-width: 97%;\r\n  border: 1px solid #cccccc82;\r\n  border-radius: 10px;\r\n  box-shadow: 3px 3px 3px 3px #b0acac;\n}\n.tabs {\r\n  margin-top: 20px;\r\n  overflow: hidden;\r\n  margin-left: 280px;\r\n  margin-bottom: -2px;\n}\n.tabs ul {\r\n  list-style-type: none;\r\n  margin-left: 20px;\n}\n.tabs a {\r\n  float: left;\r\n  cursor: pointer;\r\n  padding: 12px 24px;\r\n  transition: background-color 0.2s;\r\n  border: 1px solid #ccc;\r\n  border-right: none;\r\n  background-color: #bfbfbf;\r\n  border-radius: 10px 10px 0 0;\r\n  font-weight: bold;\r\n  color: #fff !important;\n}\n.tabs a:last-child {\r\n  border-right: 1px solid #ccc;\n}\n.pd-20 {\r\n  padding: 20px;\n}\r\n\r\n/* Change background color of tabs on hover */\n.tabs a:hover {\r\n  background-color: #aaa;\r\n  color: #fff;\n}\r\n\r\n/* Styling for active tab */\n.tabs a.active {\r\n  background-color: #00cbcec1;\r\n  color: #fff;\r\n  border-bottom: 2px solid #fff;\r\n  cursor: default;\n}\n.tabcontent {\r\n  border: 1px solid #ccc;\r\n  border-radius: 10px;\r\n  box-shadow: 3px 3px 6px #e1e1e1;\n}\n.content-azul {\r\n  background-color: #00cbcec6;\n}\n.flotante {\r\n  position: fixed;\r\n  top: 380px;\r\n  z-index: 1020;\n}\r\n", ""]);
+exports.push([module.i, "\n.mg-btn {\r\n  margin: 10px;\r\n  min-width: 165px;\n}\n.width-r {\r\n  max-width: 97%;\r\n  border: 1px solid #cccccc82;\r\n  border-radius: 10px;\r\n  box-shadow: 3px 3px 3px 3px #b0acac;\n}\n.tabs {\r\n  margin-top: 20px;\r\n  overflow: hidden;\r\n  margin-left: 200px;\r\n  margin-bottom: -2px;\n}\n.tabs ul {\r\n  list-style-type: none;\r\n  margin-left: 20px;\n}\n.tabs a {\r\n  float: left;\r\n  cursor: pointer;\r\n  padding: 12px 24px;\r\n  transition: background-color 0.2s;\r\n  border: 1px solid #ccc;\r\n  border-right: none;\r\n  background-color: #bfbfbf;\r\n  border-radius: 10px 10px 0 0;\r\n  font-weight: bold;\r\n  color: #fff !important;\n}\n.tabs a:last-child {\r\n  border-right: 1px solid #ccc;\n}\n.pd-20 {\r\n  padding: 20px;\n}\r\n\r\n/* Change background color of tabs on hover */\n.tabs a:hover {\r\n  background-color: #aaa;\r\n  color: #fff;\n}\r\n\r\n/* Styling for active tab */\n.tabs a.active {\r\n  background-color: #00cbcec1;\r\n  color: #fff;\r\n  border-bottom: 2px solid #fff;\r\n  cursor: default;\n}\n.tabcontent {\r\n  border: 1px solid #ccc;\r\n  border-radius: 10px;\r\n  box-shadow: 3px 3px 6px #e1e1e1;\n}\n.content-azul {\r\n  background-color: #00cbcec6;\n}\n.flotante {\r\n  position: fixed;\r\n  top: 380px;\r\n  z-index: 1020;\n}\r\n", ""]);
 
 // exports
 
@@ -472,149 +477,175 @@ var render = function() {
             : _vm._e(),
           _vm._v(" "),
           _c("div", [
-            _c(
-              "div",
-              {
-                staticClass: "col-md-12 text-center mx-auto",
-                attrs: { id: "tabs" }
-              },
-              [
-                _vm.showSection === "inicio"
-                  ? _c("div", { staticClass: "tabs" }, [
-                      _c(
-                        "a",
-                        {
-                          class: [_vm.activetab === 2 ? "active" : ""],
-                          on: {
-                            click: function($event) {
-                              _vm.activetab = 2
-                            }
+            _c("div", { staticClass: "text-center mr-5" }, [
+              _vm.showSection === "inicio"
+                ? _c("div", { staticClass: "tabs" }, [
+                    _c(
+                      "a",
+                      {
+                        class: [_vm.activetab === 2 ? "active" : ""],
+                        on: {
+                          click: function($event) {
+                            _vm.activetab = 2
                           }
-                        },
-                        [
-                          _c("h2", { staticClass: "letra-poppins-bold" }, [
-                            _vm._v("CLASE")
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          class: [_vm.activetab === 3 ? "active" : ""],
-                          on: {
-                            click: function($event) {
-                              _vm.activetab = 3
-                            }
+                        }
+                      },
+                      [
+                        _c("h2", { staticClass: "letra-poppins-bold" }, [
+                          _vm._v("CLASE")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        class: [_vm.activetab === 3 ? "active" : ""],
+                        on: {
+                          click: function($event) {
+                            _vm.activetab = 3
                           }
-                        },
-                        [
-                          _c("h2", { staticClass: "letra-poppins-bold" }, [
-                            _vm._v("TAREA")
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          class: [_vm.activetab === 4 ? "active" : ""],
-                          on: {
-                            click: function($event) {
-                              _vm.activetab = 4
-                            }
+                        }
+                      },
+                      [
+                        _c("h2", { staticClass: "letra-poppins-bold" }, [
+                          _vm._v("TAREA")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        class: [_vm.activetab === 4 ? "active" : ""],
+                        on: {
+                          click: function($event) {
+                            _vm.activetab = 4
                           }
-                        },
-                        [
-                          _c("h2", { staticClass: "letra-poppins-bold" }, [
-                            _vm._v("GRADOS")
-                          ])
-                        ]
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.showSection === "inicio"
-                  ? _c("div", [
-                      _vm.activetab === 2
-                        ? _c("div", { staticClass: "tabcontent" }, [
-                            _vm.idArea !== ""
-                              ? _c(
-                                  "div",
-                                  [
-                                    _c("bimestre-list-component", {
-                                      attrs: {
-                                        id_area: _vm.idArea,
-                                        id_classroom: _vm.idClassroom,
-                                        type_u: _vm.user
-                                      }
-                                    })
-                                  ],
-                                  1
-                                )
-                              : _vm._e()
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.activetab === 3
-                        ? _c(
-                            "div",
-                            { staticClass: "tabcontent" },
-                            [
-                              _c("repo-student", {
-                                attrs: {
-                                  nameArea: _vm.nameArea,
-                                  planifications: _vm.planifications,
-                                  id_lective_planification:
-                                    _vm.id_lective_planification
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.activetab === 4
-                        ? _c(
-                            "div",
-                            { staticClass: "tabcontent" },
-                            [
-                              _c("notas-component", {
-                                attrs: {
-                                  idArea: _vm.idArea,
-                                  idClassroom: _vm.idClassroom,
-                                  user: _vm.user,
-                                  nameArea: _vm.nameArea,
-                                  planifications: _vm.planifications,
-                                  id_lective_planification:
-                                    _vm.id_lective_planification
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        : _vm._e()
-                    ])
-                  : _vm.showSection === "chat"
-                  ? _c(
-                      "div",
-                      _vm._l(_vm.groups, function(group) {
-                        return _c("group-chat", {
-                          key: group.id,
-                          attrs: { group: group, user_auth: _vm.user }
-                        })
-                      }),
-                      1
+                        }
+                      },
+                      [
+                        _c("h2", { staticClass: "letra-poppins-bold" }, [
+                          _vm._v("GRADOS")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        class: [_vm.activetab === 5 ? "active" : ""],
+                        on: {
+                          click: function($event) {
+                            _vm.activetab = 5
+                          }
+                        }
+                      },
+                      [
+                        _c("h2", { staticClass: "letra-poppins-bold" }, [
+                          _vm._v("TALLERES")
+                        ])
+                      ]
                     )
-                  : _vm.showSection === "message"
-                  ? _c(
-                      "div",
-                      [_c("mensajes-component", { attrs: { user: _vm.user } })],
-                      1
-                    )
-                  : _vm._e()
-              ]
-            )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.showSection === "inicio"
+                ? _c("div", [
+                    _vm.activetab === 2
+                      ? _c("div", { staticClass: "tabcontent" }, [
+                          _vm.idArea !== ""
+                            ? _c(
+                                "div",
+                                [
+                                  _c("bimestre-list-component", {
+                                    attrs: {
+                                      id_area: _vm.idArea,
+                                      id_classroom: _vm.idClassroom,
+                                      type_u: _vm.user
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            : _vm._e()
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.activetab === 3
+                      ? _c(
+                          "div",
+                          { staticClass: "tabcontent" },
+                          [
+                            _c("repo-student", {
+                              attrs: {
+                                nameArea: _vm.nameArea,
+                                planifications: _vm.planifications,
+                                id_lective_planification:
+                                  _vm.id_lective_planification
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.activetab === 4
+                      ? _c(
+                          "div",
+                          { staticClass: "tabcontent" },
+                          [
+                            _c("notas-component", {
+                              attrs: {
+                                idArea: _vm.idArea,
+                                idClassroom: _vm.idClassroom,
+                                user: _vm.user,
+                                nameArea: _vm.nameArea,
+                                planifications: _vm.planifications,
+                                id_lective_planification:
+                                  _vm.id_lective_planification
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.activetab === 5
+                      ? _c(
+                          "div",
+                          { staticClass: "tabcontent" },
+                          [
+                            _c("talleres", {
+                              attrs: {
+                                id_area: _vm.idArea,
+                                id_classroom: _vm.idClassroom
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      : _vm._e()
+                  ])
+                : _vm.showSection === "chat"
+                ? _c(
+                    "div",
+                    _vm._l(_vm.groups, function(group) {
+                      return _c("group-chat", {
+                        key: group.id,
+                        attrs: { group: group, user_auth: _vm.user }
+                      })
+                    }),
+                    1
+                  )
+                : _vm.showSection === "message"
+                ? _c(
+                    "div",
+                    [_c("mensajes-component", { attrs: { user: _vm.user } })],
+                    1
+                  )
+                : _vm._e()
+            ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group text-center" }, [
