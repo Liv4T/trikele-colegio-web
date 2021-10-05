@@ -122,11 +122,8 @@
                                                 <div class="row">
                                                     <div class="col-8">
                                                         <label><span class="required">*</span>Bimestre</label>
-                                                        <select>
-                                                            <option value="1">Bimestre 1</option>
-                                                            <option value="2">Bimestre 2</option>
-                                                            <option value="3">Bimestre 3</option>
-                                                            <option value="4">Bimestre 4</option>
+                                                        <select class="form-control" v-model="activity.id_bimestre">                                                            
+                                                            <option v-for="(bimestre, key) in bimestres" :key="key" :value="bimestre.id">{{bimestre.name}}</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-8">
@@ -180,12 +177,10 @@
                                                         <input type="datetime-local" class="form-control" v-model="activity.feedback_date" />
                                                     </div>
                                                 </div>
-                                                <activity-questionary v-if="activity.activity_type=='CUESTIONARIO' || activity.activity_type == 'CUESTIONARIO_UNICA_RTA'" v-bind:module="activity.module" v-bind:disabled="course.state==2"></activity-questionary>
+                                                <activity-questionary v-if="activity.activity_type === 'CUESTIONARIO' || activity.activity_type === 'CUESTIONARIO_UNICA_RTA'" v-bind:module="activity.module" v-bind:disabled="course.state===2"></activity-questionary>
                                                 <activity-complete-sentence v-if="activity.activity_type=='COMPLETAR_ORACION'" v-bind:module="activity.module" v-bind:disabled="course.state==2"></activity-complete-sentence>
                                                 <activity-relationship v-if="activity.activity_type=='RELACION'" v-bind:module="activity.module" v-bind:disabled="course.state==2"></activity-relationship>
                                                 <activity-crossword v-if="activity.activity_type=='CRUCIGRAMA'" v-bind:module="activity.module" v-bind:disabled="course.state==2"></activity-crossword>
-
-
                                             </div>
                                         </div>
                                     </div><!--card -->
@@ -278,8 +273,9 @@ export default {
             achievements:[],
             indicators:[],
             nameArea:'',
-            custom_editor_toolbar_justify:[["bold", "italic", "underline"], [{ list: "ordered" }, { list: "bullet" }],["image"]]
-
+            custom_editor_toolbar_justify:[["bold", "italic", "underline"], [{ list: "ordered" }, { list: "bullet" }],["image"]],
+            bimestres:[],
+            id_bimestre:null
         };
     },
     watch:{
@@ -329,7 +325,9 @@ export default {
         },
     },
     mounted() {
-
+        axios.get('bimestres').then((response)=>{            
+            this.bimestres = response.data;
+        })
         axios.get(`/showClass/${this.id_module}`).then((response) => {        
             this.achievements=response.data.achievements;
             this.nameArea = `${response.data.area.name} ${response.data.classroom.name}`;
@@ -357,8 +355,7 @@ export default {
         if(this.id_class!=0)
         {
             axios.get(`/api/teacher/module/${this.id_module}/class/${this.id_class}`).then((response) => {
-                    this.course=response.data;
-                    console.log('Cursos',response.data)
+                    this.course=response.data;                    
 
                     if(this.course.content.length==0)
                     {
@@ -410,14 +407,16 @@ export default {
         removeActivity(index){
             this.course.activities.splice(index,1);
         },
-        addActivity(){
+        addActivity(){            
             this.course.activities.push({
                 name:'',
                 description:'',
                 activity_type:'',
                 id_achievement:'',
                 id_indicator:'',
-                module:{},
+                module:{
+                    questions:[]
+                },
                 is_required:1,
                 delivery_max_date:'',
                 feedback_date:''
@@ -427,12 +426,12 @@ export default {
         SaveDataEvent(){
             console.log(this.course)
 
-             axios.put(`/api/teacher/module/${this.id_module}/class`,this.course).then((response) => {
+            // axios.put(`/api/teacher/module/${this.id_module}/class`,this.course).then((response) => {
 
-               // this.getPlanificationEvent(this.id_lective_planification);
-                toastr.success("Clases actualizadas correctamente");
-                // this.returnPage();
-            },(error)=>{console.log(error);toastr.error("ERROR:Por favor valide que la información esta completa");});
+            //    // this.getPlanificationEvent(this.id_lective_planification);
+            //     toastr.success("Clases actualizadas correctamente");
+            //     // this.returnPage();
+            // },(error)=>{console.log(error);toastr.error("ERROR:Por favor valide que la información esta completa");});
 
         },
         selectActivityType(index_activity,activity){
