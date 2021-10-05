@@ -30,10 +30,17 @@ class WorkshopController extends Controller
     }
 
     public function getActivityByBimestre(String $id_bimestre, String $id_area, String $id_classroom){
-        $workshop = Workshop::where('id_bimestre',$id_bimestre)->where('id_area',$id_area)->where('id_classroom',$id_classroom)->first();
-        $getActivities = Activity::where('id_class',$workshop->id_class)->get();
-
-        return response()->json($getActivities);
+        $data = [];
+        $workshop = Workshop::where('id_bimestre',$id_bimestre)->where('id_area',$id_area)->where('id_classroom',$id_classroom)->get();        
+        if(isset($workshop)){
+            foreach($workshop as $work) {                
+                $getActivities = Activity::where('id_class',$work->id_class)->first();
+                array_push($data, $getActivities);
+            }
+            return response()->json($data);
+        }else{
+            return [];
+        }
     }
 
     /**

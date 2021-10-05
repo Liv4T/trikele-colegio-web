@@ -240,7 +240,12 @@ var render = function() {
         "div",
         [
           _c("teacher-module", {
-            attrs: { id_module: _vm.id_module, backPage: _vm.backPage }
+            attrs: {
+              id_module: _vm.id_module,
+              id_area: _vm.id_area_selected,
+              id_classroom: _vm.id_classroom_selected,
+              backPage: _vm.backPage
+            }
           })
         ],
         1

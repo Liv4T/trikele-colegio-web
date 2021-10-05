@@ -239,7 +239,7 @@ __webpack_require__.r(__webpack_exports__);
 
 Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["id_module", "id_class", "backToPage"],
+  props: ["id_module", "id_class", "id_area", "id_classroom", "backToPage"],
   data: function data() {
     return {
       activityForAllStudents: true,
@@ -285,6 +285,16 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
     };
   },
   watch: {
+    id_area: function id_area(newVal, oldVal) {
+      if (newVal !== oldVal) {
+        this.course.id_area = this.id_area;
+      }
+    },
+    id_classroom: function id_classroom(newVal, oldVal) {
+      if (newVal !== oldVal) {
+        this.course.id_classroom = this.id_classroom;
+      }
+    },
     activityForAllStudents: function activityForAllStudents(newVal) {
       if (newVal == true) {
         this.course.activityForPIARStudents = 0;
@@ -327,6 +337,8 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
   mounted: function mounted() {
     var _this = this;
 
+    this.course.id_area = this.id_area;
+    this.course.id_classroom = this.id_classroom;
     axios.get('bimestres').then(function (response) {
       _this.bimestres = response.data;
     });
@@ -418,11 +430,13 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
       });
     },
     SaveDataEvent: function SaveDataEvent() {
-      console.log(this.course); // axios.put(`/api/teacher/module/${this.id_module}/class`,this.course).then((response) => {
-      //    // this.getPlanificationEvent(this.id_lective_planification);
-      //     toastr.success("Clases actualizadas correctamente");
-      //     // this.returnPage();
-      // },(error)=>{console.log(error);toastr.error("ERROR:Por favor valide que la información esta completa");});
+      axios.put("/api/teacher/module/".concat(this.id_module, "/class"), this.course).then(function (response) {
+        // this.getPlanificationEvent(this.id_lective_planification);
+        toastr.success("Clases actualizadas correctamente"); // this.returnPage();
+      }, function (error) {
+        console.log(error);
+        toastr.error("ERROR:Por favor valide que la información esta completa");
+      });
     },
     selectActivityType: function selectActivityType(index_activity, activity) {
       switch (activity.activity_type) {

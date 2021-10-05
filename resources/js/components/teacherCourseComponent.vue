@@ -232,7 +232,7 @@ import VueFormWizard from "vue-form-wizard";
 import "vue-form-wizard/dist/vue-form-wizard.min.css";
 Vue.use(VueFormWizard);
 export default {
-    props: ["id_module", "id_class", "backToPage"],
+    props: ["id_module", "id_class","id_area","id_classroom","backToPage"],
     data() {
         return {
             activityForAllStudents: true,
@@ -279,6 +279,17 @@ export default {
         };
     },
     watch:{
+        id_area: function(newVal, oldVal){
+            if(newVal !== oldVal){
+                this.course.id_area = this.id_area;
+            }
+        },
+
+        id_classroom: function(newVal, oldVal){
+            if(newVal !== oldVal){
+                this.course.id_classroom = this.id_classroom;
+            }
+        },
         activityForAllStudents: function(newVal){
             if(newVal == true){
                 this.course.activityForPIARStudents = 0;
@@ -325,6 +336,8 @@ export default {
         },
     },
     mounted() {
+        this.course.id_area = this.id_area;
+        this.course.id_classroom = this.id_classroom;
         axios.get('bimestres').then((response)=>{            
             this.bimestres = response.data;
         })
@@ -424,14 +437,12 @@ export default {
         },
 
         SaveDataEvent(){
-            console.log(this.course)
+            axios.put(`/api/teacher/module/${this.id_module}/class`,this.course).then((response) => {
 
-            // axios.put(`/api/teacher/module/${this.id_module}/class`,this.course).then((response) => {
-
-            //    // this.getPlanificationEvent(this.id_lective_planification);
-            //     toastr.success("Clases actualizadas correctamente");
-            //     // this.returnPage();
-            // },(error)=>{console.log(error);toastr.error("ERROR:Por favor valide que la información esta completa");});
+               // this.getPlanificationEvent(this.id_lective_planification);
+                toastr.success("Clases actualizadas correctamente");
+                // this.returnPage();
+            },(error)=>{console.log(error);toastr.error("ERROR:Por favor valide que la información esta completa");});
 
         },
         selectActivityType(index_activity,activity){

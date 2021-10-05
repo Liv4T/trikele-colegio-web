@@ -45,6 +45,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("/api/teacher/module/".concat(this.id_achievement, "/class/").concat(this.id_class)).then(function (response) {
         _this.course = response.data;
+        console.log(response.data);
 
         if (_this.course.content.length == 0) {
           _this.course.content = [{

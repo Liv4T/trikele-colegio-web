@@ -69,7 +69,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["id_module", "backPage"],
+  props: ["id_module", "id_area", "id_classroom", "backPage"],
   data: function data() {
     return {
       clases: [],
@@ -308,6 +308,8 @@ var render = function() {
             attrs: {
               id_module: _vm.id_module,
               id_class: _vm.clas_id,
+              id_area: _vm.id_area,
+              id_classroom: _vm.id_classroom,
               backToPage: _vm.backToPage
             }
           })
@@ -322,6 +324,8 @@ var render = function() {
             attrs: {
               id_module: _vm.id_module,
               id_class: _vm.clas_id,
+              id_area: _vm.id_area,
+              id_classroom: _vm.id_classroom,
               backToPage: _vm.backToPage
             }
           })

@@ -32,7 +32,8 @@ export default {
     methods: {
         getData(){
             axios.get(`/api/teacher/module/${this.id_achievement}/class/${this.id_class}`).then((response) => {
-                this.course=response.data;                
+                this.course=response.data;     
+                console.log(response.data);           
                 if(this.course.content.length==0)
                 {
                     this.course.content=[
