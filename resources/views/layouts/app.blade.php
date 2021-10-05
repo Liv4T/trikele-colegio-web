@@ -163,7 +163,7 @@
                 </div>
             </div>
         </nav>
-        <a href="https://wa.me/573041560991?text=Me%20gustaría%20saber%20más%20del%20colegio" class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
+        <!-- <a href="https://wa.me/573041560991?text=Me%20gustaría%20saber%20más%20del%20colegio" class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a> -->
         <main class="py-3">
             @yield('content')
             @yield('scripts')
