@@ -619,7 +619,8 @@ var render = function() {
                             _c("talleres", {
                               attrs: {
                                 id_area: _vm.idArea,
-                                id_classroom: _vm.idClassroom
+                                id_classroom: _vm.idClassroom,
+                                type_u: _vm.user
                               }
                             })
                           ],

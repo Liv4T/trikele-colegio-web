@@ -33,7 +33,7 @@
     </div>
     <div v-else>
         <div v-if="id_achievement !== null">
-            <show-taller :id_achievement="id_achievement" :id_class="id_class" :backPage="backPage"></show-taller>
+            <show-taller :id_achievement="id_achievement" :id_class="id_class" :type_user="type_u" :backPage="backPage"></show-taller>
         </div>        
     </div>
 </template>
@@ -41,7 +41,7 @@
 import ShowTaller from './ShowTaller.vue';
 export default {
   components: { ShowTaller }, 
-    props:['id_area','id_classroom'],
+    props:['id_area','id_classroom','type_u'],
     data() {
         return {
             bimestres:[],

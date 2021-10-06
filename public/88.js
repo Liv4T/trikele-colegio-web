@@ -1,29 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[88],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/bimestre.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/bimestre.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/asignarPariente.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/asignarPariente.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -66,83 +51,45 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      bimestres: [],
-      idBimestre: null,
-      bimestre_name: ""
+      allStudents: [],
+      allParents: [],
+      studentSelected: {},
+      parentSelected: []
     };
   },
   mounted: function mounted() {
-    this.getData();
+    var _this = this;
+
+    axios.get("getStudents").then(function (response) {
+      _this.allStudents = response.data;
+    });
+    axios.get("getParents").then(function (response) {
+      _this.allParents = response.data;
+    });
   },
   methods: {
-    getData: function getData() {
-      var _this = this;
-
-      axios.get('/bimestres').then(function (response) {
-        _this.bimestres = response.data;
-      });
-    },
-    openModal: function openModal(idBimestre) {
-      if (idBimestre) {
-        this.idBimestre = idBimestre;
-      }
-
-      $("#bimestre").modal('show');
-    },
-    saveBimestre: function saveBimestre() {
+    saveParents: function saveParents() {
       var _this2 = this;
 
-      if (this.idBimestre !== null) {
-        axios.put("/bimestres/".concat(this.idBimestre), {
-          name: this.bimestre_name
+      this.parentSelected.forEach(function (el) {
+        axios.put("assignParent/".concat(el.id), {
+          parent_id: _this2.studentSelected.id
         }).then(function (response) {
-          toastr.success(response.data);
-
-          _this2.getData();
-
-          $("#bimestre").modal('hide');
+          toastr.success('Asignación realizada con exito');
         })["catch"](function (error) {
-          toastr.info('Ha ocurrido un error, intenta de nuevo mas tarde');
           console.log(error);
         });
-      } else {
-        axios.post('/bimestres', {
-          name: this.bimestre_name
-        }).then(function (response) {
-          toastr.success(response.data);
-
-          _this2.getData();
-
-          $("#bimestre").modal('hide');
-        })["catch"](function (error) {
-          toastr.info('Ha ocurrido un error, intenta de nuevo mas tarde');
-          console.log(error);
-        });
-      }
-    },
-    deleteBimestre: function deleteBimestre(idBimestre) {
-      var _this3 = this;
-
-      if (window.confirm('Seguro que desea eliminar este bimestre?')) {
-        axios["delete"]("/bimestres/".concat(idBimestre)).then(function (response) {
-          toastr.success(response.data);
-
-          _this3.getData();
-        })["catch"](function (error) {
-          toastr.info('Ha ocurrido un error, intenta de nuevo mas tarde');
-          console.log(error);
-        });
-      }
+      });
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/bimestre.vue?vue&type=template&id=013114be&":
-/*!***********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/bimestre.vue?vue&type=template&id=013114be& ***!
-  \***********************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/asignarPariente.vue?vue&type=template&id=6785df94&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/asignarPariente.vue?vue&type=template&id=6785df94& ***!
+  \******************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -154,152 +101,146 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "back" }, [
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-sm-10", attrs: { id: "crud" } }, [
-        _c("div", { staticClass: "card text-center" }, [
-          _c("h3", { staticClass: "card-header fondo" }, [_vm._v("Bimestres")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary float-left mb-2",
-                on: {
-                  click: function($event) {
-                    return _vm.openModal(null)
-                  }
-                }
-              },
-              [_vm._v("Crear")]
-            ),
-            _vm._v(" "),
-            _c(
-              "table",
-              { staticClass: "table table-striped table-hover" },
-              [
-                _vm._m(0),
-                _vm._v(" "),
-                _vm._l(_vm.bimestres, function(bim, key) {
-                  return _c("tbody", { key: key }, [
-                    bim.status === 1
-                      ? _c("tr", [
-                          _c("td", [_vm._v(_vm._s(bim.name))]),
-                          _vm._v(" "),
-                          _c("td", [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-primary",
-                                on: {
-                                  click: function() {
-                                    return _vm.openModal(bim.id)
-                                  }
-                                }
-                              },
-                              [_vm._v("Editar")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-danger",
-                                on: {
-                                  click: function() {
-                                    return _vm.deleteBimestre(bim.id)
-                                  }
-                                }
-                              },
-                              [_vm._v("Eliminar")]
-                            )
-                          ])
-                        ])
-                      : _vm._e()
-                  ])
-                })
-              ],
-              2
-            )
-          ])
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "bimestre",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "bimestreLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(1),
+  return _c("div", [
+    _c("div", { staticClass: "back" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-11 mx-auto" }, [
+          _c("div", { staticClass: "card-container" }, [
+            _c("div", { staticClass: "custom-card text-center" }, [
+              _vm._m(0),
               _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "name" } }, [
-                    _vm._v("Nombre de Bimestre")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.bimestre_name,
-                        expression: "bimestre_name"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text", name: "name", id: "name" },
-                    domProps: { value: _vm.bimestre_name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.bimestre_name = $event.target.value
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
+              _c("div", { staticClass: "card-body" }, [
                 _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-secondary",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Cerrar")]
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("label", [_vm._v(" Estudiantes")]),
+                    _vm._v(" "),
+                    _c("multiselect", {
+                      attrs: {
+                        options: _vm.allStudents,
+                        multiple: false,
+                        "close-on-select": false,
+                        "clear-on-select": false,
+                        "preserve-search": true,
+                        placeholder: "Seleccione una o varias",
+                        label: "name",
+                        "track-by": "id",
+                        "preselect-first": false
+                      },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "selection",
+                          fn: function(ref) {
+                            var values = ref.values
+                            var isOpen = ref.isOpen
+                            return [
+                              values.length && !isOpen
+                                ? _c(
+                                    "span",
+                                    { staticClass: "multiselect__single" },
+                                    [
+                                      _vm._v(
+                                        _vm._s(values.length) +
+                                          " opciones selecionadas"
+                                      )
+                                    ]
+                                  )
+                                : _vm._e()
+                            ]
+                          }
+                        }
+                      ]),
+                      model: {
+                        value: _vm.studentSelected,
+                        callback: function($$v) {
+                          _vm.studentSelected = $$v
+                        },
+                        expression: "studentSelected"
+                      }
+                    })
+                  ],
+                  1
                 ),
                 _vm._v(" "),
                 _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "button" },
-                    on: { click: _vm.saveBimestre }
-                  },
-                  [_vm._v("Guardar")]
-                )
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("label", [_vm._v(" Parientes")]),
+                    _vm._v(" "),
+                    _c("multiselect", {
+                      attrs: {
+                        options: _vm.allParents,
+                        multiple: true,
+                        "close-on-select": false,
+                        "clear-on-select": false,
+                        "preserve-search": true,
+                        placeholder: "Seleccione una o varias",
+                        label: "name",
+                        "track-by": "id",
+                        "preselect-first": false
+                      },
+                      scopedSlots: _vm._u([
+                        {
+                          key: "selection",
+                          fn: function(ref) {
+                            var values = ref.values
+                            var isOpen = ref.isOpen
+                            return [
+                              values.length && !isOpen
+                                ? _c(
+                                    "span",
+                                    { staticClass: "multiselect__single" },
+                                    [
+                                      _vm._v(
+                                        _vm._s(values.length) +
+                                          " opciones selecionadas"
+                                      )
+                                    ]
+                                  )
+                                : _vm._e()
+                            ]
+                          }
+                        }
+                      ]),
+                      model: {
+                        value: _vm.parentSelected,
+                        callback: function($$v) {
+                          _vm.parentSelected = $$v
+                        },
+                        expression: "parentSelected"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group float-rigth" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: { click: _vm.saveParents }
+                    },
+                    [_vm._v("Guardar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { href: "/salon_adm" }
+                    },
+                    [_vm._v("Volver")]
+                  )
+                ])
               ])
             ])
-          ]
-        )
-      ]
-    )
+          ])
+        ])
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -307,35 +248,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Nombre")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Acción")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("h5", { staticClass: "modal-title", attrs: { id: "bimestreLabel" } }, [
-        _vm._v("Bimestre")
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", [_vm._v("Asignar Parientes")])
     ])
   }
 ]
@@ -345,17 +259,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/bimestre.vue":
-/*!**********************************************!*\
-  !*** ./resources/js/components/bimestre.vue ***!
-  \**********************************************/
+/***/ "./resources/js/components/asignarPariente.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/asignarPariente.vue ***!
+  \*****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _bimestre_vue_vue_type_template_id_013114be___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bimestre.vue?vue&type=template&id=013114be& */ "./resources/js/components/bimestre.vue?vue&type=template&id=013114be&");
-/* harmony import */ var _bimestre_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bimestre.vue?vue&type=script&lang=js& */ "./resources/js/components/bimestre.vue?vue&type=script&lang=js&");
+/* harmony import */ var _asignarPariente_vue_vue_type_template_id_6785df94___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./asignarPariente.vue?vue&type=template&id=6785df94& */ "./resources/js/components/asignarPariente.vue?vue&type=template&id=6785df94&");
+/* harmony import */ var _asignarPariente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./asignarPariente.vue?vue&type=script&lang=js& */ "./resources/js/components/asignarPariente.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -365,9 +279,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _bimestre_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _bimestre_vue_vue_type_template_id_013114be___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _bimestre_vue_vue_type_template_id_013114be___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _asignarPariente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _asignarPariente_vue_vue_type_template_id_6785df94___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _asignarPariente_vue_vue_type_template_id_6785df94___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -377,38 +291,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/bimestre.vue"
+component.options.__file = "resources/js/components/asignarPariente.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/bimestre.vue?vue&type=script&lang=js&":
-/*!***********************************************************************!*\
-  !*** ./resources/js/components/bimestre.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************/
+/***/ "./resources/js/components/asignarPariente.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/asignarPariente.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_bimestre_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./bimestre.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/bimestre.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_bimestre_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_asignarPariente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./asignarPariente.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/asignarPariente.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_asignarPariente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/bimestre.vue?vue&type=template&id=013114be&":
-/*!*****************************************************************************!*\
-  !*** ./resources/js/components/bimestre.vue?vue&type=template&id=013114be& ***!
-  \*****************************************************************************/
+/***/ "./resources/js/components/asignarPariente.vue?vue&type=template&id=6785df94&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/asignarPariente.vue?vue&type=template&id=6785df94& ***!
+  \************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_bimestre_vue_vue_type_template_id_013114be___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./bimestre.vue?vue&type=template&id=013114be& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/bimestre.vue?vue&type=template&id=013114be&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_bimestre_vue_vue_type_template_id_013114be___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_asignarPariente_vue_vue_type_template_id_6785df94___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./asignarPariente.vue?vue&type=template&id=6785df94& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/asignarPariente.vue?vue&type=template&id=6785df94&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_asignarPariente_vue_vue_type_template_id_6785df94___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_bimestre_vue_vue_type_template_id_013114be___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_asignarPariente_vue_vue_type_template_id_6785df94___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
