@@ -751,8 +751,9 @@ class ClassController extends Controller
                         'feedback_date'=>$activity['feedback_date'],
                         'id_indicator'=>$activity['id_indicator'])                       
                     );
-
-                    Workshop::where('id_activity',$activity['id'])->update(array('id_bimestre' => $activity['id_bimestre']));
+                    if(isset($activity['id_bimestre'])){
+                        Workshop::where('id_activity',$activity['id'])->update(array('id_bimestre' => $activity['id_bimestre']));
+                    }                    
                 }
                 else
                 {

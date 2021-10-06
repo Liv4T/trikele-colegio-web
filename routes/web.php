@@ -904,3 +904,4 @@ Route::middleware('auth')->get('/changeGrade', function () {
 Route::put('savePromGrade/{id_student}','ChangeGradeController@savePromGrade');
 
 Route::get('getWorkShop/{id_bimestre}/{id_area}/{id_classroom}','WorkshopController@getActivityByBimestre');
+Route::post('saveUrlFile/{id}','WorkshopController@saveUrlFile');

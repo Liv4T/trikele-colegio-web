@@ -33,7 +33,7 @@
     </div>
     <div v-else>
         <div v-if="id_achievement !== null">
-            <show-taller :id_achievement="id_achievement" :id_class="id_class" :type_user="type_u" :backPage="backPage"></show-taller>
+            <show-taller :id_achievement="id_achievement" :id_class="id_class" :type_user="type_u" :id_bimestre="id_bimestre" :id_workshop="id_workshop" :backPage="backPage"></show-taller>
         </div>        
     </div>
 </template>
@@ -49,6 +49,8 @@ export default {
             id_achievement:null,
             id_class:null,
             list:true,
+            id_bimestre: null,
+            id_workshop:null
         };
     },
     mounted() {
@@ -62,12 +64,14 @@ export default {
             });
         },
 
-        getIdBimestre(id){            
+        getIdBimestre(id){      
+            this.id_bimestre = id;      
             axios.get(`getWorkShop/${id}/${this.id_area}/${this.id_classroom}`).then((response)=>{
                 this.workshop = response.data;                
             })                
         },
         activity(data){
+            this.id_workshop = data.id;
             this.list = false;
             this.id_achievement = data.id_achievement;
             this.id_class = data.id_class;           

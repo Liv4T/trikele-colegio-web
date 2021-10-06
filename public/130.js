@@ -61,7 +61,9 @@ __webpack_require__.r(__webpack_exports__);
       workshop: [],
       id_achievement: null,
       id_class: null,
-      list: true
+      list: true,
+      id_bimestre: null,
+      id_workshop: null
     };
   },
   mounted: function mounted() {
@@ -78,11 +80,13 @@ __webpack_require__.r(__webpack_exports__);
     getIdBimestre: function getIdBimestre(id) {
       var _this2 = this;
 
+      this.id_bimestre = id;
       axios.get("getWorkShop/".concat(id, "/").concat(this.id_area, "/").concat(this.id_classroom)).then(function (response) {
         _this2.workshop = response.data;
       });
     },
     activity: function activity(data) {
+      this.id_workshop = data.id;
       this.list = false;
       this.id_achievement = data.id_achievement;
       this.id_class = data.id_class;
@@ -212,6 +216,8 @@ var render = function() {
                     id_achievement: _vm.id_achievement,
                     id_class: _vm.id_class,
                     type_user: _vm.type_u,
+                    id_bimestre: _vm.id_bimestre,
+                    id_workshop: _vm.id_workshop,
                     backPage: _vm.backPage
                   }
                 })

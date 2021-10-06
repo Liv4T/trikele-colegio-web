@@ -18,17 +18,6 @@ class WorkshopController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
     public function getActivityByBimestre(String $id_bimestre, String $id_area, String $id_classroom){
         $data = [];
         $workshop = Workshop::where('id_bimestre',$id_bimestre)->where('id_area',$id_area)->where('id_classroom',$id_classroom)->get();        
@@ -42,6 +31,25 @@ class WorkshopController extends Controller
             return [];
         }
     }
+
+    public function saveUrlFile(Request $request, String $id){
+        $work = Workshop::where('id_activity',$id)->first();
+        $work->urlFile = $request->url;
+        $work->update();
+
+        return ('Url Actualizada');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }    
 
     /**
      * Display the specified resource.
