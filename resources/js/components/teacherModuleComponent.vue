@@ -72,8 +72,6 @@ export default {
             fillS: [],
             nameWeekly: "",
             nameArea: "",
-            id_area: "",
-            id_classroom: "",
             clas_id:undefined,
             showSection:"listClass"
         };
@@ -106,8 +104,8 @@ export default {
                 if(response.data.area && response.data.classroom)
                     this.nameArea = `${response.data.area.name} ${response.data.classroom.name}`;
 
-                this.id_area = response.data.area.id;
-                this.id_classroom = response.data.classroom.id;
+                // this.id_area = response.data.area.id;
+                // this.id_classroom = response.data.classroom.id;
             });
         },
         getSection(showSection, data){

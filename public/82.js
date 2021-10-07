@@ -215,6 +215,7 @@ var render = function() {
                   attrs: {
                     id_achievement: _vm.id_achievement,
                     id_class: _vm.id_class,
+                    id_area: _vm.id_area,
                     type_user: _vm.type_u,
                     id_bimestre: _vm.id_bimestre,
                     id_workshop: _vm.id_workshop,

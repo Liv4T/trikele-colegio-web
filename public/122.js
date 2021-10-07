@@ -113,6 +113,8 @@ __webpack_require__.r(__webpack_exports__);
         this.id_classroom_selected = data.id_classroom;
         this.showSection = "edit";
       } else if (showSection === "cycle") {
+        this.id_area_selected = data.id_area;
+        this.id_classroom_selected = data.id_classroom;
         this.id_module = data.id;
         this.showSection = "cycle";
       }

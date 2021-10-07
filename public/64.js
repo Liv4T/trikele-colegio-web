@@ -83,8 +83,6 @@ __webpack_require__.r(__webpack_exports__);
       fillS: [],
       nameWeekly: "",
       nameArea: "",
-      id_area: "",
-      id_classroom: "",
       clas_id: undefined,
       showSection: "listClass"
     };
@@ -117,9 +115,8 @@ __webpack_require__.r(__webpack_exports__);
       var urlr = window.location.origin + "/showClass/" + this.id_module;
       axios.get(urlr).then(function (response) {
         _this3.fillS = response.data.clase;
-        if (response.data.area && response.data.classroom) _this3.nameArea = "".concat(response.data.area.name, " ").concat(response.data.classroom.name);
-        _this3.id_area = response.data.area.id;
-        _this3.id_classroom = response.data.classroom.id;
+        if (response.data.area && response.data.classroom) _this3.nameArea = "".concat(response.data.area.name, " ").concat(response.data.classroom.name); // this.id_area = response.data.area.id;
+        // this.id_classroom = response.data.classroom.id;
       });
     },
     getSection: function getSection(showSection, data) {

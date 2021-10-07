@@ -335,7 +335,7 @@ export default {
             }
         },
     },
-    mounted() {
+    mounted() {        
         this.course.id_area = this.id_area;
         this.course.id_classroom = this.id_classroom;
         axios.get('bimestres').then((response)=>{            
@@ -437,9 +437,12 @@ export default {
         },
 
         SaveDataEvent(){
+            this.course.id_area = this.id_area;
+            this.course.id_classroom = this.id_classroom;            
+
             axios.put(`/api/teacher/module/${this.id_module}/class`,this.course).then((response) => {
 
-               // this.getPlanificationEvent(this.id_lective_planification);
+              // this.getPlanificationEvent(this.id_lective_planification);
                 toastr.success("Clases actualizadas correctamente");
                 // this.returnPage();
             },(error)=>{console.log(error);toastr.error("ERROR:Por favor valide que la información esta completa");});

@@ -132,8 +132,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     AddQuestionEvent: function AddQuestionEvent() {
-      console.log('Modulo: ', this.module);
-      console.log('Disabled: ', this.disabled);
       this.module.questions.push({
         question: "",
         type_question: 'SIMPLE_RTA',

@@ -430,6 +430,8 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
       });
     },
     SaveDataEvent: function SaveDataEvent() {
+      this.course.id_area = this.id_area;
+      this.course.id_classroom = this.id_classroom;
       axios.put("/api/teacher/module/".concat(this.id_module, "/class"), this.course).then(function (response) {
         // this.getPlanificationEvent(this.id_lective_planification);
         toastr.success("Clases actualizadas correctamente"); // this.returnPage();

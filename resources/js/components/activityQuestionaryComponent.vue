@@ -118,9 +118,7 @@ export default {
         }
     },
     methods:{
-        AddQuestionEvent(){ 
-            console.log('Modulo: ',this.module);
-            console.log('Disabled: ',this.disabled);             
+        AddQuestionEvent(){                          
             this.module.questions.push({
                 question:"",
                 type_question:'SIMPLE_RTA',

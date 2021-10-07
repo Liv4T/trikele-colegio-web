@@ -10,7 +10,7 @@
         </ul>
         <div v-if="type_user === 1 || type_user === 2">            
             <div class="card">
-                <div class="card-body" v-if="activeClass === 1">
+                <div class="card-body" v-if="activeClass === 1">                    
                     <label>Bimestre</label>                     
                     <div v-for="(activity,key_a) in course.activities" v-bind:key="key_a">   
                         <select class="form-control m-2" v-model="activity.id_bimestre">                                                            
@@ -138,7 +138,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 export default { 
-    props:['id_achievement','id_class','type_user','id_bimestre','id_workshop','backPage'],
+    props:['id_achievement','id_class','id_area','type_user','id_bimestre','id_workshop','backPage'],
     data() {
         return {
             course:[], 
@@ -183,7 +183,9 @@ export default {
             
 
             axios.get(`/api/teacher/module/${this.id_achievement}/class/${this.id_class}`).then((response) => {
-                this.course=response.data;                    
+                this.course=response.data;         
+                this.course.id_area = this.id_area;
+                this.course.id_bimestre = this.id_bimestre;           
                 if(this.course.content.length==0)
                 {
                     this.course.content=[
@@ -207,7 +209,7 @@ export default {
                 if(this.course.activities.length>0)
                 {
                     this.course.activities.forEach(act=>{
-                        act.delivery_max_date=act.delivery_max_date ? act.delivery_max_date && delivery_max_date.replace(" ","T") : '';
+                        act.delivery_max_date=act.delivery_max_date ? act.delivery_max_date && delivery_max_date.replace(" ","T") : '';                        
                         act.feedback_date=act.feedback_date.replace(" ","T");
                         this.GetIndicatorsEvent(act);
                     });
