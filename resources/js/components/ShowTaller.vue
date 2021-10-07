@@ -24,7 +24,7 @@
 
                     <button class="btn btn-primary col-md-3" v-on:click="saveData">Guardar</button>    
                 </div>                
-                <div v-else-if="activeClass === 2">                
+                <div v-else-if="activeClass === 2 && type_user === 2">                
                     <div class="card-body">
                         <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">Cargar Archivo</button>
                         <table class="table table-striped table-hover">

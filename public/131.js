@@ -462,7 +462,7 @@ var render = function() {
                   ],
                   2
                 )
-              : _vm.activeClass === 2
+              : _vm.activeClass === 2 && _vm.type_user === 2
               ? _c("div", [
                   _c("div", { staticClass: "card-body" }, [
                     _c(
