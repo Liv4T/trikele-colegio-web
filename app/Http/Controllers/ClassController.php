@@ -754,11 +754,17 @@ class ClassController extends Controller
                     if(isset($activity['id_bimestre'])){
                         $actividadWork = Workshop::where('id_activity',$activity['id'])->first();
                         if(isset($actividadWork->id)){
-                            Workshop::where('id_activity',$activity['id'])->update(array('id_bimestre' => $activity['id_bimestre']));
+                            Workshop::where('id_activity',$activity['id'])->update(array(                                
+                                'id_class'    => $id_course,
+                                'id_activity' => $activity['id'] ? $activity['id'] : $dataWorkshop->id,
+                                'id_bimestre' => $activity['id_bimestre'],
+                                'id_area'     => $data['id_area'],
+                                'id_classroom'=> $data['id_classroom'],
+                            ));
                         }else{        
                             $dataWorkshop = Activity::latest('id')->first();                
                             $workshop = Workshop::create([
-                                'id_class' => $id_course,
+                                'id_class'    => $id_course,
                                 'id_activity' => $activity['id'] ? $activity['id'] : $dataWorkshop->id,
                                 'id_bimestre' => $activity['id_bimestre'],
                                 'id_area'     => $data['id_area'],
