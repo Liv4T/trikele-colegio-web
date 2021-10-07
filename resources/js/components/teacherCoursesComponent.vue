@@ -40,7 +40,7 @@
     <semanalact-component :id_area="id_area_selected" :id_classroom="id_classroom_selected" :backPage="backPage"></semanalact-component>
   </div>
   <div v-else-if="showSection === 'cycle'">
-    <teacher-module :id_module="id_module" :backPage="backPage"></teacher-module>
+    <teacher-module :id_module="id_module" :id_area="id_area_selected" :id_classroom="id_classroom_selected" :backPage="backPage"></teacher-module>
   </div>
 </template>
 <script>

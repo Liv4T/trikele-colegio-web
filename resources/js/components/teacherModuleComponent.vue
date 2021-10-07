@@ -49,16 +49,16 @@
         </div>
     </div>
     <div v-else-if="showSection === 'createClass'">
-        <teacher-course :id_module="id_module" :id_class="clas_id" :backToPage="backToPage"></teacher-course>        
+        <teacher-course :id_module="id_module" :id_class="clas_id" :id_area="id_area" :id_classroom="id_classroom" :backToPage="backToPage"></teacher-course>        
     </div>
     <div v-else-if="showSection === 'editClass'">
-        <teacher-course :id_module="id_module" :id_class="clas_id" :backToPage="backToPage"></teacher-course>
+        <teacher-course :id_module="id_module" :id_class="clas_id" :id_area="id_area" :id_classroom="id_classroom" :backToPage="backToPage"></teacher-course>
     </div>
 </template>
 <script>
 import { RsiIndicator } from "@syncfusion/ej2-vue-charts";
 export default {
-    props: ["id_module","backPage"],
+    props: ["id_module","id_area","id_classroom","backPage"],
     data() {
         return {
             clases: [],

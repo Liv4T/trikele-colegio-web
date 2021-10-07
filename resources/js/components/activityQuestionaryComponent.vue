@@ -118,18 +118,20 @@ export default {
         }
     },
     methods:{
-          AddQuestionEvent(){
-                this.module.questions.push({
-                        question:"",
-                        type_question:'SIMPLE_RTA',
-                        options:[{
-                            content:''
-                        },{
-                            content:''
-                        }],
-                        valid_answer_index:0,
-                        justify:"",
-                });
+        AddQuestionEvent(){ 
+            console.log('Modulo: ',this.module);
+            console.log('Disabled: ',this.disabled);             
+            this.module.questions.push({
+                question:"",
+                type_question:'SIMPLE_RTA',
+                options:[{
+                    content:''
+                },{
+                    content:''
+                }],
+                valid_answer_index:0,
+                justify:"",
+            });
         },
         RemoveQuestionEvent(index){
             this.module.questions.splice(index,1);
@@ -139,7 +141,6 @@ export default {
             this.module.questions[index].options.push({
                 content:''
             });
-
         },
         RemoveOptionOnQuestion(index_question,index)
         {
@@ -148,34 +149,25 @@ export default {
     /*
         uploadQuestionFile(file){
             return new Promise((resolve,reject)=>{
-
                 if(!file) resolve();
-
                 let _fileNameSplit=file.name.split(".");
                 let file_extension=_fileNameSplit[_fileNameSplit.length-1];
                 let file_name=file.name.replace(`.${file_extension}`,'');
                 let file_detail_name=`-editor-content-questions-${this.getRandom(1,9999999)}`;
                 let file_url=`${window.location.origin}/uploads/editor_content/${file_name.split(' ').join('_')}${file_detail_name}.${file_extension}`;
-
                 let data = new FormData();
                 data.append("file", file);
                 data.append("name", `${file_name}${file_detail_name}`);
-
                  axios.post("/api/file/upload/editor-content", data).then(response => {
                       resolve(file_url);
                 }).catch(err=>{reject(err);});
-
             });
         },*/
         getRandom(min,max){
             return Math.random() * (max - min) + min;
         },
-
         SetQuestionEvent(content,ix_question){
-
            this.module.questions[ix_question].question=content;
-
-
         },
         SetJustifyEvent(content,ix_question){
            this.module.questions[ix_question].justify=content;
@@ -201,7 +193,6 @@ export default {
   flex-direction:row;
   justify-content:center;
   align-items:center;
-
 }
 .icon-remove{
   background-color:#f2f2f2;
@@ -214,7 +205,6 @@ export default {
   justify-content:center;
   align-items:center;
   cursor:default;
-
   font-weight:900;
   background-color:#ffc107;color:white;border-color:#ffc107;
 }
@@ -230,7 +220,6 @@ export default {
   justify-content:center;
   align-items:center;
   cursor:default;
-
   font-weight:900;
   color:white;
 }
@@ -239,7 +228,6 @@ export default {
 .codex-editor__redactor{
     padding-bottom: 50px !important;
 }
-
 .visor{border:1px solid #7b7b7b;}
 .question_container{font-family: "Century Gothic";width: 100%;padding:10px 20px;font-weight: 600;font-size:1.2em;border-radius:4px;}
 .q-option {

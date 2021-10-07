@@ -121,6 +121,12 @@
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-8">
+                                                        <label><span class="required">*</span>Bimestre</label>
+                                                        <select class="form-control" v-model="activity.id_bimestre">                                                            
+                                                            <option v-for="(bimestre, key) in bimestres" :key="key" :value="bimestre.id">{{bimestre.name}}</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-8">
                                                         <label><span class="required">*</span>Nombre de la actividad:</label>
                                                         <input type="text" class="form-control" v-model="activity.name" v-bind:readonly="course.state==2"/>
                                                     </div>
@@ -171,12 +177,10 @@
                                                         <input type="datetime-local" class="form-control" v-model="activity.feedback_date" />
                                                     </div>
                                                 </div>
-                                                <activity-questionary v-if="activity.activity_type=='CUESTIONARIO' || activity.activity_type == 'CUESTIONARIO_UNICA_RTA'" v-bind:module="activity.module" v-bind:disabled="course.state==2"></activity-questionary>
+                                                <activity-questionary v-if="activity.activity_type === 'CUESTIONARIO' || activity.activity_type === 'CUESTIONARIO_UNICA_RTA'" v-bind:module="activity.module" v-bind:disabled="course.state===2"></activity-questionary>
                                                 <activity-complete-sentence v-if="activity.activity_type=='COMPLETAR_ORACION'" v-bind:module="activity.module" v-bind:disabled="course.state==2"></activity-complete-sentence>
                                                 <activity-relationship v-if="activity.activity_type=='RELACION'" v-bind:module="activity.module" v-bind:disabled="course.state==2"></activity-relationship>
                                                 <activity-crossword v-if="activity.activity_type=='CRUCIGRAMA'" v-bind:module="activity.module" v-bind:disabled="course.state==2"></activity-crossword>
-
-
                                             </div>
                                         </div>
                                     </div><!--card -->
@@ -228,7 +232,7 @@ import VueFormWizard from "vue-form-wizard";
 import "vue-form-wizard/dist/vue-form-wizard.min.css";
 Vue.use(VueFormWizard);
 export default {
-    props: ["id_module", "id_class", "backToPage"],
+    props: ["id_module", "id_class","id_area","id_classroom","backToPage"],
     data() {
         return {
             activityForAllStudents: true,
@@ -269,11 +273,23 @@ export default {
             achievements:[],
             indicators:[],
             nameArea:'',
-            custom_editor_toolbar_justify:[["bold", "italic", "underline"], [{ list: "ordered" }, { list: "bullet" }],["image"]]
-
+            custom_editor_toolbar_justify:[["bold", "italic", "underline"], [{ list: "ordered" }, { list: "bullet" }],["image"]],
+            bimestres:[],
+            id_bimestre:null
         };
     },
     watch:{
+        id_area: function(newVal, oldVal){
+            if(newVal !== oldVal){
+                this.course.id_area = this.id_area;
+            }
+        },
+
+        id_classroom: function(newVal, oldVal){
+            if(newVal !== oldVal){
+                this.course.id_classroom = this.id_classroom;
+            }
+        },
         activityForAllStudents: function(newVal){
             if(newVal == true){
                 this.course.activityForPIARStudents = 0;
@@ -320,7 +336,11 @@ export default {
         },
     },
     mounted() {
-
+        this.course.id_area = this.id_area;
+        this.course.id_classroom = this.id_classroom;
+        axios.get('bimestres').then((response)=>{            
+            this.bimestres = response.data;
+        })
         axios.get(`/showClass/${this.id_module}`).then((response) => {        
             this.achievements=response.data.achievements;
             this.nameArea = `${response.data.area.name} ${response.data.classroom.name}`;
@@ -348,8 +368,7 @@ export default {
         if(this.id_class!=0)
         {
             axios.get(`/api/teacher/module/${this.id_module}/class/${this.id_class}`).then((response) => {
-                    this.course=response.data;
-                    console.log('Cursos',response.data)
+                    this.course=response.data;                    
 
                     if(this.course.content.length==0)
                     {
@@ -401,14 +420,16 @@ export default {
         removeActivity(index){
             this.course.activities.splice(index,1);
         },
-        addActivity(){
+        addActivity(){            
             this.course.activities.push({
                 name:'',
                 description:'',
                 activity_type:'',
                 id_achievement:'',
                 id_indicator:'',
-                module:{},
+                module:{
+                    questions:[]
+                },
                 is_required:1,
                 delivery_max_date:'',
                 feedback_date:''
@@ -416,9 +437,7 @@ export default {
         },
 
         SaveDataEvent(){
-            console.log(this.course)
-
-             axios.put(`/api/teacher/module/${this.id_module}/class`,this.course).then((response) => {
+            axios.put(`/api/teacher/module/${this.id_module}/class`,this.course).then((response) => {
 
                // this.getPlanificationEvent(this.id_lective_planification);
                 toastr.success("Clases actualizadas correctamente");

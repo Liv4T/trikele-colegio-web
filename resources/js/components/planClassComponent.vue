@@ -19,11 +19,12 @@
                             <a v-on:click="activetab = 2" v-bind:class="[activetab === 2 ? 'active' : '']"><h4 class="letra-boldfont">ACTIVIDADES</h4></a>
                             <a v-on:click="activetab = 3" v-bind:class="[activetab === 3 ? 'active' : '']"><h4 class="letra-boldfont">NOTAS</h4></a>
                             <a v-on:click="activetab = 4" v-bind:class="[activetab === 4 ? 'active' : '']"><h4 class="letra-boldfont">ENTREGAS</h4></a>
+                            <a v-on:click="activetab = 5" v-bind:class="[activetab === 5 ? 'active' : '']"><h4 class="letra-boldfont">TALLERES</h4></a>
                         </div>
 
                         <div>
                             <div v-if="activetab === 1" class="tabcontent">
-                                <div v-if="idArea !=''">                                    
+                                <div v-if="idArea !=''">
                                     <bimestre-list-component :id_area="idArea" :id_classroom="idClassroom" :type_u="user"></bimestre-list-component>
                                 </div>
                             </div>
@@ -43,6 +44,12 @@
                             <div v-if="activetab === 4" class="tabcontent">
                                 <div v-if="idArea !='' && idClassroom != ''">
                                     <repository-component :id_grade="undefined" :id_area="idArea" :id_classroom="idClassroom"></repository-component>
+                                </div>
+                            </div>
+
+                            <div v-if="activetab === 5" class="tabcontent">
+                                <div v-if="idArea !='' && idClassroom != ''">
+                                    <talleres :id_area="idArea" :id_classroom="idClassroom" :type_u="user"></talleres>
                                 </div>
                             </div>
                         </div>

@@ -911,3 +911,8 @@ Route::get('getPaymentAproved','VerifyRegistrationController@getPaymentAproved')
 Route::middleware('auth')->get('/verifyRegister', function () {
     return view('verifyRegistration');
 });
+
+Route::get('getWorkShop/{id_bimestre}/{id_area}/{id_classroom}','WorkshopController@getActivityByBimestre');
+
+Route::resource('filesWork','FilesWorkshopController');
+Route::get('getFilesStudents/{id_activity}/{id_workshop}','FilesWorkshopController@getFilesStudents');

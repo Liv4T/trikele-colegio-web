@@ -25,6 +25,7 @@ use App\Classroom;
 use App\User;
 use App\Grade;
 use App\ClassSubject;
+use App\Workshop;
 use Illuminate\Http\Request;
 use Auth;
 use PhpParser\Node\Stmt\Foreach_;
@@ -750,6 +751,9 @@ class ClassController extends Controller
                         'feedback_date'=>$activity['feedback_date'],
                         'id_indicator'=>$activity['id_indicator'])                       
                     );
+                    if(isset($activity['id_bimestre'])){
+                        Workshop::where('id_activity',$activity['id'])->update(array('id_bimestre' => $activity['id_bimestre']));
+                    }                    
                 }
                 else
                 {
@@ -768,10 +772,20 @@ class ClassController extends Controller
                         'feedback_date'=>$activity['feedback_date']
                     ]);
                     $id_activity=$activity_new->id;
+
+                    $dataWorkshop = Activity::latest('id')->first();
+
+                    $workshop = Workshop::create([
+                        'id_class' => $id_course,
+                        'id_activity' => $dataWorkshop->id,
+                        'id_bimestre' => $activity['id_bimestre'],
+                        'id_area'     => $data['id_area'],
+                        'id_classroom'=> $data['id_classroom'],
+                    ]);
                 }
 
 
-                if($id_activity!=0 && $activity['activity_type']=='CUESTIONARIO')
+                if($id_activity!=0 && $activity['activity_type']=='CUESTIONARIO' || $activity['activity_type']=='CUESTIONARIO_UNICA_RTA')                
                 {
                     //update activity_questions
                     ActivityQuestion::where('id_activity',$id_activity)->update(array('deleted'=>1));
@@ -873,18 +887,11 @@ class ClassController extends Controller
                         ]);
                         $id_modelo=$modelo_new->id;
                     }
-
-
-
                 }
-
 
             }//foreach activities
         }
-
         return;
-
-
     }
 
         /**
