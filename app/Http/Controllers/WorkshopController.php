@@ -24,20 +24,31 @@ class WorkshopController extends Controller
         if(isset($workshop)){
             foreach($workshop as $work) {                
                 $getActivities = Activity::where('id_class',$work->id_class)->first();
-                array_push($data, $getActivities);
+                array_push($data, 
+                    array(
+                        "id"=>$getActivities->id,
+                        "id_class"=> $getActivities->id_class,
+                        'id_achievement'=> $getActivities->id_achievement,
+                        'id_indicator'=> $getActivities->id_indicator,
+                        'activity_type'=> $getActivities->activity_type ,
+                        'name'=> $getActivities->name,
+                        'description'=> $getActivities->description ,
+                        'delivery_max_date'=> $getActivities->delivery_max_date,
+                        'feedback_date'=> $getActivities->feedback_date,
+                        'rules'=> $getActivities->rules,
+                        'is_required'=> $getActivities->is_required,
+                        'state'=> $getActivities->state,
+                        'deleted'=> $getActivities->deleted,
+                        'updated_user'=> $getActivities->updated_user,
+                        'id_bimestre'=> $work->id_bimestre,
+                        'id_workshop'=> $work->id,
+                    )
+                );                
             }
             return response()->json($data);
         }else{
             return [];
         }
-    }
-
-    public function saveUrlFile(Request $request, String $id){
-        $work = Workshop::where('id_activity',$id)->first();
-        $work->urlFile = $request->url;
-        $work->update();
-
-        return ('Url Actualizada');
     }
 
     /**

@@ -67,11 +67,11 @@ export default {
         getIdBimestre(id){      
             this.id_bimestre = id;      
             axios.get(`getWorkShop/${id}/${this.id_area}/${this.id_classroom}`).then((response)=>{
-                this.workshop = response.data;                
+                this.workshop = response.data;                 
             })                
         },
         activity(data){
-            this.id_workshop = data.id;
+            this.id_workshop = data.id_workshop;
             this.list = false;
             this.id_achievement = data.id_achievement;
             this.id_class = data.id_class;           

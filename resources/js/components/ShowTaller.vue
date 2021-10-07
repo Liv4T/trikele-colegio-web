@@ -26,10 +26,24 @@
                 </div>                
                 <div v-else-if="activeClass === 2">                
                     <div class="card-body">
-                        <label>Subir Documento</label>
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1" v-on:change="getFile">
-
-                        <button class="btn btn-primary col-md-3 mt-2" v-on:click="saveFile">Guardar</button>
+                        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">Cargar Archivo</button>
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(files, key) in dataFiles" :key="key">
+                                    <th>{{files.name}}</th>
+                                    <th>
+                                        <a :href="files.url" :download="files.name" target="_blank" class="btn btn-primary">Descargar</a>
+                                        <button v-if="this.type_user === 2" class="btn btn-primary" v-on:click="deleteFile(files)">Eliminar</button>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>                        
                     </div>
                 </div>
             </div>
@@ -56,11 +70,56 @@
                     </div>
                 </div>
                 <div class="card-body" v-else-if="activeClass === 2">
-                    
+                    <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(files, key) in dataFiles" :key="key">
+                                    <th>{{files.name}}</th>
+                                    <th>
+                                        <a :href="files.url" :download="files.name" target="_blank" class="btn btn-primary">Descargar</a>
+                                        <button v-if="type_user === 2" class="btn btn-primary" v-on:click="deleteFile(files)">Eliminar</button>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
                 </div>
             </div>
         </div>
-        <button class="btn btn-primary col-md-3" v-on:click="backPage">Volver</button>            
+        <button class="btn btn-primary col-md-3" v-on:click="backPage">Volver</button>     
+
+        <!-- Modal Cargue de documentos -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Carge de documentos</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Subir Documento</label>
+                            <input type="file" class="form-control-file" id="exampleFormControlFile1" v-on:change="getFile">
+                        </div>
+                        <div class="form-group">
+                            <label>Nombre de Archivo</label>
+                            <input type="text" class="form-control" v-model="fileName">
+                        </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" v-on:click="saveFile">Guardar Cambios</button>
+                    </div>
+                </div>
+            </div>
+        </div>       
     </div>    
 </template>
 <script>
@@ -88,6 +147,8 @@ export default {
             file:null,
             loading:false,
             urlFile:null,
+            fileName:null,
+            dataFiles:[]
         };
     },
     watch:{
@@ -100,13 +161,27 @@ export default {
     mounted(){
         if(this.id_class !== null){
             this.getData();
+            this.getFiles();
             axios.get('bimestres').then((response)=>{            
                 this.bimestres = response.data;
             });
         }        
     },
     methods: {
+        getFiles(){
+            if(this.type_user === 2){
+                axios.get('filesWork').then((response) => {
+                    this.dataFiles = response.data;
+                });
+            }else{
+                axios.get(`getFilesStudents/${this.id_class}/${this.id_workshop}`).then((response)=>{
+                    this.dataFiles = response.data
+                })
+            }
+        },
         getData(){
+            
+
             axios.get(`/api/teacher/module/${this.id_achievement}/class/${this.id_class}`).then((response) => {
                 this.course=response.data;                    
                 if(this.course.content.length==0)
@@ -155,19 +230,42 @@ export default {
 
         saveFile(){
             let storageRef = firebase.storage().ref();
-            let id = this.id_workshop;
+            let id_activity = this.id_class;
+            let id_workshop = this.id_workshop;
+            let nameFile = this.fileName;
             let imageRef = storageRef.child(`images/${this.file.name}`);            
             
             imageRef.put(this.file).then(function(snapshot) {                
                 snapshot.ref.getDownloadURL().then(url=>{
-                    axios.post(`saveUrlFile/${id}`,{url: url}).then((response)=>{
-                        toastr.success("Url actualizada correctamente");
+                    axios.post(`filesWork`,{
+                        url: url, 
+                        name:nameFile,
+                        id_activity: id_activity, 
+                        id_workshop: id_workshop,
+                    }).then((response)=>{
+                        toastr.success(response.data);
                     }).catch((error)=>{
                         console.log(error);
                         toastr.error("Error, intenta de nuevo mas tarde")
                     })
                 });
-            });            
+            });
+            
+            $('#exampleModal').modal('hide');
+            this.getFiles();
+        },
+
+        deleteFile(data){
+            if(window.confirm(`Seguro que desea eliminar el documento ${data.name} ?`)){
+                axios.delete(`filesWork/${data.id}`).then((response)=>{
+                    toastr.success(response.data);
+                    this.getFiles();
+                }).catch((error)=>{
+                    toastr.error("Intenta de nuevo mas tarde");
+                    console.log(error);
+                })
+            }
+            console.log(data);
         }
     },
     
