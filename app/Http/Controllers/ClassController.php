@@ -759,7 +759,7 @@ class ClassController extends Controller
                             $dataWorkshop = Activity::latest('id')->first();                
                             $workshop = Workshop::create([
                                 'id_class' => $id_course,
-                                'id_activity' => $dataWorkshop->id,
+                                'id_activity' => $activity['id'] ? $activity['id'] : $dataWorkshop->id,
                                 'id_bimestre' => $activity['id_bimestre'],
                                 'id_area'     => $data['id_area'],
                                 'id_classroom'=> $data['id_classroom'],
