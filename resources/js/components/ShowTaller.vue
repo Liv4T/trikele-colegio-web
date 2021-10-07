@@ -8,7 +8,7 @@
                 <a :class="activeClass === 2 ? 'nav-link active' : 'nav-link'" v-on:click="()=>changeTab(2)">{{type_user === 1 || type_user === 2 ? 'Carga de Documentos' : 'Documentos'}}</a>
             </li>                
         </ul>
-        <div v-if="type_user === 1 || type_user === 2">            
+        <div v-if="type_user === 1 || type_user === 2">
             <div class="card">
                 <div class="card-body" v-if="activeClass === 1">                    
                     <label>Bimestre</label>                     
@@ -24,33 +24,33 @@
 
                     <button class="btn btn-primary col-md-3" v-on:click="saveData">Guardar</button>    
                 </div>                
-                <div v-else-if="activeClass === 2 && type_user === 2">                
+                <div v-else-if="activeClass === 2">                
                     <div class="card-body">
                         <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">Cargar Archivo</button>
-                        <table class="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Acción</th>
+                        <table class="table table-striped table-hover" v-if="type_user === 2">
+                            <thead>                            
+                                <tr>                                    
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="(files, key) in dataFiles" :key="key">
-                                    <th>{{files.name}}</th>
-                                    <th>
+                                    <td>{{files.name}}</td>
+                                    <td>
                                         <a :href="files.url" :download="files.name" target="_blank" class="btn btn-primary">Descargar</a>
-                                        <button v-if="this.type_user === 2" class="btn btn-primary" v-on:click="deleteFile(files)">Eliminar</button>
-                                    </th>
-                                </tr>
+                                        <button v-if="type_user === 2" class="btn btn-primary" v-on:click="deleteFile(files)">Eliminar</button>
+                                    </td>
+                                </tr>                            
                             </tbody>
                         </table>                        
                     </div>
                 </div>
             </div>
         </div>
-        <div v-else-if="type_user === 3">
-            <div v-for="(activity,key_a) in course.activities" v-bind:key="key_a">
-                <div class="card-body" v-if="activeClass === 1">
+        <div v-else-if="type_user === 3">             
+            <div class="card-body" v-if="activeClass === 1">
+                <div v-for="(activity,key_a) in course.activities" v-bind:key="key_a">
                     <div class="row">
                         <div class="col-12">
                             <b>Descripción:</b>
@@ -63,31 +63,30 @@
                     <activity-crossword v-if="activity.activity_type=='CRUCIGRAMA'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-crossword>
                     <div class="activity_response-button">
                         <button class="btn btn-primary" v-if="activity.interaction.state==1" @click="SaveResponseEvent(activity)">Enviar respuestas</button>
-
                     </div>
                     <div v-if="activity.interaction.state==3">
                         Calificación: <span class="activity_score" >{{activity.interaction.score}}<small>/5</small></span>
                     </div>
-                </div>
-                <div class="card-body" v-else-if="activeClass === 2">
-                    <table class="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Acción</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(files, key) in dataFiles" :key="key">
-                                    <th>{{files.name}}</th>
-                                    <th>
-                                        <a :href="files.url" :download="files.name" target="_blank" class="btn btn-primary">Descargar</a>
-                                        <button v-if="type_user === 2" class="btn btn-primary" v-on:click="deleteFile(files)">Eliminar</button>
-                                    </th>
-                                </tr>
-                            </tbody>
-                        </table>
-                </div>
+                </div>                    
+            </div>
+
+            <div class="card-body" v-else-if="activeClass === 2">
+                <table class="table table-striped table-hover" v-if="type_user === 3">
+                    <thead>                            
+                        <tr>                                    
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(files, key) in dataFiles" :key="key">
+                            <td>{{files.name}}</td>
+                            <td>
+                                <a :href="files.url" :download="files.name" target="_blank" class="btn btn-primary">Descargar</a>                                    
+                            </td>
+                        </tr>                            
+                    </tbody>
+                </table>
             </div>
         </div>
         <button class="btn btn-primary col-md-3" v-on:click="backPage">Volver</button>     
@@ -173,7 +172,7 @@ export default {
                 axios.get('filesWork').then((response) => {
                     this.dataFiles = response.data;
                 });
-            }else{
+            }else if(this.type_user === 3){
                 axios.get(`getFilesStudents/${this.id_class}/${this.id_workshop}`).then((response)=>{
                     this.dataFiles = response.data
                 })
