@@ -267,6 +267,18 @@ export default {
                 })
             }
             console.log(data);
+        },
+        SaveResponseEvent(activity)
+        {
+            axios.put(`/api/student/module/${this.id_achievement}/class/${this.id_class}/activity/${activity.id}/interaction`,activity).then(
+                response => {        
+                    toastr.success("Actividad enviada correctamente");            
+                },error => {                        
+                    toastr.error(
+                        "ERROR:Por favor valide que la información esta completa"
+                    );
+                }
+            );
         }
     },
     

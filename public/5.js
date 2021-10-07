@@ -280,6 +280,13 @@ firebase__WEBPACK_IMPORTED_MODULE_0__["default"].analytics();
       }
 
       console.log(data);
+    },
+    SaveResponseEvent: function SaveResponseEvent(activity) {
+      axios.put("/api/student/module/".concat(this.id_achievement, "/class/").concat(this.id_class, "/activity/").concat(activity.id, "/interaction"), activity).then(function (response) {
+        toastr.success("Actividad enviada correctamente");
+      }, function (error) {
+        toastr.error("ERROR:Por favor valide que la información esta completa");
+      });
     }
   }
 });
