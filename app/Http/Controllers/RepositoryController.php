@@ -127,8 +127,8 @@ class RepositoryController extends Controller
      */
     public function show(String $id_area, String $id_classroom)
     {
-
-        $repositori = Repository::where('id_area', $id_area)->where('id_classroom', $id_classroom)->get();
+        $user = Auth::user();
+        $repositori = Repository::where('id_teacher', $user->id)->orderBy('id','desc')->get();
         if (isset($repositori)) {
             return $repositori;
         } else {

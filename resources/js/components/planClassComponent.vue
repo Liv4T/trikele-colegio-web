@@ -19,7 +19,7 @@
                             <a v-on:click="activetab = 2" v-bind:class="[activetab === 2 ? 'active' : '']"><h4 class="letra-boldfont">ACTIVIDADES</h4></a>
                             <a v-on:click="activetab = 3" v-bind:class="[activetab === 3 ? 'active' : '']"><h4 class="letra-boldfont">NOTAS</h4></a>
                             <a v-on:click="activetab = 4" v-bind:class="[activetab === 4 ? 'active' : '']"><h4 class="letra-boldfont">ENTREGAS</h4></a>
-                            <a v-on:click="activetab = 5" v-bind:class="[activetab === 5 ? 'active' : '']"><h4 class="letra-boldfont">TALLERES</h4></a>
+                            <a v-on:click="activetab = 5" v-bind:class="[activetab === 5 ? 'active' : '']"><h4 class="letra-boldfont">EXAMENES</h4></a>
                         </div>
 
                         <div>

@@ -292,7 +292,7 @@ var render = function() {
                     },
                     [
                       _c("h4", { staticClass: "letra-boldfont" }, [
-                        _vm._v("TALLERES")
+                        _vm._v("EXAMENES")
                       ])
                     ]
                   )
