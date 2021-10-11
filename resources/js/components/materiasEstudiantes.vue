@@ -22,7 +22,7 @@
                         <a v-on:click="activetab = 2" v-bind:class="[activetab === 2 ? 'active' : '']"><h2 class="letra-poppins-bold">CLASE</h2></a>
                         <a v-on:click="activetab = 3" v-bind:class="[activetab === 3 ? 'active' : '']"><h2 class="letra-poppins-bold">TAREA</h2></a>
                         <a v-on:click="activetab = 4" v-bind:class="[activetab === 4 ? 'active' : '']"><h2 class="letra-poppins-bold">GRADOS</h2></a>
-                        <a v-on:click="activetab = 5" v-bind:class="[activetab === 5 ? 'active' : '']"><h2 class="letra-poppins-bold">TALLERES</h2></a>
+                        <a v-on:click="activetab = 5" v-bind:class="[activetab === 5 ? 'active' : '']"><h2 class="letra-poppins-bold">EXAMENES</h2></a>
                     </div>
                     <div v-if="showSection === 'inicio'">
                         <!-- <div v-if="activetab === 1" class="tabcontent"><calendar-component :type_u="3" :user="user"></calendar-component></div> -->

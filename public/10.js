@@ -543,7 +543,7 @@ var render = function() {
                       },
                       [
                         _c("h2", { staticClass: "letra-poppins-bold" }, [
-                          _vm._v("TALLERES")
+                          _vm._v("EXAMENES")
                         ])
                       ]
                     )
