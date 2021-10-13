@@ -920,3 +920,7 @@ Route::get('getFilesStudents/{id_activity}/{id_workshop}','FilesWorkshopControll
 Route::middleware('auth')->get('payPlan', function(){
     return view('payPlan');
 });
+
+Route::middleware('auth')->get('/compra/pagar/paypal/{data_string}', 'PurchasedController@payPaypal');
+Route::middleware('auth')->get('/compra/pagar/plan/paypal/{data_string}', 'PurchasedController@payPaypalPlan');
+Route::middleware('auth')->get('/compra/currencyExchange', 'PurchasedController@currencyExchange');
