@@ -312,6 +312,7 @@
                             <div class="row align-items-center">
                               <div class="col-md-12 content-button">
                                 <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() > 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">FINALIZAR COMPRA</button>
+                                <div id="paypal-button"></div>
                                 <button v-if="events.pay_loading" type="button" class="btn btn-primary letra-boldfont" disabled>Procesando...</button>
                                 <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() == 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">EMPEZAR</button>
                               </div>
@@ -345,6 +346,7 @@
       window.onresize = () => {
         this.fillWidthCalculate();
       };
+      this.PayPaypal();
     },
     data() {
       return {
@@ -482,6 +484,59 @@
           //location.href = `/compra/pagar/mercadopago/${encodeURI(window.btoa(JSON.stringify(model)))}`;
           this.events.pay_loading = false;
         }, 1000);
+      },
+      PayPaypal(){
+        paypal.Button.render({
+          env: 'sandbox',
+          client: {
+            sandbox: 'ARQ-WKAkFn3g4C111Ud3lLaUAfzagvJ_pmkLKBVMASvv6nyjX3fv3j0gtBdJEDhRPznYP9sLtf9oiJfH',
+            production: 'EFNo9sAyqiOmnlRHsAdXiGBf6ULysEIfKUVsn58Pq6ilfGHVFn03iVvbWtfiht-irdJD_df1MECvmBC2'
+          },
+
+          locale: 'es_US',
+          style: {
+            size: 'medium',
+            color: 'gold',
+            shape: 'pill',
+          },
+
+          commit: true,
+
+          payment: async (data, actions) => {
+            return actions.payment.create({
+              transactions: [{
+                amount: {
+                  total: this.TotalValue(),
+                  currency: 'USD'
+                }
+              }]
+            });
+          },
+  
+          onApprove: async (data, actions) => {
+            const order = await actions.order.capture();
+            //console.log(order);
+            this.paypalEvent(order);
+          }
+        }, '#paypal-button');
+      },
+      paypalEvent(order){
+        this.events.pay_loading = true;
+        let model = {
+          quantity: this.current_plan.quantity,
+          plan_name: this.plan_type,
+          amount: order.purchase_units[0].amount.value,
+          ref: order.purchase_units[0].payments.captures[0].id,  
+          result: order.purchase_units[0].payments.captures[0].status,
+          payer_email: order.payer.email_address,
+          payer_id: order.payer.payer_id,
+          merchant_id: order.purchase_units[0].payee.merchant_id,
+          princeExchange: 0,
+          total: this.current_plan.plan_price.total_price,         
+        };
+        setTimeout(() => {
+          location.href=`/compra/pagar/plan/paypal/${encodeURI(window.btoa(JSON.stringify(model)))}`;
+        },1000);
       },
       quantityEditEnabled() {
         if (this.plan_type == "CREDITO") return false;
