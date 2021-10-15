@@ -230,9 +230,9 @@
 
             <div>
               <i class="fas fa-phone-alt fa-2x"></i>
-              <h3 class="navbar-brand">+57 316 0108409</h3>
-              <h3 class="navbar-brand">+57 304 1560991</h3>
-              <h3 class="navbar-brand">+57 311 3157161</h3>              
+              <p class="navbar-brand">+57 304 1560991</p>
+              <p class="navbar-brand">+57 304 1560991</p>
+              <p class="navbar-brand">+57 311 3157161</p>              
             </div>            
           </div>
         </div>
@@ -541,6 +541,15 @@ export default {
   background-image: linear-gradient(to right, rgb(240 139 46), rgb(255 184 118) 4%, rgb(244 204 167));
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
+}
+.navbar-brand {
+  display: inline-block;
+  padding-top: 0.32rem;
+  padding-bottom: 0.32rem;
+  margin-right: 1rem;
+  font-size: 1rem;
+  line-height: inherit;
+  white-space: nowrap;
 }
 .md-card-actions.text-center {
   display: flex;
@@ -935,6 +944,15 @@ iframe:not(.md-image) {
     transform: translate(-50%, -20%);
     width: 40%;
     display: contents;
+  }
+  .navbar-brand {
+    display: inline-block;
+    padding-top: 0.32rem;
+    padding-bottom: 0.32rem;
+    margin-right: 1rem;
+    font-size: 11px;
+    line-height: inherit;
+    white-space: nowrap;
   }
   .sliderv {
     padding-top: 100px;
