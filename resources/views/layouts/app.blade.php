@@ -178,6 +178,16 @@
         z-index: 1020;
     }
 
+    .navbar-brand {
+        display: inline-block;
+        padding-top: 0.32rem;
+        padding-bottom: 0.32rem;
+        margin-right: 1rem;
+        font-size: 1rem;
+        line-height: inherit;
+        white-space: nowrap;
+    }
+
     .navbar a {
     float: left;
     display: block;
@@ -231,9 +241,19 @@
   margin-top:13px;
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
-.btn-colegio{
-width: 69%;
-}
+    .btn-colegio{
+        width: 69%;
+    }
+
+    .navbar-brand {
+        display: inline-block;
+        padding-top: 0.32rem;
+        padding-bottom: 0.32rem;
+        margin-right: 1rem;
+        font-size: 11px;
+        line-height: inherit;
+        white-space: nowrap;
+    }
 }
     </style>
     @if(isset($usersChart))
