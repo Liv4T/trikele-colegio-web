@@ -331,6 +331,7 @@
     </div>
   </div>
 </template>
+<script src="https://www.paypal.com/sdk/js?client-id=ATljmu4Gqu19wyaqHP-1o10NvFsUbLWbKm04ll6YYJ_bM799kZM3ioutzAjF7G0SeWClEbEXYo37O-By"></script>
 <script>
   export default {
     props: ["plan_type", "voucher"],
@@ -485,41 +486,37 @@
           this.events.pay_loading = false;
         }, 1000);
       },
-      PayPaypal(){
+       PayPaypal(){
         paypal.Button.render({
-          env: 'sandbox',
-          client: {
-            sandbox: 'ARQ-WKAkFn3g4C111Ud3lLaUAfzagvJ_pmkLKBVMASvv6nyjX3fv3j0gtBdJEDhRPznYP9sLtf9oiJfH',
-            production: 'EFNo9sAyqiOmnlRHsAdXiGBf6ULysEIfKUVsn58Pq6ilfGHVFn03iVvbWtfiht-irdJD_df1MECvmBC2'
-          },
-
-          locale: 'es_US',
-          style: {
-            size: 'medium',
-            color: 'gold',
-            shape: 'pill',
-          },
-
-          commit: true,
-
-          payment: async (data, actions) => {
-            return actions.payment.create({
-              transactions: [{
-                amount: {
-                  total: this.TotalValue(),
-                  currency: 'USD'
-                }
-              }]
-            });
-          },
-  
-          onApprove: async (data, actions) => {
+            env: 'sandbox',
+            client: {
+                sandbox: 'ARQ-WKAkFn3g4C111Ud3lLaUAfzagvJ_pmkLKBVMASvv6nyjX3fv3j0gtBdJEDhRPznYP9sLtf9oiJfH',
+                production: 'EFNo9sAyqiOmnlRHsAdXiGBf6ULysEIfKUVsn58Pq6ilfGHVFn03iVvbWtfiht-irdJD_df1MECvmBC2'
+            },
+            locale: 'es_US',
+            style: {
+                size: 'medium',
+                color: 'gold',
+                shape: 'pill',
+            },
+            commit: true,
+            payment: async (data, actions) => {
+                return actions.payment.create({
+                    transactions: [{
+                        amount: {
+                            total: this.TotalValue(),
+                            currency: 'USD'
+                        }
+                    }]
+                });
+            },
+            onApprove: async (data, actions) => {
             const order = await actions.order.capture();
             //console.log(order);
             this.paypalEvent(order);
-          }
-        }, '#paypal-button');
-      },
+            }
+          }, '#paypal-button');
+    },
       paypalEvent(order){
         this.events.pay_loading = true;
         let model = {

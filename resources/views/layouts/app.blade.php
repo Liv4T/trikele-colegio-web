@@ -83,14 +83,13 @@
                 'user_id' => Auth::check() ? Auth::user()->id : -1,
                 'role' => Config::get('type_user')
             ]); ?>
-      </script>
-      <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+      </script>      
     <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
     <!-- Begin emoji-picker Stylesheets -->
     <link href="//onesignal.github.io/emoji-picker/lib/css/emoji.css" rel="stylesheet">
-
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
   </head>
   <body >
 
