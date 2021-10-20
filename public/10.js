@@ -526,7 +526,7 @@ var render = function() {
                       },
                       [
                         _c("h2", { staticClass: "letra-poppins-bold" }, [
-                          _vm._v("GRADOS")
+                          _vm._v("NOTAS")
                         ])
                       ]
                     ),

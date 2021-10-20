@@ -49,6 +49,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -179,6 +181,8 @@ var render = function() {
                           return _c("tr", { key: key }, [
                             _c("td", [_vm._v(_vm._s(work.name))]),
                             _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(work.score_activity))]),
+                            _vm._v(" "),
                             _c("td", [
                               _c(
                                 "button",
@@ -236,6 +240,8 @@ var staticRenderFns = [
     return _c("thead", [
       _c("tr", [
         _c("th", [_vm._v("Actividad")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Nota")]),
         _vm._v(" "),
         _c("th", [_vm._v("Acción")])
       ])

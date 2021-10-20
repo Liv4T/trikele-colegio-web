@@ -15,12 +15,14 @@
                         <thead>
                             <tr>
                                 <th>Actividad</th>
+                                <th>Nota</th>
                                 <th>Acción</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(work, key) in workshop" :key="key">
                                 <td>{{work.name}}</td>
+                                <td>{{work.score_activity}}</td>
                                 <td>
                                     <button class="btn btn-primary" v-on:click="activity(work)">Presentar</button>
                                 </td>
@@ -66,7 +68,7 @@ export default {
 
         getIdBimestre(id){      
             this.id_bimestre = id;      
-            axios.get(`getWorkShop/${id}/${this.id_area}/${this.id_classroom}`).then((response)=>{
+            axios.get(`getWorkShop/${id}/${this.id_area}/${this.id_classroom}`).then((response)=>{                
                 this.workshop = response.data;                 
             })                
         },
