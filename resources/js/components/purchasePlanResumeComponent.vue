@@ -162,15 +162,18 @@
             <div class="content-button">
               <div class="row align-items-center">
                 <div class="col-md-12 content-button">
+                  <div id="paypal-button"></div>
                   <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() > 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">FINALIZAR COMPRA</button>
                   <button v-if="events.pay_loading" type="button" class="btn btn-primary letra-boldfont" disabled>Procesando...</button>
-                  <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() == 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">EMPEZAR</button>
+                  <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() == 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">EMPEZAR</button>                  
                 </div>
               </div>
             </div>
+            
           </section>
-        </div>
+        </div>      
       </div>
+      
       <div class="row justify-content-center" v-if="!fullWidth">
         <div class="col-md-10">
           <section class="resume-container">
@@ -296,7 +299,7 @@
                           </div>
                         </td>
                       </tr>
-                      <tr>
+                      <tr>                        
                         <th class="letra-boldfont">TOTAL</th>
                         <td>
                           <div class="row align-items-center">
@@ -306,32 +309,31 @@
                           </div>
                         </td>
                       </tr>
-                      <tr>
-                        <td colspan="2">
+                      <tr>                        
+                        <td colspan="2">                          
                           <div class="content-button">
                             <div class="row align-items-center">
                               <div class="col-md-12 content-button">
-                                <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() > 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">FINALIZAR COMPRA</button>
                                 <div id="paypal-button"></div>
+                                <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() > 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">FINALIZAR COMPRA</button>
                                 <button v-if="events.pay_loading" type="button" class="btn btn-primary letra-boldfont" disabled>Procesando...</button>
-                                <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() == 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">EMPEZAR</button>
+                                <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() == 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">EMPEZAR</button>                                
                               </div>
                             </div>
                           </div>
                         </td>
                       </tr>
                     </tbody>
-                  </table>
+                  </table>                  
                 </div>
               </div>
-            </div>
-          </section>
-        </div>
-      </div>
-    </div>
+            </div>            
+          </section>          
+        </div>        
+      </div>      
+    </div>    
   </div>
 </template>
-<script src="https://www.paypal.com/sdk/js?client-id=ATljmu4Gqu19wyaqHP-1o10NvFsUbLWbKm04ll6YYJ_bM799kZM3ioutzAjF7G0SeWClEbEXYo37O-By"></script>
 <script>
   export default {
     props: ["plan_type", "voucher"],

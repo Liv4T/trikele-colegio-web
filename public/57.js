@@ -351,6 +351,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["plan_type", "voucher"],
   mounted: function mounted() {
@@ -1406,6 +1408,8 @@ var render = function() {
                   _c("div", { staticClass: "content-button" }, [
                     _c("div", { staticClass: "row align-items-center" }, [
                       _c("div", { staticClass: "col-md-12 content-button" }, [
+                        _c("div", { attrs: { id: "paypal-button" } }),
+                        _vm._v(" "),
                         !_vm.events.pay_loading &&
                         _vm.TotalValue() - _vm.VoucherDiscountValue() > 0
                           ? _c(
@@ -2166,6 +2170,10 @@ var render = function() {
                                         staticClass: "col-md-12 content-button"
                                       },
                                       [
+                                        _c("div", {
+                                          attrs: { id: "paypal-button" }
+                                        }),
+                                        _vm._v(" "),
                                         !_vm.events.pay_loading &&
                                         _vm.TotalValue() -
                                           _vm.VoucherDiscountValue() >
@@ -2184,10 +2192,6 @@ var render = function() {
                                               [_vm._v("FINALIZAR COMPRA")]
                                             )
                                           : _vm._e(),
-                                        _vm._v(" "),
-                                        _c("div", {
-                                          attrs: { id: "paypal-button" }
-                                        }),
                                         _vm._v(" "),
                                         _vm.events.pay_loading
                                           ? _c(
