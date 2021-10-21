@@ -922,6 +922,6 @@ Route::middleware('auth')->get('payPlan', function(){
 });
 
 //Paypal pay
-Route::middleware('auth')->get('/compra/pagar/paypal/{data_string}', 'PurchasedController@payPaypal');
-Route::middleware('auth')->get('/compra/pagar/plan/paypal/{data_string}', 'PurchasedController@payPaypalPlan');
-Route::middleware('auth')->get('/compra/currencyExchange', 'PurchasedController@currencyExchange');
+Route::middleware('auth')->get('/compra/pagar/paypal/{data_string}', 'PaypalPaymentController@payPaypal');
+Route::middleware('auth')->get('/compra/pagar/plan/paypal/{data_string}', 'PaypalPaymentController@payPaypalPlan');
+Route::middleware('auth')->get('/compra/currencyExchange', 'PaypalPaymentController@currencyExchange');

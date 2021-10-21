@@ -521,7 +521,7 @@
     },
       paypalEvent(order){
         this.events.pay_loading = true;
-        let model = {
+        let model = {          
           quantity: this.current_plan.quantity,
           plan_name: this.plan_type,
           amount: order.purchase_units[0].amount.value,
@@ -531,7 +531,8 @@
           payer_id: order.payer.payer_id,
           merchant_id: order.purchase_units[0].payee.merchant_id,
           princeExchange: 0,
-          total: this.current_plan.plan_price.total_price,         
+          total: this.current_plan.plan_price.total_price, 
+          total: 0        
         };
         setTimeout(() => {
           location.href=`/compra/pagar/plan/paypal/${encodeURI(window.btoa(JSON.stringify(model)))}`;

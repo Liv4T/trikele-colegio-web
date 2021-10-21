@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\PaypalPayment;
 use App\Customer;
 use App\CustomerInvoice;
+use App\CustomerInvoiceItem;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
@@ -52,7 +53,7 @@ class PaypalPaymentController extends Controller
             // ->where('currency', 'COP')
             // ->orderBy('id', 'desc')
             // ->first(); 
-            $plan_price = TutorSchedule::where('id',$data['schedule_id'])->where('state', 1)->where('deleted', 0)->first();
+            // $plan_price = TutorSchedule::where('id',$data['schedule_id'])->where('state', 1)->where('deleted', 0)->first();
             //$plan_price = $data['amount'];
             //$total_plan = (($plan_price  * $data['quantity'])/$exchange);
             $total = $data['total'];
@@ -73,7 +74,7 @@ class PaypalPaymentController extends Controller
                 $studentEvent=TutorScheduleEvent::where('id_schedulestudent', $data['event_student_id'])->where('deleted', 0)->where('id_user', $auth->id)->first();
                 
                 $invoice = CustomerInvoice::create([
-                    'prefix_code' => 'LIV4T',
+                    'prefix_code' => 'TRIKELE-COLEGIO',
                     'consecutive' => $consecutive,
                     'customer_id' => $customer->id,
                     'sale_date' => date('Y-m-d H:i:s'),
@@ -112,7 +113,7 @@ class PaypalPaymentController extends Controller
                 
 
                     CustomerInvoice::where('id', $invoice->id)->update([
-                        'prefix_code' => 'LIV4T',
+                        'prefix_code' => 'TRIKELE-COLEGIO',
                         'consecutive' => $consecutive,
                         'state' => 2
                     ]);
@@ -195,12 +196,12 @@ class PaypalPaymentController extends Controller
                 }
             }
 
-            $code = TutorCode::where('code', $data['code'])->first();
+            // $code = TutorCode::where('code', $data['code'])->first();
 
-            $vinculation_code = VinculationTutorStudent::where('id_tutor', $code->id_tutor)
-                                                        ->where('id_student', $auth->id)
-                                                        ->where('code_vinculated', $data['code'])
-                                                        ->first();
+            // $vinculation_code = VinculationTutorStudent::where('id_tutor', $code->id_tutor)
+            //                                             ->where('id_student', $auth->id)
+            //                                             ->where('code_vinculated', $data['code'])
+            //                                             ->first();
             
             
             $total = $data['total'];
@@ -219,7 +220,7 @@ class PaypalPaymentController extends Controller
                 }
 
                 $invoice = CustomerInvoice::create([
-                    'prefix_code' => 'LIV4T',
+                    'prefix_code' => 'TRIKELE-COLEGIO',
                     'consecutive' => $consecutive,
                     'customer_id' => $customer->id,
                     'sale_date' => date('Y-m-d H:i:s'),
@@ -249,21 +250,21 @@ class PaypalPaymentController extends Controller
                     'updated_user' => $auth->id
                 ]);
                 
-                $enable_subjects = enableSubject::create([
-                    'id_code' => $code->id,
-                    'id_area' => $code->id_area,
-                    'id_user' => $auth->id,
-                    'date_payment' => $current_date,
-                    'date_enable_area' => $end_range_date,
-                ]);
+                // $enable_subjects = enableSubject::create([
+                //     'id_code' => $code->id,
+                //     'id_area' => $code->id_area,
+                //     'id_user' => $auth->id,
+                //     'date_payment' => $current_date,
+                //     'date_enable_area' => $end_range_date,
+                // ]);
 
-                if(!isset($vinculation_code)){
-                    $vinculation_tutor_students = VinculationTutorStudent::create([
-                        'id_tutor' => $code->id_tutor,
-                        'id_student' => $auth->id,
-                        'code_vinculated' => $data['code'],
-                    ]);
-                }
+                // if(!isset($vinculation_code)){
+                //     $vinculation_tutor_students = VinculationTutorStudent::create([
+                //         'id_tutor' => $code->id_tutor,
+                //         'id_student' => $auth->id,
+                //         'code_vinculated' => $data['code'],
+                //     ]);
+                // }
                 
 
                 if ($total == 0) {
@@ -275,7 +276,7 @@ class PaypalPaymentController extends Controller
                 
 
                     CustomerInvoice::where('id', $invoice->id)->update([
-                        'prefix_code' => 'LIV4T',
+                        'prefix_code' => 'TRIKELE-COLEGIO',
                         'consecutive' => $consecutive,
                         'state' => 2
                     ]);
