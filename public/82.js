@@ -51,6 +51,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -65,7 +71,8 @@ __webpack_require__.r(__webpack_exports__);
       id_class: null,
       list: true,
       id_bimestre: null,
-      id_workshop: null
+      id_workshop: null,
+      prom: null
     };
   },
   mounted: function mounted() {
@@ -83,8 +90,20 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.id_bimestre = id;
+      var notes = [];
       axios.get("getWorkShop/".concat(id, "/").concat(this.id_area, "/").concat(this.id_classroom)).then(function (response) {
         _this2.workshop = response.data;
+        console.log(response.data);
+        response.data.forEach(function (element) {
+          notes.push(element.score_activity);
+        });
+
+        if (notes.length > 0) {
+          var suma = notes.reduce(function (previous, current) {
+            return parseInt(current) + parseInt(previous);
+          });
+          _this2.prom = (suma / notes.length).toFixed(2);
+        }
       });
     },
     activity: function activity(data) {
@@ -200,7 +219,15 @@ var render = function() {
                           ])
                         }),
                         0
-                      )
+                      ),
+                      _vm._v(" "),
+                      _c("tfoot", [
+                        _c("tr", [
+                          _c("th", [_vm._v("Promedio")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v(_vm._s(_vm.prom))])
+                        ])
+                      ])
                     ]
                   )
                 ])

@@ -26,7 +26,7 @@ class WorkshopController extends Controller
         $workshop = Workshop::where('id_bimestre',$id_bimestre)->where('id_area',$id_area)->where('id_classroom',$id_classroom)->get();        
         if(isset($workshop)){
             foreach($workshop as $work) {        
-                $activities = Activity::where('id_class', $work->id_class)->where('deleted',0)->first();
+                $activities = Activity::where('id_class', $work->id_class)->where('id', $work->id_activity)->where('deleted',0)->first();
                 $user = Auth::user();
                 
                 if($user->type_user===3)//student

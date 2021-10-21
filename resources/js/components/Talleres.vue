@@ -28,6 +28,12 @@
                                 </td>
                             </tr>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Promedio</th>
+                                <th>{{prom}}</th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>                
             </div>
@@ -52,7 +58,8 @@ export default {
             id_class:null,
             list:true,
             id_bimestre: null,
-            id_workshop:null
+            id_workshop:null,
+            prom: null
         };
     },
     mounted() {
@@ -67,10 +74,27 @@ export default {
         },
 
         getIdBimestre(id){      
-            this.id_bimestre = id;      
+            this.id_bimestre = id;    
+            let notes = [];  
             axios.get(`getWorkShop/${id}/${this.id_area}/${this.id_classroom}`).then((response)=>{                
-                this.workshop = response.data;                 
-            })                
+                this.workshop = response.data;
+                console.log(response.data);
+
+                response.data.forEach((element)=>{
+                    notes.push(
+                        element.score_activity
+                    )
+                });
+                
+                if(notes.length > 0){
+                    let suma = notes.reduce((previous, current) => (                    
+                        parseInt(current) + parseInt(previous)
+                    ));  
+
+                    this.prom = (suma / notes.length).toFixed(2);
+                }                
+            });
+                                
         },
         activity(data){
             this.id_workshop = data.id_workshop;
