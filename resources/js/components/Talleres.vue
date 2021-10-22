@@ -28,7 +28,7 @@
                                 </td>
                             </tr>
                         </tbody>
-                        <tfoot>
+                        <tfoot v-if="type_u === 3">
                             <tr>
                                 <th>Promedio</th>
                                 <th>{{prom}}</th>

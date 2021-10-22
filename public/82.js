@@ -233,13 +233,15 @@ var render = function() {
                         0
                       ),
                       _vm._v(" "),
-                      _c("tfoot", [
-                        _c("tr", [
-                          _c("th", [_vm._v("Promedio")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v(_vm._s(_vm.prom))])
-                        ])
-                      ])
+                      _vm.type_u === 3
+                        ? _c("tfoot", [
+                            _c("tr", [
+                              _c("th", [_vm._v("Promedio")]),
+                              _vm._v(" "),
+                              _c("th", [_vm._v(_vm._s(_vm.prom))])
+                            ])
+                          ])
+                        : _vm._e()
                     ]
                   )
                 ])
