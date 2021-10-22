@@ -531,8 +531,7 @@
           payer_id: order.payer.payer_id,
           merchant_id: order.purchase_units[0].payee.merchant_id,
           princeExchange: 0,
-          total: this.current_plan.plan_price.total_price, 
-          total: 0        
+          total: this.current_plan.plan_price.total_price,
         };
         setTimeout(() => {
           location.href=`/compra/pagar/plan/paypal/${encodeURI(window.btoa(JSON.stringify(model)))}`;

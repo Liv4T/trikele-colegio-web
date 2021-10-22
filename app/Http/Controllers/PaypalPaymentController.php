@@ -63,7 +63,7 @@ class PaypalPaymentController extends Controller
 
                 DB::beginTransaction();
 
-                $last_cons= CustomerInvoice::all()->last();
+                $last_cons= CustomerInvoice::latest('consecutive')->first();
 
                 if(!isset($last_cons)){
                     $consecutive=0;   
@@ -74,7 +74,7 @@ class PaypalPaymentController extends Controller
                 $studentEvent=TutorScheduleEvent::where('id_schedulestudent', $data['event_student_id'])->where('deleted', 0)->where('id_user', $auth->id)->first();
                 
                 $invoice = CustomerInvoice::create([
-                    'prefix_code' => 'TRIKELE-COLEGIO',
+                    'prefix_code' => 'TRIK-COL',
                     'consecutive' => $consecutive,
                     'customer_id' => $customer->id,
                     'sale_date' => date('Y-m-d H:i:s'),
@@ -107,13 +107,13 @@ class PaypalPaymentController extends Controller
                 if ($total == 0) {
                     $invoice_items = CustomerInvoiceItem::where('customer_invoice_id', $invoice->id)->where('deleted', 0)->get();
 
-                    $last_cons= CustomerInvoice::all()->last()->consecutive;
+                    $last_cons= CustomerInvoice::latest('consecutive')->first();
                     
                     $consecutive = $last_cons->consecutive + 1;
                 
 
                     CustomerInvoice::where('id', $invoice->id)->update([
-                        'prefix_code' => 'TRIKELE-COLEGIO',
+                        'prefix_code' => 'TRIK-COL',
                         'consecutive' => $consecutive,
                         'state' => 2
                     ]);
@@ -211,7 +211,7 @@ class PaypalPaymentController extends Controller
 
                 DB::beginTransaction();
 
-                $last_cons= CustomerInvoice::all()->last();
+                $last_cons= CustomerInvoice::latest('consecutive')->first();
 
                 if(!isset($last_cons)){
                     $consecutive=0;   
@@ -220,7 +220,7 @@ class PaypalPaymentController extends Controller
                 }
 
                 $invoice = CustomerInvoice::create([
-                    'prefix_code' => 'TRIKELE-COLEGIO',
+                    'prefix_code' => 'TRIK-COL',
                     'consecutive' => $consecutive,
                     'customer_id' => $customer->id,
                     'sale_date' => date('Y-m-d H:i:s'),
@@ -270,13 +270,13 @@ class PaypalPaymentController extends Controller
                 if ($total == 0) {
                     $invoice_items = CustomerInvoiceItem::where('customer_invoice_id', $invoice->id)->where('deleted', 0)->get();
 
-                    $last_cons= CustomerInvoice::all()->last()->consecutive;
+                    $last_cons= CustomerInvoice::latest('consecutive')->first();
                     
                     $consecutive = $last_cons->consecutive + 1;
                 
 
                     CustomerInvoice::where('id', $invoice->id)->update([
-                        'prefix_code' => 'TRIKELE-COLEGIO',
+                        'prefix_code' => 'TRIK-COL',
                         'consecutive' => $consecutive,
                         'state' => 2
                     ]);
