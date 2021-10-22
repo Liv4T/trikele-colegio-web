@@ -162,7 +162,7 @@
             <div class="content-button">
               <div class="row align-items-center">
                 <div class="col-md-12 content-button">
-                  <div id="paypal-button"></div>
+                  <div id="paypal-button" v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() > 0 && user" ></div>
                   <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() > 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">FINALIZAR COMPRA</button>
                   <button v-if="events.pay_loading" type="button" class="btn btn-primary letra-boldfont" disabled>Procesando...</button>
                   <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() == 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">EMPEZAR</button>                  
@@ -313,8 +313,8 @@
                         <td colspan="2">                          
                           <div class="content-button">
                             <div class="row align-items-center">
-                              <div class="col-md-12 content-button">
-                                <div id="paypal-button"></div>
+                              <div class="col-md-12 content-button">                                
+                                <div id="paypal-button" v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() > 0 && user" ></div>
                                 <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() > 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">FINALIZAR COMPRA</button>
                                 <button v-if="events.pay_loading" type="button" class="btn btn-primary letra-boldfont" disabled>Procesando...</button>
                                 <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() == 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">EMPEZAR</button>                                
@@ -327,16 +327,16 @@
                   </table>                  
                 </div>
               </div>
-            </div>            
+            </div>              
           </section>          
         </div>        
       </div>      
-    </div>    
+    </div>        
   </div>
 </template>
 <script>
   export default {
-    props: ["plan_type", "voucher"],
+    props: ["plan_type", "voucher", "user"],
     mounted() {
       this.getPlanInformation();
 

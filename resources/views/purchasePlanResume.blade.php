@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<purchase-plan-resume :plan_type="'{{ $plan_type }}'" :voucher="'{{ $voucher }}'"></purchase-plan-resume>
+<purchase-plan-resume :plan_type="'{{ $plan_type }}'" :voucher="'{{ $voucher }}'" :user="'{{ Auth::user() }}'"></purchase-plan-resume>
 <footers></footers>
 <div class="container">
     <div class="row justify-content-center">
