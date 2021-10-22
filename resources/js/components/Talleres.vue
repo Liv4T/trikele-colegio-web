@@ -15,14 +15,14 @@
                         <thead>
                             <tr>
                                 <th>Actividad</th>
-                                <th>Nota</th>
+                                <th v-if="type_u === 3">Nota</th>
                                 <th>Acción</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(work, key) in workshop" :key="key">
                                 <td>{{work.name}}</td>
-                                <td>{{work.score_activity}}</td>
+                                <td v-if="type_u === 3">{{work.score_activity}}</td>
                                 <td>
                                     <button class="btn btn-primary" v-on:click="activity(work)">Presentar</button>
                                 </td>

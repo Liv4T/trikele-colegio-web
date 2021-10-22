@@ -192,7 +192,17 @@ var render = function() {
                     "table",
                     { staticClass: "table table-striped table-hover" },
                     [
-                      _vm._m(0, true),
+                      _c("thead", [
+                        _c("tr", [
+                          _c("th", [_vm._v("Actividad")]),
+                          _vm._v(" "),
+                          _vm.type_u === 3
+                            ? _c("th", [_vm._v("Nota")])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Acción")])
+                        ])
+                      ]),
                       _vm._v(" "),
                       _c(
                         "tbody",
@@ -200,7 +210,9 @@ var render = function() {
                           return _c("tr", { key: key }, [
                             _c("td", [_vm._v(_vm._s(work.name))]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(work.score_activity))]),
+                            _vm.type_u === 3
+                              ? _c("td", [_vm._v(_vm._s(work.score_activity))])
+                              : _vm._e(),
                             _vm._v(" "),
                             _c("td", [
                               _c(
@@ -259,22 +271,7 @@ var render = function() {
           : _vm._e()
       ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Actividad")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Nota")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Acción")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

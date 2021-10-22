@@ -28,33 +28,53 @@ class WorkshopController extends Controller
             foreach($workshop as $work) {        
                 $activities = Activity::where('id_class', $work->id_class)->where('id', $work->id_activity)->where('deleted',0)->first();
                 $user = Auth::user();
-                
-                if($user->type_user===3)//student
-                {
+            
+                if($user->type_user===3){
                     $interaction=ActivityInteraction::where('id_activity',$activities->id)->first();
-                }                
-                
-                array_push($data, 
-                    array(
-                        "id"=>$activities->id,
-                        "id_class"=> $activities->id_class,
-                        'id_achievement'=> $activities->id_achievement,
-                        'id_indicator'=> $activities->id_indicator,
-                        'activity_type'=> $activities->activity_type ,
-                        'name'=> $activities->name,
-                        'description'=> $activities->description ,
-                        'delivery_max_date'=> $activities->delivery_max_date,
-                        'feedback_date'=> $activities->feedback_date,
-                        'rules'=> $activities->rules,
-                        'is_required'=> $activities->is_required,
-                        'state'=> $activities->state,
-                        'deleted'=> $activities->deleted,
-                        'updated_user'=> $activities->updated_user,
-                        'id_bimestre'=> $work->id_bimestre,
-                        'id_workshop'=> $work->id,
-                        'score_activity' => $interaction ? $interaction->score : 0
-                    )
-                );                
+
+                    array_push($data, 
+                        array(
+                            "id"=>$activities->id,
+                            "id_class"=> $activities->id_class,
+                            'id_achievement'=> $activities->id_achievement,
+                            'id_indicator'=> $activities->id_indicator,
+                            'activity_type'=> $activities->activity_type ,
+                            'name'=> $activities->name,
+                            'description'=> $activities->description ,
+                            'delivery_max_date'=> $activities->delivery_max_date,
+                            'feedback_date'=> $activities->feedback_date,
+                            'rules'=> $activities->rules,
+                            'is_required'=> $activities->is_required,
+                            'state'=> $activities->state,
+                            'deleted'=> $activities->deleted,
+                            'updated_user'=> $activities->updated_user,
+                            'id_bimestre'=> $work->id_bimestre,
+                            'id_workshop'=> $work->id,
+                            'score_activity' => $interaction ? $interaction->score : 0
+                        )
+                    );
+                }else{
+                    array_push($data, 
+                        array(
+                            "id"=>$activities->id,
+                            "id_class"=> $activities->id_class,
+                            'id_achievement'=> $activities->id_achievement,
+                            'id_indicator'=> $activities->id_indicator,
+                            'activity_type'=> $activities->activity_type ,
+                            'name'=> $activities->name,
+                            'description'=> $activities->description ,
+                            'delivery_max_date'=> $activities->delivery_max_date,
+                            'feedback_date'=> $activities->feedback_date,
+                            'rules'=> $activities->rules,
+                            'is_required'=> $activities->is_required,
+                            'state'=> $activities->state,
+                            'deleted'=> $activities->deleted,
+                            'updated_user'=> $activities->updated_user,
+                            'id_bimestre'=> $work->id_bimestre,
+                            'id_workshop'=> $work->id,                            
+                        )
+                    );
+                }                               
             }
             return response()->json($data);
         }else{
