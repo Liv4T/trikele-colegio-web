@@ -498,13 +498,15 @@
         }, 1000);
       },
       PayPaypal(){
-        // axios.get('https://free.currconv.com/api/v7/convert?q=COP_USD&compact=ultra&apiKey=78b417a4d5400cf1278b').then((response)=>{
-          let pagoCOP = this.pagoPesos
-          let valueToMultiply = 0.000265;
-          // valueToMultiply = response.data.COP_USD;
-          this.PagoTotal = (pagoCOP * valueToMultiply).toFixed(2)
-          // console.log(this.PagoTotal);
-        // }); 
+        let pagoCOP = this.pagoPesos
+        let valueToMultiply = 0.000265;
+      
+        axios.get('https://free.currconv.com/api/v7/convert?q=COP_USD&compact=ultra&apiKey=78b417a4d5400cf1278b').then((response)=>{              
+          valueToMultiply = response.data.COP_USD;                    
+        });
+        
+        this.PagoTotal = (pagoCOP * valueToMultiply).toFixed(2)
+
         paypal.Button.render({
           env: 'sandbox',
           client: {

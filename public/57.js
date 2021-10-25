@@ -535,13 +535,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     PayPaypal: function PayPaypal() {
       var _this6 = this;
 
-      // axios.get('https://free.currconv.com/api/v7/convert?q=COP_USD&compact=ultra&apiKey=78b417a4d5400cf1278b').then((response)=>{
       var pagoCOP = this.pagoPesos;
-      var valueToMultiply = 0.000265; // valueToMultiply = response.data.COP_USD;
-
-      this.PagoTotal = (pagoCOP * valueToMultiply).toFixed(2); // console.log(this.PagoTotal);
-      // }); 
-
+      var valueToMultiply = 0.000265;
+      axios.get('https://free.currconv.com/api/v7/convert?q=COP_USD&compact=ultra&apiKey=78b417a4d5400cf1278b').then(function (response) {
+        valueToMultiply = response.data.COP_USD;
+      });
+      this.PagoTotal = (pagoCOP * valueToMultiply).toFixed(2);
       paypal.Button.render({
         env: 'sandbox',
         client: {
