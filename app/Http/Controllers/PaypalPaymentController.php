@@ -206,6 +206,8 @@ class PaypalPaymentController extends Controller
             
             $total = $data['total'];
 
+            $customer = Customer::where('user_id', $auth->id)->where('deleted', 0)->where('state', 1)->first();
+
             //add invoice
             try {
 
