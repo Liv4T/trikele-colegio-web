@@ -349,8 +349,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["plan_type", "voucher"],
+  props: ["plan_type", "voucher", "user"],
   mounted: function mounted() {
     var _this = this;
 
@@ -533,9 +537,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       var pagoCOP = this.pagoPesos;
       var valueToMultiply = 0.000265;
-      axios.get('https://free.currconv.com/api/v7/convert?q=COP_USD&compact=ultra&apiKey=78b417a4d5400cf1278b').then(function (response) {
-        valueToMultiply = response.data.COP_USD;
-      });
+
+      try {
+        axios.get('https://free.currconv.com/api/v7/convert?q=COP_USD&compact=ultra&apiKey=78b417a4d5400cf1278b').then(function (response) {
+          valueToMultiply = response.data.COP_USD;
+          console.log(response.data);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+
       this.PagoTotal = (pagoCOP * valueToMultiply).toFixed(2);
       paypal.Button.render({
         env: 'sandbox',
@@ -1419,6 +1430,12 @@ var render = function() {
                     _c("div", { staticClass: "row align-items-center" }, [
                       _c("div", { staticClass: "col-md-12 content-button" }, [
                         !_vm.events.pay_loading &&
+                        _vm.TotalValue() - _vm.VoucherDiscountValue() > 0 &&
+                        _vm.user
+                          ? _c("div", { attrs: { id: "paypal-button" } })
+                          : _vm._e(),
+                        _vm._v(" "),
+                        !_vm.events.pay_loading &&
                         _vm.TotalValue() - _vm.VoucherDiscountValue() > 0
                           ? _c(
                               "button",
@@ -2178,6 +2195,16 @@ var render = function() {
                                         staticClass: "col-md-12 content-button"
                                       },
                                       [
+                                        !_vm.events.pay_loading &&
+                                        _vm.TotalValue() -
+                                          _vm.VoucherDiscountValue() >
+                                          0 &&
+                                        _vm.user
+                                          ? _c("div", {
+                                              attrs: { id: "paypal-button" }
+                                            })
+                                          : _vm._e(),
+                                        _vm._v(" "),
                                         !_vm.events.pay_loading &&
                                         _vm.TotalValue() -
                                           _vm.VoucherDiscountValue() >

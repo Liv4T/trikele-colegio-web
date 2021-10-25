@@ -88,7 +88,7 @@
 
     <!-- Begin emoji-picker Stylesheets -->
     <link href="//onesignal.github.io/emoji-picker/lib/css/emoji.css" rel="stylesheet">
-
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
   </head>
   <body >
 
