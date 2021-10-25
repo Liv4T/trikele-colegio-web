@@ -30,7 +30,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'UA-188981300-1');
     </script>
     <meta name="facebook-domain-verification" content="fzn5mgyk9xq1weqb0y8wr0k73mdzum" />
@@ -177,7 +176,6 @@
         top: 0;
         z-index: 1020;
     }
-
     .navbar-brand {
         display: inline-block;
         padding-top: 0.32rem;
@@ -187,7 +185,6 @@
         line-height: inherit;
         white-space: nowrap;
     }
-
     .navbar a {
     float: left;
     display: block;
@@ -195,14 +192,12 @@
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
-
     }
     .navbar-light .navbar-nav .nav-link{
     color: black;
     font-family: 'PoppinsBold';
         padding: 10px;
     }
-
     .bg-trikele {
         background-color:  #ff7900; !important;
         height: 60px;
@@ -211,7 +206,6 @@
     .nleft{
         align-self: flex-start;
     }
-
 .bg-trikele {
     background-color:  #ff7900; !important;
     height: 60px;
@@ -236,7 +230,6 @@
 .whatsapp a{
     color: white;
 }
-
 .whatsapp-icon {
   margin-top:13px;
 }
@@ -244,7 +237,6 @@
     .btn-colegio{
         width: 69%;
     }
-
     .navbar-brand {
         display: inline-block;
         padding-top: 0.32rem;

@@ -916,3 +916,12 @@ Route::get('getWorkShop/{id_bimestre}/{id_area}/{id_classroom}','WorkshopControl
 
 Route::resource('filesWork','FilesWorkshopController');
 Route::get('getFilesStudents/{id_activity}/{id_workshop}','FilesWorkshopController@getFilesStudents');
+
+Route::middleware('auth')->get('payPlan', function(){
+    return view('payPlan');
+});
+
+//Paypal pay
+Route::middleware('auth')->get('/compra/pagar/paypal/{data_string}', 'PaypalPaymentController@payPaypal');
+Route::middleware('auth')->get('/compra/pagar/plan/paypal/{data_string}', 'PaypalPaymentController@payPaypalPlan');
+Route::middleware('auth')->get('/compra/currencyExchange', 'PaypalPaymentController@currencyExchange');

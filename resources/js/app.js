@@ -259,4 +259,8 @@ Vue.component("verify-registration", ()=>import("./components/VerifyRegistration
 Vue.component("talleres",()=>import("./components/Talleres.vue"));
 Vue.component("show-taller", ()=>import("./components/ShowTaller.vue"));
 
+//Modulo Paypal
+Vue.component("pay-plan",()=>import("./components/payPlan.vue"));
+Vue.component("purchase-pay-paypal-result", () => import ("./components/purchasePlanPayResultPaypalComponent.vue"));
+
 const app = new Vue({el: "#app", data: {}, store});

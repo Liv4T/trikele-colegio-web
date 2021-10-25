@@ -162,15 +162,18 @@
             <div class="content-button">
               <div class="row align-items-center">
                 <div class="col-md-12 content-button">
+                  <div id="paypal-button" v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() > 0 && user" ></div>
                   <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() > 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">FINALIZAR COMPRA</button>
                   <button v-if="events.pay_loading" type="button" class="btn btn-primary letra-boldfont" disabled>Procesando...</button>
-                  <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() == 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">EMPEZAR</button>
+                  <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() == 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">EMPEZAR</button>                  
                 </div>
               </div>
             </div>
+            
           </section>
-        </div>
+        </div>      
       </div>
+      
       <div class="row justify-content-center" v-if="!fullWidth">
         <div class="col-md-10">
           <section class="resume-container">
@@ -296,7 +299,7 @@
                           </div>
                         </td>
                       </tr>
-                      <tr>
+                      <tr>                        
                         <th class="letra-boldfont">TOTAL</th>
                         <td>
                           <div class="row align-items-center">
@@ -306,33 +309,34 @@
                           </div>
                         </td>
                       </tr>
-                      <tr>
-                        <td colspan="2">
+                      <tr>                        
+                        <td colspan="2">                          
                           <div class="content-button">
                             <div class="row align-items-center">
-                              <div class="col-md-12 content-button">
+                              <div class="col-md-12 content-button">                                
+                                <div id="paypal-button" v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() > 0 && user" ></div>
                                 <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() > 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">FINALIZAR COMPRA</button>
                                 <button v-if="events.pay_loading" type="button" class="btn btn-primary letra-boldfont" disabled>Procesando...</button>
-                                <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() == 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">EMPEZAR</button>
+                                <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() == 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">EMPEZAR</button>                                
                               </div>
                             </div>
                           </div>
                         </td>
                       </tr>
                     </tbody>
-                  </table>
+                  </table>                  
                 </div>
               </div>
-            </div>
-          </section>
-        </div>
-      </div>
-    </div>
+            </div>              
+          </section>          
+        </div>        
+      </div>      
+    </div>        
   </div>
 </template>
 <script>
   export default {
-    props: ["plan_type", "voucher"],
+    props: ["plan_type", "voucher", "user"],
     mounted() {
       this.getPlanInformation();
 
@@ -345,6 +349,7 @@
       window.onresize = () => {
         this.fillWidthCalculate();
       };
+      this.PayPaypal();
     },
     data() {
       return {
@@ -360,6 +365,7 @@
         },
         voucher_code: "",
         voucher_data: null,
+        PagoTotal: null
       };
     },
     methods: {
@@ -482,6 +488,65 @@
           //location.href = `/compra/pagar/mercadopago/${encodeURI(window.btoa(JSON.stringify(model)))}`;
           this.events.pay_loading = false;
         }, 1000);
+      },
+       PayPaypal(){         
+        axios.get('https://free.currconv.com/api/v7/convert?q=COP_USD&compact=ultra&apiKey=78b417a4d5400cf1278b').then((response)=>{
+          let pagoCOP = this.TotalValue();
+          let valueToMultiply = null;
+
+          valueToMultiply = response.data.COP_USD;
+
+          this.PagoTotal = pagoCOP * valueToMultiply;
+
+          paypal.Button.render({
+            env: 'sandbox',
+            client: {
+                sandbox: 'ARQ-WKAkFn3g4C111Ud3lLaUAfzagvJ_pmkLKBVMASvv6nyjX3fv3j0gtBdJEDhRPznYP9sLtf9oiJfH',
+                production: 'EFNo9sAyqiOmnlRHsAdXiGBf6ULysEIfKUVsn58Pq6ilfGHVFn03iVvbWtfiht-irdJD_df1MECvmBC2'
+            },
+            locale: 'es_US',
+            style: {
+                size: 'medium',
+                color: 'gold',
+                shape: 'pill',
+            },
+            commit: true,
+            payment: async (data, actions) => {
+                return actions.payment.create({
+                    transactions: [{
+                        amount: {
+                            total: this.PagoTotal,
+                            currency: 'USD'
+                        }
+                    }]
+                });
+            },
+            onApprove: async (data, actions) => {
+            const order = await actions.order.capture();
+            //console.log(order);
+            this.paypalEvent(order);
+            }
+          }, '#paypal-button');
+
+        });        
+    },
+      paypalEvent(order){
+        this.events.pay_loading = true;
+        let model = {          
+          quantity: this.current_plan.quantity,
+          plan_name: this.plan_type,
+          amount: order.purchase_units[0].amount.value,
+          ref: order.purchase_units[0].payments.captures[0].id,  
+          result: order.purchase_units[0].payments.captures[0].status,
+          payer_email: order.payer.email_address,
+          payer_id: order.payer.payer_id,
+          merchant_id: order.purchase_units[0].payee.merchant_id,
+          princeExchange: 0,
+          total: this.PagoTotal,
+        };
+        setTimeout(() => {
+          location.href=`/compra/pagar/plan/paypal/${encodeURI(window.btoa(JSON.stringify(model)))}`;
+        },1000);
       },
       quantityEditEnabled() {
         if (this.plan_type == "CREDITO") return false;
