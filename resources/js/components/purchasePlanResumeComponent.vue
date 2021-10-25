@@ -348,8 +348,7 @@
       this.fillWidthCalculate();
       window.onresize = () => {
         this.fillWidthCalculate();
-      };
-      this.PayPaypal();
+      };   
     },
     data() {
       return {
@@ -365,8 +364,16 @@
         },
         voucher_code: "",
         voucher_data: null,
-        PagoTotal: null
+        PagoTotal: null,
+        pagoPesos:null
       };
+    },
+    watch:{
+      pagoPesos :function(newVal){
+        if(newVal){
+          this.PayPaypal(); 
+        }
+      }
     },
     methods: {
       fillWidthCalculate() {
@@ -380,6 +387,7 @@
         return ret_stament;
       },
       TotalValue() {
+        this.pagoPesos = (this.current_plan.plan_price.total_price + this.current_plan.english_price.total_price) * this.current_plan.quantity;
         return (this.current_plan.plan_price.total_price + this.current_plan.english_price.total_price) * this.current_plan.quantity;
       },
       VoucherDiscountApplied() {
@@ -489,47 +497,44 @@
           this.events.pay_loading = false;
         }, 1000);
       },
-       PayPaypal(){         
-        axios.get('https://free.currconv.com/api/v7/convert?q=COP_USD&compact=ultra&apiKey=78b417a4d5400cf1278b').then((response)=>{
-          let pagoCOP = this.TotalValue();
-          let valueToMultiply = null;
-
-          valueToMultiply = response.data.COP_USD;
-
-          this.PagoTotal = pagoCOP * valueToMultiply;
-
-          paypal.Button.render({
-            env: 'sandbox',
-            client: {
-                sandbox: 'ARQ-WKAkFn3g4C111Ud3lLaUAfzagvJ_pmkLKBVMASvv6nyjX3fv3j0gtBdJEDhRPznYP9sLtf9oiJfH',
-                production: 'EFNo9sAyqiOmnlRHsAdXiGBf6ULysEIfKUVsn58Pq6ilfGHVFn03iVvbWtfiht-irdJD_df1MECvmBC2'
-            },
-            locale: 'es_US',
-            style: {
-                size: 'medium',
-                color: 'gold',
-                shape: 'pill',
-            },
-            commit: true,
-            payment: async (data, actions) => {
-                return actions.payment.create({
-                    transactions: [{
-                        amount: {
-                            total: this.PagoTotal,
-                            currency: 'USD'
-                        }
-                    }]
-                });
-            },
-            onApprove: async (data, actions) => {
+      PayPaypal(){
+        // axios.get('https://free.currconv.com/api/v7/convert?q=COP_USD&compact=ultra&apiKey=78b417a4d5400cf1278b').then((response)=>{
+          let pagoCOP = this.pagoPesos
+          let valueToMultiply = 0.000265;
+          // valueToMultiply = response.data.COP_USD;
+          this.PagoTotal = (pagoCOP * valueToMultiply).toFixed(2)
+          // console.log(this.PagoTotal);
+        // }); 
+        paypal.Button.render({
+          env: 'sandbox',
+          client: {
+            sandbox: 'ARQ-WKAkFn3g4C111Ud3lLaUAfzagvJ_pmkLKBVMASvv6nyjX3fv3j0gtBdJEDhRPznYP9sLtf9oiJfH',
+            production: 'EFNo9sAyqiOmnlRHsAdXiGBf6ULysEIfKUVsn58Pq6ilfGHVFn03iVvbWtfiht-irdJD_df1MECvmBC2'
+          },
+          locale: 'es_US',
+          style: {
+            size: 'medium',
+            color: 'gold',
+            shape: 'pill',
+          },
+        commit: true,
+          payment: async (data, actions) => {
+            return actions.payment.create({
+              transactions: [{
+                amount: {
+                  total: this.PagoTotal,
+                  currency: 'USD'
+                }
+              }]
+            });
+          },
+          onApprove: async (data, actions) => {
             const order = await actions.order.capture();
             //console.log(order);
             this.paypalEvent(order);
-            }
-          }, '#paypal-button');
-
-        });        
-    },
+          }
+        }, '#paypal-button');       
+      },
       paypalEvent(order){
         this.events.pay_loading = true;
         let model = {          
