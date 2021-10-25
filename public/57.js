@@ -393,7 +393,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         voucher_error: ""
       },
       voucher_code: "",
-      voucher_data: null
+      voucher_data: null,
+      PagoTotal: null
     };
   },
   methods: {
@@ -527,79 +528,86 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     PayPaypal: function PayPaypal() {
       var _this6 = this;
 
-      paypal.Button.render({
-        env: 'sandbox',
-        client: {
-          sandbox: 'ARQ-WKAkFn3g4C111Ud3lLaUAfzagvJ_pmkLKBVMASvv6nyjX3fv3j0gtBdJEDhRPznYP9sLtf9oiJfH',
-          production: 'EFNo9sAyqiOmnlRHsAdXiGBf6ULysEIfKUVsn58Pq6ilfGHVFn03iVvbWtfiht-irdJD_df1MECvmBC2'
-        },
-        locale: 'es_US',
-        style: {
-          size: 'medium',
-          color: 'gold',
-          shape: 'pill'
-        },
-        commit: true,
-        payment: function () {
-          var _payment = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data, actions) {
-            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-              while (1) {
-                switch (_context.prev = _context.next) {
-                  case 0:
-                    return _context.abrupt("return", actions.payment.create({
-                      transactions: [{
-                        amount: {
-                          total: _this6.TotalValue(),
-                          currency: 'USD'
-                        }
-                      }]
-                    }));
+      axios.get('https://free.currconv.com/api/v7/convert?q=COP_USD&compact=ultra&apiKey=78b417a4d5400cf1278b').then(function (response) {
+        var pagoCOP = _this6.TotalValue();
 
-                  case 1:
-                  case "end":
-                    return _context.stop();
+        var valueToMultiply = null;
+        valueToMultiply = response.data.COP_USD;
+        _this6.PagoTotal = pagoCOP * valueToMultiply;
+        paypal.Button.render({
+          env: 'sandbox',
+          client: {
+            sandbox: 'ARQ-WKAkFn3g4C111Ud3lLaUAfzagvJ_pmkLKBVMASvv6nyjX3fv3j0gtBdJEDhRPznYP9sLtf9oiJfH',
+            production: 'EFNo9sAyqiOmnlRHsAdXiGBf6ULysEIfKUVsn58Pq6ilfGHVFn03iVvbWtfiht-irdJD_df1MECvmBC2'
+          },
+          locale: 'es_US',
+          style: {
+            size: 'medium',
+            color: 'gold',
+            shape: 'pill'
+          },
+          commit: true,
+          payment: function () {
+            var _payment = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data, actions) {
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      return _context.abrupt("return", actions.payment.create({
+                        transactions: [{
+                          amount: {
+                            total: _this6.PagoTotal,
+                            currency: 'USD'
+                          }
+                        }]
+                      }));
+
+                    case 1:
+                    case "end":
+                      return _context.stop();
+                  }
                 }
-              }
-            }, _callee);
-          }));
+              }, _callee);
+            }));
 
-          function payment(_x, _x2) {
-            return _payment.apply(this, arguments);
-          }
+            function payment(_x, _x2) {
+              return _payment.apply(this, arguments);
+            }
 
-          return payment;
-        }(),
-        onApprove: function () {
-          var _onApprove = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(data, actions) {
-            var order;
-            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-              while (1) {
-                switch (_context2.prev = _context2.next) {
-                  case 0:
-                    _context2.next = 2;
-                    return actions.order.capture();
+            return payment;
+          }(),
+          onApprove: function () {
+            var _onApprove = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(data, actions) {
+              var order;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+                while (1) {
+                  switch (_context2.prev = _context2.next) {
+                    case 0:
+                      _context2.next = 2;
+                      return actions.order.capture();
 
-                  case 2:
-                    order = _context2.sent;
+                    case 2:
+                      order = _context2.sent;
 
-                    //console.log(order);
-                    _this6.paypalEvent(order);
+                      //console.log(order);
+                      _this6.paypalEvent(order);
 
-                  case 4:
-                  case "end":
-                    return _context2.stop();
+                    case 4:
+                    case "end":
+                      return _context2.stop();
+                  }
                 }
-              }
-            }, _callee2);
-          }));
+              }, _callee2);
+            }));
 
-          function onApprove(_x3, _x4) {
-            return _onApprove.apply(this, arguments);
-          }
+            function onApprove(_x3, _x4) {
+              return _onApprove.apply(this, arguments);
+            }
 
-          return onApprove;
-        }()
-      }, '#paypal-button');
+            return onApprove;
+          }()
+        }, '#paypal-button');
+      });
     },
     paypalEvent: function paypalEvent(order) {
       this.events.pay_loading = true;
@@ -613,7 +621,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         payer_id: order.payer.payer_id,
         merchant_id: order.purchase_units[0].payee.merchant_id,
         princeExchange: 0,
-        total: this.current_plan.plan_price.total_price
+        total: this.PagoTotal
       };
       setTimeout(function () {
         location.href = "/compra/pagar/plan/paypal/".concat(encodeURI(window.btoa(JSON.stringify(model))));

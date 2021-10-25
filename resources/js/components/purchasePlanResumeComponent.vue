@@ -365,6 +365,7 @@
         },
         voucher_code: "",
         voucher_data: null,
+        PagoTotal: null
       };
     },
     methods: {
@@ -488,8 +489,16 @@
           this.events.pay_loading = false;
         }, 1000);
       },
-       PayPaypal(){
-        paypal.Button.render({
+       PayPaypal(){         
+        axios.get('https://free.currconv.com/api/v7/convert?q=COP_USD&compact=ultra&apiKey=78b417a4d5400cf1278b').then((response)=>{
+          let pagoCOP = this.TotalValue();
+          let valueToMultiply = null;
+
+          valueToMultiply = response.data.COP_USD;
+
+          this.PagoTotal = pagoCOP * valueToMultiply;
+
+          paypal.Button.render({
             env: 'sandbox',
             client: {
                 sandbox: 'ARQ-WKAkFn3g4C111Ud3lLaUAfzagvJ_pmkLKBVMASvv6nyjX3fv3j0gtBdJEDhRPznYP9sLtf9oiJfH',
@@ -506,7 +515,7 @@
                 return actions.payment.create({
                     transactions: [{
                         amount: {
-                            total: this.TotalValue(),
+                            total: this.PagoTotal,
                             currency: 'USD'
                         }
                     }]
@@ -518,6 +527,8 @@
             this.paypalEvent(order);
             }
           }, '#paypal-button');
+
+        });        
     },
       paypalEvent(order){
         this.events.pay_loading = true;
@@ -531,7 +542,7 @@
           payer_id: order.payer.payer_id,
           merchant_id: order.purchase_units[0].payee.merchant_id,
           princeExchange: 0,
-          total: this.current_plan.plan_price.total_price,
+          total: this.PagoTotal,
         };
         setTimeout(() => {
           location.href=`/compra/pagar/plan/paypal/${encodeURI(window.btoa(JSON.stringify(model)))}`;
