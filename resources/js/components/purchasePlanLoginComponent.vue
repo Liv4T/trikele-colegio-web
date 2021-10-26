@@ -243,7 +243,7 @@ export default {
             return re.test(email);
         },
         validCellphone: function (cellphone) {
-            var re = /^[3][1-2][0-9]*/;
+            var re = /^[3][0-9][0-9]*/;
             return re.test(cellphone) && cellphone.length==10;
         },
         navigateToResumen()

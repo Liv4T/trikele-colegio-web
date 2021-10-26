@@ -239,7 +239,7 @@ __webpack_require__.r(__webpack_exports__);
       return re.test(email);
     },
     validCellphone: function validCellphone(cellphone) {
-      var re = /^[3][1-2][0-9]*/;
+      var re = /^[3][0-9][0-9]*/;
       return re.test(cellphone) && cellphone.length == 10;
     },
     navigateToResumen: function navigateToResumen() {

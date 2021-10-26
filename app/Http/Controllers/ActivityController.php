@@ -331,21 +331,23 @@ class ActivityController extends Controller
                 'id_activity'=>$id_activity,
                 'id_student'=>$id_student,
                 'score'=>$data['score'],
+                'is_qualified'=> isset($data['score']) ? 1 : 0,
                 'qualified_date'=>date("Y-m-d H:i"),
-                'state'=>3
+                'state'=>3,
+                'deleted'=>0,
+                'updated_user'=>$user->id,
             ]);
 
         }else{
             ActivityInteraction::where('id_activity',$activity->id)->update([
                 'score'=>$data['score'],
                 'qualified_date'=>date("Y-m-d H:i"),
-                'state'=>3
+                'is_qualified'=> isset($data['score']) ? 1 : 0,
+                'state'=>3,
+                'deleted'=>0,
+                'updated_user'=>$user->id,
             ]);
         }
-
-
-
-
     }
 
     /**
