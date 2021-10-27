@@ -1247,86 +1247,6 @@ var render = function() {
                     [
                       _c("div", { staticClass: "col-10" }, [
                         _c("div", { staticClass: "card" }, [
-                          _c("div", { staticClass: "card-header card-title" }, [
-                            _c("h5", { staticStyle: { color: "#f79d52" } }, [
-                              _vm._v(
-                                "\n                                            Actividad N°" +
-                                  _vm._s(key_a + 1) +
-                                  " :\n                                            " +
-                                  _vm._s(act.name) +
-                                  "\n                                        "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            act.interaction.state < 3 &&
-                            _vm.activity.id != act.id
-                              ? _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-primary",
-                                    on: {
-                                      click: function($event) {
-                                        $event.preventDefault()
-                                        return _vm.openActivity(key_a)
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                            " +
-                                        _vm._s(
-                                          act.interaction.state == 2
-                                            ? "Esperando calificación"
-                                            : "Presentar"
-                                        ) +
-                                        "\n                                        "
-                                    )
-                                  ]
-                                )
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _vm.activity.id == act.id
-                              ? _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-warning",
-                                    on: {
-                                      click: function($event) {
-                                        $event.preventDefault()
-                                        return _vm.closeQuestion()
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                            Cancelar\n                                        "
-                                    )
-                                  ]
-                                )
-                              : _vm._e(),
-                            _vm._v(" "),
-                            act.interaction.state == 3 &&
-                            _vm.activity.id != act.id
-                              ? _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-primary",
-                                    on: {
-                                      click: function($event) {
-                                        $event.preventDefault()
-                                        return _vm.openFeedback(key_a)
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                            Ver retroalimentación\n                                        "
-                                    )
-                                  ]
-                                )
-                              : _vm._e()
-                          ]),
-                          _vm._v(" "),
                           _vm.activity.id == act.id
                             ? _c("div", { staticClass: "card-body" }, [
                                 _c("div", { staticClass: "row" }, [
@@ -1363,29 +1283,6 @@ var render = function() {
                                     })
                                   ])
                                 ]),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "activity_response-button" },
-                                  [
-                                    _vm.activity.interaction.state == 1
-                                      ? _c(
-                                          "button",
-                                          {
-                                            staticClass: "btn btn-primary",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.SaveResponseEvent(
-                                                  _vm.activity
-                                                )
-                                              }
-                                            }
-                                          },
-                                          [_vm._v("Enviar respuestas")]
-                                        )
-                                      : _vm._e()
-                                  ]
-                                ),
                                 _vm._v(" "),
                                 _vm.activity.interaction.state == 3
                                   ? _c("div", [
