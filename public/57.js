@@ -9,15 +9,6 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
 //
 //
 //
@@ -396,13 +387,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       pagoPesos: null
     };
   },
-  watch: {
-    pagoPesos: function pagoPesos(newVal) {
-      if (newVal) {
-        this.PayPaypal();
-      }
-    }
-  },
   methods: {
     fillWidthCalculate: function fillWidthCalculate() {
       this.fullWidth = window.innerWidth > 1024;
@@ -527,117 +511,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         voucher: this.voucher_data ? this.voucher_data.code : null
       };
       setTimeout(function () {
-        location.href = "/compra/plan/".concat(_this5.plan_type, "/ingresar/p/").concat(encodeURI(window.btoa(JSON.stringify(model)))); //location.href = `/compra/pagar/mercadopago/${encodeURI(window.btoa(JSON.stringify(model)))}`;
+        location.href = "/compra/plan/".concat(_this5.plan_type, "/cop/").concat(_this5.pagoPesos, "/ingresar/p/").concat(encodeURI(window.btoa(JSON.stringify(model)))); //location.href = `/compra/pagar/mercadopago/${encodeURI(window.btoa(JSON.stringify(model)))}`;
 
         _this5.events.pay_loading = false;
-      }, 1000);
-    },
-    PayPaypal: function PayPaypal() {
-      var _this6 = this;
-
-      var pagoCOP = this.pagoPesos;
-      var valueToMultiply = 0.000265;
-
-      try {
-        axios.get('https://free.currconv.com/api/v7/convert?q=COP_USD&compact=ultra&apiKey=78b417a4d5400cf1278b').then(function (response) {
-          valueToMultiply = response.data.COP_USD;
-          console.log(response.data);
-        });
-      } catch (error) {
-        console.log(error);
-      }
-
-      this.PagoTotal = (pagoCOP * valueToMultiply).toFixed(2);
-      paypal.Button.render({
-        env: 'sandbox',
-        client: {
-          sandbox: 'ARQ-WKAkFn3g4C111Ud3lLaUAfzagvJ_pmkLKBVMASvv6nyjX3fv3j0gtBdJEDhRPznYP9sLtf9oiJfH',
-          production: 'EFNo9sAyqiOmnlRHsAdXiGBf6ULysEIfKUVsn58Pq6ilfGHVFn03iVvbWtfiht-irdJD_df1MECvmBC2'
-        },
-        locale: 'es_US',
-        style: {
-          size: 'medium',
-          color: 'gold',
-          shape: 'pill'
-        },
-        commit: true,
-        payment: function () {
-          var _payment = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data, actions) {
-            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-              while (1) {
-                switch (_context.prev = _context.next) {
-                  case 0:
-                    return _context.abrupt("return", actions.payment.create({
-                      transactions: [{
-                        amount: {
-                          total: _this6.PagoTotal,
-                          currency: 'USD'
-                        }
-                      }]
-                    }));
-
-                  case 1:
-                  case "end":
-                    return _context.stop();
-                }
-              }
-            }, _callee);
-          }));
-
-          function payment(_x, _x2) {
-            return _payment.apply(this, arguments);
-          }
-
-          return payment;
-        }(),
-        onApprove: function () {
-          var _onApprove = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(data, actions) {
-            var order;
-            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-              while (1) {
-                switch (_context2.prev = _context2.next) {
-                  case 0:
-                    _context2.next = 2;
-                    return actions.order.capture();
-
-                  case 2:
-                    order = _context2.sent;
-
-                    //console.log(order);
-                    _this6.paypalEvent(order);
-
-                  case 4:
-                  case "end":
-                    return _context2.stop();
-                }
-              }
-            }, _callee2);
-          }));
-
-          function onApprove(_x3, _x4) {
-            return _onApprove.apply(this, arguments);
-          }
-
-          return onApprove;
-        }()
-      }, '#paypal-button');
-    },
-    paypalEvent: function paypalEvent(order) {
-      this.events.pay_loading = true;
-      var model = {
-        quantity: this.current_plan.quantity,
-        plan_name: this.plan_type,
-        amount: order.purchase_units[0].amount.value,
-        ref: order.purchase_units[0].payments.captures[0].id,
-        result: order.purchase_units[0].payments.captures[0].status,
-        payer_email: order.payer.email_address,
-        payer_id: order.payer.payer_id,
-        merchant_id: order.purchase_units[0].payee.merchant_id,
-        princeExchange: 0,
-        total: this.PagoTotal
-      };
-      setTimeout(function () {
-        location.href = "/compra/pagar/plan/paypal/".concat(encodeURI(window.btoa(JSON.stringify(model))));
       }, 1000);
     },
     quantityEditEnabled: function quantityEditEnabled() {
@@ -1430,12 +1306,6 @@ var render = function() {
                     _c("div", { staticClass: "row align-items-center" }, [
                       _c("div", { staticClass: "col-md-12 content-button" }, [
                         !_vm.events.pay_loading &&
-                        _vm.TotalValue() - _vm.VoucherDiscountValue() > 0 &&
-                        _vm.user
-                          ? _c("div", { attrs: { id: "paypal-button" } })
-                          : _vm._e(),
-                        _vm._v(" "),
-                        !_vm.events.pay_loading &&
                         _vm.TotalValue() - _vm.VoucherDiscountValue() > 0
                           ? _c(
                               "button",
@@ -2195,16 +2065,6 @@ var render = function() {
                                         staticClass: "col-md-12 content-button"
                                       },
                                       [
-                                        !_vm.events.pay_loading &&
-                                        _vm.TotalValue() -
-                                          _vm.VoucherDiscountValue() >
-                                          0 &&
-                                        _vm.user
-                                          ? _c("div", {
-                                              attrs: { id: "paypal-button" }
-                                            })
-                                          : _vm._e(),
-                                        _vm._v(" "),
                                         !_vm.events.pay_loading &&
                                         _vm.TotalValue() -
                                           _vm.VoucherDiscountValue() >

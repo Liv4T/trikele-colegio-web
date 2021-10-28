@@ -1,143 +1,163 @@
 <template>
-<div class="container">
- <div class="row justify-content-center margin-top-20">
-    <div class="col-md-4 col-lg-3">
-      <div class="card">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <h4>Ingresar</h4>
+    <div class="container">
+        <div class="row justify-content-center margin-top-20">
+            <div class="col-md-4 col-lg-3">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h4>Ingresar</h4>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-10 col-md-10">
+                            <form onSubmit="return false;">
+                                <div class="form-group">
+                                    <label><small class="label-required">*</small>Usuario</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
+                                                    <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                                    <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" v-model="loginForm.username">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><small class="label-required">*</small>Contraseña</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-lock-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z"/>
+                                                    <path fill-rule="evenodd" d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"/>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <input type="password" class="form-control" v-model="loginForm.password">
+                                    </div>
+                                </div>
+                                <div class="form-group content-button">
+                                    <button class="btn btn-Azul" @click="LoginEvent()" :disabled="!LoginValidForm()">Continuar con el pago</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card" >
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h4>Crear cuenta</h4>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-10 col-md-10">
+                            <form onSubmit="return false;">
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label><small class="label-required">*</small>Usuario</label>
+                                        <input type="text" class="form-control" v-model="registerForm.username">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label><small class="label-required">*</small>Contraseña</label>
+                                        <input type="password" class="form-control"  v-model="registerForm.password">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label><small class="label-required">*</small>Confirmar contraseña</label>
+                                        <input type="password" class="form-control"  v-model="registerForm.password_confirm">
+                                        <small v-if="registerForm.password_confirm && registerForm.password_confirm!=registerForm.password" class="form-text text-error">Contraseñas deben ser iguales</small>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label><small class="label-required">*</small>Tipo identificación</label>
+                                        <select class="form-control" v-model="registerForm.document_type">
+                                            <option v-for="(doc_type,doc_type_id) in document_types" v-bind:key="doc_type_id" v-bind:value="doc_type.id">{{doc_type.shortname}} {{doc_type.name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label><small class="label-required">*</small>Identificación</label>
+                                        <input type="text" class="form-control" v-model="registerForm.identification">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label><small class="label-required">*</small>Nombres</label>
+                                        <input type="text" class="form-control" v-model="registerForm.names">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label><small class="label-required">*</small>Apellidos</label>
+                                        <input type="text" class="form-control" v-model="registerForm.lastnames" >
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label><small class="label-required">*</small>Número celular</label>
+                                        <input type="number" class="form-control" v-model="registerForm.cellphone" >
+                                        <small v-if="registerForm.cellphone && !validCellphone(registerForm.cellphone)" class="form-text text-error">Número de celular inválido</small>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label><small class="label-required">*</small>Correo electrónico</label>
+                                        <input type="email" class="form-control"  v-model="registerForm.email"  >
+                                        <small v-if="registerForm.email && !validEmail(registerForm.email)" class="form-text text-error">Correo inválido</small>
+                                    </div>
+                                    <div class="form-check col-md-6" >
+                                        <input type="checkbox"  id="check_term" v-model="registerForm.politics_accepted">
+                                        <label class="form-check-label" for="check_term"><small class="label-required">*</small>Acepta políticas, terminos y condiciones?</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group content-button col-md-12">
+                                        <button v-if="!events.register_loading" class="btn btn-Azul" @click="RegisterEvent()" :disabled="!RegisterValidForm()">Continuar con el pago</button>
+                                        <button v-if="events.register_loading" class="btn btn-primary"  :disabled="true">Registrando...</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-10 col-md-10">
-                <form onSubmit="return false;">
-                    <div class="form-group">
-                        <label><small class="label-required">*</small>Usuario</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
-                                        <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                                        <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
-                                    </svg>
-                                </span>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Selección del metodo de Pago</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div id="paypal-button"></div>
                             </div>
-                            <input type="text" class="form-control" v-model="loginForm.username">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label><small class="label-required">*</small>Contraseña</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-lock-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z"/>
-                                        <path fill-rule="evenodd" d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"/>
-                                    </svg>
-                                </span>
+                            <div class="col-md-5 ml-2">
+                                <button class="btn btn-primary" v-on:click="payMercadopago">Mercado Pago</button>
                             </div>
-                            <input type="password" class="form-control" v-model="loginForm.password">
                         </div>
                     </div>
-                    <div class="form-group content-button">
-                        <button class="btn btn-Azul" @click="LoginEvent()" :disabled="!LoginValidForm()">Continuar con el pago</button>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
-      </div>
     </div>
-    <div class="col-md-8">
-      <div class="card" >
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <h4>Crear cuenta</h4>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-10 col-md-10">
-                 <form onSubmit="return false;">
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <label><small class="label-required">*</small>Usuario</label>
-                            <input type="text" class="form-control" v-model="registerForm.username">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label><small class="label-required">*</small>Contraseña</label>
-                            <input type="password" class="form-control"  v-model="registerForm.password">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label><small class="label-required">*</small>Confirmar contraseña</label>
-                            <input type="password" class="form-control"  v-model="registerForm.password_confirm">
-                            <small v-if="registerForm.password_confirm && registerForm.password_confirm!=registerForm.password" class="form-text text-error">Contraseñas deben ser iguales</small>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label><small class="label-required">*</small>Tipo identificación</label>
-                            <select class="form-control" v-model="registerForm.document_type">
-                                <option v-for="(doc_type,doc_type_id) in document_types" v-bind:key="doc_type_id" v-bind:value="doc_type.id">{{doc_type.shortname}} {{doc_type.name}}</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label><small class="label-required">*</small>Identificación</label>
-                            <input type="text" class="form-control" v-model="registerForm.identification">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <label><small class="label-required">*</small>Nombres</label>
-                            <input type="text" class="form-control" v-model="registerForm.names">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label><small class="label-required">*</small>Apellidos</label>
-                            <input type="text" class="form-control" v-model="registerForm.lastnames" >
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label><small class="label-required">*</small>Número celular</label>
-                            <input type="number" class="form-control" v-model="registerForm.cellphone" >
-                            <small v-if="registerForm.cellphone && !validCellphone(registerForm.cellphone)" class="form-text text-error">Número de celular inválido</small>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label><small class="label-required">*</small>Correo electrónico</label>
-                            <input type="email" class="form-control"  v-model="registerForm.email"  >
-                            <small v-if="registerForm.email && !validEmail(registerForm.email)" class="form-text text-error">Correo inválido</small>
-                        </div>
-                        <div class="form-check col-md-6" >
-                            <input type="checkbox"  id="check_term" v-model="registerForm.politics_accepted">
-                            <label class="form-check-label" for="check_term"><small class="label-required">*</small>Acepta políticas, terminos y condiciones?</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group content-button col-md-12">
-                            <button v-if="!events.register_loading" class="btn btn-Azul" @click="RegisterEvent()" :disabled="!RegisterValidForm()">Continuar con el pago</button>
-                            <button v-if="events.register_loading" class="btn btn-primary"  :disabled="true">Registrando...</button>
-                        </div>
-                    </div>
-
-                 </form>
-            </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-
 </template>
 <script>
 
 export default {
-    props: ["plan_type","aut","voucher","payment_code"],
+    props: ["plan_type","pago_pesos","aut","voucher","payment_code"],
     data() {
         return {
             loginForm:{
                 username:'',
                 password:''
             },
+            PagoTotal: null,
             registerForm:{
                 username:'',
                 password:'',
@@ -165,7 +185,7 @@ export default {
         axios.get(`/api/document-type`).then((response) => {
             this.document_types=response.data;
         });
-    },
+    },    
     methods:{
         LoginValidForm()
         {
@@ -256,9 +276,77 @@ export default {
             {
                  location.href=`/compra/plan/${this.plan_type}/resumen`;
             }*/
+            this.PayPaypal();
+            $("#exampleModal").modal("show");
+        },
+        payMercadopago(){
             location.href=`/compra/pagar/mercadopago/${encodeURI(this.payment_code)}`;
-        }
+        },
+        PayPaypal(){                    
+            let pagoCOP = this.pago_pesos;
+            let valueToMultiply = 0.000265;
+            console.log(this.plan_type,",",this.pago_pesos,",",this.aut,",",this.voucher,",",this.payment_code);
+            try {
+                axios.get('https://free.currconv.com/api/v7/convert?q=COP_USD&compact=ultra&apiKey=78b417a4d5400cf1278b').then((response)=>{              
+                    valueToMultiply = response.data.COP_USD;                    
+                    console.log(response.data);
+                });
+            } catch (error) {
+                console.log(error);
+            }        
+            
+            this.PagoTotal = (pagoCOP * valueToMultiply).toFixed(2)
 
+            paypal.Button.render({
+                env: 'sandbox',
+                client: {
+                    sandbox: 'ARQ-WKAkFn3g4C111Ud3lLaUAfzagvJ_pmkLKBVMASvv6nyjX3fv3j0gtBdJEDhRPznYP9sLtf9oiJfH',
+                    production: 'EFNo9sAyqiOmnlRHsAdXiGBf6ULysEIfKUVsn58Pq6ilfGHVFn03iVvbWtfiht-irdJD_df1MECvmBC2'
+                },
+                locale: 'es_US',
+                style: {
+                    size: 'small',
+                    color: 'blue',
+                    shape: 'pill',
+                },
+                commit: true,
+                payment: async (data, actions) => {
+                    return actions.payment.create({
+                        transactions: [{
+                            amount: {
+                            total: this.PagoTotal,
+                            currency: 'USD'
+                            }
+                        }]
+                    });
+                },
+                onApprove: async (data, actions) => {
+                    const order = await actions.order.capture();
+                    //console.log(order);            
+                    this.paypalEvent(order);
+                }
+            }, '#paypal-button');       
+        },
+
+        paypalEvent(order){
+            this.events.pay_loading = true;
+            let model = {          
+                quantity: 1,
+                plan_name: this.plan_type,
+                amount: order.purchase_units[0].amount.value,
+                ref: order.purchase_units[0].payments.captures[0].id,  
+                result: order.purchase_units[0].payments.captures[0].status,
+                payer_email: order.payer.email_address,
+                payer_id: order.payer.payer_id,
+                merchant_id: order.purchase_units[0].payee.merchant_id,
+                princeExchange: 0,
+                total: this.PagoTotal,
+            };
+            
+            setTimeout(() => {
+                location.href=`/compra/pagar/plan/paypal/${encodeURI(window.btoa(JSON.stringify(model)))}`;
+            },1000);
+        },
     }
 };
 </script>
