@@ -124,7 +124,7 @@
             </div>
         </div>
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Selección del metodo de Pago</h5>
@@ -137,8 +137,8 @@
                             <div class="col-md-6">
                                 <div id="paypal-button"></div>
                             </div>
-                            <div class="col-md-5 ml-2">
-                                <button class="btn btn-primary" v-on:click="payMercadopago">Mercado Pago</button>
+                            <div class="col-md-5">
+                                <button class="btn btn-primary btn-lg" style="border-radius: 17px;" v-on:click="payMercadopago">Mercado Pago</button>
                             </div>
                         </div>
                     </div>
@@ -284,8 +284,7 @@ export default {
         },
         PayPaypal(){                    
             let pagoCOP = this.pago_pesos;
-            let valueToMultiply = 0.000265;
-            console.log(this.plan_type,",",this.pago_pesos,",",this.aut,",",this.voucher,",",this.payment_code);
+            let valueToMultiply = 0.000265;            
             try {
                 axios.get('https://free.currconv.com/api/v7/convert?q=COP_USD&compact=ultra&apiKey=78b417a4d5400cf1278b').then((response)=>{              
                     valueToMultiply = response.data.COP_USD;                    
@@ -305,8 +304,9 @@ export default {
                 },
                 locale: 'es_US',
                 style: {
-                    size: 'small',
+                    size: 'medium',
                     color: 'blue',
+                    layout: 'vertical',
                     shape: 'pill',
                 },
                 commit: true,

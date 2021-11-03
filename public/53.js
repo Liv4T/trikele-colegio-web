@@ -291,7 +291,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       var pagoCOP = this.pago_pesos;
       var valueToMultiply = 0.000265;
-      console.log(this.plan_type, ",", this.pago_pesos, ",", this.aut, ",", this.voucher, ",", this.payment_code);
 
       try {
         axios.get('https://free.currconv.com/api/v7/convert?q=COP_USD&compact=ultra&apiKey=78b417a4d5400cf1278b').then(function (response) {
@@ -311,8 +310,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         },
         locale: 'es_US',
         style: {
-          size: 'small',
+          size: 'medium',
           color: 'blue',
+          layout: 'vertical',
           shape: 'pill'
         },
         commit: true,
@@ -1076,7 +1076,7 @@ var render = function() {
       [
         _c(
           "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
               _vm._m(14),
@@ -1085,11 +1085,12 @@ var render = function() {
                 _c("div", { staticClass: "row" }, [
                   _vm._m(15),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-5 ml-2" }, [
+                  _c("div", { staticClass: "col-md-5" }, [
                     _c(
                       "button",
                       {
-                        staticClass: "btn btn-primary",
+                        staticClass: "btn btn-primary btn-lg",
+                        staticStyle: { "border-radius": "17px" },
                         on: { click: _vm.payMercadopago }
                       },
                       [_vm._v("Mercado Pago")]
