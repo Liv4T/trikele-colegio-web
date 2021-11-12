@@ -62,7 +62,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     ShowTaller: _ShowTaller_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: ['id_area', 'id_classroom', 'type_u'],
+  props: ['id_area', 'id_classroom', 'type_u', 'id_user'],
   data: function data() {
     return {
       bimestres: [],
@@ -264,7 +264,8 @@ var render = function() {
                     type_user: _vm.type_u,
                     id_bimestre: _vm.id_bimestre,
                     id_workshop: _vm.id_workshop,
-                    backPage: _vm.backPage
+                    backPage: _vm.backPage,
+                    id_user: _vm.id_user
                   }
                 })
               ],

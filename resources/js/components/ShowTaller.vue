@@ -137,7 +137,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 export default { 
-    props:['id_achievement','id_class','id_area','type_user','id_bimestre','id_workshop','backPage'],
+    props:['id_achievement','id_class','id_area','type_user','id_bimestre','id_workshop','backPage','id_user'],
     data() {
         return {
             course:[], 
@@ -208,6 +208,32 @@ export default {
                 if(this.course.activities.length>0)
                 {
                     this.course.activities.forEach(act=>{
+                        axios.get(`answerLite/${act.id}`).then((response)=>{
+                            let data = response.data;
+
+                            data.forEach((el)=>{
+                                axios.put(`/api/student/module/${this.id_achievement}/class/${this.id_class}/activity/${act.id}/interaction`,{
+                                    activity_type: el.activity_type,
+                                    delivery_max_date: el.delivery_max_date,
+                                    description: el.description,
+                                    feedback_date: el.feedback_date,
+                                    id_student: this.id_user,
+                                    id: el.id,
+                                    id_achievement: el.id_achievement,
+                                    id_indicator: el.id_indicator,
+                                    interaction: JSON.parse(el.interaction),
+                                    is_required: el.is_required,
+                                    module: JSON.parse(el.module),
+                                    name: el.name,
+                                    rules: el.rules,
+                                    state: el.state,
+                                    updated_user: el.updated_user,
+                                }).then((response)=>{
+                                    console.log(response.data);
+                                })
+                            })
+                        })
+
                         act.delivery_max_date=act.delivery_max_date ? act.delivery_max_date && delivery_max_date.replace(" ","T") : '';                        
                         act.feedback_date=act.feedback_date.replace(" ","T");
                         this.GetIndicatorsEvent(act);
@@ -269,14 +295,33 @@ export default {
             console.log(data);
         },
         SaveResponseEvent(activity)
-        {
+        {   
             axios.put(`/api/student/module/${this.id_achievement}/class/${this.id_class}/activity/${activity.id}/interaction`,activity).then(
                 response => {        
                     toastr.success("Actividad enviada correctamente");            
                 },error => {                        
-                    toastr.error(
-                        "ERROR:Por favor valide que la información esta completa"
-                    );
+                    axios.post('answerLite',{
+                        activity_type: activity.activity_type,
+                        delivery_max_date: activity.delivery_max_date,
+                        description: activity.description,
+                        feedback_date: activity.feedback_date,
+                        id_student: this.id_user,
+                        id_activity: activity.id,
+                        id_achievement: activity.id_achievement,
+                        id_indicator: activity.id_indicator,
+                        interaction: JSON.stringify(activity.interaction),
+                        is_required: activity.is_required,
+                        module: JSON.stringify(activity.module),
+                        name: activity.name,
+                        rules: activity.rules,
+                        state: activity.state,
+                        updated_user: activity.updated_user,
+                    }).then((response)=>{
+                        console.log(response.data)
+                        toastr.success('Actividad guardada de forma local, vuelve mas tarde para observar tus resultados');
+                    }).catch((error)=>{
+                        toastr.error("Intenta de nuevo mas tarde");
+                    })
                 }
             );
         }

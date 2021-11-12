@@ -148,7 +148,7 @@ var firebaseConfig = {
 firebase__WEBPACK_IMPORTED_MODULE_0__["default"].initializeApp(firebaseConfig);
 firebase__WEBPACK_IMPORTED_MODULE_0__["default"].analytics();
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['id_achievement', 'id_class', 'id_area', 'type_user', 'id_bimestre', 'id_workshop', 'backPage'],
+  props: ['id_achievement', 'id_class', 'id_area', 'type_user', 'id_bimestre', 'id_workshop', 'backPage', 'id_user'],
   data: function data() {
     return {
       course: [],
@@ -219,6 +219,30 @@ firebase__WEBPACK_IMPORTED_MODULE_0__["default"].analytics();
 
         if (_this3.course.activities.length > 0) {
           _this3.course.activities.forEach(function (act) {
+            axios.get("answerLite/".concat(act.id)).then(function (response) {
+              var data = response.data;
+              data.forEach(function (el) {
+                axios.put("/api/student/module/".concat(_this3.id_achievement, "/class/").concat(_this3.id_class, "/activity/").concat(act.id, "/interaction"), {
+                  activity_type: el.activity_type,
+                  delivery_max_date: el.delivery_max_date,
+                  description: el.description,
+                  feedback_date: el.feedback_date,
+                  id_student: _this3.id_user,
+                  id: el.id,
+                  id_achievement: el.id_achievement,
+                  id_indicator: el.id_indicator,
+                  interaction: JSON.parse(el.interaction),
+                  is_required: el.is_required,
+                  module: JSON.parse(el.module),
+                  name: el.name,
+                  rules: el.rules,
+                  state: el.state,
+                  updated_user: el.updated_user
+                }).then(function (response) {
+                  console.log(response.data);
+                });
+              });
+            });
             act.delivery_max_date = act.delivery_max_date ? act.delivery_max_date && delivery_max_date.replace(" ", "T") : '';
             act.feedback_date = act.feedback_date.replace(" ", "T");
 
@@ -282,10 +306,33 @@ firebase__WEBPACK_IMPORTED_MODULE_0__["default"].analytics();
       console.log(data);
     },
     SaveResponseEvent: function SaveResponseEvent(activity) {
+      var _this5 = this;
+
       axios.put("/api/student/module/".concat(this.id_achievement, "/class/").concat(this.id_class, "/activity/").concat(activity.id, "/interaction"), activity).then(function (response) {
         toastr.success("Actividad enviada correctamente");
       }, function (error) {
-        toastr.error("ERROR:Por favor valide que la información esta completa");
+        axios.post('answerLite', {
+          activity_type: activity.activity_type,
+          delivery_max_date: activity.delivery_max_date,
+          description: activity.description,
+          feedback_date: activity.feedback_date,
+          id_student: _this5.id_user,
+          id_activity: activity.id,
+          id_achievement: activity.id_achievement,
+          id_indicator: activity.id_indicator,
+          interaction: JSON.stringify(activity.interaction),
+          is_required: activity.is_required,
+          module: JSON.stringify(activity.module),
+          name: activity.name,
+          rules: activity.rules,
+          state: activity.state,
+          updated_user: activity.updated_user
+        }).then(function (response) {
+          console.log(response.data);
+          toastr.success('Actividad guardada de forma local, vuelve mas tarde para observar tus resultados');
+        })["catch"](function (error) {
+          toastr.error("Intenta de nuevo mas tarde");
+        });
       });
     }
   }

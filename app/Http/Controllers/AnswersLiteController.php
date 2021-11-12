@@ -36,9 +36,10 @@ class AnswersLiteController extends Controller
      * @param  \App\AnswersLite  $answersLite
      * @return \Illuminate\Http\Response
      */
-    public function show(AnswersLite $answersLite)
+    public function show($id)
     {
-        //
+        $showList  = AnswersLite::where('id_activity',$id)->orderBy('id','DESC')->get();
+        return response()->json($showList);
     }
 
     /**

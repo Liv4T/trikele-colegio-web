@@ -23,5 +23,3 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     Route::apiResource('school-classes', 'SchoolClassesApiController');
     return $request->user();
 });
-
-Route::resource('answerLite','AnswersLiteController');

@@ -15,7 +15,20 @@ class AnswersLite extends Model
     protected $fillable = [
         'id_student',
         'id_activity_question',
-        'answer'
+        'activity_type',
+        'delivery_max_date',
+        'description',
+        'feedback_date',
+        'id_activity',
+        'id_achievement',
+        'id_indicator',
+        'interaction',
+        'is_required',
+        'module',
+        'name',
+        'rules',
+        'state',
+        'updated_user',
     ];
 
 }
