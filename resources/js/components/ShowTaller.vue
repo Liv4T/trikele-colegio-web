@@ -16,10 +16,10 @@
                         <select class="form-control m-2" v-model="activity.id_bimestre">                                                            
                             <option v-for="(bimestre, key) in bimestres" :key="key" :value="bimestre.id">{{bimestre.name}}</option>
                         </select>
-                        <activity-questionary v-if="activity.activity_type=='CUESTIONARIO' || activity.activity_type == 'CUESTIONARIO_UNICA_RTA'" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-questionary>
-                        <activity-complete-sentence v-if="activity.activity_type=='COMPLETAR_ORACION'" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-complete-sentence>
-                        <activity-relationship v-if="activity.activity_type=='RELACION'" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-relationship>
-                        <activity-crossword v-if="activity.activity_type=='CRUCIGRAMA'" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-crossword>
+                        <activity-questionary v-if="activity.activity_type=='CUESTIONARIO' || activity.activity_type == 'CUESTIONARIO_UNICA_RTA'" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state > 1 && attempt === false"></activity-questionary>
+                        <activity-complete-sentence v-if="activity.activity_type=='COMPLETAR_ORACION'" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state > 1 && attempt === false"></activity-complete-sentence>
+                        <activity-relationship v-if="activity.activity_type=='RELACION'" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state > 1 && attempt === false"></activity-relationship>
+                        <activity-crossword v-if="activity.activity_type=='CRUCIGRAMA'" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state > 1 && attempt === false"></activity-crossword>
                     </div>
 
                     <button class="btn btn-primary col-md-3" v-on:click="saveData">Guardar</button>    
@@ -57,14 +57,25 @@
                             <textarea class="form-control-plaintext" v-model="activity.description" readonly></textarea>
                         </div>
                     </div>
-                    <activity-questionary v-if="activity.activity_type=='CUESTIONARIO_UNICA_RTA' || activity.activity_type =='CUESTIONARIO'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-questionary>
-                    <activity-complete-sentence v-if="activity.activity_type=='COMPLETAR_ORACION'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-complete-sentence>
-                    <activity-relationship v-if="activity.activity_type=='RELACION'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-relationship>
-                    <activity-crossword v-if="activity.activity_type=='CRUCIGRAMA'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-crossword>
-                    <div class="activity_response-button">
-                        <button class="btn btn-primary" v-if="activity.interaction.state==1" @click="SaveResponseEvent(activity)">Enviar respuestas</button>
+                    <activity-questionary v-if="activity.activity_type=='CUESTIONARIO_UNICA_RTA' || activity.activity_type =='CUESTIONARIO'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state > 1 && attempt === false"></activity-questionary>
+                    <activity-complete-sentence v-if="activity.activity_type=='COMPLETAR_ORACION'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state > 1 && attempt === false"></activity-complete-sentence>
+                    <activity-relationship v-if="activity.activity_type=='RELACION'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state > 1 && attempt === false"></activity-relationship>
+                    <activity-crossword v-if="activity.activity_type=='CRUCIGRAMA'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state > 1 && attempt === false"></activity-crossword>
+                    <div v-if="attempt === false" class="activity_response-button">
+                        <button class="btn btn-primary" v-if="activity.interaction.state==1 && count_attemp === 0" @click="SaveResponseEvent(activity)">Enviar respuestas</button>
                     </div>
-                    <div v-if="activity.interaction.state==3">
+        
+                    <div v-if="attempt === true && count_attemp <= 3">
+                        <button class="btn btn-primary col-md-3" v-on:click="saveAttemp(activity)">Guardar Intento</button>
+                    </div>
+                    <div v-if="count_attemp > 3">
+                        <p>Intentos excedidos</p>
+                    </div>
+                    <div v-if="attempt === false && activity.interaction.state > 1">
+                        <button class="btn btn-primary col-md-3" v-on:click="registerAttemp(activity)">Registrar Intento</button>
+                    </div>                    
+        
+                    <div class="activity_response-button" v-if="activity.interaction.state==3">
                         Calificación: <span class="activity_score" >{{activity.interaction.score}}<small>/5</small></span>
                     </div>
                 </div>                    
@@ -89,8 +100,7 @@
                 </table>
             </div>
         </div>
-        <button class="btn btn-primary col-md-3" v-on:click="backPage">Volver</button>     
-
+        <button class="btn btn-primary col-md-3" v-on:click="backPage">Volver</button>    
         <!-- Modal Cargue de documentos -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -147,7 +157,9 @@ export default {
             loading:false,
             urlFile:null,
             fileName:null,
-            dataFiles:[]
+            dataFiles:[],
+            attempt:false,
+            count_attemp:0
         };
     },
     watch:{
@@ -253,6 +265,39 @@ export default {
 
         getFile(e){            
             this.file = e.target.files[0];            
+        },
+
+        registerAttemp(activity){
+            axios.get(`attemps/${activity.id}`).then((response)=>{
+                this.count_attemp = response.data.attemps;
+            });
+            this.attempt = true;
+        },
+
+        saveAttemp(activity){
+            let count = 0;
+            axios.post('attemps',{
+                activity_type: activity.activity_type,
+                delivery_max_date: activity.delivery_max_date,
+                description: activity.description,
+                feedback_date: activity.feedback_date,
+                id_student: this.id_user,
+                id_activity: activity.id,
+                id_achievement: activity.id_achievement,
+                id_indicator: activity.id_indicator,
+                interaction: JSON.stringify(activity.interaction),
+                is_required: activity.is_required,
+                module: JSON.stringify(activity.module),
+                name: activity.name,
+                rules: activity.rules,
+                state: activity.state,
+                updated_user: activity.updated_user,
+                attemps: (this.count_attemp + 1),
+            }).then((response)=>{                
+                toastr.success(response.data);
+            }).catch((error)=>{
+                toastr.error("Intenta de nuevo mas tarde");
+            })
         },
 
         saveFile(){

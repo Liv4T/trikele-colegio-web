@@ -916,4 +916,6 @@ Route::get('getWorkShop/{id_bimestre}/{id_area}/{id_classroom}','WorkshopControl
 
 Route::resource('filesWork','FilesWorkshopController');
 Route::get('getFilesStudents/{id_activity}/{id_workshop}','FilesWorkshopController@getFilesStudents');
+
 Route::resource('answerLite','AnswersLiteController');
+Route::resource('attemps','AttempsEvaluationsController');

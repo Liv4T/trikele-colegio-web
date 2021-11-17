@@ -36,9 +36,10 @@ class AttempsEvaluationsController extends Controller
      * @param  \App\attempsEvaluations  $attempsEvaluations
      * @return \Illuminate\Http\Response
      */
-    public function show(attempsEvaluations $attempsEvaluations)
+    public function show($id)
     {
-        
+        $data = attempsEvaluations::where('id_activity',$id)->orderBy('id', 'desc')->first();
+        return response()->json($data);   
     }
 
     /**
