@@ -122,6 +122,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['id_area', 'id_classroom', 'id_student', 'id_module', 'id_class'],
   data: function data() {
@@ -129,20 +145,49 @@ __webpack_require__.r(__webpack_exports__);
       classs: [],
       current_class: {},
       course: {},
-      current_activity: {}
+      current_activity: {},
+      attemps: []
     };
   },
   mounted: function mounted() {
+    var _this = this;
+
     this.classs = [];
     this.getClassContent();
+    axios.get('/attemps').then(function (response) {
+      var data = response.data;
+      data.forEach(function (element) {
+        _this.attemps.push({
+          activity_type: element.activity_type,
+          attemps: element.attemps,
+          created_at: element.created_at,
+          delivery_max_date: element.delivery_max_date,
+          description: element.description,
+          feedback_date: element.feedback_date,
+          id: element.id_activity,
+          id_achievement: element.id_achievement,
+          id_activity: element.id_activity,
+          id_indicator: element.id_indicator,
+          id_student: element.id_student,
+          interaction: JSON.parse(element.interaction),
+          is_required: element.is_required,
+          module: JSON.parse(element.module),
+          name: element.name,
+          rules: element.rules,
+          state: element.state,
+          updated_at: element.updated_at,
+          updated_user: element.updated_user
+        });
+      });
+    });
   },
   methods: {
     getClassContent: function getClassContent() {
-      var _this = this;
+      var _this2 = this;
 
       return new Promise(function (resolve, reject) {
-        axios.get("/api/teacher/area/".concat(_this.id_area, "/classroom/").concat(_this.id_classroom, "/student/").concat(_this.id_student, "/module/").concat(_this.id_module, "/class/").concat(_this.id_class)).then(function (response) {
-          _this.course = response.data;
+        axios.get("/api/teacher/area/".concat(_this2.id_area, "/classroom/").concat(_this2.id_classroom, "/student/").concat(_this2.id_student, "/module/").concat(_this2.id_module, "/class/").concat(_this2.id_class)).then(function (response) {
+          _this2.course = response.data;
           resolve();
         }, function (e) {
           return reject(e);
@@ -161,13 +206,13 @@ __webpack_require__.r(__webpack_exports__);
       $("#createZ").modal("show");
     },
     SaveScoreAction: function SaveScoreAction() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.put("/api/teacher/activity/".concat(this.current_activity.id, "/student/").concat(this.id_student, "/score"), {
         score: this.current_activity.score
       }).then(function (response) {
         $("#createZ").modal("hide");
-        _this2.current_activity = {};
+        _this3.current_activity = {};
         location.reload();
       }, function (e) {
         console.log(e);
@@ -288,9 +333,9 @@ var render = function() {
                     _vm._v(" "),
                     _c("small", { staticClass: "class_notify" }, [
                       _vm._v(
-                        "\n                                     " +
+                        "\n                                   " +
                           _vm._s(content.content_type) +
-                          "\n                              "
+                          "\n                            "
                       )
                     ])
                   ]),
@@ -343,9 +388,9 @@ var render = function() {
                     _vm._v(" "),
                     _c("small", { staticClass: "class_notify" }, [
                       _vm._v(
-                        "\n                                    ACTIVIDAD - " +
+                        "\n                                ACTIVIDAD - " +
                           _vm._s(activity.activity_type) +
-                          "\n                              "
+                          "\n                            "
                       )
                     ])
                   ]),
@@ -373,6 +418,57 @@ var render = function() {
           }),
           0
         )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card mt-2 ml-2" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c(
+              "div",
+              { staticClass: "col-12 col-md-12" },
+              _vm._l(_vm.attemps, function(activity, k_activity) {
+                return _c(
+                  "div",
+                  {
+                    key: k_activity,
+                    staticClass: "class_container",
+                    on: {
+                      click: function($event) {
+                        return _vm.openActivityEvent(activity)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "class_container_info" }, [
+                      _c(
+                        "div",
+                        { staticClass: "class_container_info-container" },
+                        [
+                          _c("small", { staticClass: "class_notify" }, [
+                            _vm._v("intento #" + _vm._s(activity.attemps))
+                          ]),
+                          _vm._v(" "),
+                          _c("span", [_vm._v(_vm._s(activity.name))]),
+                          _vm._v(" "),
+                          _c("small", { staticClass: "class_notify" }, [
+                            _vm._v(
+                              "\n                                        ACTIVIDAD - " +
+                                _vm._s(activity.activity_type) +
+                                "\n                                    "
+                            )
+                          ])
+                        ]
+                      )
+                    ])
+                  ]
+                )
+              }),
+              0
+            )
+          ])
+        ])
       ])
     ]),
     _vm._v(" "),
@@ -383,9 +479,9 @@ var render = function() {
             _c("div", { staticClass: "card-header card-title" }, [
               _c("h5", { staticStyle: { color: "#f79d52" } }, [
                 _vm._v(
-                  "\n                                  Actividad:" +
+                  "\n                            Actividad:" +
                     _vm._s(_vm.current_activity.name) +
-                    "\n                              "
+                    "\n                        "
                 )
               ])
             ]),
@@ -521,7 +617,16 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-title" }, [
+      _c("h1", [_vm._v("Intentos Actividades")])
+    ])
+  }
+]
 render._withStripped = true
 
 

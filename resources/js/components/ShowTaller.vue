@@ -65,7 +65,7 @@
                         <button class="btn btn-primary" v-if="activity.interaction.state==1 && count_attemp === 0" @click="SaveResponseEvent(activity)">Enviar respuestas</button>
                     </div>
         
-                    <div v-if="attempt === true && count_attemp <= 3">
+                    <div v-if="attempt === true">
                         <button class="btn btn-primary col-md-3" v-on:click="saveAttemp(activity)">Guardar Intento</button>
                     </div>
                     <div v-if="count_attemp > 3">
@@ -159,7 +159,7 @@ export default {
             fileName:null,
             dataFiles:[],
             attempt:false,
-            count_attemp:0
+            count_attemp: null
         };
     },
     watch:{
@@ -267,15 +267,15 @@ export default {
             this.file = e.target.files[0];            
         },
 
-        registerAttemp(activity){
+        registerAttemp(activity){            
             axios.get(`attemps/${activity.id}`).then((response)=>{
-                this.count_attemp = response.data.attemps;
+                this.count_attemp = parseInt(response.data.attemps);
             });
             this.attempt = true;
         },
 
-        saveAttemp(activity){
-            let count = 0;
+        saveAttemp(activity){          
+            let total_attemps = 1            
             axios.post('attemps',{
                 activity_type: activity.activity_type,
                 delivery_max_date: activity.delivery_max_date,
@@ -292,7 +292,7 @@ export default {
                 rules: activity.rules,
                 state: activity.state,
                 updated_user: activity.updated_user,
-                attemps: (this.count_attemp + 1),
+                attemps: total_attemps
             }).then((response)=>{                
                 toastr.success(response.data);
             }).catch((error)=>{
