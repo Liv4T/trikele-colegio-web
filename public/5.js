@@ -287,6 +287,7 @@ firebase__WEBPACK_IMPORTED_MODULE_0__["default"].analytics();
     },
     saveAttemp: function saveAttemp(activity) {
       var total_attemps = 1;
+      var suma = this.count_attemp + total_attemps;
       axios.post('attemps', {
         activity_type: activity.activity_type,
         delivery_max_date: activity.delivery_max_date,
@@ -303,7 +304,7 @@ firebase__WEBPACK_IMPORTED_MODULE_0__["default"].analytics();
         rules: activity.rules,
         state: activity.state,
         updated_user: activity.updated_user,
-        attemps: total_attemps
+        attemps: suma
       }).then(function (response) {
         toastr.success(response.data);
       })["catch"](function (error) {
@@ -754,7 +755,7 @@ var render = function() {
                           )
                         : _vm._e(),
                       _vm._v(" "),
-                      _vm.attempt === true
+                      _vm.attempt === true && _vm.count_attemp < 3
                         ? _c("div", [
                             _c(
                               "button",

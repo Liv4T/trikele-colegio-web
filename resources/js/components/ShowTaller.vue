@@ -65,7 +65,7 @@
                         <button class="btn btn-primary" v-if="activity.interaction.state==1 && count_attemp === 0" @click="SaveResponseEvent(activity)">Enviar respuestas</button>
                     </div>
         
-                    <div v-if="attempt === true">
+                    <div v-if="attempt === true && count_attemp < 3">
                         <button class="btn btn-primary col-md-3" v-on:click="saveAttemp(activity)">Guardar Intento</button>
                     </div>
                     <div v-if="count_attemp > 3">
@@ -275,7 +275,9 @@ export default {
         },
 
         saveAttemp(activity){          
-            let total_attemps = 1            
+            let total_attemps = 1                        
+            let suma = this.count_attemp + total_attemps
+            
             axios.post('attemps',{
                 activity_type: activity.activity_type,
                 delivery_max_date: activity.delivery_max_date,
@@ -292,7 +294,7 @@ export default {
                 rules: activity.rules,
                 state: activity.state,
                 updated_user: activity.updated_user,
-                attemps: total_attemps
+                attemps: suma
             }).then((response)=>{                
                 toastr.success(response.data);
             }).catch((error)=>{
