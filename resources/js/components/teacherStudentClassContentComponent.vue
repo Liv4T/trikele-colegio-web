@@ -142,7 +142,7 @@ export default {
     mounted() {
         this.classs = [];
         this.getClassContent();
-        axios.get('/attemps').then((response)=>{
+        axios.get(`/attemps/${this.id_student}`).then((response)=>{
             let data = response.data;            
             data.forEach(element => {                
                 this.attemps.push({

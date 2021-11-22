@@ -38,7 +38,7 @@ class AttempsEvaluationsController extends Controller
      */
     public function show($id)
     {
-        $data = attempsEvaluations::where('id_activity',$id)->orderBy('id', 'desc')->first();
+        $data = attempsEvaluations::where('id_student',$id)->orderBy('id', 'desc')->get();
         return response()->json($data);   
     }
 
