@@ -179,6 +179,7 @@ __webpack_require__.r(__webpack_exports__);
           updated_user: element.updated_user
         });
       });
+      console.log('attemps: ', _this.attemps);
     });
   },
   methods: {
@@ -522,7 +523,8 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm.current_activity.activity_type == "CUESTIONARIO"
+                _vm.current_activity.activity_type == "CUESTIONARIO" ||
+                _vm.current_activity.activity_type == "CUESTIONARIO_UNICA_RTA"
                   ? _c("activity-questionary", {
                       attrs: {
                         playing: true,

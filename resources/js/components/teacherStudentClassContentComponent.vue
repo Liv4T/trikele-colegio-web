@@ -108,7 +108,7 @@
                                     <textarea class="form-control-plaintext" v-model="current_activity.description" readonly></textarea>
                                 </div>
                             </div>
-                            <activity-questionary v-if="current_activity.activity_type=='CUESTIONARIO'" v-bind:playing="true" v-bind:module="current_activity.module" v-bind:disabled="true"></activity-questionary>
+                            <activity-questionary v-if="current_activity.activity_type=='CUESTIONARIO' || current_activity.activity_type=='CUESTIONARIO_UNICA_RTA'" v-bind:playing="true" v-bind:module="current_activity.module" v-bind:disabled="true"></activity-questionary>
                             <activity-complete-sentence v-if="current_activity.activity_type=='COMPLETAR_ORACION'" v-bind:playing="true" v-bind:module="current_activity.module" v-bind:disabled="true"></activity-complete-sentence>
                             <activity-relationship v-if="current_activity.activity_type=='RELACION'" v-bind:playing="true" v-bind:module="current_activity.module" v-bind:disabled="true"></activity-relationship>
                             <activity-crossword v-if="current_activity.activity_type=='CRUCIGRAMA'" v-bind:playing="true" v-bind:module="current_activity.module" v-bind:disabled="true"></activity-crossword>
@@ -143,9 +143,9 @@ export default {
         this.classs = [];
         this.getClassContent();
         axios.get('/attemps').then((response)=>{
-            let data = response.data;
-            data.forEach(element => {
-               this.attemps.push({
+            let data = response.data;            
+            data.forEach(element => {                
+                this.attemps.push({
                     activity_type: element.activity_type,
                     attemps: element.attemps,
                     created_at: element.created_at,
@@ -165,8 +165,10 @@ export default {
                     state: element.state,
                     updated_at: element.updated_at,
                     updated_user: element.updated_user,
-               }) 
+                }); 
             });
+
+            console.log('attemps: ',this.attemps);
         })
     },
     methods: {
