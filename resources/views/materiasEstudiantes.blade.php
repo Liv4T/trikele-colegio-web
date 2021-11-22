@@ -2,7 +2,7 @@
 
 @section('content')
   <menu-lateral></menu-lateral>
-  <inicio-materias-component :user="{{ Auth::user()->type_user }}"></inicio-materias-component>
+  <inicio-materias-component :user="{{ Auth::user()->type_user }}" :id_user="{{ Auth::user()->id}}"></inicio-materias-component>
   <div class="container">
     <div class="row justify-content-center">
       <div class="card-body"> @if (session('status'))

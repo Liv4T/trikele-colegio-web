@@ -192,8 +192,8 @@
                             >
                                 <div class="col-10">
                                     <div class="card">
-                                        <div class="card-header card-title">
-                                            <h5 style="color:#f79d52">
+                                        <!-- <div class="card-header card-title"> -->
+                                            <!-- <h5 style="color:#f79d52">
                                                 Actividad N°{{ key_a + 1 }} :
                                                 {{ act.name }}
                                             </h5>
@@ -228,8 +228,8 @@
                                                 "
                                             >
                                                 Ver retroalimentación
-                                            </button>
-                                        </div>
+                                            </button> -->
+                                        <!-- </div> -->
                                         <div
                                             class="card-body"
                                             v-if="activity.id == act.id"
@@ -250,10 +250,10 @@
                                             <activity-complete-sentence v-if="activity.activity_type=='COMPLETAR_ORACION'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-complete-sentence>
                                             <activity-relationship v-if="activity.activity_type=='RELACION'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-relationship>
                                             <activity-crossword v-if="activity.activity_type=='CRUCIGRAMA'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-crossword> -->
-                                            <div class="activity_response-button">
+                                            <!-- <div class="activity_response-button">
                                                 <button class="btn btn-primary" v-if="activity.interaction.state==1" @click="SaveResponseEvent(activity)">Enviar respuestas</button>
 
-                                            </div>
+                                            </div> -->
                                             <div v-if="activity.interaction.state==3">Calificación: <span class="activity_score" >{{activity.interaction.score}}<small>/5</small></span></div>
                                         </div>
                                     </div>

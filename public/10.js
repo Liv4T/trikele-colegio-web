@@ -114,7 +114,7 @@ moment__WEBPACK_IMPORTED_MODULE_1___default.a.locale("es");
   components: {
     pdf: vue_pdf__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: ["user"],
+  props: ["user", "id_user"],
   data: function data() {
     return {
       clases: [],
@@ -620,7 +620,8 @@ var render = function() {
                               attrs: {
                                 id_area: _vm.idArea,
                                 id_classroom: _vm.idClassroom,
-                                type_u: _vm.user
+                                type_u: _vm.user,
+                                id_user: _vm.id_user
                               }
                             })
                           ],

@@ -925,3 +925,5 @@ Route::middleware('auth')->get('payPlan', function(){
 Route::middleware('auth')->get('/compra/pagar/paypal/{data_string}', 'PaypalPaymentController@payPaypal');
 Route::middleware('auth')->get('/compra/pagar/plan/paypal/{data_string}', 'PaypalPaymentController@payPaypalPlan');
 Route::middleware('auth')->get('/compra/currencyExchange', 'PaypalPaymentController@currencyExchange');
+Route::resource('answerLite','AnswersLiteController');
+Route::resource('attemps','AttempsEvaluationsController');

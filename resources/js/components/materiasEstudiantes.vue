@@ -38,7 +38,7 @@
                         <div v-if="activetab === 4" class="tabcontent"><notas-component :idArea="idArea" :idClassroom="idClassroom" :user="user" :nameArea="nameArea" :planifications="planifications" :id_lective_planification="id_lective_planification"></notas-component></div>
 
                         <div v-if="activetab === 5" class="tabcontent">
-                            <talleres :id_area="idArea" :id_classroom="idClassroom" :type_u="user"></talleres>
+                            <talleres :id_area="idArea" :id_classroom="idClassroom" :type_u="user" :id_user="id_user" ></talleres>
                         </div>
                     </div>
                     <div v-else-if="showSection === 'chat'">
@@ -101,7 +101,7 @@ export default {
     components: {
         pdf,
     },
-    props: ["user"],
+    props: ["user","id_user"],
     data() {
         return {
             clases: [],

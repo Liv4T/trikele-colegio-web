@@ -1,115 +1,131 @@
 <template>
-      <div class="row">
-            <div class="col-12 col-md-12">
-                <div class="row">
-                    <div class="col-12 col-md-12">
-                        <div class="class_container_header">
-                            <span>Contenido de la clase:</span>
-                            <button class="btn btn-link" @click="GoReturnPage()">Regresar</button>
-                        </div>
+    <div class="row">
+        <div class="col-12 col-md-12">
+            <div class="row">
+                <div class="col-12 col-md-12">
+                    <div class="class_container_header">
+                        <span>Contenido de la clase:</span>
+                        <button class="btn btn-link" @click="GoReturnPage()">Regresar</button>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12 col-md-12 class_content_title">
-                        <span>{{course.name}}</span>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-12 class_content_title">
+                    <span>{{course.name}}</span>
                 </div>
+            </div>
 
-                <div class="row">
-                    <div class="col-12 col-md-12">
-                        <div class="class_container" v-for="(content,k_content) in course.content" v-bind:key="k_content">
+            <div class="row">
+                <div class="col-12 col-md-12">
+                    <div class="class_container" v-for="(content,k_content) in course.content" v-bind:key="k_content">
 
-                            <div class="class_container_info">
-                                <div  class="class_container_info-container">
-                                    <span>{{content.description}}</span>
-                                    <small class="class_notify">
-                                           {{content.content_type}}
-                                    </small>
-                                </div>
-
-                                <div class="class_container_score">
-                                    <div>
-                                        <span v-if="content.is_required">SI</span>
-                                        <span v-else>NO</span>
-                                        <small>Obligatorio</small>
-                                    </div>
-                                    <div>
-                                        <span v-if="content.date_interaction">SI</span>
-                                        <span v-else>NO</span>
-                                        <small>Visto</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                 <div class="row">
-                    <div class="col-12 col-md-12">
-                        <div class="class_container" v-for="(activity,k_activity) in course.activities" v-bind:key="k_activity" @click="openActivityEvent(activity)">
-                              <div class="class_container_info">
-                                <div  class="class_container_info-container">
-                                    <span>{{activity.name}}</span>
-                                    <small class="class_notify">
-                                          ACTIVIDAD - {{activity.activity_type}}
-                                    </small>
-                                </div>
-
-                                <div class="class_container_score">
-                                    <div v-if="activity.state_interaction==2">
-                                        <span class="class_notify">PENDIENTE</span>
-                                        <small>Calificación</small>
-                                    </div>
-                                    <div v-else>
-                                        <span v-if="activity.date_interaction">{{activity.score}}</span>
-                                        <span v-else>-</span>
-                                        <small>Calificación</small>
-                                    </div>
-                                </div>
+                        <div class="class_container_info">
+                            <div  class="class_container_info-container">
+                                <span>{{content.description}}</span>
+                                <small class="class_notify">
+                                       {{content.content_type}}
+                                </small>
                             </div>
 
+                            <div class="class_container_score">
+                                <div>
+                                    <span v-if="content.is_required">SI</span>
+                                    <span v-else>NO</span>
+                                    <small>Obligatorio</small>
+                                </div>
+                                <div>
+                                    <span v-if="content.date_interaction">SI</span>
+                                    <span v-else>NO</span>
+                                    <small>Visto</small>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="createZ">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                         <div class="card">
-                                <div class="card-header card-title">
-                                    <h5 style="color:#f79d52">
-                                        Actividad:{{ current_activity.name }}
-                                    </h5>
-                                </div>
-                                <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <b>Descripción:</b>
-                                                    <textarea
-                                                        class="form-control-plaintext"
-                                                        v-model="current_activity.description"
-                                                        readonly
-                                                    ></textarea>
-                                                </div>
-                                            </div>
-                                            <activity-questionary v-if="current_activity.activity_type=='CUESTIONARIO'" v-bind:playing="true" v-bind:module="current_activity.module" v-bind:disabled="true"></activity-questionary>
-                                            <activity-complete-sentence v-if="current_activity.activity_type=='COMPLETAR_ORACION'" v-bind:playing="true" v-bind:module="current_activity.module" v-bind:disabled="true"></activity-complete-sentence>
-                                            <activity-relationship v-if="current_activity.activity_type=='RELACION'" v-bind:playing="true" v-bind:module="current_activity.module" v-bind:disabled="true"></activity-relationship>
-                                            <activity-crossword v-if="current_activity.activity_type=='CRUCIGRAMA'" v-bind:playing="true" v-bind:module="current_activity.module" v-bind:disabled="true"></activity-crossword>
-                                            <div class="activity_score">
-                                                <div>
-                                                    <small>Calificación</small>
-                                                    <input class="form-control" style="width:100px" type="number" v-model="current_activity.score" />
-                                                </div>
+            <div class="row">
+                <div class="col-12 col-md-12">
+                    <div class="class_container" v-for="(activity,k_activity) in course.activities" v-bind:key="k_activity" @click="openActivityEvent(activity)">
+                          <div class="class_container_info">
+                            <div  class="class_container_info-container">
+                                <span>{{activity.name}}</span>
+                                <small class="class_notify">
+                                    ACTIVIDAD - {{activity.activity_type}}
+                                </small>
+                            </div>
 
-                                                <button class="btn btn-primary" style="margin-top:1em;"  @click="SaveScoreAction()">Actualizar</button>
-                                            </div>
-                                        </div>
-                         </div>
+                            <div class="class_container_score">
+                                <div v-if="activity.state_interaction==2">
+                                    <span class="class_notify">PENDIENTE</span>
+                                    <small>Calificación</small>
+                                </div>
+                                <div v-else>
+                                    <span v-if="activity.date_interaction">{{activity.score}}</span>
+                                    <span v-else>-</span>
+                                    <small>Calificación</small>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-             </div>
-
+            </div>
+            <div class="card mt-2 ml-2">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h1>Intentos Actividades</h1>
+                    </div>                
+                    <div class="card-body">    
+                        <div class="col-12 col-md-12">
+                            <div class="class_container" v-for="(activity,k_activity) in attemps" v-bind:key="k_activity" @click="openActivityEvent(activity)">
+                                <div class="class_container_info">
+                                    <div  class="class_container_info-container">
+                                        <small class="class_notify">intento #{{ activity.attemps }}</small>
+                                        <span>{{activity.name}}</span>
+                                        <small class="class_notify">
+                                            ACTIVIDAD - {{activity.activity_type}}
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <div class="modal fade" id="createZ">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="card">
+                        <div class="card-header card-title">
+                            <h5 style="color:#f79d52">
+                                Actividad:{{ current_activity.name }}
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <b>Descripción:</b>
+                                    <textarea class="form-control-plaintext" v-model="current_activity.description" readonly></textarea>
+                                </div>
+                            </div>
+                            <activity-questionary v-if="current_activity.activity_type=='CUESTIONARIO'" v-bind:playing="true" v-bind:module="current_activity.module" v-bind:disabled="true"></activity-questionary>
+                            <activity-complete-sentence v-if="current_activity.activity_type=='COMPLETAR_ORACION'" v-bind:playing="true" v-bind:module="current_activity.module" v-bind:disabled="true"></activity-complete-sentence>
+                            <activity-relationship v-if="current_activity.activity_type=='RELACION'" v-bind:playing="true" v-bind:module="current_activity.module" v-bind:disabled="true"></activity-relationship>
+                            <activity-crossword v-if="current_activity.activity_type=='CRUCIGRAMA'" v-bind:playing="true" v-bind:module="current_activity.module" v-bind:disabled="true"></activity-crossword>
+                            <div class="activity_score">
+                                <div>
+                                    <small>Calificación</small>
+                                    <input class="form-control" style="width:100px" type="number" v-model="current_activity.score" />
+                                </div>
+
+                                <button class="btn btn-primary" style="margin-top:1em;"  @click="SaveScoreAction()">Actualizar</button>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>        
+    </div>
 </template>
 <script>
 export default {
@@ -119,12 +135,39 @@ export default {
             classs:[],
             current_class:{},
             course:{},
-            current_activity:{}
+            current_activity:{},
+            attemps:[]
         }
     },
     mounted() {
         this.classs = [];
         this.getClassContent();
+        axios.get('/attemps').then((response)=>{
+            let data = response.data;
+            data.forEach(element => {
+               this.attemps.push({
+                    activity_type: element.activity_type,
+                    attemps: element.attemps,
+                    created_at: element.created_at,
+                    delivery_max_date: element.delivery_max_date,
+                    description: element.description,
+                    feedback_date: element.feedback_date,
+                    id: element.id_activity,
+                    id_achievement: element.id_achievement,
+                    id_activity: element.id_activity,
+                    id_indicator: element.id_indicator,
+                    id_student: element.id_student,
+                    interaction: JSON.parse(element.interaction),
+                    is_required: element.is_required,
+                    module: JSON.parse(element.module),
+                    name: element.name,
+                    rules: element.rules,
+                    state: element.state,
+                    updated_at: element.updated_at,
+                    updated_user: element.updated_user,
+               }) 
+            });
+        })
     },
     methods: {
         getClassContent()
@@ -153,17 +196,16 @@ export default {
         SaveScoreAction()
         {
 
-
-             axios.put( `/api/teacher/activity/${this.current_activity.id}/student/${this.id_student}/score`,{score:this.current_activity.score})
-                    .then(response => {
-                         $("#createZ").modal("hide");
-                         this.current_activity={};
-                         location.reload();
-                    },e=>{
-                        console.log(e);
-                        toastr.error(e.message);
-                         $("#createZ").modal("hide");
-                    });
+            axios.put( `/api/teacher/activity/${this.current_activity.id}/student/${this.id_student}/score`,{score:this.current_activity.score})
+            .then(response => {                
+                $("#createZ").modal("hide");
+                this.current_activity={};
+                location.reload();
+            },e=>{
+                console.log(e);
+                toastr.error(e.message);
+                $("#createZ").modal("hide");
+            });
         }
     }
 }

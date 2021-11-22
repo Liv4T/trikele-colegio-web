@@ -133,6 +133,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var firebaseConfig = {
   apiKey: "AIzaSyBUwPOBHWgSv10yWDO0VX_UCCOfHZ3jKYE",
@@ -148,7 +158,7 @@ var firebaseConfig = {
 firebase__WEBPACK_IMPORTED_MODULE_0__["default"].initializeApp(firebaseConfig);
 firebase__WEBPACK_IMPORTED_MODULE_0__["default"].analytics();
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['id_achievement', 'id_class', 'id_area', 'type_user', 'id_bimestre', 'id_workshop', 'backPage'],
+  props: ['id_achievement', 'id_class', 'id_area', 'type_user', 'id_bimestre', 'id_workshop', 'backPage', 'id_user'],
   data: function data() {
     return {
       course: [],
@@ -158,7 +168,9 @@ firebase__WEBPACK_IMPORTED_MODULE_0__["default"].analytics();
       loading: false,
       urlFile: null,
       fileName: null,
-      dataFiles: []
+      dataFiles: [],
+      attempt: false,
+      count_attemp: null
     };
   },
   watch: {
@@ -219,6 +231,30 @@ firebase__WEBPACK_IMPORTED_MODULE_0__["default"].analytics();
 
         if (_this3.course.activities.length > 0) {
           _this3.course.activities.forEach(function (act) {
+            axios.get("answerLite/".concat(act.id)).then(function (response) {
+              var data = response.data;
+              data.forEach(function (el) {
+                axios.put("/api/student/module/".concat(_this3.id_achievement, "/class/").concat(_this3.id_class, "/activity/").concat(act.id, "/interaction"), {
+                  activity_type: el.activity_type,
+                  delivery_max_date: el.delivery_max_date,
+                  description: el.description,
+                  feedback_date: el.feedback_date,
+                  id_student: _this3.id_user,
+                  id: el.id,
+                  id_achievement: el.id_achievement,
+                  id_indicator: el.id_indicator,
+                  interaction: JSON.parse(el.interaction),
+                  is_required: el.is_required,
+                  module: JSON.parse(el.module),
+                  name: el.name,
+                  rules: el.rules,
+                  state: el.state,
+                  updated_user: el.updated_user
+                }).then(function (response) {
+                  console.log(response.data);
+                });
+              });
+            });
             act.delivery_max_date = act.delivery_max_date ? act.delivery_max_date && delivery_max_date.replace(" ", "T") : '';
             act.feedback_date = act.feedback_date.replace(" ", "T");
 
@@ -240,6 +276,40 @@ firebase__WEBPACK_IMPORTED_MODULE_0__["default"].analytics();
     },
     getFile: function getFile(e) {
       this.file = e.target.files[0];
+    },
+    registerAttemp: function registerAttemp(activity) {
+      var _this4 = this;
+
+      axios.get("attemps/".concat(activity.id)).then(function (response) {
+        _this4.count_attemp = parseInt(response.data.attemps);
+      });
+      this.attempt = true;
+    },
+    saveAttemp: function saveAttemp(activity) {
+      var total_attemps = 1;
+      var suma = this.count_attemp + total_attemps;
+      axios.post('attemps', {
+        activity_type: activity.activity_type,
+        delivery_max_date: activity.delivery_max_date,
+        description: activity.description,
+        feedback_date: activity.feedback_date,
+        id_student: this.id_user,
+        id_activity: activity.id,
+        id_achievement: activity.id_achievement,
+        id_indicator: activity.id_indicator,
+        interaction: JSON.stringify(activity.interaction),
+        is_required: activity.is_required,
+        module: JSON.stringify(activity.module),
+        name: activity.name,
+        rules: activity.rules,
+        state: activity.state,
+        updated_user: activity.updated_user,
+        attemps: suma
+      }).then(function (response) {
+        toastr.success(response.data);
+      })["catch"](function (error) {
+        toastr.error("Intenta de nuevo mas tarde");
+      });
     },
     saveFile: function saveFile() {
       var storageRef = firebase__WEBPACK_IMPORTED_MODULE_0__["default"].storage().ref();
@@ -266,13 +336,13 @@ firebase__WEBPACK_IMPORTED_MODULE_0__["default"].analytics();
       this.getFiles();
     },
     deleteFile: function deleteFile(data) {
-      var _this4 = this;
+      var _this5 = this;
 
       if (window.confirm("Seguro que desea eliminar el documento ".concat(data.name, " ?"))) {
         axios["delete"]("filesWork/".concat(data.id)).then(function (response) {
           toastr.success(response.data);
 
-          _this4.getFiles();
+          _this5.getFiles();
         })["catch"](function (error) {
           toastr.error("Intenta de nuevo mas tarde");
           console.log(error);
@@ -282,10 +352,33 @@ firebase__WEBPACK_IMPORTED_MODULE_0__["default"].analytics();
       console.log(data);
     },
     SaveResponseEvent: function SaveResponseEvent(activity) {
+      var _this6 = this;
+
       axios.put("/api/student/module/".concat(this.id_achievement, "/class/").concat(this.id_class, "/activity/").concat(activity.id, "/interaction"), activity).then(function (response) {
         toastr.success("Actividad enviada correctamente");
       }, function (error) {
-        toastr.error("ERROR:Por favor valide que la información esta completa");
+        axios.post('answerLite', {
+          activity_type: activity.activity_type,
+          delivery_max_date: activity.delivery_max_date,
+          description: activity.description,
+          feedback_date: activity.feedback_date,
+          id_student: _this6.id_user,
+          id_activity: activity.id,
+          id_achievement: activity.id_achievement,
+          id_indicator: activity.id_indicator,
+          interaction: JSON.stringify(activity.interaction),
+          is_required: activity.is_required,
+          module: JSON.stringify(activity.module),
+          name: activity.name,
+          rules: activity.rules,
+          state: activity.state,
+          updated_user: activity.updated_user
+        }).then(function (response) {
+          console.log(response.data);
+          toastr.success('Actividad guardada de forma local, vuelve mas tarde para observar tus resultados');
+        })["catch"](function (error) {
+          toastr.error("Intenta de nuevo mas tarde");
+        });
       });
     }
   }
@@ -421,7 +514,9 @@ var render = function() {
                             ? _c("activity-questionary", {
                                 attrs: {
                                   module: activity.module,
-                                  disabled: activity.interaction.state > 1
+                                  disabled:
+                                    activity.interaction.state > 1 &&
+                                    _vm.attempt === false
                                 }
                               })
                             : _vm._e(),
@@ -430,7 +525,9 @@ var render = function() {
                             ? _c("activity-complete-sentence", {
                                 attrs: {
                                   module: activity.module,
-                                  disabled: activity.interaction.state > 1
+                                  disabled:
+                                    activity.interaction.state > 1 &&
+                                    _vm.attempt === false
                                 }
                               })
                             : _vm._e(),
@@ -439,7 +536,9 @@ var render = function() {
                             ? _c("activity-relationship", {
                                 attrs: {
                                   module: activity.module,
-                                  disabled: activity.interaction.state > 1
+                                  disabled:
+                                    activity.interaction.state > 1 &&
+                                    _vm.attempt === false
                                 }
                               })
                             : _vm._e(),
@@ -448,7 +547,9 @@ var render = function() {
                             ? _c("activity-crossword", {
                                 attrs: {
                                   module: activity.module,
-                                  disabled: activity.interaction.state > 1
+                                  disabled:
+                                    activity.interaction.state > 1 &&
+                                    _vm.attempt === false
                                 }
                               })
                             : _vm._e()
@@ -587,7 +688,9 @@ var render = function() {
                             attrs: {
                               playing: true,
                               module: activity.module,
-                              disabled: activity.interaction.state > 1
+                              disabled:
+                                activity.interaction.state > 1 &&
+                                _vm.attempt === false
                             }
                           })
                         : _vm._e(),
@@ -597,7 +700,9 @@ var render = function() {
                             attrs: {
                               playing: true,
                               module: activity.module,
-                              disabled: activity.interaction.state > 1
+                              disabled:
+                                activity.interaction.state > 1 &&
+                                _vm.attempt === false
                             }
                           })
                         : _vm._e(),
@@ -607,7 +712,9 @@ var render = function() {
                             attrs: {
                               playing: true,
                               module: activity.module,
-                              disabled: activity.interaction.state > 1
+                              disabled:
+                                activity.interaction.state > 1 &&
+                                _vm.attempt === false
                             }
                           })
                         : _vm._e(),
@@ -617,36 +724,87 @@ var render = function() {
                             attrs: {
                               playing: true,
                               module: activity.module,
-                              disabled: activity.interaction.state > 1
+                              disabled:
+                                activity.interaction.state > 1 &&
+                                _vm.attempt === false
                             }
                           })
                         : _vm._e(),
                       _vm._v(" "),
-                      _c("div", { staticClass: "activity_response-button" }, [
-                        activity.interaction.state == 1
-                          ? _c(
+                      _vm.attempt === false
+                        ? _c(
+                            "div",
+                            { staticClass: "activity_response-button" },
+                            [
+                              activity.interaction.state == 1 &&
+                              _vm.count_attemp === 0
+                                ? _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-primary",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.SaveResponseEvent(activity)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Enviar respuestas")]
+                                  )
+                                : _vm._e()
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.attempt === true && _vm.count_attemp < 3
+                        ? _c("div", [
+                            _c(
                               "button",
                               {
-                                staticClass: "btn btn-primary",
+                                staticClass: "btn btn-primary col-md-3",
                                 on: {
                                   click: function($event) {
-                                    return _vm.SaveResponseEvent(activity)
+                                    return _vm.saveAttemp(activity)
                                   }
                                 }
                               },
-                              [_vm._v("Enviar respuestas")]
+                              [_vm._v("Guardar Intento")]
                             )
-                          : _vm._e()
-                      ]),
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.count_attemp > 3
+                        ? _c("div", [_c("p", [_vm._v("Intentos excedidos")])])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.attempt === false && activity.interaction.state > 1
+                        ? _c("div", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary col-md-3",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.registerAttemp(activity)
+                                  }
+                                }
+                              },
+                              [_vm._v("Registrar Intento")]
+                            )
+                          ])
+                        : _vm._e(),
                       _vm._v(" "),
                       activity.interaction.state == 3
-                        ? _c("div", [
-                            _vm._v("\n                    Calificación: "),
-                            _c("span", { staticClass: "activity_score" }, [
-                              _vm._v(_vm._s(activity.interaction.score)),
-                              _c("small", [_vm._v("/5")])
-                            ])
-                          ])
+                        ? _c(
+                            "div",
+                            { staticClass: "activity_response-button" },
+                            [
+                              _vm._v("\n                    Calificación: "),
+                              _c("span", { staticClass: "activity_score" }, [
+                                _vm._v(_vm._s(activity.interaction.score)),
+                                _c("small", [_vm._v("/5")])
+                              ])
+                            ]
+                          )
                         : _vm._e()
                     ],
                     1
