@@ -154,7 +154,7 @@ __webpack_require__.r(__webpack_exports__);
 
     this.classs = [];
     this.getClassContent();
-    axios.get('/attemps').then(function (response) {
+    axios.get("/attemps/".concat(this.id_student)).then(function (response) {
       var data = response.data;
       data.forEach(function (element) {
         _this.attemps.push({
