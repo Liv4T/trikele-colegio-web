@@ -63,12 +63,12 @@
                     <activity-crossword v-if="activity.activity_type=='CRUCIGRAMA'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state > 1 && attempt === false"></activity-crossword>
                     <div v-if="attempt === false" class="activity_response-button">
                         <button class="btn btn-primary" v-if="activity.interaction.state==1 && count_attemp === 0" @click="SaveResponseEvent(activity)">Enviar respuestas</button>
-                    </div>
+                    </div>                    
         
                     <div v-if="attempt === true && count_attemp < 3">
                         <button class="btn btn-primary col-md-3" v-on:click="saveAttemp(activity)">Guardar Intento</button>
                     </div>
-                    <div v-if="count_attemp > 3">
+                    <div v-if="count_attemp >= 3">
                         <p>Intentos excedidos</p>
                     </div>
                     <div v-if="attempt === false && activity.interaction.state > 1">
@@ -268,8 +268,8 @@ export default {
         },
 
         registerAttemp(activity){            
-            axios.get(`attemps/${activity.id}`).then((response)=>{
-                this.count_attemp = parseInt(response.data.attemps);
+            axios.get(`attemps/${activity.id}`).then((response)=>{                
+                this.count_attemp = response.data.attemps ? parseInt(response.data.attemps) : 0;
             });
             this.attempt = true;
         },

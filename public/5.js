@@ -281,7 +281,7 @@ firebase__WEBPACK_IMPORTED_MODULE_0__["default"].analytics();
       var _this4 = this;
 
       axios.get("attemps/".concat(activity.id)).then(function (response) {
-        _this4.count_attemp = parseInt(response.data.attemps);
+        _this4.count_attemp = response.data.attemps ? parseInt(response.data.attemps) : 0;
       });
       this.attempt = true;
     },
@@ -772,7 +772,7 @@ var render = function() {
                           ])
                         : _vm._e(),
                       _vm._v(" "),
-                      _vm.count_attemp > 3
+                      _vm.count_attemp >= 3
                         ? _c("div", [_c("p", [_vm._v("Intentos excedidos")])])
                         : _vm._e(),
                       _vm._v(" "),
