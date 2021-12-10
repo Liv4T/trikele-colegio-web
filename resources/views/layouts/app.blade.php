@@ -1,6 +1,7 @@
 <!DOCTYPE html>
   <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
   <head>
+    <title>Trikele Colegio</title>
     <meta name="description" content="Educación por ciclos,2 Ciclos en un año,Titulo de Bachiller"/>
     <meta name="keywords" content="Bachillerato por ciclos,Bachillerato,Colegio,Colegio por ciclos,2 grados en 1 año"/>
     <link rel="shortcat icon" href="images/icon.png" />
