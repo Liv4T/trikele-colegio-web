@@ -3,14 +3,14 @@
     <div class="seccion desktop1">
       <div class="form-group">
         <a  href >
-          <img src="uploads/home/23.jpg" width="100%" />
+          <img src="uploads/images/semipresencial.png" width="100%" />
         </a>
       </div>
     </div>
     <div class="mobile1">
       <div class="form-group">
         <a  href ><!--@click.prevent="modalmatricula()"-->
-          <img src="uploads/home/24.jpg" width="100%" />
+          <img src="uploads/images/semipresencial.png" width="100%" />
         </a>
       </div>
     </div>
