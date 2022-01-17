@@ -293,18 +293,13 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
       this.isLoading = true;
       var url = window.location.origin + "/Courses";
       if (this.inputs.length < 1) return;
-      this.newTrimestre = []; // this.newLogro = [];
+      this.newTrimestre = [];
 
       if (this.inputs.length >= 1) {
         for (var i = 0; i < this.inputs.length; i++) {
           this.newTrimestre.push(this.inputs[i]);
         }
-      } // if (this.inputs1.length >= 1) {
-      //     for (let i = 0; i < this.inputs1.length; i++) {
-      //         this.newLogro.push(this.inputs1[i]);
-      //     }
-      // }
-
+      }
 
       axios.post(url, {
         //Cursos generales

@@ -293,19 +293,12 @@ export default {
                 return;
 
             this.newTrimestre = [];
-            // this.newLogro = [];
                 
             if (this.inputs.length >= 1) {
                 for (let i = 0; i < this.inputs.length; i++) {
                     this.newTrimestre.push(this.inputs[i]);
                 }
             }
-                
-            // if (this.inputs1.length >= 1) {
-            //     for (let i = 0; i < this.inputs1.length; i++) {
-            //         this.newLogro.push(this.inputs1[i]);
-            //     }
-            // }
 
             axios.post(url, {
                 //Cursos generales
