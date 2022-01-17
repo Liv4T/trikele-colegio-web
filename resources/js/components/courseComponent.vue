@@ -25,7 +25,7 @@
                         <strong>Logro:</strong>
                         <input v-on:change="annualContentUpdateEvent($event, t, 'inputs1')" class="form-control form-control-sm" type="number" style="width:50px;" v-model="input1.porcentaje" />%
                         <span>
-                          <a href="#" class="badge badge-danger" @click.prevent="remove1(t)" v-show="t === 0 ? false : true">-</a>
+                          <a href="#" class="badge badge-danger" @click.prevent="remove1(t, input1)" v-show="t === 0 ? false : true">-</a>
                           <a href="#" class="badge badge-primary" @click.prevent="add1(t)" v-show="t == inputs1.length - 1">+</a>
                         </span>
                       </div>
@@ -220,8 +220,14 @@
       add1(index) {
         this.inputs1.push({ logro: "", porcentaje: "0" });
       },
-      remove1(index) {
-        this.inputs1.splice(index, 1);
+      remove1(index, data) {
+            if(window.confirm("Seguro que desea Eliminar este Logro?")){
+                this.inputs1.splice(index, 1);
+                axios.delete(`/Courses/${data.id_achievement}`).then((response)=>{
+                    toastr.info('Logro Eliminado');
+                    console.log(response);
+                })
+            }                
       },
       isLoadingEvent() {
         return this.isLoading;

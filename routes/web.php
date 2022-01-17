@@ -321,6 +321,7 @@ Route::resource('users', 'UserController', ['except' => 'show', 'create', 'edit'
 Route::resource('resumes', 'ResumeController', ['except' => 'show', 'create', 'edit']);;
 Route::resource('courses', 'courseController', ['except' => 'show', 'create', 'edit']);
 Route::resource('Courses', 'CoursesController', ['except' => 'show', 'create', 'edit']);
+Route::delete('CoursesTrimDelete/{id_quaterly}','CoursesController@destroyTrim');
 Route::resource('Class', 'ClassController', ['except' => 'show', 'create', 'edit']);
 Route::get('GetClass', 'ClassController@getClass');
 Route::get('showClass/{id}', 'ClassController@show')->name('showClass');
@@ -361,6 +362,7 @@ Route::get('editOneWeek/{id_area}/{id_classroom}', 'CoursesController@editOneWee
 Route::get('viewGetWeek/{id_area}/{id_classrom}/{id_bimestre}', 'CoursesController@viewGetWeek')->name('viewGetWeek');
 Route::get('showWeek/{id}', 'CoursesController@showWeek');
 Route::put('updateCourseWeekly', 'CoursesController@updateCourseWeekly');
+Route::delete('destroyCourseWeekly/{id_course_weekly}', 'CoursesController@destroyCourseWeekly');
 Route::resource('course_unit', 'Course_unitController', ['except' => 'show', 'create', 'edit']);;
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/SaveTerms', 'HomeController@UserTerms')->name('SaveTerms');

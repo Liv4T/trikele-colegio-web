@@ -44,7 +44,7 @@
                                                 <a
                                                     href="#"
                                                     class="badge badge-danger"
-                                                    @click.prevent="remove(t)"
+                                                    @click.prevent="remove(t, input)"
                                                     v-show="t === 0 ? false : true"
                                                 >-</a>
                                                 <a
@@ -267,8 +267,14 @@ export default {
         add(index) {
             this.inputs.push({ name: "", contenido: "" });
         },
-        remove(index) {
-            this.inputs.splice(index, 1);
+        remove(index,data) {
+            if(window.confirm("Seguro que deseas eliminar el Indicador")){
+                this.inputs.splice(index, 1);  
+                axios.delete(`/CoursesTrimDelete/${data.id_quaterly}`).then((response)=>{
+                    toastr.info('Informació de trimestre Eliminada');
+                    console.log(response);
+                })              
+            }            
         },
         // add1(index) {
         //     this.inputs1.push({ logro: "", porcentaje: "0" });

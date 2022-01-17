@@ -19,6 +19,14 @@
                                 <tab-content title="Ciclo">
                                     <div class="form-group row mx-auto" v-for="(act, t) in fillS" :key="t">
                                         <div class="col-md-6">
+                                            <span>
+                                                <a
+                                                    href="#"
+                                                    class="badge badge-danger"
+                                                    @click.prevent="remove(t, act)"
+                                                    v-show="t === 0 ? false : true"
+                                                >-</a>
+                                            </span>
                                             <label for="name">Pregunta conductora o nombre {{t+1}}</label>
                                             <div>
                                                 <input
@@ -28,7 +36,7 @@
                                                     v-model="act.text"
                                                     required
                                                 />
-                                            </div>
+                                            </div>                                            
                                         </div>
                                         <div class="col-md-6">
                                             <label for="bimestre">Seleccione el Bimestre</label>                                      
@@ -131,10 +139,10 @@ export default {
             newSemanal: [],
             fillS: [
                 {
-                id: "",
-                driving_question: "",
-                class_development: "",
-                observation: "",
+                    id: "",
+                    driving_question: "",
+                    class_development: "",
+                    observation: "",
                 },
             ],
             semanal: false,
@@ -179,15 +187,14 @@ export default {
                 }
             });
         },
-        add(index) {
-            this.inputs.push({
-                driving_question: "",
-                class_development: "",
-                observation: "",
-            });
-        },
-        remove(index) {
-            this.inputs.splice(index, 1);
+        remove(index,data) {
+            if(window.confirm('Seguro que desea Eliminar este ciclo?')){
+                this.fillS.splice(index, 1);
+                axios.delete(`destroyCourseWeekly/${data.id}`).then((response)=>{
+                    console.log(response.data);
+                    toastr.info('Ciclo Eliminado');
+                })    
+            }            
         },
         getMenu() {
             window.location = "/actividad_g";
