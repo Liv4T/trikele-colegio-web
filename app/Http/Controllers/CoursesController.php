@@ -529,6 +529,12 @@ class CoursesController extends Controller
         return response()->json($data);
     }
 
+    public function deleteWeekly($id){
+        $deleteWeekly = Weekly::findOrFail($id);
+        $deleteWeekly->delete();
+        return 'ok';
+    }
+
     public function editOneWeek(String $id_area, String $id_classroom)
     {
         $user = Auth::user();

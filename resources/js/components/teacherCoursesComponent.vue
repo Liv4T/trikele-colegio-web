@@ -20,6 +20,7 @@
                   <tr>
                     <td>
                       <a class="btn btn-primary" v-on:click="getSelectedData('edit', clas)" style="color: white;">Editar</a>
+                      <a class="btn btn-primary" v-on:click="getSelectedData('delete', clas)" style="color: white;">Eliminar</a>
                     </td>
                     <td>{{ clas.text }}</td>
                     <td>
@@ -108,6 +109,13 @@
           this.id_classroom_selected = data.id_classroom;
           this.id_module = data.id;
           this.showSection = "cycle";
+        } else if (showSection == "delete"){
+          if(window.confirm('Seguro que desea Eliminar este Ciclo?')){
+            axios.delete(`/deleteWeekly/${data.id}`).then((response)=>{
+              toastr.info('Ciclo Eliminado');
+              this.getData();
+            })
+          }
         }
       },
       backPage() {        
