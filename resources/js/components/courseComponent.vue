@@ -25,7 +25,7 @@
                         <strong>Logro:</strong>
                         <input v-on:change="annualContentUpdateEvent($event, t, 'inputs1')" class="form-control form-control-sm" type="number" style="width:50px;" v-model="input1.porcentaje" />%
                         <span>
-                          <a href="#" class="badge badge-danger" @click.prevent="remove1(t)" v-show="t > 0 && inputs1_saved.length <= t">-</a>
+                          <a href="#" class="badge badge-danger" @click.prevent="remove1(t)" v-show="t === 0 ? false : true">-</a>
                           <a href="#" class="badge badge-primary" @click.prevent="add1(t)" v-show="t == inputs1.length - 1">+</a>
                         </span>
                       </div>

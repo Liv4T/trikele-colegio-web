@@ -422,10 +422,8 @@ var render = function() {
                                       {
                                         name: "show",
                                         rawName: "v-show",
-                                        value:
-                                          t > 0 && _vm.inputs_saved.length <= t,
-                                        expression:
-                                          "(t>0 && inputs_saved.length<=t)"
+                                        value: t === 0 ? false : true,
+                                        expression: "t === 0 ? false : true"
                                       }
                                     ],
                                     staticClass: "badge badge-danger",
