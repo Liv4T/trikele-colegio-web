@@ -154,7 +154,6 @@ export default {
             } catch {}
         },
         openLink(resource) {
-            console.log('resource content:', resource);
             try {
                 window.open(resource.content);
             } catch {}
