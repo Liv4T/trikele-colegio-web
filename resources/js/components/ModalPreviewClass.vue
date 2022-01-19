@@ -149,14 +149,13 @@ export default {
     },
     methods: {
         openDocument(resource) {
-            try {
-                this.saveInteraction(resource);
+            try {                
                 window.open(resource.content);
             } catch {}
         },
         openLink(resource) {
+            console.log('resource content:', resource);
             try {
-                this.saveInteraction(resource);
                 window.open(resource.content);
             } catch {}
         },
