@@ -269,8 +269,14 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
         contenido: ""
       });
     },
-    remove: function remove(index) {
-      this.inputs.splice(index, 1);
+    remove: function remove(index, data) {
+      if (window.confirm("Seguro que deseas eliminar el Indicador")) {
+        this.inputs.splice(index, 1);
+        axios["delete"]("/CoursesTrimDelete/".concat(data.id_quaterly)).then(function (response) {
+          toastr.info('Informació de trimestre Eliminada');
+          console.log(response);
+        });
+      }
     },
     // add1(index) {
     //     this.inputs1.push({ logro: "", porcentaje: "0" });
@@ -287,18 +293,13 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
       this.isLoading = true;
       var url = window.location.origin + "/Courses";
       if (this.inputs.length < 1) return;
-      this.newTrimestre = []; // this.newLogro = [];
+      this.newTrimestre = [];
 
       if (this.inputs.length >= 1) {
         for (var i = 0; i < this.inputs.length; i++) {
           this.newTrimestre.push(this.inputs[i]);
         }
-      } // if (this.inputs1.length >= 1) {
-      //     for (let i = 0; i < this.inputs1.length; i++) {
-      //         this.newLogro.push(this.inputs1[i]);
-      //     }
-      // }
-
+      }
 
       axios.post(url, {
         //Cursos generales
@@ -422,10 +423,8 @@ var render = function() {
                                       {
                                         name: "show",
                                         rawName: "v-show",
-                                        value:
-                                          t > 0 && _vm.inputs_saved.length <= t,
-                                        expression:
-                                          "(t>0 && inputs_saved.length<=t)"
+                                        value: t === 0 ? false : true,
+                                        expression: "t === 0 ? false : true"
                                       }
                                     ],
                                     staticClass: "badge badge-danger",
@@ -433,7 +432,7 @@ var render = function() {
                                     on: {
                                       click: function($event) {
                                         $event.preventDefault()
-                                        return _vm.remove(t)
+                                        return _vm.remove(t, input)
                                       }
                                     }
                                   },

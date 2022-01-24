@@ -24,7 +24,7 @@
                                                 href="#"
                                                 class="badge badge-danger"
                                                 @click.prevent="remove(t)"
-                                                v-show="t || (!t && inputs.length > 1)"
+                                                v-show="t === 0 ? false : true"
                                             >-</a>
                                             <a
                                                 href="#"

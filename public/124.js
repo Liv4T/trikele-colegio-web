@@ -54,6 +54,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["user", "id_area", "id_classroom", "id_bimestre"],
   data: function data() {
@@ -108,6 +109,8 @@ __webpack_require__.r(__webpack_exports__);
       }); // }
     },
     getSelectedData: function getSelectedData(showSection, data) {
+      var _this2 = this;
+
       if (showSection === "edit") {
         this.id_area_selected = data.id_area;
         this.id_classroom_selected = data.id_classroom;
@@ -117,6 +120,14 @@ __webpack_require__.r(__webpack_exports__);
         this.id_classroom_selected = data.id_classroom;
         this.id_module = data.id;
         this.showSection = "cycle";
+      } else if (showSection == "delete") {
+        if (window.confirm('Seguro que desea Eliminar este Ciclo?')) {
+          axios["delete"]("/deleteWeekly/".concat(data.id)).then(function (response) {
+            toastr.info('Ciclo Eliminado');
+
+            _this2.getData();
+          });
+        }
       }
     },
     backPage: function backPage() {
@@ -182,6 +193,23 @@ var render = function() {
                                     }
                                   },
                                   [_vm._v("Editar")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-primary",
+                                    staticStyle: { color: "white" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.getSelectedData(
+                                          "delete",
+                                          clas
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Eliminar")]
                                 )
                               ]),
                               _vm._v(" "),

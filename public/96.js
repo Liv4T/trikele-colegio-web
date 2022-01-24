@@ -232,8 +232,14 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
         porcentaje: "0"
       });
     },
-    remove1: function remove1(index) {
-      this.inputs1.splice(index, 1);
+    remove1: function remove1(index, data) {
+      if (window.confirm("Seguro que desea Eliminar este Logro?")) {
+        this.inputs1.splice(index, 1);
+        axios["delete"]("/Courses/".concat(data.id_achievement)).then(function (response) {
+          toastr.info('Logro Eliminado');
+          console.log(response);
+        });
+      }
     },
     isLoadingEvent: function isLoadingEvent() {
       return this.isLoading;
@@ -430,11 +436,9 @@ var render = function() {
                                               {
                                                 name: "show",
                                                 rawName: "v-show",
-                                                value:
-                                                  t > 0 &&
-                                                  _vm.inputs1_saved.length <= t,
+                                                value: t === 0 ? false : true,
                                                 expression:
-                                                  "t > 0 && inputs1_saved.length <= t"
+                                                  "t === 0 ? false : true"
                                               }
                                             ],
                                             staticClass: "badge badge-danger",
@@ -442,7 +446,7 @@ var render = function() {
                                             on: {
                                               click: function($event) {
                                                 $event.preventDefault()
-                                                return _vm.remove1(t)
+                                                return _vm.remove1(t, input1)
                                               }
                                             }
                                           },

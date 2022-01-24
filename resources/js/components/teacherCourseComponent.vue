@@ -275,7 +275,8 @@ export default {
             nameArea:'',
             custom_editor_toolbar_justify:[["bold", "italic", "underline"], [{ list: "ordered" }, { list: "bullet" }],["image"]],
             bimestres:[],
-            id_bimestre:null
+            id_bimestre:null,
+            disabledButton: false
         };
     },
     watch:{
@@ -437,14 +438,18 @@ export default {
         },
 
         SaveDataEvent(){
+            this.is_loading = true;
             this.course.id_area = this.id_area;
             this.course.id_classroom = this.id_classroom;            
 
             axios.put(`/api/teacher/module/${this.id_module}/class`,this.course).then((response) => {
 
               // this.getPlanificationEvent(this.id_lective_planification);
-                toastr.success("Clases actualizadas correctamente");
-                // this.returnPage();
+                
+                toastr.success("Clase actualizada correctamente");
+                this.is_loading = false;
+                this.backToPage();
+
             },(error)=>{console.log(error);toastr.error("ERROR:Por favor valide que la información esta completa");});
 
         },

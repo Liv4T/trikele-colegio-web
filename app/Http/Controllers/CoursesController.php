@@ -387,6 +387,12 @@ class CoursesController extends Controller
         return "ok";
     }
 
+    public function destroyCourseWeekly(Request $request, $id){
+        $courseWeekly = Weekly::findOrFail($id);
+        $courseWeekly->delete();
+        return 'ok';
+    }
+
     /**
      * Display the specified resource.
      *
@@ -427,9 +433,18 @@ class CoursesController extends Controller
      * @param  \App\Courses  $courses
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Courses $courses)
+    public function destroy(Request $request, $id)
     {
-        //
+        $achievementDelete = CoursesAchievement::findOrFail($id);
+        $achievementDelete->delete();
+        return 'ok';
+    }
+
+    public function destroyTrim(Request $request, $id)
+    {
+        $quaterlyDelete = Quarterly::findOrFail($id);
+        $quaterlyDelete->delete();
+        return 'ok';
     }
 
     public function getWeek()
@@ -512,6 +527,12 @@ class CoursesController extends Controller
             }
         }
         return response()->json($data);
+    }
+
+    public function deleteWeekly($id){
+        $deleteWeekly = Weekly::findOrFail($id);
+        $deleteWeekly->delete();
+        return 'ok';
     }
 
     public function editOneWeek(String $id_area, String $id_classroom)

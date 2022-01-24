@@ -44,8 +44,8 @@
                                                 <a
                                                     href="#"
                                                     class="badge badge-danger"
-                                                    @click.prevent="remove(t)"
-                                                    v-show="(t>0 && inputs_saved.length<=t)"
+                                                    @click.prevent="remove(t, input)"
+                                                    v-show="t === 0 ? false : true"
                                                 >-</a>
                                                 <a
                                                     href="#"
@@ -267,8 +267,14 @@ export default {
         add(index) {
             this.inputs.push({ name: "", contenido: "" });
         },
-        remove(index) {
-            this.inputs.splice(index, 1);
+        remove(index,data) {
+            if(window.confirm("Seguro que deseas eliminar el Indicador")){
+                this.inputs.splice(index, 1);  
+                axios.delete(`/CoursesTrimDelete/${data.id_quaterly}`).then((response)=>{
+                    toastr.info('Informació de trimestre Eliminada');
+                    console.log(response);
+                })              
+            }            
         },
         // add1(index) {
         //     this.inputs1.push({ logro: "", porcentaje: "0" });
@@ -287,19 +293,12 @@ export default {
                 return;
 
             this.newTrimestre = [];
-            // this.newLogro = [];
                 
             if (this.inputs.length >= 1) {
                 for (let i = 0; i < this.inputs.length; i++) {
                     this.newTrimestre.push(this.inputs[i]);
                 }
             }
-                
-            // if (this.inputs1.length >= 1) {
-            //     for (let i = 0; i < this.inputs1.length; i++) {
-            //         this.newLogro.push(this.inputs1[i]);
-            //     }
-            // }
 
             axios.post(url, {
                 //Cursos generales
