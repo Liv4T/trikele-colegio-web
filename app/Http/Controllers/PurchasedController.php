@@ -696,7 +696,7 @@ class PurchasedController extends Controller
             }
 
             //procede al pago online
-            $access_token = env("MERCADOPAGO_ACCESS_TOKEN", 'TEST-901453271267975-111311-4156a2cae13505cd777cba08c1476d7f-671652305');
+            $access_token = env("MERCADOPAGO_ACCESS_TOKEN", 'APP_USR-6210585021324446-111013-97c82e36ceab96268ed0911da0d20766-655239657');
             MercadoPago\SDK::setAccessToken($access_token);
 
             $reference = "TRIKELE-" . $auth->id . "-" . $invoice->id . "-" . date('Ymd-Hi');
