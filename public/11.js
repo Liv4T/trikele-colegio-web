@@ -314,6 +314,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 (function () {
   "use strict";
 
@@ -1096,8 +1097,7 @@ var render = function() {
                     _vm._l(_vm.course.content, function(item_content, key_c) {
                       return [
                         item_content.content != "" &&
-                        item_content.content != null &&
-                        item_content.content_type != "DOCUMENT"
+                        item_content.content != null
                           ? _c(
                               "div",
                               {
@@ -1106,6 +1106,28 @@ var render = function() {
                                 staticStyle: { "border-radius": "8px" }
                               },
                               [
+                                item_content.content_type === "DOCUMENT"
+                                  ? _c(
+                                      "h4",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: _vm.hideDocuments,
+                                            expression: "hideDocuments"
+                                          }
+                                        ],
+                                        staticStyle: { color: "#f79d52" }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                        Documento\n                                    "
+                                        )
+                                      ]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
                                 item_content.content_type === "LINK"
                                   ? _c(
                                       "h4",
@@ -1170,6 +1192,30 @@ var render = function() {
                                 _vm._v(" "),
                                 _c("div", { staticClass: "form-item" }, [
                                   _c("div", { staticClass: "form-button" }, [
+                                    _c("div", [
+                                      item_content.content_type === "DOCUMENT"
+                                        ? _c(
+                                            "a",
+                                            {
+                                              staticClass: "btn btn-primary",
+                                              attrs: {
+                                                href: item_content.content,
+                                                download: "",
+                                                target: "__blank"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.openDocument(
+                                                    item_content
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Leer documento")]
+                                          )
+                                        : _vm._e()
+                                    ]),
+                                    _vm._v(" "),
                                     item_content.content_type === "LINK"
                                       ? _c(
                                           "a",
