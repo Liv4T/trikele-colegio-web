@@ -118,7 +118,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['module', 'disabled', 'playing'],
+  props: ['module', 'disabled', 'playing', 'type_user'],
   data: function data() {
     return {
       question_types: [{
@@ -311,24 +311,34 @@ var render = function() {
                                 ])
                               ]),
                               _vm._v(" "),
-                              _c("div", { staticClass: "col-5 text-right" }, [
-                                k_q > 0 && !_vm.disabled
-                                  ? _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-warning",
-                                        attrs: { alt: "Remover pregunta" },
-                                        on: {
-                                          click: function($event) {
-                                            $event.preventDefault()
-                                            return _vm.RemoveQuestionEvent(k_q)
-                                          }
-                                        }
-                                      },
-                                      [_vm._v("Remover pregunta")]
-                                    )
-                                  : _vm._e()
-                              ])
+                              _vm.type_user === 2
+                                ? _c(
+                                    "div",
+                                    { staticClass: "col-5 text-right" },
+                                    [
+                                      k_q > 0 && !_vm.disabled
+                                        ? _c(
+                                            "button",
+                                            {
+                                              staticClass: "btn btn-warning",
+                                              attrs: {
+                                                alt: "Remover pregunta"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  $event.preventDefault()
+                                                  return _vm.RemoveQuestionEvent(
+                                                    k_q
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Remover pregunta")]
+                                          )
+                                        : _vm._e()
+                                    ]
+                                  )
+                                : _vm._e()
                             ]),
                             _vm._v(" "),
                             _c("div", { staticClass: "row" }, [
@@ -597,24 +607,28 @@ var render = function() {
                               ])
                             ]),
                             _vm._v(" "),
-                            _c("div", { staticClass: "col-5 text-right" }, [
-                              k_q > 0 && !_vm.disabled
-                                ? _c(
-                                    "button",
-                                    {
-                                      staticClass: "btn btn-warning",
-                                      attrs: { alt: "Remover pregunta" },
-                                      on: {
-                                        click: function($event) {
-                                          $event.preventDefault()
-                                          return _vm.RemoveQuestionEvent(k_q)
-                                        }
-                                      }
-                                    },
-                                    [_vm._v("Remover pregunta")]
-                                  )
-                                : _vm._e()
-                            ])
+                            _vm.type_user === 2
+                              ? _c("div", { staticClass: "col-5 text-right" }, [
+                                  k_q > 0 && !_vm.disabled
+                                    ? _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-warning",
+                                          attrs: { alt: "Remover pregunta" },
+                                          on: {
+                                            click: function($event) {
+                                              $event.preventDefault()
+                                              return _vm.RemoveQuestionEvent(
+                                                k_q
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Remover pregunta")]
+                                      )
+                                    : _vm._e()
+                                ])
+                              : _vm._e()
                           ]),
                           _vm._v(" "),
                           _c("div", {

@@ -587,7 +587,8 @@ var render = function() {
                             attrs: {
                               playing: true,
                               module: activity.module,
-                              disabled: activity.interaction.state > 1
+                              disabled: activity.interaction.state > 1,
+                              type_user: _vm.type_user
                             }
                           })
                         : _vm._e(),
