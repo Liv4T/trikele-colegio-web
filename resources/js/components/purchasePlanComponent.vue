@@ -208,6 +208,58 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-5 margin-top-100">
+                <div class="card text-center">
+                    <div class="div-plan-icon fondoplan">
+                        <img
+                            class="section3I"
+                            src="/images/Botonplan2.png"
+                            alt="boton plan 1"
+                        />
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <h4>MENSUALIDAD</h4>
+                        </div>
+                    </div>
+                    <!-- <div class="row height-50 margin-top-50">
+                        <div class="col-12 text-center">
+                            <span class="border-bottom-1 padding-10">Aprender por grado</span>
+                        </div>
+                    </div> -->
+                    <!-- <div class="row">
+                        <div class="col-12">
+                            <p class="text-justify padding-10">Disfruta de todos las materias y módulos aprendiendo a tu ritmo</p>
+                        </div>
+                    </div> -->
+                    <div class="row plan-height">
+                        <div class="col-12">
+                            <!-- <ul>
+                                <li>Acceso a todas las materia</li>
+                                <li>Acceso ilimitado a todos los módulos</li>
+                                <li>Actividades lúdicas</li>
+                            </ul> -->
+                            <h6 class="text-center">Desde</h6>
+                            <span>
+                                <strong>$300.000</strong>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="row padding-10">
+                        <div class="col-12">
+                            <button @click="SelectPlanEvent('MENSUALIDAD')"   class="btn btn-Azul">Comprar</button>
+                        </div>
+                    </div>
+
+                    <div class="row padding-20">
+                        <div class="col-12">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>

@@ -222,6 +222,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['voucher'],
   data: function data() {
@@ -470,6 +522,35 @@ var render = function() {
           ]),
           _vm._v(" "),
           _vm._m(23)
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-5 margin-top-100" }, [
+        _c("div", { staticClass: "card text-center" }, [
+          _vm._m(24),
+          _vm._v(" "),
+          _vm._m(25),
+          _vm._v(" "),
+          _vm._m(26),
+          _vm._v(" "),
+          _c("div", { staticClass: "row padding-10" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-Azul",
+                  on: {
+                    click: function($event) {
+                      return _vm.SelectPlanEvent("MENSUALIDAD")
+                    }
+                  }
+                },
+                [_vm._v("Comprar")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(27)
         ])
       ])
     ])
@@ -747,6 +828,47 @@ var staticRenderFns = [
         _c("h6", { staticClass: "text-center" }, [_vm._v("Desde")]),
         _vm._v(" "),
         _c("span", [_c("strong", [_vm._v("$315.000")])])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row padding-20" }, [
+      _c("div", { staticClass: "col-12" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "div-plan-icon fondoplan" }, [
+      _c("img", {
+        staticClass: "section3I",
+        attrs: { src: "/images/Botonplan2.png", alt: "boton plan 1" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12 text-center" }, [
+        _c("h4", [_vm._v("MENSUALIDAD")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row plan-height" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("h6", { staticClass: "text-center" }, [_vm._v("Desde")]),
+        _vm._v(" "),
+        _c("span", [_c("strong", [_vm._v("$300.000")])])
       ])
     ])
   },
