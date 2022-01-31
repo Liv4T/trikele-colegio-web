@@ -30,7 +30,7 @@ class WorkshopController extends Controller
                 $user = Auth::user();
             
                 if($user->type_user===3){
-                    $interaction=ActivityInteraction::where('id_activity',$activities->id)->first();
+                    $interaction=ActivityInteraction::where('id_activity',$activities->id)->where('id_student',$user->id)->first();
 
                     array_push($data, 
                         array(
