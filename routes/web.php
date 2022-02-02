@@ -919,3 +919,6 @@ Route::get('getWorkShop/{id_bimestre}/{id_area}/{id_classroom}','WorkshopControl
 
 Route::resource('filesWork','FilesWorkshopController');
 Route::get('getFilesStudents/{id_activity}/{id_workshop}','FilesWorkshopController@getFilesStudents');
+
+Route::resource('AssignNote','AssignNoteController');
+Route::get('/AssignNote/{id_student}/{id_area}','AssignNoteController@show');

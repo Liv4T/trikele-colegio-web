@@ -78,13 +78,60 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
   data: function data() {
     return {
       students: [],
       areas: [],
-      current_area: {}
+      current_area: {},
+      asignNote: null,
+      bimestres: [],
+      data: {},
+      idbimestre: "",
+      noteassigned: "",
+      id_assign_note: null
     };
   },
   mounted: function mounted() {
@@ -100,6 +147,10 @@ __webpack_require__.r(__webpack_exports__);
         _this.getStudents();
       }
     });
+    axios.get('/bimestres').then(function (response) {
+      _this.bimestres = response.data;
+      console.log(response.data);
+    });
   },
   methods: {
     getStudents: function getStudents() {
@@ -113,6 +164,58 @@ __webpack_require__.r(__webpack_exports__);
     SelectArea: function SelectArea(area) {
       this.current_area = area;
       this.getStudents();
+    },
+    getDataStudents: function getDataStudents(student, current_area) {
+      var _this3 = this;
+
+      this.data = {
+        name_student: student.user_name,
+        id_student: student.user_id,
+        id_area: current_area.id,
+        "class": current_area.text
+      };
+      axios.get("/AssignNote/".concat(student.user_id, "/").concat(current_area.id), {
+        id_student: student.user_id,
+        id_area: current_area.id
+      }).then(function (response) {
+        _this3.asignNote = response.data.asignNote;
+        _this3.noteassigned = response.data.note;
+        response.data.asignNote === 'parcial' && (_this3.idbimestre = response.data.id_bimestre);
+        _this3.id_assign_note = response.data.id;
+      });
+    },
+    saveNote: function saveNote() {
+      if (this.id_assign_note === null) {
+        axios.post('/AssignNote', {
+          id_bimestre: this.asignNote === 'parcial' ? this.idbimestre : null,
+          id_student: this.data.id_student,
+          id_area: this.data.id_area,
+          "class": this.data["class"],
+          student_name: this.data.name_student,
+          note: this.noteassigned,
+          asignNote: this.asignNote
+        }).then(function (response) {
+          toastr.success(response.data);
+        })["catch"](function (error) {
+          toastr.info('Intenta de nuevo mas tarde');
+          console.log(error);
+        });
+      } else {
+        axios.put("/AssignNote/".concat(this.id_assign_note), {
+          id_bimestre: this.asignNote === 'parcial' ? this.idbimestre : null,
+          id_student: this.data.id_student,
+          id_area: this.data.id_area,
+          "class": this.data["class"],
+          student_name: this.data.name_student,
+          note: this.noteassigned,
+          asignNote: this.asignNote
+        }).then(function (response) {
+          toastr.success(response.data);
+        })["catch"](function (error) {
+          toastr.info('Intenta de nuevo mas tarde');
+          console.log(error);
+        });
+      }
     }
   }
 });
@@ -241,11 +344,11 @@ var render = function() {
                                   })
                                 : _vm._e(),
                               _vm._v(
-                                "\n                                                " +
+                                "\n                                            " +
                                   _vm._s(student.user_lastname) +
                                   " " +
                                   _vm._s(student.user_name) +
-                                  "\n                                            "
+                                  "\n                                        "
                               )
                             ]),
                             _vm._v(" "),
@@ -280,7 +383,7 @@ var render = function() {
                                     ]
                                   ),
                                   _vm._v(
-                                    "\n                                                Actividades pendientes de calificación\n                                            "
+                                    "\n                                            Actividades pendientes de calificación\n                                        "
                                   )
                                 ])
                               : _vm._e()
@@ -288,19 +391,19 @@ var render = function() {
                           _vm._v(" "),
                           _c("td", [
                             _vm._v(
-                              "\n                                            " +
+                              "\n                                        " +
                                 _vm._s(student.progress) +
-                                " %\n                                        "
+                                " %\n                                    "
                             )
                           ]),
                           _vm._v(" "),
                           _c("td", [
                             _vm._v(
-                              "\n                                            " +
+                              "\n                                        " +
                                 _vm._s(student.score) +
                                 " /  " +
                                 _vm._s(student.score_base) +
-                                "\n                                        "
+                                "\n                                    "
                             )
                           ]),
                           _vm._v(" "),
@@ -321,6 +424,29 @@ var render = function() {
                               },
                               [_vm._v("VER")]
                             )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary",
+                                attrs: {
+                                  type: "button",
+                                  "data-toggle": "modal",
+                                  "data-target": "#exampleModal"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.getDataStudents(
+                                      student,
+                                      _vm.current_area
+                                    )
+                                  }
+                                }
+                              },
+                              [_vm._v("Nota")]
+                            )
                           ])
                         ])
                       }),
@@ -334,7 +460,168 @@ var render = function() {
           ])
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "exampleModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(4),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Asignacion de nota: ")]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.asignNote,
+                          expression: "asignNote"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.asignNote = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "final" } }, [
+                        _vm._v("Final")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "parcial" } }, [
+                        _vm._v("Parcial")
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm.asignNote === "parcial"
+                  ? _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Bimestre")]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.idbimestre,
+                              expression: "idbimestre"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.idbimestre = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        _vm._l(_vm.bimestres, function(bim, key) {
+                          return _c(
+                            "option",
+                            { key: key, domProps: { value: bim.id } },
+                            [_vm._v(_vm._s(bim.name))]
+                          )
+                        }),
+                        0
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Nota")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.noteassigned,
+                        expression: "noteassigned"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.noteassigned },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.noteassigned = $event.target.value
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Cerrar")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button" },
+                    on: { click: _vm.saveNote }
+                  },
+                  [_vm._v("Guardar Cambios")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -366,6 +653,8 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Calificación")]),
         _vm._v(" "),
+        _c("th"),
+        _vm._v(" "),
         _c("th")
       ])
     ])
@@ -376,6 +665,31 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { attrs: { colspan: "4" } }, [_vm._v("Cargando...")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Asignación de Nota")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
     ])
   }
 ]
