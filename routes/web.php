@@ -922,3 +922,4 @@ Route::get('getFilesStudents/{id_activity}/{id_workshop}','FilesWorkshopControll
 
 Route::resource('AssignNote','AssignNoteController');
 Route::get('/AssignNote/{id_student}/{id_area}','AssignNoteController@show');
+Route::get('/assignNote/{id}','AssignNoteController@getAssignNote');

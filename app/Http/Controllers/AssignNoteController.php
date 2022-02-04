@@ -49,7 +49,13 @@ class AssignNoteController extends Controller
      */
     public function show($id_student,$id_area)
     {
-        $getNote = AssignNote::where('id_student',$id_student)->where('id_area',$id_area)->orderBy('id','desc')->first();
+        $getNote = AssignNote::where('id_student',$id_student)->where('id_area',$id_area)->orderBy('id_bimestre','asc')->get();
+        return response()->json($getNote);
+    }
+
+    public function getAssignNote($id_assign)
+    {
+        $getNote = AssignNote::where('id',$id_assign)->first();
         return response()->json($getNote);
     }
 
@@ -83,7 +89,7 @@ class AssignNoteController extends Controller
      * @param  \App\AssignNote  $assignNote
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AssignNote $assignNote)
+    public function destroy($id)
     {
         $assignNote = AssignNote::findOrFail($id);
         $assignNote->delete();

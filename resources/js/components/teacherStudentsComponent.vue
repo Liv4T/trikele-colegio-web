@@ -53,7 +53,10 @@
                                             <a class="btn btn-primary" :href="`/docente/area/${current_area.id}/curso/${current_area.id_classroom}/estudiante/${student.user_id}`">VER</a>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" v-on:click="getDataStudents(student,current_area)">Nota</button>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" v-on:click="getDataStudents(student, current_area)">Nota</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalNote" v-on:click="getNotesStudents(student.user_id,current_area.id)">Ver Notas</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -106,6 +109,113 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="exampleModalNote" tabindex="-1" role="dialog" aria-labelledby="exampleModalNoteLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalNoteLabel">Informe de Nota</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div>
+                                <div class="form-group">
+                                    <div v-for="(notes, key) in notesStudent" :key="key">
+                                        <div v-if="notes.id_bimestre === 1">
+                                            <th>
+                                                <tr>Bimestre 1</tr>
+                                            </th>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <input class="form-control" disabled type="text" :placeholder="notes.note">
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-primary btn-sm" v-on:click="editInfo(notes.id)">Editar</button>
+                                                        <button class="btn btn-danger btn-sm" v-on:click="deleteNote(notes.id)">Eliminar</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>                                            
+                                        </div>
+
+                                        <div v-if="notes.id_bimestre === 2">
+                                            <th>
+                                                <tr>Bimestre 2</tr>
+                                            </th>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <input class="form-control" disabled type="text" :placeholder="notes.note">
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-primary btn-sm" v-on:click="editInfo(notes.id)">Editar</button>
+                                                        <button class="btn btn-danger btn-sm" v-on:click="deleteNote(notes.id)">Eliminar</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </div>
+
+                                        <div v-if="notes.id_bimestre === 3">
+                                            <th>
+                                                <tr>Bimestre 3</tr>
+                                            </th>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <input class="form-control" disabled type="text" :placeholder="notes.note">
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-primary btn-sm" v-on:click="editInfo(notes.id)">Editar</button>
+                                                        <button class="btn btn-danger btn-sm" v-on:click="deleteNote(notes.id)">Eliminar</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </div>
+
+                                        <div v-if="notes.id_bimestre === 4">
+                                            <th>
+                                                <tr>Bimestre 4</tr>
+                                            </th>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <input class="form-control" disabled type="text" :placeholder="notes.note">
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-primary btn-sm" v-on:click="editInfo(notes.id)">Editar</button>
+                                                        <button class="btn btn-danger btn-sm" v-on:click="deleteNote(notes.id)">Eliminar</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </div>
+
+                                        <div v-if="notes.asignNote === 'final'">
+                                            <th>
+                                                <tr>Nota Final</tr>
+                                            </th>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <input class="form-control" disabled type="text" :placeholder="notes.note">
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-primary btn-sm" v-on:click="editInfo(notes.id)">Editar</button>
+                                                        <button class="btn btn-danger btn-sm" v-on:click="deleteNote(notes.id)">Eliminar</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </div>                                                                            
+                                    </div>            
+                                </div>
+                            </div>                            
+                        </div>                        
+                    </div>                    
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -121,7 +231,8 @@ export default {
             data:{},
             idbimestre:"",
             noteassigned:"",
-            id_assign_note:null
+            id_assign_note:null,
+            notesStudent:[]
         }
     },
     mounted() {
@@ -137,8 +248,7 @@ export default {
         });
 
         axios.get('/bimestres').then((response)=>{
-            this.bimestres = response.data;
-            console.log(response.data);
+            this.bimestres = response.data;            
         })
     },
     methods: {
@@ -150,8 +260,8 @@ export default {
             });
         },
         SelectArea(area){
-             this.current_area=area;
-             this.getStudents();
+            this.current_area=area;
+            this.getStudents();
         },
         getDataStudents(student, current_area){
             this.data = {
@@ -160,15 +270,25 @@ export default {
                 id_area: current_area.id,
                 class: current_area.text
             }
+        },
+        editInfo(id){
+            axios.get(`/assignNote/${id}`).then((response)=>{
+                let data = response.data;
 
-            axios.get(`/AssignNote/${student.user_id}/${current_area.id}`,{
-                id_student:student.user_id,
-                id_area:current_area.id
-            }).then((response)=>{
-                this.asignNote = response.data.asignNote;
-                this.noteassigned = response.data.note;
-                response.data.asignNote === 'parcial' && (this.idbimestre = response.data.id_bimestre); 
-                this.id_assign_note = response.data.id
+                this.asignNote = data.asignNote;
+                this.idbimestre = data.id_bimestre;
+                this.noteassigned = data.note;
+                this.id_assign_note = data.id;
+
+                this.data = {
+                    id_student: data.id_student,
+                    id_area: data.id_area,
+                    class: data.class,
+                    name_student: data.student_name
+                }                
+
+                $('#exampleModal').modal('show');
+                $('#exampleModalNote').modal('hide');
             })
         },
         saveNote(){     
@@ -183,6 +303,17 @@ export default {
                     asignNote: this.asignNote,
                 }).then((response)=>{
                     toastr.success(response.data);
+                    this.asignNote = '';
+                    this.idbimestre = '';
+                    this.noteassigned = '';
+                    this.id_assign_note = null;
+                    this.data = {
+                        id_student: '',
+                        id_area: '',
+                        class: '',
+                        name_student: '',
+                    };
+                    $('#exampleModal').modal('hide');
                 }).catch((error)=>{
                     toastr.info('Intenta de nuevo mas tarde');
                     console.log(error)
@@ -198,11 +329,35 @@ export default {
                     asignNote: this.asignNote,
                 }).then((response)=>{
                     toastr.success(response.data);
+                    this.asignNote = '';
+                    this.idbimestre = '';
+                    this.noteassigned = '';
+                    this.id_assign_note = null;
+                    this.data = {
+                        id_student: '',
+                        id_area: '',
+                        class: '',
+                        name_student: '',
+                    };
+                    $('#exampleModal').modal('hide');
                 }).catch((error)=>{
                     toastr.info('Intenta de nuevo mas tarde');
                     console.log(error)
                 })
             }                          
+        },
+        getNotesStudents(idStudent,idArea){
+            axios.get(`/AssignNote/${idStudent}/${idArea}`).then((response)=>{
+                this.notesStudent = response.data;
+            })
+        },
+        deleteNote(id){
+            if(window.confirm('Seguro que desea eliminar esta nota?')){
+                axios.delete(`/AssignNote/${id}`).then((response)=>{
+                    toastr.success(response.data);
+                    $('#exampleModalNote').modal('hide');
+                })
+            }            
         }
     }
 }
