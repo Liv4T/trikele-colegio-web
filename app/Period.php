@@ -10,6 +10,6 @@ class Period extends Model
     protected $table = 'period';
 
     protected $fillable = [
-        'name', 'id_institution', 'date_from', 'date_to',
+        'name', 'id_institution', 'date_from', 'date_to','week_from','week_to','year'
     ];
 }

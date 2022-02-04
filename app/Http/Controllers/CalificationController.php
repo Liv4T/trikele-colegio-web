@@ -660,7 +660,7 @@ class CalificationController extends Controller
 
         $current_date=date('Y-m-d');
 
-        $current_period=Period::whereDate('date_from','<=',$current_date)->whereDate('date_to','>=',$current_date)->first();
+        $current_period=Period::where('date_from','<=',$current_date)->where('date_to','>=',$current_date)->first();
 
         if(!isset($current_period)) return response('Period not configured',400);
 
