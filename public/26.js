@@ -595,7 +595,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "form-group" }, [
         _c("a", { attrs: { href: "/#contacto" } }, [
           _c("img", {
-            attrs: { src: "uploads/home/ciclosslide.jpg", width: "100%" }
+            attrs: { src: "uploads/home/semipresencialnew.png", width: "100%" }
           })
         ])
       ])
