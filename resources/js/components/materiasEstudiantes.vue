@@ -35,7 +35,9 @@
                         <div v-if="activetab === 3" class="tabcontent">
                             <repo-student :nameArea="nameArea" :planifications="planifications" :id_lective_planification="id_lective_planification"></repo-student>
                         </div>
-                        <div v-if="activetab === 4" class="tabcontent"><notas-component :idArea="idArea" :idClassroom="idClassroom" :user="user" :nameArea="nameArea" :planifications="planifications" :id_lective_planification="id_lective_planification"></notas-component></div>
+                        <div v-if="activetab === 4" class="tabcontent">
+                            <notas-component :id_area="idArea" :id_user="id_user"></notas-component>
+                        </div>
 
                         <div v-if="activetab === 5" class="tabcontent">
                             <talleres :id_area="idArea" :id_classroom="idClassroom" :type_u="user"></talleres>
@@ -101,7 +103,7 @@ export default {
     components: {
         pdf,
     },
-    props: ["user"],
+    props: ["user","id_user"],
     data() {
         return {
             clases: [],
