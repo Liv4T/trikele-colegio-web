@@ -2,7 +2,7 @@
 
 @section('content')
 <process-ribbon-component :items="[{title:'Seleccionar',link:'/compra/plan'},{title:'Identificarme'},{title:'Pagar'}]" :active="1"></process-ribbon-component>
-<purchase-plan-login :plan_type="'{{ $plan_type }}'" :voucher="'{{ $voucher }}'" :payment_code="'{{ $payment_code }}'" :aut="'{{ Auth::user()?Auth::user()->type_user:0 }}'"></purchase-plan-login>
+<purchase-plan-login :plan_type="'{{ $plan_type }}'" :pago_pesos="'{{ $pago_pesos }}'" :voucher="'{{ $voucher }}'" :payment_code="'{{ $payment_code }}'" :aut="'{{ Auth::user()?Auth::user()->type_user:0 }}'"></purchase-plan-login>
 <footers></footers>
 <div class="container">
     <div class="row justify-content-center">

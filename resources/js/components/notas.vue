@@ -8,7 +8,7 @@
                             <h3>Notas</h3>
                         </div>
 
-                        <div class="card-body">
+                        <!-- <div class="card-body">
                             <table>
                                 <thead>
                                     <tr>
@@ -29,7 +29,7 @@
                             <div class="modal-footer">
                                 <input type="submit" class="btn btn-warning" value="Guardar" />
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

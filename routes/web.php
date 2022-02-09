@@ -709,8 +709,8 @@ Route::get('/compra/plan/{plan_type}/area/{area_id}/ingresar/p/{payment_code}', 
 Route::get('/compra/plan/{plan_type}/area/{area_id}/ingresar/v/{voucher}/p/{payment_code}', function (string $plan_type, string $voucher, int $area_id, String $payment_code) {
     return view('purchaseAreaLogin')->with('plan_type', $plan_type)->with('area_id', $area_id)->with('voucher', $voucher)->with('payment_code', $payment_code);
 });
-Route::get('/compra/plan/{plan_type}/ingresar/p/{payment_code}', function (string $plan_type, String $payment_code) {
-    return view('purchasePlanLogin')->with('plan_type', $plan_type)->with('voucher', '')->with('payment_code', $payment_code);
+Route::get('/compra/plan/{plan_type}/cop/{pago_pesos}/ingresar/p/{payment_code}', function (string $plan_type, String $pago_pesos, String $payment_code) {
+    return view('purchasePlanLogin')->with('plan_type', $plan_type)->with('pago_pesos', $pago_pesos)->with('voucher', '')->with('payment_code', $payment_code);
 });
 Route::get('/compra/plan/{plan_type}/ingresar/v/{voucher}', function (string $plan_type, string $voucher, String $payment_code) {
     return view('purchasePlanLogin')->with('plan_type', $plan_type)->with('voucher', $voucher)->with('payment_code', $payment_code);
@@ -923,3 +923,11 @@ Route::get('getFilesStudents/{id_activity}/{id_workshop}','FilesWorkshopControll
 Route::resource('AssignNote','AssignNoteController');
 Route::get('/AssignNote/{id_student}/{id_area}','AssignNoteController@show');
 Route::get('/assignNote/{id}','AssignNoteController@getAssignNote');
+Route::middleware('auth')->get('payPlan', function(){
+    return view('payPlan');
+});
+
+//Paypal pay
+Route::middleware('auth')->get('/compra/pagar/paypal/{data_string}', 'PaypalPaymentController@payPaypal');
+Route::middleware('auth')->get('/compra/pagar/plan/paypal/{data_string}', 'PaypalPaymentController@payPaypalPlan');
+Route::middleware('auth')->get('/compra/currencyExchange', 'PaypalPaymentController@currencyExchange');
