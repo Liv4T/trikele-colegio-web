@@ -709,8 +709,8 @@ Route::get('/compra/plan/{plan_type}/area/{area_id}/ingresar/p/{payment_code}', 
 Route::get('/compra/plan/{plan_type}/area/{area_id}/ingresar/v/{voucher}/p/{payment_code}', function (string $plan_type, string $voucher, int $area_id, String $payment_code) {
     return view('purchaseAreaLogin')->with('plan_type', $plan_type)->with('area_id', $area_id)->with('voucher', $voucher)->with('payment_code', $payment_code);
 });
-Route::get('/compra/plan/{plan_type}/cop/{pago_pesos}/ingresar/p/{payment_code}', function (string $plan_type, String $pago_pesos, String $payment_code) {
-    return view('purchasePlanLogin')->with('plan_type', $plan_type)->with('pago_pesos', $pago_pesos)->with('voucher', '')->with('payment_code', $payment_code);
+Route::get('/compra/plan/{plan_type}/cop/{pago_pesos}/usd/{pago_usd}/ingresar/p/{payment_code}', function (string $plan_type, String $pago_pesos, String $pago_usd, String $payment_code) {
+    return view('purchasePlanLogin')->with('plan_type', $plan_type)->with('pago_pesos', $pago_pesos)->with('pago_usd', $pago_usd)->with('voucher', '')->with('payment_code', $payment_code);
 });
 Route::get('/compra/plan/{plan_type}/ingresar/v/{voucher}', function (string $plan_type, string $voucher, String $payment_code) {
     return view('purchasePlanLogin')->with('plan_type', $plan_type)->with('voucher', $voucher)->with('payment_code', $payment_code);

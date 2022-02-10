@@ -763,7 +763,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: { type: "number" },
+                    attrs: { type: "text" },
                     domProps: { value: _vm.noteassigned },
                     on: {
                       input: function($event) {

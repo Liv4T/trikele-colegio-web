@@ -364,7 +364,8 @@
         voucher_code: "",
         voucher_data: null,
         PagoTotal: null,
-        pagoPesos:null
+        pagoPesos:null,
+        paymentUsd:null
       };
     },
     methods: {
@@ -380,6 +381,7 @@
       },
       TotalValue() {
         this.pagoPesos = (this.current_plan.plan_price.total_price + this.current_plan.english_price.total_price) * this.current_plan.quantity;
+        this.paymentUsd = this.current_plan.plan_price.price_usd;        
         return (this.current_plan.plan_price.total_price + this.current_plan.english_price.total_price) * this.current_plan.quantity;
       },
       VoucherDiscountApplied() {
@@ -484,7 +486,7 @@
         };
 
         setTimeout(() => {
-          location.href = `/compra/plan/${this.plan_type}/cop/${this.pagoPesos}/ingresar/p/${encodeURI(window.btoa(JSON.stringify(model)))}`;
+          location.href = `/compra/plan/${this.plan_type}/cop/${this.pagoPesos}/usd/${this.paymentUsd}/ingresar/p/${encodeURI(window.btoa(JSON.stringify(model)))}`;
           //location.href = `/compra/pagar/mercadopago/${encodeURI(window.btoa(JSON.stringify(model)))}`;
           this.events.pay_loading = false;
         }, 1000);

@@ -44,6 +44,7 @@ class CustomerPlanController extends Controller
                     'credits_quantity'=>$plan->credits_quantity,
                     'presentation_url'=>$plan->presentation_url,
                     'price'=>$price->value,
+                    'price_usd'=> $price->price_usd,
                     'discount'=>$price->discount_value,
                     'tax_percent'=>$price->tax_percent,
                     'total_tax'=>(($price->value-$price->discount_value)*$price->tax_percent)/($price->tax_percent+100),

@@ -384,7 +384,8 @@ __webpack_require__.r(__webpack_exports__);
       voucher_code: "",
       voucher_data: null,
       PagoTotal: null,
-      pagoPesos: null
+      pagoPesos: null,
+      paymentUsd: null
     };
   },
   methods: {
@@ -399,6 +400,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     TotalValue: function TotalValue() {
       this.pagoPesos = (this.current_plan.plan_price.total_price + this.current_plan.english_price.total_price) * this.current_plan.quantity;
+      this.paymentUsd = this.current_plan.plan_price.price_usd;
       return (this.current_plan.plan_price.total_price + this.current_plan.english_price.total_price) * this.current_plan.quantity;
     },
     VoucherDiscountApplied: function VoucherDiscountApplied() {
@@ -511,7 +513,7 @@ __webpack_require__.r(__webpack_exports__);
         voucher: this.voucher_data ? this.voucher_data.code : null
       };
       setTimeout(function () {
-        location.href = "/compra/plan/".concat(_this5.plan_type, "/cop/").concat(_this5.pagoPesos, "/ingresar/p/").concat(encodeURI(window.btoa(JSON.stringify(model)))); //location.href = `/compra/pagar/mercadopago/${encodeURI(window.btoa(JSON.stringify(model)))}`;
+        location.href = "/compra/plan/".concat(_this5.plan_type, "/cop/").concat(_this5.pagoPesos, "/usd/").concat(_this5.paymentUsd, "/ingresar/p/").concat(encodeURI(window.btoa(JSON.stringify(model)))); //location.href = `/compra/pagar/mercadopago/${encodeURI(window.btoa(JSON.stringify(model)))}`;
 
         _this5.events.pay_loading = false;
       }, 1000);

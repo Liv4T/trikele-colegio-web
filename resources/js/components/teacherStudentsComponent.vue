@@ -99,7 +99,7 @@
 
                         <div class="form-group">
                             <label>Nota</label>
-                            <input type="number" class="form-control" v-model="noteassigned"/>
+                            <input type="text" class="form-control" v-model="noteassigned"/>
                         </div>
                     </div>
                     <div class="modal-footer">
