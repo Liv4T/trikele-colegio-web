@@ -16,6 +16,8 @@ use App\ClassContent;
 use App\Classroom;
 use App\ClassroomStudent;
 use App\Classs;
+use App\AssignNote;
+use App\Area;
 use Illuminate\Support\Facades\Auth;
 use App\Weekly;
 use Illuminate\Support\Facades\DB;
@@ -658,35 +660,34 @@ class CalificationController extends Controller
         $html=str_replace("[STUDENT_TYPEID]","",$html);
         $html=str_replace("[STUDENT_ID]",$user->id_number,$html);
 
-        $current_date=date('Y-m-d');
-
-        $current_period=Period::whereDate('date_from','<=',$current_date)->whereDate('date_to','>=',$current_date)->first();
-
-        if(!isset($current_period)) return response('Period not configured',400);
-
-
-        $html=str_replace("[PERIOD_NAME]",$current_period->name,$html);
-        $html=str_replace("[WORKING_DAY]","VIRTUAL",$html);
-        $html=str_replace("[REPORT_DATE]",$current_date,$html);
-
-
-        $grade=DB::table('classroom_student')
-        ->join('classroom', 'classroom.id', '=', 'classroom_student.id_classroom')
-        ->join('grade', 'grade.id', '=', 'classroom.id_grade')
-        ->where('classroom_student.id_user', $student_id)
-        ->select('grade.name')
-        ->first();
-
-        if(!isset($grade)) return response("Grade student's don't exists",400);
-
-        $html=str_replace("[GRADE_NAME]",$grade->name,$html);
-
-
         $table_html='';
 
         //get notes by period
 
-        $califications=CalificationHelper::getCalificationGuide($student_id);
+        $califications = array();
+        $data = AssignNote::where('id_student',$student_id)->get();
+        $countArray = 0;
+
+        foreach ($data as $dt){
+            $area = Area::where('id',$dt->id_area)->first();
+            if(isset($califications[0]) && $califications[0]['area_name'] !== $area->name){
+                $countArray = $countArray + 1;
+            }
+            $califications[$countArray]['area_name']= $area->name;
+            
+            if($dt->id_bimestre === 1){
+                $califications[$countArray]['1p'] = $dt->note;
+            }else if($dt->id_bimestre === 2){
+                $califications[$countArray]['2p'] = $dt->note; 
+            }
+            else if($dt->id_bimestre === 3){
+                $califications[$countArray]['3p'] = $dt->note;
+            }else if($dt->id_bimestre === 4){
+                $califications[$countArray]['4p'] = $dt->note;
+            }else if($dt->asignNote === 'final'){
+                $califications[$countArray]['def'] = $dt->note;
+            }            
+        }
 
         foreach ($califications as $row) {
 
