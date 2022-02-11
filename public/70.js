@@ -229,6 +229,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
   data: function data() {
@@ -753,27 +758,52 @@ var render = function() {
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("Nota")]),
                   _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.noteassigned,
-                        expression: "noteassigned"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text" },
-                    domProps: { value: _vm.noteassigned },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.noteassigned,
+                          expression: "noteassigned"
                         }
-                        _vm.noteassigned = $event.target.value
+                      ],
+                      staticClass: "form-control",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.noteassigned = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
                       }
-                    }
-                  })
+                    },
+                    [
+                      _c("option", { attrs: { value: "E" } }, [
+                        _vm._v("Desempeño superior")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "S" } }, [
+                        _vm._v("Desempeño alto")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "A" } }, [
+                        _vm._v("Desempeño basico")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "P" } }, [
+                        _vm._v("Pendiente")
+                      ])
+                    ]
+                  )
                 ])
               ]),
               _vm._v(" "),

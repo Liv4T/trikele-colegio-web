@@ -99,7 +99,12 @@
 
                         <div class="form-group">
                             <label>Nota</label>
-                            <input type="text" class="form-control" v-model="noteassigned"/>
+                            <select class="form-control" v-model="noteassigned">
+                                <option value="E">Desempeño superior</option>
+                                <option value="S">Desempeño alto</option>
+                                <option value="A">Desempeño basico</option>
+                                <option value="P">Pendiente</option>                                
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
