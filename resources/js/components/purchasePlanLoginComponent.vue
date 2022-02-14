@@ -139,8 +139,13 @@
                                 <div id="paypal-button"></div>
                             </div>                            
                             <div :class="pago_usd !== 'null' ? 'col-md-5' : 'col-md-12 text-center'">
-                                <h5 class="mb-2">Pago en Pesos</h5>
-                                <button class="btn btn-primary btn-lg" style="border-radius: 17px;" v-on:click="payMercadopago">Mercado Pago</button>
+                                <h5 class="mb-2">Pago en Pesos</h5>          
+                                <a style="border-radius: 17px;" v-on:click="payMercadopago">
+                                    <button class="btn btn-primary btn-lg">Mercado Pago</button>
+
+                                    <img src="/uploads/images/logo_pse.png" style="width:130px" alt="">
+                                    <img src="/uploads/images/logo_tarjetas.png" style="width:130px" alt="">
+                                </a>                                
                             </div>
                         </div>
                     </div>

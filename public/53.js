@@ -168,6 +168,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["plan_type", "pago_pesos", "pago_usd", "aut", "voucher", "payment_code"],
   data: function data() {
@@ -1104,13 +1109,34 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c(
-                        "button",
+                        "a",
                         {
-                          staticClass: "btn btn-primary btn-lg",
                           staticStyle: { "border-radius": "17px" },
                           on: { click: _vm.payMercadopago }
                         },
-                        [_vm._v("Mercado Pago")]
+                        [
+                          _c(
+                            "button",
+                            { staticClass: "btn btn-primary btn-lg" },
+                            [_vm._v("Mercado Pago")]
+                          ),
+                          _vm._v(" "),
+                          _c("img", {
+                            staticStyle: { width: "130px" },
+                            attrs: {
+                              src: "/uploads/images/logo_pse.png",
+                              alt: ""
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("img", {
+                            staticStyle: { width: "130px" },
+                            attrs: {
+                              src: "/uploads/images/logo_tarjetas.png",
+                              alt: ""
+                            }
+                          })
+                        ]
                       )
                     ]
                   )

@@ -678,15 +678,14 @@ class CalificationController extends Controller
 
         foreach ($data as $dt){
             $area = Area::where('id',$dt->id_area)->first();
-            if(isset($califications[0]) && $califications[0]['area_name'] !== $area->name){
-                $countArray = $countArray + 1;
+            if(isset($califications[0]) && $califications[$countArray]['area_name'] !== $area->name){
+                $countArray ++;
             }
-            $califications[$countArray]['area_name']= $area->name;
-            
+            $califications[$countArray]['area_name']= $area->name;            
             if($dt->id_bimestre === 1){
-                $califications[$countArray]['onep'] = $dt->note;
-            }else if($dt->id_bimestre === 2){
-                $califications[$countArray]['twop'] = $dt->note; 
+                $califications[$countArray]['onep'] = $dt->note;                
+            }else if($dt->id_bimestre === 2){                
+                $califications[$countArray]['twop'] = $dt->note;            
             }
             else if($dt->id_bimestre === 3){
                 $califications[$countArray]['threep'] = $dt->note;
@@ -696,20 +695,19 @@ class CalificationController extends Controller
                 $califications[$countArray]['def'] = $dt->note;
             }            
         }
-
-        foreach ($califications as $row) {            
-            $table_html.='<tr>';
+        
+        $table_html.='<tr>';
                 $table_html.=' <td style="height:10px" colspan="6"></td>';
-            $table_html.='</tr>';
-            $table_html.='<tr class="row_note">';
-                $table_html.='<td>Area</td>';
-                $table_html.='<td>1P</td>';
-                $table_html.='<td>2P</td>';
-                $table_html.='<td>3P</td>';
-                $table_html.='<td>4P</td>';
-                $table_html.='<td>DEF</td>';
-            $table_html.='</tr>';                
-            
+        $table_html.='</tr>';
+        $table_html.='<tr class="row_note">';
+            $table_html.='<td>Area</td>';
+            $table_html.='<td>1P</td>';
+            $table_html.='<td>2P</td>';
+            $table_html.='<td>3P</td>';
+            $table_html.='<td>4P</td>';
+            $table_html.='<td>DEF</td>';
+        $table_html.='</tr>';                
+        foreach ($califications as $row) {
             $table_html.='<tr>';
                 $table_html.='<td class="note_detail">'.$row['area_name'].'</td>';
                 $table_html.='<td class="note_detail">'.$row['onep'].'</td>';
