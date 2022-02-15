@@ -107,7 +107,7 @@ var render = function() {
           _c("div", { staticClass: "text-center" }, [
             _vm._m(0),
             _vm._v(" "),
-            _c("div", { staticClass: "float-right col-md-4" }, [
+            _c("div", { staticClass: "float-right col-md-4 mb-3" }, [
               _c("label", { attrs: { for: "" } }, [_vm._v("Buscar")]),
               _vm._v(" "),
               _c("input", {
@@ -134,38 +134,42 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
-              _c("table", { staticStyle: { "margin-left": "15%" } }, [
-                _vm._m(1),
-                _vm._v(" "),
-                _c(
-                  "tbody",
-                  _vm._l(_vm.filteredRows, function(student, key) {
-                    return _c("tr", { key: key }, [
-                      _c("td", [_vm._v(_vm._s(student.name))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(student.last_name))]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-primary",
-                            attrs: {
-                              href:
-                                "/api/student/" +
-                                student.id +
-                                "/calification-report",
-                              target: "_blank"
-                            }
-                          },
-                          [_vm._v("Planilla de notas")]
-                        )
+              _c(
+                "table",
+                { staticClass: "table table-bordered table-striped ml-2" },
+                [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.filteredRows, function(student, key) {
+                      return _c("tr", { key: key }, [
+                        _c("td", [_vm._v(_vm._s(student.name))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(student.last_name))]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-primary",
+                              attrs: {
+                                href:
+                                  "/api/student/" +
+                                  student.id +
+                                  "/calification-report",
+                                target: "_blank"
+                              }
+                            },
+                            [_vm._v("Planilla de notas")]
+                          )
+                        ])
                       ])
-                    ])
-                  }),
-                  0
-                )
-              ])
+                    }),
+                    0
+                  )
+                ]
+              )
             ])
           ])
         ])
@@ -179,7 +183,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
-      _c("h3", [_vm._v("Boletin del Estudinte")])
+      _c("h3", [_vm._v("Boletin del Estudiante")])
     ])
   },
   function() {

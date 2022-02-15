@@ -173,6 +173,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["plan_type", "pago_pesos", "pago_usd", "aut", "voucher", "payment_code"],
   data: function data() {
@@ -1121,21 +1123,7 @@ var render = function() {
                             [_vm._v("Mercado Pago")]
                           ),
                           _vm._v(" "),
-                          _c("img", {
-                            staticStyle: { width: "130px" },
-                            attrs: {
-                              src: "/uploads/images/logo_pse.png",
-                              alt: ""
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("img", {
-                            staticStyle: { width: "130px" },
-                            attrs: {
-                              src: "/uploads/images/logo_tarjetas.png",
-                              alt: ""
-                            }
-                          })
+                          _vm._m(15)
                         ]
                       )
                     ]
@@ -1305,6 +1293,22 @@ var staticRenderFns = [
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("img", {
+        staticStyle: { width: "100px" },
+        attrs: { src: "/uploads/images/logo_pse.png", alt: "" }
+      }),
+      _vm._v(" "),
+      _c("img", {
+        staticStyle: { width: "130px" },
+        attrs: { src: "/uploads/images/logo_tarjetas.png", alt: "" }
+      })
     ])
   }
 ]

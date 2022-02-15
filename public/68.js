@@ -194,23 +194,6 @@ var render = function() {
                 _c("small", [_vm._v("Correo:")]),
                 _vm._v(" "),
                 _c("span", [_vm._v(_vm._s(_vm.current_student.email))])
-              ]),
-              _vm._v(" "),
-              _c("div", [
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: {
-                      href:
-                        "/api/student/" +
-                        _vm.current_student.id +
-                        "/calification-report",
-                      target: "_blank"
-                    }
-                  },
-                  [_vm._v("Planilla de notas")]
-                )
               ])
             ]),
             _vm._v(" "),

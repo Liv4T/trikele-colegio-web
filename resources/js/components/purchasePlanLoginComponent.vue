@@ -142,9 +142,11 @@
                                 <h5 class="mb-2">Pago en Pesos</h5>          
                                 <a style="border-radius: 17px;" v-on:click="payMercadopago">
                                     <button class="btn btn-primary btn-lg">Mercado Pago</button>
-
-                                    <img src="/uploads/images/logo_pse.png" style="width:130px" alt="">
-                                    <img src="/uploads/images/logo_tarjetas.png" style="width:130px" alt="">
+                                    
+                                    <div>
+                                        <img src="/uploads/images/logo_pse.png" style="width:100px" alt="">
+                                        <img src="/uploads/images/logo_tarjetas.png" style="width:130px" alt="">
+                                    </div>                                    
                                 </a>                                
                             </div>
                         </div>

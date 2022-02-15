@@ -5,14 +5,14 @@
                 <div class="col-md-12">
                     <div class="text-center">
                         <div class="card-header">
-                            <h3>Boletin del Estudinte</h3>
+                            <h3>Boletin del Estudiante</h3>
                         </div>
-                        <div class="float-right col-md-4">
+                        <div class="float-right col-md-4 mb-3">
                             <label for="">Buscar</label>
                             <input type="text" class="form-control" placeholder="Estudiante" v-model="filter" />
                         </div>
                         <div class="card-body">
-                            <table style="margin-left: 15%">
+                            <table class="table table-bordered table-striped ml-2">
                                 <thead>
                                     <tr>
                                         <th>Nombre</th>
