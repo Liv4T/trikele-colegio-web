@@ -263,4 +263,6 @@ Vue.component("show-taller", ()=>import("./components/ShowTaller.vue"));
 Vue.component("pay-plan",()=>import("./components/payPlan.vue"));
 Vue.component("purchase-pay-paypal-result", () => import ("./components/purchasePlanPayResultPaypalComponent.vue"));
 
+Vue.component("admin-boletin",()=>import("./components/boletinesAdmin.vue"));
+
 const app = new Vue({el: "#app", data: {}, store});
