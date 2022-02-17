@@ -134,12 +134,12 @@ class UserController extends Controller
         $user->picture = isset($data['user_name']) ? $url . "/uploads/images/" . $data['user_name'] . ".png" : "";
         $user->save();
 
-        /* Send email register */
-        if (isset($data['email'])) {
-            Mail::send('emails.register', $data, function ($msj) use ($data) {
-                $msj->to($data['email'])->subject('Falta sólo un paso más');
-            });
-        }
+        // /* Send email register */
+        // if (isset($data['email'])) {
+        //     Mail::send('emails.register', $data, function ($msj) use ($data) {
+        //         $msj->to($data['email'])->subject('Falta sólo un paso más');
+        //     });
+        // }
         return view('home');
         // return response()->json([true]);
     }
