@@ -934,3 +934,33 @@ Route::middleware('auth')->get('/compra/currencyExchange', 'PaypalPaymentControl
 Route::middleware('auth')->get('/admin-boletin', function(){
     return view('adminBoletin');
 });
+
+Route::get('/extra_ef', function () {
+    return view('CatExtraEF');
+});
+Route::get('/extra_ea', function () {
+    return view('CatExtraEA');
+});
+Route::get('class_extra/{id_cat}', function (String $id_cat) {
+    return view('ClassExtra')->with('id_cat', $id_cat);
+});
+Route::get('/extra_view/{id_cat}/{id_class}', function (String $id_cat, String $id_class) {
+    return view('viewClassExtra')->with('id_cat', $id_cat)->with('id_class', $id_class);
+});
+Route::post('createExtra', 'AdministratorController@createExtra')->name('createExtra');
+Route::get('getExtra', 'AdministratorController@findExtra')->name('getExtra');
+Route::post('createCatExtra', 'AdministratorController@createCatExtra')->name('createCatExtra');
+Route::get('findCatExtra/{id}', 'AdministratorController@findCatExtra')->name('findCatExtra');
+Route::get('findCatName/{id}', 'AdministratorController@findCatName')->name('findCatName');
+Route::get('showClassExtra/{id}', 'ClassController@showClassExtra')->name('showClassExtra');
+Route::get('showExtraById/{id}', 'ClassController@showExtraById')->name('showExtraById');
+
+Route::post('saveClassExtra', 'ClassController@saveClassExtra')->name('saveClassExtra');
+Route::put('updateClassExtra', 'ClassController@updateClassExtra')->name('updateClassExtra');
+
+Route::get('/extra_crear/{id_cat}', function (String $id_cat) {
+    return view('cClassExtra')->with('id_cat', $id_cat);
+});
+Route::get('/extra_edit/{id_cat}/{id_class}', function (String $id_cat, String $id_class) {
+    return view('editClassExtra')->with('id_cat', $id_cat)->with('id_class', $id_class);
+});
