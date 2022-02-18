@@ -92,6 +92,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -100,7 +106,8 @@ __webpack_require__.r(__webpack_exports__);
       selectedStudens: [],
       grade_prom: null,
       grade_selected: null,
-      isChecked: false
+      isChecked: false,
+      filter: ""
     };
   },
   mounted: function mounted() {
@@ -112,13 +119,35 @@ __webpack_require__.r(__webpack_exports__);
       console.log(error);
     });
   },
+  computed: {
+    filteredRows: function filteredRows() {
+      var _this2 = this;
+
+      if (!this.studentsGrades.filter) return false;
+      return this.studentsGrades.filter(function (row) {
+        if (parseInt(_this2.filter) === parseInt(row.id_number)) {
+          var id = row.id_number.toString().toLowerCase();
+
+          var searchTerm = _this2.filter.toLowerCase();
+
+          return id.includes(searchTerm);
+        } else {
+          var name = row.name.toString().toLowerCase();
+
+          var _searchTerm = _this2.filter.toLowerCase();
+
+          return name.includes(_searchTerm);
+        }
+      });
+    }
+  },
   methods: {
     gradeSelected: function gradeSelected(grade_id, grade_name) {
-      var _this2 = this;
+      var _this3 = this;
 
       this.grade_selected = grade_name;
       axios.get("getStudentsByGrade/".concat(grade_id)).then(function (response) {
-        _this2.studentsGrades = response.data;
+        _this3.studentsGrades = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -147,7 +176,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     saveData: function saveData() {
-      var _this3 = this;
+      var _this4 = this;
 
       var data = [];
 
@@ -159,7 +188,7 @@ __webpack_require__.r(__webpack_exports__);
 
       data.forEach(function (el) {
         axios.put("/savePromGrade/".concat(el.id), {
-          id_grade: _this3.grade_prom
+          id_grade: _this4.grade_prom
         }).then(function (response) {
           toastr.success('Estudiante Promovido');
         })["catch"](function (error) {
@@ -248,6 +277,32 @@ var render = function() {
             _vm._v(" "),
             _vm.studentsGrades.length > 0
               ? _c("div", { staticClass: "form-group mx-sm-3 mb-2 mt-3" }, [
+                  _c("div", { staticClass: "col-md-6 float-right" }, [
+                    _c("label", { attrs: { for: "" } }, [_vm._v("Buscar")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.filter,
+                          expression: "filter"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", placeholder: "Buscar por Nombre" },
+                      domProps: { value: _vm.filter },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.filter = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
                   _c(
                     "table",
                     { staticClass: "table table-striped table hover" },
@@ -267,11 +322,13 @@ var render = function() {
                           _vm._v(" "),
                           _c("th", [_vm._v("Nombre")]),
                           _vm._v(" "),
+                          _c("th", [_vm._v("# Documento")]),
+                          _vm._v(" "),
                           _c("th", [_vm._v("Grado")])
                         ])
                       ]),
                       _vm._v(" "),
-                      _vm._l(_vm.studentsGrades, function(studentsG, key) {
+                      _vm._l(_vm.filteredRows, function(studentsG, key) {
                         return _c("tbody", { key: key }, [
                           _c("tr", [
                             _c("td", [
@@ -296,6 +353,8 @@ var render = function() {
                                 )
                               )
                             ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(studentsG.id_number))]),
                             _vm._v(" "),
                             _c("td", [_vm._v(_vm._s(studentsG.grade_name))])
                           ])
