@@ -3,7 +3,9 @@
         <div class="row justify-content-center">
             <div id="crud" class="col-sm-10">
                 <div class="card bg-light mb-3">
-                    <div class="card-header">Selección de Grado</div>
+                    <div class="card-header">
+                        <h2><strong>Selección de Grado</strong></h2>
+                    </div>
                     <div class="card-doby">
                         <div>
                             <p>Seleccione el Grado :</p>
