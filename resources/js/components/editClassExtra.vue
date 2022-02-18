@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="back">
-      <div class="back row justify-content-center">
+      <div class="row justify-content-center">
        <div class="col-sm-10">
           <div class="card text-center">
             <h5 class="card-header fondo">Editar Clase</h5>

@@ -677,9 +677,8 @@ class AdministratorController extends Controller
     {
         if (Auth::user()->type_user == 1) {
             $extra = ExtracurricularCategory::findOrFail($id);
-            $extra->status = 0;
-        } elseif (Auth::user()->type_user == 2) {
-            $status = 0;
+            $extra->status = 1;
+        } elseif (Auth::user()->type_user == 2) {            
             $extra = ExtracurricularCategory::findOrFail($id);
             // dd($extra);
             $teacher_extra = ExtracurricularTeacher::where('id_user', Auth::user()->id)->get();
@@ -692,7 +691,7 @@ class AdministratorController extends Controller
                 }
             }
             $extra->id_user = Auth::user()->id;
-            $extra->status = $status;
+            $extra->status = 2;
             $extra->id_category = $id;
         } elseif (Auth::user()->type_user == 3) {
             $extra = ExtracurricularCategory::findOrFail($id);

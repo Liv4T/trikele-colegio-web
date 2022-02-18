@@ -5,7 +5,7 @@
         <div class="card text-center">
           <h5 class="card-header fondo letra-poppins-bold">{{ nameCat }}</h5>
           <div class="card-body">
-            <div class="form-group" v-show="status==1">
+            <div class="form-group" v-if="status === 1">
               <a class="btn btn-Azul" :href="'/extra_crear/'+id_cat">Crear clase</a>
             </div>
             <div class="card" v-for="(resource, key) in clases.clase" :key="key">
@@ -24,7 +24,7 @@
                 <p class="letra-poppins">Estos recursos no estan visibles o disponibles de forma libre en youtube o en otras plataformas de video</p>
                 <a
                   class="btn btn-Azul float-right"
-                  v-show="status==1"
+                  v-if="status === 2"
                   :href="'/extra_edit/'+id_cat+'/'+resource.id"
                 >Editar</a>
               </div>

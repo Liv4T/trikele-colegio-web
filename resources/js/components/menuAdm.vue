@@ -179,6 +179,29 @@
                 </li>
               </a>
             </div>
+            <div class="dropdown">
+              <a>
+                <li class="item-menu">    
+                  <img
+                    width="35px"
+                    src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/ANUNCIOS_naranja.png?alt=media&token=539c1428-c480-43bf-a132-73be35386940"
+                    alt
+                  />            
+                  <span
+                    class="menu"
+                  >Extracurricular&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <div class="dropdown-content">
+                    <a href="/extra_ea">                      
+                      Educación Artistica
+                    </a>
+
+                    <a href="/extra_ef">                
+                      Educación Física
+                    </a>                    
+                  </div>
+                </li>
+              </a>
+            </div>
             <a href="/admin-boletin">
               <li class="item-menu">
                 <img
