@@ -8,6 +8,7 @@ use App\Imports\studensClassroomImport;
 use App\Imports\usersImport;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Http\Request;
 
 class ImportController extends Controller
 {
@@ -27,27 +28,43 @@ class ImportController extends Controller
         Excel::import(new bookImport, 'book.xlsx');
 
         // return redirect('/')->with('success', 'File imported successfully!');
-        return redirect('/importar_adm')->with('success', 'All good!');
+        return "Importación realizada con exito";
     }
     public function importTeacherClassroom()
     {
-        Excel::import(new teachersClassroomImport, 'asignacion.xlsx');
-
-        // return redirect('/')->with('success', 'File imported successfully!');
-        return redirect('/importar_adm')->with('success', 'All good!');
+        try {
+            Excel::import(new teachersClassroomImport, 'asignacion.xlsx');        
+            return "Importación realizada con exito";
+        } catch (\Throwable $th) {
+            return "Ningun campo puede ir Vacio, revisa e intenta de nuevo";
+        }        
     }
     public function importStudentClassroom()
     {
-        Excel::import(new studensClassroomImport, 'asignacionStudent.xlsx');
-
-        // return redirect('/')->with('success', 'File imported successfully!');
-        return redirect('/importar_adm')->with('success', 'All good!');
+        try {
+            Excel::import(new studensClassroomImport, 'asignacionStudent.xlsx');
+            return "Importación realizada con exito";
+        } catch (\Throwable $th) {
+            return "Ningun campo puede ir Vacio, revisa e intenta de nuevo";
+        }        
     }
     public function importUsers()
     {
-        Excel::import(new usersImport, 'users.xlsx');
-
-        // return redirect('/')->with('success', 'File imported successfully!');
-        return redirect('/importar_adm')->with('success', 'All good!');
+        try {
+            Excel::import(new usersImport, 'users.xlsx');
+            return "Importación realizada con exito";
+        } catch (\Throwable $th) {
+            return "Ningun campo puede ir Vacio, revisa e intenta de nuevo";
+        }        
     }
+
+    public function uploadFiles(Request $request)
+    {
+        if ($request->file == null) {            
+            return "el documento no existe";
+        }else{
+            $request->file->move(public_path(),'users.xlsx');
+            return "subido y guardado";
+        }
+   }
 }

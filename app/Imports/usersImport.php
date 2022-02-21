@@ -3,12 +3,14 @@
 namespace App\Imports;
 
 use App\User;
+use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Facades\Hash;
 
 class usersImport implements ToModel, WithHeadingRow
 {
+    use Importable;
     /**
      * @param array $row
      *

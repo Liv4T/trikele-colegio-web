@@ -68,6 +68,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 (function () {
   "use strict";
 
@@ -94,7 +103,9 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      allowedExtensions: ["xlsx"]
+      allowedExtensions: ["xlsx"],
+      type_export: '',
+      ExcelFile: ""
     };
   },
   mounted: function mounted() {},
@@ -102,9 +113,46 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
     getMenu: function getMenu() {
       window.location = "/salon_adm";
     },
+    setImport: function setImport(value) {
+      switch (value) {
+        case 'importUsers':
+          axios.get('/importUsers', this.ExcelFile[0]).then(function (response) {
+            toastr.success(response.data);
+            window.location.href = '/salon_adm';
+          })["catch"](function (error) {
+            toastr.info('intenta de nuevo mas tarde');
+            console.log(error);
+          });
+          break;
+
+        case 'import':
+          axios.get('/import', this.ExcelFile[0]).then(function (response) {
+            toastr.success(response.data);
+            window.location.href = '/salon_adm';
+          })["catch"](function (error) {
+            toastr.info('intenta de nuevo mas tarde');
+            console.log(error);
+          });
+          break;
+
+        case 'importStudent':
+          axios.get('/importStudent', this.ExcelFile[0]).then(function (response) {
+            toastr.success(response.data);
+            window.location.href = '/salon_adm';
+          })["catch"](function (error) {
+            toastr.info('intenta de nuevo mas tarde');
+            console.log(error);
+          });
+          break;
+
+        default:
+          break;
+      }
+    },
     onFlieChange: function onFlieChange(file) {
       var _this = this;
 
+      this.ExcelFile = file.target.files || file.dataTransfer.files;
       var files = file.target.files || file.dataTransfer.files;
       var data = new FormData();
 
@@ -273,20 +321,44 @@ var render = function() {
                           _c(
                             "select",
                             {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.type_export,
+                                  expression: "type_export"
+                                }
+                              ],
                               ref: "seleccionado",
                               staticClass: "form-control",
-                              attrs: { required: "" }
+                              attrs: { required: "" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.type_export = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                }
+                              }
                             },
                             [
-                              _c("option", { attrs: { value: "4" } }, [
-                                _vm._v("Coordinador")
+                              _c("option", { attrs: { value: "users" } }, [
+                                _vm._v("Usuarios")
                               ]),
                               _vm._v(" "),
-                              _c("option", { attrs: { value: "2" } }, [
+                              _c("option", { attrs: { value: "teachers" } }, [
                                 _vm._v("Docente")
                               ]),
                               _vm._v(" "),
-                              _c("option", { attrs: { value: "3" } }, [
+                              _c("option", { attrs: { value: "students" } }, [
                                 _vm._v("Estudiante")
                               ])
                             ]
@@ -315,14 +387,60 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "modal-footer" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-warning float-right",
-                            attrs: { href: "/import" }
-                          },
-                          [_vm._v("Importar")]
-                        )
+                        _vm.type_export === "users"
+                          ? _c("div", [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "btn btn-warning float-right",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.setImport("importUsers")
+                                    }
+                                  }
+                                },
+                                [_vm._v("Importar Usuarios")]
+                              )
+                            ])
+                          : _vm.type_export === "teachers"
+                          ? _c("div", [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "btn btn-warning float-right",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.setImport("import")
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "Asignación de profesores a Clases Masivo"
+                                  )
+                                ]
+                              )
+                            ])
+                          : _vm.type_export === "students"
+                          ? _c("div", [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "btn btn-warning float-right",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.setImport("importStudent")
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "Asignacion de estudiantes a Clases Masivo"
+                                  )
+                                ]
+                              )
+                            ])
+                          : _vm._e()
                       ])
                     ])
                   ],
