@@ -54,7 +54,9 @@ class ImportController extends Controller
             Excel::import(new usersImport, 'users.xlsx');
             return "Importación realizada con exito";
         } catch (\Throwable $th) {
-            return "Ningun campo puede ir Vacio, revisa e intenta de nuevo";
+            echo($th);
+            die;
+            return false;
         }        
     }
 

@@ -44,14 +44,7 @@
                   <div class="modal-footer">
                     <div v-if="type_export === 'users'">
                       <a v-on:click="setImport('importUsers')" class="btn btn-warning float-right">Importar Usuarios</a>
-                    </div>
-                    <div v-else-if="type_export === 'teachers'">
-                      <a v-on:click="setImport('import')" class="btn btn-warning float-right">Asignación de profesores a Clases Masivo</a>
-                    </div>
-                    <div v-else-if="type_export === 'students'">
-                      <a v-on:click="setImport('importStudent')" class="btn btn-warning float-right">Asignacion de estudiantes a Clases Masivo</a>
-                    </div>
-                    
+                    </div>                    
                   </div>
                 </tab-content>
               </form-wizard>
@@ -109,34 +102,11 @@ export default {
       switch (value) {
         case 'importUsers':
             axios.get('/importUsers',this.ExcelFile[0]).then((response)=>{
-              toastr.success(response.data);
-              window.location.href = '/salon_adm';
+              toastr.success(response.data);              
             }).catch((error)=>{
               toastr.info('intenta de nuevo mas tarde');
               console.log(error);
             });
-          break;
-      
-        case 'import':
-            axios.get('/import',this.ExcelFile[0]).then((response)=>{
-              toastr.success(response.data);
-              window.location.href = '/salon_adm';
-            }).catch((error)=>{
-              toastr.info('intenta de nuevo mas tarde');
-              console.log(error);
-            });
-          break;
-
-        case 'importStudent':
-            axios.get('/importStudent',this.ExcelFile[0]).then((response)=>{
-              toastr.success(response.data);
-              window.location.href = '/salon_adm';
-            }).catch((error)=>{
-              toastr.info('intenta de nuevo mas tarde');
-              console.log(error);
-            });
-          break
-        default:
           break;
       }
     },
