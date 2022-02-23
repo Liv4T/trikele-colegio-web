@@ -44,6 +44,12 @@
                   <div class="modal-footer">
                     <div v-if="type_export === 'users'">
                       <a v-on:click="setImport('importUsers')" class="btn btn-warning float-right">Importar Usuarios</a>
+                    </div>
+                    <div v-if="type_export === 'teachers'">
+                      <a v-on:click="setImport('importTeachers')" class="btn btn-warning float-right">Importar Asignación de Docentes</a>
+                    </div>
+                    <div v-if="type_export === 'students'">
+                      <a v-on:click="setImport('importStudents')" class="btn btn-warning float-right">Importar Asignación de Estudiantes</a>
                     </div>                    
                   </div>
                 </tab-content>
@@ -98,16 +104,34 @@ export default {
     getMenu() {
       window.location = "/salon_adm";
     },
-    setImport(value){
+    setImport(value){      
       switch (value) {
         case 'importUsers':
-            axios.get('/importUsers',this.ExcelFile[0]).then((response)=>{
-              toastr.success(response.data);              
-            }).catch((error)=>{
-              toastr.info('intenta de nuevo mas tarde');
-              console.log(error);
-            });
-          break;
+          axios.get('/importUsers',this.ExcelFile[0]).then((response)=>{
+            toastr.success(response.data);              
+          }).catch((error)=>{
+            toastr.info('intenta de nuevo mas tarde');
+            console.log(error);
+          });
+        break;
+        
+        case 'importStudents':
+          axios.get('/importStudent',this.ExcelFile[0]).then((response)=>{
+            toastr.success(response.data);              
+          }).catch((error)=>{
+            toastr.info('intenta de nuevo mas tarde');
+            console.log(error);
+          });
+        break;
+
+        case 'importTeachers':
+          axios.get('/import',this.ExcelFile[0]).then((response)=>{
+            toastr.success(response.data);              
+          }).catch((error)=>{
+            toastr.info('intenta de nuevo mas tarde');
+            console.log(error);
+          });
+        break;
       }
     },
     onFlieChange(file) {

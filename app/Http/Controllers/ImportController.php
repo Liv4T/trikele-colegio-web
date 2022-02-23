@@ -45,7 +45,9 @@ class ImportController extends Controller
             Excel::import(new studensClassroomImport, 'asignacionStudent.xlsx');
             return "Importación realizada con exito";
         } catch (\Throwable $th) {
-            return "Ningun campo puede ir Vacio, revisa e intenta de nuevo";
+            echo($th);
+            die;
+            return "Intenta de nuevo mas tarde";
         }        
     }
     public function importUsers()
@@ -54,9 +56,7 @@ class ImportController extends Controller
             Excel::import(new usersImport, 'users.xlsx');
             return "Importación realizada con exito";
         } catch (\Throwable $th) {
-            echo($th);
-            die;
-            return false;
+            return "Intenta de nuevo mas tarde";
         }        
     }
 

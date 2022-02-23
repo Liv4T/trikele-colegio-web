@@ -70,6 +70,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 (function () {
   "use strict";
 
@@ -110,6 +116,24 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
       switch (value) {
         case 'importUsers':
           axios.get('/importUsers', this.ExcelFile[0]).then(function (response) {
+            toastr.success(response.data);
+          })["catch"](function (error) {
+            toastr.info('intenta de nuevo mas tarde');
+            console.log(error);
+          });
+          break;
+
+        case 'importStudents':
+          axios.get('/importStudent', this.ExcelFile[0]).then(function (response) {
+            toastr.success(response.data);
+          })["catch"](function (error) {
+            toastr.info('intenta de nuevo mas tarde');
+            console.log(error);
+          });
+          break;
+
+        case 'importTeachers':
+          axios.get('/import', this.ExcelFile[0]).then(function (response) {
             toastr.success(response.data);
           })["catch"](function (error) {
             toastr.info('intenta de nuevo mas tarde');
@@ -369,6 +393,40 @@ var render = function() {
                                   }
                                 },
                                 [_vm._v("Importar Usuarios")]
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.type_export === "teachers"
+                          ? _c("div", [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "btn btn-warning float-right",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.setImport("importTeachers")
+                                    }
+                                  }
+                                },
+                                [_vm._v("Importar Asignación de Docentes")]
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.type_export === "students"
+                          ? _c("div", [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "btn btn-warning float-right",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.setImport("importStudents")
+                                    }
+                                  }
+                                },
+                                [_vm._v("Importar Asignación de Estudiantes")]
                               )
                             ])
                           : _vm._e()
