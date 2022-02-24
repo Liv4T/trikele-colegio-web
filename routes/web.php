@@ -493,6 +493,7 @@ $router->get('importStudent', 'ImportController@importStudentClassroom');
 $router->get('importUsers', 'ImportController@importUsers');
 Route::post('documentoimp','ImportController@uploadFiles');
 Route::post('uploadFileAssignStudent','ImportController@uploadFileAssignStudent');
+Route::post('uploadFileAssignTeachers','ImportController@uploadFileAssignTeachers');
 
 Route::middleware('auth')->get('/importar_adm', function () {
     return view('imports.importB');

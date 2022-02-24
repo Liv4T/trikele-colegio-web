@@ -159,6 +159,13 @@ export default {
               this.emitMessage(response);
             });
           }
+        }else if(this.type_export === 'teachers'){
+          if (this.validateFile(filesize, extension)) {
+            data.append("file", files[0]);
+            axios.post("/uploadFileAssignTeachers", data).then((response) => {
+              this.emitMessage(response);
+            });
+          }
         }        
       }
     },

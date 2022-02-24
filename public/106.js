@@ -170,6 +170,13 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
               _this.emitMessage(response);
             });
           }
+        } else if (this.type_export === 'teachers') {
+          if (this.validateFile(filesize, extension)) {
+            data.append("file", files[0]);
+            axios.post("/uploadFileAssignTeachers", data).then(function (response) {
+              _this.emitMessage(response);
+            });
+          }
         }
       }
     },
