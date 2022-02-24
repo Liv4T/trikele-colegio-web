@@ -104,7 +104,7 @@ export default {
     getMenu() {
       window.location = "/salon_adm";
     },
-    setImport(value){      
+    setImport(value){   
       switch (value) {
         case 'importUsers':
           axios.get('/importUsers',this.ExcelFile[0]).then((response)=>{
@@ -144,13 +144,22 @@ export default {
         let filesize = file.size;
         let extension = this.findExtension(filename);
 
-        // if uploaded file is valid with validation rules
-        if (this.validateFile(filesize, extension)) {
-          data.append("file", files[0]);
-          axios.post("/documentoimp", data).then((response) => {
-            this.emitMessage(response);
-          });
-        }
+        if(this.type_export === 'users'){
+          // if uploaded file is valid with validation rules
+          if (this.validateFile(filesize, extension)) {
+            data.append("file", files[0]);
+            axios.post("/documentoimp", data).then((response) => {
+              this.emitMessage(response);
+            });
+          }
+        }else if(this.type_export === 'students'){
+          if (this.validateFile(filesize, extension)) {
+            data.append("file", files[0]);
+            axios.post("/uploadFileAssignStudent", data).then((response) => {
+              this.emitMessage(response);
+            });
+          }
+        }        
       }
     },
     /**

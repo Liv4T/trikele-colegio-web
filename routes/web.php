@@ -492,6 +492,7 @@ $router->get('importStudent', 'ImportController@importStudentClassroom');
 // Carga masiva usuario
 $router->get('importUsers', 'ImportController@importUsers');
 Route::post('documentoimp','ImportController@uploadFiles');
+Route::post('uploadFileAssignStudent','ImportController@uploadFileAssignStudent');
 
 Route::middleware('auth')->get('/importar_adm', function () {
     return view('imports.importB');

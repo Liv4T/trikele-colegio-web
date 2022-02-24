@@ -45,9 +45,7 @@ class ImportController extends Controller
             Excel::import(new studensClassroomImport, 'asignacionStudent.xlsx');
             return "Importación realizada con exito";
         } catch (\Throwable $th) {
-            echo($th);
-            die;
-            return "Intenta de nuevo mas tarde";
+            return $th;            
         }        
     }
     public function importUsers()
@@ -68,5 +66,15 @@ class ImportController extends Controller
             $request->file->move(public_path(),'users.xlsx');
             return "subido y guardado";
         }
-   }
+    }
+
+    public function uploadFileAssignStudent(Request $request)
+    {
+        if ($request->file == null) {            
+            return "el documento no existe";
+        }else{
+            $request->file->move(public_path(),'asignacionStudent.xlsx');
+            return "subido y guardado";
+        }
+    }
 }

@@ -153,13 +153,23 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
         var _file = files[0];
         var filename = _file.name;
         var filesize = _file.size;
-        var extension = this.findExtension(filename); // if uploaded file is valid with validation rules
+        var extension = this.findExtension(filename);
 
-        if (this.validateFile(filesize, extension)) {
-          data.append("file", files[0]);
-          axios.post("/documentoimp", data).then(function (response) {
-            _this.emitMessage(response);
-          });
+        if (this.type_export === 'users') {
+          // if uploaded file is valid with validation rules
+          if (this.validateFile(filesize, extension)) {
+            data.append("file", files[0]);
+            axios.post("/documentoimp", data).then(function (response) {
+              _this.emitMessage(response);
+            });
+          }
+        } else if (this.type_export === 'students') {
+          if (this.validateFile(filesize, extension)) {
+            data.append("file", files[0]);
+            axios.post("/uploadFileAssignStudent", data).then(function (response) {
+              _this.emitMessage(response);
+            });
+          }
         }
       }
     },

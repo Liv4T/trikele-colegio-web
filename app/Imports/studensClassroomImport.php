@@ -25,10 +25,10 @@ class studensClassroomImport implements ToModel, WithHeadingRow
      * @return \Illuminate\Database\Eloquent\Model|null
      */
     public function model(array $row)
-    {
+    {        
         return new ClassroomStudent([
-            'id_user' => $this->user[$row['user_name']],
             'id_classroom'  => $this->classroom[$row['classroom']],
+            'id_user' => $this->user[$row['user_name']],
 
         ]);
     }
