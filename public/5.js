@@ -133,6 +133,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 var firebaseConfig = {
   apiKey: "AIzaSyBUwPOBHWgSv10yWDO0VX_UCCOfHZ3jKYE",
@@ -550,7 +556,21 @@ var render = function() {
                     { key: key_a },
                     [
                       _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-12" }, [
+                        _c("div", { staticClass: "col-6" }, [
+                          _c("p", [_vm._v("Nombre de Actividad: ")]),
+                          _vm._v(" "),
+                          _c("b", [_vm._v(_vm._s(activity.name))])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-6" }, [
+                          _c("p", [_vm._v("Cantidad de Preguntas: ")]),
+                          _vm._v(" "),
+                          _c("b", [
+                            _vm._v(_vm._s(activity.module.questions.length))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-12 mt-3" }, [
                           _c("b", [_vm._v("Descripción:")]),
                           _vm._v(" "),
                           _c("textarea", {

@@ -51,8 +51,14 @@
         <div v-else-if="type_user === 3">             
             <div class="card-body" v-if="activeClass === 1">
                 <div v-for="(activity,key_a) in course.activities" v-bind:key="key_a">
-                    <div class="row">
-                        <div class="col-12">
+                    <div class="row">                    
+                        <div class="col-6">
+                            <p>Nombre de Actividad: </p> <b>{{activity.name}}</b>                            
+                        </div>
+                        <div class="col-6">
+                            <p>Cantidad de Preguntas: </p> <b>{{activity.module.questions.length}}</b>                            
+                        </div>
+                        <div class="col-12 mt-3">
                             <b>Descripción:</b>
                             <textarea class="form-control-plaintext" v-model="activity.description" readonly></textarea>
                         </div>
