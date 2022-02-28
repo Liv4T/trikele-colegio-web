@@ -737,145 +737,449 @@ class CalificationController extends Controller
             //get notes by period
 
             $califications = array();
-            $data = AssignNote::where('id_student',$student_id)->get();
+            $data = AssignNote::where('id_student',$student_id)->get();            
             $countArray = 0;        
-
-            if(count($data) > 0){
-                foreach ($data as $dt){
-                    $area = Area::where('id',$dt->id_area)->first();                              
-                    if(isset($califications[0]) && $califications[$countArray]['subject'] !== $area->name){                                        
-                        $countArray ++;            
-                        $califications[$countArray]['onep'] = 'P';
-                        $califications[$countArray]['twop'] = 'P';
-                        $califications[$countArray]['threep'] = 'P';
-                        $califications[$countArray]['fourp'] = 'P';
-                        $califications[$countArray]['def'] = 'P';
-                
-                    }
-                    $califications[$countArray]['subject']= $area->name;
-                    switch ($califications[$countArray]['subject']) {
-                        case 'Español':
-                            $califications[$countArray]['area_name'] = 'HUMANIDADES';
-                            break;
-    
-                        case 'Ingles':
-                            $califications[$countArray]['area_name'] = 'HUMANIDADES';
-                            break;
-                        
-                        case 'Ciencias naturales y biología':
-                            $califications[$countArray]['area_name'] = 'C. NATURALES Y EDU. AMBIENTAL';
-                            break;
-    
-                        case 'Física':
-                            $califications[$countArray]['area_name'] = 'C. NATURALES Y EDU. AMBIENTAL';
-                            break;
-    
-                        case 'Química':
-                            $califications[$countArray]['area_name'] = 'C. NATURALES Y EDU. AMBIENTAL';
-                            break;
-    
-                        case 'Matemáticas':
-                            $califications[$countArray]['area_name'] = 'MATEMÁTICAS';
-                            break;
-    
-                        case 'Ciencias sociales':
-                            $califications[$countArray]['area_name'] = 'CIENCIAS SOCIALES';
-                            break;
-    
-                        default:
-                            $califications[$countArray]['area_name'] = $area->name;
-                            break;
-                    }
-    
-                    if($dt->id_bimestre === 1){
-                        $califications[$countArray]['onep'] = $dt->note;
-                    }else if($dt->id_bimestre === 2){                
-                        $califications[$countArray]['twop'] = $dt->note;
-                    }
-                    else if($dt->id_bimestre === 3){
-                        $califications[$countArray]['threep'] = $dt->note;
-                    }else if($dt->id_bimestre === 4){
-                        $califications[$countArray]['fourp'] = $dt->note;
-                    }else if($dt->asignNote === 'final'){
-                        $califications[$countArray]['def'] = $dt->note;
-                    }       
-                }
-            }else{
+            if($cycle === 'IV' || $cycle === 'V' || $cycle === 'VI'){
                 for ($i=0; $i < 9; $i++) { 
                     $countArray = $i;
-
                     $califications[$countArray]['onep'] = 'P';
                     $califications[$countArray]['twop'] = 'P';
                     $califications[$countArray]['threep'] = 'P';
                     $califications[$countArray]['fourp'] = 'P';
                     $califications[$countArray]['def'] = 'P';
-
                     switch ($i) {
                         case 0:
                             $califications[$countArray]['area_name'] = 'HUMANIDADES';
+                            foreach ($data as $dt){
+                                $area = Area::where('id',$dt->id_area)->first();                                
+                                if($area->name === 'Español'){                                    
+                                    if($dt->id_bimestre === 1){
+                                        $califications[$countArray]['onep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 2){                
+                                        $califications[$countArray]['twop'] = $dt->note;
+                                    }
+                                    else if($dt->id_bimestre === 3){
+                                        $califications[$countArray]['threep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 4){
+                                        $califications[$countArray]['fourp'] = $dt->note;
+                                    }else if($dt->asignNote === 'final'){
+                                        $califications[$countArray]['def'] = $dt->note;
+                                    }
+                                }                                       
+                            }
                             $califications[$countArray]['subject']= 'Español';
-
-                            break;
-                    
+                        break;
+                            
                         case 1:
                             $califications[$countArray]['area_name'] = 'HUMANIDADES';
+                            foreach ($data as $dt){
+                                $area = Area::where('id',$dt->id_area)->first();
+                                if($area->name === 'Ingles' || $area->name === 'Inglés'){
+                                    if($dt->id_bimestre === 1){
+                                        $califications[$countArray]['onep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 2){                
+                                        $califications[$countArray]['twop'] = $dt->note;
+                                    }
+                                    else if($dt->id_bimestre === 3){
+                                        $califications[$countArray]['threep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 4){
+                                        $califications[$countArray]['fourp'] = $dt->note;
+                                    }else if($dt->asignNote === 'final'){
+                                        $califications[$countArray]['def'] = $dt->note;
+                                    }
+                                }                                       
+                            }
                             $califications[$countArray]['subject']= 'Ingles';
                             break;
-                        
-                        case 2:
                             
+                        case 2:
+                                
                             $califications[$countArray]['area_name'] = 'C. NATURALES Y EDU. AMBIENTAL';
+                            foreach ($data as $dt){
+                                $area = Area::where('id',$dt->id_area)->first();
+                                if($area->name === 'Ciencias naturales y biología'){
+                                    if($dt->id_bimestre === 1){
+                                        $califications[$countArray]['onep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 2){                
+                                        $califications[$countArray]['twop'] = $dt->note;
+                                    }
+                                    else if($dt->id_bimestre === 3){
+                                        $califications[$countArray]['threep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 4){
+                                        $califications[$countArray]['fourp'] = $dt->note;
+                                    }else if($dt->asignNote === 'final'){
+                                        $califications[$countArray]['def'] = $dt->note;
+                                    }
+                                }                                       
+                            }
                             $califications[$countArray]['subject']= 'Ciencias Naturales y Biología';
                             break;
-
+        
                         case 3:
-                            
+                                    
                             $califications[$countArray]['area_name'] = 'C. NATURALES Y EDU. AMBIENTAL';
+                            foreach ($data as $dt){
+                                $area = Area::where('id',$dt->id_area)->first();
+                                if($area->name === 'Química'){
+                                    if($dt->id_bimestre === 1){
+                                        $califications[$countArray]['onep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 2){                
+                                        $califications[$countArray]['twop'] = $dt->note;
+                                    }
+                                    else if($dt->id_bimestre === 3){
+                                        $califications[$countArray]['threep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 4){
+                                        $califications[$countArray]['fourp'] = $dt->note;
+                                    }else if($dt->asignNote === 'final'){
+                                        $califications[$countArray]['def'] = $dt->note;
+                                    }
+                                }                                       
+                            }
                             $califications[$countArray]['subject']= 'Química';
                             break;
-        
+            
                         case 4:
                         
                             $califications[$countArray]['area_name'] = 'C. NATURALES Y EDU. AMBIENTAL';
+                            foreach ($data as $dt){
+                                $area = Area::where('id',$dt->id_area)->first();
+                                if($area->name === 'Física'){
+                                    if($dt->id_bimestre === 1){
+                                        $califications[$countArray]['onep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 2){                
+                                        $califications[$countArray]['twop'] = $dt->note;
+                                    }
+                                    else if($dt->id_bimestre === 3){
+                                        $califications[$countArray]['threep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 4){
+                                        $califications[$countArray]['fourp'] = $dt->note;
+                                    }else if($dt->asignNote === 'final'){
+                                        $califications[$countArray]['def'] = $dt->note;
+                                    }
+                                }                                       
+                            }
                             $califications[$countArray]['subject']= 'Física';
                             break;
-        
+                
                         case 5:
-                            
+                                
                             $califications[$countArray]['area_name'] = 'MATEMÁTICAS';
+                            foreach ($data as $dt){
+                                $area = Area::where('id',$dt->id_area)->first();
+                                if($area->name === 'Matemáticas'){
+                                    if($dt->id_bimestre === 1){
+                                        $califications[$countArray]['onep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 2){                
+                                        $califications[$countArray]['twop'] = $dt->note;
+                                    }
+                                    else if($dt->id_bimestre === 3){
+                                        $califications[$countArray]['threep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 4){
+                                        $califications[$countArray]['fourp'] = $dt->note;
+                                    }else if($dt->asignNote === 'final'){
+                                        $califications[$countArray]['def'] = $dt->note;
+                                    }
+                                }                                       
+                            }
                             $califications[$countArray]['subject']= 'Matemáticas';
                             break;
-                                
+                                        
                         case 6:
-                            
+                                
                             $califications[$countArray]['area_name'] = 'CIENCIAS SOCIALES';
+                            foreach ($data as $dt){
+                                $area = Area::where('id',$dt->id_area)->first();
+                                if($area->name === 'Ciencias sociales'){
+                                    if($dt->id_bimestre === 1){
+                                        $califications[$countArray]['onep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 2){                
+                                        $califications[$countArray]['twop'] = $dt->note;
+                                    }
+                                    else if($dt->id_bimestre === 3){
+                                        $califications[$countArray]['threep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 4){
+                                        $califications[$countArray]['fourp'] = $dt->note;
+                                    }else if($dt->asignNote === 'final'){
+                                        $califications[$countArray]['def'] = $dt->note;
+                                    }
+                                }                                       
+                            }
                             $califications[$countArray]['subject']= 'Ciencias Sociales';
                             break;
-
+                            
                         case 7:
-                        
+                            
                             $califications[$countArray]['area_name'] = 'ED. FÍSICA';
+                            foreach ($data as $dt){
+                                $area = Area::where('id',$dt->id_area)->first();
+                                if($area->name === 'Educación Física'){
+                                    if($dt->id_bimestre === 1){
+                                        $califications[$countArray]['onep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 2){                
+                                        $califications[$countArray]['twop'] = $dt->note;
+                                    }
+                                    else if($dt->id_bimestre === 3){
+                                        $califications[$countArray]['threep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 4){
+                                        $califications[$countArray]['fourp'] = $dt->note;
+                                    }else if($dt->asignNote === 'final'){
+                                        $califications[$countArray]['def'] = $dt->note;
+                                    }
+                                }                                       
+                            }
                             $califications[$countArray]['subject']= 'Ed. Física';
                             break;
-
+        
                         case 8:
-                    
+                        
                             $califications[$countArray]['area_name'] = 'TECNOLOGÍA';
+                            foreach ($data as $dt){
+                                $area = Area::where('id',$dt->id_area)->first();
+                                if($area->name === 'Tecnología'){
+                                    if($dt->id_bimestre === 1){
+                                        $califications[$countArray]['onep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 2){                
+                                        $califications[$countArray]['twop'] = $dt->note;
+                                    }
+                                    else if($dt->id_bimestre === 3){
+                                        $califications[$countArray]['threep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 4){
+                                        $califications[$countArray]['fourp'] = $dt->note;
+                                    }else if($dt->asignNote === 'final'){
+                                        $califications[$countArray]['def'] = $dt->note;
+                                    }
+                                }                                       
+                            }
                             $califications[$countArray]['subject']= 'Tecnología';
                             break;
-
+                            
                         case 9:
-                    
+                            
                             $califications[$countArray]['area_name'] = 'ARTE';
+                            foreach ($data as $dt){
+                                $area = Area::where('id',$dt->id_area)->first();
+                                if($area->name === 'Arte'){
+                                    if($dt->id_bimestre === 1){
+                                        $califications[$countArray]['onep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 2){                
+                                        $califications[$countArray]['twop'] = $dt->note;
+                                    }
+                                    else if($dt->id_bimestre === 3){
+                                        $califications[$countArray]['threep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 4){
+                                        $califications[$countArray]['fourp'] = $dt->note;
+                                    }else if($dt->asignNote === 'final'){
+                                        $califications[$countArray]['def'] = $dt->note;
+                                    }
+                                }                                       
+                            }
                             $califications[$countArray]['subject']= 'ARTE';
                             break;
-        
+            
                         default:
                             # code...
                             break;
                     }
                 }
-            }        
+            }else{
+                for ($i=0; $i < 7; $i++) { 
+                    $countArray = $i;
+    
+                    $califications[$countArray]['onep'] = 'P';
+                    $califications[$countArray]['twop'] = 'P';
+                    $califications[$countArray]['threep'] = 'P';
+                    $califications[$countArray]['fourp'] = 'P';
+                    $califications[$countArray]['def'] = 'P';
+                    switch ($i) {
+                        case 0:
+                            $califications[$countArray]['area_name'] = 'HUMANIDADES';
+                            $califications[$countArray]['subject']= 'Español';
+
+                            foreach ($data as $dt){
+                                $area = Area::where('id',$dt->id_area)->first();
+                                if($area->name === 'Español'){
+                                    if($dt->id_bimestre === 1){
+                                        $califications[$countArray]['onep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 2){                
+                                        $califications[$countArray]['twop'] = $dt->note;
+                                    }
+                                    else if($dt->id_bimestre === 3){
+                                        $califications[$countArray]['threep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 4){
+                                        $califications[$countArray]['fourp'] = $dt->note;
+                                    }else if($dt->asignNote === 'final'){
+                                        $califications[$countArray]['def'] = $dt->note;
+                                    }
+                                }                                       
+                            }
+                            break;
+                        
+                        case 1:
+                            $califications[$countArray]['area_name'] = 'HUMANIDADES';
+                            $califications[$countArray]['subject']= 'Ingles';
+                            foreach ($data as $dt){
+                                $area = Area::where('id',$dt->id_area)->first();
+                                if($area->name === 'Ingles' || $area->name === 'Inglés'){
+                                    if($dt->id_bimestre === 1){
+                                        $califications[$countArray]['onep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 2){                
+                                        $califications[$countArray]['twop'] = $dt->note;
+                                    }
+                                    else if($dt->id_bimestre === 3){
+                                        $califications[$countArray]['threep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 4){
+                                        $califications[$countArray]['fourp'] = $dt->note;
+                                    }else if($dt->asignNote === 'final'){
+                                        $califications[$countArray]['def'] = $dt->note;
+                                    }
+                                }                                       
+                            }
+                            break;
+                            
+                        case 2:
+                                    
+                            $califications[$countArray]['area_name'] = 'C. NATURALES Y EDU. AMBIENTAL';
+                            $califications[$countArray]['subject']= 'Ciencias Naturales y Biología';
+                            foreach ($data as $dt){
+                                $area = Area::where('id',$dt->id_area)->first();
+                                if($area->name === 'Ciencias naturales y biología'){
+                                    if($dt->id_bimestre === 1){
+                                        $califications[$countArray]['onep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 2){                
+                                        $califications[$countArray]['twop'] = $dt->note;
+                                    }
+                                    else if($dt->id_bimestre === 3){
+                                        $califications[$countArray]['threep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 4){
+                                        $califications[$countArray]['fourp'] = $dt->note;
+                                    }else if($dt->asignNote === 'final'){
+                                        $califications[$countArray]['def'] = $dt->note;
+                                    }
+                                }                                       
+                            }
+                            break;
+            
+                        case 3:
+                                
+                            $califications[$countArray]['area_name'] = 'MATEMÁTICAS';
+                            $califications[$countArray]['subject']= 'Matemáticas';
+                            foreach ($data as $dt){
+                                $area = Area::where('id',$dt->id_area)->first();
+                                if($area->name === 'Matemáticas'){
+                                    if($dt->id_bimestre === 1){
+                                        $califications[$countArray]['onep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 2){                
+                                        $califications[$countArray]['twop'] = $dt->note;
+                                    }
+                                    else if($dt->id_bimestre === 3){
+                                        $califications[$countArray]['threep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 4){
+                                        $califications[$countArray]['fourp'] = $dt->note;
+                                    }else if($dt->asignNote === 'final'){
+                                        $califications[$countArray]['def'] = $dt->note;
+                                    }
+                                }                                       
+                            }
+                            break;
+                                    
+                        case 4:
+                                
+                            $califications[$countArray]['area_name'] = 'CIENCIAS SOCIALES';
+                            $califications[$countArray]['subject']= 'Ciencias Sociales';
+                            foreach ($data as $dt){
+                                $area = Area::where('id',$dt->id_area)->first();
+                                if($area->name === 'Ciencias sociales'){
+                                    if($dt->id_bimestre === 1){
+                                        $califications[$countArray]['onep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 2){                
+                                        $califications[$countArray]['twop'] = $dt->note;
+                                    }
+                                    else if($dt->id_bimestre === 3){
+                                        $califications[$countArray]['threep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 4){
+                                        $califications[$countArray]['fourp'] = $dt->note;
+                                    }else if($dt->asignNote === 'final'){
+                                        $califications[$countArray]['def'] = $dt->note;
+                                    }
+                                }                                       
+                            }
+                            break;
+                                
+                        case 5:
+                            
+                            $califications[$countArray]['area_name'] = 'ED. FÍSICA';
+                            $califications[$countArray]['subject']= 'Ed. Física';
+                            foreach ($data as $dt){
+                                $area = Area::where('id',$dt->id_area)->first();
+                                if($area->name === 'Educación Física'){
+                                    if($dt->id_bimestre === 1){
+                                        $califications[$countArray]['onep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 2){                
+                                        $califications[$countArray]['twop'] = $dt->note;
+                                    }
+                                    else if($dt->id_bimestre === 3){
+                                        $califications[$countArray]['threep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 4){
+                                        $califications[$countArray]['fourp'] = $dt->note;
+                                    }else if($dt->asignNote === 'final'){
+                                        $califications[$countArray]['def'] = $dt->note;
+                                    }
+                                }                                       
+                            }
+                            break;
+        
+                        case 6:
+                            
+                            $califications[$countArray]['area_name'] = 'TECNOLOGÍA';
+                            $califications[$countArray]['subject']= 'Tecnología';
+                            foreach ($data as $dt){
+                                $area = Area::where('id',$dt->id_area)->first();
+                                if($area->name === 'Tecnología'){
+                                    if($dt->id_bimestre === 1){
+                                        $califications[$countArray]['onep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 2){                
+                                        $califications[$countArray]['twop'] = $dt->note;
+                                    }
+                                    else if($dt->id_bimestre === 3){
+                                        $califications[$countArray]['threep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 4){
+                                        $califications[$countArray]['fourp'] = $dt->note;
+                                    }else if($dt->asignNote === 'final'){
+                                        $califications[$countArray]['def'] = $dt->note;
+                                    }
+                                }                                       
+                            }
+                            break;
+                            
+                        case 7:
+                        
+                            $califications[$countArray]['area_name'] = 'ARTE';
+                            $califications[$countArray]['subject']= 'ARTE';
+                            foreach ($data as $dt){
+                                $area = Area::where('id',$dt->id_area)->first();
+                                if($area->name === 'Arte'){
+                                    if($dt->id_bimestre === 1){
+                                        $califications[$countArray]['onep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 2){                
+                                        $califications[$countArray]['twop'] = $dt->note;
+                                    }
+                                    else if($dt->id_bimestre === 3){
+                                        $califications[$countArray]['threep'] = $dt->note;
+                                    }else if($dt->id_bimestre === 4){
+                                        $califications[$countArray]['fourp'] = $dt->note;
+                                    }else if($dt->asignNote === 'final'){
+                                        $califications[$countArray]['def'] = $dt->note;
+                                    }
+                                }                                       
+                            }
+                            break;
+                
+                        default:
+                            # code...
+                            break;
+                    }
+                }
+            }
             $table_html.='<tr>';
                 $table_html.=' <td style="height:10px" colspan="6"></td>';
             $table_html.='</tr>';
