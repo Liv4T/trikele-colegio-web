@@ -740,65 +740,142 @@ class CalificationController extends Controller
             $data = AssignNote::where('id_student',$student_id)->get();
             $countArray = 0;        
 
-            foreach ($data as $dt){
-                $area = Area::where('id',$dt->id_area)->first();            
-                if(isset($califications[0]) && $califications[$countArray]['subject'] !== $area->name){                                        
-                    $countArray ++;            
+            if(count($data) > 0){
+                foreach ($data as $dt){
+                    $area = Area::where('id',$dt->id_area)->first();                              
+                    if(isset($califications[0]) && $califications[$countArray]['subject'] !== $area->name){                                        
+                        $countArray ++;            
+                        $califications[$countArray]['onep'] = 'P';
+                        $califications[$countArray]['twop'] = 'P';
+                        $califications[$countArray]['threep'] = 'P';
+                        $califications[$countArray]['fourp'] = 'P';
+                        $califications[$countArray]['def'] = 'P';
+                
+                    }
+                    $califications[$countArray]['subject']= $area->name;
+                    switch ($califications[$countArray]['subject']) {
+                        case 'Español':
+                            $califications[$countArray]['area_name'] = 'HUMANIDADES';
+                            break;
+    
+                        case 'Ingles':
+                            $califications[$countArray]['area_name'] = 'HUMANIDADES';
+                            break;
+                        
+                        case 'Ciencias naturales y biología':
+                            $califications[$countArray]['area_name'] = 'C. NATURALES Y EDU. AMBIENTAL';
+                            break;
+    
+                        case 'Física':
+                            $califications[$countArray]['area_name'] = 'C. NATURALES Y EDU. AMBIENTAL';
+                            break;
+    
+                        case 'Química':
+                            $califications[$countArray]['area_name'] = 'C. NATURALES Y EDU. AMBIENTAL';
+                            break;
+    
+                        case 'Matemáticas':
+                            $califications[$countArray]['area_name'] = 'MATEMÁTICAS';
+                            break;
+    
+                        case 'Ciencias sociales':
+                            $califications[$countArray]['area_name'] = 'CIENCIAS SOCIALES';
+                            break;
+    
+                        default:
+                            $califications[$countArray]['area_name'] = $area->name;
+                            break;
+                    }
+    
+                    if($dt->id_bimestre === 1){
+                        $califications[$countArray]['onep'] = $dt->note;
+                    }else if($dt->id_bimestre === 2){                
+                        $califications[$countArray]['twop'] = $dt->note;
+                    }
+                    else if($dt->id_bimestre === 3){
+                        $califications[$countArray]['threep'] = $dt->note;
+                    }else if($dt->id_bimestre === 4){
+                        $califications[$countArray]['fourp'] = $dt->note;
+                    }else if($dt->asignNote === 'final'){
+                        $califications[$countArray]['def'] = $dt->note;
+                    }       
+                }
+            }else{
+                for ($i=0; $i < 9; $i++) { 
+                    $countArray = $i;
+
                     $califications[$countArray]['onep'] = 'P';
                     $califications[$countArray]['twop'] = 'P';
                     $califications[$countArray]['threep'] = 'P';
                     $califications[$countArray]['fourp'] = 'P';
                     $califications[$countArray]['def'] = 'P';
-            
-                }
-                $califications[$countArray]['subject']= $area->name;
-                switch ($califications[$countArray]['subject']) {
-                    case 'Español':
-                        $califications[$countArray]['area_name'] = 'HUMANIDADES';
-                        break;
 
-                    case 'Ingles':
-                        $califications[$countArray]['area_name'] = 'HUMANIDADES';
-                        break;
+                    switch ($i) {
+                        case 0:
+                            $califications[$countArray]['area_name'] = 'HUMANIDADES';
+                            $califications[$countArray]['subject']= 'Español';
+
+                            break;
                     
-                    case 'Ciencias naturales y biología':
-                        $califications[$countArray]['area_name'] = 'C. NATURALES Y EDU. AMBIENTAL';
-                        break;
+                        case 1:
+                            $califications[$countArray]['area_name'] = 'HUMANIDADES';
+                            $califications[$countArray]['subject']= 'Ingles';
+                            break;
+                        
+                        case 2:
+                            
+                            $califications[$countArray]['area_name'] = 'C. NATURALES Y EDU. AMBIENTAL';
+                            $califications[$countArray]['subject']= 'Ciencias Naturales y Biología';
+                            break;
 
-                    case 'Física':
-                        $califications[$countArray]['area_name'] = 'C. NATURALES Y EDU. AMBIENTAL';
-                        break;
+                        case 3:
+                            
+                            $califications[$countArray]['area_name'] = 'C. NATURALES Y EDU. AMBIENTAL';
+                            $califications[$countArray]['subject']= 'Química';
+                            break;
+        
+                        case 4:
+                        
+                            $califications[$countArray]['area_name'] = 'C. NATURALES Y EDU. AMBIENTAL';
+                            $califications[$countArray]['subject']= 'Física';
+                            break;
+        
+                        case 5:
+                            
+                            $califications[$countArray]['area_name'] = 'MATEMÁTICAS';
+                            $califications[$countArray]['subject']= 'Matemáticas';
+                            break;
+                                
+                        case 6:
+                            
+                            $califications[$countArray]['area_name'] = 'CIENCIAS SOCIALES';
+                            $califications[$countArray]['subject']= 'Ciencias Sociales';
+                            break;
 
-                    case 'Química':
-                        $califications[$countArray]['area_name'] = 'C. NATURALES Y EDU. AMBIENTAL';
-                        break;
+                        case 7:
+                        
+                            $califications[$countArray]['area_name'] = 'ED. FÍSICA';
+                            $califications[$countArray]['subject']= 'Ed. Física';
+                            break;
 
-                    case 'Matemáticas':
-                        $califications[$countArray]['area_name'] = 'MATEMÁTICAS';
-                        break;
+                        case 8:
+                    
+                            $califications[$countArray]['area_name'] = 'TECNOLOGÍA';
+                            $califications[$countArray]['subject']= 'Tecnología';
+                            break;
 
-                    case 'Ciencias sociales':
-                        $califications[$countArray]['area_name'] = 'CIENCIAS SOCIALES';
-                        break;
-
-                    default:
-                        $califications[$countArray]['area_name'] = $area->name;
-                        break;
+                        case 9:
+                    
+                            $califications[$countArray]['area_name'] = 'ARTE';
+                            $califications[$countArray]['subject']= 'ARTE';
+                            break;
+        
+                        default:
+                            # code...
+                            break;
+                    }
                 }
-
-                if($dt->id_bimestre === 1){
-                    $califications[$countArray]['onep'] = $dt->note;
-                }else if($dt->id_bimestre === 2){                
-                    $califications[$countArray]['twop'] = $dt->note;
-                }
-                else if($dt->id_bimestre === 3){
-                    $califications[$countArray]['threep'] = $dt->note;
-                }else if($dt->id_bimestre === 4){
-                    $califications[$countArray]['fourp'] = $dt->note;
-                }else if($dt->asignNote === 'final'){
-                    $califications[$countArray]['def'] = $dt->note;
-                }       
-            }
+            }        
             $table_html.='<tr>';
                 $table_html.=' <td style="height:10px" colspan="6"></td>';
             $table_html.='</tr>';
@@ -815,10 +892,18 @@ class CalificationController extends Controller
                 $table_html.='<tr>';
                     $table_html.='<td class="td_note">'.$row['area_name'].'</td>';
                     $table_html.='<td class="note_detail">'.$row['subject'].'</td>';
-                    $table_html.='<td class="note_detail">'.$row['onep'].'</td>';
-                    $table_html.='<td class="note_detail">'.$row['twop'].'</td>';
-                    $table_html.='<td class="note_detail">'.$row['threep'].'</td>';
-                    $table_html.='<td class="note_detail">'.$row['fourp'].'</td>';
+                    if(isset($row['onep']) || isset($row['twop']) || isset($row['threep']) || isset($row['fourp']) )
+                    {                    
+                        $table_html.='<td class="note_detail">'.$row['onep'].'</td>';
+                        $table_html.='<td class="note_detail">'.$row['twop'].'</td>';
+                        $table_html.='<td class="note_detail">'.$row['threep'].'</td>';
+                        $table_html.='<td class="note_detail">'.$row['fourp'].'</td>';
+                    }else{
+                        $table_html.='<td class="note_detail">P</td>';
+                        $table_html.='<td class="note_detail">P</td>';
+                        $table_html.='<td class="note_detail">P</td>';
+                        $table_html.='<td class="note_detail">P</td>';
+                    }                    
                     $table_html.='<td class="note_detail">'.$row['def'].'</td>';
                 $table_html.='</tr>';                    
             }

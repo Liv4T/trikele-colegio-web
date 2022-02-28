@@ -63,6 +63,20 @@ class AdministratorController extends Controller
         return $users;
     }
 
+    public function getStudents(){
+        $students = [];
+        $users = User::where('type_user','=',3)->get();        
+        foreach($users as $key => $user){
+            $findUser = ClassroomStudent::where('id_user', $user->id)->first();
+            if($findUser){
+                $dataToPush = User::where('id',$findUser->id_user)->first();
+                array_push($students, $dataToPush);
+            }            
+        }
+
+        return $students;
+    }
+
     public function getParents(){
         $users = User::where('type_user',5)->get();
         return $users;

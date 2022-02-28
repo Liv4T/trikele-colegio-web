@@ -315,6 +315,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 (function () {
   "use strict";
 
@@ -343,6 +346,9 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
   props: ["id_module", "id_class", "returnPage"],
   data: function data() {
     return {
+      disableDocument: false,
+      disableLink: false,
+      disableVideo: false,
       is_loading: false,
       weekly_plan: {},
       errors: [],
@@ -434,20 +440,28 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
       this.activity.completed = complete;
     },
     openDocument: function openDocument(resource) {
+      this.disableDocument = true;
+
       try {
         this.saveInteraction(resource);
+        this.disableDocument = false;
       } catch (_unused) {
         console.log("Falló");
       }
     },
     openLink: function openLink(resource) {
+      this.disableLink = true;
+
       try {
         this.saveInteraction(resource);
         window.open(resource.content);
+        this.disableLink = false;
       } catch (_unused2) {}
     },
     playVideo: function playVideo(resource) {
+      this.disableVideo = true;
       this.saveInteraction(resource);
+      this.disableLink = false;
     },
     saveInteraction: function saveInteraction(resource) {
       axios.put("/api/student/module/".concat(this.id_module, "/class/").concat(this.id_class, "/resource/").concat(resource.id, "/interaction")).then(function (response) {//this.getCourseData();
@@ -1199,6 +1213,7 @@ var render = function() {
                                             {
                                               staticClass: "btn btn-primary",
                                               attrs: {
+                                                disabled: _vm.disableDocument,
                                                 href: item_content.content,
                                                 download: "",
                                                 target: "__blank"
@@ -1221,7 +1236,10 @@ var render = function() {
                                           "a",
                                           {
                                             staticClass: "btn btn-primary",
-                                            attrs: { target: "_blank" },
+                                            attrs: {
+                                              disabled: _vm.disableLink,
+                                              target: "_blank"
+                                            },
                                             on: {
                                               click: function($event) {
                                                 return _vm.openLink(
@@ -1238,7 +1256,11 @@ var render = function() {
                                       ? _c(
                                           "video",
                                           {
-                                            attrs: { id: "vid", controls: "" },
+                                            attrs: {
+                                              disabled: _vm.disableVideo,
+                                              id: "vid",
+                                              controls: ""
+                                            },
                                             on: {
                                               playing: function($event) {
                                                 return _vm.playVideo(

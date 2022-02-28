@@ -138,6 +138,7 @@
                                             <div class="form-button">  
                                                 <div>
                                                     <a
+                                                        :disabled="disableDocument"
                                                         :href="item_content.content"
                                                         class="btn btn-primary"
                                                         v-if="
@@ -150,6 +151,7 @@
                                                     >
                                                 </div>
                                                 <a
+                                                    :disabled="disableLink"
                                                     class="btn btn-primary"
                                                     v-if="
                                                         item_content.content_type === 'LINK'
@@ -161,6 +163,7 @@
                                                     >Vamos a trabajar</a
                                                 >
                                                 <video
+                                                    :disabled="disableVideo"
                                                     id="vid"
                                                     @playing="
                                                         playVideo(item_content)
@@ -333,6 +336,9 @@ export default {
     props: ["id_module", "id_class", "returnPage"],
     data() {
         return {
+            disableDocument: false,
+            disableLink: false,
+            disableVideo: false,
             is_loading: false,
             weekly_plan: {},
             errors: [],
@@ -433,20 +439,26 @@ export default {
             this.activity.completed = complete;
         },
         openDocument(resource) {
+            this.disableDocument = true;
             try {
                 this.saveInteraction(resource);
+                this.disableDocument = false;
             } catch {
                 console.log("Falló")
             }
         },
         openLink(resource) {
+            this.disableLink = true;
             try {
                 this.saveInteraction(resource);
                 window.open(resource.content);
+                this.disableLink = false;
             } catch {}
         },
         playVideo(resource) {
+            this.disableVideo = true;
             this.saveInteraction(resource);
+            this.disableLink = false;
         },
         saveInteraction(resource) {
             axios

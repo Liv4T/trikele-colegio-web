@@ -434,7 +434,7 @@ Route::middleware('auth')->get('/enviados', function () {
      */
 
 Route::get('getUsers', 'AdministratorController@indexUsers')->name('getUsers');
-Route::get('getStudents', 'AdministratorController@indexStudents')->name('getStudents');
+Route::get('getStudents', 'AdministratorController@getStudents')->name('getStudents');
 Route::get('getParents','AdministratorController@getParents');
 Route::get('getCoords', 'AdministratorController@indexCoords')->name('getCoords');
 Route::get('getTeachers', 'AdministratorController@indexTeachers')->name('getTeachers');
@@ -935,6 +935,7 @@ Route::middleware('auth')->get('payPlan', function(){
 Route::middleware('auth')->get('/compra/pagar/paypal/{data_string}', 'PaypalPaymentController@payPaypal');
 Route::middleware('auth')->get('/compra/pagar/plan/paypal/{data_string}', 'PaypalPaymentController@payPaypalPlan');
 Route::middleware('auth')->get('/compra/currencyExchange', 'PaypalPaymentController@currencyExchange');
+
 Route::middleware('auth')->get('/admin-boletin', function(){
     return view('adminBoletin');
 });
