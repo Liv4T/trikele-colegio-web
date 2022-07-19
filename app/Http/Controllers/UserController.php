@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\ClassContentInteraction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\User;
@@ -292,9 +293,24 @@ class UserController extends Controller
         $parents = User::where('parent_id','=',$id)->get();
         return response()->json($parents);
     }
+      public function getStudents(String $id){
+        $students = User::where('id','=',$id)->get();
+        return response()->json($students);
+    }
 
     public function getUser(){
         $user = Auth::user();
         return $user;
     }
+
+    public function getConectionbyId(String $id){
+
+        $last_conection = ClassContentInteraction::where('id_student',$id)
+                                                ->orderBy('created_at','DESC')
+                                                ->limit(5)
+                                                ->get();
+        return response()->json($last_conection);
+       
+    }
+
 }

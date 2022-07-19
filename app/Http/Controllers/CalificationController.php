@@ -930,30 +930,9 @@ class CalificationController extends Controller
                             $califications[$countArray]['subject']= 'Ed. Física';
                             break;
         
-                        case 8:
                         
-                            $califications[$countArray]['area_name'] = 'TECNOLOGÍA';
-                            foreach ($data as $dt){
-                                $area = Area::where('id',$dt->id_area)->first();
-                                if($area->name === 'Tecnología'){
-                                    if($dt->id_bimestre === 1){
-                                        $califications[$countArray]['onep'] = $dt->note;
-                                    }else if($dt->id_bimestre === 2){                
-                                        $califications[$countArray]['twop'] = $dt->note;
-                                    }
-                                    else if($dt->id_bimestre === 3){
-                                        $califications[$countArray]['threep'] = $dt->note;
-                                    }else if($dt->id_bimestre === 4){
-                                        $califications[$countArray]['fourp'] = $dt->note;
-                                    }else if($dt->asignNote === 'final'){
-                                        $califications[$countArray]['def'] = $dt->note;
-                                    }
-                                }                                       
-                            }
-                            $califications[$countArray]['subject']= 'Tecnología';
-                            break;
                             
-                        case 9:
+                        case 8:
                             
                             $califications[$countArray]['area_name'] = 'ARTE';
                             foreach ($data as $dt){
@@ -973,7 +952,7 @@ class CalificationController extends Controller
                                     }
                                 }                                       
                             }
-                            $califications[$countArray]['subject']= 'ARTE';
+                            $califications[$countArray]['subject']= 'Arte';
                             break;
             
                         default:
@@ -1128,33 +1107,11 @@ class CalificationController extends Controller
                             }
                             break;
         
+                                                  
                         case 6:
-                            
-                            $califications[$countArray]['area_name'] = 'TECNOLOGÍA';
-                            $califications[$countArray]['subject']= 'Tecnología';
-                            foreach ($data as $dt){
-                                $area = Area::where('id',$dt->id_area)->first();
-                                if($area->name === 'Tecnología'){
-                                    if($dt->id_bimestre === 1){
-                                        $califications[$countArray]['onep'] = $dt->note;
-                                    }else if($dt->id_bimestre === 2){                
-                                        $califications[$countArray]['twop'] = $dt->note;
-                                    }
-                                    else if($dt->id_bimestre === 3){
-                                        $califications[$countArray]['threep'] = $dt->note;
-                                    }else if($dt->id_bimestre === 4){
-                                        $califications[$countArray]['fourp'] = $dt->note;
-                                    }else if($dt->asignNote === 'final'){
-                                        $califications[$countArray]['def'] = $dt->note;
-                                    }
-                                }                                       
-                            }
-                            break;
-                            
-                        case 7:
                         
                             $califications[$countArray]['area_name'] = 'ARTE';
-                            $califications[$countArray]['subject']= 'ARTE';
+                            $califications[$countArray]['subject']= 'Arte';
                             foreach ($data as $dt){
                                 $area = Area::where('id',$dt->id_area)->first();
                                 if($area->name === 'Arte'){

@@ -138,9 +138,10 @@ Route::middleware('auth')->get('/plan', function () {
 Route::middleware('auth')->get('/changePassword', function () {
     return view('changepassword');
 });
-Route::middleware('auth')->get('/miPerfil', function () {
-    return view('perfil');
+Route::get('/miPerfil/{id_student}', function (String $id_student) {
+    return view('perfil')->with('id_student', $id_student);
 });
+
 Route::middleware('auth')->get('/resetPass', function () {
     return view('resetPass');
 });
@@ -295,6 +296,7 @@ Route::put('/changePassword', 'UserController@changePassword')->name('changePass
 
 Route::middleware('auth')->get('showUser', 'UserController@show')->name('users_save');
 Route::middleware('auth')->post('img_user', 'UserController@uploadFile')->name('img_user');
+Route::get('getStudents/{id}', 'UserController@getStudents');
 
 Route::middleware('auth')->post('savePrintDoc', 'HomeController@savePrintDoc')->name('savePrintDoc');
 Route::get('downloadFile', 'HomeController@downloadFile')->name('downloadFile');
@@ -927,6 +929,7 @@ Route::get('getFilesStudents/{id_activity}/{id_workshop}','FilesWorkshopControll
 Route::resource('AssignNote','AssignNoteController');
 Route::get('/AssignNote/{id_student}/{id_area}','AssignNoteController@show');
 Route::get('/assignNote/{id}','AssignNoteController@getAssignNote');
+Route::get('/getConectionbyId/{id}','UserController@getConectionbyId');
 Route::middleware('auth')->get('payPlan', function(){
     return view('payPlan');
 });
