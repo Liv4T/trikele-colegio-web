@@ -138,9 +138,10 @@ Route::middleware('auth')->get('/plan', function () {
 Route::middleware('auth')->get('/changePassword', function () {
     return view('changepassword');
 });
-Route::middleware('auth')->get('/miPerfil', function () {
-    return view('perfil');
+Route::get('/miPerfil/{id_student}', function (String $id_student) {
+    return view('perfil')->with('id_student', $id_student);
 });
+
 Route::middleware('auth')->get('/resetPass', function () {
     return view('resetPass');
 });
@@ -295,6 +296,7 @@ Route::put('/changePassword', 'UserController@changePassword')->name('changePass
 
 Route::middleware('auth')->get('showUser', 'UserController@show')->name('users_save');
 Route::middleware('auth')->post('img_user', 'UserController@uploadFile')->name('img_user');
+Route::get('getStudents/{id}', 'UserController@getStudents');
 
 Route::middleware('auth')->post('savePrintDoc', 'HomeController@savePrintDoc')->name('savePrintDoc');
 Route::get('downloadFile', 'HomeController@downloadFile')->name('downloadFile');
@@ -434,7 +436,7 @@ Route::middleware('auth')->get('/enviados', function () {
      */
 
 Route::get('getUsers', 'AdministratorController@indexUsers')->name('getUsers');
-Route::get('getStudents', 'AdministratorController@indexStudents')->name('getStudents');
+Route::get('getStudents', 'AdministratorController@getStudents')->name('getStudents');
 Route::get('getParents','AdministratorController@getParents');
 Route::get('getCoords', 'AdministratorController@indexCoords')->name('getCoords');
 Route::get('getTeachers', 'AdministratorController@indexTeachers')->name('getTeachers');
@@ -491,6 +493,10 @@ $router->get('import', 'ImportController@importTeacherClassroom');
 $router->get('importStudent', 'ImportController@importStudentClassroom');
 // Carga masiva usuario
 $router->get('importUsers', 'ImportController@importUsers');
+Route::post('documentoimp','ImportController@uploadFiles');
+Route::post('uploadFileAssignStudent','ImportController@uploadFileAssignStudent');
+Route::post('uploadFileAssignTeachers','ImportController@uploadFileAssignTeachers');
+
 Route::middleware('auth')->get('/importar_adm', function () {
     return view('imports.importB');
 });
@@ -709,8 +715,8 @@ Route::get('/compra/plan/{plan_type}/area/{area_id}/ingresar/p/{payment_code}', 
 Route::get('/compra/plan/{plan_type}/area/{area_id}/ingresar/v/{voucher}/p/{payment_code}', function (string $plan_type, string $voucher, int $area_id, String $payment_code) {
     return view('purchaseAreaLogin')->with('plan_type', $plan_type)->with('area_id', $area_id)->with('voucher', $voucher)->with('payment_code', $payment_code);
 });
-Route::get('/compra/plan/{plan_type}/cop/{pago_pesos}/ingresar/p/{payment_code}', function (string $plan_type, String $pago_pesos, String $payment_code) {
-    return view('purchasePlanLogin')->with('plan_type', $plan_type)->with('pago_pesos', $pago_pesos)->with('voucher', '')->with('payment_code', $payment_code);
+Route::get('/compra/plan/{plan_type}/cop/{pago_pesos}/usd/{pago_usd}/ingresar/p/{payment_code}', function (string $plan_type, String $pago_pesos, String $pago_usd, String $payment_code) {
+    return view('purchasePlanLogin')->with('plan_type', $plan_type)->with('pago_pesos', $pago_pesos)->with('pago_usd', $pago_usd)->with('voucher', '')->with('payment_code', $payment_code);
 });
 Route::get('/compra/plan/{plan_type}/ingresar/v/{voucher}', function (string $plan_type, string $voucher, String $payment_code) {
     return view('purchasePlanLogin')->with('plan_type', $plan_type)->with('voucher', $voucher)->with('payment_code', $payment_code);
@@ -920,6 +926,10 @@ Route::get('getWorkShop/{id_bimestre}/{id_area}/{id_classroom}','WorkshopControl
 Route::resource('filesWork','FilesWorkshopController');
 Route::get('getFilesStudents/{id_activity}/{id_workshop}','FilesWorkshopController@getFilesStudents');
 
+Route::resource('AssignNote','AssignNoteController');
+Route::get('/AssignNote/{id_student}/{id_area}','AssignNoteController@show');
+Route::get('/assignNote/{id}','AssignNoteController@getAssignNote');
+Route::get('/getConectionbyId/{id}','UserController@getConectionbyId');
 Route::middleware('auth')->get('payPlan', function(){
     return view('payPlan');
 });
@@ -928,5 +938,37 @@ Route::middleware('auth')->get('payPlan', function(){
 Route::middleware('auth')->get('/compra/pagar/paypal/{data_string}', 'PaypalPaymentController@payPaypal');
 Route::middleware('auth')->get('/compra/pagar/plan/paypal/{data_string}', 'PaypalPaymentController@payPaypalPlan');
 Route::middleware('auth')->get('/compra/currencyExchange', 'PaypalPaymentController@currencyExchange');
-Route::resource('answerLite','AnswersLiteController');
-Route::resource('attemps','AttempsEvaluationsController');
+
+Route::middleware('auth')->get('/admin-boletin', function(){
+    return view('adminBoletin');
+});
+
+Route::get('/extra_ef', function () {
+    return view('CatExtraEF');
+});
+Route::get('/extra_ea', function () {
+    return view('CatExtraEA');
+});
+Route::get('class_extra/{id_cat}', function (String $id_cat) {
+    return view('ClassExtra')->with('id_cat', $id_cat);
+});
+Route::get('/extra_view/{id_cat}/{id_class}', function (String $id_cat, String $id_class) {
+    return view('viewClassExtra')->with('id_cat', $id_cat)->with('id_class', $id_class);
+});
+Route::post('createExtra', 'AdministratorController@createExtra')->name('createExtra');
+Route::get('getExtra', 'AdministratorController@findExtra')->name('getExtra');
+Route::post('createCatExtra', 'AdministratorController@createCatExtra')->name('createCatExtra');
+Route::get('findCatExtra/{id}', 'AdministratorController@findCatExtra')->name('findCatExtra');
+Route::get('findCatName/{id}', 'AdministratorController@findCatName')->name('findCatName');
+Route::get('showClassExtra/{id}', 'ClassController@showClassExtra')->name('showClassExtra');
+Route::get('showExtraById/{id}', 'ClassController@showExtraById')->name('showExtraById');
+
+Route::post('saveClassExtra', 'ClassController@saveClassExtra')->name('saveClassExtra');
+Route::put('updateClassExtra', 'ClassController@updateClassExtra')->name('updateClassExtra');
+
+Route::get('/extra_crear/{id_cat}', function (String $id_cat) {
+    return view('cClassExtra')->with('id_cat', $id_cat);
+});
+Route::get('/extra_edit/{id_cat}/{id_class}', function (String $id_cat, String $id_class) {
+    return view('editClassExtra')->with('id_cat', $id_cat)->with('id_class', $id_class);
+});

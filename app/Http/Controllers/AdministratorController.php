@@ -14,6 +14,9 @@ use App\State;
 use App\User;
 use App\ClassroomStudent;
 use App\ClassroomTeacher;
+use App\Extracurricular;
+use App\ExtracurricularCategory;
+use App\ExtracurricularTeacher;
 use Auth;
 use DB;
 
@@ -58,6 +61,20 @@ class AdministratorController extends Controller
         }
         $users = User::where('type_user', 3)->get();
         return $users;
+    }
+
+    public function getStudents(){
+        $students = [];
+        $users = User::where('type_user','=',3)->get();        
+        foreach($users as $key => $user){
+            $findUser = ClassroomStudent::where('id_user', $user->id)->first();
+            if($findUser){
+                $dataToPush = User::where('id',$findUser->id_user)->first();
+                array_push($students, $dataToPush);
+            }            
+        }
+
+        return $students;
     }
 
     public function getParents(){
@@ -626,5 +643,75 @@ class AdministratorController extends Controller
         $coord->new_coord_area = $request->new_coord_area;
         $coord->save();
         return response()->json('El usuario '.$coord->name.'Fué asignado a '.$request->new_coord_area);
+    }
+
+    public function createExtra(Request $request)
+    {
+        $data = $request->all();
+        $extra = $data['name'];
+        foreach ($extra as $ext) {
+            $extracurricular = new Extracurricular();
+            $extracurricular->name = $ext['name'];
+            $extracurricular->save();
+        }
+        return 'ok';
+    }
+    public function createCatExtra(Request $request)
+    {
+        $data = $request->all();
+        $ExtracurricularCategory = $data['name'];
+        foreach ($ExtracurricularCategory as $ext) {
+            $cat = new ExtracurricularCategory();
+            $cat->name = $ext['name'];
+            $cat->id_extra = $data['id_extra'];
+            $cat->save();
+        }
+
+        return 'ok';
+    }
+    public function findExtra()
+    {
+        $extra = Extracurricular::all();
+        return $extra;
+    }
+    public function findCatExtra(String $id)
+    {
+        $extras = [];
+
+        $cat_extra = ExtracurricularCategory::where('id_extra', $id)->get();;
+        foreach ($cat_extra as $key => $val) {
+            $extras[] = [
+                'id' => $val->id,
+                'name' => $val->name,
+            ];
+        }
+        return $extras;
+    }
+    public function findCatName($id)
+    {
+        if (Auth::user()->type_user == 1) {
+            $extra = ExtracurricularCategory::findOrFail($id);
+            $extra->status = 1;
+        } elseif (Auth::user()->type_user == 2) {            
+            $extra = ExtracurricularCategory::findOrFail($id);
+            // dd($extra);
+            $teacher_extra = ExtracurricularTeacher::where('id_user', Auth::user()->id)->get();
+            if (isset($teacher_extra)) {
+                foreach ($teacher_extra as $key => $ext) {
+                    if ($ext->id_category == $id) {
+                        $status = 1;
+                        break;
+                    }
+                }
+            }
+            $extra->id_user = Auth::user()->id;
+            $extra->status = 2;
+            $extra->id_category = $id;
+        } elseif (Auth::user()->type_user == 3) {
+            $extra = ExtracurricularCategory::findOrFail($id);
+            $extra->status = 0;
+        }
+
+        return $extra;
     }
 }

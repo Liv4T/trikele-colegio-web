@@ -25,14 +25,8 @@
     /></noscript>
     <!-- End Facebook Pixel Code -->
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-188981300-1">
-    </script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-188981300-1');
-    </script>
+    <!-- Global site tag (gtag.js) - Google Ads: 343608358 --> <script async src="https://www.googletagmanager.com/gtag/js?id=AW-343608358"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-343608358'); </script>
+<!-- Global site tag (gtag) - Google Ads: 343608358 --> <amp-analytics type="gtag" data-credentials="include"> <script type="application/json"> { "vars": { "gtag_id": "AW-343608358", "config": { "AW-343608358": { "groups": "default" } } }, "triggers": { } } </script> </amp-analytics>
     <meta name="facebook-domain-verification" content="fzn5mgyk9xq1weqb0y8wr0k73mdzum" />
     @endif
 
@@ -92,14 +86,14 @@
     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
   </head>
   <body >
-
+<!-- Global site tag (gtag) - Google Ads: 343608358 --> <amp-analytics type="gtag" data-credentials="include"> <script type="application/json"> { "vars": { "gtag_id": "AW-343608358", "config": { "AW-343608358": { "groups": "default" } } }, "triggers": { } } </script> </amp-analytics>
     <div id="app">
         <nav class="navbar navbar-light">
             <div class="container-fluid">
                 <div  class="navbar-brand" >
                         <i class="fas fa-phone-alt"></i>    
                         <p class="navbar-brand">+57 316 0108409</p>       
-                        <p class="navbar-brand">+57 304 1560991</p>      
+                              
                         <p class="navbar-brand">+57 311 3157161</p>                        
                        <!-- <a class="navbar-brand" href="https://www.facebook.com/TrikelePlataformaEducativa/" target="_blank"  class="icons">
                             <i class="fab fa-facebook fa-2x"></i>

@@ -124,7 +124,7 @@
             </div>
         </div>
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
+            <div :class=" pago_usd !== 'null' ? 'modal-dialog modal-lg' : 'modal-dialog'" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Selección del metodo de Pago</h5>
@@ -134,11 +134,20 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6" v-if="pago_usd !== 'null'">
+                                <h5 class="mb-2">Pago en Dolares</h5>
                                 <div id="paypal-button"></div>
                             </div>
-                            <div class="col-md-5">
-                                <button class="btn btn-primary btn-lg" style="border-radius: 17px;" v-on:click="payMercadopago">Mercado Pago</button>
+                            <div :class="pago_usd !== 'null' ? 'col-md-5' : 'col-md-12 text-center'">
+                                <h5 class="mb-2">Pago en Pesos</h5>
+                                <a style="border-radius: 17px;" v-on:click="payMercadopago">
+                                    <button class="btn btn-primary btn-lg">Mercado Pago</button>
+
+                                    <div>
+                                        <img src="/uploads/images/logo_pse.png" style="width:100px" alt="">
+                                        <img src="/uploads/images/logo_tarjetas.png" style="width:130px" alt="">
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -150,7 +159,7 @@
 <script>
 
 export default {
-    props: ["plan_type","pago_pesos","aut","voucher","payment_code"],
+    props: ["plan_type","pago_pesos", "pago_usd","aut","voucher","payment_code"],
     data() {
         return {
             loginForm:{
@@ -185,7 +194,7 @@ export default {
         axios.get(`/api/document-type`).then((response) => {
             this.document_types=response.data;
         });
-    },    
+    },
     methods:{
         LoginValidForm()
         {
@@ -282,67 +291,55 @@ export default {
         payMercadopago(){
             location.href=`/compra/pagar/mercadopago/${encodeURI(this.payment_code)}`;
         },
-        PayPaypal(){                    
-            let pagoCOP = this.pago_pesos;
-            let valueToMultiply = 0.000265;            
-            try {
-                axios.get('https://free.currconv.com/api/v7/convert?q=COP_USD&compact=ultra&apiKey=78b417a4d5400cf1278b').then((response)=>{              
-                    valueToMultiply = response.data.COP_USD;                    
-                    console.log(response.data);
-                });
-            } catch (error) {
-                console.log(error);
-            }        
-            
-            this.PagoTotal = (pagoCOP * valueToMultiply).toFixed(2)
-
-            paypal.Button.render({
-                env: 'sandbox',
-                client: {
-                    sandbox: 'ARQ-WKAkFn3g4C111Ud3lLaUAfzagvJ_pmkLKBVMASvv6nyjX3fv3j0gtBdJEDhRPznYP9sLtf9oiJfH',
-                    production: 'EFNo9sAyqiOmnlRHsAdXiGBf6ULysEIfKUVsn58Pq6ilfGHVFn03iVvbWtfiht-irdJD_df1MECvmBC2'
-                },
-                locale: 'es_US',
-                style: {
-                    size: 'medium',
-                    color: 'blue',
-                    layout: 'vertical',
-                    shape: 'pill',
-                },
-                commit: true,
-                payment: async (data, actions) => {
-                    return actions.payment.create({
-                        transactions: [{
-                            amount: {
-                            total: this.PagoTotal,
-                            currency: 'USD'
-                            }
-                        }]
-                    });
-                },
-                onApprove: async (data, actions) => {
-                    const order = await actions.order.capture();
-                    //console.log(order);            
-                    this.paypalEvent(order);
-                }
-            }, '#paypal-button');       
+        PayPaypal(){
+            if(this.pago_usd){
+                paypal.Button.render({
+                    env: 'sandbox',
+                    client: {
+                        sandbox: 'ARQ-WKAkFn3g4C111Ud3lLaUAfzagvJ_pmkLKBVMASvv6nyjX3fv3j0gtBdJEDhRPznYP9sLtf9oiJfH',
+                        production: 'EFNo9sAyqiOmnlRHsAdXiGBf6ULysEIfKUVsn58Pq6ilfGHVFn03iVvbWtfiht-irdJD_df1MECvmBC2'
+                    },
+                    locale: 'es_US',
+                    style: {
+                        size: 'medium',
+                        color: 'blue',
+                        layout: 'vertical',
+                        shape: 'pill',
+                    },
+                    commit: true,
+                    payment: async (data, actions) => {
+                        return actions.payment.create({
+                            transactions: [{
+                                amount: {
+                                    total: this.pago_usd,
+                                    currency: 'USD'
+                                }
+                            }]
+                        });
+                    },
+                    onApprove: async (data, actions) => {
+                        const order = await actions.order.capture();
+                        //console.log(order);
+                        this.paypalEvent(order);
+                    }
+                }, '#paypal-button');
+            }
         },
-
         paypalEvent(order){
             this.events.pay_loading = true;
-            let model = {          
+            let model = {
                 quantity: 1,
                 plan_name: this.plan_type,
                 amount: order.purchase_units[0].amount.value,
-                ref: order.purchase_units[0].payments.captures[0].id,  
+                ref: order.purchase_units[0].payments.captures[0].id,
                 result: order.purchase_units[0].payments.captures[0].status,
                 payer_email: order.payer.email_address,
                 payer_id: order.payer.payer_id,
                 merchant_id: order.purchase_units[0].payee.merchant_id,
                 princeExchange: 0,
-                total: this.PagoTotal,
+                total: this.pago_usd,
             };
-            
+
             setTimeout(() => {
                 location.href=`/compra/pagar/plan/paypal/${encodeURI(window.btoa(JSON.stringify(model)))}`;
             },1000);

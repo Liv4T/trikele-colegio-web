@@ -143,6 +143,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 var firebaseConfig = {
   apiKey: "AIzaSyBUwPOBHWgSv10yWDO0VX_UCCOfHZ3jKYE",
@@ -651,7 +653,21 @@ var render = function() {
                     { key: key_a },
                     [
                       _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-12" }, [
+                        _c("div", { staticClass: "col-6" }, [
+                          _c("p", [_vm._v("Nombre de Actividad: ")]),
+                          _vm._v(" "),
+                          _c("b", [_vm._v(_vm._s(activity.name))])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-6" }, [
+                          _c("p", [_vm._v("Cantidad de Preguntas: ")]),
+                          _vm._v(" "),
+                          _c("b", [
+                            _vm._v(_vm._s(activity.module.questions.length))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-12 mt-3" }, [
                           _c("b", [_vm._v("Descripción:")]),
                           _vm._v(" "),
                           _c("textarea", {
@@ -688,9 +704,8 @@ var render = function() {
                             attrs: {
                               playing: true,
                               module: activity.module,
-                              disabled:
-                                activity.interaction.state > 1 &&
-                                _vm.attempt === false
+                              disabled: activity.interaction.state > 1,
+                              type_user: _vm.type_user
                             }
                           })
                         : _vm._e(),
@@ -700,9 +715,7 @@ var render = function() {
                             attrs: {
                               playing: true,
                               module: activity.module,
-                              disabled:
-                                activity.interaction.state > 1 &&
-                                _vm.attempt === false
+                              disabled: activity.interaction.state > 1
                             }
                           })
                         : _vm._e(),
@@ -712,9 +725,7 @@ var render = function() {
                             attrs: {
                               playing: true,
                               module: activity.module,
-                              disabled:
-                                activity.interaction.state > 1 &&
-                                _vm.attempt === false
+                              disabled: activity.interaction.state > 1
                             }
                           })
                         : _vm._e(),
@@ -724,53 +735,27 @@ var render = function() {
                             attrs: {
                               playing: true,
                               module: activity.module,
-                              disabled:
-                                activity.interaction.state > 1 &&
-                                _vm.attempt === false
+                              disabled: activity.interaction.state > 1
                             }
                           })
                         : _vm._e(),
                       _vm._v(" "),
-                      _vm.attempt === false
-                        ? _c(
-                            "div",
-                            { staticClass: "activity_response-button" },
-                            [
-                              activity.interaction.state == 1 &&
-                              _vm.count_attemp === 0
-                                ? _c(
-                                    "button",
-                                    {
-                                      staticClass: "btn btn-primary",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.SaveResponseEvent(activity)
-                                        }
-                                      }
-                                    },
-                                    [_vm._v("Enviar respuestas")]
-                                  )
-                                : _vm._e()
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.attempt === true && _vm.count_attemp < 3
-                        ? _c("div", [
-                            _c(
+                      _c("div", { staticClass: "activity_response-button" }, [
+                        activity.interaction.state == 1
+                          ? _c(
                               "button",
                               {
-                                staticClass: "btn btn-primary col-md-3",
+                                staticClass: "btn btn-primary",
                                 on: {
                                   click: function($event) {
-                                    return _vm.saveAttemp(activity)
+                                    return _vm.SaveResponseEvent(activity)
                                   }
                                 }
                               },
-                              [_vm._v("Guardar Intento")]
+                              [_vm._v("Enviar respuestas")]
                             )
-                          ])
-                        : _vm._e(),
+                          : _vm._e()
+                      ]),
                       _vm._v(" "),
                       _vm.count_attemp >= 3
                         ? _c("div", [_c("p", [_vm._v("Intentos excedidos")])])

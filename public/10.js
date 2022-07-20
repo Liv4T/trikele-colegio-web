@@ -106,6 +106,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 moment__WEBPACK_IMPORTED_MODULE_1___default.a.tz.setDefault("America/Bogota");
@@ -597,13 +599,8 @@ var render = function() {
                           [
                             _c("notas-component", {
                               attrs: {
-                                idArea: _vm.idArea,
-                                idClassroom: _vm.idClassroom,
-                                user: _vm.user,
-                                nameArea: _vm.nameArea,
-                                planifications: _vm.planifications,
-                                id_lective_planification:
-                                  _vm.id_lective_planification
+                                id_area: _vm.idArea,
+                                id_user: _vm.id_user
                               }
                             })
                           ],

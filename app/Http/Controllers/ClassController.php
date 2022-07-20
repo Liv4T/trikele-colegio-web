@@ -26,6 +26,8 @@ use App\User;
 use App\Grade;
 use App\ClassSubject;
 use App\Workshop;
+use App\ExtracurricularClass;
+use App\ExtracurricularClassContent;
 use Illuminate\Http\Request;
 use Auth;
 use PhpParser\Node\Stmt\Foreach_;
@@ -1271,5 +1273,93 @@ class ClassController extends Controller
     {
         $week = $id;
         return view("activity", compact("week"));;
+    }
+
+    public function showClassExtra(Request $request, String $id)
+    {
+        $clases = ExtracurricularClass::where('id_category', $id)->get();
+        $resources = [];
+        $count = 0;
+        foreach ($clases as $key => $class) {
+            $classExtras = ExtracurricularClassContent::where('id_class', $class->id)->get();
+            foreach ($classExtras as $index => $classExtra) {
+                $resources[$count] = [
+                    'url' => $classExtra->url,
+                    'id_class' => $class->id,
+                ];
+                $count = $count + 1;
+            }
+        }
+        $data = [
+            'clase' => $clases,
+            'class_content' => $resources,
+        ];
+        return $data;
+    }
+
+    public function showExtraById(String $id)
+    {
+        $clases = ExtracurricularClass::find($id);
+        $resources = [];
+        $classResources = ExtracurricularClassContent::where('id_class', $clases->id)->get();
+        foreach ($classResources as $index => $classResource) {
+            $resources[$index] = [
+                'name' => $classResource->url
+            ];
+        }
+        $data = [
+            'clase' => $clases,
+            'class_content' => $resources,
+        ];
+        return $data;
+    }
+
+    public function saveClassExtra(Request $request)
+    {
+        $data = $request->all();
+        $classExtra = ExtracurricularClass::create([
+            'name' => $data['name'],
+            'description' => $data['description'],
+            'id_category' => $data['id_category'],
+        ]);
+        $contents = $data['urls'];
+
+        foreach ($contents as $index => $content) {
+            $url_yt = $content['name'];
+            $url = str_replace("https://youtu.be/", "https://www.youtube.com/embed/", $url_yt);
+            $contents = ExtracurricularClassContent::create([
+                'url' => $url,
+                'id_class' => $classExtra->id,
+            ]);
+        }
+
+        return 'ok';
+    }
+
+    public function updateClassExtra(Request $request)
+    {
+        $data = $request->all();
+        $class = ExtracurricularClass::find($data['id_class']);
+
+        $class->name = $data['name'];
+        $class->description = $data['description'];
+        $class->save();
+
+        $resources_class = ExtracurricularClassContent::where('id_class', $data['id_class'])->get();
+        foreach ($resources_class as $key => $value) {
+            $value->delete();
+        }
+
+        $contents = $data['urls'];
+        foreach ($contents as $index => $content) {
+            $url_yt = $content['name'];
+            $url = str_replace("https://youtu.be/", "https://www.youtube.com/embed/", $url_yt);
+            $contents = ExtracurricularClassContent::create([
+                'url' => $url,
+                'id_class' => $class->id,
+            ]);
+        }
+
+        return 'ok';
     }
 }

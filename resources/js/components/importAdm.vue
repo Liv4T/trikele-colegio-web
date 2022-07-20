@@ -19,10 +19,10 @@
                   <div class="form-group row mx-auto">
                     <div class="col-md-6">
                       <label for>Rol:</label>
-                      <select class="form-control" ref="seleccionado" required>
-                        <option value="4">Coordinador</option>
-                        <option value="2">Docente</option>
-                        <option value="3">Estudiante</option>
+                      <select class="form-control" ref="seleccionado" required v-model="type_export">
+                        <option value="users">Usuarios</option>
+                        <option value="teachers">Docente</option>
+                        <option value="students">Estudiante</option>
                       </select>
                     </div>
 
@@ -42,7 +42,15 @@
                   </div>
 
                   <div class="modal-footer">
-                    <a href="/import" class="btn btn-warning float-right">Importar</a>
+                    <div v-if="type_export === 'users'">
+                      <a v-on:click="setImport('importUsers')" class="btn btn-warning float-right">Importar Usuarios</a>
+                    </div>
+                    <div v-if="type_export === 'teachers'">
+                      <a v-on:click="setImport('importTeachers')" class="btn btn-warning float-right">Importar Asignación de Docentes</a>
+                    </div>
+                    <div v-if="type_export === 'students'">
+                      <a v-on:click="setImport('importStudents')" class="btn btn-warning float-right">Importar Asignación de Estudiantes</a>
+                    </div>                    
                   </div>
                 </tab-content>
               </form-wizard>
@@ -87,6 +95,8 @@ export default {
   data() {
     return {
       allowedExtensions: ["xlsx"],
+      type_export:'',
+      ExcelFile:""
     };
   },
   mounted() {},
@@ -94,7 +104,38 @@ export default {
     getMenu() {
       window.location = "/salon_adm";
     },
+    setImport(value){   
+      switch (value) {
+        case 'importUsers':
+          axios.get('/importUsers',this.ExcelFile[0]).then((response)=>{
+            toastr.success(response.data);              
+          }).catch((error)=>{
+            toastr.info('intenta de nuevo mas tarde');
+            console.log(error);
+          });
+        break;
+        
+        case 'importStudents':
+          axios.get('/importStudent',this.ExcelFile[0]).then((response)=>{
+            toastr.success(response.data);              
+          }).catch((error)=>{
+            toastr.info('intenta de nuevo mas tarde');
+            console.log(error);
+          });
+        break;
+
+        case 'importTeachers':
+          axios.get('/import',this.ExcelFile[0]).then((response)=>{
+            toastr.success(response.data);              
+          }).catch((error)=>{
+            toastr.info('intenta de nuevo mas tarde');
+            console.log(error);
+          });
+        break;
+      }
+    },
     onFlieChange(file) {
+      this.ExcelFile = file.target.files || file.dataTransfer.files;
       let files = file.target.files || file.dataTransfer.files;
       let data = new FormData();
       if (files.length > 0) {
@@ -103,14 +144,29 @@ export default {
         let filesize = file.size;
         let extension = this.findExtension(filename);
 
-        // if uploaded file is valid with validation rules
-        if (this.validateFile(filesize, extension)) {
-          data.append("file", files[0]);
-
-          axios.post("/documentoimp", data).then((response) => {
-            this.emitMessage(response);
-          });
-        }
+        if(this.type_export === 'users'){
+          // if uploaded file is valid with validation rules
+          if (this.validateFile(filesize, extension)) {
+            data.append("file", files[0]);
+            axios.post("/documentoimp", data).then((response) => {
+              this.emitMessage(response);
+            });
+          }
+        }else if(this.type_export === 'students'){
+          if (this.validateFile(filesize, extension)) {
+            data.append("file", files[0]);
+            axios.post("/uploadFileAssignStudent", data).then((response) => {
+              this.emitMessage(response);
+            });
+          }
+        }else if(this.type_export === 'teachers'){
+          if (this.validateFile(filesize, extension)) {
+            data.append("file", files[0]);
+            axios.post("/uploadFileAssignTeachers", data).then((response) => {
+              this.emitMessage(response);
+            });
+          }
+        }        
       }
     },
     /**

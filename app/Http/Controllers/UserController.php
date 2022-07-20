@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\ClassContentInteraction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\User;
@@ -134,12 +135,12 @@ class UserController extends Controller
         $user->picture = isset($data['user_name']) ? $url . "/uploads/images/" . $data['user_name'] . ".png" : "";
         $user->save();
 
-        /* Send email register */
-        if (isset($data['email'])) {
-            Mail::send('emails.register', $data, function ($msj) use ($data) {
-                $msj->to($data['email'])->subject('Falta sólo un paso más');
-            });
-        }
+        // /* Send email register */
+        // if (isset($data['email'])) {
+        //     Mail::send('emails.register', $data, function ($msj) use ($data) {
+        //         $msj->to($data['email'])->subject('Falta sólo un paso más');
+        //     });
+        // }
         return view('home');
         // return response()->json([true]);
     }
@@ -292,9 +293,24 @@ class UserController extends Controller
         $parents = User::where('parent_id','=',$id)->get();
         return response()->json($parents);
     }
+      public function getStudents(String $id){
+        $students = User::where('id','=',$id)->get();
+        return response()->json($students);
+    }
 
     public function getUser(){
         $user = Auth::user();
         return $user;
     }
+
+    public function getConectionbyId(String $id){
+
+        $last_conection = ClassContentInteraction::where('id_student',$id)
+                                                ->orderBy('created_at','DESC')
+                                                ->limit(5)
+                                                ->get();
+        return response()->json($last_conection);
+       
+    }
+
 }

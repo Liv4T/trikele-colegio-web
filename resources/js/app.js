@@ -263,4 +263,13 @@ Vue.component("show-taller", ()=>import("./components/ShowTaller.vue"));
 Vue.component("pay-plan",()=>import("./components/payPlan.vue"));
 Vue.component("purchase-pay-paypal-result", () => import ("./components/purchasePlanPayResultPaypalComponent.vue"));
 
+Vue.component("admin-boletin",()=>import("./components/boletinesAdmin.vue"));
+
+Vue.component("catextraea-adm", require("./components/CatExtraEA.vue").default);
+Vue.component("catextraef-adm", require("./components/CatExtraEF.vue").default);
+Vue.component("classextra-adm", require("./components/classExtra.vue").default);
+Vue.component("viewclassextra-component", require("./components/viewClassExtra.vue").default);
+Vue.component("createclassextra-component", require("./components/createClassExtra.vue").default);
+Vue.component("editclassextra-component", require("./components/editClassExtra.vue").default);
+
 const app = new Vue({el: "#app", data: {}, store});

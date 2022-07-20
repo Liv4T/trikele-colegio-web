@@ -161,18 +161,18 @@
             </div>
             <div class="content-button">
               <div class="row align-items-center">
-                <div class="col-md-12 content-button">                  
+                <div class="col-md-12 content-button">
                   <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() > 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">FINALIZAR COMPRA</button>
                   <button v-if="events.pay_loading" type="button" class="btn btn-primary letra-boldfont" disabled>Procesando...</button>
-                  <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() == 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">EMPEZAR</button>                  
+                  <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() == 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">EMPEZAR</button>
                 </div>
               </div>
             </div>
-            
+
           </section>
-        </div>      
+        </div>
       </div>
-      
+
       <div class="row justify-content-center" v-if="!fullWidth">
         <div class="col-md-10">
           <section class="resume-container">
@@ -298,7 +298,7 @@
                           </div>
                         </td>
                       </tr>
-                      <tr>                        
+                      <tr>
                         <th class="letra-boldfont">TOTAL</th>
                         <td>
                           <div class="row align-items-center">
@@ -308,29 +308,29 @@
                           </div>
                         </td>
                       </tr>
-                      <tr>                        
-                        <td colspan="2">                          
+                      <tr>
+                        <td colspan="2">
                           <div class="content-button">
                             <div class="row align-items-center">
-                              <div class="col-md-12 content-button">                                
-                                
+                              <div class="col-md-12 content-button">
+
                                 <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() > 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">FINALIZAR COMPRA</button>
                                 <button v-if="events.pay_loading" type="button" class="btn btn-primary letra-boldfont" disabled>Procesando...</button>
-                                <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() == 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">EMPEZAR</button>                                
+                                <button v-if="!events.pay_loading && TotalValue() - VoucherDiscountValue() == 0" @click="PayEvent()" class="btn btn-Azul letra-boldfont">EMPEZAR</button>
                               </div>
                             </div>
                           </div>
                         </td>
                       </tr>
                     </tbody>
-                  </table>                  
+                  </table>
                 </div>
               </div>
-            </div>              
-          </section>          
-        </div>        
-      </div>      
-    </div>        
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -347,7 +347,7 @@
       this.fillWidthCalculate();
       window.onresize = () => {
         this.fillWidthCalculate();
-      };   
+      };
     },
     data() {
       return {
@@ -364,7 +364,8 @@
         voucher_code: "",
         voucher_data: null,
         PagoTotal: null,
-        pagoPesos:null
+        pagoPesos:null,
+        paymentUsd:null,
       };
     },
     methods: {
@@ -380,6 +381,7 @@
       },
       TotalValue() {
         this.pagoPesos = (this.current_plan.plan_price.total_price + this.current_plan.english_price.total_price) * this.current_plan.quantity;
+        this.paymentUsd = this.current_plan.plan_price.price_usd;
         return (this.current_plan.plan_price.total_price + this.current_plan.english_price.total_price) * this.current_plan.quantity;
       },
       VoucherDiscountApplied() {
@@ -473,7 +475,7 @@
 
         if (this.current_plan.quantity > 20) this.current_plan.quantity = 20;
       },
-      PayEvent() {        
+      PayEvent() {
         this.events.pay_loading = true;
 
         let model = {
@@ -484,7 +486,7 @@
         };
 
         setTimeout(() => {
-          location.href = `/compra/plan/${this.plan_type}/cop/${this.pagoPesos}/ingresar/p/${encodeURI(window.btoa(JSON.stringify(model)))}`;
+          location.href = `/compra/plan/${this.plan_type}/cop/${this.pagoPesos}/usd/${this.paymentUsd}/ingresar/p/${encodeURI(window.btoa(JSON.stringify(model)))}`;
           //location.href = `/compra/pagar/mercadopago/${encodeURI(window.btoa(JSON.stringify(model)))}`;
           this.events.pay_loading = false;
         }, 1000);

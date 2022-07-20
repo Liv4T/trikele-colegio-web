@@ -25,12 +25,16 @@ class WorkshopController extends Controller
         $interaction=['state'=>1,'score'=>0];
         $workshop = Workshop::where('id_bimestre',$id_bimestre)->where('id_area',$id_area)->where('id_classroom',$id_classroom)->get();        
         if(isset($workshop)){
-            foreach($workshop as $work) {        
+            foreach($workshop as $work) {     
                 $activities = Activity::where('id_class', $work->id_class)->where('id', $work->id_activity)->where('deleted',0)->first();
+                // if(isset($activities)){
+                //     // return $workshop;
+                // }else{
+                //     return $work;
+                // }   
                 $user = Auth::user();
-            
                 if($user->type_user===3){
-                    $interaction=ActivityInteraction::where('id_activity',$activities->id)->first();
+                    $interaction=ActivityInteraction::where('id_activity',$activities->id)->where('id_student',$user->id)->first();
 
                     array_push($data, 
                         array(

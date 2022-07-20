@@ -8,11 +8,7 @@
           </div>
           <div class="card-body">
             <div class="form-group row">
-              <div class="col-md-4">
-                <img :src="dataU.picture" class="rounded float-left" height="160px" width="190px" />
-              </div>
-
-              <div align="left col">
+              <div>
                 <div class="form-group row">
                   <h6>INFORMACIÓN DEL ESTUDIANTE</h6>
                 </div>
@@ -66,6 +62,7 @@
 <script>
 import "toastr/toastr.scss";
 export default {
+  props: ["id_student"],
   data() {
     return {
       fillNames: {
@@ -93,7 +90,7 @@ export default {
   },
   created() {},
   mounted() {
-    var urlUsers = "showUser";
+    var urlUsers = "getStudents/this.id_student";
     axios.get(urlUsers).then((response) => {
       this.dataU = response.data;
     });

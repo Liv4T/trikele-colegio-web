@@ -3,7 +3,7 @@
     <div class="seccion desk-1">
       <div class="form-group">
         <a href="/#contacto">
-          <img src="uploads/home/ciclosslide.jpg" width="100%" />
+          <img src="uploads/home/semipresencialnew.png" width="100%" />
         </a>
       </div>
     </div>

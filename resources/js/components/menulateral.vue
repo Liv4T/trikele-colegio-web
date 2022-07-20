@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="container">
+    <div class="">
       <div class="row">
         <div class="left">
           <ul>
@@ -128,6 +128,24 @@
                                             Boletín de notas
                     </a>-->
                   <!-- </div> -->
+                </li>
+              </a>
+            </div>
+            <div class="dropdown">
+              <a>
+                <li class="item-menu">                
+                  <span
+                    class="menu"
+                  >Clases Extracurriculares&nbsp;&nbsp;&nbsp;</span>
+                  <div class="dropdown-content">
+                    <a href="/extra_ea">                      
+                      Educación Artistica
+                    </a>
+
+                    <a href="/extra_ef">                
+                      Educación Física
+                    </a>                    
+                  </div>
                 </li>
               </a>
             </div>

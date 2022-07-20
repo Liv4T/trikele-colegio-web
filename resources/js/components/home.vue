@@ -3,7 +3,7 @@
     <div class="seccion desktop1">
       <div class="form-group">
         <a  href >
-          <img src="uploads/images/semipresencial.png" width="100%" />
+          <img src="uploads/images/semipresencialNew.png" width="100%" />
         </a>
       </div>
     </div>

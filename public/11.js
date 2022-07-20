@@ -314,6 +314,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 (function () {
   "use strict";
 
@@ -342,6 +346,9 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
   props: ["id_module", "id_class", "returnPage"],
   data: function data() {
     return {
+      disableDocument: false,
+      disableLink: false,
+      disableVideo: false,
       is_loading: false,
       weekly_plan: {},
       errors: [],
@@ -433,20 +440,28 @@ Vue.use(vue_form_wizard__WEBPACK_IMPORTED_MODULE_0___default.a);
       this.activity.completed = complete;
     },
     openDocument: function openDocument(resource) {
+      this.disableDocument = true;
+
       try {
         this.saveInteraction(resource);
+        this.disableDocument = false;
       } catch (_unused) {
         console.log("Falló");
       }
     },
     openLink: function openLink(resource) {
+      this.disableLink = true;
+
       try {
         this.saveInteraction(resource);
         window.open(resource.content);
+        this.disableLink = false;
       } catch (_unused2) {}
     },
     playVideo: function playVideo(resource) {
+      this.disableVideo = true;
       this.saveInteraction(resource);
+      this.disableLink = false;
     },
     saveInteraction: function saveInteraction(resource) {
       axios.put("/api/student/module/".concat(this.id_module, "/class/").concat(this.id_class, "/resource/").concat(resource.id, "/interaction")).then(function (response) {//this.getCourseData();
@@ -1096,8 +1111,7 @@ var render = function() {
                     _vm._l(_vm.course.content, function(item_content, key_c) {
                       return [
                         item_content.content != "" &&
-                        item_content.content != null &&
-                        item_content.content_type != "DOCUMENT"
+                        item_content.content != null
                           ? _c(
                               "div",
                               {
@@ -1106,6 +1120,28 @@ var render = function() {
                                 staticStyle: { "border-radius": "8px" }
                               },
                               [
+                                item_content.content_type === "DOCUMENT"
+                                  ? _c(
+                                      "h4",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: _vm.hideDocuments,
+                                            expression: "hideDocuments"
+                                          }
+                                        ],
+                                        staticStyle: { color: "#f79d52" }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                        Documento\n                                    "
+                                        )
+                                      ]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
                                 item_content.content_type === "LINK"
                                   ? _c(
                                       "h4",
@@ -1170,12 +1206,40 @@ var render = function() {
                                 _vm._v(" "),
                                 _c("div", { staticClass: "form-item" }, [
                                   _c("div", { staticClass: "form-button" }, [
+                                    _c("div", [
+                                      item_content.content_type === "DOCUMENT"
+                                        ? _c(
+                                            "a",
+                                            {
+                                              staticClass: "btn btn-primary",
+                                              attrs: {
+                                                disabled: _vm.disableDocument,
+                                                href: item_content.content,
+                                                download: "",
+                                                target: "__blank"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.openDocument(
+                                                    item_content
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Leer documento")]
+                                          )
+                                        : _vm._e()
+                                    ]),
+                                    _vm._v(" "),
                                     item_content.content_type === "LINK"
                                       ? _c(
                                           "a",
                                           {
                                             staticClass: "btn btn-primary",
-                                            attrs: { target: "_blank" },
+                                            attrs: {
+                                              disabled: _vm.disableLink,
+                                              target: "_blank"
+                                            },
                                             on: {
                                               click: function($event) {
                                                 return _vm.openLink(
@@ -1192,7 +1256,11 @@ var render = function() {
                                       ? _c(
                                           "video",
                                           {
-                                            attrs: { id: "vid", controls: "" },
+                                            attrs: {
+                                              disabled: _vm.disableVideo,
+                                              id: "vid",
+                                              controls: ""
+                                            },
                                             on: {
                                               playing: function($event) {
                                                 return _vm.playVideo(

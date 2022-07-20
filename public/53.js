@@ -166,8 +166,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["plan_type", "pago_pesos", "aut", "voucher", "payment_code"],
+  props: ["plan_type", "pago_pesos", "pago_usd", "aut", "voucher", "payment_code"],
   data: function data() {
     return {
       loginForm: {
@@ -289,93 +298,82 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     PayPaypal: function PayPaypal() {
       var _this4 = this;
 
-      var pagoCOP = this.pago_pesos;
-      var valueToMultiply = 0.000265;
+      if (this.pago_usd) {
+        paypal.Button.render({
+          env: 'sandbox',
+          client: {
+            sandbox: 'ARQ-WKAkFn3g4C111Ud3lLaUAfzagvJ_pmkLKBVMASvv6nyjX3fv3j0gtBdJEDhRPznYP9sLtf9oiJfH',
+            production: 'EFNo9sAyqiOmnlRHsAdXiGBf6ULysEIfKUVsn58Pq6ilfGHVFn03iVvbWtfiht-irdJD_df1MECvmBC2'
+          },
+          locale: 'es_US',
+          style: {
+            size: 'medium',
+            color: 'blue',
+            layout: 'vertical',
+            shape: 'pill'
+          },
+          commit: true,
+          payment: function () {
+            var _payment = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data, actions) {
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      return _context.abrupt("return", actions.payment.create({
+                        transactions: [{
+                          amount: {
+                            total: _this4.pago_usd,
+                            currency: 'USD'
+                          }
+                        }]
+                      }));
 
-      try {
-        axios.get('https://free.currconv.com/api/v7/convert?q=COP_USD&compact=ultra&apiKey=78b417a4d5400cf1278b').then(function (response) {
-          valueToMultiply = response.data.COP_USD;
-          console.log(response.data);
-        });
-      } catch (error) {
-        console.log(error);
+                    case 1:
+                    case "end":
+                      return _context.stop();
+                  }
+                }
+              }, _callee);
+            }));
+
+            function payment(_x, _x2) {
+              return _payment.apply(this, arguments);
+            }
+
+            return payment;
+          }(),
+          onApprove: function () {
+            var _onApprove = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(data, actions) {
+              var order;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+                while (1) {
+                  switch (_context2.prev = _context2.next) {
+                    case 0:
+                      _context2.next = 2;
+                      return actions.order.capture();
+
+                    case 2:
+                      order = _context2.sent;
+
+                      //console.log(order);
+                      _this4.paypalEvent(order);
+
+                    case 4:
+                    case "end":
+                      return _context2.stop();
+                  }
+                }
+              }, _callee2);
+            }));
+
+            function onApprove(_x3, _x4) {
+              return _onApprove.apply(this, arguments);
+            }
+
+            return onApprove;
+          }()
+        }, '#paypal-button');
       }
-
-      this.PagoTotal = (pagoCOP * valueToMultiply).toFixed(2);
-      paypal.Button.render({
-        env: 'sandbox',
-        client: {
-          sandbox: 'ARQ-WKAkFn3g4C111Ud3lLaUAfzagvJ_pmkLKBVMASvv6nyjX3fv3j0gtBdJEDhRPznYP9sLtf9oiJfH',
-          production: 'EFNo9sAyqiOmnlRHsAdXiGBf6ULysEIfKUVsn58Pq6ilfGHVFn03iVvbWtfiht-irdJD_df1MECvmBC2'
-        },
-        locale: 'es_US',
-        style: {
-          size: 'medium',
-          color: 'blue',
-          layout: 'vertical',
-          shape: 'pill'
-        },
-        commit: true,
-        payment: function () {
-          var _payment = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data, actions) {
-            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-              while (1) {
-                switch (_context.prev = _context.next) {
-                  case 0:
-                    return _context.abrupt("return", actions.payment.create({
-                      transactions: [{
-                        amount: {
-                          total: _this4.PagoTotal,
-                          currency: 'USD'
-                        }
-                      }]
-                    }));
-
-                  case 1:
-                  case "end":
-                    return _context.stop();
-                }
-              }
-            }, _callee);
-          }));
-
-          function payment(_x, _x2) {
-            return _payment.apply(this, arguments);
-          }
-
-          return payment;
-        }(),
-        onApprove: function () {
-          var _onApprove = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(data, actions) {
-            var order;
-            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-              while (1) {
-                switch (_context2.prev = _context2.next) {
-                  case 0:
-                    _context2.next = 2;
-                    return actions.order.capture();
-
-                  case 2:
-                    order = _context2.sent;
-
-                    //console.log(order);            
-                    _this4.paypalEvent(order);
-
-                  case 4:
-                  case "end":
-                    return _context2.stop();
-                }
-              }
-            }, _callee2);
-          }));
-
-          function onApprove(_x3, _x4) {
-            return _onApprove.apply(this, arguments);
-          }
-
-          return onApprove;
-        }()
-      }, '#paypal-button');
     },
     paypalEvent: function paypalEvent(order) {
       this.events.pay_loading = true;
@@ -389,7 +387,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         payer_id: order.payer.payer_id,
         merchant_id: order.purchase_units[0].payee.merchant_id,
         princeExchange: 0,
-        total: this.PagoTotal
+        total: this.pago_usd
       };
       setTimeout(function () {
         location.href = "/compra/pagar/plan/paypal/".concat(encodeURI(window.btoa(JSON.stringify(model))));
@@ -412,7 +410,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n*{font-family: 'Montserrat';}\nh4{margin-top:20px;}\n.border-bottom-1{border-bottom:1px solid #818181;}\nform{margin-top:20px;padding:10px;}\n.form-check-label{width:90%}\r\n", ""]);
+exports.push([module.i, "\n*{font-family: 'Montserrat';}\nh4{margin-top:20px;}\n.border-bottom-1{border-bottom:1px solid #818181;}\nform{margin-top:20px;padding:10px;}\n.form-check-label{width:90%}\n", ""]);
 
 // exports
 
@@ -1076,26 +1074,60 @@ var render = function() {
       [
         _c(
           "div",
-          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
+          {
+            class:
+              _vm.pago_usd !== "null"
+                ? "modal-dialog modal-lg"
+                : "modal-dialog",
+            attrs: { role: "document" }
+          },
           [
             _c("div", { staticClass: "modal-content" }, [
               _vm._m(14),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "row" }, [
-                  _vm._m(15),
+                  _vm.pago_usd !== "null"
+                    ? _c("div", { staticClass: "col-md-6" }, [
+                        _c("h5", { staticClass: "mb-2" }, [
+                          _vm._v("Pago en Dolares")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { attrs: { id: "paypal-button" } })
+                      ])
+                    : _vm._e(),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col-md-5" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary btn-lg",
-                        staticStyle: { "border-radius": "17px" },
-                        on: { click: _vm.payMercadopago }
-                      },
-                      [_vm._v("Mercado Pago")]
-                    )
-                  ])
+                  _c(
+                    "div",
+                    {
+                      class:
+                        _vm.pago_usd !== "null"
+                          ? "col-md-5"
+                          : "col-md-12 text-center"
+                    },
+                    [
+                      _c("h5", { staticClass: "mb-2" }, [
+                        _vm._v("Pago en Pesos")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticStyle: { "border-radius": "17px" },
+                          on: { click: _vm.payMercadopago }
+                        },
+                        [
+                          _c(
+                            "button",
+                            { staticClass: "btn btn-primary btn-lg" },
+                            [_vm._v("Mercado Pago")]
+                          ),
+                          _vm._v(" "),
+                          _vm._m(15)
+                        ]
+                      )
+                    ]
+                  )
                 ])
               ])
             ])
@@ -1267,8 +1299,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-6" }, [
-      _c("div", { attrs: { id: "paypal-button" } })
+    return _c("div", [
+      _c("img", {
+        staticStyle: { width: "100px" },
+        attrs: { src: "/uploads/images/logo_pse.png", alt: "" }
+      }),
+      _vm._v(" "),
+      _c("img", {
+        staticStyle: { width: "130px" },
+        attrs: { src: "/uploads/images/logo_tarjetas.png", alt: "" }
+      })
     ])
   }
 ]

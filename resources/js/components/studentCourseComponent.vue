@@ -88,9 +88,9 @@
                             </div>
                             <div class="row justify-content-center">
                                 <template v-for="(item_content,key_c) in course.content">
-                                    <div class="col-10 div-resource" style="border-radius:8px;" v-if="item_content.content !='' && item_content.content !=null && item_content.content_type != 'DOCUMENT'" v-bind:key="key_c">
+                                    <div class="col-10 div-resource" style="border-radius:8px;" v-if="item_content.content !='' && item_content.content !=null" v-bind:key="key_c">
                                         
-                                        <!-- <h4 
+                                        <h4 
                                             v-show="hideDocuments"
                                             style="color:#f79d52"
                                             v-if="
@@ -99,7 +99,7 @@
                                             "
                                         >
                                             Documento
-                                        </h4> -->
+                                        </h4>
                                         <h4
                                             style="color:#f79d52"
                                             v-if="
@@ -136,19 +136,22 @@
                                         </div>
                                         <div class="form-item">
                                             <div class="form-button">  
-                                                <!-- <div v-show="hideDocuments">
+                                                <div>
                                                     <a
+                                                        :disabled="disableDocument"
                                                         :href="item_content.content"
                                                         class="btn btn-primary"
                                                         v-if="
                                                             item_content.content_type ==='DOCUMENT'                                                    
                                                         "
                                                         download
+                                                        target="__blank"
                                                         v-on:click="openDocument(item_content)"
                                                         >Leer documento</a
                                                     >
-                                                </div>                                                                                       -->
+                                                </div>
                                                 <a
+                                                    :disabled="disableLink"
                                                     class="btn btn-primary"
                                                     v-if="
                                                         item_content.content_type === 'LINK'
@@ -160,6 +163,7 @@
                                                     >Vamos a trabajar</a
                                                 >
                                                 <video
+                                                    :disabled="disableVideo"
                                                     id="vid"
                                                     @playing="
                                                         playVideo(item_content)
@@ -332,6 +336,9 @@ export default {
     props: ["id_module", "id_class", "returnPage"],
     data() {
         return {
+            disableDocument: false,
+            disableLink: false,
+            disableVideo: false,
             is_loading: false,
             weekly_plan: {},
             errors: [],
@@ -432,20 +439,26 @@ export default {
             this.activity.completed = complete;
         },
         openDocument(resource) {
+            this.disableDocument = true;
             try {
                 this.saveInteraction(resource);
+                this.disableDocument = false;
             } catch {
                 console.log("Falló")
             }
         },
         openLink(resource) {
+            this.disableLink = true;
             try {
                 this.saveInteraction(resource);
                 window.open(resource.content);
+                this.disableLink = false;
             } catch {}
         },
         playVideo(resource) {
+            this.disableVideo = true;
             this.saveInteraction(resource);
+            this.disableLink = false;
         },
         saveInteraction(resource) {
             axios

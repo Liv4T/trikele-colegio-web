@@ -18,7 +18,7 @@
                                     <div class="row">
 
                                         <div class="col-7"><label><span class="required" >*</span>Pregunta N° {{k_q+1}} :</label></div>
-                                        <div class="col-5 text-right">
+                                        <div class="col-5 text-right" v-if="type_user === 2">
                                             <button class="btn btn-warning" alt="Remover pregunta" v-if="(k_q)>0 && !disabled" @click.prevent="RemoveQuestionEvent(k_q)" >Remover pregunta</button>
                                         </div>
                                     </div>
@@ -69,7 +69,7 @@
                                     <div class="row">
 
                                         <div class="col-7"><label><span class="required" >*</span>Pregunta N° {{k_q+1}} :</label></div>
-                                        <div class="col-5 text-right">
+                                        <div class="col-5 text-right" v-if="type_user === 2">
                                             <button class="btn btn-warning" alt="Remover pregunta" v-if="(k_q)>0 && !disabled" @click.prevent="RemoveQuestionEvent(k_q)" >Remover pregunta</button>
                                         </div>
                                     </div>
@@ -108,7 +108,7 @@
 </template>
 <script>
 export default {
-    props:['module', 'disabled','playing'],
+    props:['module', 'disabled','playing','type_user'],
     data() {
         return {
             question_types:[

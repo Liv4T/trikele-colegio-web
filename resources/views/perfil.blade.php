@@ -2,8 +2,7 @@
 
 @section('content')
 <!--<formstyle></formstyle>-->
-<menu-lateral></menu-lateral>
-  <perfil-component></perfil-component>
+  <perfil-component :id_student="{{ $id_student }}"></perfil-component>
   <footers></footers>
 <div class="container">
   <!--<app-vue></app-vue>-->

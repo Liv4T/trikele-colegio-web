@@ -3,7 +3,9 @@
         <div class="row justify-content-center">
             <div id="crud" class="col-sm-10">
                 <div class="card bg-light mb-3">
-                    <div class="card-header">Selección de Grado</div>
+                    <div class="card-header">
+                        <h2><strong>Selección de Grado</strong></h2>
+                    </div>
                     <div class="card-doby">
                         <div>
                             <p>Seleccione el Grado :</p>
@@ -19,18 +21,24 @@
                         </form>      
 
                         <div v-if="studentsGrades.length > 0" class="form-group mx-sm-3 mb-2 mt-3">
+                            <div class="col-md-6 float-right">
+                                <label for="">Buscar</label>
+                                <input type="text" class="form-control" placeholder="Buscar por Nombre" v-model="filter" />
+                            </div>
                             <table class="table table-striped table hover">
                                 <thead>
                                     <tr>
                                         <th><input type="checkbox" v-on:click="(e)=>checkedAll(e)"></th>
                                         <th>Nombre</th>
+                                        <th># Documento</th>
                                         <th>Grado</th>
                                     </tr>
                                 </thead>
-                                <tbody v-for="(studentsG, key) in studentsGrades" :key="key">
+                                <tbody v-for="(studentsG, key) in filteredRows" :key="key">
                                     <tr>
                                         <td><input type="checkbox" name="checkStudents" :id="key" v-on:click="(e)=>setStudents(studentsG, e)"></td>
                                         <td>{{studentsG.name+' '+studentsG.last_name}}</td>
+                                        <td>{{studentsG.id_number}}</td>
                                         <td>{{studentsG.grade_name}}</td>
                                     </tr>                                    
                                 </tbody>
@@ -90,7 +98,8 @@ export default {
             selectedStudens:[],
             grade_prom:null,
             grade_selected:null,
-            isChecked: false
+            isChecked: false,
+            filter: "",
         };
     },
 
@@ -101,11 +110,29 @@ export default {
             console.log(error);
         })
     },
+    computed: {
+      filteredRows() {
+        if (!this.studentsGrades.filter) return false;        
+        return this.studentsGrades.filter((row) => {            
+            if(parseInt(this.filter) === parseInt(row.id_number)){
+                const id = row.id_number.toString().toLowerCase();
+                const searchTerm = this.filter.toLowerCase();
+                
+                return id.includes(searchTerm);
+            } else{
+                const name = row.name.toString().toLowerCase();
+                const searchTerm = this.filter.toLowerCase();
+                
+                return name.includes(searchTerm);
+            }
+        });
+      },
+    },
     methods: {
         gradeSelected(grade_id, grade_name){
             this.grade_selected = grade_name
             axios.get(`getStudentsByGrade/${grade_id}`).then((response)=>{
-                this.studentsGrades = response.data;
+                this.studentsGrades = response.data;                
             }).catch((error)=>{
                 console.log(error)
             })

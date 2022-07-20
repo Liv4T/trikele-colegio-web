@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <div class="container">
+        <div class="">
             <div class="row">
                 <div class="left">
                     <ul>
@@ -45,6 +45,24 @@
                                 </p>
                             </li>
                         </a>
+                        <div class="dropdown">
+                          <a>
+                            <li class="item-menu">                                            
+                              <span
+                                class="menu"
+                              >CLASE EXTRACURRICULAR</span>
+                              <div class="dropdown-content">
+                                <a href="/extra_ea">                      
+                                  Educación Artistica
+                                </a>
+
+                                <a href="/extra_ef">                
+                                  Educación Física
+                                </a>                    
+                              </div>
+                            </li>
+                          </a>
+                        </div>
                         <a href="/docente/estudiantes">
                           <li class="item-menu">
                               <span class="menu letra-boldfont">MIS ESTUDIANTES</span>

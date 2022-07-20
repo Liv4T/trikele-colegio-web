@@ -49,9 +49,10 @@ class BimestreController extends Controller
      * @param  \App\Bimestre  $bimestre
      * @return \Illuminate\Http\Response
      */
-    public function show(Bimestre $bimestre)
+    public function show($id)
     {
-        //
+        $bimestre = Bimestre::where('id',$id)->first();
+        return response()->json($bimestre);
     }
 
     /**

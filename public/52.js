@@ -220,8 +220,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['voucher'],
   data: function data() {
@@ -317,23 +315,7 @@ var render = function() {
           _vm._v(" "),
           _vm._m(3),
           _vm._v(" "),
-          _c("div", { staticClass: "row plan-height" }, [
-            _c("div", { staticClass: "col-12" }, [
-              _vm._m(4),
-              _vm._v(" "),
-              _c("h6", { staticClass: "text-center" }, [_vm._v("Desde")]),
-              _vm._v(" "),
-              _c(
-                "span",
-                [
-                  _c("strike", [_vm._v("$2.699.100")]),
-                  _vm._v(" "),
-                  _c("strong", [_vm._v("$1.799.100")])
-                ],
-                1
-              )
-            ])
-          ]),
+          _vm._m(4),
           _vm._v(" "),
           _c("div", { staticClass: "row padding-10" }, [
             _c("div", { staticClass: "col-12" }, [
@@ -343,7 +325,7 @@ var render = function() {
                   staticClass: "btn btn-Azul",
                   on: {
                     click: function($event) {
-                      return _vm.SelectPlanEvent("ANUAL")
+                      return _vm.SelectPlanEvent("FORMULARIO-ADMISION")
                     }
                   }
                 },
@@ -366,89 +348,7 @@ var render = function() {
           _vm._v(" "),
           _vm._m(9),
           _vm._v(" "),
-          _c("div", { staticClass: "row plan-height" }, [
-            _c("div", { staticClass: "col-12" }, [
-              _vm._m(10),
-              _vm._v(" "),
-              _c("h6", { staticClass: "text-center" }, [_vm._v("Desde")]),
-              _vm._v(" "),
-              _c(
-                "span",
-                [
-                  _c("strike", [_vm._v("$299.900")]),
-                  _vm._v(" "),
-                  _c("strong", [_vm._v("$199.900")])
-                ],
-                1
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row padding-10" }, [
-            _c("div", { staticClass: "col-12" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-Azul",
-                  on: {
-                    click: function($event) {
-                      return _vm.SelectPlanEvent("MENSUAL")
-                    }
-                  }
-                },
-                [_vm._v("Comprar")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _vm._m(11)
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-5 margin-top-100" }, [
-        _c("div", { staticClass: "card text-center" }, [
-          _vm._m(12),
-          _vm._v(" "),
-          _vm._m(13),
-          _vm._v(" "),
-          _vm._m(14),
-          _vm._v(" "),
-          _vm._m(15),
-          _vm._v(" "),
-          _vm._m(16),
-          _vm._v(" "),
-          _c("div", { staticClass: "row padding-10" }, [
-            _c("div", { staticClass: "col-12" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-Azul",
-                  on: {
-                    click: function($event) {
-                      return _vm.SelectPlanEvent("FORMULARIO-ADMISION")
-                    }
-                  }
-                },
-                [_vm._v("Comprar")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _vm._m(17)
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-5 margin-top-100" }, [
-        _c("div", { staticClass: "card text-center" }, [
-          _vm._m(18),
-          _vm._v(" "),
-          _vm._m(19),
-          _vm._v(" "),
-          _vm._m(20),
-          _vm._v(" "),
-          _vm._m(21),
-          _vm._v(" "),
-          _vm._m(22),
+          _vm._m(10),
           _vm._v(" "),
           _c("div", { staticClass: "row padding-10" }, [
             _c("div", { staticClass: "col-12" }, [
@@ -469,145 +369,71 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(23)
+          _vm._m(11)
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-5 margin-top-100" }, [
+        _c("div", { staticClass: "card text-center" }, [
+          _vm._m(12),
+          _vm._v(" "),
+          _vm._m(13),
+          _vm._v(" "),
+          _vm._m(14),
+          _vm._v(" "),
+          _c("div", { staticClass: "row padding-10" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-Azul",
+                  on: {
+                    click: function($event) {
+                      return _vm.SelectPlanEvent("MENSUALIDAD")
+                    }
+                  }
+                },
+                [_vm._v("Comprar")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(15)
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-5 margin-top-100" }, [
+        _c("div", { staticClass: "card text-center" }, [
+          _vm._m(16),
+          _vm._v(" "),
+          _vm._m(17),
+          _vm._v(" "),
+          _vm._m(18),
+          _vm._v(" "),
+          _c("div", { staticClass: "row padding-10" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-Azul",
+                  on: {
+                    click: function($event) {
+                      return _vm.SelectPlanEvent("PENSION-MATRICULA-FORMULARIO")
+                    }
+                  }
+                },
+                [_vm._v("Comprar")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(19)
         ])
       ])
     ])
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "div-plan-icon" }, [
-      _c("img", {
-        staticClass: "section3I",
-        attrs: { src: "/images/Botonplan1.png", alt: "boton plan 1" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-12 text-center" }, [
-        _c("h4", [_vm._v("PLAN ANUAL")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row height-50 margin-top-50" }, [
-      _c("div", { staticClass: "col-12 text-center" }, [
-        _c("span", { staticClass: "border-bottom-1 padding-10" }, [
-          _vm._v("Aprender por grado")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-12" }, [
-        _c("p", { staticClass: "text-justify padding-10" }, [
-          _vm._v("Paga 9 meses y estudia un año")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ul", [
-      _c("li", [_vm._v("Acceso a todas las materia")]),
-      _vm._v(" "),
-      _c("li", [_vm._v("Acceso ilimitado a todos los módulos")]),
-      _vm._v(" "),
-      _c("li", [_vm._v("Actividades lúdicas")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row padding-20" }, [
-      _c("div", { staticClass: "col-12" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "div-plan-icon fondoplan" }, [
-      _c("img", {
-        staticClass: "section3I",
-        attrs: { src: "/images/Botonplan2.png", alt: "boton plan 1" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-12 text-center" }, [
-        _c("h4", [_vm._v("PLAN MENSUAL")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row height-50 margin-top-50" }, [
-      _c("div", { staticClass: "col-12 text-center" }, [
-        _c("span", { staticClass: "border-bottom-1 padding-10" }, [
-          _vm._v("Aprender por grado")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-12" }, [
-        _c("p", { staticClass: "text-justify padding-10" }, [
-          _vm._v(
-            "Disfruta de todos las materias y módulos aprendiendo a tu ritmo"
-          )
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ul", [
-      _c("li", [_vm._v("Acceso a todas las materia")]),
-      _vm._v(" "),
-      _c("li", [_vm._v("Acceso ilimitado a todos los módulos")]),
-      _vm._v(" "),
-      _c("li", [_vm._v("Actividades lúdicas")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row padding-20" }, [
-      _c("div", { staticClass: "col-12" })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -747,6 +573,88 @@ var staticRenderFns = [
         _c("h6", { staticClass: "text-center" }, [_vm._v("Desde")]),
         _vm._v(" "),
         _c("span", [_c("strong", [_vm._v("$315.000")])])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row padding-20" }, [
+      _c("div", { staticClass: "col-12" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "div-plan-icon fondoplan" }, [
+      _c("img", {
+        staticClass: "section3I",
+        attrs: { src: "/images/Botonplan2.png", alt: "boton plan 1" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12 text-center" }, [
+        _c("h4", [_vm._v("MENSUALIDAD")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row plan-height" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("h6", { staticClass: "text-center" }, [_vm._v("Desde")]),
+        _vm._v(" "),
+        _c("span", [_c("strong", [_vm._v("$300.000")])])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row padding-20" }, [
+      _c("div", { staticClass: "col-12" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "div-plan-icon" }, [
+      _c("img", {
+        staticClass: "section3I",
+        attrs: { src: "/images/Botonplan1.png", alt: "boton plan 1" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12 text-center" }, [
+        _c("h4", [_vm._v("Pensión")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row plan-height" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("h6", { staticClass: "text-center" }, [_vm._v("Desde")]),
+        _vm._v(" "),
+        _c("span", [_c("strong", [_vm._v("$415.000")])])
       ])
     ])
   },

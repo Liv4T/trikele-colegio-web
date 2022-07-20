@@ -78,20 +78,213 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
   data: function data() {
     return {
       students: [],
       areas: [],
-      current_area: {}
+      current_area: {},
+      asignNote: null,
+      bimestres: [],
+      data: {},
+      idbimestre: "",
+      noteassigned: "",
+      id_assign_note: null,
+      notesStudent: [],
+      conectionStudent: []
     };
   },
   mounted: function mounted() {
     var _this = this;
 
     this.areas = [];
-    axios.get('/GetArearByUser').then(function (response) {
+    axios.get("/GetArearByUser").then(function (response) {
       _this.areas = response.data;
 
       if (_this.areas.length > 0) {
@@ -99,6 +292,9 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.getStudents();
       }
+    });
+    axios.get("/bimestres").then(function (response) {
+      _this.bimestres = response.data;
     });
   },
   methods: {
@@ -113,6 +309,112 @@ __webpack_require__.r(__webpack_exports__);
     SelectArea: function SelectArea(area) {
       this.current_area = area;
       this.getStudents();
+    },
+    getDataStudents: function getDataStudents(student, current_area) {
+      this.data = {
+        name_student: student.user_name,
+        id_student: student.user_id,
+        id_area: current_area.id,
+        "class": current_area.text
+      };
+    },
+    editInfo: function editInfo(id) {
+      var _this3 = this;
+
+      axios.get("/assignNote/".concat(id)).then(function (response) {
+        var data = response.data;
+        _this3.asignNote = data.asignNote;
+        _this3.idbimestre = data.id_bimestre;
+        _this3.noteassigned = data.note;
+        _this3.id_assign_note = data.id;
+        _this3.data = {
+          id_student: data.id_student,
+          id_area: data.id_area,
+          "class": data["class"],
+          name_student: data.student_name
+        };
+        $("#exampleModal").modal("show");
+        $("#exampleModalNote").modal("hide");
+      });
+    },
+    saveNote: function saveNote() {
+      var _this4 = this;
+
+      if (this.id_assign_note === null) {
+        axios.post("/AssignNote", {
+          id_bimestre: this.asignNote === "parcial" ? this.idbimestre : null,
+          id_student: this.data.id_student,
+          id_area: this.data.id_area,
+          "class": this.data["class"],
+          student_name: this.data.name_student,
+          note: this.noteassigned,
+          asignNote: this.asignNote
+        }).then(function (response) {
+          toastr.success(response.data);
+          _this4.asignNote = "";
+          _this4.idbimestre = "";
+          _this4.noteassigned = "";
+          _this4.id_assign_note = null;
+          _this4.data = {
+            id_student: "",
+            id_area: "",
+            "class": "",
+            name_student: ""
+          };
+          $("#exampleModal").modal("hide");
+        })["catch"](function (error) {
+          toastr.info("Intenta de nuevo mas tarde");
+          console.log(error);
+        });
+      } else {
+        axios.put("/AssignNote/".concat(this.id_assign_note), {
+          id_bimestre: this.asignNote === "parcial" ? this.idbimestre : null,
+          id_student: this.data.id_student,
+          id_area: this.data.id_area,
+          "class": this.data["class"],
+          student_name: this.data.name_student,
+          note: this.noteassigned,
+          asignNote: this.asignNote
+        }).then(function (response) {
+          toastr.success(response.data);
+          _this4.asignNote = "";
+          _this4.idbimestre = "";
+          _this4.noteassigned = "";
+          _this4.id_assign_note = null;
+          _this4.data = {
+            id_student: "",
+            id_area: "",
+            "class": "",
+            name_student: ""
+          };
+          $("#exampleModal").modal("hide");
+        })["catch"](function (error) {
+          toastr.info("Intenta de nuevo mas tarde");
+          console.log(error);
+        });
+      }
+    },
+    getNotesStudents: function getNotesStudents(idStudent, idArea) {
+      var _this5 = this;
+
+      axios.get("/AssignNote/".concat(idStudent, "/").concat(idArea)).then(function (response) {
+        _this5.notesStudent = response.data;
+      });
+    },
+    getConection: function getConection(idStudent) {
+      var _this6 = this;
+
+      axios.get("/getConectionbyId/".concat(idStudent)).then(function (response) {
+        _this6.conectionStudent = response.data;
+      });
+    },
+    deleteNote: function deleteNote(id) {
+      if (window.confirm("Seguro que desea eliminar esta nota?")) {
+        axios["delete"]("/AssignNote/".concat(id)).then(function (response) {
+          toastr.success(response.data);
+          $("#exampleModalNote").modal("hide");
+        });
+      }
     }
   }
 });
@@ -131,7 +433,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.area_container[data-v-aeb68f64]{\r\n    display: flex;\r\n    padding: 10px;\r\n    border:2px solid #fff1d2;\r\n    border-radius:4px;\r\n    margin-top:10px;\r\n    transition: background 0.8s;\r\n    font-weight: 600;\r\n    font-family: \"Century Gothic\";\r\n    color:#000;\n}\n.area_container[data-v-aeb68f64]:hover{\r\n      box-shadow: 0 0 11px rgba(33,33,33,.2);\r\n      cursor: default;\r\n      background: #FFE164 radial-gradient(circle, transparent 1%, white 1%) center/15000%;\r\n      color:#000;\n}\n.area_container[data-v-aeb68f64]:active {\r\n  background-color: #FFE164;\r\n  background-size: 100%;\r\n  text-decoration: none;\r\n  transition: background 0s;\r\n   color:white;\n}\n.area_container-active[data-v-aeb68f64]{\r\n     background-color: #FFE164;\r\n     color:#000;\n}\n.student_info[data-v-aeb68f64]{\r\n    display: flex;\r\n    flex-direction: column;\n}\n.student_name[data-v-aeb68f64]{\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: flex-start;\r\n    align-items: center;\n}\n.student_name>img[data-v-aeb68f64]{\r\n    margin-right: 8px;\n}\n.student_notify[data-v-aeb68f64]{\r\n    background: #edffff;\r\n    padding: 3px;\r\n    color:#278080;\n}\r\n", ""]);
+exports.push([module.i, "\n.area_container[data-v-aeb68f64] {\r\n  display: flex;\r\n  padding: 10px;\r\n  border: 2px solid #fff1d2;\r\n  border-radius: 4px;\r\n  margin-top: 10px;\r\n  transition: background 0.8s;\r\n  font-weight: 600;\r\n  font-family: \"Century Gothic\";\r\n  color: #000;\n}\n.area_container[data-v-aeb68f64]:hover {\r\n  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);\r\n  cursor: default;\r\n  background: #ffe164 radial-gradient(circle, transparent 1%, white 1%) center/15000%;\r\n  color: #000;\n}\n.area_container[data-v-aeb68f64]:active {\r\n  background-color: #ffe164;\r\n  background-size: 100%;\r\n  text-decoration: none;\r\n  transition: background 0s;\r\n  color: white;\n}\n.area_container-active[data-v-aeb68f64] {\r\n  background-color: #ffe164;\r\n  color: #000;\n}\n.student_info[data-v-aeb68f64] {\r\n  display: flex;\r\n  flex-direction: column;\n}\n.student_name[data-v-aeb68f64] {\r\n  display: flex;\r\n  flex-direction: row;\r\n  justify-content: flex-start;\r\n  align-items: center;\n}\n.student_name > img[data-v-aeb68f64] {\r\n  margin-right: 8px;\n}\n.student_notify[data-v-aeb68f64] {\r\n  background: #edffff;\r\n  padding: 3px;\r\n  color: #278080;\n}\r\n", ""]);
 
 // exports
 
@@ -241,11 +543,11 @@ var render = function() {
                                   })
                                 : _vm._e(),
                               _vm._v(
-                                "\n                                                " +
+                                "\n                      " +
                                   _vm._s(student.user_lastname) +
                                   " " +
                                   _vm._s(student.user_name) +
-                                  "\n                                            "
+                                  "\n                    "
                               )
                             ]),
                             _vm._v(" "),
@@ -280,27 +582,19 @@ var render = function() {
                                     ]
                                   ),
                                   _vm._v(
-                                    "\n                                                Actividades pendientes de calificación\n                                            "
+                                    "\n                      Actividades pendientes de calificación\n                    "
                                   )
                                 ])
                               : _vm._e()
                           ]),
                           _vm._v(" "),
-                          _c("td", [
-                            _vm._v(
-                              "\n                                            " +
-                                _vm._s(student.progress) +
-                                " %\n                                        "
-                            )
-                          ]),
+                          _c("td", [_vm._v(_vm._s(student.progress) + " %")]),
                           _vm._v(" "),
                           _c("td", [
                             _vm._v(
-                              "\n                                            " +
-                                _vm._s(student.score) +
-                                " /  " +
-                                _vm._s(student.score_base) +
-                                "\n                                        "
+                              _vm._s(student.score) +
+                                " / " +
+                                _vm._s(student.score_base)
                             )
                           ]),
                           _vm._v(" "),
@@ -321,6 +615,72 @@ var render = function() {
                               },
                               [_vm._v("VER")]
                             )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary",
+                                attrs: {
+                                  type: "button",
+                                  "data-toggle": "modal",
+                                  "data-target": "#exampleModal"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.getDataStudents(
+                                      student,
+                                      _vm.current_area
+                                    )
+                                  }
+                                }
+                              },
+                              [_vm._v("Nota")]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary",
+                                attrs: {
+                                  type: "button",
+                                  "data-toggle": "modal",
+                                  "data-target": "#exampleModalNote"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.getNotesStudents(
+                                      student.user_id,
+                                      _vm.current_area.id
+                                    )
+                                  }
+                                }
+                              },
+                              [_vm._v("Ver Notas")]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary",
+                                attrs: {
+                                  type: "button",
+                                  "data-toggle": "modal",
+                                  "data-target": "#modalConection"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.getConection(student.user_id)
+                                  }
+                                }
+                              },
+                              [_vm._v("Última Conexión")]
+                            )
                           ])
                         ])
                       }),
@@ -334,7 +694,518 @@ var render = function() {
           ])
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "exampleModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(4),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Asignacion de nota: ")]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.asignNote,
+                          expression: "asignNote"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.asignNote = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "final" } }, [
+                        _vm._v("Final")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "parcial" } }, [
+                        _vm._v("Parcial")
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm.asignNote === "parcial"
+                  ? _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Bimestre")]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.idbimestre,
+                              expression: "idbimestre"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.idbimestre = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        _vm._l(_vm.bimestres, function(bim, key) {
+                          return _c(
+                            "option",
+                            { key: key, domProps: { value: bim.id } },
+                            [_vm._v(_vm._s(bim.name))]
+                          )
+                        }),
+                        0
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Nota")]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.noteassigned,
+                          expression: "noteassigned"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.noteassigned = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "E" } }, [
+                        _vm._v("Desempeño superior")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "S" } }, [
+                        _vm._v("Desempeño alto")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "A" } }, [
+                        _vm._v("Desempeño basico")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "P" } }, [
+                        _vm._v("Pendiente")
+                      ])
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Cerrar")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button" },
+                    on: { click: _vm.saveNote }
+                  },
+                  [_vm._v("Guardar Cambios")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "modalConection",
+          "data-backdrop": "static",
+          "data-keyboard": "false"
+        }
+      },
+      [
+        _c("div", { staticClass: "modal-lg modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(5),
+            _vm._v(" "),
+            _c("div", { staticClass: "card" }, [
+              _c(
+                "div",
+                { staticClass: "card-body text-center" },
+                [
+                  _c("h3", { staticClass: "mobile-popup" }, [
+                    _vm._v("Últimas 5 conexiones")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.conectionStudent, function(item, key3) {
+                    return _c(
+                      "h4",
+                      { key: key3, staticClass: "mobile-popup2" },
+                      [_vm._v(_vm._s(item.created_at))]
+                    )
+                  })
+                ],
+                2
+              )
+            ])
+          ])
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "exampleModalNote",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalNoteLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(6),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", [
+                  _c("div", [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      _vm._l(_vm.notesStudent, function(notes, key) {
+                        return _c("div", { key: key }, [
+                          notes.id_bimestre === 1
+                            ? _c("div", [
+                                _vm._m(7, true),
+                                _vm._v(" "),
+                                _c("tbody", [
+                                  _c("tr", [
+                                    _c("td", [
+                                      _c("input", {
+                                        staticClass: "form-control",
+                                        attrs: {
+                                          disabled: "",
+                                          type: "text",
+                                          placeholder: notes.note
+                                        }
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-primary btn-sm",
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.editInfo(notes.id)
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Editar")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-danger btn-sm",
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.deleteNote(notes.id)
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Eliminar")]
+                                      )
+                                    ])
+                                  ])
+                                ])
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          notes.id_bimestre === 2
+                            ? _c("div", [
+                                _vm._m(8, true),
+                                _vm._v(" "),
+                                _c("tbody", [
+                                  _c("tr", [
+                                    _c("td", [
+                                      _c("input", {
+                                        staticClass: "form-control",
+                                        attrs: {
+                                          disabled: "",
+                                          type: "text",
+                                          placeholder: notes.note
+                                        }
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-primary btn-sm",
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.editInfo(notes.id)
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Editar")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-danger btn-sm",
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.deleteNote(notes.id)
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Eliminar")]
+                                      )
+                                    ])
+                                  ])
+                                ])
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          notes.id_bimestre === 3
+                            ? _c("div", [
+                                _vm._m(9, true),
+                                _vm._v(" "),
+                                _c("tbody", [
+                                  _c("tr", [
+                                    _c("td", [
+                                      _c("input", {
+                                        staticClass: "form-control",
+                                        attrs: {
+                                          disabled: "",
+                                          type: "text",
+                                          placeholder: notes.note
+                                        }
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-primary btn-sm",
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.editInfo(notes.id)
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Editar")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-danger btn-sm",
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.deleteNote(notes.id)
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Eliminar")]
+                                      )
+                                    ])
+                                  ])
+                                ])
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          notes.id_bimestre === 4
+                            ? _c("div", [
+                                _vm._m(10, true),
+                                _vm._v(" "),
+                                _c("tbody", [
+                                  _c("tr", [
+                                    _c("td", [
+                                      _c("input", {
+                                        staticClass: "form-control",
+                                        attrs: {
+                                          disabled: "",
+                                          type: "text",
+                                          placeholder: notes.note
+                                        }
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-primary btn-sm",
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.editInfo(notes.id)
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Editar")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-danger btn-sm",
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.deleteNote(notes.id)
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Eliminar")]
+                                      )
+                                    ])
+                                  ])
+                                ])
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          notes.asignNote === "final"
+                            ? _c("div", [
+                                _vm._m(11, true),
+                                _vm._v(" "),
+                                _c("tbody", [
+                                  _c("tr", [
+                                    _c("td", [
+                                      _c("input", {
+                                        staticClass: "form-control",
+                                        attrs: {
+                                          disabled: "",
+                                          type: "text",
+                                          placeholder: notes.note
+                                        }
+                                      })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-primary btn-sm",
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.editInfo(notes.id)
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Editar")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-danger btn-sm",
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.deleteNote(notes.id)
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Eliminar")]
+                                      )
+                                    ])
+                                  ])
+                                ])
+                              ])
+                            : _vm._e()
+                        ])
+                      }),
+                      0
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -366,6 +1237,8 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Calificación")]),
         _vm._v(" "),
+        _c("th"),
+        _vm._v(" "),
         _c("th")
       ])
     ])
@@ -376,6 +1249,125 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { attrs: { colspan: "4" } }, [_vm._v("Cargando...")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Asignación de Nota")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalNoteLabel" } },
+        [_vm._v("Informe de Nota")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("th", [
+      _c("tr", [
+        _vm._v("\n                        Bimestre 1\n                      ")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("th", [
+      _c("tr", [
+        _vm._v("\n                        Bimestre 2\n                      ")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("th", [
+      _c("tr", [
+        _vm._v("\n                        Bimestre 3\n                      ")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("th", [
+      _c("tr", [
+        _vm._v("\n                        Bimestre 4\n                      ")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("th", [
+      _c("tr", [
+        _vm._v("\n                        Nota Final\n                      ")
+      ])
     ])
   }
 ]

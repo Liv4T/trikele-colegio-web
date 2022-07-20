@@ -1,19 +1,19 @@
 <template>
-    <div>        
+    <div>
         <ul class="nav nav-tabs">
             <li class="nav-item">
                 <a :class="activeClass === 1 ? 'nav-link active' : 'nav-link'" aria-current="page" v-on:click="()=>changeTab(1)">{{type_user === 1 || type_user === 2 ? 'Creación de Talleres' : 'Talleres'}}</a>
             </li>
             <li class="nav-item">
                 <a :class="activeClass === 2 ? 'nav-link active' : 'nav-link'" v-on:click="()=>changeTab(2)">{{type_user === 1 || type_user === 2 ? 'Carga de Documentos' : 'Documentos'}}</a>
-            </li>                
+            </li>
         </ul>
         <div v-if="type_user === 1 || type_user === 2">
             <div class="card">
-                <div class="card-body" v-if="activeClass === 1">                    
-                    <label>Bimestre</label>                     
-                    <div v-for="(activity,key_a) in course.activities" v-bind:key="key_a">   
-                        <select class="form-control m-2" v-model="activity.id_bimestre">                                                            
+                <div class="card-body" v-if="activeClass === 1">
+                    <label>Bimestre</label>
+                    <div v-for="(activity,key_a) in course.activities" v-bind:key="key_a">
+                        <select class="form-control m-2" v-model="activity.id_bimestre">
                             <option v-for="(bimestre, key) in bimestres" :key="key" :value="bimestre.id">{{bimestre.name}}</option>
                         </select>
                         <activity-questionary v-if="activity.activity_type=='CUESTIONARIO' || activity.activity_type == 'CUESTIONARIO_UNICA_RTA'" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state > 1 && attempt === false"></activity-questionary>
@@ -22,14 +22,14 @@
                         <activity-crossword v-if="activity.activity_type=='CRUCIGRAMA'" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state > 1 && attempt === false"></activity-crossword>
                     </div>
 
-                    <button class="btn btn-primary col-md-3" v-on:click="saveData">Guardar</button>    
-                </div>                
-                <div v-else-if="activeClass === 2">                
+                    <button class="btn btn-primary col-md-3" v-on:click="saveData">Guardar</button>
+                </div>
+                <div v-else-if="activeClass === 2">
                     <div class="card-body">
                         <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">Cargar Archivo</button>
                         <table class="table table-striped table-hover" v-if="type_user === 2">
-                            <thead>                            
-                                <tr>                                    
+                            <thead>
+                                <tr>
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Acción</th>
                                 </tr>
@@ -41,50 +41,52 @@
                                         <a :href="files.url" :download="files.name" target="_blank" class="btn btn-primary">Descargar</a>
                                         <button v-if="type_user === 2" class="btn btn-primary" v-on:click="deleteFile(files)">Eliminar</button>
                                     </td>
-                                </tr>                            
+                                </tr>
                             </tbody>
-                        </table>                        
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-        <div v-else-if="type_user === 3">             
+        <div v-else-if="type_user === 3">
             <div class="card-body" v-if="activeClass === 1">
                 <div v-for="(activity,key_a) in course.activities" v-bind:key="key_a">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-6">
+                            <p>Nombre de Actividad: </p> <b>{{activity.name}}</b>
+                        </div>
+                        <div class="col-6">
+                            <p>Cantidad de Preguntas: </p> <b>{{activity.module.questions.length}}</b>
+                        </div>
+                        <div class="col-12 mt-3">
                             <b>Descripción:</b>
                             <textarea class="form-control-plaintext" v-model="activity.description" readonly></textarea>
                         </div>
                     </div>
-                    <activity-questionary v-if="activity.activity_type=='CUESTIONARIO_UNICA_RTA' || activity.activity_type =='CUESTIONARIO'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state > 1 && attempt === false"></activity-questionary>
-                    <activity-complete-sentence v-if="activity.activity_type=='COMPLETAR_ORACION'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state > 1 && attempt === false"></activity-complete-sentence>
-                    <activity-relationship v-if="activity.activity_type=='RELACION'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state > 1 && attempt === false"></activity-relationship>
-                    <activity-crossword v-if="activity.activity_type=='CRUCIGRAMA'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state > 1 && attempt === false"></activity-crossword>
-                    <div v-if="attempt === false" class="activity_response-button">
-                        <button class="btn btn-primary" v-if="activity.interaction.state==1 && count_attemp === 0" @click="SaveResponseEvent(activity)">Enviar respuestas</button>
-                    </div>                    
-        
-                    <div v-if="attempt === true && count_attemp < 3">
-                        <button class="btn btn-primary col-md-3" v-on:click="saveAttemp(activity)">Guardar Intento</button>
+                    <activity-questionary v-if="activity.activity_type=='CUESTIONARIO_UNICA_RTA' || activity.activity_type =='CUESTIONARIO'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1" :type_user="type_user"></activity-questionary>
+                    <activity-complete-sentence v-if="activity.activity_type=='COMPLETAR_ORACION'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-complete-sentence>
+                    <activity-relationship v-if="activity.activity_type=='RELACION'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-relationship>
+                    <activity-crossword v-if="activity.activity_type=='CRUCIGRAMA'" v-bind:playing="true" v-bind:module="activity.module" v-bind:disabled="activity.interaction.state>1"></activity-crossword>
+                    <div class="activity_response-button">
+                        <button class="btn btn-primary" v-if="activity.interaction.state==1" @click="SaveResponseEvent(activity)">Enviar respuestas</button>
                     </div>
                     <div v-if="count_attemp >= 3">
                         <p>Intentos excedidos</p>
                     </div>
                     <div v-if="attempt === false && activity.interaction.state > 1">
                         <button class="btn btn-primary col-md-3" v-on:click="registerAttemp(activity)">Registrar Intento</button>
-                    </div>                    
-        
+                    </div>
+
                     <div class="activity_response-button" v-if="activity.interaction.state==3">
                         Calificación: <span class="activity_score" >{{activity.interaction.score}}<small>/5</small></span>
                     </div>
-                </div>                    
+                </div>
             </div>
 
             <div class="card-body" v-else-if="activeClass === 2">
                 <table class="table table-striped table-hover" v-if="type_user === 3">
-                    <thead>                            
-                        <tr>                                    
+                    <thead>
+                        <tr>
                             <th scope="col">Nombre</th>
                             <th scope="col">Acción</th>
                         </tr>
@@ -93,14 +95,14 @@
                         <tr v-for="(files, key) in dataFiles" :key="key">
                             <td>{{files.name}}</td>
                             <td>
-                                <a :href="files.url" :download="files.name" target="_blank" class="btn btn-primary">Descargar</a>                                    
+                                <a :href="files.url" :download="files.name" target="_blank" class="btn btn-primary">Descargar</a>
                             </td>
-                        </tr>                            
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <button class="btn btn-primary col-md-3" v-on:click="backPage">Volver</button>    
+        <button class="btn btn-primary col-md-3" v-on:click="backPage">Volver</button>
         <!-- Modal Cargue de documentos -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -120,7 +122,7 @@
                             <label>Nombre de Archivo</label>
                             <input type="text" class="form-control" v-model="fileName">
                         </div>
-                        
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -128,8 +130,8 @@
                     </div>
                 </div>
             </div>
-        </div>       
-    </div>    
+        </div>
+    </div>
 </template>
 <script>
 import firebase from 'firebase';
@@ -146,11 +148,11 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
-export default { 
+export default {
     props:['id_achievement','id_class','id_area','type_user','id_bimestre','id_workshop','backPage','id_user'],
     data() {
         return {
-            course:[], 
+            course:[],
             activeClass:1,
             bimestres:[],
             file:null,
@@ -163,9 +165,9 @@ export default {
         };
     },
     watch:{
-        id_class: function(newVal){            
-            if(newVal){                
-                this.getData();                
+        id_class: function(newVal){
+            if(newVal){
+                this.getData();
             }
         }
     },
@@ -173,10 +175,10 @@ export default {
         if(this.id_class !== null){
             this.getData();
             this.getFiles();
-            axios.get('bimestres').then((response)=>{            
+            axios.get('bimestres').then((response)=>{
                 this.bimestres = response.data;
             });
-        }        
+        }
     },
     methods: {
         getFiles(){
@@ -191,12 +193,12 @@ export default {
             }
         },
         getData(){
-            
+
 
             axios.get(`/api/teacher/module/${this.id_achievement}/class/${this.id_class}`).then((response) => {
-                this.course=response.data;         
+                this.course=response.data;
                 this.course.id_area = this.id_area;
-                this.course.id_bimestre = this.id_bimestre;           
+                this.course.id_bimestre = this.id_bimestre;
                 if(this.course.content.length==0)
                 {
                     this.course.content=[
@@ -246,7 +248,7 @@ export default {
                             })
                         })
 
-                        act.delivery_max_date=act.delivery_max_date ? act.delivery_max_date && delivery_max_date.replace(" ","T") : '';                        
+                        act.delivery_max_date=act.delivery_max_date ? act.delivery_max_date && delivery_max_date.replace(" ","T") : '';
                         act.feedback_date=act.feedback_date.replace(" ","T");
                         this.GetIndicatorsEvent(act);
                     });
@@ -254,30 +256,30 @@ export default {
             });
         },
 
-        changeTab(data){            
+        changeTab(data){
             this.activeClass = data;
         },
         saveData(){
-            axios.put(`/api/teacher/module/${this.course.id_weekly_plan}/class`,this.course).then((response) => {               
-                toastr.success("Clases actualizadas correctamente");                
-            },(error)=>{console.log(error);toastr.error("ERROR:Por favor valide que la información esta completa");});            
+            axios.put(`/api/teacher/module/${this.course.id_weekly_plan}/class`,this.course).then((response) => {
+                toastr.success("Clases actualizadas correctamente");
+            },(error)=>{console.log(error);toastr.error("ERROR:Por favor valide que la información esta completa");});
         },
 
-        getFile(e){            
-            this.file = e.target.files[0];            
+        getFile(e){
+            this.file = e.target.files[0];
         },
 
-        registerAttemp(activity){            
-            axios.get(`attemps/${activity.id}`).then((response)=>{                
+        registerAttemp(activity){
+            axios.get(`attemps/${activity.id}`).then((response)=>{
                 this.count_attemp = response.data.attemps ? parseInt(response.data.attemps) : 0;
             });
             this.attempt = true;
         },
 
-        saveAttemp(activity){          
-            let total_attemps = 1                        
+        saveAttemp(activity){
+            let total_attemps = 1
             let suma = this.count_attemp + total_attemps
-            
+
             axios.post('attemps',{
                 activity_type: activity.activity_type,
                 delivery_max_date: activity.delivery_max_date,
@@ -295,7 +297,7 @@ export default {
                 state: activity.state,
                 updated_user: activity.updated_user,
                 attemps: suma
-            }).then((response)=>{                
+            }).then((response)=>{
                 toastr.success(response.data);
             }).catch((error)=>{
                 toastr.error("Intenta de nuevo mas tarde");
@@ -307,14 +309,14 @@ export default {
             let id_activity = this.id_class;
             let id_workshop = this.id_workshop;
             let nameFile = this.fileName;
-            let imageRef = storageRef.child(`images/${this.file.name}`);            
-            
-            imageRef.put(this.file).then(function(snapshot) {                
+            let imageRef = storageRef.child(`images/${this.file.name}`);
+
+            imageRef.put(this.file).then(function(snapshot) {
                 snapshot.ref.getDownloadURL().then(url=>{
                     axios.post(`filesWork`,{
-                        url: url, 
+                        url: url,
                         name:nameFile,
-                        id_activity: id_activity, 
+                        id_activity: id_activity,
                         id_workshop: id_workshop,
                     }).then((response)=>{
                         toastr.success(response.data);
@@ -324,7 +326,7 @@ export default {
                     })
                 });
             });
-            
+
             $('#exampleModal').modal('hide');
             this.getFiles();
         },
@@ -342,11 +344,11 @@ export default {
             console.log(data);
         },
         SaveResponseEvent(activity)
-        {   
+        {
             axios.put(`/api/student/module/${this.id_achievement}/class/${this.id_class}/activity/${activity.id}/interaction`,activity).then(
-                response => {        
-                    toastr.success("Actividad enviada correctamente");            
-                },error => {                        
+                response => {
+                    toastr.success("Actividad enviada correctamente");
+                },error => {
                     axios.post('answerLite',{
                         activity_type: activity.activity_type,
                         delivery_max_date: activity.delivery_max_date,
@@ -373,6 +375,6 @@ export default {
             );
         }
     },
-    
+
 };
 </script>

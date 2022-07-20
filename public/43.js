@@ -136,6 +136,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: {
     logout: function logout() {
@@ -333,6 +351,30 @@ var staticRenderFns = [
             _vm._v(
               "\n                                CLASES\n                            "
             )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "dropdown" }, [
+        _c("a", [
+          _c("li", { staticClass: "item-menu" }, [
+            _c("span", { staticClass: "menu" }, [
+              _vm._v("CLASE EXTRACURRICULAR")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "dropdown-content" }, [
+              _c("a", { attrs: { href: "/extra_ea" } }, [
+                _vm._v(
+                  "                      \n                              Educación Artistica\n                            "
+                )
+              ]),
+              _vm._v(" "),
+              _c("a", { attrs: { href: "/extra_ef" } }, [
+                _vm._v(
+                  "                \n                              Educación Física\n                            "
+                )
+              ])
+            ])
           ])
         ])
       ]),
