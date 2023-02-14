@@ -36,6 +36,16 @@
       </div>
     </div>
     <br />
+    <div class="form-group desktop2">
+      <div class="text-center">
+        <a class="btn btn-lg btn-trikele" href="https://www.trikele.edu.co/uploads/resolucion/COSTOS_TRIKELE_NORMAL20221124_16431077.pdf" target="_blank">Resolución de costos</a>
+      </div>
+    </div>
+    <div class="form-group desktop2">
+      <div class="text-center">
+        <a class="btn btn-lg btn-trikele" href="https://www.trikele.edu.co/uploads/resolucion/Costos_Trikele_ciclos.pdf" target="_blank">Resolución de costos por ciclo</a>
+      </div>
+    </div>
     <div class="row desktop4" id="que_es" style="background-image: url('/uploads/home/banner-azul.jpg'); background-repeat: no-repeat; background-position: bottom; background-size: cover">
       <div class="col-md-6">
         <img src="uploads/home/trikele-naranja.png" width="100%" />
@@ -232,8 +242,8 @@
               <i class="fas fa-phone-alt fa-2x"></i>
               <p class="navbar-brand">+57 304 1560991</p>
               <p class="navbar-brand">+57 304 1560991</p>
-              <p class="navbar-brand">+57 311 3157161</p>              
-            </div>            
+              <p class="navbar-brand">+57 311 3157161</p>
+            </div>
           </div>
         </div>
       </footer>
