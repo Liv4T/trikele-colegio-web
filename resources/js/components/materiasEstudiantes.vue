@@ -1,11 +1,11 @@
 <template>
     <div class="back-calendar">
-        <div class="form-group width-r mx-auto">
-            <div class="row pd-20">                
+        <div class="form-group width-r mx-auto" v-show="valueStatusStudent === 0">
+            <div class="row pd-20">
                 <div class="col-md-2" v-for="(area, t) in areas" :key="t">
                     <a v-on:click="cleanOtherSection" href="http://" class="btn btn-warning mg-btn" :style="area.style" @click.prevent="nameArea = area.text, colorTitle = area.titleColor, idArea = area.id, idClassroom = area.id_classroom">
                         <h6 class="letra-poppins-bold" style="color: black">{{ nameMinus(area.text) }}</h6>
-                    </a>                    
+                    </a>
                 </div>
             </div>
         </div>
@@ -15,7 +15,7 @@
                 ><h1 style="color: black">{{ nameMinus(nameArea) }}</h1>
                 </a>
             </div>
-            <div>                
+            <div>
                 <div class="text-center mr-5">
                     <div v-if="showSection === 'inicio'" class="tabs">
                         <!-- <a v-on:click="activetab = 1" v-bind:class="[activetab === 1 ? 'active' : '']"><h2 class="letra-poppins-bold">CALENDARIO</h2></a> -->
@@ -26,12 +26,12 @@
                     </div>
                     <div v-if="showSection === 'inicio'">
                         <!-- <div v-if="activetab === 1" class="tabcontent"><calendar-component :type_u="3" :user="user"></calendar-component></div> -->
-                        <div v-if="activetab === 2" class="tabcontent">   
-                            <div v-if="idArea !== ''">                                
+                        <div v-if="activetab === 2" class="tabcontent">
+                            <div v-if="idArea !== ''">
                                 <bimestre-list-component :id_area="idArea" :id_classroom="idClassroom" :type_u="user"></bimestre-list-component>
                             </div>
                         </div>
-                            
+
                         <div v-if="activetab === 3" class="tabcontent">
                             <repo-student :nameArea="nameArea" :planifications="planifications" :id_lective_planification="id_lective_planification"></repo-student>
                         </div>
@@ -54,7 +54,7 @@
                     </div>
                 </div>
             </div>
-        
+
             <div class="form-group text-center">
                 <a class="btn btn-warning mg-btn">
                     <h1 class="letra-poppins-bold">Actividades Pendientes</h1>
@@ -69,8 +69,8 @@
                                 <span>{{activity.date_init_class|formatDate}}</span>
                             </div>
 
-                            <div class="activity-event-date">   
-                                <small>URL de Clase:</small>                                     
+                            <div class="activity-event-date">
+                                <small>URL de Clase:</small>
                                 <a :href="activity.url_class" class="badge badge-primary" target="_blank">{{activity.url_class}}</a>
                             </div>
 
@@ -78,21 +78,21 @@
                                 <small>Fecha de Retroalimentación:</small>
                                 <span>{{activity.feedback_date|formatDate}}</span>
                             </div>
-                        
+
                             <div class="activity-event-date" v-else>
                                 <small>Fecha Limite:</small>
                                 <span>{{activity.delivery_max_date|formatDate}}</span>
-                            </div>                                    
+                            </div>
 
                             <div class="activity-event-action">
-                                <a class="btn btn-link" v-on:click="getActivityId(activity.weekly_plan_id, activity.id_class)">Ir a Actividad</a>                                
+                                <a class="btn btn-link" v-on:click="getActivityId(activity.weekly_plan_id, activity.id_class)">Ir a Actividad</a>
                             </div>
                         </div>
                     </div>
                 </a>
             </div>
         </div>
-    </div>    
+    </div>
 </template>
 <script>
 import pdf from "vue-pdf";
@@ -207,7 +207,7 @@ export default {
                     style: "background-color: #EDCB00; border-color: #EDCB00; box-shadow: 3px 3px 3px 3px #b0acac",
                     title: "background-color: #EDCB00;"
                 },
-                
+
             ],
             areas: [],
             descripcion: "",
@@ -230,39 +230,41 @@ export default {
             idClass :"",
             planif:"claseEst",
             showSection: "inicio",
+            valueStatusStudent: [],
             groups:{}
         };
     },
     mounted() {
+        this.statusStudent();
         axios.get("/api/lectives").then((response) => {
             if(response.data.length > 0){
                 this.planifications = response.data;
                 this.lectivs = true;
             }else{
                 this.lectivs = false;
-            }          
+            }
         });
-    
+
         var url = "/GetArearByUser";
         axios.get(url).then((response) => {
             this.areas = response.data;
             this.areas.forEach((e)=>{
                 this.colorClass.filter(i=>{
-                    // console.log(i.area === e.text);  
+                    // console.log(i.area === e.text);
                     let text1 = i.area;
                     let text2 = e.text;
 
                     text1 = this.nameMinus(text1);
                     text2 = this.nameMinus(text2);
 
-                    if(text1 === text2){                        
+                    if(text1 === text2){
                         e.style = i.style;
                         e.titleColor = i.title;
-                    }                    
+                    }
                 })
             })
         });
-        // console.log("Component mounted.");        
+        // console.log("Component mounted.");
     },
     watch:{
         nameArea(new_value, old_value){
@@ -271,7 +273,7 @@ export default {
             }
         }
     },
-    methods: {        
+    methods: {
         getActivitiesStudents(nameArea){
             this.activities = [];
             axios.get("/api/student/activity").then((response) => {
@@ -281,33 +283,33 @@ export default {
 
                 activs.forEach((el)=>{
                     if(el.activityForAllStudents == 1){
-                        
+
                         if(el.selectedStudents == "[]" || el.selectedStudents == null){
                             this.activities.push(el)
                         }
-                        
+
                         }else if(el.activityForPIARStudents == 1){
 
                         let PIARStudents= JSON.parse(el.selectedStudents);
                         PIARStudents.forEach((e)=>{
                             if(e.id == this.user.id){
-                                this.activities.push(el)   
+                                this.activities.push(el)
                             }
                         });
 
                         }else if(el.activityForSelectStudents == 1){
-                            
+
                         let selectedStudents= JSON.parse(el.selectedStudents);
                         selectedStudents.forEach((e)=>{
                             if(e.id == this.user.id){
-                                this.activities.push(el)   
+                                this.activities.push(el)
                             }
                         });
                     }
                 })
             });
         },
-        
+
         modaliniciar() {
             var url = window.location.origin + "/SaveTerms";
 
@@ -325,14 +327,14 @@ export default {
 
         getActivityId(id_module, id_class){
             this.idClass = id_module;
-            this.idModule = id_class;            
+            this.idModule = id_class;
             this.activetab !== 2 ? this.activetab = 2 : this.activetab;
         },
         nameMinus(name){
           var nameMinus=name;
           return nameMinus.normalize("NFD");
         },
-        showOtherSection(data){            
+        showOtherSection(data){
             if(data === 'chat'){
                 axios.get('/chat2').then((response)=>{
                     this.groups = response.data
@@ -343,6 +345,12 @@ export default {
         cleanOtherSection(){
             this.showSection = 'inicio';
             this.groups= {}
+        },
+        statusStudent(){
+            axios.get('/getStatusStudent').then((response)=>{
+                this.valueStatusStudent = response.data.status;
+                console.log(this.valueStatusStudent);
+            });
         }
     },
     filters: {

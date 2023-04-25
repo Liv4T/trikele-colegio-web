@@ -297,6 +297,7 @@ Route::put('/changePassword', 'UserController@changePassword')->name('changePass
 Route::middleware('auth')->get('showUser', 'UserController@show')->name('users_save');
 Route::middleware('auth')->post('img_user', 'UserController@uploadFile')->name('img_user');
 Route::get('getStudents/{id}', 'UserController@getStudents');
+Route::middleware('auth')->get('getStudentsByClassroom', 'UserController@getStudentsByClassroom');
 
 Route::middleware('auth')->post('savePrintDoc', 'HomeController@savePrintDoc')->name('savePrintDoc');
 Route::get('downloadFile', 'HomeController@downloadFile')->name('downloadFile');
@@ -942,7 +943,9 @@ Route::middleware('auth')->get('/compra/currencyExchange', 'PaypalPaymentControl
 Route::middleware('auth')->get('/admin-boletin', function(){
     return view('adminBoletin');
 });
-
+Route::middleware('auth')->get('/admin-students', function(){
+    return view('adminStudents');
+});
 Route::get('/extra_ef', function () {
     return view('CatExtraEF');
 });
@@ -972,3 +975,5 @@ Route::get('/extra_crear/{id_cat}', function (String $id_cat) {
 Route::get('/extra_edit/{id_cat}/{id_class}', function (String $id_cat, String $id_class) {
     return view('editClassExtra')->with('id_cat', $id_cat)->with('id_class', $id_class);
 });
+Route::middleware('auth')->put('updateStatusStudent','ClassroomStudentController@updateStatus');
+Route::middleware('auth')->get('getStatusStudent','ClassroomStudentController@getStatus');

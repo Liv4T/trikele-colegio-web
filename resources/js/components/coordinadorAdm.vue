@@ -17,11 +17,11 @@
                             <tbody v-for="(coord,key) in coords" :key="key">
                                 <tr v-show="coord.deleted === 0" data-toggle="collapse" data-target="#accordion" class="clickable">
                                     <td>{{coord.name+' '+coord.last_name}}</td>
-                                    
+
 
                                     <td class="float-right">
                                         <a class="btn btn-sm" v-on:click="()=>viewInfoCoord('show', coord)" style="color: grey;">
-                                            <i class="fa fa-eye"></i>                                            
+                                            <i class="fa fa-eye"></i>
                                         </a>
                                         <a class="btn btn-sm" v-on:click="()=>viewInfoCoord('edit', coord)" style="color: grey;">
                                             <i class="fa fa-edit"></i>
@@ -397,7 +397,7 @@
             </div>
         </div>
         <modal-coord :type="type_view" :data="data" :coord="coord_name"></modal-coord>
-    </div>    
+    </div>
 </template>
 <script>
 export default {
@@ -440,7 +440,7 @@ export default {
     mounted() {
         var urlr = "getInstitution";
         axios.get(urlr).then(response => {
-            this.myOptions = response.data;            
+            this.myOptions = response.data;
         });
 
         axios.get('getCoords').then((response)=>{
@@ -603,7 +603,7 @@ export default {
         chooseFile() {
             $("#file").click();
         },
-        viewInfoCoord(type, data){            
+        viewInfoCoord(type, data){
             this.type_view = type;
             this.data = data;
             this.coord_name = data.name+' '+data.last_name

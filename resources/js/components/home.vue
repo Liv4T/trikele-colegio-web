@@ -38,12 +38,27 @@
     <br />
     <div class="form-group desktop2">
       <div class="text-center">
-        <a class="btn btn-lg btn-trikele" href="https://www.trikele.edu.co/uploads/resolucion/COSTOS_TRIKELE_NORMAL20221124_16431077.pdf" target="_blank">Resolución de costos</a>
+        <a class="btn btn-lg btn-trikele" href="/uploads/resolucion/COSTOS_TRIKELE_NORMAL20221124_16431077.pdf" target="_blank">Resolución de costos</a>
       </div>
     </div>
     <div class="form-group desktop2">
       <div class="text-center">
-        <a class="btn btn-lg btn-trikele" href="https://www.trikele.edu.co/uploads/resolucion/Costos_Trikele_ciclos.pdf" target="_blank">Resolución de costos por ciclo</a>
+        <a class="btn btn-lg btn-trikele" href="/uploads/resolucion/Costos_Trikele_ciclos.pdf" target="_blank">Resolución de costos por ciclo</a>
+      </div>
+    </div>
+    <div class="form-group desktop2">
+      <div class="text-center">
+        <a class="btn btn-lg btn-trikele" href="/uploads/resolucion/manual_convivencia_2023.pdf" target="_blank">Manual de convivencia</a>
+      </div>
+    </div>
+    <div class="form-group desktop2">
+      <div class="text-center">
+        <a class="btn btn-lg btn-trikele" href="/uploads/resolucion/movilidad_transito_transporte_2023.pdf" target="_blank">Movilidad, tránsito y transporte</a>
+      </div>
+    </div>
+    <div class="form-group desktop2">
+      <div class="text-center">
+        <a class="btn btn-lg btn-trikele" href="/uploads/resolucion/afrocolombianidad_2023.pdf" target="_blank">Afrocolombianidad</a>
       </div>
     </div>
     <div class="row desktop4" id="que_es" style="background-image: url('/uploads/home/banner-azul.jpg'); background-repeat: no-repeat; background-position: bottom; background-size: cover">

@@ -271,4 +271,7 @@ Vue.component("classextra-adm", require("./components/classExtra.vue").default);
 Vue.component("viewclassextra-component", require("./components/viewClassExtra.vue").default);
 Vue.component("createclassextra-component", require("./components/createClassExtra.vue").default);
 Vue.component("editclassextra-component", require("./components/editClassExtra.vue").default);
+//Admin students
+Vue.component("admin-students", () => import ("./components/adminStudentsComponent.vue"));
+Vue.component("modal-create-students", ()=>import("./components/modalCreateStudent.vue"));
 const app = new Vue({el: "#app", data: {}, store});

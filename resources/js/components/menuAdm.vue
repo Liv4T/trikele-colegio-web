@@ -182,31 +182,31 @@
                       />
                       Progreso Estudiantes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </a>
-                    
-                    
+
+
                   </div>
                 </li>
               </a>
             </div>
             <div class="dropdown">
               <a>
-                <li class="item-menu">    
+                <li class="item-menu">
                   <img
                     width="35px"
                     src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/ANUNCIOS_naranja.png?alt=media&token=539c1428-c480-43bf-a132-73be35386940"
                     alt
-                  />            
+                  />
                   <span
                     class="menu"
                   >Extracurricular&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                   <div class="dropdown-content">
-                    <a href="/extra_ea">                      
+                    <a href="/extra_ea">
                       Educación Artistica
                     </a>
 
-                    <a href="/extra_ef">                
+                    <a href="/extra_ef">
                       Educación Física
-                    </a>                    
+                    </a>
                   </div>
                 </li>
               </a>
@@ -221,7 +221,17 @@
                 <span class="menu">Boletin Estudiante</span>
               </li>
             </a>
-            <div class="dropdown2">
+            <a href="/admin-students">
+              <li class="item-menu">
+                <img
+                  width="35px"
+                  src="https://firebasestorage.googleapis.com/v0/b/chat-firebase-7b7ff.appspot.com/o/MI-PERFIL.png?alt=media&token=317fc013-8cce-448f-9af9-54e2981274d0"
+                  alt
+                />
+                <span class="menu">Administrar estudiantes</span>
+              </li>
+            </a>
+            <!-- <div class="dropdown2">
               <a>
                 <li class="item-menu">
                   <img
@@ -250,7 +260,7 @@
                   </div>
                 </li>
               </a>
-            </div>
+            </div> -->
             <a href="/deleteUser">
               <li class="item-menu">
                 <img

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use App\ClassContentInteraction;
+use App\ClassroomStudent;
+use App\Classroom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\User;
@@ -37,7 +39,7 @@ class UserController extends Controller
             $teachers,
             $students,
         ];
-            
+
         return response()->json($users);
         /*[
          'pagination'      => [
@@ -113,7 +115,8 @@ class UserController extends Controller
             'type_user' => 'required',
             'address' => 'required',
             'phone' => 'required',
-            'id_number' => 'required'
+            'id_number' => 'required',
+            'classroom' => 'required'
         ]);
 
         // User::create($request->all());
@@ -134,6 +137,13 @@ class UserController extends Controller
         $user->type_user = isset($data['type_user']) ? $data['type_user'] : "";
         $user->picture = isset($data['user_name']) ? $url . "/uploads/images/" . $data['user_name'] . ".png" : "";
         $user->save();
+
+        if($user->save()){
+            $classroomStudent = new ClassroomStudent;
+            $classroomStudent->id_classroom = isset($data['classroom']) ? $data['classroom'] : 0;
+            $classroomStudent->id_user = isset($user->id) ? $user->id : 0;
+            $classroomStudent->save();
+        }
 
         // /* Send email register */
         // if (isset($data['email'])) {
@@ -310,7 +320,29 @@ class UserController extends Controller
                                                 ->limit(5)
                                                 ->get();
         return response()->json($last_conection);
-       
+
+    }
+    public function getStudentsByClassroom(){
+        $students = [];
+        $classroomStudents=ClassroomStudent::orderBy('id_classroom','Desc')->get();
+        foreach($classroomStudents as $key => $classroomstudent){
+            $classroom_name = Classroom::where('id',$classroomstudent->id_classroom)->first();
+            $student = User::where('id',$classroomstudent->id_user)->first();
+            if($student != NULL){
+                $students[$key] = [
+                    "id_user" => $student->id,
+                    "name" => $student->name,
+                    "last_name" => $student->last_name,
+                    "type_user" => $student->type_user,
+                    "picture" => $student->picture,
+                    "email" => $student->email,
+                    "status" => $classroomstudent->status,
+                    "classroomName" => isset($classroom_name->name) ? $classroom_name->name  : 'Bloqueado',
+                ];
+            }
+
+        }
+        return response()->json($students);
     }
 
 }
