@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Excel;
 |
 */
 
+################# Rutas para la pagina web ###########################
 // Route::group(['middleware' => 'auth', function () {
 //add all your routes here
 Route::get('/ciclos', function () {
@@ -26,7 +27,6 @@ Route::get('/ciclos', function () {
 Route::middleware('auth')->get('/user', function () {
     return view('user');
 });
-Route::post('sendEmailHome', 'TestingController@sendEmailHome')->name('sendEmailHome');
 Route::middleware('auth')->get('/board', function () {
     return view('welcome');
 });
@@ -281,6 +281,310 @@ Route::get('/matricula', function () {
 Route::middleware('auth')->get('/porcentaje/{id_area}/{id_classroom}', function (String $id_area, String $id_classroom) {
     return view('porcentajeNotas')->with('id_area', $id_area)->with('id_classroom', $id_classroom);
 });
+Route::middleware('auth')->get('/enviados', function () {
+    return view('mensajeEnv');
+});
+Route::middleware('auth')->get('/importar_adm', function () {
+    return view('imports.importB');
+});
+// Modulo del repositorio de clases
+Route::middleware('auth')->get('/repository', function () {
+    return view('repository');
+});
+Route::middleware('auth')->get('/createrepository', function () {
+    return view('repositoryCreate');
+});
+Route::middleware('auth')->get('/repository/students/{id_repo}', function (String $id_repo) {
+    return view('repositoryStudents')->with('id_repo', $id_repo);
+});
+Route::middleware('auth')->get('/repository/comments/{id_student}/{id_repo}', function (String $id_student, String $id_repo) {
+    return view('repositoryComments')->with('id_student', $id_student)->with('id_repo', $id_repo);
+});
+Route::middleware('auth')->get('/repository/student/comment/{id_repo}', function (String $id_repo) {
+    return view('repositoryStudentComments')->with('id_repo', $id_repo);
+});
+Route::middleware('auth')->get('/repository/student', function () {
+    return view('repositoryStudentView');
+});
+Route::middleware('auth')->get('/repository/student/upload/{id_repo}', function (String $id_repo) {
+    return view('repositoryStudentUpload')->with('id_repo', $id_repo);
+});
+/*login personalizado permite verificar suscripcion*/
+Route::get('/', function () {
+    return view('home');
+});
+Route::get('/loginNew', function () {
+    return view('auth.login');
+})->name('loginNew');
+Route::get('/registerNew', function () {
+    return view('auth.register');
+})->name('registerNew');
+//CONTROLLERS CLIENT
+Route::middleware('auth')->get('/cliente/cuenta', function () {
+    return view('clientAccount');
+});
+Route::middleware('auth')->get('/cliente/estudiantes', function () {
+    return view('clientStudents');
+});
+Route::middleware('auth')->get('/cliente/planes', function () {
+    return view('clientPlans');
+});
+Route::middleware('auth')->get('/cliente/creditos', function () {
+    return view('clientCredits');
+});
+
+//LECTIVAS
+//Módulo de electivas usuario Administrador
+Route::middleware('auth')->get('/admin/lectives', function () {
+    return view('lectivesAdm');
+});
+Route::middleware('auth')->get('/admin/lectives-teacher', function () {
+    return view('lectivesAdmAssingTeacher');
+});
+//Módulo de electivas usuario Docente
+Route::middleware('auth')->get('/teacher/lectives/planning', function () {
+    return view('lectivesTeacherPlanning');
+});
+Route::middleware('auth')->get('/teacher/lectives/planning/{id_lective_planification}', function (int $id_lective_planification) {
+    return view('lectivesTeacherPlanningEdit')->with('id_lective_planification', $id_lective_planification);
+});
+Route::middleware('auth')->get('/teacher/lectives/planning/{id_lective_planification}/indicators', function (int $id_lective_planification) {
+    return view('lectivesTeacherIndicators')->with('id_lective_planification', $id_lective_planification);
+});
+
+Route::middleware('auth')->get('/teacher/lectives/planning/{id_lective_planification}/weekly', function (int $id_lective_planification) {
+    return view('lectivesTeacherWeekly')->with('id_lective_planification', $id_lective_planification);
+});
+
+Route::middleware('auth')->get('/teacher/lectives/planning/{id_lective_planification}/weekly/{id_weekly_plan}/course', function (int $id_lective_planification, int $id_weekly_plan) {
+    return view('lectivesTeacherCoursesEdit')->with('id_lective_planification', $id_lective_planification)->with('id_weekly_plan', $id_weekly_plan);
+});
+Route::middleware('auth')->get('/teacher/lectives/planning/{id_lective_planification}/weekly/{id_weekly_plan}/course/{id_course}/activities', function (int $id_lective_planification, int $id_weekly_plan, $id_course) {
+    return view('lectivesTeacherActivity')->with('id_lective_planification', $id_lective_planification)->with('id_weekly_plan', $id_weekly_plan)->with('id_course', $id_course);
+});
+
+Route::middleware('auth')->get('/teacher/lectives/activities', function () {
+    return view('lectivesTeacherActivities');
+});
+Route::middleware('auth')->get('/teacher/lectives/courses', function () {
+    return view('lectivesTeacherCourses');
+});
+Route::middleware('auth')->get('/teacher/lectives/students', function () {
+    return view('lectivesTeacherStudents');
+});
+
+Route::middleware('auth')->get('/teacher/lectives/notes', function () {
+    return view('lectivesTeacherNotes');
+});
+Route::middleware('auth')->get('/teacher/lectives/board', function () {
+    return view('lectivesTeacherBoard');
+});
+//Módulo de electivas usuario Estudiante
+Route::middleware('auth')->get('/student/lectives/courses', function () {
+    return view('lectivesStudentCourses');
+});
+
+Route::middleware('auth')->get('/student/lectives/activities', function () {
+    return view('lectivesStudentActivities');
+});
+//Clases
+Route::middleware('auth')->get('/docente/clases', function () {
+    return view('teacherCourses');
+});
+Route::get('/admin/modulo/{id_module}', function (int $id_module) {
+    return view('adminModule')->with('id_module', $id_module);
+});
+
+Route::middleware('auth')->get('/docente/modulo/{id_module}', function (int $id_module) {
+    return view('teacherModule')->with('id_module', $id_module);
+});
+
+Route::middleware('auth')->get('/docente/modulo/{id_module}/clase/nueva', function (int $id_module) {
+    return view('teacherCourse')->with('id_module', $id_module)->with('id_class', 0);
+});
+
+Route::middleware('auth')->get('/docente/modulo/{id_module}/clase/{id_class}', function (int $id_module, int $id_class) {
+    return view('teacherCourse')->with('id_module', $id_module)->with('id_class', $id_class);
+});
+
+Route::middleware('auth')->get('/docente/estudiantes', function () {
+    return view('teacherStudents');
+});
+
+Route::middleware('auth')->get('/docente/area/{id_area}/curso/{id_classroom}/estudiante/{id_student}', function (int $id_area, int $id_classroom, int $id_student) {
+    return view('teacherStudent')->with('id_area', $id_area)->with('id_classroom', $id_classroom)->with('id_student', $id_student);
+});
+
+Route::middleware('auth')->get('/docente/area/{id_area}/curso/{id_classroom}/estudiante/{id_student}/modulo/{id_module}', function (int $id_area, int $id_classroom, int $id_student, int $id_module) {
+    return view('teacherStudent')->with('id_area', $id_area)->with('id_classroom', $id_classroom)->with('id_student', $id_student)->with('id_module', $id_module);
+});
+
+Route::middleware('auth')->get('/docente/area/{id_area}/curso/{id_classroom}/estudiante/{id_student}/modulo/{id_module}/clase/{id_class}', function (int $id_area, int $id_classroom, int $id_student, int $id_module, int $id_class) {
+    return view('teacherStudent')->with('id_area', $id_area)->with('id_classroom', $id_classroom)->with('id_student', $id_student)->with('id_module', $id_module)->with('id_class', $id_class);
+});
+
+
+Route::middleware('auth')->get('/estudiante/clases', function () {
+    return view('studentCourses');
+});
+
+Route::middleware('auth')->get('/estudiante/modulo/{id_module}', function (int $id_module) {
+    return view('studentModule')->with('id_module', $id_module);
+});
+
+Route::middleware('auth')->get('/estudiante/modulo/{id_module}/clase/nueva', function (int $id_module) {
+    return view('studentCourse')->with('id_module', $id_module)->with('id_class', 0);
+});
+
+Route::middleware('auth')->get('/estudiante/modulo/{id_module}/clase/{id_class}', function (int $id_module, int $id_class) {
+    return view('studentCourse')->with('id_module', $id_module)->with('id_class', $id_class);
+});
+
+Route::middleware('auth')->get('/admin/clases', function () {
+    return view('adminCourses');
+});
+Route::get('/compra/plan', function () {
+    return view('purchasePlan')->with('voucher', '');
+});
+Route::get('/compra/plan/v/{voucher}', function (string $voucher) {
+    return view('purchasePlan')->with('voucher', $voucher);
+});
+Route::get('/compra/plan/{plan_type}/modulo/{module_id}/ingresar/p/{payment_code}', function (string $plan_type, int $module_id, String $payment_code) {
+    return view('purchaseModuleLogin')->with('plan_type', $plan_type)->with('module_id', $module_id)->with('voucher', '')->with('payment_code', $payment_code);
+});
+Route::get('/compra/plan/{plan_type}/modulo/{module_id}/ingresar/v/{voucher}/p/{payment_code}', function (string $plan_type, string $voucher, int $module_id, String $payment_code) {
+    return view('purchaseModuleLogin')->with('plan_type', $plan_type)->with('module_id', $module_id)->with('voucher', $voucher)->with('payment_code', $payment_code);
+});
+Route::get('/compra/plan/{plan_type}/area/{area_id}/ingresar/p/{payment_code}', function (string $plan_type, int $area_id, String $payment_code) {
+    return view('purchaseAreaLogin')->with('plan_type', $plan_type)->with('area_id', $area_id)->with('voucher', '')->with('payment_code', $payment_code);
+});
+Route::get('/compra/plan/{plan_type}/area/{area_id}/ingresar/v/{voucher}/p/{payment_code}', function (string $plan_type, string $voucher, int $area_id, String $payment_code) {
+    return view('purchaseAreaLogin')->with('plan_type', $plan_type)->with('area_id', $area_id)->with('voucher', $voucher)->with('payment_code', $payment_code);
+});
+Route::get('/compra/plan/{plan_type}/cop/{pago_pesos}/usd/{pago_usd}/ingresar/p/{payment_code}', function (string $plan_type, String $pago_pesos, String $pago_usd, String $payment_code) {
+    return view('purchasePlanLogin')->with('plan_type', $plan_type)->with('pago_pesos', $pago_pesos)->with('pago_usd', $pago_usd)->with('voucher', '')->with('payment_code', $payment_code);
+});
+Route::get('/compra/plan/{plan_type}/ingresar/v/{voucher}', function (string $plan_type, string $voucher, String $payment_code) {
+    return view('purchasePlanLogin')->with('plan_type', $plan_type)->with('voucher', $voucher)->with('payment_code', $payment_code);
+});
+Route::get('/compra/plan/{plan_type}/modulo/{module_id}/resumen', function (string $plan_type, int $module_id) {
+    return view('purchaseModuleResume')->with('plan_type', $plan_type)->with('module_id', $module_id)->with('voucher', '');
+});
+Route::get('/compra/plan/{plan_type}/modulo/{module_id}/resumen/v/{voucher}', function (string $plan_type, int $module_id, string $voucher) {
+    return view('purchaseModuleResume')->with('plan_type', $plan_type)->with('module_id', $module_id)->with('voucher', $voucher);
+});
+Route::get('/compra/plan/{plan_type}/area/{area_id}/resumen', function (string $plan_type, int $area_id) {
+    return view('purchaseAreaResume')->with('plan_type', $plan_type)->with('area_id', $area_id)->with('voucher', '');
+});
+Route::get('/compra/plan/{plan_type}/area/{area_id}/resumen/v/{voucher}', function (string $plan_type, int $area_id, string $voucher) {
+    return view('purchaseAreaResume')->with('plan_type', $plan_type)->with('area_id', $area_id)->with('voucher', $voucher);
+});
+Route::get('/compra/plan/{plan_type}/resumen', function (string $plan_type) {
+    return view('purchasePlanResume')->with('plan_type', $plan_type)->with('voucher', '');
+});
+Route::get('/compra/plan/{plan_type}/resumen/v/{voucher}', function (string $plan_type, string $voucher) {
+    return view('purchasePlanResume')->with('plan_type', $plan_type)->with('voucher', $voucher);
+});
+
+Route::get('/compra/plan/{plan_type}/tutoria/ingresar/p/{payment_code}', function (string $plan_type,  String $payment_code) {
+    return view('purchaseTutorialLogin')->with('plan_type', $plan_type)->with('voucher', '')->with('payment_code', $payment_code);
+});
+Route::get('/compra/plan/{plan_type}/tutoria/ingresar/v/{voucher}/p/{payment_code}', function (string $plan_type, string $voucher,  String $payment_code) {
+    return view('purchaseTutorialLogin')->with('plan_type', $plan_type)->with('voucher', $voucher)->with('payment_code', $payment_code);
+});
+
+Route::get('/compra/plan/{plan_type}/tutoria/{group_name}/{area_id}/{schedulearea_id}/{time_index}/resumen', function (String $plan_type, String $group_name, int $area_id, int $schedulearea_id, int $time_index) {
+    return view('purchaseTutorialResume')->with('voucher', '')->with('plan_type', $plan_type)->with('area_id', $area_id)->with('group_name', $group_name)->with('schedulearea_id', $schedulearea_id)->with('time_index', $time_index);
+});
+Route::get('/compra/plan/{plan_type}/tutoria/{group_name}/{area_id}/{schedulearea_id}/{time_index}/resumen', function (String $plan_type, String $group_name, int $area_id, int $schedulearea_id, int $time_index) {
+    return view('purchaseTutorialResume')->with('voucher', '')->with('plan_type', $plan_type)->with('area_id', $area_id)->with('group_name', $group_name)->with('schedulearea_id', $schedulearea_id)->with('time_index', $time_index);
+});
+Route::get('/compra/plan/{plan_type}/tutoria/{group_name}/{area_id}/{schedulearea_id}/{time_index}/resumen/v/{voucher}', function (String $plan_type, String $group_name, int $area_id, int $schedulearea_id, int $time_index, String $voucher) {
+    return view('purchaseTutorialResume')->with('voucher', $voucher)->with('plan_type', $plan_type)->with('area_id', $area_id)->with('group_name', $group_name)->with('schedulearea_id', $schedulearea_id)->with('time_index', $time_index);
+});
+Route::get('/compra/plan/{plan_type}/tutoria/{group_name}/{area_id}/{schedulearea_id}/{time_index}/resumen/v/{voucher}', function (String $plan_type, String $group_name, int $area_id, int $schedulearea_id, int $time_index, String $voucher) {
+    return view('purchaseTutorialResume')->with('voucher', $voucher)->with('plan_type', $plan_type)->with('area_id', $area_id)->with('group_name', $group_name)->with('schedulearea_id', $schedulearea_id)->with('time_index', $time_index);
+});
+Route::middleware('auth')->get('/planClass', function () {
+    return view('planclass');
+});
+Route::middleware('auth')->get('/clasesTeacher', function () {
+    return view('clasesTeacher');
+});
+//Refuerzo Escolar
+Route::get('/plan_estudio', function () {
+    return view('menuhome')->with('plan', $_GET['plan'] ?? '');
+});
+Route::get('/modulo_clases/{id_weekly}', function (String $id_weekly) {
+    return view('homeClassModul')->with('id_weekly', $id_weekly)->with('plan', isset($_GET['plan']) ? $_GET['plan'] : '');
+});
+Route::get('/modulo_clases/{id_weekly}', function (String $id_weekly) {
+    return view('homeClassModul')->with('id_weekly', $id_weekly)->with('plan', isset($_GET['plan']) ? $_GET['plan'] : '');
+});
+Route::get('/modulos_home/{id_area}/{id_grade}', function (String $id_area, String $id_grade) {
+    return view('homeModulos')->with('id_area', $id_area)->with('id_grade', $id_grade)->with('plan', isset($_GET['plan']) ? $_GET['plan'] : '');
+});
+Route::get('/bimestre', function () {
+    return view('bimestre');
+});
+Route::get('/contrato-educativo', function () {
+    return view('contratoEducativo');
+});
+Route::get('/trimestre/{id_area}/{id_classroom}', function (String $id_area, String $id_classroom) {
+    return view('trimestre')->with('id_area', $id_area)->with('id_classroom', $id_classroom);
+});
+Route::get('/notesStudentsADM', function(){
+    return view('notasADM');
+});
+Route::get('/deleteUser', function(){
+    return view('deleteUser');
+});
+Route::middleware('auth')->get('/pariente_asignar', function () {
+    return view('asignarPariente');
+});
+Route::middleware('auth')->get('/getParentsObserver', function () {
+    return view('/getParentsObserver');
+});
+Route::middleware('auth')->get('/changeGrade', function () {
+    return view('changeGrade');
+});
+Route::middleware('auth')->get('/verifyRegister', function () {
+    return view('verifyRegistration');
+});
+Route::middleware('auth')->get('payPlan', function(){
+    return view('payPlan');
+});
+Route::middleware('auth')->get('/admin-boletin', function(){
+    return view('adminBoletin');
+});
+Route::middleware('auth')->get('/admin-students', function(){
+    return view('adminStudents');
+});
+Route::get('/extra_ef', function () {
+    return view('CatExtraEF');
+});
+Route::get('/extra_ea', function () {
+    return view('CatExtraEA');
+});
+Route::get('class_extra/{id_cat}', function (String $id_cat) {
+    return view('ClassExtra')->with('id_cat', $id_cat);
+});
+Route::get('/extra_view/{id_cat}/{id_class}', function (String $id_cat, String $id_class) {
+    return view('viewClassExtra')->with('id_cat', $id_cat)->with('id_class', $id_class);
+});
+Route::get('/extra_crear/{id_cat}', function (String $id_cat) {
+    return view('cClassExtra')->with('id_cat', $id_cat);
+});
+Route::get('/extra_edit/{id_cat}/{id_class}', function (String $id_cat, String $id_class) {
+    return view('editClassExtra')->with('id_cat', $id_cat)->with('id_class', $id_class);
+});
+Route::get('/program', function () {
+    return view('program');
+});
+
+################# Rutas para los controladores ###########################
+
+Route::post('sendEmailHome', 'TestingController@sendEmailHome')->name('sendEmailHome');
 Route::middleware('auth')->get('/chat', 'HomeController@CreateGroup')->name('chat');
 // Lessons
 Route::middleware('auth')->delete('lessons/destroy', 'LessonsController@massDestroy')->name('lessons.massDestroy');
@@ -430,9 +734,7 @@ Route::put('updateMessages', 'MessagingController@update')->name('updateMessages
 Route::get('getReceivedMessage', 'MessagingController@showReceivedMessage')->name('showReceivedMessage');
 Route::get('getSentMessage', 'MessagingController@showSentMessage')->name('showSentMessage');
 Route::get('getMessage/{id}', 'MessagingController@showMessage')->name('getMessage');
-Route::middleware('auth')->get('/enviados', function () {
-    return view('mensajeEnv');
-});
+
 /* Rutas del administrador
      */
 
@@ -498,33 +800,7 @@ Route::post('documentoimp','ImportController@uploadFiles');
 Route::post('uploadFileAssignStudent','ImportController@uploadFileAssignStudent');
 Route::post('uploadFileAssignTeachers','ImportController@uploadFileAssignTeachers');
 
-Route::middleware('auth')->get('/importar_adm', function () {
-    return view('imports.importB');
-});
-// }]);
-// Modulo del repositorio de clases
 
-Route::middleware('auth')->get('/repository', function () {
-    return view('repository');
-});
-Route::middleware('auth')->get('/createrepository', function () {
-    return view('repositoryCreate');
-});
-Route::middleware('auth')->get('/repository/students/{id_repo}', function (String $id_repo) {
-    return view('repositoryStudents')->with('id_repo', $id_repo);
-});
-Route::middleware('auth')->get('/repository/comments/{id_student}/{id_repo}', function (String $id_student, String $id_repo) {
-    return view('repositoryComments')->with('id_student', $id_student)->with('id_repo', $id_repo);
-});
-Route::middleware('auth')->get('/repository/student/comment/{id_repo}', function (String $id_repo) {
-    return view('repositoryStudentComments')->with('id_repo', $id_repo);
-});
-Route::middleware('auth')->get('/repository/student', function () {
-    return view('repositoryStudentView');
-});
-Route::middleware('auth')->get('/repository/student/upload/{id_repo}', function (String $id_repo) {
-    return view('repositoryStudentUpload')->with('id_repo', $id_repo);
-});
 Route::post('/saveRepository', 'RepositoryController@store')->name('saveRepository');
 Route::get('/getRepository/{id_area}/{id_classroom}', 'RepositoryController@show')->name('getRepository');
 Route::get('/getRepoStudent/{id_area}/{id_classroom}', 'RepositoryController@showStudent')->name('getRepositoryStudent');
@@ -538,93 +814,12 @@ Route::post('/saveRepoComment', 'RepositoryController@storeRepositoryComment')->
 Route::post('/saveRepoStUpload', 'RepositoryController@storeRepositoryStudent')->name('saveRepoStUpload');
 
 /*login personalizado permite verificar suscripcion*/
-Route::get('/', function () {
-    return view('home');
-});
-Route::get('/loginNew', function () {
-    return view('auth.login');
-})->name('loginNew');
-Route::get('/registerNew', function () {
-    return view('auth.register');
-})->name('registerNew');
 Route::post('/login2', 'UserController@loginWeb')->name('login2');
 Route::post('/resetPassword', 'UserController@resetPassword')->name('resetPassword');
 Route::post('users_save', 'UserController@store')->name('users_save');
 Route::get('Courses_save', 'CoursesController@storeNew')->name('Courses_save');
 Route::get('/logout2', 'UserController@logOut')->name('logout2');
 Route::post('/login/client/web', 'UserController@loginClientWeb')->name('login_client_web');
-
-
-//CONTROLLERS CLIENT
-Route::middleware('auth')->get('/cliente/cuenta', function () {
-    return view('clientAccount');
-});
-Route::middleware('auth')->get('/cliente/estudiantes', function () {
-    return view('clientStudents');
-});
-Route::middleware('auth')->get('/cliente/planes', function () {
-    return view('clientPlans');
-});
-Route::middleware('auth')->get('/cliente/creditos', function () {
-    return view('clientCredits');
-});
-
-//LECTIVAS
-//Módulo de electivas usuario Administrador
-Route::middleware('auth')->get('/admin/lectives', function () {
-    return view('lectivesAdm');
-});
-Route::middleware('auth')->get('/admin/lectives-teacher', function () {
-    return view('lectivesAdmAssingTeacher');
-});
-//Módulo de electivas usuario Docente
-Route::middleware('auth')->get('/teacher/lectives/planning', function () {
-    return view('lectivesTeacherPlanning');
-});
-Route::middleware('auth')->get('/teacher/lectives/planning/{id_lective_planification}', function (int $id_lective_planification) {
-    return view('lectivesTeacherPlanningEdit')->with('id_lective_planification', $id_lective_planification);
-});
-Route::middleware('auth')->get('/teacher/lectives/planning/{id_lective_planification}/indicators', function (int $id_lective_planification) {
-    return view('lectivesTeacherIndicators')->with('id_lective_planification', $id_lective_planification);
-});
-
-Route::middleware('auth')->get('/teacher/lectives/planning/{id_lective_planification}/weekly', function (int $id_lective_planification) {
-    return view('lectivesTeacherWeekly')->with('id_lective_planification', $id_lective_planification);
-});
-
-Route::middleware('auth')->get('/teacher/lectives/planning/{id_lective_planification}/weekly/{id_weekly_plan}/course', function (int $id_lective_planification, int $id_weekly_plan) {
-    return view('lectivesTeacherCoursesEdit')->with('id_lective_planification', $id_lective_planification)->with('id_weekly_plan', $id_weekly_plan);
-});
-Route::middleware('auth')->get('/teacher/lectives/planning/{id_lective_planification}/weekly/{id_weekly_plan}/course/{id_course}/activities', function (int $id_lective_planification, int $id_weekly_plan, $id_course) {
-    return view('lectivesTeacherActivity')->with('id_lective_planification', $id_lective_planification)->with('id_weekly_plan', $id_weekly_plan)->with('id_course', $id_course);
-});
-
-Route::middleware('auth')->get('/teacher/lectives/activities', function () {
-    return view('lectivesTeacherActivities');
-});
-
-
-Route::middleware('auth')->get('/teacher/lectives/courses', function () {
-    return view('lectivesTeacherCourses');
-});
-Route::middleware('auth')->get('/teacher/lectives/students', function () {
-    return view('lectivesTeacherStudents');
-});
-
-Route::middleware('auth')->get('/teacher/lectives/notes', function () {
-    return view('lectivesTeacherNotes');
-});
-Route::middleware('auth')->get('/teacher/lectives/board', function () {
-    return view('lectivesTeacherBoard');
-});
-//Módulo de electivas usuario Estudiante
-Route::middleware('auth')->get('/student/lectives/courses', function () {
-    return view('lectivesStudentCourses');
-});
-
-Route::middleware('auth')->get('/student/lectives/activities', function () {
-    return view('lectivesStudentActivities');
-});
 
 /* LEADS */
 Route::post('saveLead', 'ClienteController@saveLead')->name('saveLead');
@@ -634,134 +829,11 @@ Route::post('saveLeadFiles', 'ClienteController@uploadFile')->name('saveLeadFile
 // CLASES
 Route::get('GetNameWeekly/{id_class}', 'ClassController@getWeeklyName')->name('GetNameWeekly');
 
-Route::middleware('auth')->get('/docente/clases', function () {
-    return view('teacherCourses');
-});
-Route::get('/admin/modulo/{id_module}', function (int $id_module) {
-    return view('adminModule')->with('id_module', $id_module);
-});
-
-Route::middleware('auth')->get('/docente/modulo/{id_module}', function (int $id_module) {
-    return view('teacherModule')->with('id_module', $id_module);
-});
-
-Route::middleware('auth')->get('/docente/modulo/{id_module}/clase/nueva', function (int $id_module) {
-    return view('teacherCourse')->with('id_module', $id_module)->with('id_class', 0);
-});
-
-Route::middleware('auth')->get('/docente/modulo/{id_module}/clase/{id_class}', function (int $id_module, int $id_class) {
-    return view('teacherCourse')->with('id_module', $id_module)->with('id_class', $id_class);
-});
-
-Route::middleware('auth')->get('/docente/estudiantes', function () {
-    return view('teacherStudents');
-});
-
-Route::middleware('auth')->get('/docente/area/{id_area}/curso/{id_classroom}/estudiante/{id_student}', function (int $id_area, int $id_classroom, int $id_student) {
-    return view('teacherStudent')->with('id_area', $id_area)->with('id_classroom', $id_classroom)->with('id_student', $id_student);
-});
-
-Route::middleware('auth')->get('/docente/area/{id_area}/curso/{id_classroom}/estudiante/{id_student}/modulo/{id_module}', function (int $id_area, int $id_classroom, int $id_student, int $id_module) {
-    return view('teacherStudent')->with('id_area', $id_area)->with('id_classroom', $id_classroom)->with('id_student', $id_student)->with('id_module', $id_module);
-});
-
-Route::middleware('auth')->get('/docente/area/{id_area}/curso/{id_classroom}/estudiante/{id_student}/modulo/{id_module}/clase/{id_class}', function (int $id_area, int $id_classroom, int $id_student, int $id_module, int $id_class) {
-    return view('teacherStudent')->with('id_area', $id_area)->with('id_classroom', $id_classroom)->with('id_student', $id_student)->with('id_module', $id_module)->with('id_class', $id_class);
-});
-
-
-Route::middleware('auth')->get('/estudiante/clases', function () {
-    return view('studentCourses');
-});
-
-Route::middleware('auth')->get('/estudiante/modulo/{id_module}', function (int $id_module) {
-    return view('studentModule')->with('id_module', $id_module);
-});
-
-Route::middleware('auth')->get('/estudiante/modulo/{id_module}/clase/nueva', function (int $id_module) {
-    return view('studentCourse')->with('id_module', $id_module)->with('id_class', 0);
-});
-
-Route::middleware('auth')->get('/estudiante/modulo/{id_module}/clase/{id_class}', function (int $id_module, int $id_class) {
-    return view('studentCourse')->with('id_module', $id_module)->with('id_class', $id_class);
-});
-
-Route::middleware('auth')->get('/admin/clases', function () {
-    return view('adminCourses');
-});
-
-
 //CONTROLLERS PURCHASE
 Route::middleware('auth')->get('/compra/pagar/resultado/payu', 'PurchasedController@payResultPayu');
 Route::middleware('auth')->get('/compra/pagar/resultado/mercadopago', 'PurchasedController@payResultMercadopago');
 Route::middleware('auth')->get('/compra/pagar/payu/{data_string}', 'PurchasedController@payPayu');
 Route::middleware('auth')->get('/compra/pagar/mercadopago/{data_string}', 'PurchasedController@payMercadopago');
-
-
-Route::get('/compra/plan', function () {
-    return view('purchasePlan')->with('voucher', '');
-});
-Route::get('/compra/plan/v/{voucher}', function (string $voucher) {
-    return view('purchasePlan')->with('voucher', $voucher);
-});
-Route::get('/compra/plan/{plan_type}/modulo/{module_id}/ingresar/p/{payment_code}', function (string $plan_type, int $module_id, String $payment_code) {
-    return view('purchaseModuleLogin')->with('plan_type', $plan_type)->with('module_id', $module_id)->with('voucher', '')->with('payment_code', $payment_code);
-});
-Route::get('/compra/plan/{plan_type}/modulo/{module_id}/ingresar/v/{voucher}/p/{payment_code}', function (string $plan_type, string $voucher, int $module_id, String $payment_code) {
-    return view('purchaseModuleLogin')->with('plan_type', $plan_type)->with('module_id', $module_id)->with('voucher', $voucher)->with('payment_code', $payment_code);
-});
-Route::get('/compra/plan/{plan_type}/area/{area_id}/ingresar/p/{payment_code}', function (string $plan_type, int $area_id, String $payment_code) {
-    return view('purchaseAreaLogin')->with('plan_type', $plan_type)->with('area_id', $area_id)->with('voucher', '')->with('payment_code', $payment_code);
-});
-Route::get('/compra/plan/{plan_type}/area/{area_id}/ingresar/v/{voucher}/p/{payment_code}', function (string $plan_type, string $voucher, int $area_id, String $payment_code) {
-    return view('purchaseAreaLogin')->with('plan_type', $plan_type)->with('area_id', $area_id)->with('voucher', $voucher)->with('payment_code', $payment_code);
-});
-Route::get('/compra/plan/{plan_type}/cop/{pago_pesos}/usd/{pago_usd}/ingresar/p/{payment_code}', function (string $plan_type, String $pago_pesos, String $pago_usd, String $payment_code) {
-    return view('purchasePlanLogin')->with('plan_type', $plan_type)->with('pago_pesos', $pago_pesos)->with('pago_usd', $pago_usd)->with('voucher', '')->with('payment_code', $payment_code);
-});
-Route::get('/compra/plan/{plan_type}/ingresar/v/{voucher}', function (string $plan_type, string $voucher, String $payment_code) {
-    return view('purchasePlanLogin')->with('plan_type', $plan_type)->with('voucher', $voucher)->with('payment_code', $payment_code);
-});
-Route::get('/compra/plan/{plan_type}/modulo/{module_id}/resumen', function (string $plan_type, int $module_id) {
-    return view('purchaseModuleResume')->with('plan_type', $plan_type)->with('module_id', $module_id)->with('voucher', '');
-});
-Route::get('/compra/plan/{plan_type}/modulo/{module_id}/resumen/v/{voucher}', function (string $plan_type, int $module_id, string $voucher) {
-    return view('purchaseModuleResume')->with('plan_type', $plan_type)->with('module_id', $module_id)->with('voucher', $voucher);
-});
-Route::get('/compra/plan/{plan_type}/area/{area_id}/resumen', function (string $plan_type, int $area_id) {
-    return view('purchaseAreaResume')->with('plan_type', $plan_type)->with('area_id', $area_id)->with('voucher', '');
-});
-Route::get('/compra/plan/{plan_type}/area/{area_id}/resumen/v/{voucher}', function (string $plan_type, int $area_id, string $voucher) {
-    return view('purchaseAreaResume')->with('plan_type', $plan_type)->with('area_id', $area_id)->with('voucher', $voucher);
-});
-Route::get('/compra/plan/{plan_type}/resumen', function (string $plan_type) {
-    return view('purchasePlanResume')->with('plan_type', $plan_type)->with('voucher', '');
-});
-Route::get('/compra/plan/{plan_type}/resumen/v/{voucher}', function (string $plan_type, string $voucher) {
-    return view('purchasePlanResume')->with('plan_type', $plan_type)->with('voucher', $voucher);
-});
-
-Route::get('/compra/plan/{plan_type}/tutoria/ingresar/p/{payment_code}', function (string $plan_type,  String $payment_code) {
-    return view('purchaseTutorialLogin')->with('plan_type', $plan_type)->with('voucher', '')->with('payment_code', $payment_code);
-});
-Route::get('/compra/plan/{plan_type}/tutoria/ingresar/v/{voucher}/p/{payment_code}', function (string $plan_type, string $voucher,  String $payment_code) {
-    return view('purchaseTutorialLogin')->with('plan_type', $plan_type)->with('voucher', $voucher)->with('payment_code', $payment_code);
-});
-
-Route::get('/compra/plan/{plan_type}/tutoria/{group_name}/{area_id}/{schedulearea_id}/{time_index}/resumen', function (String $plan_type, String $group_name, int $area_id, int $schedulearea_id, int $time_index) {
-    return view('purchaseTutorialResume')->with('voucher', '')->with('plan_type', $plan_type)->with('area_id', $area_id)->with('group_name', $group_name)->with('schedulearea_id', $schedulearea_id)->with('time_index', $time_index);
-});
-Route::get('/compra/plan/{plan_type}/tutoria/{group_name}/{area_id}/{schedulearea_id}/{time_index}/resumen', function (String $plan_type, String $group_name, int $area_id, int $schedulearea_id, int $time_index) {
-    return view('purchaseTutorialResume')->with('voucher', '')->with('plan_type', $plan_type)->with('area_id', $area_id)->with('group_name', $group_name)->with('schedulearea_id', $schedulearea_id)->with('time_index', $time_index);
-});
-Route::get('/compra/plan/{plan_type}/tutoria/{group_name}/{area_id}/{schedulearea_id}/{time_index}/resumen/v/{voucher}', function (String $plan_type, String $group_name, int $area_id, int $schedulearea_id, int $time_index, String $voucher) {
-    return view('purchaseTutorialResume')->with('voucher', $voucher)->with('plan_type', $plan_type)->with('area_id', $area_id)->with('group_name', $group_name)->with('schedulearea_id', $schedulearea_id)->with('time_index', $time_index);
-});
-Route::get('/compra/plan/{plan_type}/tutoria/{group_name}/{area_id}/{schedulearea_id}/{time_index}/resumen/v/{voucher}', function (String $plan_type, String $group_name, int $area_id, int $schedulearea_id, int $time_index, String $voucher) {
-    return view('purchaseTutorialResume')->with('voucher', $voucher)->with('plan_type', $plan_type)->with('area_id', $area_id)->with('group_name', $group_name)->with('schedulearea_id', $schedulearea_id)->with('time_index', $time_index);
-});
-
-
 
 //api rest
 Route::get('/api/achievement/{id_achievement}/indicator', 'IndicatorController@getByAchievement');
@@ -832,58 +904,17 @@ Route::get('/getActivitiesTeacher/{id_area}/{id_classroom}','ActivityController@
 Route::resource('piar', 'PIARController');
 Route::get('getPIARStudents', 'PIARController@getPIARStudents');
 Route::get('PIARStudentsByArea/{id_1}/{id_2}', 'PIARController@getPIARStudentsArea');
-
-Route::middleware('auth')->get('/planClass', function () {
-    return view('planclass');
-});
-
-Route::middleware('auth')->get('/clasesTeacher', function () {
-    return view('clasesTeacher');
-});
-
-//Refuerzo Escolar
-Route::get('/plan_estudio', function () {
-    return view('menuhome')->with('plan', $_GET['plan'] ?? '');
-});
 Route::get('getAllGrades', 'AdministratorController@getAllGrades')->name('getAllGrades');
 Route::get('getAllClass', 'ClassController@getAllClass');
-Route::get('/modulo_clases/{id_weekly}', function (String $id_weekly) {
-    return view('homeClassModul')->with('id_weekly', $id_weekly)->with('plan', isset($_GET['plan']) ? $_GET['plan'] : '');
-});
-
-Route::get('/modulo_clases/{id_weekly}', function (String $id_weekly) {
-    return view('homeClassModul')->with('id_weekly', $id_weekly)->with('plan', isset($_GET['plan']) ? $_GET['plan'] : '');
-});
 Route::get('findClassByModule/{id}', 'LandingController@findClassByModule')->name('findClassByModule');
 Route::get('findWeeklyById/{id}', 'LandingController@findWeeklyById')->name('findWeeklyById');
-
-Route::get('/modulos_home/{id_area}/{id_grade}', function (String $id_area, String $id_grade) {
-    return view('homeModulos')->with('id_area', $id_area)->with('id_grade', $id_grade)->with('plan', isset($_GET['plan']) ? $_GET['plan'] : '');
-});
 Route::get('findClassroomByGrade/{id}', 'LandingController@findClassroomByGrade')->name('findClassroomByGrade');
 Route::get('findAreaById/{id}', 'LandingController@findAreaById')->name('findAreaById');
 
 Route::resource('bimestres','BimestreController');
-Route::get('/bimestre', function () {
-    return view('bimestre');
-});
+
 
 Route::get('contratoEducativo/{motherName}/{fatherName}/{ccMother}/{ccFather}/{ccOther}','CalificationController@educativeContract')->name('contratoEducativo');
-Route::get('/contrato-educativo', function () {
-    return view('contratoEducativo');
-});
-
-Route::get('/trimestre/{id_area}/{id_classroom}', function (String $id_area, String $id_classroom) {
-    return view('trimestre')->with('id_area', $id_area)->with('id_classroom', $id_classroom);
-});
-
-Route::get('/notesStudentsADM', function(){
-    return view('notasADM');
-});
-
-Route::get('/deleteUser', function(){
-    return view('deleteUser');
-});
 Route::get('getAllUsersPaginated', 'UserController@getAllUsersPaginated');
 Route::get('specificUser/{name}','UserController@specificUser');
 
@@ -895,33 +926,16 @@ Route::post('assignCoord','AdministratorController@assignCoord');
 Route::resource('/observer', 'ObserverController');
 Route::get('/dataUsers', 'ObserverController@getDataParentsStudents');
 Route::get('getParents/{parent_id}', 'UserController@getParents');
-Route::middleware('auth')->get('/pariente_asignar', function () {
-    return view('asignarPariente');
-});
 Route::put('assignParent/{user_id}','AdministratorController@assignParent');
-
-Route::middleware('auth')->get('/getParentsObserver', function () {
-    return view('/getParentsObserver');
-});
 Route::get('/dataObserver', 'ParentsController@getDataObserverStudents');
 
 Route::get('getStudentsByGrade/{grade_id}','ChangeGradeController@getStudentsByGrade');
-
-Route::middleware('auth')->get('/changeGrade', function () {
-    return view('changeGrade');
-});
-
 Route::put('savePromGrade/{id_student}','ChangeGradeController@savePromGrade');
 Route::get('/api/student/{student_id}/calification-report', 'CalificationController@generateTemplateCalification');
 Route::get('getDataUser','UserController@getUser');
 
 Route::resource('paymentRegistration','VerifyRegistrationController');
 Route::get('getPaymentAproved','VerifyRegistrationController@getPaymentAproved');
-
-Route::middleware('auth')->get('/verifyRegister', function () {
-    return view('verifyRegistration');
-});
-
 Route::get('getWorkShop/{id_bimestre}/{id_area}/{id_classroom}','WorkshopController@getActivityByBimestre');
 
 Route::resource('filesWork','FilesWorkshopController');
@@ -931,33 +945,10 @@ Route::resource('AssignNote','AssignNoteController');
 Route::get('/AssignNote/{id_student}/{id_area}','AssignNoteController@show');
 Route::get('/assignNote/{id}','AssignNoteController@getAssignNote');
 Route::get('/getConectionbyId/{id}','UserController@getConectionbyId');
-Route::middleware('auth')->get('payPlan', function(){
-    return view('payPlan');
-});
-
 //Paypal pay
 Route::middleware('auth')->get('/compra/pagar/paypal/{data_string}', 'PaypalPaymentController@payPaypal');
 Route::middleware('auth')->get('/compra/pagar/plan/paypal/{data_string}', 'PaypalPaymentController@payPaypalPlan');
 Route::middleware('auth')->get('/compra/currencyExchange', 'PaypalPaymentController@currencyExchange');
-
-Route::middleware('auth')->get('/admin-boletin', function(){
-    return view('adminBoletin');
-});
-Route::middleware('auth')->get('/admin-students', function(){
-    return view('adminStudents');
-});
-Route::get('/extra_ef', function () {
-    return view('CatExtraEF');
-});
-Route::get('/extra_ea', function () {
-    return view('CatExtraEA');
-});
-Route::get('class_extra/{id_cat}', function (String $id_cat) {
-    return view('ClassExtra')->with('id_cat', $id_cat);
-});
-Route::get('/extra_view/{id_cat}/{id_class}', function (String $id_cat, String $id_class) {
-    return view('viewClassExtra')->with('id_cat', $id_cat)->with('id_class', $id_class);
-});
 Route::post('createExtra', 'AdministratorController@createExtra')->name('createExtra');
 Route::get('getExtra', 'AdministratorController@findExtra')->name('getExtra');
 Route::post('createCatExtra', 'AdministratorController@createCatExtra')->name('createCatExtra');
@@ -968,12 +959,8 @@ Route::get('showExtraById/{id}', 'ClassController@showExtraById')->name('showExt
 
 Route::post('saveClassExtra', 'ClassController@saveClassExtra')->name('saveClassExtra');
 Route::put('updateClassExtra', 'ClassController@updateClassExtra')->name('updateClassExtra');
-
-Route::get('/extra_crear/{id_cat}', function (String $id_cat) {
-    return view('cClassExtra')->with('id_cat', $id_cat);
-});
-Route::get('/extra_edit/{id_cat}/{id_class}', function (String $id_cat, String $id_class) {
-    return view('editClassExtra')->with('id_cat', $id_cat)->with('id_class', $id_class);
-});
 Route::middleware('auth')->put('updateStatusStudent','ClassroomStudentController@updateStatus');
 Route::middleware('auth')->get('getStatusStudent','ClassroomStudentController@getStatus');
+
+//SignUp
+Route::post('createSignUp', 'SignUpController@store')->name('SignUp');
