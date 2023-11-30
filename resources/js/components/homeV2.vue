@@ -16,7 +16,7 @@
                                     <a class="color-nav" href="#queEs">¿Qué es?</a>
                                 </li>
                                 <li class="">
-                                    <a class="color-nav" href="#metodoTrikele">Metodo Trikele</a>
+                                    <a class="color-nav" href="#metodoTrikele">Método Trikele</a>
                                 </li>
                                 <li class="">
                                     <a class="color-nav" href="#testimonio">Testimonios</a>
@@ -57,14 +57,16 @@
             <iframe class="youtube-position" src="https://www.youtube.com/embed/VaZaMqj3OLU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </section>
         <section class="home-section-5">
-            <div class="team-text-position1">
-                <p>Lic. En filosofía y humanidades de la Universidad Sergio Arboleda, con 19 años de experiencia en educación formal,  formación en ISSO 21001 y coordinadora académica del colegio Trikele.</p>
-            </div>
-            <div class="team-text-position2">
-                <p>Licenciada en educación universidad javeriana, Especialización en lenguas modernas universidad Javeriana, Especialización en Gestión y evaluación, Universidad externado de Colombia, Experiencia en educación desde 1977.</p>
-            </div>
-            <div class="team-text-position3">
-                <p>Carlos Felipe Diago, Administrador de Empresas del CESA en Colombia con IMBA en IE Business School de madrid, España, Emprendedor, con más de 15 años trabajando en educación, hoy estando al frente como Director General del Colegio Trikele.</p>
+            <div>
+                <div class="team-text-position1">
+                    <p>Lic. En filosofía y humanidades de la Universidad Sergio Arboleda, con 19 años de experiencia en educación formal,  formación en ISSO 21001 y coordinadora académica del colegio Trikele.</p>
+                </div>
+                <div class="team-text-position2">
+                    <p>Licenciada en educación universidad javeriana, Especialización en lenguas modernas universidad Javeriana, Especialización en Gestión y evaluación, Universidad externado de Colombia, Experiencia en educación desde 1977.</p>
+                </div>
+                <div class="team-text-position3">
+                    <p>Carlos Felipe Diago, Administrador de Empresas del CESA en Colombia con IMBA en IE Business School de madrid, España, Emprendedor, con más de 15 años trabajando en educación, hoy estando al frente como Director General del Colegio Trikele.</p>
+                </div>
             </div>
         </section>
         <section class="home-section-6">
@@ -94,7 +96,7 @@
                             </label>
                         </div> -->
                         <div>
-                            <button type="submit" class="btn btn-primary text-center btn-form">Enviar</button>
+                            <button type="submit" class="btn text-center btn-form">Enviar</button>
                         </div>
                     </form>
                 </div>
@@ -297,7 +299,7 @@ export default {
         padding-top: 550px;
         padding-left: 920px;
         padding-right: 75px;
-        font-size: 16px;
+        font-size: 14px;
         color: white;
         line-height: 20px;
         text-align: center;
@@ -307,7 +309,7 @@ export default {
         padding-top: 550px;
         padding-left: 500px;
         padding-right: 500px;
-        font-size: 16px;
+        font-size: 14px;
         color: white;
         line-height: 20px;
         text-align: center;
@@ -317,7 +319,7 @@ export default {
         padding-top: 550px;
         padding-left: 70px;
         padding-right: 930px;
-        font-size: 16px;
+        font-size: 14px;
         color: white;
         line-height: 20px;
         text-align: center;
@@ -388,6 +390,8 @@ export default {
         letter-spacing: 0.11em;
         border-radius: 5px;
         background-color: #ff7900;
+        color: #fff;
+        font-weight: 600;
     }
     .phone {
         display: none;
@@ -421,37 +425,37 @@ export default {
         .home-section-1 {
             background-image: url("/uploads/home/phone-first-view.png");
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: 100% 100%;
             height: 800px;
         }
         .home-section-2 {
             background-image: url("/uploads/home/phone-que-es.png");
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: 100% 100%;
             height: 800px;
         }
         .home-section-3 {
             background-image: url("/uploads/home/phone-metodo-trikele.png");
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: 100% 100%;
             height: 800px;
         }
         .home-section-4 {
             background-image: url("/uploads/home/phone-testimonios.png");
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: 100% 100%;
             height: 800px;
         }
         .home-section-5 {
             background-image: url("/uploads/home/phone-nuestro-equipo.png");
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: 100% 100%;
             height: 800px;
         }
         .home-section-6 {
             background-image: url("/uploads/home/phone-contactanos.png");
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: 100% 100%;
             height: 800px;
         }
         .btn-login{
@@ -462,16 +466,16 @@ export default {
             left: 170px;
         }
         .text-position {
-            padding-top: 480px;
-            padding-left: 80px;
-            padding-right: 85px;
+            padding-top: 470px;
+            padding-left: 17%;
+            padding-right: 18%;
             font-size: 16px;
             line-height: normal;
         }
         .text-position-metodo {
             padding-top: 530px;
-            padding-left: 70px;
-            padding-right: 100px;
+            padding-left: 13%;
+            padding-right: 21%;
             font-size: 16px;
             line-height: normal;
         }
@@ -488,23 +492,23 @@ export default {
             padding: 420px 45px 0 45px;
         }
         .team-text-position1 {
-            padding-top: 620px;
-            padding-left: 210px;
-            padding-right: 35px;
+            padding-top: 600px;
+            padding-left: 50%;
+            padding-right: 7%;
             font-size: 11px;
             line-height: normal;
         }
         .team-text-position2 {
-            padding-top: 440px;
-            padding-left: 210px;
-            padding-right: 35px;
+            padding-top: 430px;
+            padding-left: 50%;
+            padding-right: 7%;
             font-size: 11px;
             line-height: normal;
         }
         .team-text-position3 {
-            padding-top: 250px;
-            padding-left: 210px;
-            padding-right: 35px;
+            padding-top: 240px;
+            padding-left: 50%;
+            padding-right: 7%;
             font-size: 11px;
             line-height: normal;
         }

@@ -16,7 +16,7 @@
                                     <a class="color-nav" href="/#queEs">¿Qué es?</a>
                                 </li>
                                 <li class="">
-                                    <a class="color-nav" href="/#metodoTrikele">Metodo Trikele</a>
+                                    <a class="color-nav" href="/#metodoTrikele">Método Trikele</a>
                                 </li>
                                 <li class="">
                                     <a class="color-nav" href="/#testimonio">Testimonios</a>
@@ -319,58 +319,58 @@
         .program-section-1 {
             background-image: url("/uploads/home/phone-programa1.png");
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: 100% 100%;
             height: 800px;
         }
         .program-section-2 {
             background-image: url("/uploads/home/phone-programa2.png");
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: 100% 100%;
             height: 800px;
         }
         .program-section-3 {
             background-image: url("/uploads/home/phone-programa3.png");
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: 100% 100%;
             height: 800px;
         }
         .program-section-4 {
             background-image: url("/uploads/home/phone-programa4.png");
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: 100% 100%;
             height: 800px;
         }
         .program-section-5 {
             background-image: url("/uploads/home/phone-programa5.png");
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: 100% 100%;
             height: 800px;
         }
         .sec-1-text-position1 {
-            padding-top: 220px;
-            padding-left: 45px;
-            padding-right: 130px;
+            padding-top: 210px;
+            padding-left: 8%;
+            padding-right: 32%;
             font-size: 18px;
             line-height: normal;
         }
         .sec-1-text-position2 {
-            padding-top: 330px;
-            padding-left: 120px;
-            padding-right: 50px;
+            padding-top: 320px;
+            padding-left: 28%;
+            padding-right: 12%;
             font-size: 18px;
             line-height: normal;
         }
         .sec-1-text-position3 {
-            padding-top: 430px;
-            padding-left: 45px;
-            padding-right: 130px;
+            padding-top: 420px;
+            padding-left: 8%;
+            padding-right: 32%;
             font-size: 18px;
             line-height: normal;
         }
         .sec-1-text-position4 {
-            padding-top: 545px;
-            padding-left: 150px;
-            padding-right: 30px;
+            padding-top: 535px;
+            padding-left: 34%;
+            padding-right: 6%;
             font-size: 18px;
             line-height: normal;
         }
@@ -378,9 +378,9 @@
             display: none;
         }
         .sec-2-text-position1 {
-            padding-top: 380px;
-            padding-left: 40px;
-            padding-right: 55px;
+            padding-top: 360px;
+            padding-left: 10%;
+            padding-right: 14%;
             font-size: 18px;
         }
         .img-position2 {
@@ -389,17 +389,23 @@
         }
         .img-dim2{
             width: 100%;
+            height: 170px !important;
+        }
+        .text-img-dim2 {
+            font-size: 24px;
+            margin-left: 0;
         }
         .sec-3-text-position1 {
-            padding-top: 290px;
-            padding-left: 40px;
-            padding-right: 60px;
+            padding-top: 280px;
+            padding-left: 5%;
+            padding-right: 13%;
             font-size: 18px;
         }
         .sec-4-text-position1 {
-            padding-top: 225px;
+            padding-top: 210px;
             padding-left: 30px;
-            font-size: 18px;
+            font-size: 22px;
+            inline-size: min-content;
         }
         .img-position {
             display: block;
@@ -412,7 +418,7 @@
         .text-img-dim {
             font-size: 20px;
             position: relative;
-            margin-left: 40px;
+            margin-left: 10px;
             margin-bottom: 1rem;
         }
     }
