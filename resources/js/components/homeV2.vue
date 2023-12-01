@@ -459,7 +459,7 @@ export default {
             height: 800px;
         }
         .btn-login{
-            width: 200px;
+            width: 200px !important;
         }
         .btn-position {
             top: 650px;
@@ -484,7 +484,7 @@ export default {
         }
         .youtube-position {
             top: 260px;
-            left: 30px;
+            left: 20px;
             width: 350px;
             height: 350px !important;
         }

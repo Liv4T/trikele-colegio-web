@@ -95,7 +95,7 @@
             </div>
             <div class="col-lg-12 img-position">
                 <div class="col-lg-4">
-                    <a href="/uploads/resolucion/afrocolombianidad_2023.pdf" target="_blank"><img class="img-dim" src="/uploads/home/programa4-logo1.png" alt=""><label class="row text-img-dim" style="margin-left: -15px !important;">Afrocolombianidad</label></a>
+                    <a href="/uploads/resolucion/afrocolombianidad_2023.pdf" target="_blank"><img class="img-dim" src="/uploads/home/programa4-logo1.png" alt=""><label class="row text-img-dim">Afrocolombianidad</label></a>
                 </div>
                 <div class="col-lg-4">
                     <a href="/uploads/resolucion/movilidad_transito_transporte_2023.pdf" target="_blank"><img class="img-dim" src="/uploads/home/programa4-logo2.png" alt=""><label class="row text-img-dim">Movilidad</label></a>
@@ -108,7 +108,7 @@
         <section class="program-section-5">
             <div class="col-lg-12 img-position2">
                 <div class="col-lg-6">
-                    <a href="/uploads/resolucion/resolucion_costos_2024.pdf" target="_blank"><img class="img-dim2" src="/uploads/home/phone-programa5-logo1.png" alt=""><label class="row text-img-dim2" style="margin-left: 10px !important;">Resolución de costos</label></a>
+                    <a href="/uploads/resolucion/resolucion_costos_2024.pdf" target="_blank"><img class="img-dim2" src="/uploads/home/phone-programa5-logo1.png" alt=""><label class="row text-img-dim2">Resolución de costos</label></a>
                 </div>
                 <div class="col-lg-6">
                     <a href="/uploads/resolucion/manual_convivencia_2023.pdf" target="_blank"><img class="img-dim2" src="/uploads/home/phone-programa5-logo2.png" alt=""><label class="row text-img-dim2">Manual de convivencia</label></a>
@@ -238,7 +238,7 @@
         background-repeat: no-repeat;
         height: 270px !important;
         background-size: 100% 100%;
-        width: 100%;
+        width: 270px !important;
         position: relative;
         z-index: 1018;
     }
@@ -250,11 +250,14 @@
     .text-img-dim{
         font-size: 34px;
         position: relative;
-        margin-left: 80px;
+        margin-left: 80px !important;
         margin-bottom: 1rem;
+        color: #fff !important;
     }
     .img-position2 {
         display: flex;
+        text-align: center;
+        flex-wrap: wrap;
         top: 240px;
         padding: 0 300px 0 300px;
     }
@@ -262,7 +265,7 @@
         background-repeat: no-repeat;
         height: 250px !important;
         background-size: 100% 100%;
-        width: 100%;
+        width: 250px;
         position: relative;
         z-index: 1018;
     }
@@ -271,7 +274,8 @@
         position: relative;
         margin-bottom: 1rem;
         line-height: 30px;
-        margin-left: 50px;
+        margin-left: 110px !important;
+        color: #fff !important;
     }
     label.text-img-dim:hover{
         color: #ff7900 !important;
@@ -391,15 +395,12 @@
             flex-wrap: wrap;
         }
         .img-dim2{
-            display: flex;
-            flex-wrap: wrap;
             height: 140px !important;
             width: 140px !important;
-            text-align: center;
         }
         .text-img-dim2 {
             font-size: 24px;
-            margin-left: 0;
+            margin-left: 50px !important;
             color: #fff;
         }
         .sec-3-text-position1 {
@@ -429,7 +430,7 @@
         .text-img-dim {
             font-size: 20px;
             position: relative;
-            margin-left: 110px;
+            margin-left: 110px !important;
             margin-bottom: 1rem;
             color: #fff;
         }
