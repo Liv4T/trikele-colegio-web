@@ -114,7 +114,7 @@
                                 <label for="email" class="form__label">Correo</label>
                             </div>
                             <div class="form__group">
-                                <button type="submit" class="btn btn-primary text-center btn-form">Enviar</button>
+                                <button type="submit" class="btn text-center btn-form">Enviar</button>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -227,17 +227,17 @@ export default {
         height: 720px;
     }
     .btn-login{
-        background-color: #ff7900;
-        color: white;
-        font-weight: 800;
-        width: 250px;
-        border-radius: 30px;
-        font-size: 20px;
+        background-color: #ff7900 !important;
+        color: white !important;
+        font-weight: 800 !important;
+        width: 250px !important;
+        border-radius: 30px !important;
+        font-size: 20px !important;
     }
     .btn-login:hover{
-        background-color: #f79d52;
-        color: #c9c9c9;
-        font-weight: 800;
+        background-color: #f79d52 !important;
+        color: #c9c9c9 !important;
+        font-weight: 800 !important;
     }
     .btn-position {
         position: absolute;
@@ -387,11 +387,11 @@ export default {
         padding: 0;
         margin: 0;
         border: 0;
-        letter-spacing: 0.11em;
-        border-radius: 5px;
-        background-color: #ff7900;
-        color: #fff;
-        font-weight: 600;
+        letter-spacing: 0.11em !important;
+        border-radius: 5px !important;
+        background-color: #ff7900 !important;
+        color: #fff !important;
+        font-weight: 600 !important;
     }
     .phone {
         display: none;
@@ -470,14 +470,14 @@ export default {
             padding-left: 17%;
             padding-right: 18%;
             font-size: 16px;
-            line-height: normal;
+            line-height: 18px;
         }
         .text-position-metodo {
             padding-top: 530px;
             padding-left: 13%;
             padding-right: 21%;
             font-size: 16px;
-            line-height: normal;
+            line-height: 18px;
         }
         .text-whatsapp1{
             display: none;
@@ -496,21 +496,21 @@ export default {
             padding-left: 50%;
             padding-right: 7%;
             font-size: 11px;
-            line-height: normal;
+            line-height: 12px;
         }
         .team-text-position2 {
             padding-top: 430px;
             padding-left: 50%;
             padding-right: 7%;
             font-size: 11px;
-            line-height: normal;
+            line-height: 12px;
         }
         .team-text-position3 {
             padding-top: 240px;
             padding-left: 50%;
             padding-right: 7%;
             font-size: 11px;
-            line-height: normal;
+            line-height: 12px;
         }
         .form__group {
             position: relative;

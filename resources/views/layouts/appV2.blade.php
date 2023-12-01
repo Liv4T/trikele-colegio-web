@@ -96,7 +96,15 @@
     </div>
     <style>
     body{
-        background-color: #ff7900;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      text-decoration: none;
+      border: none;
+      outline: none;
+      background-color: #ff7900;
+      font-family: Nunito;
+      line-height: 20px;
     }
     .navbar{
         position: -webkit-sticky;
